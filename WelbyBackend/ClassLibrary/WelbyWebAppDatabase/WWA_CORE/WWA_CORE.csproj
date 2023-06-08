@@ -267,6 +267,13 @@
       <DependentUpon>WWAContext.edmx</DependentUpon>
       <LastGenOutput>WWAContext.cs</LastGenOutput>
     </Content>
+    <Content Include="WWA.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WWA_log.ldf">
+      <DependentUpon>WWA.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

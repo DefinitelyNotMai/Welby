@@ -63,7 +63,7 @@ namespace WWA_CORE.Persistent.Service.Masters
 
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new IndustryTypeMasterViewModel()
             {
-                IndustryTypeId = Convert.ToInt32(row["IndustryType_Id"]),
+                IndustryTypeId = Convert.ToInt32(row["IndustryTypeId"]),
                 Industry_Name = Convert.ToString(row["Industry_Name"]),
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

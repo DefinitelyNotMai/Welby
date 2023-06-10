@@ -120,7 +120,7 @@ namespace WWA_CORE.Persistent.Service.Registration
 
                 EmployeeFullName = Convert.ToString(row["ClientFullName"]),
                 GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
-                LocationDisplay = Convert.ToString(row["CountryNameDisplay"]),
+                CountryDisplay = Convert.ToString(row["CountryDisplay"]),
                 EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
 
                 EmployeeUnrealizedStrengths = Convert.ToString(row["UnrealizedStrengths"]),

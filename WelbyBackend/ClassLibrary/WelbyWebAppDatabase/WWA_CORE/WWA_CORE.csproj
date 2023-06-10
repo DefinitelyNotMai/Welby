@@ -107,6 +107,9 @@
     <Compile Include="Constants\PROCEDURE_NAME.cs" />
     <Compile Include="Constants\PROCEDURE_PARAMETERS.cs" />
     <Compile Include="Constants\REPORT_PARAMETER.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeInterestRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeLearnedBehaviorsRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeRealizedStrengthsRepository.cs" />
     <Compile Include="Core\Repositories\Masters\ICompanyMasterRepository.cs" />
     <Compile Include="Core\Repositories\Masters\ICityMasterRepository.cs" />
     <Compile Include="Core\Repositories\Masters\IIndustryTypeMasterRepository.cs" />
@@ -185,6 +188,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WWAContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Persistent\Resource\Company\CompanyGoalsResource.cs" />
+    <Compile Include="Persistent\Resource\Company\CompanyValuesResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeInterestsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeLearnedBehaviorsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeRealizedStrengthsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeUnrealizedStrengthsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeWeaknessResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CityMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CompanyMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CountryMasterResource.cs" />
@@ -201,6 +211,13 @@
     <Compile Include="Persistent\Service\Masters\StrengthMasterService.cs" />
     <Compile Include="Persistent\Service\Masters\ValueMasterService.cs" />
     <Compile Include="Persistent\Service\Registration\EmployeeRegistrationService.cs" />
+    <Compile Include="Persistent\ViewModel\Company\CompanyGoalsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Company\CompanyValuesViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeInterestViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeLearnedBehaviorsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeRealizedStrengthsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeUnrealizedStrengthsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeWeaknessViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Masters\CityMasterViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Masters\IndustryTypeMasterViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Masters\CompanyMasterViewModel.cs" />
@@ -238,8 +255,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
+    <Folder Include="Core\Repositories\Company\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Persistent\Resource\Security\" />
+    <Folder Include="Persistent\Service\Company\" />
+    <Folder Include="Persistent\Service\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

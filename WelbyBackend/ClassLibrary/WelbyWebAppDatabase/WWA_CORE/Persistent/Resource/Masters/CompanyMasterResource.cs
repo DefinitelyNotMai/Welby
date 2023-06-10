@@ -9,7 +9,9 @@ namespace WWA_CORE.Persistent.Resource.Masters
 {
     public class CompanyMasterResource : CommonSchema
     {
-        public string CompanyValues { get; set; }
+        public string CompanyValues { get; set; } 
         public string CompanyGoals { get; set; }
+        public string CompanyLocation { get; set; }
+        public string IndustryTypeDisplay { get; set; }
     }
 }

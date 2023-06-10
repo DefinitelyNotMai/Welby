@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WWA_CORE.Utilities;
 
-namespace WWA_CORE.Persistent.Resource.Masters
+namespace WWA_CORE.Persistent.Resource.Company
 {
-    public class CityMasterResource : CommonSchema
+    public class CompanyGoalsResource : CommonSchema
     {
-        public string CountryDisplay { get; set; }
-
+        public string CompanyGoalsDisplay { get; set; }
     }
 }

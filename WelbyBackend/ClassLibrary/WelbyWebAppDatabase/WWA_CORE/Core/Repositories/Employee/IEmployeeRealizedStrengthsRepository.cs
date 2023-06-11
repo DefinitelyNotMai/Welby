@@ -13,5 +13,6 @@ namespace WWA_CORE.Core.Repositories.Employee
         Task<EmployeeRealizedStrengthsViewModel> UpdateEmployeeRealizedStrength(EmployeeRealizedStrengthsViewModel employeeRealizedStrengthsViewModel);
         Task<EmployeeRealizedStrengthsViewModel> RemoveEmployeeRealizedStrength(EmployeeRealizedStrengthsViewModel employeeRealizedStrengthsViewModel);
         Task<EmployeeRealizedStrengthsViewModel> ReturnEmployeeRealizedStrength(EmployeeRealizedStrengthsViewModel employeeRealizedStrengthsViewModel);
+        Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrength(EmployeeRealizedStrengthsViewModel employeeRealizedStrengthsViewModel);
     }
 }

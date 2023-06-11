@@ -13,6 +13,6 @@ namespace WWA_CORE.Core.Repositories.Employee
         Task<EmployeeLearnedBehaviorsViewModel> UpdateEmployeeLearnedBehavior(EmployeeLearnedBehaviorsViewModel employeeLearnedBehaviorsViewModel);
         Task<EmployeeLearnedBehaviorsViewModel> RemoveEmployeeLearnedBehavior(EmployeeLearnedBehaviorsViewModel employeeLearnedBehaviorsViewModel);
         Task<EmployeeLearnedBehaviorsViewModel> ReturnEmployeeLearnedBehavior(EmployeeLearnedBehaviorsViewModel employeeLearnedBehaviorsViewModel);
-        Task<EmployeeLearnedBehaviorsViewModel> GetEmployeeLearnedBehaviors(EmployeeLearnedBehaviorsViewModel employeeLearnedBehaviorsViewModel);
+        Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviors(EmployeeLearnedBehaviorsViewModel employeeLearnedBehaviorsViewModel);
     }
 }

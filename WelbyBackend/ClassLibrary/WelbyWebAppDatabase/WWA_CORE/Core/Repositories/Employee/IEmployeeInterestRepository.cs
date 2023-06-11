@@ -13,6 +13,6 @@ namespace WWA_CORE.Core.Repositories.Employee
         Task<EmployeeInterestViewModel> UpdateEmployeeInterest(EmployeeInterestViewModel employeeInterestViewModel);
         Task<EmployeeInterestViewModel> RemoveEmployeeInterest(EmployeeInterestViewModel employeeInterestViewModel);
         Task<EmployeeInterestViewModel> ReturnEmployeeInterest(EmployeeInterestViewModel employeeInterestViewModel);
-        Task<EmployeeInterestViewModel> GetEmployeeInterests(EmployeeInterestViewModel employeeInterestViewModel);
+        Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterests(EmployeeInterestViewModel employeeInterestViewModel);
     }
 }

@@ -107,9 +107,13 @@
     <Compile Include="Constants\PROCEDURE_NAME.cs" />
     <Compile Include="Constants\PROCEDURE_PARAMETERS.cs" />
     <Compile Include="Constants\REPORT_PARAMETER.cs" />
+    <Compile Include="Core\Repositories\Company\ICompanyGoalsRepository.cs" />
+    <Compile Include="Core\Repositories\Company\ICompanyValuesRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeInterestRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeLearnedBehaviorsRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeRealizedStrengthsRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeUnrealizedStrengthsRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeWeaknessRepository.cs" />
     <Compile Include="Core\Repositories\Masters\ICompanyMasterRepository.cs" />
     <Compile Include="Core\Repositories\Masters\ICityMasterRepository.cs" />
     <Compile Include="Core\Repositories\Masters\IIndustryTypeMasterRepository.cs" />
@@ -201,6 +205,11 @@
     <Compile Include="Persistent\Resource\Masters\GoalMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeInterestService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeLearnedBehaviorsService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeRealizedStrengthsService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeUnrealizedStrengthsService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeWeaknessService.cs" />
     <Compile Include="Persistent\Service\Masters\CityMasterService.cs" />
     <Compile Include="Persistent\Service\Masters\IndustryTypeMasterService.cs" />
     <Compile Include="Persistent\Service\Masters\CompanyMasterService.cs" />
@@ -255,11 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
-    <Folder Include="Core\Repositories\Company\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Persistent\Resource\Security\" />
     <Folder Include="Persistent\Service\Company\" />
-    <Folder Include="Persistent\Service\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

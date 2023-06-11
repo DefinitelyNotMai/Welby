@@ -161,7 +161,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var RowToUpdate = await context.tbl_MST_Strength_Master.FirstOrDefaultAsync(c => c.StrengthId == strengthMasterViewModel.StrengthId);
 
-                RowToUpdate.StrengthId = strengthMasterViewModel.StrengthId;
                 RowToUpdate.Strength = strengthMasterViewModel.Strength;
 
                 RowToUpdate.Active = strengthMasterViewModel.Active;

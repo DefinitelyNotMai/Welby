@@ -143,7 +143,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var RowToUpdate = await context.tbl_MST_IndustryType_Master.FirstOrDefaultAsync(c => c.IndustryTypeId == industryTypeMasterViewModel.IndustryTypeId);
 
                 RowToUpdate.Industry_Name = industryTypeMasterViewModel.Industry_Name;
-                RowToUpdate.IndustryTypeId = industryTypeMasterViewModel.IndustryTypeId;
                 RowToUpdate.Active = industryTypeMasterViewModel.Active;
                 RowToUpdate.LastChanged_By = industryTypeMasterViewModel.Encoded_By;
                 RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();

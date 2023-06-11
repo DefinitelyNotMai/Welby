@@ -171,7 +171,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var RowToUpdate = await context.tbl_MST_Company.FirstOrDefaultAsync(c => c.CompanyId == companyMasterViewModel.CompanyId);
 
                 RowToUpdate.Name = companyMasterViewModel.Name;
-                RowToUpdate.CompanyId = companyMasterViewModel.CompanyId;
                 RowToUpdate.Email = companyMasterViewModel.Email;
                 RowToUpdate.Phone_Number = companyMasterViewModel.Phone_Number;
                 RowToUpdate.Website = companyMasterViewModel.Website;

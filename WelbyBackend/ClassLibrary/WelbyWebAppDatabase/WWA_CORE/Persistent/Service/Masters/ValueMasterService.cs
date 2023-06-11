@@ -148,7 +148,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var RowToUpdate = await context.tbl_MST_Value_Master.FirstOrDefaultAsync(c => c.ValueId == valueMasterViewModel.ValueId);
 
-                RowToUpdate.ValueId = valueMasterViewModel.ValueId;
                 RowToUpdate.Title = valueMasterViewModel.Title;
                 RowToUpdate.Description = valueMasterViewModel.Description;
                 

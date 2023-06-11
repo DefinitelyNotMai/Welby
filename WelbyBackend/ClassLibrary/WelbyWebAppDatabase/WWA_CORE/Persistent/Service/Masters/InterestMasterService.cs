@@ -144,7 +144,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var RowToUpdate = await context.tbl_MST_Interest_Master.FirstOrDefaultAsync(c => c.InterestId == interestMasterViewModel.InterestId);
 
-                RowToUpdate.InterestId = interestMasterViewModel.InterestId;
                 RowToUpdate.Name = interestMasterViewModel.Name;
 
                 RowToUpdate.Active = interestMasterViewModel.Active;

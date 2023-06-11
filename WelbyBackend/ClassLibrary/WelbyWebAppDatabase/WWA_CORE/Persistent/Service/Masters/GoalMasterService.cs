@@ -150,7 +150,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var RowToUpdate = await context.tbl_MST_Goal_Master.FirstOrDefaultAsync(c => c.GoalId == goalMasterViewModel.GoalId);
 
-                RowToUpdate.GoalId = goalMasterViewModel.GoalId;
                 RowToUpdate.Title = goalMasterViewModel.Title;
                 RowToUpdate.Description = goalMasterViewModel.Description;
                 RowToUpdate.DurationFrom = goalMasterViewModel.DurationFrom;

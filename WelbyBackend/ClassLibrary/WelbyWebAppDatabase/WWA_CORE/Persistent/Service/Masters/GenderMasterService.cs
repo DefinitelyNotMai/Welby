@@ -147,7 +147,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var RowToUpdate = await context.tbl_MST_Gender_Master.FirstOrDefaultAsync(c => c.GenderId == genderMasterViewModel.GenderId);
 
-                RowToUpdate.GenderId = genderMasterViewModel.GenderId;
                 RowToUpdate.Gender = genderMasterViewModel.Gender;
                 RowToUpdate.Biological = genderMasterViewModel.Biological;
                 RowToUpdate.Active = genderMasterViewModel.Active;

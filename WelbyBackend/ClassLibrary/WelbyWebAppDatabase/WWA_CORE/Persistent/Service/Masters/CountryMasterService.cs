@@ -149,7 +149,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var RowToUpdate = await context.tbl_MST_Country_Master.FirstOrDefaultAsync(c => c.CountryId == countryMasterViewModel.CountryId);
 
                 RowToUpdate.Name = countryMasterViewModel.Name;
-                RowToUpdate.CountryId = countryMasterViewModel.CountryId;
                 RowToUpdate.Nationality = countryMasterViewModel.Nationality;
                 RowToUpdate.Flag_Image = countryMasterViewModel.Flag_Image;
 

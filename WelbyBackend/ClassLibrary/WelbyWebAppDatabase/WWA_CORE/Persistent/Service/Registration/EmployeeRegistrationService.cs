@@ -123,11 +123,6 @@ namespace WWA_CORE.Persistent.Service.Registration
                 CountryDisplay = Convert.ToString(row["CountryDisplay"]),
                 EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
 
-                EmployeeUnrealizedStrengths = Convert.ToString(row["UnrealizedStrengths"]),
-                EmployeeRealizedStrengths = Convert.ToString(row["RealizedStrengths"]),
-                EmployeeLearnedBehaviors = Convert.ToString(row["LearnedBehaviors"]),
-                EmployeeWeakness = Convert.ToString(row["Weakness"]),
-
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
                 Computer_Name = Convert.ToString(row["Computer_Name"]),

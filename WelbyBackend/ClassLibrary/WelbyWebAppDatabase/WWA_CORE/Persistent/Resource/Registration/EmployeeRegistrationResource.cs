@@ -13,13 +13,6 @@ namespace WWA_CORE.Persistent.Resource.Registration
         public string CountryDisplay { get; set; } 
         public string EmployeeCompanyDisplay { get; set; }
         public string GenderDisplayName { get; set; }
-        
-
-        //should this be in a StrengthMasterResource??
-        public string EmployeeUnrealizedStrengths { get; set; }
-        public string EmployeeRealizedStrengths { get; set; }
-        public string EmployeeWeakness { get; set; }
-        public string EmployeeLearnedBehaviors { get; set; }
     
     }
 }

@@ -31,9 +31,9 @@ namespace WWA_CORE.Constants
 
         #region EMPLOYEE
         public const string PROC_EMP_INTEREST_GET = "procWWA_EMP_Interest_Get";
-        public const string PROC_EMP_UNREALIZED_STRENGTHS_GET = "procWWA_EMP_Unrealized_Strengths_Get";
-        public const string PROC_EMP_REALIZED_STRENGTHS_GET = "procWWA_EMP_Realized_Strengths_Get";
         public const string PROC_EMP_LEARNED_BEHAVIORS_GET = "procWWA_EMP_Learned_Behaviors_Get";
+        public const string PROC_EMP_REALIZED_STRENGTHS_GET = "procWWA_EMP_Realized_Strengths_Get";
+        public const string PROC_EMP_UNREALIZED_STRENGTHS_GET = "procWWA_EMP_Unrealized_Strengths_Get";
         public const string PROC_EMP_WEAKNESS_GET = "procWWA_EMP_Weakness_Get";
         #endregion
 

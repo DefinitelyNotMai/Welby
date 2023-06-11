@@ -10,7 +10,7 @@ namespace WWA_CORE.Persistent.ViewModel.Employee
     public class EmployeeWeaknessViewModel : EmployeeWeaknessResource
     {
         public int StrengthId { get; set; }
-        public int WeaknessId { get; set; }
+        public int EmployeeWeaknessId { get; set; }
         public int EmployeeId { get; set; }
 
     }

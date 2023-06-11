@@ -11,6 +11,6 @@ namespace WWA_CORE.Persistent.ViewModel.Employee
     {
         public int InterestId { get; set; }
         public int EmployeeId { get; set; }
-        public int StrengthId { get; set; }
+        public int EmployeeInterestId { get; set; }
     }
 }

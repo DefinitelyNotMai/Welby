@@ -10,5 +10,7 @@ namespace WWA_CORE.Persistent.Resource.Employee
     public class EmployeeInterestsResource : CommonSchema
     {
         public string EmployeeInterestsDisplay { get; set; }
+        public string InterestNameDisplay { get; set; }
+        public string EmployeeFirstNameDisplay { get; set; }
     }
 }

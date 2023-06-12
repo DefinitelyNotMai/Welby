@@ -10,5 +10,7 @@ namespace WWA_CORE.Persistent.Resource.Employee
     public class EmployeeUnrealizedStrengthsResource : CommonSchema
     {
         public string EmployeeUnrealizedStrengthsDisplay { get; set; }
+        public string UnrealizedStrengthDisplay { get; set; }
+        public string EmployeeFirstNameDisplay { get; set; }
     }
 }

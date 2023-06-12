@@ -205,6 +205,8 @@
     <Compile Include="Persistent\Resource\Masters\GoalMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
+    <Compile Include="Persistent\Service\Company\CompanyGoalsService.cs" />
+    <Compile Include="Persistent\Service\Company\CompanyValuesService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeInterestService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeLearnedBehaviorsService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeRealizedStrengthsService.cs" />
@@ -266,7 +268,6 @@
     <Folder Include="bin\Debug\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Persistent\Resource\Security\" />
-    <Folder Include="Persistent\Service\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

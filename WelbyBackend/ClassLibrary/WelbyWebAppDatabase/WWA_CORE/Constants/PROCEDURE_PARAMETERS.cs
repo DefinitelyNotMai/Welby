@@ -47,11 +47,11 @@ namespace WWA_CORE.Constants
         #endregion
 
         #region COMPANY
-        public const string PARA_CMP_GOALS_GET_COMPANYGOALSID = "@CompanyGoalId";
+        public const string PARA_CMP_GOALS_GET_COMPANYGOALSID = "@CompanyGoalsId";
         public const string PARA_CMP_GOALS_GET_COMPANYID = "@CompanyId";
         public const string PARA_CMP_GOALS_GET_GOALID = "@GoalId";
 
-        public const string PARA_CMP_VALUES_GET_COMPANYVALUESID = "@CompanyValueId";
+        public const string PARA_CMP_VALUES_GET_COMPANYVALUESID = "@CompanyValuesId";
         public const string PARA_CMP_VALUES_GET_COMPANYID = "@CompanyId";
         public const string PARA_CMP_VALUES_GET_VALUEID = "@ValueId";
         #endregion

@@ -9,8 +9,8 @@ namespace WWA_CORE.Persistent.ViewModel.Company
 {
     public class CompanyValuesViewModel : CompanyValuesResource
     {
-        public string CompanyValuesId { get; set; }
-        public string CompanyId { get; set; }
-        public string ValueId { get; set; }
+        public int CompanyValuesId { get; set; }
+        public int CompanyId { get; set; }
+        public int ValueId { get; set; }
     }
 }

@@ -10,5 +10,7 @@ namespace WWA_CORE.Persistent.Resource.Company
     public class CompanyGoalsResource : CommonSchema
     {
         public string CompanyGoalsDisplay { get; set; }
+        public string CompanyNameDisplay { get; set; }
+        public string GoalTitleDisplay { get; set; }
     }
 }

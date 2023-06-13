@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WWA_CORE.Core.Repositories.Company;
+using WWA_CORE.Core.Repositories.Employee;
 using WWA_CORE.Core.Repositories.Masters;
 using WWA_CORE.Core.Repositories.Registration;
 using WWA_CORE.Utilities;
@@ -22,6 +24,14 @@ namespace WWA_CORE.Core.Repositories
         IStrengthMasterRepository Strength { get; }
         IValueMasterRepository Value { get; }
         IEmployeeRegistrationRepository Employee { get; }
+        IEmployeeInterestRepository EmployeeInterest { get; }
+        IEmployeeLearnedBehaviorsRepository EmployeeLearnedBehaviors { get; }
+        IEmployeeRealizedStrengthsRepository EmployeeRealizedStrengths { get; }
+        IEmployeeUnrealizedStrengthsRepository EmployeeUnrealizedStrengths { get; }
+        IEmployeeWeaknessRepository EmployeeWeakness { get; }
+        ICompanyGoalsRepository CompanyGoals { get; }
+        ICompanyValuesRepository CompanyValues { get; }
+
         GlobalFunctions GlobalFunctions { get; set; }
         DbContextTransaction Transaction { get; }
 

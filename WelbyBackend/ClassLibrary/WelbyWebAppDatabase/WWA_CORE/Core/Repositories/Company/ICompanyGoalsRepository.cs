@@ -13,6 +13,6 @@ namespace WWA_CORE.Core.Repositories.Company
         Task<CompanyGoalsViewModel> UpdateCompanyGoal(CompanyGoalsViewModel companyGoalsViewModel);
         Task<CompanyGoalsViewModel> RemoveCompanyGoal(CompanyGoalsViewModel companyGoalsViewModel);
         Task<CompanyGoalsViewModel> ReturnCompanyGoal(CompanyGoalsViewModel companyGoalsViewModel);
-        Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoal(CompanyGoalsViewModel companyGoalsViewModel);
+        Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoals(CompanyGoalsViewModel companyGoalsViewModel);
     }
 }

@@ -51,7 +51,7 @@ namespace WWA_CORE.Persistent.Service.Company
             return companyValuesViewModel;
         }
 
-        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValue(CompanyValuesViewModel companyValuesViewModel)
+        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValues(CompanyValuesViewModel companyValuesViewModel)
         {
             var query = new SqlQueryObject
             {
@@ -89,7 +89,7 @@ namespace WWA_CORE.Persistent.Service.Company
             return ReturnedList;
         }
 
-        public async Task<CompanyValuesViewModel> RemoveCompayValue(CompanyValuesViewModel companyValuesViewModel)
+        public async Task<CompanyValuesViewModel> RemoveCompanyValue(CompanyValuesViewModel companyValuesViewModel)
         {
             var context = new WWAEntities();
             var globalFunctions = new GlobalFunctions();

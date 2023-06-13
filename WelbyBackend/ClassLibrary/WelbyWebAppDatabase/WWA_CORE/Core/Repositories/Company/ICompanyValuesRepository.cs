@@ -11,8 +11,8 @@ namespace WWA_CORE.Core.Repositories.Company
     {
         Task<CompanyValuesViewModel> AddCompanyValue(CompanyValuesViewModel companyValuesViewModel);
         Task<CompanyValuesViewModel> UpdateCompanyValue(CompanyValuesViewModel companyValuesViewModel);
-        Task<CompanyValuesViewModel> RemoveCompayValue(CompanyValuesViewModel companyValuesViewModel);
+        Task<CompanyValuesViewModel> RemoveCompanyValue(CompanyValuesViewModel companyValuesViewModel);
         Task<CompanyValuesViewModel> ReturnCompanyValue(CompanyValuesViewModel companyValuesViewModel);
-        Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValue(CompanyValuesViewModel companyValuesViewModel);
+        Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValues(CompanyValuesViewModel companyValuesViewModel);
     }
 }

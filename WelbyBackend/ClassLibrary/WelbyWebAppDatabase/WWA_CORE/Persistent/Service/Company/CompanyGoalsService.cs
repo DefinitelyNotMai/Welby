@@ -50,7 +50,7 @@ namespace WWA_CORE.Persistent.Service.Company
             return companyGoalsViewModel;
         }
 
-        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoal(CompanyGoalsViewModel companyGoalsViewModel)
+        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoals(CompanyGoalsViewModel companyGoalsViewModel)
         {
             var query = new SqlQueryObject
             {

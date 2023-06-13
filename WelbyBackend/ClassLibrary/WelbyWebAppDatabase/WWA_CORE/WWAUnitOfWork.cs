@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WWA_CORE.Core.Repositories;
+using WWA_CORE.Core.Repositories.Company;
+using WWA_CORE.Core.Repositories.Employee;
 using WWA_CORE.Core.Repositories.Masters;
 using WWA_CORE.Core.Repositories.Registration;
 using WWA_CORE.Persistent.Context;
@@ -15,7 +17,7 @@ using WWA_CORE.Utilities;
 
 namespace WWA_CORE
 {
-    public class WWAUnitOfWork :IWWAUnitOfWork
+    public class WWAUnitOfWork : IWWAUnitOfWork
     {
         private readonly WWAEntities WWAContext;
         private DbContextTransaction _transaction;
@@ -30,7 +32,13 @@ namespace WWA_CORE
         public IStrengthMasterRepository Strength { get; private set; }
         public IValueMasterRepository Value { get; private set; }
         public IEmployeeRegistrationRepository Employee { get; private set; }
-
+        public IEmployeeInterestRepository EmployeeInterest { get; private set; }
+        public IEmployeeLearnedBehaviorsRepository EmployeeLearnedBehaviors { get; private set; }
+        public IEmployeeRealizedStrengthsRepository EmployeeRealizedStrengths { get; private set; }
+        public IEmployeeUnrealizedStrengthsRepository EmployeeUnrealizedStrengths { get; private set; }
+        public IEmployeeWeaknessRepository EmployeeWeakness { get; private set; }
+        public ICompanyGoalsRepository CompanyGoals { get; private set; }
+        public ICompanyValuesRepository CompanyValues { get; private set; }
         public GlobalFunctions GlobalFunctions { get; set; }
         public DbContextTransaction Transaction
         {

@@ -11,6 +11,8 @@ using WWA_CORE.Core.Repositories.Employee;
 using WWA_CORE.Core.Repositories.Masters;
 using WWA_CORE.Core.Repositories.Registration;
 using WWA_CORE.Persistent.Context;
+using WWA_CORE.Persistent.Service.Company;
+using WWA_CORE.Persistent.Service.Employee;
 using WWA_CORE.Persistent.Service.Masters;
 using WWA_CORE.Persistent.Service.Registration;
 using WWA_CORE.Utilities;
@@ -61,6 +63,13 @@ namespace WWA_CORE
             this.Strength = new StrengthMasterService();
             this.Value = new ValueMasterService();
             this.Employee = new EmployeeRegistrationService();
+            this.EmployeeInterest = new EmployeeInterestService();
+            this.EmployeeLearnedBehaviors = new EmployeeLearnedBehaviorsService();
+            this.EmployeeRealizedStrengths = new EmployeeRealizedStrengthsService();
+            this.EmployeeUnrealizedStrengths = new EmployeeUnrealizedStrengthsService();
+            this.EmployeeWeakness = new EmployeeWeaknessService();
+            this.CompanyGoals = new CompanyGoalsService();
+            this.CompanyValues = new CompanyValuesService();
         }
 
         public void BeginTransaction()

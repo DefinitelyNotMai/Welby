@@ -14,7 +14,7 @@ using System.Data.Entity;
 
 namespace WWA_CORE.Persistent.Service.Employee
 {
-    public class EmployeeUnrealizedStrengthsRepository : IEmployeeUnrealizedStrengthsRepository
+    public class EmployeeUnrealizedStrengthsService : IEmployeeUnrealizedStrengthsRepository
     {
         public async Task<EmployeeUnrealizedStrengthsViewModel> AddEmployeeUnrealizedStrength(EmployeeUnrealizedStrengthsViewModel employeeUnrealizedStrengthsViewModel)
         {

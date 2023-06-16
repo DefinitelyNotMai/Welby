@@ -609,9 +609,8 @@ namespace WelbyAPI.Controllers
         }
         #endregion
 
-        //{id} should be /EmployeeId/{id} i think...
         #region EMPLOYEE INTEREST
-        [Route("~/api/GetEmployeeInterests/{id}")]
+        [Route("~/api/GetEmployeeInterests")]
         [HttpGet]
         public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromBody] EmployeeInterestViewModel param)
         {
@@ -619,7 +618,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddEmployeeInterests/{id}")]
+        [Route("~/api/AddEmployeeInterests")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployeeInterest([FromBody] EmployeeInterestViewModel param)
         {
@@ -631,7 +630,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/UpdateEmployeeInterests/{id}")]
+        [Route("~/api/UpdateEmployeeInterests")]
         [HttpPatch]
         public async Task<HttpResponseMessage> UpdateEmployeeInterest([FromBody] EmployeeInterestViewModel param)
         {
@@ -643,7 +642,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/RemoveEmployeeInterests/{id}")]
+        [Route("~/api/RemoveEmployeeInterests")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveEmployeeInterest([FromBody] EmployeeInterestViewModel param)
         {
@@ -655,7 +654,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/ReturnEmployeeInterests/{id}")]
+        [Route("~/api/ReturnEmployeeInterests")]
         [HttpPatch]
         public async Task<HttpResponseMessage> ReturnEmployeeInterest([FromBody] EmployeeInterestViewModel param)
         {
@@ -669,7 +668,7 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region EMPLOYEE LEARNED BEHAVIORS
-        [Route("~/api/GetEmployeeLearnedBehaviors/{id}")]
+        [Route("~/api/GetEmployeeLearnedBehaviors")]
         [HttpGet]
         public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromBody] EmployeeLearnedBehaviorsViewModel param)
         {
@@ -677,7 +676,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddEmployeeLearnedBehavior/{id}")]
+        [Route("~/api/AddEmployeeLearnedBehavior")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployeeLearnedBehavior([FromBody] EmployeeLearnedBehaviorsViewModel param)
         {
@@ -689,7 +688,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/UpdateEmployeeLearnedBehavior/{id}")]
+        [Route("~/api/UpdateEmployeeLearnedBehavior")]
         [HttpPatch]
         public async Task<HttpResponseMessage> UpdateEmployeeLearnedBehavior([FromBody] EmployeeLearnedBehaviorsViewModel param)
         {
@@ -701,7 +700,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/RemoveEmployeeLearnedBehavior/{id}")]
+        [Route("~/api/RemoveEmployeeLearnedBehavior")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveEmployeeLearnedBehaviors([FromBody] EmployeeLearnedBehaviorsViewModel param)
         {
@@ -713,7 +712,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/ReturnEmployeeLearnedBehavior/{id}")]
+        [Route("~/api/ReturnEmployeeLearnedBehavior")]
         [HttpPatch]
         public async Task<HttpResponseMessage> ReturnEmployeeLearnedBehaviors([FromBody] EmployeeLearnedBehaviorsViewModel param)
         {
@@ -727,7 +726,7 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region EMPLOYEE REALIZED STRENGTH
-        [Route("~/api/GetEmployeeRealizedStrengths/{id}")]
+        [Route("~/api/GetEmployeeRealizedStrengths")]
         [HttpGet]
         public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromBody] EmployeeRealizedStrengthsViewModel param)
         {
@@ -735,7 +734,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddEmployeeRealizedStrength/{id}")]
+        [Route("~/api/AddEmployeeRealizedStrength")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployeeRealizedStrength([FromBody] EmployeeRealizedStrengthsViewModel param)
         {
@@ -747,7 +746,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/UpdateEmployeeRealizedStrength/{id}")]
+        [Route("~/api/UpdateEmployeeRealizedStrength")]
         [HttpPatch]
         public async Task<HttpResponseMessage> UpdateEmployeeRealizedStrength([FromBody] EmployeeRealizedStrengthsViewModel param)
         {
@@ -759,7 +758,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/RemoveEmployeeRealizedStrengths/{id}")]
+        [Route("~/api/RemoveEmployeeRealizedStrengths")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveEmployeeRealizedStrengths([FromBody] EmployeeRealizedStrengthsViewModel param)
         {
@@ -771,7 +770,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/ReturnEmployeeRealizedStrengths/{id}")]
+        [Route("~/api/ReturnEmployeeRealizedStrengths")]
         [HttpPatch]
         public async Task<HttpResponseMessage> ReturnEmployeeRealizedStrengths([FromBody] EmployeeRealizedStrengthsViewModel param)
         {
@@ -785,7 +784,7 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region EMPLOYEE UNREALIZED STRENGTH
-        [Route("~/api/GetEmployeeUnrealizedStrengths/{id}")]
+        [Route("~/api/GetEmployeeUnrealizedStrengths")]
         [HttpGet]
         public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromBody] EmployeeUnrealizedStrengthsViewModel param)
         {
@@ -793,7 +792,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddEmployeeUnrealizedStrength/{id}")]
+        [Route("~/api/AddEmployeeUnrealizedStrength")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployeeUnrealizedStrength([FromBody] EmployeeUnrealizedStrengthsViewModel param)
         {
@@ -805,7 +804,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/UpdateEmployeeUnrealizedStrength/{id}")]
+        [Route("~/api/UpdateEmployeeUnrealizedStrength")]
         [HttpPatch]
         public async Task<HttpResponseMessage> UpdateEmployeeUnrealizedStrength([FromBody] EmployeeUnrealizedStrengthsViewModel param)
         {
@@ -817,7 +816,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/RemoveEmployeeUnrealizedStrengths/{id}")]
+        [Route("~/api/RemoveEmployeeUnrealizedStrengths")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveEmployeeUnrealizedStrengths([FromBody] EmployeeUnrealizedStrengthsViewModel param)
         {
@@ -829,7 +828,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/ReturnEmployeeUnrealizedStrengths/{id}")]
+        [Route("~/api/ReturnEmployeeUnrealizedStrengths")]
         [HttpPatch]
         public async Task<HttpResponseMessage> ReturnEmployeeUnrealizedStrengths([FromBody] EmployeeUnrealizedStrengthsViewModel param)
         {
@@ -843,7 +842,7 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region EMPLOYEE WEAKNESS
-        [Route("~/api/GetEmployeeWeaknesses/{id}")]
+        [Route("~/api/GetEmployeeWeaknesses")]
         [HttpGet]
         public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromBody] EmployeeWeaknessViewModel param)
         {
@@ -851,7 +850,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddEmployeeWeakness/{id}")]
+        [Route("~/api/AddEmployeeWeakness")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
         {
@@ -863,7 +862,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/UpdateEmployeeWeakness/{id}")]
+        [Route("~/api/UpdateEmployeeWeakness")]
         [HttpPatch]
         public async Task<HttpResponseMessage> UpdateEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
         {
@@ -875,7 +874,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/RemoveEmployeeWeakness/{id}")]
+        [Route("~/api/RemoveEmployeeWeakness")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
         {
@@ -887,7 +886,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/ReturnEmployeeWeakness/{id}")]
+        [Route("~/api/ReturnEmployeeWeakness")]
         [HttpPatch]
         public async Task<HttpResponseMessage> ReturnEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
         {
@@ -901,7 +900,7 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region COMPANY GOALS
-        [Route("~/api/GetCompanyGoals/{Companyid}")]
+        [Route("~/api/GetCompanyGoals")]
         [HttpGet]
         public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromBody] CompanyGoalsViewModel param)
         {
@@ -909,7 +908,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddCompanyGoals/{CompanyId}")]
+        [Route("~/api/AddCompanyGoals")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddCompanyGoal([FromBody] CompanyGoalsViewModel param)
         {
@@ -921,7 +920,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/UpdateCompanyGoals/{CompanyId}")]
+        [Route("~/api/UpdateCompanyGoals")]
         [HttpPatch]
         public async Task<HttpResponseMessage> UpdateCompanyGoal([FromBody] CompanyGoalsViewModel param)
         {
@@ -933,7 +932,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/RemoveCompanyGoals/{CompanyId}")]
+        [Route("~/api/RemoveCompanyGoals")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveCompanyGoal([FromBody] CompanyGoalsViewModel param)
         {
@@ -945,7 +944,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/ReturnCompanyGoals/{CompanyId}")]
+        [Route("~/api/ReturnCompanyGoals")]
         [HttpPatch]
         public async Task<HttpResponseMessage> ReturnCompanyGoal([FromBody] CompanyGoalsViewModel param)
         {
@@ -967,7 +966,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddCompanyValues/{CompanyId}")]
+        [Route("~/api/AddCompanyValues")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddCompanyValue([FromBody] CompanyValuesViewModel param)
         {
@@ -979,7 +978,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/UpdateCompanyValues/{CompanyId}")]
+        [Route("~/api/UpdateCompanyValues")]
         [HttpPatch]
         public async Task<HttpResponseMessage> UpdateCompanyValue([FromBody] CompanyValuesViewModel param)
         {
@@ -991,7 +990,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/RemoveCompanyValues/{CompanyId}")]
+        [Route("~/api/RemoveCompanyValues")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveCompanyValue([FromBody] CompanyValuesViewModel param)
         {
@@ -1003,7 +1002,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/ReturnCompanyValues/{CompanyId}")]
+        [Route("~/api/ReturnCompanyValues")]
         [HttpPatch]
         public async Task<HttpResponseMessage> ReturnCompanyValue([FromBody] CompanyValuesViewModel param)
         {

@@ -10,8 +10,6 @@ C:\Users\Micah\source\repos\WelbyWebAppDatabase\WWA_CORE\bin\Debug\EntityFramewo
 C:\Users\Micah\source\repos\WelbyWebAppDatabase\WWA_CORE\bin\Debug\EntityFramework.xml
 C:\Users\Micah\source\repos\WelbyWebAppDatabase\WWA_CORE\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Micah\source\repos\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.csproj.CopyComplete
-C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA.mdf
-C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_log.ldf
 C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_CORE.dll.config
 C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_CORE.dll
 C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_CORE.pdb
@@ -32,3 +30,5 @@ C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\Wel
 C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.csproj.CopyComplete
 C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.dll
 C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.pdb
+C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA.mdf
+C:\Users\Micah\source\repos\DefinitelyNotMai\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_log.ldf

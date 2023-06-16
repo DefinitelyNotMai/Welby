@@ -281,7 +281,7 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        [Route("~/api/DeleteIndustryType")]
+        [Route("~/api/RemoveIndustryType")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveIndustryType([FromBody] IndustryTypeMasterViewModel param)
         {

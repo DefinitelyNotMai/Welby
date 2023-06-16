@@ -41,8 +41,10 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 industryTypeMasterViewModel.Message_Code = $"{ex.Message} \n {ex.InnerException.ToString() ?? ""}";
             }
+
             context.Dispose();
             globalFunctions.Dispose();
+
             return industryTypeMasterViewModel;
         }
 

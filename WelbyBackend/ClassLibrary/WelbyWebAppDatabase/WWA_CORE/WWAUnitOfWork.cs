@@ -50,6 +50,7 @@ namespace WWA_CORE
         public WWAUnitOfWork()
         {
             WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING = ConfigurationManager.ConnectionStrings["WWAConnection"].ToString();
+            
             this.GlobalFunctions = new GlobalFunctions();
             this.WWAContext = new WWAEntities();
 

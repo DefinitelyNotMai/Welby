@@ -30,7 +30,7 @@ const MainHeader = () => {
           >
             <Link>
               <Image
-                src="/src/assets/images/welby.svg"
+                src="../../assets/images/welby.svg"
                 alt="Welby Logo"
                 objectFit="contain"
                 w="full"

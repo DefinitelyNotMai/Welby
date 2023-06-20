@@ -6,44 +6,91 @@ import MainFormCard from '../../components/MainFormCard';
 import MainFormTextbox from '../../components/MainFormTextbox';
 import MainFormButton from '../../components/MainFormButton';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const [UserName, setUserName] = useState('');
+    const [Password, setPassword] = useState('');
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+    const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserName(e.target.value);
+    };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    };
 
-  const handleLogin = async () => {
-    const apiUrl = 'your-api-url';
+    const handleLogin = async () => {
+        const tokenUrl = 'http://localhost:58258/token';
+        let header = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Access-Control-Allow-Origin": "*"
+        };
 
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
 
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        body: formData,
-      });
+        const formData = new URLSearchParams();
+        formData.append('grant_type', 'password');
+        formData.append('username', UserName);
+        formData.append('password', Password);
 
-      if (response.ok) {
-        // Handle successful API response
-        console.log('Login successful');
-      } else {
-        // Handle API error
-        console.error('Login failed');
-      }
-    } catch (error) {
-      // Handle network or other error
-      console.error('An error occurred:', error);
-    }
-  };
+        //const formData = new FormData();
+        //formData.append('UserName', UserName);
+        //formData.append('Password', Password);
+
+        try {
+            const tokenResponse = await fetch(tokenUrl, {
+                method: 'POST',
+                headers: header,
+                body: formData
+            }).then(res => {
+                return res.json();
+            });
+            if (tokenResponse != null) {
+                var token = tokenResponse.access_token;
+                var loginUrl = 'http://localhost:58258/api/GetSystemUsers';
+                var result = null;
+                let param = {
+                    "UserId": 0, // Identity Key
+                    "UserCode": "", // FK from referencing from Registration table
+                    "UserName": UserName,// Username
+                    "Password": Password,
+                    "CurrentOTP": null,
+                    "PageNo": 0,
+                    "PageSize": 0,
+                    "Active": true
+                }
+                axios.get(loginUrl, {
+                    method: 'GET',
+                    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    params: param
+                }).then(response => {
+                    result = response.data;
+                    if (result != null) {
+                        if (result.length > 0) {
+                            console.log(result);
+                            alert(result[0].UserId);
+                        }
+                    }
+
+                });
+
+
+            }
+
+
+            //if (tokenResponse.ok) {
+            //  // Handle successful API tokenResponse
+            //    let json = tokenResponse;
+            //  console.log('Login successful');
+            //} else {
+            //  // Handle API error
+            //  console.error('Login failed');
+            //}
+        } catch (error) {
+            // Handle network or other error
+            console.error('An error occurred:', error);
+        }
+    };
 
     return (
         <MainLayout>
@@ -61,13 +108,13 @@ const Login = () => {
                     </Heading>
                     <MainFormTextbox
                         placeholder="Email Address"
-                        value={email}
-                        onChange={handleEmailChange}
+                        value={UserName}
+                        onChange={handleUserNameChange}
                     />
                     <MainFormTextbox
                         placeholder="Password"
                         type="password"
-                        value={password}
+                        value={Password}
                         onChange={handlePasswordChange}
                     />
                     <Link

@@ -1,6 +1,6 @@
 import { Avatar, Box, Flex, Icon, Image, Link, Text } from '@chakra-ui/react';
 import { TbBell, TbCalendarEvent } from 'react-icons/tb';
-import DashboardSearch from '../DashboardSearch';
+import DashboardSearch from '../Search';
 
 const DashboardHeader = () => {
   return (

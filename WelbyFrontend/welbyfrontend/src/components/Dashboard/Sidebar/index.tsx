@@ -3,7 +3,7 @@ import { LuCalendarCheck, LuLayoutDashboard } from 'react-icons/lu';
 import { AiOutlineTeam } from 'react-icons/ai';
 import { BiMessageCheck } from 'react-icons/bi';
 import { MdOutlineBusinessCenter } from 'react-icons/md';
-import DashboardSidebarItem from '../DashboardSidebarItem';
+import DashboardSidebarItem from '../SidebarItem';
 
 const DashboardSidebar = () => {
   return (

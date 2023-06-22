@@ -1,4 +1,5 @@
-import Dashboard from './pages/AdminDashboard';
+import Dashboard from './pages/Dashboard';
+import ProfilePage from './pages/Dashboard/Profile';
 //import SignUpPage from './pages/SignUp';
 import LoginPage from './pages/Login';
 //import WelcomePage from './pages/Welcome'
@@ -13,6 +14,7 @@ function App() {
                 <Route path="employee/login" element={<LoginPage />} />
                 {/*<Route path="employee/signup" element={<SignUpPage />} />*/}
                 <Route path="employee/dashboard" element={<Dashboard />} />
+                <Route path="employee/dashboard/profile" element={<ProfilePage />} />
             </Routes>
         </BrowserRouter>
     );

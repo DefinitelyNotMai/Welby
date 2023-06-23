@@ -87,13 +87,15 @@ namespace WWA_CORE.Constants
         public const string PARA_SSA_SYSTEM_GROUP_CONTROL_MAPPING_MAPPINGID = "@MappingId";
         public const string PARA_SSA_SYSTEM_GROUP_CONTROL_MAPPING_CONTROLID = "@ControlId";
 
+        public const string PARA_SSA_SYSTEM_USERS_USER_NAME = "@User_Name";
+        public const string PARA_SSA_SYSTEM_USERS_PASSWORD = "@Password";
+
         /**
         public const string PARA_SSA_SYSTEM_USERS_GROUPID = "@GroupId";
         public const string PARA_SSA_SYSTEM_USERS_USERID = "@UserId";
         public const string PARA_SSA_SYSTEM_USERS_BRANCHID = "@BranchId";
         public const string PARA_SSA_SYSTEM_USERS_EMP_NO = "@Emp_No";
-        public const string PARA_SSA_SYSTEM_USERS_USER_NAME = "@User_Name";
-        public const string PARA_SSA_SYSTEM_USERS_PASSWORD = "@Password";
+        
         public const string PARA_SSA_SYSTEM_USERS_ACCOUNT_LOGS_USERID = "@UserId";
         public const string PARA_SSA_SYSTEM_USERS_ACCOUNT_LOGS_RECORDID = "@RecordId";
         public const string PARA_SSA_SYSTEM_USERS_SYSTEM_LOGS_EMP_NO = "@Emp_No";

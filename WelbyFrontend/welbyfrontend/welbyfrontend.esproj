@@ -15,13 +15,8 @@
     <Folder Include="src\components\Dashboard\Profile\Header\" />
     <Folder Include="src\components\Dashboard\Profile\Card\" />
     <Folder Include="src\components\Dashboard\Profile\CardHeader\" />
-    <Folder Include="src\pages\Dashboard\MyDashboard\" />
-    <Folder Include="src\pages\Dashboard\GrowthPlan\" />
-    <Folder Include="src\pages\Dashboard\MyTeam\" />
-    <Folder Include="src\pages\Dashboard\Approvals\" />
-    <Folder Include="src\pages\Dashboard\Profile\" />
-    <Folder Include="src\pages\Dashboard\OurCompany\" />
-    <Folder Include="src\pages\SignUp\" />
+    <Folder Include="src\pages\Admin\" />
+    <Folder Include="src\pages\Employee\SignUp\" />
     <Folder Include="src\pages\Welcome\" />
   </ItemGroup>
 </Project>

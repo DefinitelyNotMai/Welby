@@ -1,14 +1,17 @@
 import { Button } from '@chakra-ui/react';
+import { ReactNode } from 'react';
 
 type MainFormButtonProps = {
     mb?: string;
+    ml?: string;
     width?: string | string[];
-    children: string;
+    children: ReactNode;
     onClickEvent?: () => void;
 };
 
 const MainFormButton = ({
     mb = '5',
+    ml = '5',
     width,
     children,
     onClickEvent,
@@ -22,6 +25,7 @@ const MainFormButton = ({
             border="2px"
             boxShadow="md"
             mb={mb}
+            ml={ml}
             w={width}
             onClick={onClickEvent}
         >

@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_CMP_Goals">
+    <Key>
+      <PropertyRef Name="CompanyGoalsId" />
+    </Key>
+    <Property Name="CompanyGoalsId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="GoalId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_CMP_Values">
+    <Key>
+      <PropertyRef Name="CompanyValuesId" />
+    </Key>
+    <Property Name="CompanyValuesId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="ValueId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_EMP_Interest">
+    <Key>
+      <PropertyRef Name="EmployeeInterestId" />
+    </Key>
+    <Property Name="EmployeeInterestId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="InterestId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_EMP_Learned_Behaviors">
+    <Key>
+      <PropertyRef Name="LearnedBehaviorsId" />
+    </Key>
+    <Property Name="LearnedBehaviorsId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="StrengthId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_EMP_Realized_Strengths">
+    <Key>
+      <PropertyRef Name="RealizedStrengthsId" />
+    </Key>
+    <Property Name="RealizedStrengthsId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="StrengthId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_EMP_Unrealized_Strengths">
+    <Key>
+      <PropertyRef Name="UnrealizedStrengthsId" />
+    </Key>
+    <Property Name="UnrealizedStrengthsId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="StrengthId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_EMP_Weakness">
+    <Key>
+      <PropertyRef Name="EmployeeWeaknessId" />
+    </Key>
+    <Property Name="EmployeeWeaknessId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="StrengthId" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_City_Master">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" />
+    <Property Name="Phone_Number" Type="nvarchar" MaxLength="150" />
+    <Property Name="Website" Type="nvarchar" MaxLength="150" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Vision" Type="nvarchar(max)" />
+    <Property Name="Mission" Type="nvarchar(max)" />
+    <Property Name="Logo" Type="text" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="IndustryTypeId" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="FoundingDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_MST_Country_Master">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="100" />
+    <Property Name="Flag_Image" Type="text" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_Gender_Master">
+    <Key>
+      <PropertyRef Name="GenderId" />
+    </Key>
+    <Property Name="GenderId" Type="int" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="Biological" Type="bit" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_Goal_Master">
+    <Key>
+      <PropertyRef Name="GoalId" />
+    </Key>
+    <Property Name="GoalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DurationFrom" Type="datetime" />
+    <Property Name="DurationTo" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_IndustryType_Master">
+    <Key>
+      <PropertyRef Name="IndustryTypeId" />
+    </Key>
+    <Property Name="IndustryTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Industry_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_Interest_Master">
+    <Key>
+      <PropertyRef Name="InterestId" />
+    </Key>
+    <Property Name="InterestId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_Strength_Master">
+    <Key>
+      <PropertyRef Name="StrengthId" />
+    </Key>
+    <Property Name="StrengthId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Strength" Type="nvarchar" MaxLength="100" />
+    <Property Name="Category" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_MST_Value_Master">
+    <Key>
+      <PropertyRef Name="ValueId" />
+    </Key>
+    <Property Name="ValueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_REG_Employee_Registration">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="First_Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Middle_Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Last_Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Nickname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" />
+    <Property Name="Phone_Number" Type="nvarchar" MaxLength="150" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="Linkedin" Type="nvarchar" MaxLength="150" />
+    <Property Name="Facebook" Type="nvarchar" MaxLength="150" />
+    <Property Name="Instagram" Type="nvarchar" MaxLength="150" />
+    <Property Name="TikTok" Type="nvarchar" MaxLength="150" />
+    <Property Name="Work" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Connect" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Support" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Other_Notes" Type="nvarchar(max)" />
+    <Property Name="ProfilePhoto" Type="text" />
+    <Property Name="GenderId" Type="int" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <Association Name="FK__tbl_CMP_G__Compa__49C3F6B7">
+    <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
+    <End Role="tbl_CMP_Goals" Type="Self.tbl_CMP_Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="tbl_CMP_Goals">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_CMP_G__GoalI__4AB81AF0">
+    <End Role="tbl_MST_Goal_Master" Type="Self.tbl_MST_Goal_Master" Multiplicity="1" />
+    <End Role="tbl_CMP_Goals" Type="Self.tbl_CMP_Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Goal_Master">
+        <PropertyRef Name="GoalId" />
+      </Principal>
+      <Dependent Role="tbl_CMP_Goals">
+        <PropertyRef Name="GoalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_CMP_V__Compa__4D94879B">
+    <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
+    <End Role="tbl_CMP_Values" Type="Self.tbl_CMP_Values" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="tbl_CMP_Values">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_CMP_V__Value__4E88ABD4">
+    <End Role="tbl_MST_Value_Master" Type="Self.tbl_MST_Value_Master" Multiplicity="1" />
+    <End Role="tbl_CMP_Values" Type="Self.tbl_CMP_Values" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Value_Master">
+        <PropertyRef Name="ValueId" />
+      </Principal>
+      <Dependent Role="tbl_CMP_Values">
+        <PropertyRef Name="ValueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_I__Emplo__0E6E26BF">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_Interest" Type="Self.tbl_EMP_Interest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Interest">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_I__Inter__0F624AF8">
+    <End Role="tbl_MST_Interest_Master" Type="Self.tbl_MST_Interest_Master" Multiplicity="1" />
+    <End Role="tbl_EMP_Interest" Type="Self.tbl_EMP_Interest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Interest_Master">
+        <PropertyRef Name="InterestId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Interest">
+        <PropertyRef Name="InterestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_L__Emplo__01142BA1">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_Learned_Behaviors" Type="Self.tbl_EMP_Learned_Behaviors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Learned_Behaviors">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_L__Stren__02084FDA">
+    <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
+    <End Role="tbl_EMP_Learned_Behaviors" Type="Self.tbl_EMP_Learned_Behaviors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Strength_Master">
+        <PropertyRef Name="StrengthId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Learned_Behaviors">
+        <PropertyRef Name="StrengthId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_R__Emplo__7D439ABD">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_Realized_Strengths" Type="Self.tbl_EMP_Realized_Strengths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Realized_Strengths">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_R__Stren__7E37BEF6">
+    <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
+    <End Role="tbl_EMP_Realized_Strengths" Type="Self.tbl_EMP_Realized_Strengths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Strength_Master">
+        <PropertyRef Name="StrengthId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Realized_Strengths">
+        <PropertyRef Name="StrengthId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_U__Emplo__797309D9">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_Unrealized_Strengths" Type="Self.tbl_EMP_Unrealized_Strengths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Unrealized_Strengths">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_U__Stren__7A672E12">
+    <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
+    <End Role="tbl_EMP_Unrealized_Strengths" Type="Self.tbl_EMP_Unrealized_Strengths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Strength_Master">
+        <PropertyRef Name="StrengthId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Unrealized_Strengths">
+        <PropertyRef Name="StrengthId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_W__Emplo__04E4BC85">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_Weakness" Type="Self.tbl_EMP_Weakness" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Weakness">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_W__Stren__05D8E0BE">
+    <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
+    <End Role="tbl_EMP_Weakness" Type="Self.tbl_EMP_Weakness" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Strength_Master">
+        <PropertyRef Name="StrengthId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_Weakness">
+        <PropertyRef Name="StrengthId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_MST_C__Compu__3F466844">
+    <End Role="tbl_MST_Country_Master" Type="Self.tbl_MST_Country_Master" Multiplicity="0..1" />
+    <End Role="tbl_MST_City_Master" Type="Self.tbl_MST_City_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Country_Master">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="tbl_MST_City_Master">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_MST_C__Compu__45F365D3">
+    <End Role="tbl_MST_Country_Master" Type="Self.tbl_MST_Country_Master" Multiplicity="0..1" />
+    <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Country_Master">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="tbl_MST_Company">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_MST_C__Indus__46E78A0C">
+    <End Role="tbl_MST_IndustryType_Master" Type="Self.tbl_MST_IndustryType_Master" Multiplicity="0..1" />
+    <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_IndustryType_Master">
+        <PropertyRef Name="IndustryTypeId" />
+      </Principal>
+      <Dependent Role="tbl_MST_Company">
+        <PropertyRef Name="IndustryTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_REG_E__Compa__76969D2E">
+    <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_REG_E__Count__74AE54BC">
+    <End Role="tbl_MST_Country_Master" Type="Self.tbl_MST_Country_Master" Multiplicity="0..1" />
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Country_Master">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_REG_E__Gende__75A278F5">
+    <End Role="tbl_MST_Gender_Master" Type="Self.tbl_MST_Gender_Master" Multiplicity="0..1" />
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MST_Gender_Master">
+        <PropertyRef Name="GenderId" />
+      </Principal>
+      <Dependent Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WWAModelStoreContainer">
+    <EntitySet Name="tbl_CMP_Goals" EntityType="Self.tbl_CMP_Goals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_CMP_Values" EntityType="Self.tbl_CMP_Values" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_EMP_Interest" EntityType="Self.tbl_EMP_Interest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_EMP_Learned_Behaviors" EntityType="Self.tbl_EMP_Learned_Behaviors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_EMP_Realized_Strengths" EntityType="Self.tbl_EMP_Realized_Strengths" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_EMP_Unrealized_Strengths" EntityType="Self.tbl_EMP_Unrealized_Strengths" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_EMP_Weakness" EntityType="Self.tbl_EMP_Weakness" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_City_Master" EntityType="Self.tbl_MST_City_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_Company" EntityType="Self.tbl_MST_Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_Country_Master" EntityType="Self.tbl_MST_Country_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_Gender_Master" EntityType="Self.tbl_MST_Gender_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_Goal_Master" EntityType="Self.tbl_MST_Goal_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_IndustryType_Master" EntityType="Self.tbl_MST_IndustryType_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_Interest_Master" EntityType="Self.tbl_MST_Interest_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_Strength_Master" EntityType="Self.tbl_MST_Strength_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MST_Value_Master" EntityType="Self.tbl_MST_Value_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_REG_Employee_Registration" EntityType="Self.tbl_REG_Employee_Registration" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tbl_CMP_G__Compa__49C3F6B7" Association="Self.FK__tbl_CMP_G__Compa__49C3F6B7">
+      <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+      <End Role="tbl_CMP_Goals" EntitySet="tbl_CMP_Goals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_CMP_G__GoalI__4AB81AF0" Association="Self.FK__tbl_CMP_G__GoalI__4AB81AF0">
+      <End Role="tbl_MST_Goal_Master" EntitySet="tbl_MST_Goal_Master" />
+      <End Role="tbl_CMP_Goals" EntitySet="tbl_CMP_Goals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_CMP_V__Compa__4D94879B" Association="Self.FK__tbl_CMP_V__Compa__4D94879B">
+      <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+      <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_CMP_V__Value__4E88ABD4" Association="Self.FK__tbl_CMP_V__Value__4E88ABD4">
+      <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
+      <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_I__Emplo__0E6E26BF" Association="Self.FK__tbl_EMP_I__Emplo__0E6E26BF">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_Interest" EntitySet="tbl_EMP_Interest" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_I__Inter__0F624AF8" Association="Self.FK__tbl_EMP_I__Inter__0F624AF8">
+      <End Role="tbl_MST_Interest_Master" EntitySet="tbl_MST_Interest_Master" />
+      <End Role="tbl_EMP_Interest" EntitySet="tbl_EMP_Interest" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_L__Emplo__01142BA1" Association="Self.FK__tbl_EMP_L__Emplo__01142BA1">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_Learned_Behaviors" EntitySet="tbl_EMP_Learned_Behaviors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_L__Stren__02084FDA" Association="Self.FK__tbl_EMP_L__Stren__02084FDA">
+      <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
+      <End Role="tbl_EMP_Learned_Behaviors" EntitySet="tbl_EMP_Learned_Behaviors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_R__Emplo__7D439ABD" Association="Self.FK__tbl_EMP_R__Emplo__7D439ABD">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_Realized_Strengths" EntitySet="tbl_EMP_Realized_Strengths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_R__Stren__7E37BEF6" Association="Self.FK__tbl_EMP_R__Stren__7E37BEF6">
+      <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
+      <End Role="tbl_EMP_Realized_Strengths" EntitySet="tbl_EMP_Realized_Strengths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_U__Emplo__797309D9" Association="Self.FK__tbl_EMP_U__Emplo__797309D9">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_Unrealized_Strengths" EntitySet="tbl_EMP_Unrealized_Strengths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_U__Stren__7A672E12" Association="Self.FK__tbl_EMP_U__Stren__7A672E12">
+      <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
+      <End Role="tbl_EMP_Unrealized_Strengths" EntitySet="tbl_EMP_Unrealized_Strengths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_W__Emplo__04E4BC85" Association="Self.FK__tbl_EMP_W__Emplo__04E4BC85">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_Weakness" EntitySet="tbl_EMP_Weakness" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_W__Stren__05D8E0BE" Association="Self.FK__tbl_EMP_W__Stren__05D8E0BE">
+      <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
+      <End Role="tbl_EMP_Weakness" EntitySet="tbl_EMP_Weakness" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_MST_C__Compu__3F466844" Association="Self.FK__tbl_MST_C__Compu__3F466844">
+      <End Role="tbl_MST_Country_Master" EntitySet="tbl_MST_Country_Master" />
+      <End Role="tbl_MST_City_Master" EntitySet="tbl_MST_City_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_MST_C__Compu__45F365D3" Association="Self.FK__tbl_MST_C__Compu__45F365D3">
+      <End Role="tbl_MST_Country_Master" EntitySet="tbl_MST_Country_Master" />
+      <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_MST_C__Indus__46E78A0C" Association="Self.FK__tbl_MST_C__Indus__46E78A0C">
+      <End Role="tbl_MST_IndustryType_Master" EntitySet="tbl_MST_IndustryType_Master" />
+      <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_REG_E__Compa__76969D2E" Association="Self.FK__tbl_REG_E__Compa__76969D2E">
+      <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_REG_E__Count__74AE54BC" Association="Self.FK__tbl_REG_E__Count__74AE54BC">
+      <End Role="tbl_MST_Country_Master" EntitySet="tbl_MST_Country_Master" />
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_REG_E__Gende__75A278F5" Association="Self.FK__tbl_REG_E__Gende__75A278F5">
+      <End Role="tbl_MST_Gender_Master" EntitySet="tbl_MST_Gender_Master" />
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

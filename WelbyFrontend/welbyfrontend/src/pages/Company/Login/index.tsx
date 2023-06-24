@@ -1,10 +1,10 @@
 import { Center, Heading, Link, Text } from '@chakra-ui/react';
-import MainLayout from '../../components/Main/Layout';
-import MainHeader from '../../components/Main/Header';
-import MainFooter from '../../components/Main/Footer';
-import MainFormCard from '../../components/Main/FormCard';
-import MainFormTextbox from '../../components/Main/FormTextbox';
-import MainFormButton from '../../components/Main/FormButton';
+import MainLayout from '../../../components/Main/Layout';
+import MainHeader from '../../../components/Main/Header';
+import MainFooter from '../../../components/Main/Footer';
+import MainFormCard from '../../../components/Main/FormCard';
+import MainFormTextbox from '../../../components/Main/FormTextbox';
+import MainFormButton from '../../../components/Main/FormButton';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -73,7 +73,7 @@ const Login = () => {
                         if (result.length > 0) {
                             console.log(result);
                             alert(result[0].UserId);
-                            navigate('/employee/dashboard'); // For Navigating into the Dashboard Page
+                            navigate('/company/dashboard'); // For Navigating into the Dashboard Page
                         }
                     }
                 });

@@ -1,7 +1,7 @@
 import { Divider, CardBody, Flex, Text, Box, Grid } from "@chakra-ui/react";
-import ProfileCard from "../../../components/Dashboard/Profile/Card";
-import ProfileCardHeader from "../../../components/Dashboard/Profile/CardHeader";
-import Header from '../../../components/Dashboard/Profile/Header';
+import ProfileCard from "../../../../components/Dashboard/Profile/Card";
+import ProfileCardHeader from "../../../../components/Dashboard/Profile/CardHeader";
+import Header from '../../../../components/Dashboard/Profile/Header';
 
 const Profile = () => {
     return (

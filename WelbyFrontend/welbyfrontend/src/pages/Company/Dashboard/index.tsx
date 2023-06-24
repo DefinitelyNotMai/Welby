@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
-import DashboardHeader from '../../components/Dashboard/Header';
-import DashboardSidebar from '../../components/Dashboard/Sidebar';
+import DashboardHeader from '../../../components/Dashboard/Header';
+import DashboardSidebar from '../../../components/Dashboard/Sidebar';
 
 const Dashboard = () => {
     return (

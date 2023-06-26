@@ -131,8 +131,71 @@ namespace WWA_CORE.Persistent.Service.Registration
                 Active = Convert.ToBoolean(row["Active"]),
                 EncodedByName = "",
                 LastChangedByName = "",
+
                 TotalRows = Convert.ToInt32(row["TotalRows"]),
                 TotalPage = Convert.ToInt32(row["TotalPage"]),
+
+            }).ToList();
+
+            query.Dispose();
+            employeeRegistrationViewModel.Dispose();
+            return ReturnedList;
+        }
+
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee(EmployeeRegistrationViewModel employeeRegistrationViewModel)
+        {
+            var query = new SqlQueryObject
+            {
+                ProcedureName = PROCEDURE_NAME.PROC_REG_EMPLOYEE_REGISTRATION_GET,
+                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
+                Parameters = new SqlParameter[]
+               {
+                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID, employeeRegistrationViewModel.EmployeeId),
+                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeRegistrationViewModel.Active)
+               }
+            };
+
+            await query.ExecuteAsync();
+
+            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
+            {
+                EmployeeId = Convert.ToInt32(row["EmployeeId"]),
+                First_Name = Convert.ToString(row["First_Name"]),
+                Middle_Name = Convert.ToString(row["Middle_Name"]),
+                Last_Name = Convert.ToString(row["Last_Name"]),
+                Phone_Number = Convert.ToString(row["Mobile_Number"]),
+                Email = Convert.ToString(row["Email_Address"]),
+                Birthday = Convert.ToDateTime(row["Birthday"]),
+                Linkedin = Convert.ToString(row["Linkedin"]),
+                Instagram = Convert.ToString(row["Instagram"]),
+                Facebook = Convert.ToString(row["Facebook"]),
+                ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
+                Address = Convert.ToString(row["Address"]),
+
+                GenderId = Convert.ToInt32(row["GenderId"]),
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
+                CountryId = Convert.ToInt32(row["CountryId"]),
+
+
+                Work = Convert.ToString(row["Work"]),
+                Contact = Convert.ToString(row["Contact"]),
+                Support = Convert.ToString(row["Support"]),
+                Other_Notes = Convert.ToString(row["Other_Notes"]),
+
+
+                EmployeeFullName = Convert.ToString(row["ClientFullName"]),
+                GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
+                CountryDisplay = Convert.ToString(row["CountryDisplay"]),
+                EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
+
+                Active = Convert.ToBoolean(row["Active"]),
+                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
+                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
+                Computer_Name = Convert.ToString(row["Computer_Name"]),
+                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
+                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
+                EncodedByName = "",
+                LastChangedByName = "",
             }).ToList();
 
             query.Dispose();

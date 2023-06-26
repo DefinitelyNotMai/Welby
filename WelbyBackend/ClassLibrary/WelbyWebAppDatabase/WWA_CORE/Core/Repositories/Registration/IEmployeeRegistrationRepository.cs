@@ -15,5 +15,6 @@ namespace WWA_CORE.Core.Repositories.Registration
         Task<EmployeeRegistrationViewModel> ReturnEmployee(EmployeeRegistrationViewModel employeeRegistrationModelView);
         Task<EmployeeRegistrationViewModel> UpdateEmployee(EmployeeRegistrationViewModel employeeRegistrationViewModel);    
         Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployees(EmployeeRegistrationViewModel employeeRegistrationViewModel);
+        Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee(EmployeeRegistrationViewModel employeeRegistrationViewModel);
     }
 }

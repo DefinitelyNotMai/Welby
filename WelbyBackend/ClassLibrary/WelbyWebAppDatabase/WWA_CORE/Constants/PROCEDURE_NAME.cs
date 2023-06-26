@@ -9,7 +9,8 @@ namespace WWA_CORE.Constants
     public class PROCEDURE_NAME
     {
         #region REGISTRATION
-        public const string PROC_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET = "procWWA_REG_Employee_Registration_Get";
+        public const string PROC_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET = "procWWA_REG_Employee_Registration_PageWise_Get";
+        public const string PROC_REG_EMPLOYEE_REGISTRATION_GET = "procWWA_REG_Employee_Get";
         #endregion
 
         #region MASTERS

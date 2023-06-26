@@ -65,14 +65,13 @@ const Login = () => {
                 }
                 axios.get(loginUrl, {
                     method: 'GET',
-                    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     params: param
                 }).then(response => {
                     result = response.data;
                     if (result != null) {
                         if (result.length > 0) {
                             console.log(result);
-                            alert(result[0].UserId);
                             const id = result[0].UserId
                             navigate('/employee/dashboard', { state: { id, }}); // For Navigating into the Dashboard Page
                         }

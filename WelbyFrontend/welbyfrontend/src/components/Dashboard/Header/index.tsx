@@ -3,7 +3,11 @@ import { TbBell, TbCalendarEvent } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import DashboardSearch from '../Search';
 
-const DashboardHeader = () => {
+type CustomDashboardHeaderProps = {
+    name: string;
+};
+
+const DashboardHeader = ({ name }: CustomDashboardHeaderProps) => {
     const navigate = useNavigate();
 
     const handleProfileClick = () => {
@@ -56,7 +60,7 @@ const DashboardHeader = () => {
                             <Avatar boxSize="6 " />
                         </Link>
                         <Text fontFamily="Montserrat" fontWeight="600" ml="2">
-                            Name
+                            {name}
                         </Text>
                     </Flex>
                 </Flex>

@@ -29,13 +29,24 @@ namespace WelbyAPI.Controllers
         }
 
         #region EMPLOYEES
-        [Route("~/api/GetEmployees")]
+        [Route("~/api/GetAllEmployees")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetAllEmployees(param);
             return model;
         }
+
+        //GetSingle Employee
+        [Route("~/api/GetEmployee")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromBody] EmployeeRegistrationViewModel param)
+        {
+            var model = await _wwauow.Employee.GetEmployee(param);
+            return model;
+        }
+
+
         [Route("~/api/AddEmployee")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployee([FromBody] EmployeeRegistrationViewModel param)
@@ -495,7 +506,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY
         [Route("~/api/GetCompanies")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromBody] CompanyMasterViewModel param)
+        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromUri] CompanyMasterViewModel param)
         {
             var model = await _wwauow.Company.GetCompanyList(param);
             return model;

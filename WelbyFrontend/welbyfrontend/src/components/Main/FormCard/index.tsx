@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 type MainFormCardProps = {
     children: ReactNode;
-    w?: string;
+    w?: string | string[];
 };
 
 const MainFormCard = ({ children, w }: MainFormCardProps) => {
@@ -13,7 +13,7 @@ const MainFormCard = ({ children, w }: MainFormCardProps) => {
                 boxShadow="dark-lg"
                 bg="#24a2f0"
                 my="16"
-                p={{ base: '8', md: '16' }}
+                p="0"
                 borderRadius="2xl"
                 w={w}
             >

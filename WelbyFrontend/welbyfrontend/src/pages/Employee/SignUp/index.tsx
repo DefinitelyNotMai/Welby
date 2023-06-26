@@ -175,7 +175,7 @@ const SignUp = () => {
                 </Flex>
                 <Grid templateColumns="2fr 1fr" gap="10">
                     <Flex flexDirection="column">
-                        <CustomTextbox placeholder="Email" value={UserName} />
+                        <CustomTextbox placeholder="Email" value={UserName} onChange={handleUserNameChange} />
                         <Select
                             placeholder="Choose your location"
                             bg="#ffffff"

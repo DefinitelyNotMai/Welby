@@ -73,7 +73,8 @@ const Login = () => {
                         if (result.length > 0) {
                             console.log(result);
                             alert(result[0].UserId);
-                            navigate('/employee/dashboard'); // For Navigating into the Dashboard Page
+                            const id = result[0].UserId
+                            navigate('/employee/dashboard', { state: { id, }}); // For Navigating into the Dashboard Page
                         }
                     }
                 });

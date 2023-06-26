@@ -1,4 +1,4 @@
-import { Box, Icon, Flex, Grid, Heading, Text, Select, Textarea } from "@chakra-ui/react";
+import { Box, Icon, Flex, Grid, Heading, Text, Select, Textarea, Checkbox, Avatar, Center, FormControl } from "@chakra-ui/react";
 import { FiPlus } from 'react-icons/fi';
 import { useState } from "react";
 import MainFooter from "../../../components/Main/Footer";
@@ -161,7 +161,7 @@ const SignUp = () => {
 
     const renderStep1 = () => {
         return (
-            <>
+            <Flex flexDirection="column" p="16">
                 <Flex
                     flexDirection="column"
                     alignItems="center"
@@ -213,16 +213,17 @@ const SignUp = () => {
                         <Text>SAVE PROGRESS</Text>
                     </MainFormButton>
                 </Flex>
-            </>
+            </Flex>
         );
     };
 
     const renderStep2 = () => {
         return (
-            <>
+            <Flex flexDirection="column" p="16">
                 <Flex
                     flexDirection="column"
                     alignItems="center"
+                    textAlign="center"
                     color="#ffffff"
                     fontFamily="Montserrat"
                     mb="10"
@@ -245,7 +246,7 @@ const SignUp = () => {
                 </Box>
                 <Flex flexDirection="row" justifyContent="space-between">
                     <MainFormButton width="25%" onClickEvent={handlePreviousStep}>
-                        <Text>PREVIOUS</Text>
+                        <Text>BACK</Text>
                     </MainFormButton>
                     <MainFormButton width="25%">
                         <Text>SAVE PROGRESS</Text>
@@ -254,13 +255,13 @@ const SignUp = () => {
                         <Text>NEXT</Text>
                     </MainFormButton>
                 </Flex>
-            </>
+            </Flex>
         );
     };
 
     const renderStep3 = () => {
         return (
-            <>
+            <Flex flexDirection="column" p="16">
                 <Flex
                     flexDirection="column"
                     alignItems="center"
@@ -307,7 +308,7 @@ const SignUp = () => {
                     <Text color="#ffffff">Top 2 Learned Behaviors</Text>
                     <Flex flexDirection="row" flexFlow="flex-start" >
                         {Array.from({ length: 2 }).map((_, index) => (
-                            <Select key={index} bg="#ffffff" placeholder="Choose here..." width="30%" mr={index === 0 ? "9" : "0" }>
+                            <Select key={index} bg="#ffffff" placeholder="Choose here..." width="30%" mr={index === 0 ? "10" : "0"}>
                                 {options.map((option) => (
                                     <option key={option} value={option}>
                                         {option}
@@ -319,19 +320,19 @@ const SignUp = () => {
                 </Box>
                 <Box mb="20" fontFamily="Montserrat" fontWeight="500">
                     <Text color="#ffffff">Top 1 Weaknesses</Text>
-                        {Array.from({ length: 1 }).map((_, index) => (
-                            <Select key={index} bg="#ffffff" placeholder="Choose here..." w="30%">
-                                {options.map((option) => (
-                                    <option key={option} value={option}>
-                                        {option}
-                                    </option>
-                                ))}
-                            </Select>
-                        ))}
+                    {Array.from({ length: 1 }).map((_, index) => (
+                        <Select key={index} bg="#ffffff" placeholder="Choose here..." w="30%">
+                            {options.map((option) => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </Select>
+                    ))}
                 </Box>
                 <Flex flexDirection="row" justifyContent="space-between">
                     <MainFormButton width="25%" onClickEvent={handlePreviousStep}>
-                        <Text>PREVIOUS</Text>
+                        <Text>BACK</Text>
                     </MainFormButton>
                     <MainFormButton width="25%">
                         <Text>SAVE PROGRESS</Text>
@@ -340,35 +341,154 @@ const SignUp = () => {
                         <Text>NEXT</Text>
                     </MainFormButton>
                 </Flex>
-            </>
+            </Flex>
         );
     };
 
     const renderStep4 = () => {
         return (
-            <>
-            </>
+            <Flex flexDirection="column" p="16">
+                <Flex
+                    flexDirection="column"
+                    alignItems="center"
+                    color="#ffffff"
+                    fontFamily="Montserrat"
+                    mb="10"
+                >
+                    <Heading fontFamily="Montserrat" fontWeight="700" mb="5">Share your strengths to the team.</Heading>
+                    <Text fontSize="lg" fontWeight="700">"Play with your strengths"</Text>
+                    <Text fontSize="sm" fontWeight="400">- Jennifer Lopez</Text>
+                </Flex>
+                <Box color="#ffffff" fontFamily="Montserrat" mb="10">
+                    <Text fontSize="lg" fontWeight="400">Choose all that apply</Text>
+                </Box>
+                <Box bg="#ffffff" borderRadius="xl" fontFamily="Montserrat" fontWeight="400" mb="10">
+                    <Grid templateColumns="1fr 1fr">
+                        <Flex flexDirection="column">
+                            <Checkbox value="dance" p="4">Dance</Checkbox>
+                            <Checkbox value="exercise" p="4">Exercise</Checkbox>
+                            <Checkbox value="languages" p="4">Languages</Checkbox>
+                            <Checkbox value="movies" p="4">Movies</Checkbox>
+                            <Checkbox value="photography" p="4">Photography</Checkbox>
+                            <Checkbox value="podcasts" p="4">Podcasts</Checkbox>
+                            <Checkbox value="poems-and-literature" p="4">Poems and Literature</Checkbox>
+                        </Flex>
+                        <Flex flexDirection="column">
+                            <Checkbox value="reading" p="4">Reading</Checkbox>
+                            <Checkbox value="sports" p="4">Sports</Checkbox>
+                            <Checkbox value="travel" p="4">Travel</Checkbox>
+                            <Checkbox value="video-games" p="4">Video Games</Checkbox>
+                            <Checkbox value="volunteering" p="4">Volunteering</Checkbox>
+                            <Checkbox value="writing" p="4">Writing</Checkbox>
+                            <Checkbox value="yoga" p="4">Yoga</Checkbox>
+                        </Flex>
+                    </Grid>
+                </Box>
+                <Flex flexDirection="row" justifyContent="space-between">
+                    <MainFormButton width="25%" onClickEvent={handlePreviousStep}>
+                        <Text>BACK</Text>
+                    </MainFormButton>
+                    <MainFormButton width="25%">
+                        <Text>SAVE PROGRESS</Text>
+                    </MainFormButton>
+                    <MainFormButton width="25%" onClickEvent={handleNextStep}>
+                        <Text>NEXT</Text>
+                    </MainFormButton>
+                </Flex>
+            </Flex>
         );
     };
 
     const renderStep5 = () => {
         return (
-            <>
-            </>
+            <Flex flexDirection="column" p="16">
+                <Flex
+                    flexDirection="column"
+                    alignItems="center"
+                    textAlign="center"
+                    color="#ffffff"
+                    fontFamily="Montserrat"
+                    mb="10"
+                >
+                    <Heading fontFamily="Montserrat" fontWeight="700" mb="5">Anything else you want your colleagues to take note of?</Heading>
+                </Flex>
+                <Box mb="5" fontFamily="Montserrat" fontWeight="500">
+                    <Text color="#ffffff">Other things I want to share for my team to know me more:</Text>
+                    <Textarea bg="#ffffff" border="none" placeholder="Type here..." h="15vh" />
+                </Box>
+                <Box color="#ffffff" mb="5" fontFamily="Montserrat">
+                    <Text fontWeight="700" pb="5">Reminders:</Text>
+                    <Text fontWeight="700">Don't forget to join in our other collaboration platforms!</Text>
+                    <Flex flexDirection="column">
+                        <Checkbox value="discord">Discord</Checkbox>
+                        <Checkbox value="asana">Asana</Checkbox>
+                        <Checkbox value="clickup">ClickUp</Checkbox>
+                    </Flex>
+                </Box>
+                <Flex flexDirection="row" justifyContent="space-between">
+                    <MainFormButton width="25%" onClickEvent={handlePreviousStep}>
+                        <Text>BACK</Text>
+                    </MainFormButton>
+                    <MainFormButton width="25%">
+                        <Text>SAVE PROGRESS</Text>
+                    </MainFormButton>
+                    <MainFormButton width="25%" onClickEvent={handleNextStep}>
+                        <Text>NEXT</Text>
+                    </MainFormButton>
+                </Flex>
+            </Flex>
         );
     };
 
     const renderStep6 = () => {
         return (
-            <>
-            </>
+            <Flex flexDirection="column" p="16">
+                <Heading
+                    textAlign="center"
+                    fontFamily="Montserrat"
+                    fontWeight="700"
+                    fontSize="4xl"
+                    color="#ffffff"
+                >
+                    Congratulations,
+                </Heading>
+                <Text
+                    textAlign="center"
+                    fontFamily="Montserrat"
+                    fontWeight="700"
+                    fontSize="5xl"
+                    color="#ffffff"
+                >
+                    NICKNAME
+                </Text>
+                <Flex justify="center" mt="8">
+                    <Avatar boxSize="250px"></Avatar>
+                </Flex>
+                <Text
+                    textAlign="center"
+                    fontFamily="Montserrat"
+                    fontWeight="400"
+                    fontSize="4xl"
+                    color="#ffffff"
+                    mb="8"
+                >
+                    You are all set-up!
+                </Text>
+                <Center>
+                    <MainFormButton width="35%">
+                        Go to My Dashboard
+                    </MainFormButton>
+                </Center>
+            </Flex>
         );
     };
 
     return (
         <MainLayout>
             <MainHeader />
-            <MainFormCard>{renderStep()}</MainFormCard>
+            <MainFormCard w={["100%", "75%", "50%"]}>
+                {renderStep()}
+            </MainFormCard>
             <MainFooter />
         </MainLayout>
     );

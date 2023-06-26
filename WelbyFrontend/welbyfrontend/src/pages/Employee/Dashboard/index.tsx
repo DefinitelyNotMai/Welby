@@ -12,12 +12,12 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                var userUrl = 'https://localhost:44373/api/GetAllEmployees';
+                var userUrl = 'https://localhost:44373/api/GetEmployee';
                 var result = null;
                 let param = {
                     "EmployeeId": state.Id,
-                    "Phone_Number": 9887537421,
-                    "Email": "micahangelachua@email.com",
+                    //"Phone_Number": 9887537421,
+                    //"Email": "micahangelachua@email.com",
                     "Active": true
                 }
                 axios.get(userUrl, {

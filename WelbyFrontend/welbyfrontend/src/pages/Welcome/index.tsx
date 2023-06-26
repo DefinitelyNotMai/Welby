@@ -1,4 +1,4 @@
-import { Box, Center, Heading, Text } from '@chakra-ui/react';
+import { Box, Center, Flex, Heading, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainFooter from '../../components/Main/Footer';
@@ -51,72 +51,67 @@ const Welcome = () => {
 
     const renderInitial = () => {
         return (
-            <MainLayout>
-                <MainHeader />
-                <MainFormCard>
-                    <Heading
-                        as="h1"
-                        fontFamily="Montserrat"
-                        fontWeight="700"
-                        mb="5"
-                        color="#ffffff"
-                    >
-                        <Text align="center">Welcome to your happy portal</Text>
-                    </Heading>
-                    <MainFormButton onClickEvent={() => setStep(WelcomeStep.SignUp)}>Sign Up</MainFormButton>
-                    <MainFormButton onClickEvent={() => setStep(WelcomeStep.Login)}>Log In</MainFormButton>
-                </MainFormCard>
-                <MainFooter />
-            </MainLayout>
-
+            <Flex flexDirection="column" p="16">
+                <Heading
+                    as="h1"
+                    fontFamily="Montserrat"
+                    fontWeight="700"
+                    mb="10"
+                    color="#ffffff"
+                >
+                    <Text align="center">Welcome to your happy portal</Text>
+                </Heading>
+                <MainFormButton onClickEvent={() => setStep(WelcomeStep.SignUp)}>Sign Up</MainFormButton>
+                <MainFormButton onClickEvent={() => setStep(WelcomeStep.Login)}>Log In</MainFormButton>
+            </Flex>
         )
     }
 
     const renderSignUp = () => {
         return (
-            <MainLayout>
-                <MainHeader />
-                <MainFormCard w="25%">
-                    <Heading
-                        as="h1"
-                        fontFamily="Montserrat"
-                        fontWeight="700"
-                        mb="5"
-                        color="#ffffff"
-                    >
-                        <Text align="center">Sign Up As:</Text>
-                    </Heading>
-                    <MainFormButton onClickEvent={handleCompanySignUpClick}>Company</MainFormButton>
-                    <MainFormButton onClickEvent={handleEmployeeSignUpClick}>Employee</MainFormButton>
-                </MainFormCard>
-                <MainFooter />
-            </MainLayout>
+            <Flex flexDirection="column" p="16">
+                <Heading
+                    as="h1"
+                    fontFamily="Montserrat"
+                    fontWeight="700"
+                    mb="5"
+                    color="#ffffff"
+                >
+                    <Text align="center">Sign Up As:</Text>
+                </Heading>
+                <MainFormButton onClickEvent={handleCompanySignUpClick}>Company</MainFormButton>
+                <MainFormButton onClickEvent={handleEmployeeSignUpClick}>Employee</MainFormButton>
+            </Flex>
         )
     }
 
     const renderLogin = () => {
         return (
-            <MainLayout>
-                <MainHeader />
-                <MainFormCard w="25%">
-                    <Heading
-                        as="h1"
-                        fontFamily="Montserrat"
-                        fontWeight="700"
-                        mb="5"
-                        color="#ffffff"
-                    >
-                        <Text align="center">Login As:</Text>
-                    </Heading>
-                    <MainFormButton onClickEvent={handleCompanyLoginClick}>Company</MainFormButton>
-                    <MainFormButton onClickEvent={handleEmployeeLoginClick}>Employee</MainFormButton>
-                </MainFormCard>
-                <MainFooter />
-            </MainLayout>
+            <Flex flexDirection="column" p="16">
+                <Heading
+                    as="h1"
+                    fontFamily="Montserrat"
+                    fontWeight="700"
+                    mb="5"
+                    color="#ffffff"
+                >
+                    <Text align="center">Login As:</Text>
+                </Heading>
+                <MainFormButton onClickEvent={handleCompanyLoginClick}>Company</MainFormButton>
+                <MainFormButton onClickEvent={handleEmployeeLoginClick}>Employee</MainFormButton>
+            </Flex>
         )
     }
 
-    return <Box>{renderStep()}</Box>
+    return (
+        <MainLayout>
+            <MainHeader />
+            <MainFormCard w={["100%", "75%", "50%"]}>
+                {renderStep()}
+            </MainFormCard>
+            <MainFooter />
+        </MainLayout>
+    );
 };
 
 export default Welcome;

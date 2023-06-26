@@ -1,4 +1,4 @@
-import { Center, Heading, Link, Text } from '@chakra-ui/react';
+import { Center, Flex, Heading, Link, Text } from '@chakra-ui/react';
 import MainLayout from '../../../components/Main/Layout';
 import MainHeader from '../../../components/Main/Header';
 import MainFooter from '../../../components/Main/Footer';
@@ -97,8 +97,8 @@ const Login = () => {
     return (
         <MainLayout>
             <MainHeader />
-            <Center m="auto">
-                <MainFormCard>
+            <MainFormCard w={["100%", "75%", "50%"]}>
+                <Flex flexDirection="column" p="16">
                     <Heading
                         as="h1"
                         fontFamily="Montserrat"
@@ -138,8 +138,8 @@ const Login = () => {
                             Submit
                         </MainFormButton>
                     </Center>
-                </MainFormCard>
-            </Center>
+                </Flex>
+            </MainFormCard>
             <MainFooter />
         </MainLayout>
     );

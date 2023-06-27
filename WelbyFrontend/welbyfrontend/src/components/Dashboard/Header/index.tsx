@@ -1,7 +1,9 @@
-import { Avatar, Box, Flex, Icon, Image, Link, Text } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Avatar, Box, Flex, Icon, Image, Link, Text, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import { TbBell, TbCalendarEvent } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import DashboardSearch from '../Search';
+import WelbyLogo from '../../../assets/images/welby_primary-1.png';
 
 type CustomDashboardHeaderProps = {
     name: string;
@@ -9,10 +11,26 @@ type CustomDashboardHeaderProps = {
 
 const DashboardHeader = ({ name }: CustomDashboardHeaderProps) => {
     const navigate = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleProfileClick = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const handleProfileSelection = () => {
         navigate("profile");
     };
+
+    const handleLogoutSelection = () => {
+        // Add logout logic here. (Clear cookie/token from localStorage?)
+        /*
+            if successful 
+                alert "Logout successful"
+                navigate to "/"
+        */
+        navigate("/");
+    };
+
 
     return (
         <Box
@@ -44,7 +62,7 @@ const DashboardHeader = ({ name }: CustomDashboardHeaderProps) => {
                     >
                         <Link>
                             <Image
-                                src="/src/assets/images/welby_primary-1.png"
+                                src={WelbyLogo}
                                 alt="Welby Logo"
                                 objectFit="contain"
                                 w="full"
@@ -56,9 +74,15 @@ const DashboardHeader = ({ name }: CustomDashboardHeaderProps) => {
                         <DashboardSearch />
                         <Icon as={TbCalendarEvent} color="#24a2f0" boxSize="6" />
                         <Icon as={TbBell} color="#24a2f0" boxSize="6" />
-                        <Link onClick={handleProfileClick}>
-                            <Avatar boxSize="6 " />
-                        </Link>
+                        <Menu isOpen={isMenuOpen}>
+                            <MenuButton as={Link} onClick={handleProfileClick}>
+                                <Avatar boxSize="6" />
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem onClick={handleProfileSelection}>My Profile</MenuItem>
+                                <MenuItem onClick={handleLogoutSelection}>Logout</MenuItem>
+                            </MenuList>
+                        </Menu>
                         <Text fontFamily="Montserrat" fontWeight="600" ml="2">
                             {name}
                         </Text>

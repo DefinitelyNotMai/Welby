@@ -150,8 +150,8 @@ namespace WWA_CORE.Persistent.Service.Registration
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                {
-                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID, employeeRegistrationViewModel.EmployeeId),
-                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeRegistrationViewModel.Active)
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID , employeeRegistrationViewModel.EmployeeId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeRegistrationViewModel.Active)
                }
             };
 

@@ -40,7 +40,7 @@ namespace WelbyAPI.Controllers
         //GetSingle Employee
         [Route("~/api/GetEmployee")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetEmployee(param);
             return model;
@@ -100,7 +100,7 @@ namespace WelbyAPI.Controllers
         #region VALUE
         [Route("~/api/GetAllValue")]
         [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromBody] ValueMasterViewModel param)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
         {
             var model = await _wwauow.Value.GetAllValues(param);
             return model;
@@ -158,7 +158,7 @@ namespace WelbyAPI.Controllers
         #region STRENGTH
         [Route("~/api/GetStrength")]
         [HttpGet]
-        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromBody] StrengthMasterViewModel param)
+        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromUri] StrengthMasterViewModel param)
         {
             var model = await _wwauow.Strength.GetStrengthList(param);
             return model;
@@ -216,7 +216,7 @@ namespace WelbyAPI.Controllers
         #region INTEREST
         [Route("~/api/GetAllInterest")]
         [HttpGet]
-        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromBody] InterestMasterViewModel param)
+        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromUri] InterestMasterViewModel param)
         {
             var model = await _wwauow.Interest.GetInterestsList(param);
             return model;
@@ -274,7 +274,7 @@ namespace WelbyAPI.Controllers
         #region INDUSTRY TYPE
         [Route("~/api/GetIndustryTypes")]
         [HttpGet]
-        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromBody] IndustryTypeMasterViewModel param)
+        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromUri] IndustryTypeMasterViewModel param)
         {
             var model = await _wwauow.IndustryType.GetIndustryTypeList(param);
             return model;
@@ -332,7 +332,7 @@ namespace WelbyAPI.Controllers
         #region GOAL
         [Route("~/api/GetAllGoal")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromBody] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromUri] GoalMasterViewModel param)
         {
             var model = await _wwauow.Goal.GetGoalList(param);
             return model;
@@ -390,7 +390,7 @@ namespace WelbyAPI.Controllers
         #region GENDER
         [Route("~/api/GetGender")]
         [HttpGet]
-        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromBody] GenderMasterViewModel param)
+        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromUri] GenderMasterViewModel param)
         {
             var model = await _wwauow.Gender.GetGenderList(param);
             return model;
@@ -448,7 +448,7 @@ namespace WelbyAPI.Controllers
         #region COUNTRY
         [Route("~/api/GetAllCountry")]
         [HttpGet]
-        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromBody] CountryMasterViewModel param)
+        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromUri] CountryMasterViewModel param)
         {
             var model = await _wwauow.Country.GetCountryList(param);
             return model;
@@ -565,7 +565,7 @@ namespace WelbyAPI.Controllers
         #region CITY
         [Route("~/api/GetAllCity")]
         [HttpGet]
-        public async Task<IEnumerable<CityMasterViewModel>> GetCityList([FromBody] CityMasterViewModel param)
+        public async Task<IEnumerable<CityMasterViewModel>> GetCityList([FromUri] CityMasterViewModel param)
         {
             var model = await _wwauow.City.GetCityList(param);
             return model;
@@ -623,7 +623,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE INTEREST
         [Route("~/api/GetEmployeeInterests")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromBody] EmployeeInterestViewModel param)
+        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromUri] EmployeeInterestViewModel param)
         {
             var model = await _wwauow.EmployeeInterest.GetEmployeeInterests(param);
             return model;
@@ -681,7 +681,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE LEARNED BEHAVIORS
         [Route("~/api/GetEmployeeLearnedBehaviors")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromBody] EmployeeLearnedBehaviorsViewModel param)
+        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromUri] EmployeeLearnedBehaviorsViewModel param)
         {
             var model = await _wwauow.EmployeeLearnedBehaviors.GetEmployeeLearnedBehaviors(param);
             return model;
@@ -739,7 +739,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE REALIZED STRENGTH
         [Route("~/api/GetEmployeeRealizedStrengths")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromBody] EmployeeRealizedStrengthsViewModel param)
+        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromUri] EmployeeRealizedStrengthsViewModel param)
         {
             var model = await _wwauow.EmployeeRealizedStrengths.GetEmployeeRealizedStrength(param);
             return model;
@@ -797,7 +797,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE UNREALIZED STRENGTH
         [Route("~/api/GetEmployeeUnrealizedStrengths")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromBody] EmployeeUnrealizedStrengthsViewModel param)
+        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromUri] EmployeeUnrealizedStrengthsViewModel param)
         {
             var model = await _wwauow.EmployeeUnrealizedStrengths.GetEmployeeUnrealizedStrength(param);
             return model;
@@ -855,7 +855,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE WEAKNESS
         [Route("~/api/GetEmployeeWeaknesses")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromBody] EmployeeWeaknessViewModel param)
+        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromUri] EmployeeWeaknessViewModel param)
         {
             var model = await _wwauow.EmployeeWeakness.GetEmployeeWeakness(param);
             return model;
@@ -913,7 +913,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY GOALS
         [Route("~/api/GetCompanyGoals")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromBody] CompanyGoalsViewModel param)
+        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromUri] CompanyGoalsViewModel param)
         {
             var model = await _wwauow.CompanyGoals.GetCompanyGoals(param);
             return model;
@@ -971,7 +971,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY VALUES
         [Route("~/api/GetCompanyValues/{Companyid}")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValuesList([FromBody] CompanyValuesViewModel param)
+        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValuesList([FromUri] CompanyValuesViewModel param)
         {
             var model = await _wwauow.CompanyValues.GetCompanyValues(param);
             return model;

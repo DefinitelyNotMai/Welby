@@ -65,7 +65,7 @@ const Login = () => {
                 }
                 axios.get(loginUrl, {
                     method: 'GET',
-                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*" },
                     params: param
                 }).then(response => {
                     result = response.data;

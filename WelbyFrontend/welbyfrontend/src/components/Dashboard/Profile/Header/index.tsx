@@ -1,5 +1,7 @@
 import { Avatar, Box, Flex, Link, Text, Icon } from "@chakra-ui/react";
-import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FaLinkedin, FaFacebook, FaInstagram, FaChevronLeft } from 'react-icons/fa'
+import { Link as RouterLink } from "react-router-dom";
+
 
 const Header = () => {
     return (
@@ -9,7 +11,13 @@ const Header = () => {
             py="4"
         >
             <Flex flexDirection="row" justifyContent="space-evenly" alignItems="center">
-                <Flex flexDirection="row">
+                <Flex flexDirection="row" alignItems="center">
+                    <Link as={RouterLink} to="/employee/dashboard">
+                        <Flex flexDirection="row" pr="4">
+                            <Icon as={FaChevronLeft} color="#ffffff" h="1.5rem" w="1.5rem" mr="2" />
+                            <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500" textDecoration="none">Back to Dashboard</Text>
+                        </Flex>
+                    </Link>
                     <Link>
                         <Avatar boxSize="32"></Avatar>
                     </Link>

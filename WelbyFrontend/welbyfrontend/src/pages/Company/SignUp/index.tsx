@@ -33,6 +33,16 @@ const SignUp = () => {
         switch (step) {
             case SignupStep.Step1:
                 return renderStep1();
+            //case SignupStep.Step2:
+            //    return renderStep2();
+            //case SignupStep.Step3:
+            //    return renderStep3();
+            //case SignupStep.Step4:
+            //    return renderStep5();
+            //case SignupStep.Step5:
+            //    return renderStep5();
+            //case SignupStep.Step6:
+            //    return renderStep6();
             default:
                 return null;
         }
@@ -114,6 +124,31 @@ const SignUp = () => {
             </>
         );
     };
+
+    //const renderStep2 = () => {
+    //    return (
+    //    );
+    //};
+
+    //const renderStep3 = () => {
+    //    return (
+    //    );
+    //};
+
+    //const renderStep4 = () => {
+    //    return (
+    //    );
+    //};
+
+    //const renderStep5 = () => {
+    //    return (
+    //    );
+    //};
+
+    //const renderStep6 = () => {
+    //    return (
+    //    );
+    //};
 
     return (
         <MainLayout>

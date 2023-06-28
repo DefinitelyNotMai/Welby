@@ -26,7 +26,6 @@ namespace WWA_CORE.Persistent.Service.Registration
             {
                 var rowtoInsert = new tbl_REG_Employee_Registration
                 {
-                    EmployeeId = employeeRegistrationViewModel.EmployeeId,
                     CompanyId = employeeRegistrationViewModel.CompanyId,
                     First_Name = employeeRegistrationViewModel.First_Name, 
                     Middle_Name = employeeRegistrationViewModel.Middle_Name,
@@ -98,8 +97,8 @@ namespace WWA_CORE.Persistent.Service.Registration
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
-                Phone_Number = Convert.ToString(row["Mobile_Number"]),
-                Email = Convert.ToString(row["Email_Address"]),
+                Phone_Number = Convert.ToString(row["Phone_Number"]),
+                Email = Convert.ToString(row["Email"]),
                 Birthday = Convert.ToDateTime(row["Birthday"]),
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
@@ -163,8 +162,8 @@ namespace WWA_CORE.Persistent.Service.Registration
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
-                Phone_Number = Convert.ToString(row["Mobile_Number"]),
-                Email = Convert.ToString(row["Email_Address"]),
+                Phone_Number = Convert.ToString(row["Phone_Number"]),
+                Email = Convert.ToString(row["Email"]),
                 Birthday = Convert.ToDateTime(row["Birthday"]),
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),

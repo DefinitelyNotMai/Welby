@@ -12,17 +12,17 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                var userUrl = 'https://localhost:44373/api/GetEmployee';
+                var userUrl = 'https://localhost:44373/api/GetAllEmployees';
                 var result = null;
                 let param = {
                     "EmployeeId": state.Id,
-                    //"Phone_Number": 9887537421,
-                    //"Email": "micahangelachua@email.com",
+                    "Phone_Number": "",
+                    "Email": "",
                     "Active": true
                 }
                 axios.get(userUrl, {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "*" },
+                    headers: { 'Content-Type': 'application/json' },
                     params: param
                 }).then(response => {
                     result = response.data;
@@ -36,10 +36,6 @@ const Dashboard = () => {
                     }
                 })
 
-                //const response = await axios.get(userUrl);
-                //const user = response.data;
-                //alert(user[0].Name);
-                //setFirst_Name(user[0].Name);
             } catch (error) {
                 console.error("Error fetching user data.", error);
             }

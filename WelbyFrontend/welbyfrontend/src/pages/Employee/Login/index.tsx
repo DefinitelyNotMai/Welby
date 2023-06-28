@@ -65,7 +65,7 @@ const Login = () => {
                 }
                 axios.get(loginUrl, {
                     method: 'GET',
-                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*" },
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     params: param
                 }).then(response => {
                     result = response.data;
@@ -73,7 +73,7 @@ const Login = () => {
                         if (result.length > 0) {
                             console.log(result);
                             const id = result[0].UserId
-                            navigate('/employee/dashboard', { state: { id, }}); // For Navigating into the Dashboard Page
+                            navigate('/employee/dashboard', { state: { id }}); // For Navigating into the Dashboard Page
                         }
                     }
                 });

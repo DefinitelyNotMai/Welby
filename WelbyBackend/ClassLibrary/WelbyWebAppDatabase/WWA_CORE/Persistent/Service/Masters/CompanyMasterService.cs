@@ -25,7 +25,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var rowToInsert = new tbl_MST_Company
                 {
-                    CompanyId = companyMasterViewModel.CompanyId,
                     Name = companyMasterViewModel.Name,
                     Email = companyMasterViewModel.Email,
                     Phone_Number = companyMasterViewModel.Phone_Number,
@@ -69,6 +68,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_GET_COMPANYID, companyMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_GET_COUNTRYID, companyMasterViewModel.CountryId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_GET_INDUSTRYTYPEID, companyMasterViewModel.IndustryTypeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, companyMasterViewModel.Active),
                }
             };
@@ -91,6 +92,9 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Mission = Convert.ToString(row["Mission"]),
                 Vision = Convert.ToString(row["Vision"]),
                 Logo = Convert.ToString(row["Logo"]),
+
+                CompanyLocation = Convert.ToString(row["CompanyLocation"]),
+                IndustryTypeDisplay = Convert.ToString(row["IndustryTypeDisplay"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

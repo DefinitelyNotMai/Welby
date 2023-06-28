@@ -285,5 +285,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Realized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Realized_Strengths_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Unrealized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Unrealized_Strengths_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Weakness_Get" FunctionName="WWAModel.Store.procWWA_EMP_Weakness_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_City_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_City_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Country_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Country_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Gender_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Gender_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Goal_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Goal_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_IndustryType_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_IndustryType_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Interest_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Interest_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Strength_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Strength_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
   </EntityContainerMapping>
 </Mapping>

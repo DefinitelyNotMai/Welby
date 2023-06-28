@@ -25,7 +25,6 @@ namespace WWA_CORE.Persistent.Service.Company
             {
                 var rowToInsert = new tbl_CMP_Goals
                 {
-                    CompanyGoalsId = companyGoalsViewModel.CompanyGoalsId,
                     GoalId = companyGoalsViewModel.GoalId,
                     CompanyId = companyGoalsViewModel.CompanyId,
 

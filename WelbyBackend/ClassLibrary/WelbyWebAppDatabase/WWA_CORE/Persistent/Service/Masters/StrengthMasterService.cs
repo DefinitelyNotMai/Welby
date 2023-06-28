@@ -26,7 +26,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_Strength_Master
                 {
                     Strength = strengthMasterViewModel.Strength,
-                    StrengthId = strengthMasterViewModel.StrengthId,
                     Category = strengthMasterViewModel.Category,
 
                     Active = true,

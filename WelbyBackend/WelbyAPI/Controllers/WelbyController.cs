@@ -16,6 +16,7 @@ using System.Web.Script.Serialization;
 using System.Text;
 using System.Web.UI;
 using System.EnterpriseServices.Internal;
+using System.Web.Http.Cors;
 
 namespace WelbyAPI.Controllers
 {
@@ -31,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEES
         [Route("~/api/GetAllEmployees")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromBody] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetAllEmployees(param);
             return model;
@@ -40,7 +41,7 @@ namespace WelbyAPI.Controllers
         //GetSingle Employee
         [Route("~/api/GetEmployee")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromUri] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromBody] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetEmployee(param);
             return model;
@@ -274,7 +275,7 @@ namespace WelbyAPI.Controllers
         #region INDUSTRY TYPE
         [Route("~/api/GetIndustryTypes")]
         [HttpGet]
-        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromUri] IndustryTypeMasterViewModel param)
+        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromBody] IndustryTypeMasterViewModel param)
         {
             var model = await _wwauow.IndustryType.GetIndustryTypeList(param);
             return model;
@@ -390,7 +391,7 @@ namespace WelbyAPI.Controllers
         #region GENDER
         [Route("~/api/GetGender")]
         [HttpGet]
-        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromUri] GenderMasterViewModel param)
+        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromBody] GenderMasterViewModel param)
         {
             var model = await _wwauow.Gender.GetGenderList(param);
             return model;
@@ -448,7 +449,7 @@ namespace WelbyAPI.Controllers
         #region COUNTRY
         [Route("~/api/GetAllCountry")]
         [HttpGet]
-        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromUri] CountryMasterViewModel param)
+        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromBody] CountryMasterViewModel param)
         {
             var model = await _wwauow.Country.GetCountryList(param);
             return model;
@@ -506,7 +507,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY
         [Route("~/api/GetCompanies")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromUri] CompanyMasterViewModel param)
+        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromBody] CompanyMasterViewModel param)
         {
             var model = await _wwauow.Company.GetCompanyList(param);
             return model;
@@ -565,7 +566,7 @@ namespace WelbyAPI.Controllers
         #region CITY
         [Route("~/api/GetAllCity")]
         [HttpGet]
-        public async Task<IEnumerable<CityMasterViewModel>> GetCityList([FromUri] CityMasterViewModel param)
+        public async Task<IEnumerable<CityMasterViewModel>> GetCityList([FromBody] CityMasterViewModel param)
         {
             var model = await _wwauow.City.GetCityList(param);
             return model;

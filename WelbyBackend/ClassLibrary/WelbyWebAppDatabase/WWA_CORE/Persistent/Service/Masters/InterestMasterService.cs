@@ -26,7 +26,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_Interest_Master
                 {
                     Name = interestMasterViewModel.Name,
-                    InterestId = interestMasterViewModel.InterestId,
 
                     Active = true,
                     Encoded_By = interestMasterViewModel.Encoded_By,

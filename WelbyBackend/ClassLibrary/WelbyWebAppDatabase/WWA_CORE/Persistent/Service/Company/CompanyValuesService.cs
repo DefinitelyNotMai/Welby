@@ -26,7 +26,6 @@ namespace WWA_CORE.Persistent.Service.Company
             {
                 var rowToInsert = new tbl_CMP_Values
                 {
-                    CompanyValuesId = companyValuesViewModel.CompanyValuesId,
                     ValueId = companyValuesViewModel.ValueId,
                     CompanyId = companyValuesViewModel.CompanyId,
 

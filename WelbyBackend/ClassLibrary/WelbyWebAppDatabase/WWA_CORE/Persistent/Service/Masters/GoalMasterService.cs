@@ -26,7 +26,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_Goal_Master
                 {
                     Title = goalMasterViewModel.Title,
-                    GoalId = goalMasterViewModel.GoalId,
                     Description = goalMasterViewModel.Description,
                     DurationFrom = goalMasterViewModel.DurationFrom,
                     DurationTo = goalMasterViewModel.DurationTo,

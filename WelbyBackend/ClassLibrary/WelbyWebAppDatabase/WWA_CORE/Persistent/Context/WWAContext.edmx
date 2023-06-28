@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_CMP_Goals">
           <Key>
             <PropertyRef Name="CompanyGoalsId" />
@@ -512,6 +512,101 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="procWWA_CMP_Goals_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyGoalsId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="GoalId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_CMP_Values_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyValuesId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="ValueId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_EMP_Interest_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeInterestId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="InterestId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_EMP_Learned_Behaviors_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LearnedBehaviorsId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_EMP_Realized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RealizedStrengthsId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_EMP_Unrealized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UnrealizedStrengthsId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_EMP_Weakness_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeWeaknessId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_City_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_Company_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="IndustryTypeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_Country_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_Gender_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GenderId" Type="int" Mode="In" />
+          <Parameter Name="Biological" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_Goal_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GoalId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_IndustryType_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IndustryTypeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_Interest_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="InterestId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_Strength_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_MST_Value_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ValueId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_REG_Employee_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_REG_Employee_Registration_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNo" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+          <Parameter Name="DateTo" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="WWAModelStoreContainer">
           <EntitySet Name="tbl_CMP_Goals" EntityType="Self.tbl_CMP_Goals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_CMP_Values" EntityType="Self.tbl_CMP_Values" Schema="dbo" store:Type="Tables" />
@@ -611,8 +706,7 @@
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1261,6 +1355,101 @@
             <End Role="tbl_MST_Gender_Master" EntitySet="tbl_MST_Gender_Master" />
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
+          <FunctionImport Name="procWWA_CMP_Goals_Get">
+            <Parameter Name="CompanyGoalsId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="GoalId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_CMP_Values_Get">
+            <Parameter Name="CompanyValuesId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="ValueId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_EMP_Interest_Get">
+            <Parameter Name="EmployeeInterestId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="InterestId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_EMP_Learned_Behaviors_Get">
+            <Parameter Name="LearnedBehaviorsId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_EMP_Realized_Strengths_Get">
+            <Parameter Name="RealizedStrengthsId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">
+            <Parameter Name="UnrealizedStrengthsId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_EMP_Weakness_Get">
+            <Parameter Name="EmployeeWeaknessId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_City_Master_Get">
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_Company_Master_Get">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="IndustryTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_Country_Master_Get">
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_Gender_Master_Get">
+            <Parameter Name="GenderId" Mode="In" Type="Int32" />
+            <Parameter Name="Biological" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_Goal_Master_Get">
+            <Parameter Name="GoalId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_IndustryType_Master_Get">
+            <Parameter Name="IndustryTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_Interest_Master_Get">
+            <Parameter Name="InterestId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_Strength_Master_Get">
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_MST_Value_Master_Get">
+            <Parameter Name="ValueId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_REG_Employee_Get">
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_REG_Employee_Registration_Pagewise_Get">
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Phone_Number" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="DateFrom" Mode="In" Type="String" />
+            <Parameter Name="DateTo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1552,6 +1741,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_EMP_Realized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Realized_Strengths_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_EMP_Unrealized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Unrealized_Strengths_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_EMP_Weakness_Get" FunctionName="WWAModel.Store.procWWA_EMP_Weakness_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_City_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_City_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_Country_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Country_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_Gender_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Gender_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_Goal_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Goal_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_IndustryType_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_IndustryType_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_Interest_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Interest_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_Strength_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Strength_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

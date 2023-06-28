@@ -26,9 +26,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_Value_Master
                 {
                     Title = valueMasterViewModel.Title,
-                    ValueId = valueMasterViewModel.ValueId,
                     Description = valueMasterViewModel.Title,
-                    
 
                     Active = true,
                     Encoded_By = valueMasterViewModel.Encoded_By,

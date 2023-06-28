@@ -645,5 +645,100 @@
       <End Role="tbl_MST_Gender_Master" EntitySet="tbl_MST_Gender_Master" />
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
     </AssociationSet>
+    <FunctionImport Name="procWWA_CMP_Goals_Get">
+      <Parameter Name="CompanyGoalsId" Mode="In" Type="Int32" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="GoalId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_CMP_Values_Get">
+      <Parameter Name="CompanyValuesId" Mode="In" Type="Int32" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="ValueId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_EMP_Interest_Get">
+      <Parameter Name="EmployeeInterestId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="InterestId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_EMP_Learned_Behaviors_Get">
+      <Parameter Name="LearnedBehaviorsId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_EMP_Realized_Strengths_Get">
+      <Parameter Name="RealizedStrengthsId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">
+      <Parameter Name="UnrealizedStrengthsId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_EMP_Weakness_Get">
+      <Parameter Name="EmployeeWeaknessId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_City_Master_Get">
+      <Parameter Name="CityId" Mode="In" Type="Int32" />
+      <Parameter Name="CountryId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Company_Master_Get">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="CountryId" Mode="In" Type="Int32" />
+      <Parameter Name="IndustryTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Country_Master_Get">
+      <Parameter Name="CountryId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Gender_Master_Get">
+      <Parameter Name="GenderId" Mode="In" Type="Int32" />
+      <Parameter Name="Biological" Mode="In" Type="Boolean" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Goal_Master_Get">
+      <Parameter Name="GoalId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_IndustryType_Master_Get">
+      <Parameter Name="IndustryTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Interest_Master_Get">
+      <Parameter Name="InterestId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Strength_Master_Get">
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Value_Master_Get">
+      <Parameter Name="ValueId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_REG_Employee_Get">
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_REG_Employee_Registration_Pagewise_Get">
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="Phone_Number" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="PageNo" Mode="In" Type="Int32" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+      <Parameter Name="DateFrom" Mode="In" Type="String" />
+      <Parameter Name="DateTo" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

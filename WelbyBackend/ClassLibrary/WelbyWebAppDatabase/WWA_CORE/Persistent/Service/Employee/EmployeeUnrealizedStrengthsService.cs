@@ -25,7 +25,6 @@ namespace WWA_CORE.Persistent.Service.Employee
             {
                 var rowToInsert = new tbl_EMP_Unrealized_Strengths
                 {
-                    UnrealizedStrengthsId = employeeUnrealizedStrengthsViewModel.UnrealizedStrengthsId,
                     EmployeeId = employeeUnrealizedStrengthsViewModel.EmployeeId,
                     StrengthId = employeeUnrealizedStrengthsViewModel.StrengthId,
 

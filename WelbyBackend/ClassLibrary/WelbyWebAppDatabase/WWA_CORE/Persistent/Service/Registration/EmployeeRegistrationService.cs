@@ -41,7 +41,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     Instagram = employeeRegistrationViewModel.Instagram,
                     TikTok = employeeRegistrationViewModel.TikTok,
                     Work = employeeRegistrationViewModel.Work,
-                    Connect = employeeRegistrationViewModel.Contact,
+                    Connect = employeeRegistrationViewModel.Connect,
                     Support = employeeRegistrationViewModel.Support,
                     ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto,
                     Other_Notes = employeeRegistrationViewModel.Other_Notes,
@@ -112,12 +112,12 @@ namespace WWA_CORE.Persistent.Service.Registration
                 
 
                 Work = Convert.ToString(row["Work"]),
-                Contact= Convert.ToString(row["Contact"]),
+                Connect= Convert.ToString(row["Connect"]),
                 Support = Convert.ToString(row["Support"]),
                 Other_Notes = Convert.ToString(row["Other_Notes"]),
 
 
-                EmployeeFullName = Convert.ToString(row["ClientFullName"]),
+                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
                 GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
                 CountryDisplay = Convert.ToString(row["CountryDisplay"]),
                 EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
@@ -164,7 +164,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 Last_Name = Convert.ToString(row["Last_Name"]),
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
-                Birthday = Convert.ToDateTime(row["Birthday"]),
+                Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
                 Facebook = Convert.ToString(row["Facebook"]),
@@ -177,12 +177,12 @@ namespace WWA_CORE.Persistent.Service.Registration
 
 
                 Work = Convert.ToString(row["Work"]),
-                Contact = Convert.ToString(row["Contact"]),
+                Connect = Convert.ToString(row["Connect"]),
                 Support = Convert.ToString(row["Support"]),
                 Other_Notes = Convert.ToString(row["Other_Notes"]),
 
 
-                EmployeeFullName = Convert.ToString(row["ClientFullName"]),
+                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
                 GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
                 CountryDisplay = Convert.ToString(row["CountryDisplay"]),
                 EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
@@ -278,7 +278,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.Instagram = employeeRegistrationViewModel.Instagram;
                 RowToUpdate.TikTok = employeeRegistrationViewModel.TikTok;
                 RowToUpdate.Work = employeeRegistrationViewModel.Work;
-                RowToUpdate.Connect = employeeRegistrationViewModel.Contact;
+                RowToUpdate.Connect = employeeRegistrationViewModel.Connect;
                 RowToUpdate.Support = employeeRegistrationViewModel.Support;
                 RowToUpdate.ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto;
                 RowToUpdate.Other_Notes = employeeRegistrationViewModel.Other_Notes;

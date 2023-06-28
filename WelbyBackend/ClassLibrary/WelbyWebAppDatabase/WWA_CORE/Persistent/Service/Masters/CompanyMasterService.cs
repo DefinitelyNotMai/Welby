@@ -88,7 +88,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 CountryId = Convert.ToInt32(row["CountryId"]),
                 IndustryTypeId = Convert.ToInt32(row["IndustryTypeId"]),
 
-                FoundingDate = Convert.ToDateTime(row["FoundingDate"]),
+                FoundingDate = DBNull.Value != row["FoundingDate"] ? (DateTime?)row["FoundingDate"] : null,
                 Mission = Convert.ToString(row["Mission"]),
                 Vision = Convert.ToString(row["Vision"]),
                 Logo = Convert.ToString(row["Logo"]),
@@ -100,12 +100,10 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
                 Computer_Name = Convert.ToString(row["Computer_Name"]),
-                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
-                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
+                LastChanged_By = row["LastChanged_By"] != DBNull.Value  ? Convert.ToInt32(row["LastChanged_By"]) : 0,
+                LastChanged_Date = row["LastChanged_Date"] != DBNull.Value ? (DateTime?)row["LastChanged_Date"] : null,
                 EncodedByName = "",
                 LastChangedByName = "",
-
-
 
             }).ToList();
             query.Dispose();

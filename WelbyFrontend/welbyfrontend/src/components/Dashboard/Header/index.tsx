@@ -3,7 +3,7 @@ import { Avatar, Box, Flex, Icon, Image, Link, Text, Menu, MenuButton, MenuList,
 import { TbBell, TbCalendarEvent } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import DashboardSearch from '../Search';
-import WelbyLogo from '../../../assets/images/welby_primary-1.png';
+import WelbyLogo from '../../../assets/images/welby_logoAndName_primary-1_flat.svg';
 
 type CustomDashboardHeaderProps = {
     name: string;

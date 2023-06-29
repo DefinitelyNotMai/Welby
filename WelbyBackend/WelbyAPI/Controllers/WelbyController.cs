@@ -32,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEES
         [Route("~/api/GetAllEmployees")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetAllEmployees(param);
             return model;
@@ -41,7 +41,7 @@ namespace WelbyAPI.Controllers
         //GetSingle Employee
         [Route("~/api/GetEmployee")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetEmployee(param);
             return model;
@@ -101,7 +101,7 @@ namespace WelbyAPI.Controllers
         #region VALUE
         [Route("~/api/GetAllValue")]
         [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromBody] ValueMasterViewModel param)
         {
             var model = await _wwauow.Value.GetAllValues(param);
             return model;
@@ -159,7 +159,7 @@ namespace WelbyAPI.Controllers
         #region STRENGTH
         [Route("~/api/GetStrength")]
         [HttpGet]
-        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromUri] StrengthMasterViewModel param)
+        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromBody] StrengthMasterViewModel param)
         {
             var model = await _wwauow.Strength.GetStrengthList(param);
             return model;
@@ -217,7 +217,7 @@ namespace WelbyAPI.Controllers
         #region INTEREST
         [Route("~/api/GetAllInterest")]
         [HttpGet]
-        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromUri] InterestMasterViewModel param)
+        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromBody] InterestMasterViewModel param)
         {
             var model = await _wwauow.Interest.GetInterestsList(param);
             return model;
@@ -333,7 +333,7 @@ namespace WelbyAPI.Controllers
         #region GOAL
         [Route("~/api/GetAllGoal")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromUri] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromBody] GoalMasterViewModel param)
         {
             var model = await _wwauow.Goal.GetGoalList(param);
             return model;
@@ -624,7 +624,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE INTEREST
         [Route("~/api/GetEmployeeInterests")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromUri] EmployeeInterestViewModel param)
+        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromBody] EmployeeInterestViewModel param)
         {
             var model = await _wwauow.EmployeeInterest.GetEmployeeInterests(param);
             return model;
@@ -682,7 +682,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE LEARNED BEHAVIORS
         [Route("~/api/GetEmployeeLearnedBehaviors")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromUri] EmployeeLearnedBehaviorsViewModel param)
+        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromBody] EmployeeLearnedBehaviorsViewModel param)
         {
             var model = await _wwauow.EmployeeLearnedBehaviors.GetEmployeeLearnedBehaviors(param);
             return model;
@@ -740,7 +740,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE REALIZED STRENGTH
         [Route("~/api/GetEmployeeRealizedStrengths")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromUri] EmployeeRealizedStrengthsViewModel param)
+        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromBody] EmployeeRealizedStrengthsViewModel param)
         {
             var model = await _wwauow.EmployeeRealizedStrengths.GetEmployeeRealizedStrength(param);
             return model;
@@ -798,7 +798,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE UNREALIZED STRENGTH
         [Route("~/api/GetEmployeeUnrealizedStrengths")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromUri] EmployeeUnrealizedStrengthsViewModel param)
+        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromBody] EmployeeUnrealizedStrengthsViewModel param)
         {
             var model = await _wwauow.EmployeeUnrealizedStrengths.GetEmployeeUnrealizedStrength(param);
             return model;
@@ -856,7 +856,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE WEAKNESS
         [Route("~/api/GetEmployeeWeaknesses")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromUri] EmployeeWeaknessViewModel param)
+        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromBody] EmployeeWeaknessViewModel param)
         {
             var model = await _wwauow.EmployeeWeakness.GetEmployeeWeakness(param);
             return model;
@@ -914,7 +914,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY GOALS
         [Route("~/api/GetCompanyGoals")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromUri] CompanyGoalsViewModel param)
+        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromBody] CompanyGoalsViewModel param)
         {
             var model = await _wwauow.CompanyGoals.GetCompanyGoals(param);
             return model;
@@ -972,7 +972,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY VALUES
         [Route("~/api/GetCompanyValues/{Companyid}")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValuesList([FromUri] CompanyValuesViewModel param)
+        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValuesList([FromBody] CompanyValuesViewModel param)
         {
             var model = await _wwauow.CompanyValues.GetCompanyValues(param);
             return model;

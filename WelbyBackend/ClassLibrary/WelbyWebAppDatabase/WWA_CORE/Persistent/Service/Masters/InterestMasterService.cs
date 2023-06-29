@@ -25,6 +25,7 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var rowtoInsert = new tbl_MST_Interest_Master
                 {
+                    InterestId = interestMasterViewModel.InterestId,
                     Name = interestMasterViewModel.Name,
 
                     Active = true,
@@ -64,7 +65,7 @@ namespace WWA_CORE.Persistent.Service.Masters
 
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new InterestMasterViewModel()
             {
-                InterestId = Convert.ToInt32(row["Interestd"]),
+                InterestId = Convert.ToInt32(row["InterestId"]),
                 Name = Convert.ToString(row["Name"]),
 
                 Active = Convert.ToBoolean(row["Active"]),

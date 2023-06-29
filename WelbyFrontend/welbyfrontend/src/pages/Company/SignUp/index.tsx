@@ -7,7 +7,7 @@ import MainFormCard from "../../../components/Main/FormCard";
 import CustomTextbox from "../../../components/Main/FormTextbox";
 import MainHeader from "../../../components/Main/Header";
 import MainLayout from "../../../components/Main/Layout";
-import WelbyLogo from "../../../assets/images/welby.svg"
+import WelbyLogo from "../../../assets/images/welby_logoAndName_primary-1_flat.svg"
 
 enum SignupStep {
     Step1,
@@ -62,7 +62,7 @@ const SignUp = () => {
                         justifyContent="center"
                     >
                         <Center>
-                            <Image src={WelbyLogo} boxSize="32" />
+                            <Image src={WelbyLogo} boxSize="64" />
                         </Center>
                     </Box>
                     <Box

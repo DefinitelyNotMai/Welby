@@ -33,6 +33,7 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_COUNTRY_MASTER_GET_COUNTRYID = "@CountryId";
 
         public const string PARA_MST_COMPANY_MASTER_GET_COMPANYID = "@CompanyId";
+        public const string PARA_MST_COMPANY_MASTER_GET_COMPANYEMAIL = "@Email";
         public const string PARA_MST_COMPANY_MASTER_GET_COUNTRYID = "@CountryId";
         public const string PARA_MST_COMPANY_MASTER_GET_INDUSTRYTYPEID = "@IndustryTypeId";
 

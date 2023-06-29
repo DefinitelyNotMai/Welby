@@ -12,13 +12,10 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                var userUrl = 'https://localhost:44373/api/GetAllEmployees';
+                var userUrl = 'https://localhost:44373/api/GetEmployee';
                 var result = null;
                 let param = {
-                    "EmployeeId": state.Id,
-                    "Phone_Number": "",
-                    "Email": "",
-                    "Active": true
+                    "EmployeeId": state.id
                 }
                 axios.get(userUrl, {
                     method: 'GET',
@@ -54,6 +51,7 @@ const Dashboard = () => {
             <Flex flexDirection="row">
                 <DashboardSidebar />
                 <div>{state.id}</div>
+                <div>{First_Name}</div>
                 {/* TODO: navigation for each SidebarItem*/}
             </Flex>
         </Flex>

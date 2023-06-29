@@ -37,10 +37,6 @@ const Login = () => {
         formData.append('username', UserName);
         formData.append('password', Password);
 
-        //const formData = new FormData();
-        //formData.append('UserName', UserName);
-        //formData.append('Password', Password);
-
         try {
             const tokenResponse = await fetch(tokenUrl, {
                 method: 'POST',
@@ -94,6 +90,35 @@ const Login = () => {
         }
     };
 
+    const temporaryHandleLogin = async () => {
+        const loginUrl = 'https://localhost:44373/api/GetAllEmployees';
+        var result = null;
+        let param = {
+            "Email": UserName,// Username
+            "Phone_Number": Password,
+        }
+
+        try {
+            axios.get(loginUrl, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                params: param
+            }).then(response => {
+                result = response.data;
+                if (result != null) {
+                    if (result.length > 0) {
+                        console.log(result);
+                        const id = result[0].EmployeeId
+                        navigate('/employee/dashboard', { state: { id } }); // For Navigating into the Dashboard Page
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+
+    };
+
     return (
         <MainLayout>
             <MainHeader />
@@ -133,7 +158,7 @@ const Login = () => {
                     <Center>
                         <MainFormButton
                             width={['70%', '50%', '50%']}
-                            onClickEvent={handleLogin}
+                            onClickEvent={temporaryHandleLogin}
                         >
                             Submit
                         </MainFormButton>

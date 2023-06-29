@@ -7,6 +7,7 @@ type MainFormButtonProps = {
     width?: string | string[];
     children: ReactNode;
     onClickEvent?: () => void;
+    isDisabled?: boolean;
 };
 
 const MainFormButton = ({
@@ -15,6 +16,7 @@ const MainFormButton = ({
     width,
     children,
     onClickEvent,
+    isDisabled,
 }: MainFormButtonProps) => {
     return (
         <Button
@@ -27,7 +29,9 @@ const MainFormButton = ({
             mb={mb}
             ml={ml}
             w={width}
+            type="submit"
             onClick={onClickEvent}
+            isDisabled={isDisabled}
         >
             {children}
         </Button>

@@ -560,6 +560,12 @@
     <Parameter Name="IndustryTypeId" Type="int" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
+  <Function Name="procWWA_MST_Company_Master_Login_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
   <Function Name="procWWA_MST_Country_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CountryId" Type="int" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />

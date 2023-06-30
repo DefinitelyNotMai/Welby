@@ -122,6 +122,8 @@ const SignUp = () => {
         setData(prev => {
             return { ...prev, ...fields }
         })
+
+        
     }
 
     //function updateStrengths(strengths: Partial<Strengths>) {
@@ -150,11 +152,18 @@ const SignUp = () => {
         nextStep();
     }
 
+    function gege() {
+        console.log(data.Phone_Number);
+        console.log(data.Location)
+    }
+
     const submitUserData = async () => {
-        const userData = {
-            "CompanyId": 1000,
+        let userData = {
+            "CompanyId": 1007,
+            "CountryId": 1000,
+            "GenderId": 1,
             "Email": data.Email,
-            "Phone_Number": Number(data.Phone_Number),
+            "Phone_Number": data.Phone_Number,
             "Linkedin": data.Linkedin,
             "Facebook": data.Facebook,
             "Instagram": data.Instagram,
@@ -169,16 +178,18 @@ const SignUp = () => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your frontend origin
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
             },
         };
 
         try {
             var addUserUrl = 'https://localhost:44373/api/AddEmployee';
             
-            axios.post(addUserUrl, userData, config)
-                .then(response => {
+            axios.post(addUserUrl, userData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your frontend origin
+                },
+            }).then(response => {
                     // Handle the response from the server
                     console.log(response.data);
                 })

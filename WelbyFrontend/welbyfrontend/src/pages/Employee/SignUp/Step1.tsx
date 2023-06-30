@@ -1,6 +1,7 @@
 import { Flex, Grid, Heading, Select, Text, Icon, FormControl } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiPlus } from 'react-icons/fi';
+import CompanySelect from "../../../components/Main/CompanySelection";
 import CountrySelect from "../../../components/Main/CountrySelection";
 import CustomTextbox from "../../../components/Main/FormTextbox";
 

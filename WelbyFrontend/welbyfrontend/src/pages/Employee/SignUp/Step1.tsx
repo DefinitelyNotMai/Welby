@@ -35,40 +35,13 @@ const Step1 = ({ Company, Email, Country, Phone_Number, Linkedin, Facebook, Inst
             </Flex>
             <Grid templateColumns="2fr 1fr" gap="10">
                 <Flex flexDirection="column">
-                    <Select
-                        placeholder="Choose your company..."
-                        bg="#ffffff"
-                        fontFamily="Montserrat"
-                        fontWeight="500"
-                        color="#000000"
-                        mb="5"
-                        value={Company}
-                        onChange={e => updateFields({ Company: e.target.value })}
-                    >
-                        <option value="Welby">Welby</option>
-                        <option value="Dlinkers">Dlinkers</option>
-                        <option value="CPU">CPU</option>
-                    </Select>
-                    <CountrySelect />
+                    <CompanySelect value={Company} />
                     <CustomTextbox
                         placeholder="Email"
                         value={Email}
                         onChange={e => updateFields({ Email: e.target.value })}
                     />
-                    <Select
-                        placeholder="Choose your location"
-                        bg="#ffffff"
-                        fontFamily="Montserrat"
-                        fontWeight="500"
-                        color="#000000"
-                        mb="5"
-                        value={Location}
-                        onChange={e => updateFields({ Location: e.target.value })}
-                    >
-                        <option value="Philippines">Philippines</option>
-                        <option value="Singapore">Singapore</option>
-                        <option value="Malaysia">Malaysia</option>
-                    </Select>
+                    <CountrySelect value={Country} />
                     <CustomTextbox
                         placeholder="Mobile Number"
                         value={Phone_Number}

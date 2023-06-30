@@ -17,7 +17,7 @@ import Step6 from "./Step6";
 type UserFormData = {
     Company: string;
     Email: string;
-    Location: string;
+    Country: string;
     Phone_Number: string;
     Linkedin: string;
     Facebook: string;
@@ -83,7 +83,7 @@ const UserWeakness = {
 const INITIAL_DATA: UserFormData = {
     Company: "",
     Email: "",
-    Location: "",
+    Country: "",
     Phone_Number: "",
     Linkedin: "",
     Facebook: "",
@@ -143,7 +143,7 @@ const SignUp = () => {
     ]);
 
     const isNextDisabled =
-        (!data.Company || !data.Email || !data.Location || !data.Phone_Number) ||
+        (!data.Company || !data.Email || !data.Country || !data.Phone_Number) ||
         (currentStepIndex === 1 && (!data.Work || !data.Connect || !data.Support)) ||
         (currentStepIndex === 2 && (!data.RealizedStrength1 || !data.RealizedStrength2 || !data.RealizedStrength3 || !data.UnrealizedStrength1 || !data.UnrealizedStrength2 || !data.UnrealizedStrength3 || !data.LearnedBehavior1 || !data.LearnedBehavior2 || !data.Weakness));
 
@@ -160,7 +160,7 @@ const SignUp = () => {
     function gege() {
         console.log(data)
         console.log(data.Phone_Number);
-        console.log(data.Location)
+        console.log(data.Country)
     }
 
     const submitUserData = async () => {

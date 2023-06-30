@@ -152,44 +152,52 @@ const SignUp = () => {
         nextStep();
     }
 
+    function submitData() {
+        gege();
+        submitUserData();
+    }
+
     function gege() {
+        console.log(data)
         console.log(data.Phone_Number);
         console.log(data.Location)
     }
 
     const submitUserData = async () => {
         let userData = {
+            "First_Name": "Dummy1",
+            "Middle_Name": "Account2",
+            "Last_Name": "Temporary3",
+            "Nickname": "Dummy4",
+            "Email": "dummyaccount5@email.com",
+            "Phone_Number": "0987654321",
+            "Address": "Zarraga, Iloilo",
+            "Birthday": "1999-02-04",
+            "Linkedin": "",
+            "Facebook": "",
+            "Instagram": "",
+            "TikTok": "",
+            "ProfilePhoto": "",
+            "GenderId": 1,
             "CompanyId": 1007,
             "CountryId": 1000,
-            "GenderId": 1,
-            "Email": data.Email,
-            "Phone_Number": data.Phone_Number,
-            "Linkedin": data.Linkedin,
-            "Facebook": data.Facebook,
-            "Instagram": data.Instagram,
-            "TikTok": data.TikTok,
-            "Work": data.Work,
-            "Connect": data.Connect,
-            "Support": data.Support,
-            "Other_Notes": data.Other_Notes,
+            "Work": "",
+            "Connect": "",
+            "Support": "",
+            "Other_Notes": ""
         }
 
         const config = {
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your frontend origin
-            },
+                'Content-Type': 'application/json'
+            }
         };
 
         try {
             var addUserUrl = 'https://localhost:44373/api/AddEmployee';
             
-            axios.post(addUserUrl, userData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your frontend origin
-                },
-            }).then(response => {
+            axios.post(addUserUrl, userData, config)
+                .then(response => {
                     // Handle the response from the server
                     console.log(response.data);
                 })
@@ -215,7 +223,7 @@ const SignUp = () => {
                                 <MainFormButton width="25%" onClickEvent={prevStep}>
                                     <Text>BACK</Text>
                                 </MainFormButton>}
-                            <MainFormButton onClickEvent={submitUserData}>Sign up!</MainFormButton>
+                            <MainFormButton onClickEvent={submitData}>Sign up!</MainFormButton>
                         </Flex>
                     }
                 </Flex>

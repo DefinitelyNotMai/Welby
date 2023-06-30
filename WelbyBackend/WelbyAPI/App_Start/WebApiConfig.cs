@@ -11,9 +11,8 @@ namespace WelbyAPI
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            config.EnableCors(new EnableCorsAttribute("http://localhost:3000", "*", "*"));
             // Web API routes
-            config.EnableCors();
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

@@ -20,6 +20,7 @@ using System.Web.Http.Cors;
 
 namespace WelbyAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:3000", headers: "Origin, X-Requested-With, Content-Type, Accept", methods: "GET, POST, PUT, DELETE, OPTIONS, PATCH")]
     public class WelbyController : ApiController
     {
         // GET: Welby
@@ -35,13 +36,14 @@ namespace WelbyAPI.Controllers
         public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetAllEmployees(param);
+            
             return model;
         }
 
         //GetSingle Employee
         [Route("~/api/GetEmployee")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetEmployee(param);
             return model;

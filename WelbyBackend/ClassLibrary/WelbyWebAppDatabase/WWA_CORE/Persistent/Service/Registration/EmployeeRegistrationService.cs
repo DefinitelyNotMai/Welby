@@ -30,6 +30,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     First_Name = employeeRegistrationViewModel.First_Name, 
                     Middle_Name = employeeRegistrationViewModel.Middle_Name,
                     Last_Name = employeeRegistrationViewModel.Last_Name,
+                    Nickname = employeeRegistrationViewModel.Nickname,
                     GenderId = employeeRegistrationViewModel.GenderId,
                     Email = employeeRegistrationViewModel.Email,
                     Phone_Number = employeeRegistrationViewModel.Phone_Number,
@@ -97,9 +98,10 @@ namespace WWA_CORE.Persistent.Service.Registration
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
+                Nickname = Convert.ToString(row["Nickname"]),
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
-                Birthday = Convert.ToDateTime(row["Birthday"]),
+                Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
                 Facebook = Convert.ToString(row["Facebook"]),
@@ -162,6 +164,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
+                Nickname = Convert.ToString(row["Nickname"]),
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
                 Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
@@ -267,6 +270,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.First_Name = employeeRegistrationViewModel.First_Name;
                 RowToUpdate.Middle_Name = employeeRegistrationViewModel.Middle_Name;
                 RowToUpdate.Last_Name = employeeRegistrationViewModel.Last_Name;
+                RowToUpdate.Nickname = employeeRegistrationViewModel.Nickname;
                 RowToUpdate.GenderId = employeeRegistrationViewModel.GenderId;
                 RowToUpdate.Email = employeeRegistrationViewModel.Email;
                 RowToUpdate.Phone_Number = employeeRegistrationViewModel.Phone_Number;

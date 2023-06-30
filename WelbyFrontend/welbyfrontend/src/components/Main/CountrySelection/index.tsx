@@ -2,6 +2,7 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { Select } from '@chakra-ui/react';
 import axios from 'axios';
 
+// property names need to be the same as column names
 interface Country {
     CountryId: number;
     Name: string;
@@ -38,12 +39,13 @@ const CountrySelect = (): JSX.Element => {
     
     const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const selected = countries.find((country) => country.Name === event.target.value)
+        console.log(selected)
         setSelectedCountry(selected);
     };
     
 
     return (
-        <Select onChange={handleCountryChange}>
+        <Select onChange={handleCountryChange} placeholder="try">
             {countries.map((country) => (
                 <option key={country.CountryId} value={country.Name}>
                     {country.Name}

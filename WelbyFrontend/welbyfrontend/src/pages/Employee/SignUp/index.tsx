@@ -1,4 +1,5 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
+import axios from "axios";
 import { FormEvent, useState } from "react";
 import MainFooter from "../../../components/Main/Footer";
 import MainFormButton from "../../../components/Main/FormButton";
@@ -13,7 +14,7 @@ import Step4 from "./Step4";
 import Step5 from "./Step5";
 import Step6 from "./Step6";
 
-type FormData = {
+type UserFormData = {
     Company: string;
     Email: string;
     Location: string;
@@ -37,7 +38,49 @@ type FormData = {
     Other_Notes: string;
 }
 
-const INITIAL_DATA: FormData = {
+//type UnrealizedStrengths = {
+//    UnrealizedStrength1: string;
+//    UnrealizedStrength2: string;
+//    UnrealizedStrength3: string;
+//}
+
+//type RealizedStrengths = {
+//    RealizedStrength1: string;
+//    RealizedStrength2: string;
+//    RealizedStrength3: string;
+//}
+
+//type LearnedBehaviors = {
+//    LearnedBehavior1: string;
+//    LearnedBehavior2: string;
+//}
+
+//type Weakness = {
+//    Weakness: string;
+//}
+
+const UserUnrealizedStrength =  {
+    UnrealizedStrength1: "",
+    UnrealizedStrength2: "",
+    UnrealizedStrength3: "",
+}
+
+const UserRealizedStrengths = {
+    RealizedStrength1: "",
+    RealizedStrength2: "",
+    RealizedStrength3: "",
+}
+
+const UserLearnedBehaviors = {
+    LearnedBehavior1: "",
+    LearnedBehavior2: "",
+}
+
+const UserWeakness = {
+    Weakness: "",
+}
+
+const INITIAL_DATA: UserFormData = {
     Company: "",
     Email: "",
     Location: "",
@@ -61,14 +104,32 @@ const INITIAL_DATA: FormData = {
     Other_Notes: "",
 }
 
+//type Strengths = {
+//    Realized: RealizedStrengths;
+//    Unrealized: UnrealizedStrengths;
+//    Behaviors: LearnedBehaviors;
+//    Weakeness: Weakness;
+//}
+
 const SignUp = () => {
     const [data, setData] = useState(INITIAL_DATA)
+    //const [realizedStrengths, setRealizedStrengths] = useState(UserRealizedStrengths)
+    //const [unrealizedStrengths, setUnrealizedStrengths] = useState(UserUnrealizedStrengths)
+    //const [learnedBehaviors, setUserLearnedBehaviors] = useState(UserLearnedBehaviors)
+    //const [weakness, setUserWeakness] = useState(UserWeakness)
 
-    function updateFields(fields: Partial<FormData>) {
+    function updateFields(fields: Partial<UserFormData>) {
         setData(prev => {
             return { ...prev, ...fields }
         })
     }
+
+    //function updateStrengths(strengths: Partial<Strengths>) {
+    //    setRealizedStrengths(prev => {
+    //        return {...prev, ...strengths}
+    //    })
+    //};
+
 
     const { steps, currentStepIndex, step, isFirstStep, isLastStep, prevStep, nextStep } = useMultistepForm([
         <Step1 {...data} updateFields={updateFields} />,
@@ -89,6 +150,44 @@ const SignUp = () => {
         nextStep();
     }
 
+    const submitUserData = async () => {
+        const userData = {
+            "CompanyId": 1000,
+            "Email": data.Email,
+            "Phone_Number": Number(data.Phone_Number),
+            "Linkedin": data.Linkedin,
+            "Facebook": data.Facebook,
+            "Instagram": data.Instagram,
+            "TikTok": data.TikTok,
+            "Work": data.Work,
+            "Connect": data.Connect,
+            "Support": data.Support,
+            "Other_Notes": data.Other_Notes,
+        }
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your frontend origin
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            },
+        };
+
+        try {
+            var addUserUrl = 'https://localhost:44373/api/AddEmployee';
+            
+            axios.post(addUserUrl, userData, config)
+                .then(response => {
+                    // Handle the response from the server
+                    console.log(response.data);
+                })
+
+        } catch (error) {
+            console.error("Error sending user data.", error);
+        }
+    }
+
     return (
         <MainLayout>
             <MainHeader />
@@ -105,6 +204,7 @@ const SignUp = () => {
                                 <MainFormButton width="25%" onClickEvent={prevStep}>
                                     <Text>BACK</Text>
                                 </MainFormButton>}
+                            <MainFormButton onClickEvent={submitUserData}>Sign up!</MainFormButton>
                         </Flex>
                     }
                 </Flex>

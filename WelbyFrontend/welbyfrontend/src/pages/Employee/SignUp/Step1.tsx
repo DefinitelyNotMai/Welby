@@ -26,6 +26,8 @@ const Step1 = ({ Company, Email, Location, Phone_Number, Linkedin, Facebook, Ins
         "Yeee",
     ];
 
+
+
     return (
         <>
             <Flex

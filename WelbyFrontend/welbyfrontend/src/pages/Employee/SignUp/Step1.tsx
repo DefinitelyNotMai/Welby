@@ -1,6 +1,7 @@
 import { Flex, Grid, Heading, Select, Text, Icon, FormControl } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiPlus } from 'react-icons/fi';
+import CountrySelect from "../../../components/Main/CountrySelection";
 import CustomTextbox from "../../../components/Main/FormTextbox";
 
 type Step1Data = {
@@ -53,6 +54,7 @@ const Step1 = ({ Company, Email, Location, Phone_Number, Linkedin, Facebook, Ins
                         <option value="Dlinkers">Dlinkers</option>
                         <option value="CPU">CPU</option>
                     </Select>
+                    <CountrySelect />
                     <CustomTextbox
                         placeholder="Email"
                         value={Email}

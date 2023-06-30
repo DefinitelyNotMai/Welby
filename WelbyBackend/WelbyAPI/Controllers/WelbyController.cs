@@ -449,7 +449,7 @@ namespace WelbyAPI.Controllers
         #region COUNTRY
         [Route("~/api/GetAllCountry")]
         [HttpGet]
-        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromBody] CountryMasterViewModel param)
+        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromUri] CountryMasterViewModel param)
         {
             var model = await _wwauow.Country.GetCountryList(param);
             return model;

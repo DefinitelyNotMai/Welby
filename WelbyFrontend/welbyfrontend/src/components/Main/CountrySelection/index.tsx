@@ -3,37 +3,50 @@ import { Select } from '@chakra-ui/react';
 import axios from 'axios';
 
 interface Country {
-    id: number;
-    name: string;
+    CountryId: number;
+    Name: string;
 }
 
 const CountrySelect = (): JSX.Element => {
     const [countries, setCountries] = useState<Country[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<number | ''>('');
+    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
 
     useEffect(() => {
+        const fetchCountries = async () => {
+            try {
+                var countryUrl = 'https://localhost:44373/api/GetAllCountry';
+                var country = null;
+                let param = { "Active": 1 };
+
+                axios.get(countryUrl, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                    params: param
+                }).then(response => {
+                    country = response.data;
+                    setCountries(country);
+                })
+            } catch (error) {
+                console.error('Error fetching countries:', error);
+            }
+        };
+
         fetchCountries();
     }, []);
 
     // get the countries
-    const fetchCountries = async () => {
-        try {
-            const response = await axios.get<Country[]>('try');
-            setCountries(response.data);
-        } catch (error) {
-            console.error('Error fetching countries:', error);
-        }
-    };
-
+    
     const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedCountry(Number(event.target.value));
+        const selected = countries.find((country) => country.Name === event.target.value)
+        setSelectedCountry(selected);
     };
+    
 
     return (
-        <Select value={selectedCountry} onChange={handleCountryChange}>
+        <Select onChange={handleCountryChange}>
             {countries.map((country) => (
-                <option key={country.id} value={country.id}>
-                    {country.name}
+                <option key={country.CountryId} value={country.Name}>
+                    {country.Name}
                 </option>
             ))}
         </Select>

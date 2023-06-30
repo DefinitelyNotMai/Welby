@@ -27,7 +27,6 @@ const Dashboard = () => {
                     if (result != null) {
                         if (result.length > 0) {
                             console.log(result);
-                            alert(result[0].First_Name);
                             setFirst_Name(result[0].First_Name)
                         }
                     }
@@ -47,11 +46,10 @@ const Dashboard = () => {
 
     return (
         <Flex flexDirection="column">
-            <DashboardHeader name={First_Name} />
+            <DashboardHeader name={First_Name} employeeId={state.id} />
             <Flex flexDirection="row">
                 <DashboardSidebar />
                 <div>{state.id}</div>
-                <div>{First_Name}</div>
                 {/* TODO: navigation for each SidebarItem*/}
             </Flex>
         </Flex>

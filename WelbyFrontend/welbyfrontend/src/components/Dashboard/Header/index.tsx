@@ -7,9 +7,10 @@ import WelbyLogo from '../../../assets/images/welby_logoAndName_primary-1_flat.s
 
 type CustomDashboardHeaderProps = {
     name: string;
+    employeeId: number;
 };
 
-const DashboardHeader = ({ name }: CustomDashboardHeaderProps) => {
+const DashboardHeader = ({ name, employeeId }: CustomDashboardHeaderProps) => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -18,7 +19,7 @@ const DashboardHeader = ({ name }: CustomDashboardHeaderProps) => {
     };
 
     const handleProfileSelection = () => {
-        navigate("profile");
+        navigate("profile", { state: { employeeId } });
     };
 
     const handleLogoutSelection = () => {

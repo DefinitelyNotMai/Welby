@@ -4,9 +4,10 @@ import DashboardSidebar from '../../../components/Dashboard/Sidebar';
 
 const Dashboard = () => {
     const pangalan = 'copmany name';
+    const empl = 234;
     return (
         <Flex flexDirection="column">
-            <DashboardHeader name={pangalan} />
+            <DashboardHeader name={pangalan} employeeId={ empl} />
             <Flex flexDirection="row">
                 <DashboardSidebar />
                 {/* TODO: navigation for each SidebarItem*/}

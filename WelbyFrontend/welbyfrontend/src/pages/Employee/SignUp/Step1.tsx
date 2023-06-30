@@ -7,7 +7,7 @@ import CustomTextbox from "../../../components/Main/FormTextbox";
 type Step1Data = {
     Company: string;
     Email: string;
-    Location: string;
+    Country: string;
     Phone_Number: string;
     Linkedin: string;
     Facebook: string;
@@ -19,15 +19,7 @@ type Step1Props = Step1Data & {
     updateFields: (fields: Partial<Step1Data>) => void
 }
 
-const Step1 = ({ Company, Email, Location, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
-    const options = [
-        "Welby",
-        "CPU",
-        "Yeee",
-    ];
-
-
-
+const Step1 = ({ Company, Email, Country, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
     return (
         <>
             <Flex

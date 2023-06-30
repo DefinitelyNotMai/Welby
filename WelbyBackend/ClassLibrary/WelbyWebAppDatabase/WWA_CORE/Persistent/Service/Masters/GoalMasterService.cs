@@ -70,8 +70,9 @@ namespace WWA_CORE.Persistent.Service.Masters
                 GoalId = Convert.ToInt32(row["GoalId"]),
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
-                DurationFrom = Convert.ToDateTime(row["DurationFrom"]), 
-                DurationTo = Convert.ToDateTime(row["DurationTo"]),
+                DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
+                DurationTo = DBNull.Value != row["DurationTo"] ? (DateTime?)row["DurationTo"] : null,
+                
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

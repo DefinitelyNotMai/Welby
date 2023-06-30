@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="CompanyGoalsId" />
           </Key>
-          <Property Name="CompanyGoalsId" Type="int" Nullable="false" />
+          <Property Name="CompanyGoalsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
           <Property Name="GoalId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -23,7 +23,7 @@
           <Key>
             <PropertyRef Name="CompanyValuesId" />
           </Key>
-          <Property Name="CompanyValuesId" Type="int" Nullable="false" />
+          <Property Name="CompanyValuesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
           <Property Name="ValueId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -37,7 +37,7 @@
           <Key>
             <PropertyRef Name="EmployeeInterestId" />
           </Key>
-          <Property Name="EmployeeInterestId" Type="int" Nullable="false" />
+          <Property Name="EmployeeInterestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="InterestId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="LearnedBehaviorsId" />
           </Key>
-          <Property Name="LearnedBehaviorsId" Type="int" Nullable="false" />
+          <Property Name="LearnedBehaviorsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="StrengthId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -65,7 +65,7 @@
           <Key>
             <PropertyRef Name="RealizedStrengthsId" />
           </Key>
-          <Property Name="RealizedStrengthsId" Type="int" Nullable="false" />
+          <Property Name="RealizedStrengthsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="StrengthId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -79,7 +79,7 @@
           <Key>
             <PropertyRef Name="UnrealizedStrengthsId" />
           </Key>
-          <Property Name="UnrealizedStrengthsId" Type="int" Nullable="false" />
+          <Property Name="UnrealizedStrengthsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="StrengthId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -93,7 +93,7 @@
           <Key>
             <PropertyRef Name="EmployeeWeaknessId" />
           </Key>
-          <Property Name="EmployeeWeaknessId" Type="int" Nullable="false" />
+          <Property Name="EmployeeWeaknessId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="StrengthId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -159,7 +159,7 @@
           <Key>
             <PropertyRef Name="GenderId" />
           </Key>
-          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="GenderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="50" />
           <Property Name="Biological" Type="bit" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -202,7 +202,7 @@
           <Key>
             <PropertyRef Name="InterestId" />
           </Key>
-          <Property Name="InterestId" Type="int" Nullable="false" />
+          <Property Name="InterestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Encoded_By" Type="int" Nullable="false" />
@@ -272,7 +272,7 @@
           <Property Name="LastChanged_Date" Type="datetime" />
           <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
         </EntityType>
-        <Association Name="FK__tbl_CMP_G__Compa__49C3F6B7">
+        <Association Name="FK__tbl_CMP_G__Compa__625A9A57">
           <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
           <End Role="tbl_CMP_Goals" Type="Self.tbl_CMP_Goals" Multiplicity="*" />
           <ReferentialConstraint>
@@ -284,7 +284,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_CMP_G__GoalI__4AB81AF0">
+        <Association Name="FK__tbl_CMP_G__GoalI__634EBE90">
           <End Role="tbl_MST_Goal_Master" Type="Self.tbl_MST_Goal_Master" Multiplicity="1" />
           <End Role="tbl_CMP_Goals" Type="Self.tbl_CMP_Goals" Multiplicity="*" />
           <ReferentialConstraint>
@@ -296,7 +296,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_CMP_V__Compa__4D94879B">
+        <Association Name="FK__tbl_CMP_V__Compa__662B2B3B">
           <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
           <End Role="tbl_CMP_Values" Type="Self.tbl_CMP_Values" Multiplicity="*" />
           <ReferentialConstraint>
@@ -308,7 +308,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_CMP_V__Value__4E88ABD4">
+        <Association Name="FK__tbl_CMP_V__Value__671F4F74">
           <End Role="tbl_MST_Value_Master" Type="Self.tbl_MST_Value_Master" Multiplicity="1" />
           <End Role="tbl_CMP_Values" Type="Self.tbl_CMP_Values" Multiplicity="*" />
           <ReferentialConstraint>
@@ -320,7 +320,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_I__Emplo__0E6E26BF">
+        <Association Name="FK__tbl_EMP_I__Emplo__1F2E9E6D">
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
           <End Role="tbl_EMP_Interest" Type="Self.tbl_EMP_Interest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -332,7 +332,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_I__Inter__0F624AF8">
+        <Association Name="FK__tbl_EMP_I__Inter__2022C2A6">
           <End Role="tbl_MST_Interest_Master" Type="Self.tbl_MST_Interest_Master" Multiplicity="1" />
           <End Role="tbl_EMP_Interest" Type="Self.tbl_EMP_Interest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -344,7 +344,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_L__Emplo__01142BA1">
+        <Association Name="FK__tbl_EMP_L__Emplo__178D7CA5">
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
           <End Role="tbl_EMP_Learned_Behaviors" Type="Self.tbl_EMP_Learned_Behaviors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -356,7 +356,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_L__Stren__02084FDA">
+        <Association Name="FK__tbl_EMP_L__Stren__1881A0DE">
           <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
           <End Role="tbl_EMP_Learned_Behaviors" Type="Self.tbl_EMP_Learned_Behaviors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -368,7 +368,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_R__Emplo__7D439ABD">
+        <Association Name="FK__tbl_EMP_R__Emplo__13BCEBC1">
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
           <End Role="tbl_EMP_Realized_Strengths" Type="Self.tbl_EMP_Realized_Strengths" Multiplicity="*" />
           <ReferentialConstraint>
@@ -380,7 +380,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_R__Stren__7E37BEF6">
+        <Association Name="FK__tbl_EMP_R__Stren__14B10FFA">
           <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
           <End Role="tbl_EMP_Realized_Strengths" Type="Self.tbl_EMP_Realized_Strengths" Multiplicity="*" />
           <ReferentialConstraint>
@@ -392,7 +392,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_U__Emplo__797309D9">
+        <Association Name="FK__tbl_EMP_U__Emplo__0FEC5ADD">
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
           <End Role="tbl_EMP_Unrealized_Strengths" Type="Self.tbl_EMP_Unrealized_Strengths" Multiplicity="*" />
           <ReferentialConstraint>
@@ -404,7 +404,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_U__Stren__7A672E12">
+        <Association Name="FK__tbl_EMP_U__Stren__10E07F16">
           <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
           <End Role="tbl_EMP_Unrealized_Strengths" Type="Self.tbl_EMP_Unrealized_Strengths" Multiplicity="*" />
           <ReferentialConstraint>
@@ -416,7 +416,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_W__Emplo__04E4BC85">
+        <Association Name="FK__tbl_EMP_W__Emplo__1B5E0D89">
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
           <End Role="tbl_EMP_Weakness" Type="Self.tbl_EMP_Weakness" Multiplicity="*" />
           <ReferentialConstraint>
@@ -428,7 +428,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_W__Stren__05D8E0BE">
+        <Association Name="FK__tbl_EMP_W__Stren__1C5231C2">
           <End Role="tbl_MST_Strength_Master" Type="Self.tbl_MST_Strength_Master" Multiplicity="1" />
           <End Role="tbl_EMP_Weakness" Type="Self.tbl_EMP_Weakness" Multiplicity="*" />
           <ReferentialConstraint>
@@ -476,7 +476,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_REG_E__Compa__76969D2E">
+        <Association Name="FK__tbl_REG_E__Compa__0D0FEE32">
           <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
           <ReferentialConstraint>
@@ -488,7 +488,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_REG_E__Count__74AE54BC">
+        <Association Name="FK__tbl_REG_E__Count__0B27A5C0">
           <End Role="tbl_MST_Country_Master" Type="Self.tbl_MST_Country_Master" Multiplicity="0..1" />
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
           <ReferentialConstraint>
@@ -500,7 +500,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_REG_E__Gende__75A278F5">
+        <Association Name="FK__tbl_REG_E__Gende__0C1BC9F9">
           <End Role="tbl_MST_Gender_Master" Type="Self.tbl_MST_Gender_Master" Multiplicity="0..1" />
           <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
           <ReferentialConstraint>
@@ -625,59 +625,59 @@
           <EntitySet Name="tbl_MST_Strength_Master" EntityType="Self.tbl_MST_Strength_Master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_MST_Value_Master" EntityType="Self.tbl_MST_Value_Master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_REG_Employee_Registration" EntityType="Self.tbl_REG_Employee_Registration" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tbl_CMP_G__Compa__49C3F6B7" Association="Self.FK__tbl_CMP_G__Compa__49C3F6B7">
+          <AssociationSet Name="FK__tbl_CMP_G__Compa__625A9A57" Association="Self.FK__tbl_CMP_G__Compa__625A9A57">
             <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
             <End Role="tbl_CMP_Goals" EntitySet="tbl_CMP_Goals" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_CMP_G__GoalI__4AB81AF0" Association="Self.FK__tbl_CMP_G__GoalI__4AB81AF0">
+          <AssociationSet Name="FK__tbl_CMP_G__GoalI__634EBE90" Association="Self.FK__tbl_CMP_G__GoalI__634EBE90">
             <End Role="tbl_MST_Goal_Master" EntitySet="tbl_MST_Goal_Master" />
             <End Role="tbl_CMP_Goals" EntitySet="tbl_CMP_Goals" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_CMP_V__Compa__4D94879B" Association="Self.FK__tbl_CMP_V__Compa__4D94879B">
+          <AssociationSet Name="FK__tbl_CMP_V__Compa__662B2B3B" Association="Self.FK__tbl_CMP_V__Compa__662B2B3B">
             <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
             <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_CMP_V__Value__4E88ABD4" Association="Self.FK__tbl_CMP_V__Value__4E88ABD4">
+          <AssociationSet Name="FK__tbl_CMP_V__Value__671F4F74" Association="Self.FK__tbl_CMP_V__Value__671F4F74">
             <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
             <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_I__Emplo__0E6E26BF" Association="Self.FK__tbl_EMP_I__Emplo__0E6E26BF">
+          <AssociationSet Name="FK__tbl_EMP_I__Emplo__1F2E9E6D" Association="Self.FK__tbl_EMP_I__Emplo__1F2E9E6D">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
             <End Role="tbl_EMP_Interest" EntitySet="tbl_EMP_Interest" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_I__Inter__0F624AF8" Association="Self.FK__tbl_EMP_I__Inter__0F624AF8">
+          <AssociationSet Name="FK__tbl_EMP_I__Inter__2022C2A6" Association="Self.FK__tbl_EMP_I__Inter__2022C2A6">
             <End Role="tbl_MST_Interest_Master" EntitySet="tbl_MST_Interest_Master" />
             <End Role="tbl_EMP_Interest" EntitySet="tbl_EMP_Interest" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_L__Emplo__01142BA1" Association="Self.FK__tbl_EMP_L__Emplo__01142BA1">
+          <AssociationSet Name="FK__tbl_EMP_L__Emplo__178D7CA5" Association="Self.FK__tbl_EMP_L__Emplo__178D7CA5">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
             <End Role="tbl_EMP_Learned_Behaviors" EntitySet="tbl_EMP_Learned_Behaviors" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_L__Stren__02084FDA" Association="Self.FK__tbl_EMP_L__Stren__02084FDA">
+          <AssociationSet Name="FK__tbl_EMP_L__Stren__1881A0DE" Association="Self.FK__tbl_EMP_L__Stren__1881A0DE">
             <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
             <End Role="tbl_EMP_Learned_Behaviors" EntitySet="tbl_EMP_Learned_Behaviors" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_R__Emplo__7D439ABD" Association="Self.FK__tbl_EMP_R__Emplo__7D439ABD">
+          <AssociationSet Name="FK__tbl_EMP_R__Emplo__13BCEBC1" Association="Self.FK__tbl_EMP_R__Emplo__13BCEBC1">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
             <End Role="tbl_EMP_Realized_Strengths" EntitySet="tbl_EMP_Realized_Strengths" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_R__Stren__7E37BEF6" Association="Self.FK__tbl_EMP_R__Stren__7E37BEF6">
+          <AssociationSet Name="FK__tbl_EMP_R__Stren__14B10FFA" Association="Self.FK__tbl_EMP_R__Stren__14B10FFA">
             <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
             <End Role="tbl_EMP_Realized_Strengths" EntitySet="tbl_EMP_Realized_Strengths" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_U__Emplo__797309D9" Association="Self.FK__tbl_EMP_U__Emplo__797309D9">
+          <AssociationSet Name="FK__tbl_EMP_U__Emplo__0FEC5ADD" Association="Self.FK__tbl_EMP_U__Emplo__0FEC5ADD">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
             <End Role="tbl_EMP_Unrealized_Strengths" EntitySet="tbl_EMP_Unrealized_Strengths" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_U__Stren__7A672E12" Association="Self.FK__tbl_EMP_U__Stren__7A672E12">
+          <AssociationSet Name="FK__tbl_EMP_U__Stren__10E07F16" Association="Self.FK__tbl_EMP_U__Stren__10E07F16">
             <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
             <End Role="tbl_EMP_Unrealized_Strengths" EntitySet="tbl_EMP_Unrealized_Strengths" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_W__Emplo__04E4BC85" Association="Self.FK__tbl_EMP_W__Emplo__04E4BC85">
+          <AssociationSet Name="FK__tbl_EMP_W__Emplo__1B5E0D89" Association="Self.FK__tbl_EMP_W__Emplo__1B5E0D89">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
             <End Role="tbl_EMP_Weakness" EntitySet="tbl_EMP_Weakness" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_W__Stren__05D8E0BE" Association="Self.FK__tbl_EMP_W__Stren__05D8E0BE">
+          <AssociationSet Name="FK__tbl_EMP_W__Stren__1C5231C2" Association="Self.FK__tbl_EMP_W__Stren__1C5231C2">
             <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
             <End Role="tbl_EMP_Weakness" EntitySet="tbl_EMP_Weakness" />
           </AssociationSet>
@@ -693,15 +693,15 @@
             <End Role="tbl_MST_IndustryType_Master" EntitySet="tbl_MST_IndustryType_Master" />
             <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_REG_E__Compa__76969D2E" Association="Self.FK__tbl_REG_E__Compa__76969D2E">
+          <AssociationSet Name="FK__tbl_REG_E__Compa__0D0FEE32" Association="Self.FK__tbl_REG_E__Compa__0D0FEE32">
             <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_REG_E__Count__74AE54BC" Association="Self.FK__tbl_REG_E__Count__74AE54BC">
+          <AssociationSet Name="FK__tbl_REG_E__Count__0B27A5C0" Association="Self.FK__tbl_REG_E__Count__0B27A5C0">
             <End Role="tbl_MST_Country_Master" EntitySet="tbl_MST_Country_Master" />
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_REG_E__Gende__75A278F5" Association="Self.FK__tbl_REG_E__Gende__75A278F5">
+          <AssociationSet Name="FK__tbl_REG_E__Gende__0C1BC9F9" Association="Self.FK__tbl_REG_E__Gende__0C1BC9F9">
             <End Role="tbl_MST_Gender_Master" EntitySet="tbl_MST_Gender_Master" />
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>

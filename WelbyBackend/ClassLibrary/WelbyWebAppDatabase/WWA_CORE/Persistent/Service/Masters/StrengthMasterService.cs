@@ -27,6 +27,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 {
                     Strength = strengthMasterViewModel.Strength,
                     Category = strengthMasterViewModel.Category,
+                    Description = strengthMasterViewModel.Description,
 
                     Active = true,
                     Encoded_By = strengthMasterViewModel.Encoded_By,
@@ -83,6 +84,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Strength = Convert.ToString(row["Strength"]),
                 StrengthId = Convert.ToInt32(row["StrengthId"]),
                 Category = Convert.ToString(row["Category"]),
+                Description = Convert.ToString(row["Description"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
@@ -161,6 +163,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var RowToUpdate = await context.tbl_MST_Strength_Master.FirstOrDefaultAsync(c => c.StrengthId == strengthMasterViewModel.StrengthId);
 
                 RowToUpdate.Strength = strengthMasterViewModel.Strength;
+                RowToUpdate.Category = strengthMasterViewModel.Category;
+                RowToUpdate.Description = strengthMasterViewModel.Description;
 
                 RowToUpdate.Active = strengthMasterViewModel.Active;
                 RowToUpdate.LastChanged_By = strengthMasterViewModel.Encoded_By;

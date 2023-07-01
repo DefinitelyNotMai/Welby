@@ -10,9 +10,10 @@ interface Country {
 
 type CountrySelectProps = {
     value: string;
+    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const CountrySelect = ({ value }: CountrySelectProps): JSX.Element => {
+const CountrySelect = ({ value, onChange }: CountrySelectProps): JSX.Element => {
     const [countries, setCountries] = useState<Country[]>([]);
     const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
 
@@ -56,11 +57,11 @@ const CountrySelect = ({ value }: CountrySelectProps): JSX.Element => {
             fontWeight="500"
             color="#000000"
             mb="5"
-            onChange={handleCountryChange}
+            onChange={onChange}
             value={value}
         >
             {countries.map((country) => (
-                <option key={country.CountryId} value={country.Name}>
+                <option key={country.CountryId} value={country.CountryId}>
                     {country.Name}
                 </option>
             ))}

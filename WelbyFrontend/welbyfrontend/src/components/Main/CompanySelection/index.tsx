@@ -8,11 +8,13 @@ interface Company {
     Name: string;
 }
 
+
 type CompanySelectProps = {
     value: string;
+    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const CompanySelect = ({ value }: CompanySelectProps): JSX.Element => {
+const CompanySelect = ({ value, onChange }: CompanySelectProps): JSX.Element => {
     const [companies, setCompanies] = useState<Company[]>([]);
     const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(undefined);
 
@@ -55,11 +57,11 @@ const CompanySelect = ({ value }: CompanySelectProps): JSX.Element => {
             fontWeight="500"
             color="#000000"
             mb="5"
-            onChange={handleCompanyChange}
+            onChange={onChange}
             value={value}
         >
             {companies.map((company) => (
-                <option key={company.CompanyId} value={company.Name}>
+                <option key={company.CompanyId} value={company.CompanyId}>
                     {company.Name}
                 </option>
             ))}

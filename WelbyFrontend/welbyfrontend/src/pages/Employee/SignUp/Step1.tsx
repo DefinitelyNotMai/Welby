@@ -38,7 +38,10 @@ const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Email, Country, Ph
             </Flex>
             <Grid templateColumns="2fr 1fr" gap="10">
                 <Flex flexDirection="column">
-                    <CompanySelect value={Company} />
+                    <CompanySelect
+                        value={Company}
+                        onChange={e => updateFields({ Company: e.target.value })}
+                    />
                     <CustomTextbox
                         placeholder="First Name"
                         value={First_Name}
@@ -59,7 +62,10 @@ const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Email, Country, Ph
                         value={Email}
                         onChange={e => updateFields({ Email: e.target.value })}
                     />
-                    <CountrySelect value={Country} />
+                    <CountrySelect
+                        value={Country}
+                        onChange={e => updateFields({ Country: e.target.value })}
+                    />
                     <CustomTextbox
                         placeholder="Mobile Number"
                         value={Phone_Number}

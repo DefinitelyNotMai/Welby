@@ -287,15 +287,10 @@ const SignUp = () => {
 
     const submitUserData = async () => {
         let userData = {
-            //"First_Name": data.First_Name,
-            //"Middle_Name": data.Middle_Name,
-            //"Last_Name": data.Last_Name,
+            "First_Name": data.First_Name,
+            "Middle_Name": data.Middle_Name,
+            "Last_Name": data.Last_Name,
             //"Nickname": data.Nickname,
-            //"Email": data.Email,
-            //"First_Name": "Trial",
-            //"Middle_Name": "Trial",
-            //"Last_Name": "Trial",
-            //"Nickname": "Trial",
             "Email": data.Email,
             "Phone_Number": data.Phone_Number,
             //"Address": data.Address,
@@ -308,9 +303,6 @@ const SignUp = () => {
             //"GenderId": data.GenderId,
             //"CompanyId": data.CompanyId,
             //"CountryId": data.CountryId,
-            //"GenderId": 2,
-            //"CompanyId": 1007,
-            //"CountryId": 1000,
             "Work": data.Work,
             "Connect": data.Connect,
             "Support": data.Support,

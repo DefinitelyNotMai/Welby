@@ -72,6 +72,9 @@ namespace WWA_CORE.Persistent.Service.Employee
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
                 StrengthId = Convert.ToInt32(row["StrengthId"]),
 
+                WeaknessDisplay = Convert.ToString(row["WeaknessDisplay"]),
+                EmployeeFirstNameDisplay = Convert.ToString(row["EmployeeFirstNameDisplay"]),
+
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),

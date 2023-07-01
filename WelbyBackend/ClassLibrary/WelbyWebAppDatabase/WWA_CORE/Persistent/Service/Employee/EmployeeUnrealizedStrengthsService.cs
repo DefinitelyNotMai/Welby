@@ -72,6 +72,9 @@ namespace WWA_CORE.Persistent.Service.Employee
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
                 StrengthId = Convert.ToInt32(row["StrengthId"]),
 
+                EmployeeFirstNameDisplay = Convert.ToString(row["EmployeeFirstNameDisplay"]),
+                UnrealizedStrengthDisplay = Convert.ToString(row["UnrealizedStrengthDisplay"]),
+
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
@@ -80,7 +83,7 @@ namespace WWA_CORE.Persistent.Service.Employee
                 LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
                 EncodedByName = "",
                 LastChangedByName = "",
-            });
+            }) ;
 
             query.Dispose();
             employeeUnrealizedStrengthsViewModel.Dispose();

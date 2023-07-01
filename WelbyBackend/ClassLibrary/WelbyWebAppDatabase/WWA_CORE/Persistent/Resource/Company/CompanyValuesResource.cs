@@ -9,7 +9,6 @@ namespace WWA_CORE.Persistent.Resource.Company
 {
     public class CompanyValuesResource : CommonSchema
     {
-        public string CompanyValuesDisplay { get; set; }
         public string ValueTitleDisplay { get; set; }
         public string CompanyNameDisplay { get; set; }
     }

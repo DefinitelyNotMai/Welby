@@ -72,6 +72,9 @@ namespace WWA_CORE.Persistent.Service.Company
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 GoalId = Convert.ToInt32(row["GoalId"]),
 
+                CompanyNameDisplay = Convert.ToString(row["CompanyNameDisplay"]),
+                GoalTitleDisplay = Convert.ToString(row["GoalTitleDisplay"]),
+
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
@@ -80,7 +83,7 @@ namespace WWA_CORE.Persistent.Service.Company
                 LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
                 EncodedByName = "",
                 LastChangedByName = "",
-            });
+            }) ;
 
             query.Dispose();
             companyGoalsViewModel.Dispose();

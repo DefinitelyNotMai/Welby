@@ -73,6 +73,9 @@ namespace WWA_CORE.Persistent.Service.Employee
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
                 InterestId = Convert.ToInt32(row["InterestId"]),
 
+                EmployeeFirstNameDisplay = Convert.ToString(row["EmployeeFirstNameDisplay"]),
+                InterestNameDisplay = Convert.ToString(row["InterestTitleDispaly"]),
+
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),

@@ -105,8 +105,6 @@ const SignUp = () => {
         nextStep();
     }
 
-    
-
     const submitUserData = () => {
         let userData = {
             "First_Name": data.First_Name,

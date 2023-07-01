@@ -692,7 +692,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE LEARNED BEHAVIORS
         [Route("~/api/GetEmployeeLearnedBehaviors")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromBody] EmployeeLearnedBehaviorsViewModel param)
+        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromUri] EmployeeLearnedBehaviorsViewModel param)
         {
             var model = await _wwauow.EmployeeLearnedBehaviors.GetEmployeeLearnedBehaviors(param);
             return model;
@@ -750,7 +750,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE REALIZED STRENGTH
         [Route("~/api/GetEmployeeRealizedStrengths")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromBody] EmployeeRealizedStrengthsViewModel param)
+        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromUri] EmployeeRealizedStrengthsViewModel param)
         {
             var model = await _wwauow.EmployeeRealizedStrengths.GetEmployeeRealizedStrength(param);
             return model;
@@ -808,7 +808,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE UNREALIZED STRENGTH
         [Route("~/api/GetEmployeeUnrealizedStrengths")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromBody] EmployeeUnrealizedStrengthsViewModel param)
+        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromUri] EmployeeUnrealizedStrengthsViewModel param)
         {
             var model = await _wwauow.EmployeeUnrealizedStrengths.GetEmployeeUnrealizedStrength(param);
             return model;
@@ -866,7 +866,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE WEAKNESS
         [Route("~/api/GetEmployeeWeaknesses")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromBody] EmployeeWeaknessViewModel param)
+        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromUri] EmployeeWeaknessViewModel param)
         {
             var model = await _wwauow.EmployeeWeakness.GetEmployeeWeakness(param);
             return model;

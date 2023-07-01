@@ -5,29 +5,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-interface IPersonalInfo {
-    First_Name: string;
-    Middle_Name: string;
-    Last_Name: string;
-    EmployeeCompanyDisplay: string;
-    Email: string;
-    CountryDisplay: string; 
-    Phone_Number: string;
-    Linkedin: string;
-    Facebook: string;
-    Instagram: string;
-    TikTok: string;
-    Work: string;
-    Connect: string;
-    Support: string;
-    Other_Notes: string;
-}
-
-
 
 const Header = () => {
     const { state } = useLocation();
-    const [userName, setUserName] = useState<IPersonalInfo>();
+    
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -46,7 +27,7 @@ const Header = () => {
                 if (result != null) {
                     if (result.length > 0) {
                         console.log(result);
-                        setUserName(result[0])
+                        //result here is na employee object
                     }
                 }
             }).catch(function (error) {

@@ -18,6 +18,7 @@ type IUserInformation = { //ideal
     First_Name: string;
     Middle_Name: string;
     Last_Name: string;
+    Gender: string;
     Nickname: string;
     Email: string;
     Phone_Number: number;
@@ -48,11 +49,13 @@ type IUserInformation = { //ideal
     Weakness: string;
 }
 
-type UserFormData = { //gender pa baka makalimutan 
+type UserFormData = {
     Company: string;
     First_Name: string;
     Middle_Name: string;
     Last_Name: string;
+    Gender: string;
+    Nickname: string;
     Email: string;
     Country: string;
     Phone_Number: string;
@@ -80,6 +83,8 @@ const INITIAL_DATA: UserFormData = {
     First_Name: "",
     Middle_Name: "",
     Last_Name: "",
+    Nickname: "",
+    Gender: "",
     Email: "",
     Country: "",
     Phone_Number: "",

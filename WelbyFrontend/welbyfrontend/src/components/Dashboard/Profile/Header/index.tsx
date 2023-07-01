@@ -1,9 +1,63 @@
 import { Avatar, Box, Flex, Link, Text, Icon } from "@chakra-ui/react";
 import { FaLinkedin, FaFacebook, FaInstagram, FaChevronLeft } from 'react-icons/fa'
 import { Link as RouterLink } from "react-router-dom";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+interface IPersonalInfo {
+    First_Name: string;
+    Middle_Name: string;
+    Last_Name: string;
+    EmployeeCompanyDisplay: string;
+    Email: string;
+    CountryDisplay: string; 
+    Phone_Number: string;
+    Linkedin: string;
+    Facebook: string;
+    Instagram: string;
+    TikTok: string;
+    Work: string;
+    Connect: string;
+    Support: string;
+    Other_Notes: string;
+}
+
 
 
 const Header = () => {
+    const { state } = useLocation();
+    const [userName, setUserName] = useState<IPersonalInfo>();
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            var userUrl = 'https://localhost:44373/api/GetEmployee';
+            var result = null;
+            let param = {
+                "EmployeeId": state.employeeId
+            }
+            axios.get(userUrl, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                params: param
+            }).then(response => {
+                result = response.data;
+                //console.log(response.data)
+                if (result != null) {
+                    if (result.length > 0) {
+                        console.log(result);
+                        setUserName(result[0])
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        };
+
+        fetchUserData();
+    }, []);
+    
+
     return (
         <Box
             as="nav"
@@ -24,7 +78,7 @@ const Header = () => {
                     <Flex flexDirection="column" justifyContent="center" ml="8" color="#ffffff">
                         <Text fontFamily="Playfair Display" fontWeight="400" fontSize="lg">Hi, I'm XXX!</Text>
                         <Box display="flex" flexDirection="column" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                            <Text>Location</Text>
+                            <div>ewan</div>
                             <Text>xxx@xxx.com</Text>
                             <Text>xxx-xxx-xxxx</Text>
                         </Box>

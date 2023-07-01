@@ -94,6 +94,35 @@ const Login = () => {
         }
     };
 
+    const temporaryHandleLogin = async () => {
+        const loginUrl = 'https://localhost:44373/api/GetCompanies';
+        var result = null;
+        let param = {
+            "Email": UserName,// Username
+            "Phone_Number": Password,
+        }
+
+        try {
+            axios.get(loginUrl, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                params: param
+            }).then(response => {
+                result = response.data;
+                if (result != null) {
+                    if (result.length > 0) {
+                        console.log(result);
+                        const id = result[0].CompanyId
+                        navigate('/company/dashboard', { state: { id } }); // For Navigating into the Dashboard Page
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+
+    };
+
     return (
         <MainLayout>
             <MainHeader />
@@ -133,7 +162,7 @@ const Login = () => {
                     <Center>
                         <MainFormButton
                             width={['70%', '50%', '50%']}
-                            onClickEvent={handleLogin}
+                            onClickEvent={temporaryHandleLogin}
                         >
                             Submit
                         </MainFormButton>

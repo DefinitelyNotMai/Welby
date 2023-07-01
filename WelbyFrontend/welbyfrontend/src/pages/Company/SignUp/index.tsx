@@ -8,6 +8,7 @@ import CustomTextbox from "../../../components/Main/FormTextbox";
 import MainHeader from "../../../components/Main/Header";
 import MainLayout from "../../../components/Main/Layout";
 import WelbyLogo from "../../../assets/images/welby_logoAndName_primary-1_flat.svg"
+import axios from "axios";
 
 enum SignupStep {
     Step1,
@@ -18,8 +19,45 @@ enum SignupStep {
     Step6,
 }
 
+type CompanyFormData = {
+    Name: string;
+    Email: string;
+    Phone_Number: string;
+    Website: string;
+    Address: string;
+    FoundingDate: string;
+    Vision: string;
+    Mission: string;
+    CountryId: string; //can be string because it is being converted in the backend
+    IndustryTypeId: string; //can be string because it is being converted in the backend
+
+    CompanyValue1: string;
+    CompanyValue2: string;
+    CompanyGoal1: string;
+    CompanyGoal2: string;
+}
+
+const INITIAL_DATA: CompanyFormData = {
+    Name: "",
+    Email: "",
+    Phone_Number: "",
+    Website: "",
+    Address: "",
+    FoundingDate: "",
+    Vision: "",
+    Mission: "",
+    CountryId: "", 
+    IndustryTypeId: "", 
+
+    CompanyValue1: "",
+    CompanyValue2: "",
+    CompanyGoal1: "",
+    CompanyGoal2: ""
+}
+
 const SignUp = () => {
     const [step, setStep] = useState<SignupStep>(SignupStep.Step1);
+    const [data, setData] = useState(INITIAL_DATA)
 
     const handleNextStep = () => {
         setStep((prevStep) => prevStep + 1);
@@ -28,6 +66,37 @@ const SignUp = () => {
     const handlePreviousStep = () => {
         setStep((prevStep) => prevStep - 1);
     };
+
+    //companySignup
+    const companySignUp = async () => {
+        let userData = {
+            "Name": data.Name,
+            "Email": data.Email,
+            "Phone_Number": data.Phone_Number,
+            "Website": data.Website,
+            "Address": data.Address,
+            "FoundingDate": data.FoundingDate,
+            "Vision": data.Vision,
+            "Mission": data.Mission,
+            "CountryId": data.CountryId,
+            "IndustryTypeId": data.IndustryTypeId
+        }
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        var addUserUrl = 'https://localhost:44373/api/AddCompany';
+        axios.post(addUserUrl, userData, config)
+            .then(response => {
+                // Handle the response from the server
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }
 
     const renderStep = () => {
         switch (step) {

@@ -509,9 +509,17 @@ namespace WelbyAPI.Controllers
         #region COMPANY
         [Route("~/api/GetCompanies")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromBody] CompanyMasterViewModel param)
+        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromUri] CompanyMasterViewModel param)
         {
             var model = await _wwauow.Company.GetCompanyList(param);
+            return model;
+        }
+
+        [Route("~/api/GetCompany")]
+        [HttpGet]
+        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompany([FromUri] CompanyMasterViewModel param)
+        {
+            var model = await _wwauow.Company.GetCompany(param);
             return model;
         }
 

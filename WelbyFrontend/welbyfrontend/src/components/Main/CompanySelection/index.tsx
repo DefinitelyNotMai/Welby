@@ -19,7 +19,7 @@ const CompanySelect = ({ value }: CompanySelectProps): JSX.Element => {
     useEffect(() => {
         const fetchCompanies = async () => {
             try {
-                var companyUrl = 'try';
+                var companyUrl = 'https://localhost:44373/api/GetCompanies';
                 var company = null;
                 let param = { "Active": 1 };
 

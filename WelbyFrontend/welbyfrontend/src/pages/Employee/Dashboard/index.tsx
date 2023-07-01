@@ -22,7 +22,7 @@ const Dashboard = () => {
                 params: param
             }).then(response => {
                 result = response.data;
-                console.log(response.data)
+                //console.log(response.data)
                 if (result != null) {
                     if (result.length > 0) {
                         console.log(result);

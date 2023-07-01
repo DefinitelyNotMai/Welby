@@ -18,6 +18,7 @@ type IUserInformation = { //ideal
     First_Name: string;
     Middle_Name: string;
     Last_Name: string;
+    Gender: string;
     Nickname: string;
     Email: string;
     Phone_Number: number;
@@ -35,6 +36,7 @@ type IUserInformation = { //ideal
     Connect: string;
     Support: string;
     Other_Notes: string;
+    Interests: string[];
 
     //these should be Ids
     RealizedStrength1: string;
@@ -48,11 +50,13 @@ type IUserInformation = { //ideal
     Weakness: string;
 }
 
-type UserFormData = { //gender pa baka makalimutan 
+type UserFormData = {
     Company: string;
     First_Name: string;
     Middle_Name: string;
     Last_Name: string;
+    Gender: string;
+    Nickname: string;
     Email: string;
     Country: string;
     Phone_Number: string;
@@ -73,6 +77,7 @@ type UserFormData = { //gender pa baka makalimutan
     LearnedBehavior2: string;
     Weakness: string;
     Other_Notes: string;
+    Interests: string[];
 }
 
 const INITIAL_DATA: UserFormData = {
@@ -80,6 +85,8 @@ const INITIAL_DATA: UserFormData = {
     First_Name: "",
     Middle_Name: "",
     Last_Name: "",
+    Nickname: "",
+    Gender: "",
     Email: "",
     Country: "",
     Phone_Number: "",
@@ -100,6 +107,7 @@ const INITIAL_DATA: UserFormData = {
     LearnedBehavior2: "",
     Weakness: "",
     Other_Notes: "",
+    Interests: [],
 }
 
 
@@ -116,7 +124,7 @@ const SignUp = () => {
         <Step1 {...data} updateFields={updateFields} />,
         <Step2 {...data} updateFields={updateFields} />,
         <Step3 {...data} updateFields={updateFields} />,
-        <Step4 />,
+        <Step4 {...data} updateFields={updateFields} />,
         <Step5 {...data} updateFields={updateFields} />,
         <Step6 />
     ]);

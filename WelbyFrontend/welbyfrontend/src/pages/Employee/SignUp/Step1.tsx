@@ -4,12 +4,15 @@ import { FiPlus } from 'react-icons/fi';
 import CompanySelect from "../../../components/Main/CompanySelection";
 import CountrySelect from "../../../components/Main/CountrySelection";
 import CustomTextbox from "../../../components/Main/FormTextbox";
+import GenderSelect from "../../../components/Main/GenderSelection";
 
 type Step1Data = {
     Company: string;
     First_Name: string;
     Middle_Name: string;
     Last_Name: string;
+    Gender: string;
+    Nickname: string;
     Email: string;
     Country: string;
     Phone_Number: string;
@@ -23,7 +26,7 @@ type Step1Props = Step1Data & {
     updateFields: (fields: Partial<Step1Data>) => void
 }
 
-const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Email, Country, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
+const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Gender, Nickname, Email, Country, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
     return (
         <>
             <Flex
@@ -56,6 +59,15 @@ const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Email, Country, Ph
                         placeholder="Last Name"
                         value={Last_Name}
                         onChange={e => updateFields({ Last_Name: e.target.value })}
+                    />
+                    <GenderSelect
+                        value={Gender}
+                        onChange={e => updateFields({ Gender: e.target.value })}
+                    />
+                    <CustomTextbox
+                        placeholder="Nickname"
+                        value={Nickname}
+                        onChange={e => updateFields({ Nickname: e.target.value })}
                     />
                     <CustomTextbox
                         placeholder="Email"

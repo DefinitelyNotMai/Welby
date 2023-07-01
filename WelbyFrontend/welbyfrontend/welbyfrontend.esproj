@@ -16,7 +16,8 @@
     <Folder Include="src\components\Dashboard\Profile\Card\" />
     <Folder Include="src\components\Dashboard\Profile\CardHeader\" />
     <Folder Include="src\components\Main\CountrySelection\" />
-    <Folder Include="src\components\Main\StrengthSelection\" />
+    <Folder Include="src\components\Main\InterestCheckbox\" />
+    <Folder Include="src\components\Main\GenderSelection\" />
     <Folder Include="src\hooks\" />
     <Folder Include="src\pages\Admin\" />
     <Folder Include="src\pages\Employee\SignUp\" />

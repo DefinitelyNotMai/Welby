@@ -14,41 +14,7 @@ import Step4 from "./Step4";
 import Step5 from "./Step5";
 import Step6 from "./Step6";
 
-type IUserInformation = { //ideal
-    First_Name: string;
-    Middle_Name: string;
-    Last_Name: string;
-    Gender: string;
-    Nickname: string;
-    Email: string;
-    Phone_Number: number;
-    Address: string;
-    Birthday: string;
-    Linkedin: string;
-    Facebook: string;
-    Instagram: string;
-    TikTok: string;
-    ProfilePhoto: string; //temporary
-    GenderId: string; //can be string because it is being converted in the backend
-    CompanyId: string; //can be string because it is being converted in the backend
-    CountryId: string; //can be string because it is being converted in the backend
-    Work: string;
-    Connect: string;
-    Support: string;
-    Other_Notes: string;
-    Interests: string[];
 
-    //these should be Ids
-    RealizedStrength1: string;
-    RealizedStrength2: string;
-    RealizedStrength3: string;
-    UnrealizedStrength1: string;
-    UnrealizedStrength2: string;
-    UnrealizedStrength3: string;
-    LearnedBehavior1: string;
-    LearnedBehavior2: string;
-    Weakness: string;
-}
 
 type UserFormData = {
     Company: string;
@@ -139,68 +105,73 @@ const SignUp = () => {
         nextStep();
     }
 
-    function EmployeeSignUp() { 
-        //final sign up method when strengths and interest
-        submitUserData();
-        var createdEmployeeId = null;
+    
 
-        const getUserId = () => {
-            const getUserUrl = 'https://localhost:44373/api/GetAllEmployees';
-            var result = null;
-            let param = {
-                "Email": data.Email,
-                "Phone_Number": data.Phone_Number // to password!
+    const submitUserData = () => {
+        let userData = {
+            "First_Name": data.First_Name,
+            "Middle_Name": data.Middle_Name,
+            "Last_Name": data.Last_Name,
+            "Nickname": data.Nickname,
+            "Email": data.Email,
+            "Phone_Number": data.Phone_Number,
+            //"Address": data.Address,
+            //"Birthday": data.Birthday,
+            "Linkedin": data.Linkedin,
+            "Facebook": data.Facebook,
+            "Instagram": data.Instagram,
+            "TikTok": data.TikTok,
+            //"ProfilePhoto": data.ProfilePhoto,
+            "GenderId": data.Gender,
+            "CompanyId": data.Company,
+            "CountryId": data.Country,
+            "Work": data.Work,
+            "Connect": data.Connect,
+            "Support": data.Support,
+            "Other_Notes": data.Other_Notes
+        }
+
+        console.log(userData)
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
             }
+        };
 
-            axios.get(getUserUrl, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                params: param
-            }).then(response => {
-                result = response.data;
-                if (result != null) {
-                    if (result.length > 0) {
-                        console.log(result);
-                        createdEmployeeId = result[0].EmployeeId
-                        submitUserStrengthsProfile(createdEmployeeId)
-                    }
-                }
+        var addUserUrl = 'https://localhost:44373/api/AddEmployee';
+        axios.post(addUserUrl, userData, config)
+            .then(response => {
+                // Handle the response from the server
+                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
-        }
-        
     }
 
-    function submitUserStrengthsProfile(id: number) {
+    function submitUserStrengthsProfile(id: string) {
         const addUnrealizedStrengths = async () => {
             const config = {
                 headers: { 'Content-Type': 'application/json' }
             };
 
-            const top3 = [
-                {
-                    "EmployeeId": id,
-                    "StrengthId": data.UnrealizedStrength1
-                },
-                {
-                    "EmployeeId": id,
-                    "StrengthId": data.UnrealizedStrength2
-                },
-                {
-                    "EmployeeId": id,
-                    "StrengthId": data.UnrealizedStrength3
-                }
-            ];
-
+            let unrealizedStrengthsId = [data.UnrealizedStrength1, data.UnrealizedStrength2, data.UnrealizedStrength3];
             var addUnrealizedStrengthsUrl = 'https://localhost:44373/api/AddEmployeeUnrealizedStrength';
-            axios.post(addUnrealizedStrengthsUrl, top3, config)
-                .then(response => {
-                    // Handle the response from the server
-                    console.log(response.data);
-                }).catch(function (error) {
-                    console.log(error);
-                });
+            for (let x = 0; x < unrealizedStrengthsId.length; x++) {
+                let strength = {
+                    "EmployeeId": id,
+                    "StrengthId": unrealizedStrengthsId[x]
+                }
+               
+                axios.post(addUnrealizedStrengthsUrl, strength, config)
+                    .then(response => {
+                        // Handle the response from the server
+                        console.log(response.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+            }
+            
         }
 
         const addRealizedStrengths = async () => {
@@ -208,30 +179,23 @@ const SignUp = () => {
                 headers: { 'Content-Type': 'application/json' }
             };
 
-            const top3 = [
-                {
+            let realizedStrengthsId = [data.RealizedStrength1, data.RealizedStrength2, data.RealizedStrength3];
+            var addRealizedStrengthsUrl = 'https://localhost:44373/api/AddEmployeeRealizedStrength';
+            for (let x = 0; x < realizedStrengthsId.length; x++) {
+                let strength = {
                     "EmployeeId": id,
-                    "StrengthId": data.RealizedStrength1
-                },
-                {
-                    "EmployeeId": id,
-                    "StrengthId": data.RealizedStrength2
-                },
-                {
-                    "EmployeeId": id,
-                    "StrengthId": data.RealizedStrength3
+                    "StrengthId": realizedStrengthsId[x]
                 }
 
-            ];
-
-            var addRealizedStrengthsUrl = 'https://localhost:44373/api/AddEmployeeRealizedStrength';
-            axios.post(addRealizedStrengthsUrl, top3, config)
-                .then(response => {
-                    // Handle the response from the server
-                    console.log(response.data);
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                axios.post(addRealizedStrengthsUrl, strength, config)
+                    .then(response => {
+                        // Handle the response from the server
+                        console.log(response.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+            }
+            
         }
 
         const addLearnedBehaviors = async () => {
@@ -239,26 +203,22 @@ const SignUp = () => {
                 headers: {'Content-Type': 'application/json'}
             };
 
-            const top2 = [
-                {
+            let learnedBehaviorsId = [data.LearnedBehavior1, data.LearnedBehavior2];
+            var addLearnedBehaviorUrl = 'https://localhost:44373/api/AddEmployeeLearnedBehavior';
+            for (let x = 0; x < learnedBehaviorsId.length; x++) {
+                let strength = {
                     "EmployeeId": id,
-                    "StrengthId": data.LearnedBehavior1
-                },
-                {
-                    "EmployeeId": id,
-                    "StrengthId": data.LearnedBehavior2
+                    "StrengthId": learnedBehaviorsId[x]
                 }
 
-            ];
-
-            var addLearnedBehaviorUrl = 'https://localhost:44373/api/AddEmployeeLearnedBehavior';
-            axios.post(addLearnedBehaviorUrl, top2, config)
-                .then(response => {
-                    // Handle the response from the server
-                    console.log(response.data);
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                axios.post(addLearnedBehaviorUrl, strength, config)
+                    .then(response => {
+                        // Handle the response from the server
+                        console.log(response.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
 
         const addWeakness = async () => {
@@ -284,54 +244,70 @@ const SignUp = () => {
         }
 
        // add interest here once we've figured out how to retrieve list
+        const addInterest = async () => {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            for (let x = 0; x < data.Interests.length; x++) {
+                let interest = {
+                    "EmployeeId": id,
+                    "InterestId": data.Interests[x]
+                }
+                var addInterestUrl = 'https://localhost:44373/api/AddEmployeeInterests';
+                axios.post(addInterestUrl, interest, config)
+                    .then(response => {
+                        // Handle the response from the server
+                        console.log(response.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
 
 
         addLearnedBehaviors();
         addRealizedStrengths();
         addUnrealizedStrengths();
         addWeakness();
+        addInterest();
 
     }
 
-    const submitUserData = async () => {
-        let userData = {
-            "First_Name": data.First_Name,
-            "Middle_Name": data.Middle_Name,
-            "Last_Name": data.Last_Name,
-            //"Nickname": data.Nickname,
+    const getUserId = () => {
+        const getUserUrl = 'https://localhost:44373/api/GetAllEmployees';
+        var result = null;
+        let param = {
             "Email": data.Email,
-            "Phone_Number": data.Phone_Number,
-            //"Address": data.Address,
-            //"Birthday": data.Birthday,
-            "Linkedin": data.Linkedin,
-            "Facebook": data.Facebook,
-            "Instagram": data.Instagram,
-            "TikTok": data.TikTok,
-            //"ProfilePhoto": data.ProfilePhoto,
-            //"GenderId": data.GenderId,
-            //"CompanyId": data.CompanyId,
-            //"CountryId": data.CountryId,
-            "Work": data.Work,
-            "Connect": data.Connect,
-            "Support": data.Support,
-            "Other_Notes": data.Other_Notes
+            "Phone_Number": data.Phone_Number // to password!
         }
-
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
         
-        var addUserUrl = 'https://localhost:44373/api/AddEmployee';
-        axios.post(addUserUrl, userData, config)
-            .then(response => {
-                // Handle the response from the server
-                console.log(response.data);
-            }).catch(function (error) {
-                console.log(error);
+        axios.get(getUserUrl, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            params: param
+        }).then(response => {
+            result = response.data;
+            if (result != null) {
+                if (result.length > 0) {
+                    console.log(result);
+                    let id = result[0].EmployeeId;
+                    submitUserStrengthsProfile(id);
+                }
+            }
+        }).catch(function (error) {
+            console.log(error);
         });
     }
+
+    const EmployeeSignUp = () => {
+        //final sign up method when strengths and interest
+        submitUserData();
+        getUserId();
+    }
+    
 
     return (
         <MainLayout>
@@ -349,7 +325,7 @@ const SignUp = () => {
                                 <MainFormButton width="25%" onClickEvent={prevStep}>
                                     <Text>BACK</Text>
                                 </MainFormButton>}
-                            <MainFormButton onClickEvent={submitUserData}>Sign up!</MainFormButton>
+                            <MainFormButton onClickEvent={EmployeeSignUp}>Sign up!</MainFormButton>
                         </Flex>
                     }
                 </Flex>

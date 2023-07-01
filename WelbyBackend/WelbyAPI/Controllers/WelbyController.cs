@@ -161,7 +161,7 @@ namespace WelbyAPI.Controllers
         #region STRENGTH
         [Route("~/api/GetStrength")]
         [HttpGet]
-        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromBody] StrengthMasterViewModel param)
+        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromUri] StrengthMasterViewModel param)
         {
             var model = await _wwauow.Strength.GetStrengthList(param);
             return model;
@@ -219,7 +219,7 @@ namespace WelbyAPI.Controllers
         #region INTEREST
         [Route("~/api/GetAllInterest")]
         [HttpGet]
-        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromBody] InterestMasterViewModel param)
+        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromUri] InterestMasterViewModel param)
         {
             var model = await _wwauow.Interest.GetInterestsList(param);
             return model;
@@ -393,7 +393,7 @@ namespace WelbyAPI.Controllers
         #region GENDER
         [Route("~/api/GetGender")]
         [HttpGet]
-        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromBody] GenderMasterViewModel param)
+        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromUri] GenderMasterViewModel param)
         {
             var model = await _wwauow.Gender.GetGenderList(param);
             return model;
@@ -634,7 +634,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE INTEREST
         [Route("~/api/GetEmployeeInterests")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromBody] EmployeeInterestViewModel param)
+        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromUri] EmployeeInterestViewModel param)
         {
             var model = await _wwauow.EmployeeInterest.GetEmployeeInterests(param);
             return model;

@@ -6,9 +6,44 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+interface IStrength {
+
+}
+
 const Profile = () => {
     const { state } = useLocation();
+    const [realizedStrength, setRealizedStrengths] = useState()
+    const [Nickname, setNickname] = useState('');
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            var userUrl = 'https://localhost:44373/api/GetEmployee';
+            var result = null;
+            let param = {
+                "EmployeeId": state.id
+            }
+            axios.get(userUrl, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                params: param
+            }).then(response => {
+                result = response.data;
+                //console.log(response.data)
+                if (result != null) {
+                    if (result.length > 0) {
+                        console.log(result);
+                        setNickname(result[0].Nickname)
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        };
+
+        if (state && state.id) {
+            fetchUserData();
+        }
+    }, [state]);
 
     return (
         <div>

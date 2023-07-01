@@ -16,6 +16,9 @@ import Step6 from "./Step6";
 
 type UserFormData = {
     Company: string;
+    First_Name: string;
+    Middle_Name: string;
+    Last_Name: string;
     Email: string;
     Country: string;
     Phone_Number: string;
@@ -82,6 +85,9 @@ const UserWeakness = {
 
 const INITIAL_DATA: UserFormData = {
     Company: "",
+    First_Name: "",
+    Middle_Name: "",
+    Last_Name: "",
     Email: "",
     Country: "",
     Phone_Number: "",

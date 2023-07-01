@@ -26,7 +26,7 @@ type Step1Props = Step1Data & {
     updateFields: (fields: Partial<Step1Data>) => void
 }
 
-const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Email, Country, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
+const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Gender, Nickname, Email, Country, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
     return (
         <>
             <Flex

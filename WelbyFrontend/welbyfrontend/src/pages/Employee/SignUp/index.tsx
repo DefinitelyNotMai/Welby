@@ -36,6 +36,7 @@ type IUserInformation = { //ideal
     Connect: string;
     Support: string;
     Other_Notes: string;
+    Interests: string[];
 
     //these should be Ids
     RealizedStrength1: string;
@@ -76,6 +77,7 @@ type UserFormData = {
     LearnedBehavior2: string;
     Weakness: string;
     Other_Notes: string;
+    Interests: string[];
 }
 
 const INITIAL_DATA: UserFormData = {
@@ -105,6 +107,7 @@ const INITIAL_DATA: UserFormData = {
     LearnedBehavior2: "",
     Weakness: "",
     Other_Notes: "",
+    Interests: [],
 }
 
 
@@ -121,7 +124,7 @@ const SignUp = () => {
         <Step1 {...data} updateFields={updateFields} />,
         <Step2 {...data} updateFields={updateFields} />,
         <Step3 {...data} updateFields={updateFields} />,
-        <Step4 />,
+        <Step4 {...data} updateFields={updateFields} />,
         <Step5 {...data} updateFields={updateFields} />,
         <Step6 />
     ]);

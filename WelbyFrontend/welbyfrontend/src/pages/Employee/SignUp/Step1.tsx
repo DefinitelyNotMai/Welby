@@ -7,6 +7,9 @@ import CustomTextbox from "../../../components/Main/FormTextbox";
 
 type Step1Data = {
     Company: string;
+    First_Name: string;
+    Middle_Name: string;
+    Last_Name: string;
     Email: string;
     Country: string;
     Phone_Number: string;
@@ -20,7 +23,7 @@ type Step1Props = Step1Data & {
     updateFields: (fields: Partial<Step1Data>) => void
 }
 
-const Step1 = ({ Company, Email, Country, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
+const Step1 = ({ Company, First_Name, Middle_Name, Last_Name, Email, Country, Phone_Number, Linkedin, Facebook, Instagram, TikTok, updateFields }: Step1Props) => {
     return (
         <>
             <Flex
@@ -36,6 +39,21 @@ const Step1 = ({ Company, Email, Country, Phone_Number, Linkedin, Facebook, Inst
             <Grid templateColumns="2fr 1fr" gap="10">
                 <Flex flexDirection="column">
                     <CompanySelect value={Company} />
+                    <CustomTextbox
+                        placeholder="First Name"
+                        value={First_Name}
+                        onChange={e => updateFields({ First_Name: e.target.value })}
+                    />
+                    <CustomTextbox
+                        placeholder="Middle Name"
+                        value={Middle_Name}
+                        onChange={e => updateFields({ Middle_Name: e.target.value })}
+                    />
+                    <CustomTextbox
+                        placeholder="Last Name"
+                        value={Last_Name}
+                        onChange={e => updateFields({ Last_Name: e.target.value })}
+                    />
                     <CustomTextbox
                         placeholder="Email"
                         value={Email}
@@ -68,7 +86,7 @@ const Step1 = ({ Company, Email, Country, Phone_Number, Linkedin, Facebook, Inst
                         onChange={e => updateFields({ TikTok: e.target.value })}
                     />
                 </Flex>
-                <Flex h="50%">
+                <Flex boxSize="64">
                     <Flex flexDirection="column" bg="#ffffff" borderRadius="md" alignItems="center" justifyContent="center" p="4">
                         <Flex flexDirection="column" bg="#c8c8c8" h="98%" borderRadius="md" alignItems="center" justifyContent="center" p="4">
                             <Icon as={FiPlus} boxSize={8} />

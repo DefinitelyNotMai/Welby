@@ -50,6 +50,9 @@ type IUserInformation = { //ideal
 
 type UserFormData = { //gender pa baka makalimutan 
     Company: string;
+    First_Name: string;
+    Middle_Name: string;
+    Last_Name: string;
     Email: string;
     Country: string;
     Phone_Number: string;
@@ -74,6 +77,9 @@ type UserFormData = { //gender pa baka makalimutan
 
 const INITIAL_DATA: UserFormData = {
     Company: "",
+    First_Name: "",
+    Middle_Name: "",
+    Last_Name: "",
     Email: "",
     Country: "",
     Phone_Number: "",

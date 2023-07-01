@@ -1,4 +1,5 @@
 import { Box, Flex, Heading, Select, Text } from "@chakra-ui/react";
+import StrengthSelect from "../../../components/Main/StrengthSelection";
 
 type Step3Data = {
     RealizedStrength1: string;
@@ -28,68 +29,6 @@ const Step3 = ({
     Weakness,
     updateFields
 }: Step3Props) => {
-    const options = [
-        "Action",
-        "Adaptable",
-        "Adherence",
-        "Adventure",
-        "Authenticity",
-        "Bounceback",
-        "Catalyst",
-        "Centered",
-        "Change Agent",
-        "Compassion",
-        "Competetive",
-        "Connector",
-        "Counterpoint",
-        "Courage",
-        "Creativity",
-        "Curiosity",
-        "Detail",
-        "Drive",
-        "Emotional Awareness",
-        "Empathic",
-        "Enabler",
-        "Equality",
-        "Esteem Builder",
-        "Explainer",
-        "Feedback",
-        "Gratitude",
-        "Growth",
-        "Humility",
-        "Humour",
-        "Improver",
-        "Incubator",
-        "Innovation",
-        "Judgement",
-        "Legacy",
-        "Listener",
-        "Mission",
-        "Moral Compass",
-        "Narrator",
-        "Optimism",
-        "Organizer",
-        "Persistence",
-        "Personal Responsibility",
-        "Personalisation",
-        "Persuasion",
-        "Planner",
-        "Prevention",
-        "Pride",
-        "Rapport Builder",
-        "Relationship Deepener",
-        "Resilience",
-        "Resolver",
-        "Self-awareness",
-        "Self-belief",
-        "Service",
-        "Spotlight",
-        "Strategic Awareness",
-        "Time Optimiser",
-        "Unconditionality",
-        "Work Ethic",
-        "Writer",
-    ];
 
     return (
         <>
@@ -110,138 +49,66 @@ const Step3 = ({
             <Box mb="5" fontFamily="Montserrat" fontWeight="500">
                 <Text color="#ffffff">Top 3 Realized Strengths</Text>
                 <Flex justifyContent="space-between">
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
-                        width="30%"
+                    <StrengthSelect
                         value={RealizedStrength1}
                         onChange={e => updateFields({ RealizedStrength1: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
                         width="30%"
+                    />
+                    <StrengthSelect
                         value={RealizedStrength2}
                         onChange={e => updateFields({ RealizedStrength2: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
                         width="30%"
+                    />
+                    <StrengthSelect
                         value={RealizedStrength3}
                         onChange={e => updateFields({ RealizedStrength3: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
+                        width="30%"
+                    />
                 </Flex>
             </Box>
             <Box mb="5" fontFamily="Montserrat" fontWeight="500">
                 <Text color="#ffffff">Top 3 Unrealized Strengths</Text>
                 <Flex justifyContent="space-between">
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
-                        width="30%"
+                    <StrengthSelect
                         value={UnrealizedStrength1}
                         onChange={e => updateFields({ UnrealizedStrength1: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
                         width="30%"
+                    />
+                    <StrengthSelect
                         value={UnrealizedStrength2}
                         onChange={e => updateFields({ UnrealizedStrength2: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
                         width="30%"
+                    />
+                    <StrengthSelect
                         value={UnrealizedStrength3}
                         onChange={e => updateFields({ UnrealizedStrength3: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
+                        width="30%"
+                    />
                 </Flex>
             </Box>
             <Box mb="5" fontFamily="Montserrat" fontWeight="500">
                 <Text color="#ffffff">Top 2 Learned Behaviors</Text>
                 <Flex flexDirection="row" flexFlow="flex-start">
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
-                        width="30%"
+                    <StrengthSelect
                         value={LearnedBehavior1}
-                        mr="10"
                         onChange={e => updateFields({ LearnedBehavior1: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
-                    <Select
-                        bg="#ffffff"
-                        placeholder="Choose here..."
                         width="30%"
+                        mr="10"
+                    />
+                    <StrengthSelect
                         value={LearnedBehavior2}
                         onChange={e => updateFields({ LearnedBehavior2: e.target.value })}
-                    >
-                        {options.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </Select>
+                        width="30%"
+                    />
                 </Flex>
             </Box>
             <Box mb="20" fontFamily="Montserrat" fontWeight="500">
                 <Text color="#ffffff">Top 1 Weaknesses</Text>
-                <Select
-                    bg="#ffffff"
-                    placeholder="Choose here..."
-                    width="30%"
+                <StrengthSelect
                     value={Weakness}
                     onChange={e => updateFields({ Weakness: e.target.value })}
-                >
-                    {options.map((option) => (
-                        <option key={option} value={option}>
-                            {option}
-                        </option>
-                    ))}
-                </Select>
+                    width="30%"
+                />
             </Box>
         </>
     );

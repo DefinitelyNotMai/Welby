@@ -10,6 +10,9 @@ import axios from 'axios';
 const Profile = () => {
     const { state } = useLocation(); //employeeId
     const [weakness, setWeakness] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     
     useEffect(() => {
         let unrealizedStrengths = []; //idk where to store.
@@ -174,7 +177,13 @@ const Profile = () => {
                         let work = result[0].Work;
                         let connect = result[0].Connect;
                         let support = result[0].Support;
+                        let name = result[0].First_Name;
+                        let email = result[0].Email;
+                        let phoneNumber = result[0].Phone_Number;
 
+                        setFirstName(name);
+                        setEmail(email);
+                        setPhoneNumber(phoneNumber);
                         console.log(`Work: ${work} \nConnect: ${connect} \nSupport: ${support}`)
                     }
                 }
@@ -197,7 +206,7 @@ const Profile = () => {
 
     return (
         <div>
-            <Header />
+            <Header name={firstName} email={email} phone_number={phoneNumber} />
             <ProfileCard>
                 <ProfileCardHeader>Strengths</ProfileCardHeader>
                 <Divider />

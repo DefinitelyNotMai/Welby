@@ -5,10 +5,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+type HeaderProps = {
+    name: string;
+    email: string;
+    phone_number: string;
+}
 
-const Header = () => {
+const Header = ({ name, email, phone_number }: HeaderProps) => {
     const { state } = useLocation();
-    
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -57,11 +61,11 @@ const Header = () => {
                         <Avatar boxSize="32"></Avatar>
                     </Link>
                     <Flex flexDirection="column" justifyContent="center" ml="8" color="#ffffff">
-                        <Text fontFamily="Playfair Display" fontWeight="400" fontSize="lg">Hi, I'm XXX!</Text>
+                        <Text fontFamily="Playfair Display" fontWeight="400" fontSize="lg">Hi, I'm {name}!</Text>
                         <Box display="flex" flexDirection="column" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                            <div>ewan</div>
-                            <Text>xxx@xxx.com</Text>
-                            <Text>xxx-xxx-xxxx</Text>
+                            {/*<div>ewan</div>*/}
+                            <Text>{email}</Text>
+                            <Text>{phone_number}</Text>
                         </Box>
                     </Flex>
                 </Flex>

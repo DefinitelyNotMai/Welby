@@ -160,7 +160,7 @@ const SignUp = () => {
                     "EmployeeId": id,
                     "StrengthId": unrealizedStrengthsId[x]
                 }
-               
+
                 axios.post(addUnrealizedStrengthsUrl, strength, config)
                     .then(response => {
                         // Handle the response from the server
@@ -169,7 +169,7 @@ const SignUp = () => {
                         console.log(error);
                     });
             }
-            
+
         }
 
         const addRealizedStrengths = async () => {
@@ -193,12 +193,12 @@ const SignUp = () => {
                         console.log(error);
                     });
             }
-            
+
         }
 
         const addLearnedBehaviors = async () => {
             const config = {
-                headers: {'Content-Type': 'application/json'}
+                headers: { 'Content-Type': 'application/json' }
             };
 
             let learnedBehaviorsId = [data.LearnedBehavior1, data.LearnedBehavior2];
@@ -241,7 +241,7 @@ const SignUp = () => {
                 });
         }
 
-       // add interest here once we've figured out how to retrieve list
+        // add interest here once we've figured out how to retrieve list
         const addInterest = async () => {
             const config = {
                 headers: {
@@ -281,7 +281,7 @@ const SignUp = () => {
             "Email": data.Email,
             "Phone_Number": data.Phone_Number // to password!
         }
-        
+
         axios.get(getUserUrl, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -304,8 +304,9 @@ const SignUp = () => {
         //final sign up method when strengths and interest
         submitUserData();
         getUserId();
+        //nextStep(); // when everything's finished, uncomment lng
     }
-    
+
 
     return (
         <MainLayout>
@@ -316,16 +317,17 @@ const SignUp = () => {
                     {step}
                     {!isLastStep &&
                         <Flex flexDirection="row-reverse" justifyContent="space-between">
-                            <MainFormButton width="25%" onClickEvent={nextStep} isDisabled={isNextDisabled}>
+                            <MainFormButton
+                                width="25%"
+                                onClickEvent={currentStepIndex === steps.length - 2 ? EmployeeSignUp : nextStep}
+                                isDisabled={isNextDisabled}>
                                 <Text>{currentStepIndex === steps.length - 2 ? "SUBMIT" : "NEXT"}</Text>
                             </MainFormButton>
                             {!isFirstStep &&
                                 <MainFormButton width="25%" onClickEvent={prevStep}>
                                     <Text>BACK</Text>
                                 </MainFormButton>}
-                            <MainFormButton onClickEvent={EmployeeSignUp}>Sign up!</MainFormButton>
-                        </Flex>
-                    }
+                        </Flex>}
                 </Flex>
             </MainFormCard>
             <MainFooter />

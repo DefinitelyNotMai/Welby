@@ -22,8 +22,12 @@ type UserFormData = {
     Middle_Name: string;
     Last_Name: string;
     Gender: string;
+    Birthday: string;
+    Address: string;
     Nickname: string;
     Email: string;
+    Password: string;
+    Confirm_Password: string;
     Country: string;
     Phone_Number: string;
     Linkedin: string;
@@ -53,7 +57,11 @@ const INITIAL_DATA: UserFormData = {
     Last_Name: "",
     Nickname: "",
     Gender: "",
+    Birthday: "",
+    Address: "",
     Email: "",
+    Password: "",
+    Confirm_Password: "",
     Country: "",
     Phone_Number: "",
     Linkedin: "",
@@ -96,7 +104,7 @@ const SignUp = () => {
     ]);
 
     const isNextDisabled =
-        (!data.Company || !data.Email || !data.Country || !data.Phone_Number) ||
+        (!data.Company || !data.First_Name || !data.Middle_Name || !data.Last_Name || !data.Gender || !data.Birthday || !data.Address || !data.Nickname || !data.Email || data.Password !== data.Confirm_Password || !data.Country || !data.Phone_Number) ||
         (currentStepIndex === 1 && (!data.Work || !data.Connect || !data.Support)) ||
         (currentStepIndex === 2 && (!data.RealizedStrength1 || !data.RealizedStrength2 || !data.RealizedStrength3 || !data.UnrealizedStrength1 || !data.UnrealizedStrength2 || !data.UnrealizedStrength3 || !data.LearnedBehavior1 || !data.LearnedBehavior2 || !data.Weakness));
 
@@ -113,8 +121,8 @@ const SignUp = () => {
             "Nickname": data.Nickname,
             "Email": data.Email,
             "Phone_Number": data.Phone_Number,
-            //"Address": data.Address,
-            //"Birthday": data.Birthday,
+            "Address": data.Address,
+            "Birthday": data.Birthday,
             "Linkedin": data.Linkedin,
             "Facebook": data.Facebook,
             "Instagram": data.Instagram,
@@ -304,14 +312,13 @@ const SignUp = () => {
         //final sign up method when strengths and interest
         submitUserData();
         getUserId();
-        nextStep(); // when everything's finished, uncomment lng
+        nextStep();
     }
 
 
     return (
         <MainLayout>
             <MainHeader />
-            <Heading textAlign="center">{currentStepIndex + 1} / {steps.length}</Heading>
             <MainFormCard w={["100%", "75%", "50%"]}>
                 <Flex flexDirection="column" p="16">
                     {step}

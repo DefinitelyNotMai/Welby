@@ -44,7 +44,7 @@ const Step6 = () => {
             </Text>
             <Center>
                 <MainFormButton width="35%" onClickEvent={handleLoginButtonClick}>
-                    Login
+                    Proceed to Login
                 </MainFormButton>
             </Center>
         </>

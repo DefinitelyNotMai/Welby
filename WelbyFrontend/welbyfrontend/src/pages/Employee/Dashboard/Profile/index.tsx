@@ -16,10 +16,15 @@ const Profile = () => {
     const [firstName, setFirstName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+
+    const [unrealizedStrengths, setUnrealizedStrengths] = useState<string[]>([]);
+    const [realizedStrengths, setRealizedStrengths] = useState<string[]>([]);
+    const [learnedBehaviors, setLearnedBehaviors] = useState<string[]>([]);
     
+
     useEffect(() => {
-        let unrealizedStrengths = []; //idk where to store.
-        let realizedStrengths = [];
+         //idk where to store.
+        
         let learnedBehaviors = [];
         let interests = [];
 
@@ -41,11 +46,14 @@ const Profile = () => {
                 if (result != null) {
                     if (result.length > 0) {
                         console.log(result);
+                        let unrealizedStrengths: string[] = [];
                         for (let x = 0; x < result.length; x++) {
                             unrealizedStrengths.push(result[x].UnrealizedStrengthDisplay)
-                            console.log("Unrealized Strength " + x + " " +result[x].UnrealizedStrengthDisplay);
+                            //console.log("Unrealized Strength " + x + " " +result[x].UnrealizedStrengthDisplay);
                         }
-                       
+
+                        setUnrealizedStrengths(unrealizedStrengths)
+                        
                     }
                 }
             }).catch(function (error) {
@@ -69,11 +77,12 @@ const Profile = () => {
                 if (result != null) {
                     if (result.length > 0) {
                         console.log(result);
+                        let realizedStrengths: string[] = [];
                         for (let x = 0; x < result.length; x++) {
                             realizedStrengths.push(result[x].RealizedStrengthDisplay)
-                            console.log("Realized Strength " + x + " " + result[x].RealizedStrengthDisplay);
+                            //console.log("Realized Strength " + x + " " + result[x].RealizedStrengthDisplay);
                         }
-
+                        setRealizedStrengths(realizedStrengths);
                     }
                 }
             }).catch(function (error) {
@@ -97,11 +106,12 @@ const Profile = () => {
                 if (result != null) {
                     if (result.length > 0) {
                         console.log(result);
+                        let learnedBehaviors: string[] = []
                         for (let x = 0; x < result.length; x++) {
                             learnedBehaviors.push(result[x].LearnedBehaviorDisplay)
                             console.log("Learned Behavior " + x + " " + result[x].LearnedBehaviorDisplay);
                         }
-
+                        setLearnedBehaviors(learnedBehaviors);
                     }
                 }
             }).catch(function (error) {
@@ -223,17 +233,17 @@ const Profile = () => {
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">Realized</Text>
                             </Flex>
                             <Flex flexDirection="column" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                                <Text>Realized 1</Text>
-                                <Text>Realized 2</Text>
-                                <Text>Realized 3</Text>
+                                <Text>{ realizedStrengths[0] }</Text>
+                                <Text>{ realizedStrengths[1] }</Text>
+                                <Text>{ realizedStrengths[2] }</Text>
                             </Flex>
                             <Flex alignItems="center" justifyContent="center">
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">Unrealized</Text>
                             </Flex>
                             <Flex flexDirection="column" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                                <Text>Unrealized 1</Text>
-                                <Text>Unrealized 2</Text>
-                                <Text>Unrealized 3</Text>
+                                <Text>{ unrealizedStrengths[0] }</Text>
+                                <Text>{ unrealizedStrengths[1] }</Text>
+                                <Text>{ unrealizedStrengths[2] }</Text>
                             </Flex>
                         </Grid>
                     </Flex>

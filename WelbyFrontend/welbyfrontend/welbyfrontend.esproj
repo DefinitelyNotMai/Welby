@@ -18,6 +18,7 @@
     <Folder Include="src\components\Main\CountrySelection\" />
     <Folder Include="src\components\Main\InterestCheckbox\" />
     <Folder Include="src\components\Main\GenderSelection\" />
+    <Folder Include="src\components\Main\IndustrySelection\" />
     <Folder Include="src\hooks\" />
     <Folder Include="src\pages\Admin\" />
     <Folder Include="src\pages\Employee\SignUp\" />

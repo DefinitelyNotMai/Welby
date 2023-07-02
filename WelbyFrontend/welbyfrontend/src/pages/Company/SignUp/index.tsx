@@ -1,27 +1,25 @@
-import { Box, Icon, Flex, Grid, Heading, Text, Select, Center, Image } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { FiPlus } from 'react-icons/fi';
 import { useState } from "react";
 import MainFooter from "../../../components/Main/Footer";
 import MainFormButton from "../../../components/Main/FormButton";
 import MainFormCard from "../../../components/Main/FormCard";
-import CustomTextbox from "../../../components/Main/FormTextbox";
 import MainHeader from "../../../components/Main/Header";
 import MainLayout from "../../../components/Main/Layout";
-import WelbyLogo from "../../../assets/images/welby_logoAndName_primary-1_flat.svg"
 import axios from "axios";
-
-enum SignupStep {
-    Step1,
-    Step2,
-    Step3,
-    Step4,
-    Step5,
-    Step6,
-}
+import { useMultistepForm } from "../../../hooks/useMultistepForm";
+import Step1 from "./Step1";
+import Step2 from "./Step2";
+import Step3 from "./Step3";
+import Step6 from "./Step6";
+import Step4 from "./Step4";
+import Step5 from "./Step5";
 
 type CompanyFormData = {
     Name: string;
     Email: string;
+    Password: string;
+    passwordConfirm: string;
     Phone_Number: string;
     Website: string;
     Address: string;
@@ -31,15 +29,21 @@ type CompanyFormData = {
     CountryId: string; //can be string because it is being converted in the backend
     IndustryTypeId: string; //can be string because it is being converted in the backend
 
-    CompanyValue1: string;
-    CompanyValue2: string;
-    CompanyGoal1: string;
-    CompanyGoal2: string;
+    CompanyValueTitle1: string;
+    CompanyValueTitle2: string;
+    CompanyValueDescription1: string;
+    CompanyValueDescription2: string;
+    CompanyGoalTitle1: string;
+    CompanyGoalTitle2: string;
+    CompanyGoalDescription1: string;
+    CompanyGoalDescription2: string;
 }
 
 const INITIAL_DATA: CompanyFormData = {
     Name: "",
     Email: "",
+    Password: "",
+    passwordConfirm: "",
     Phone_Number: "",
     Website: "",
     Address: "",
@@ -49,23 +53,33 @@ const INITIAL_DATA: CompanyFormData = {
     CountryId: "", 
     IndustryTypeId: "", 
 
-    CompanyValue1: "",
-    CompanyValue2: "",
-    CompanyGoal1: "",
-    CompanyGoal2: ""
+    CompanyValueTitle1: "",
+    CompanyValueTitle2: "",
+    CompanyValueDescription1: "",
+    CompanyValueDescription2: "",
+    CompanyGoalTitle1: "",
+    CompanyGoalTitle2: "",
+    CompanyGoalDescription1: "",
+    CompanyGoalDescription2: "",
 }
 
 const SignUp = () => {
-    const [step, setStep] = useState<SignupStep>(SignupStep.Step1);
     const [data, setData] = useState(INITIAL_DATA)
 
-    const handleNextStep = () => {
-        setStep((prevStep) => prevStep + 1);
-    };
+    function updateFields(fields: Partial<CompanyFormData>) {
+        setData(prev => {
+            return { ...prev, ...fields }
+        })
+    }
 
-    const handlePreviousStep = () => {
-        setStep((prevStep) => prevStep - 1);
-    };
+    const { steps, currentStepIndex, step, isFirstStep, isLastStep, prevStep, nextStep } = useMultistepForm([
+        <Step1 {...data} updateFields={updateFields} />,
+        <Step2 {...data} updateFields={updateFields} />,
+        <Step3 {...data} updateFields={updateFields} />,
+        <Step4 {...data} updateFields={updateFields} />,
+        <Step5 {...data} updateFields={updateFields} />,
+        <Step6 />
+    ]);
 
     //companySignup
     const companySignUp = async () => {
@@ -96,134 +110,32 @@ const SignUp = () => {
             }).catch(function (error) {
                 console.log(error);
             });
+        nextStep();
     }
-
-    const renderStep = () => {
-        switch (step) {
-            case SignupStep.Step1:
-                return renderStep1();
-            //case SignupStep.Step2:
-            //    return renderStep2();
-            //case SignupStep.Step3:
-            //    return renderStep3();
-            //case SignupStep.Step4:
-            //    return renderStep5();
-            //case SignupStep.Step5:
-            //    return renderStep5();
-            //case SignupStep.Step6:
-            //    return renderStep6();
-            default:
-                return null;
-        }
-    };
-
-    const renderStep1 = () => {
-        return (
-            <>
-                <Grid templateColumns={{ base: '1fr', md: '1.5fr 2fr' }} gap={0}>
-                    <Box
-                        bg="#ffffff"
-                        h={{ base: '50vh', md: '70vh' }}
-                        m="0"
-                        borderLeftRadius="2xl"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <Center>
-                            <Image src={WelbyLogo} boxSize="64" />
-                        </Center>
-                    </Box>
-                    <Box
-                        bg="#24a2f0"
-                        p={{ base: '8', md: '16' }}
-                        borderRightRadius="2xl"
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                    >
-                        <Heading
-                            fontFamily="Montserrat"
-                            fontWeight="500"
-                            color="#ffffff"
-                        >
-                            First of all, thank you for choosing Welby!
-                        </Heading>
-                        <Heading
-                            fontFamily="Montserrat"
-                            fontWeight="500"
-                            color="#ffffff"
-                            mb="5"
-                        >
-                            Let's start your <b>registration.</b>
-                        </Heading>
-                        <Box
-                            color="#ffffff"
-                            fontFamily="Montserrat"
-                            fontWeight="500"
-                        >
-                        </Box>
-                        <Box
-                        >
-                            <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500">Company Name</Text>
-                            <CustomTextbox placeholder="Name" />
-                        </Box>
-                        <Box>
-                            <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500">Company Email Address</Text>
-                            <CustomTextbox placeholder="hello@email.com" />
-                        </Box>
-                        <Box
-                        >
-                            <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500">Set Password</Text>
-                            <CustomTextbox placeholder="Set password" type="password" />
-                        </Box>
-                        <Box
-                        >
-                            <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500">Confirm Password</Text>
-                            <CustomTextbox placeholder="Confirm password" type="password" />
-                        </Box>
-                        <MainFormButton
-                            width={['100%', '50%', '25%']}
-                            onClickEvent={handleNextStep}
-                        >
-                            Submit
-                        </MainFormButton>
-                    </Box>
-                </Grid>
-            </>
-        );
-    };
-
-    //const renderStep2 = () => {
-    //    return (
-    //    );
-    //};
-
-    //const renderStep3 = () => {
-    //    return (
-    //    );
-    //};
-
-    //const renderStep4 = () => {
-    //    return (
-    //    );
-    //};
-
-    //const renderStep5 = () => {
-    //    return (
-    //    );
-    //};
-
-    //const renderStep6 = () => {
-    //    return (
-    //    );
-    //};
 
     return (
         <MainLayout>
             <MainHeader />
-            <MainFormCard>
-                {renderStep()}
+            <Heading textAlign="center">{currentStepIndex + 1} / {steps.length}</Heading>
+            <MainFormCard w={["100%", "75%", "50%"]}>
+                <Flex flexDirection="column" p="16">
+                    {step}
+                    {!isLastStep &&
+                        <Flex flexDirection="row-reverse" justifyContent="space-between">
+                            <MainFormButton
+                                width="25%"
+                                onClickEvent={currentStepIndex === steps.length - 2 ? companySignUp : nextStep}
+                            //isDisabled={isNextDisabled}
+                            >
+                                <Text>{currentStepIndex === steps.length - 2 ? "SUBMIT" : "NEXT"}</Text>
+                            </MainFormButton>
+                            {!isFirstStep &&
+                                <MainFormButton width="25%" onClickEvent={prevStep}>
+                                    <Text>BACK</Text>
+                                </MainFormButton>}
+                        </Flex>
+                    }
+                </Flex>
             </MainFormCard>
             <MainFooter />
         </MainLayout>

@@ -277,7 +277,7 @@ namespace WelbyAPI.Controllers
         #region INDUSTRY TYPE
         [Route("~/api/GetIndustryTypes")]
         [HttpGet]
-        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromBody] IndustryTypeMasterViewModel param)
+        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromUri] IndustryTypeMasterViewModel param)
         {
             var model = await _wwauow.IndustryType.GetIndustryTypeList(param);
             return model;
@@ -924,7 +924,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY GOALS
         [Route("~/api/GetCompanyGoals")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromBody] CompanyGoalsViewModel param)
+        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromUri] CompanyGoalsViewModel param)
         {
             var model = await _wwauow.CompanyGoals.GetCompanyGoals(param);
             return model;
@@ -980,9 +980,9 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region COMPANY VALUES
-        [Route("~/api/GetCompanyValues/{Companyid}")]
+        [Route("~/api/GetCompanyValues")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValuesList([FromBody] CompanyValuesViewModel param)
+        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValuesList([FromUri] CompanyValuesViewModel param)
         {
             var model = await _wwauow.CompanyValues.GetCompanyValues(param);
             return model;

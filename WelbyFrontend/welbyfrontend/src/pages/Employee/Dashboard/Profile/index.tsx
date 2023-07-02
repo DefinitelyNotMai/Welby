@@ -180,7 +180,7 @@ const Profile = () => {
                         let work = result[0].Work;
                         let connect = result[0].Connect;
                         let support = result[0].Support;
-                        let name = result[0].First_Name;
+                        let name = result[0].EmployeeFullName;
                         let email = result[0].Email;
                         let phoneNumber = result[0].Phone_Number;
 

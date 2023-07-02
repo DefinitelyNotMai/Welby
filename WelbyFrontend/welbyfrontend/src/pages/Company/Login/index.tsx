@@ -95,7 +95,7 @@ const Login = () => {
     };
 
     const temporaryHandleLogin = async () => {
-        const loginUrl = 'https://localhost:44373/api/GetCompanies';
+        const loginUrl = 'https://localhost:44373/api/GetCompany';
         var result = null;
         let param = {
             "Email": UserName,// Username
@@ -111,7 +111,7 @@ const Login = () => {
                 result = response.data;
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
+                        //console.log(result);
                         const id = result[0].CompanyId
                         navigate('/company/dashboard', { state: { id } }); // For Navigating into the Dashboard Page
                     }

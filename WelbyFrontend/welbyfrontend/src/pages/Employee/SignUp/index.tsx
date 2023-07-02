@@ -129,7 +129,7 @@ const SignUp = () => {
             "Other_Notes": data.Other_Notes
         }
 
-        console.log(userData)
+        //console.log(userData)
 
         const config = {
             headers: {
@@ -300,11 +300,11 @@ const SignUp = () => {
         });
     }
 
-    const EmployeeSignUp = () => {
+    const EmployeeSignUp = async () => {
         //final sign up method when strengths and interest
         submitUserData();
         getUserId();
-        //nextStep(); // when everything's finished, uncomment lng
+        nextStep(); // when everything's finished, uncomment lng
     }
 
 

@@ -33,10 +33,13 @@ type CompanyFormData = {
     CompanyValueTitle2: string;
     CompanyValueDescription1: string;
     CompanyValueDescription2: string;
+
     CompanyGoalTitle1: string;
     CompanyGoalTitle2: string;
     CompanyGoalDescription1: string;
     CompanyGoalDescription2: string;
+    CompanyGoalDurationFrom: string;
+    CompanyGoalDurationTo: string;
 }
 
 const INITIAL_DATA: CompanyFormData = {
@@ -57,10 +60,13 @@ const INITIAL_DATA: CompanyFormData = {
     CompanyValueTitle2: "",
     CompanyValueDescription1: "",
     CompanyValueDescription2: "",
+
     CompanyGoalTitle1: "",
     CompanyGoalTitle2: "",
     CompanyGoalDescription1: "",
     CompanyGoalDescription2: "",
+    CompanyGoalDurationFrom: "",
+    CompanyGoalDurationTo: ""
 }
 
 const SignUp = () => {
@@ -83,7 +89,12 @@ const SignUp = () => {
 
     //companySignup
     const companySignUp = async () => {
-        let userData = {
+        submitCompanyData();
+        nextStep();
+    }
+
+    const submitCompanyData = async () => {
+        let companyData = {
             "Name": data.Name,
             "Email": data.Email,
             "Phone_Number": data.Phone_Number,
@@ -102,15 +113,67 @@ const SignUp = () => {
             }
         };
 
-        var addUserUrl = 'https://localhost:44373/api/AddCompany';
-        axios.post(addUserUrl, userData, config)
+        var addCompanyUrl = 'https://localhost:44373/api/AddCompany';
+        axios.post(addCompanyUrl, companyData, config)
             .then(response => {
                 // Handle the response from the server
                 console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
-        nextStep();
+    }
+
+    const getCompanyId = () => {
+        const getCompanyUrl = 'https://localhost:44373/api/GetCompany';
+        var result = null;
+        let param = {
+            "Email": data.Email,
+            "Phone_Number": data.Phone_Number
+        }
+
+        axios.get(getCompanyUrl, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            params: param
+        }).then(response => {
+            result = response.data;
+            if (result != null) {
+                if (result.length > 0) {
+                    console.log(result);
+                    let id = result[0].CompanyId;
+                    //submitCompanyGoalsAndValues(id);
+                }
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    function addGoalsAndValues() { //not used for now.
+        const addCompanyValues = async () => {
+            const config = {
+                headers: { 'Content-Type': 'application/json' }
+            };
+
+            let values: { title: string, description: string }[] = [
+                {
+                    title: data.CompanyGoalTitle1,
+                    description: data.CompanyValueDescription1
+                },
+                {
+                    title: data.CompanyGoalTitle2,
+                    description: data.CompanyValueDescription2
+                }
+            ];
+
+            var addValuesUrl = 'https://localhost:44373/api/AddValues'
+            for (let x = 0; x < values.length; x++) {
+                let value = {
+                    "Title": values[x].title,
+                    "Description": values[x].description
+                }
+            }
+        }
     }
 
     return (

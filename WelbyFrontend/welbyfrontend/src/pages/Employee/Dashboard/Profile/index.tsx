@@ -2,13 +2,13 @@ import { Divider, CardBody, Flex, Text, Box, Grid } from "@chakra-ui/react";
 import ProfileCard from "../../../../components/Dashboard/Profile/Card";
 import ProfileCardHeader from "../../../../components/Dashboard/Profile/CardHeader";
 import Header from '../../../../components/Dashboard/Profile/Header';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useUserContext } from "../../../../context/UserContext";
 
 
 const Profile = () => {
-    const { state } = useLocation(); //employeeId
+    const { userId }  = useUserContext();
     const [weakness, setWeakness] = useState('');
     const [work, setWork] = useState('');
     const [connect, setConnect] = useState('');
@@ -34,7 +34,7 @@ const Profile = () => {
             var unrealizedStrengthUrl = 'https://localhost:44373/api/GetEmployeeUnrealizedStrengths';
             var result = null;
             let param = {
-                "EmployeeId": state.employeeId
+                "EmployeeId": userId
             }
             axios.get(unrealizedStrengthUrl, {
                 method: 'GET',
@@ -45,7 +45,6 @@ const Profile = () => {
                 //console.log(response.data)
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
                         let unrealizedStrengths: string[] = [];
                         for (let x = 0; x < result.length; x++) {
                             unrealizedStrengths.push(result[x].UnrealizedStrengthDisplay)
@@ -65,7 +64,7 @@ const Profile = () => {
             var realizedStrengthUrl = 'https://localhost:44373/api/GetEmployeeRealizedStrengths';
             var result = null;
             let param = {
-                "EmployeeId": state.employeeId
+                "EmployeeId": userId
             }
             axios.get(realizedStrengthUrl, {
                 method: 'GET',
@@ -76,7 +75,6 @@ const Profile = () => {
                 //console.log(response.data)
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
                         let realizedStrengths: string[] = [];
                         for (let x = 0; x < result.length; x++) {
                             realizedStrengths.push(result[x].RealizedStrengthDisplay)
@@ -94,7 +92,7 @@ const Profile = () => {
             var learnedBehaviorUrl = 'https://localhost:44373/api/GetEmployeeLearnedBehaviors';
             var result = null;
             let param = {
-                "EmployeeId": state.employeeId
+                "EmployeeId": userId
             }
             axios.get(learnedBehaviorUrl, {
                 method: 'GET',
@@ -105,11 +103,9 @@ const Profile = () => {
                 //console.log(response.data)
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
                         let learnedBehaviors: string[] = []
                         for (let x = 0; x < result.length; x++) {
                             learnedBehaviors.push(result[x].LearnedBehaviorDisplay)
-                            console.log("Learned Behavior " + x + " " + result[x].LearnedBehaviorDisplay);
                         }
                         setLearnedBehaviors(learnedBehaviors);
                     }
@@ -123,7 +119,7 @@ const Profile = () => {
             var interestUrl = 'https://localhost:44373/api/GetEmployeeInterestList';
             var result = null;
             let param = {
-                "EmployeeId": state.employeeId
+                "EmployeeId": userId
             }
             axios.get(interestUrl, {
                 method: 'GET',
@@ -134,10 +130,8 @@ const Profile = () => {
                 //console.log(response.data)
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
                         for (let x = 0; x < result.length; x++) {
                             interests.push(result[x].InterestNameDisplay)
-                            console.log("Learned Behavior " + x + " " + result[x].InterestNameDisplay);
                         }
 
                     }
@@ -151,7 +145,7 @@ const Profile = () => {
             var weaknessUrl = 'https://localhost:44373/api/GetEmployeeWeaknesses';
             var result = null;
             let param = {
-                "EmployeeId": state.employeeId
+                "EmployeeId": userId
             }
 
             axios.get(weaknessUrl, {
@@ -162,7 +156,6 @@ const Profile = () => {
                 result = response.data;
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
                         setWeakness(result[0].WeaknessDisplay)
                     }
                 }
@@ -175,7 +168,7 @@ const Profile = () => {
             var userUrl = 'https://localhost:44373/api/GetEmployee';
             var result = null;
             let param = {
-                "EmployeeId": state.employeeId
+                "EmployeeId": userId
             }
             axios.get(userUrl, {
                 method: 'GET',
@@ -186,7 +179,6 @@ const Profile = () => {
                 //console.log(response.data)
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
                         let work = result[0].Work;
                         let connect = result[0].Connect;
                         let support = result[0].Support;
@@ -200,7 +192,6 @@ const Profile = () => {
                         setFirstName(name);
                         setEmail(email);
                         setPhoneNumber(phoneNumber);
-                        console.log(`Work: ${work} \nConnect: ${connect} \nSupport: ${support}`)
                     }
                 }
             }).catch(function (error) {
@@ -208,16 +199,13 @@ const Profile = () => {
             });
         };
         
-
-        if (state && state.employeeId) {
             fetchRealizedStrengths();
             fetchUnrealizedStrengths();
             fetchLearnedBehaviors();
             fetchInterests();
             fetchWeakness();
             fetchUserData();
-        }
-    }, [state]);
+    }, []);
 
 
     return (
@@ -228,7 +216,7 @@ const Profile = () => {
                 <Divider />
                 <CardBody>
                     <Flex flexDirection="column">
-                        <Grid templateColumns="1fr 2fr">
+                        <Grid templateColumns="1fr 1fr">
                             <Flex alignItems="center" justifyContent="center">
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">Realized</Text>
                             </Flex>
@@ -265,7 +253,7 @@ const Profile = () => {
                 <Divider />
                 <CardBody>
                     <Flex flexDirection="column">
-                        <Grid templateColumns="1fr 2fr">
+                        <Grid templateColumns="1fr 1fr">
                             <Flex alignItems="center" justifyContent="center">
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">How do I work?</Text>
                             </Flex>

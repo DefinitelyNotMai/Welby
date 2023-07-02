@@ -1,15 +1,17 @@
 import { Center, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../../context/UserContext';
 import MainLayout from '../../../components/Main/Layout';
 import MainHeader from '../../../components/Main/Header';
 import MainFooter from '../../../components/Main/Footer';
 import MainFormCard from '../../../components/Main/FormCard';
 import MainFormTextbox from '../../../components/Main/FormTextbox';
 import MainFormButton from '../../../components/Main/FormButton';
-import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const { userId, setUserId } = useUserContext();
     const [UserName, setUserName] = useState('');
     const [Password, setPassword] = useState('');
 
@@ -67,9 +69,7 @@ const Login = () => {
                     result = response.data;
                     if (result != null) {
                         if (result.length > 0) {
-                            console.log(result);
-                            const id = result[0].UserId
-                            navigate('/employee/dashboard', { state: { id }}); // For Navigating into the Dashboard Page
+                            navigate('/employee/dashboard'); // For Navigating into the Dashboard Page
                         }
                     }
                 });
@@ -107,9 +107,10 @@ const Login = () => {
                 result = response.data;
                 if (result != null) {
                     if (result.length > 0) {
-                        console.log(result);
+                        //console.log(result);
                         const id = result[0].EmployeeId
-                        navigate('/employee/dashboard', { state: { id } }); // For Navigating into the Dashboard Page
+                        setUserId(id);
+                        navigate('/employee/dashboard'); // For Navigating into the Dashboard Page
                     }
                 }
             });

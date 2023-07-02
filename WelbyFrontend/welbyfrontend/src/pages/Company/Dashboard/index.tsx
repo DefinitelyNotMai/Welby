@@ -40,7 +40,7 @@ const Dashboard = () => {
     }, [state]);
     return (
         <Flex flexDirection="column">
-            <DashboardHeader name={companyName} employeeId={ state.id} />
+            <DashboardHeader name={companyName} />
             <Flex flexDirection="row">
                 <DashboardSidebar />
                 <div>{companyName + "'s Dashboard"}</div>

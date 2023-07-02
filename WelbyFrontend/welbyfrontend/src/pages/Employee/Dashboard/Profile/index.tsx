@@ -10,6 +10,9 @@ import axios from 'axios';
 const Profile = () => {
     const { state } = useLocation(); //employeeId
     const [weakness, setWeakness] = useState('');
+    const [work, setWork] = useState('');
+    const [connect, setConnect] = useState('');
+    const [support, setSupport] = useState('');
     const [firstName, setFirstName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -181,6 +184,9 @@ const Profile = () => {
                         let email = result[0].Email;
                         let phoneNumber = result[0].Phone_Number;
 
+                        setWork(work);
+                        setConnect(connect);
+                        setSupport(support);
                         setFirstName(name);
                         setEmail(email);
                         setPhoneNumber(phoneNumber);
@@ -254,19 +260,19 @@ const Profile = () => {
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">How do I work?</Text>
                             </Flex>
                             <Flex flexDirection="column" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                                <Text>Statement 1</Text>
+                                <Text>{work}</Text>
                             </Flex>
                             <Flex alignItems="center" justifyContent="center">
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">How do I connect and learn?</Text>
                             </Flex>
                             <Flex flexDirection="column" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                                <Text>Statement 1</Text>
+                                <Text>{connect}</Text>
                             </Flex>
                             <Flex alignItems="center" justifyContent="center">
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">What I need support in?</Text>
                             </Flex>
                             <Flex flexDirection="column" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                                <Text>Statement 1</Text>
+                                <Text>{support}</Text>
                             </Flex>
                         </Grid>
                     </Flex>

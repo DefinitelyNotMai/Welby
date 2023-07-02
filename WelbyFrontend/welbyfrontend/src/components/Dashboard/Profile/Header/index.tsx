@@ -1,9 +1,6 @@
 import { Avatar, Box, Flex, Link, Text, Icon } from "@chakra-ui/react";
 import { FaLinkedin, FaFacebook, FaInstagram, FaChevronLeft } from 'react-icons/fa'
 import { Link as RouterLink } from "react-router-dom";
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 type HeaderProps = {
     name: string;
@@ -12,37 +9,6 @@ type HeaderProps = {
 }
 
 const Header = ({ name, email, phone_number }: HeaderProps) => {
-    const { state } = useLocation();
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            var userUrl = 'https://localhost:44373/api/GetEmployee';
-            var result = null;
-            let param = {
-                "EmployeeId": state.employeeId
-            }
-            axios.get(userUrl, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                params: param
-            }).then(response => {
-                result = response.data;
-                //console.log(response.data)
-                if (result != null) {
-                    if (result.length > 0) {
-                        console.log(result);
-                        //result here is na employee object
-                    }
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-        };
-
-        fetchUserData();
-    }, []);
-    
-
     return (
         <Box
             as="nav"
@@ -63,7 +29,6 @@ const Header = ({ name, email, phone_number }: HeaderProps) => {
                     <Flex flexDirection="column" justifyContent="center" ml="8" color="#ffffff">
                         <Text fontFamily="Playfair Display" fontWeight="400" fontSize="lg">Hi, I'm {name}!</Text>
                         <Box display="flex" flexDirection="column" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                            {/*<div>ewan</div>*/}
                             <Text>{email}</Text>
                             <Text>{phone_number}</Text>
                         </Box>

@@ -82,8 +82,8 @@ const SignUp = () => {
         <Step1 {...data} updateFields={updateFields} />,
         <Step2 {...data} updateFields={updateFields} />,
         <Step3 {...data} updateFields={updateFields} />,
-        <Step4 {...data} updateFields={updateFields} />,
-        <Step5 {...data} updateFields={updateFields} />,
+        //<Step4 {...data} updateFields={updateFields} />,
+        //<Step5 {...data} updateFields={updateFields} />,
         <Step6 />
     ]);
 

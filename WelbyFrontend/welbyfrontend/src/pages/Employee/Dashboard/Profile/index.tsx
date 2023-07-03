@@ -8,7 +8,7 @@ import { useUserContext } from "../../../../context/UserContext";
 
 
 const Profile = () => {
-    const { userId }  = useUserContext();
+    const { userId } = useUserContext();
     const [weakness, setWeakness] = useState('');
     const [work, setWork] = useState('');
     const [connect, setConnect] = useState('');
@@ -19,14 +19,14 @@ const Profile = () => {
 
     const [unrealizedStrengths, setUnrealizedStrengths] = useState<string[]>([]);
     const [realizedStrengths, setRealizedStrengths] = useState<string[]>([]);
+    const [interests, setInterests] = useState<string[]>([]);
     const [learnedBehaviors, setLearnedBehaviors] = useState<string[]>([]);
 
 
     useEffect(() => {
-         //idk where to store.
-        
+        //idk where to store.
+
         let learnedBehaviors = [];
-        let interests = [];
 
 
         // fetching: 
@@ -52,7 +52,7 @@ const Profile = () => {
                         }
 
                         setUnrealizedStrengths(unrealizedStrengths)
-                        
+
                     }
                 }
             }).catch(function (error) {
@@ -116,7 +116,7 @@ const Profile = () => {
         }
 
         const fetchInterests = async () => {
-            var interestUrl = 'https://localhost:44373/api/GetEmployeeInterestList';
+            var interestUrl = 'https://localhost:44373/api/GetEmployeeInterests';
             var result = null;
             let param = {
                 "EmployeeId": userId
@@ -129,11 +129,13 @@ const Profile = () => {
                 result = response.data;
                 //console.log(response.data)
                 if (result != null) {
+                    let interests: string[] = [];
                     if (result.length > 0) {
                         for (let x = 0; x < result.length; x++) {
+                            console.log(interests);
                             interests.push(result[x].InterestNameDisplay)
                         }
-
+                        setInterests(interests);
                     }
                 }
             }).catch(function (error) {
@@ -198,13 +200,13 @@ const Profile = () => {
                 console.log(error);
             });
         };
-        
-            fetchRealizedStrengths();
-            fetchUnrealizedStrengths();
-            fetchLearnedBehaviors();
-            fetchInterests();
-            fetchWeakness();
-            fetchUserData();
+
+        fetchRealizedStrengths();
+        fetchUnrealizedStrengths();
+        fetchLearnedBehaviors();
+        fetchInterests();
+        fetchWeakness();
+        fetchUserData();
     }, []);
 
 
@@ -221,17 +223,17 @@ const Profile = () => {
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">Realized</Text>
                             </Flex>
                             <Flex flexDirection="column" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                                <Text>{ realizedStrengths[0] }</Text>
-                                <Text>{ realizedStrengths[1] }</Text>
-                                <Text>{ realizedStrengths[2] }</Text>
+                                <Text>{realizedStrengths[0]}</Text>
+                                <Text>{realizedStrengths[1]}</Text>
+                                <Text>{realizedStrengths[2]}</Text>
                             </Flex>
                             <Flex alignItems="center" justifyContent="center">
                                 <Text fontFamily="Montserrat" fontWeight="400" fontSize="lg">Unrealized</Text>
                             </Flex>
                             <Flex flexDirection="column" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="md">
-                                <Text>{ unrealizedStrengths[0] }</Text>
-                                <Text>{ unrealizedStrengths[1] }</Text>
-                                <Text>{ unrealizedStrengths[2] }</Text>
+                                <Text>{unrealizedStrengths[0]}</Text>
+                                <Text>{unrealizedStrengths[1]}</Text>
+                                <Text>{unrealizedStrengths[2]}</Text>
                             </Flex>
                         </Grid>
                     </Flex>
@@ -242,9 +244,9 @@ const Profile = () => {
                 <Divider />
                 <CardBody>
                     <Flex flexDirection="row" justifyContent="space-evenly" py="4" fontFamily="Montserrat" fontWeight="400" fontSize="lg">
-                        <Text>Interest 1</Text>
-                        <Text>Interest 2</Text>
-                        <Text>Interest 3</Text>
+                        <Text>{interests[0]}</Text>
+                        <Text>{interests[1]}</Text>
+                        <Text>{interests[2]}</Text>
                     </Flex>
                 </CardBody>
             </ProfileCard>

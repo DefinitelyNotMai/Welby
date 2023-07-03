@@ -20,7 +20,7 @@ const Profile = () => {
     const [unrealizedStrengths, setUnrealizedStrengths] = useState<string[]>([]);
     const [realizedStrengths, setRealizedStrengths] = useState<string[]>([]);
     const [learnedBehaviors, setLearnedBehaviors] = useState<string[]>([]);
-    
+
 
     useEffect(() => {
          //idk where to store.

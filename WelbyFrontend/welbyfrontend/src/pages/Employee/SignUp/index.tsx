@@ -87,6 +87,7 @@ const INITIAL_DATA: UserFormData = {
 
 const SignUp = () => {
     const [data, setData] = useState(INITIAL_DATA)
+    const [createdId, setId] = useState('');
 
     function updateFields(fields: Partial<UserFormData>) {
         setData(prev => {
@@ -300,7 +301,9 @@ const SignUp = () => {
                 if (result.length > 0) {
                     console.log(result);
                     let id = result[0].EmployeeId;
+                    console.log(id)
                     submitUserStrengthsProfile(id);
+                    setId(id);
                 }
             }
         }).catch(function (error) {
@@ -308,10 +311,12 @@ const SignUp = () => {
         });
     }
 
-    const EmployeeSignUp = async () => {
+    const EmployeeSignUp = () => {
         //final sign up method when strengths and interest
         submitUserData();
         getUserId();
+        console.log("why is it empty" + createdId)
+        
         nextStep();
     }
 

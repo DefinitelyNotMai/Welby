@@ -1,4 +1,4 @@
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import MainFooter from "../../../components/Main/Footer";

@@ -103,7 +103,7 @@ namespace WelbyAPI.Controllers
         #region VALUE
         [Route("~/api/GetAllValue")]
         [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromBody] ValueMasterViewModel param)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
         {
             var model = await _wwauow.Value.GetAllValues(param);
             return model;
@@ -335,7 +335,7 @@ namespace WelbyAPI.Controllers
         #region GOAL
         [Route("~/api/GetAllGoal")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromBody] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromUri] GoalMasterViewModel param)
         {
             var model = await _wwauow.Goal.GetGoalList(param);
             return model;
@@ -576,7 +576,7 @@ namespace WelbyAPI.Controllers
         #region CITY
         [Route("~/api/GetAllCity")]
         [HttpGet]
-        public async Task<IEnumerable<CityMasterViewModel>> GetCityList([FromBody] CityMasterViewModel param)
+        public async Task<IEnumerable<CityMasterViewModel>> GetCityList([FromUri] CityMasterViewModel param)
         {
             var model = await _wwauow.City.GetCityList(param);
             return model;

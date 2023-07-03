@@ -157,12 +157,14 @@ const SignUp = () => {
     }
 
     function submitUserStrengthsProfile(id: string) {
+        //console.log(id + " ID");
         const addUnrealizedStrengths = async () => {
             const config = {
                 headers: { 'Content-Type': 'application/json' }
             };
 
             let unrealizedStrengthsId = [data.UnrealizedStrength1, data.UnrealizedStrength2, data.UnrealizedStrength3];
+            //console.log(unrealizedStrengthsId);
             var addUnrealizedStrengthsUrl = 'https://localhost:44373/api/AddEmployeeUnrealizedStrength';
             for (let x = 0; x < unrealizedStrengthsId.length; x++) {
                 let strength = {

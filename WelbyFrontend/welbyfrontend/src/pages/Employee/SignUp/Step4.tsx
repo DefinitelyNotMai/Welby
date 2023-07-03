@@ -10,6 +10,11 @@ type Step4Props = Step4Data & {
 }
 
 const Step4 = ({ Interests, updateFields }: Step4Props) => {
+    const handleInterestsChange = (values: string[]) => {
+        updateFields({ Interests: values });
+        console.log("Selected interests:", values);
+    };
+
     return (
         <>
             <Flex
@@ -29,7 +34,7 @@ const Step4 = ({ Interests, updateFields }: Step4Props) => {
             <Box bg="#ffffff" borderRadius="xl" fontFamily="Montserrat" fontWeight="400" mb="10">
                 <InterestCheckbox
                     value={Interests}
-                    onChange={(values) => updateFields({ Interests: values })}
+                    onChange={handleInterestsChange}
                 />
             </Box>
         </>

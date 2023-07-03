@@ -38,11 +38,17 @@ const InterestCheckbox = ({ value, onChange }: InterestCheckboxProps) => {
         fetchInterests();
     }, []);
 
+
+    const handleCheckboxChange = (selectedValues: string[]) => {
+        onChange?.(selectedValues);
+        console.log("Selected interests:", selectedValues);
+    };
+
     return (
         <CheckboxGroup colorScheme="blue" value={value} onChange={onChange}>
             <SimpleGrid columns={2} spacing={4} padding="4">
                 {interests.map((interest) => (
-                    <Checkbox key={interest.InterestId} value={interest.InterestId}>
+                    <Checkbox key={interest.InterestId} value={String(interest.InterestId)}>
                         {interest.Name}
                     </Checkbox>
                 ))}

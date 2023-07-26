@@ -22,6 +22,8 @@
     <Folder Include="src\hooks\" />
     <Folder Include="src\pages\Admin\" />
     <Folder Include="src\pages\Employee\SignUp\" />
-    <Folder Include="src\pages\Welcome\" />
+    <Folder Include="src\pages\Login\" />
+    <Folder Include="src\pages\Dashboard\" />
+    <Folder Include="src\pages\SignUp\" />
   </ItemGroup>
 </Project>

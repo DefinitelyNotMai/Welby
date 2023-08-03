@@ -23,5 +23,7 @@ namespace WWA_CORE.Persistent.ViewModel.Masters
 
         public int? CountryId { get; set; }
         public int? IndustryTypeId { get; set; }
+
+        public string CompanySize { get; set; }
     }
 }

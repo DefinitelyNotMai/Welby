@@ -51,6 +51,7 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<int> LastChanged_By { get; set; }
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
+        public Nullable<bool> FirstLogIn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_Interest> tbl_EMP_Interest { get; set; }

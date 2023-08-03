@@ -45,8 +45,12 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_GENDER_MASTER_GET_BIOLOGICAL = "@Biological";
 
         public const string PARA_MST_GOAL_MASTER_GET_GOALID = "@GoalId";
+        public const string PARA_MST_GOAL_MASTER_GET_GOALTITLE = "@Title";
+        public const string PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION = "@Description";
 
         public const string PARA_MST_VALUE_MASTER_GET_VALUEID = "@ValueId";
+        public const string PARA_MST_VALUE_MASTER_GET_VALUETITLE = "@Title";
+        public const string PARA_MST_VALUE_MASTER_GET_VALUEDESCRIPTION = "@Description";
 
         public const string PARA_MST_INTEREST_MASTER_GET_INTERESTID = "@InterestId";
 

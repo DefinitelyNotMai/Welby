@@ -124,6 +124,7 @@
     <EntitySetMapping Name="tbl_MST_Company">
       <EntityTypeMapping TypeName="WWAModel.tbl_MST_Company">
         <MappingFragment StoreEntitySet="tbl_MST_Company">
+          <ScalarProperty Name="CompanySize" ColumnName="CompanySize" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -255,6 +256,7 @@
     <EntitySetMapping Name="tbl_REG_Employee_Registration">
       <EntityTypeMapping TypeName="WWAModel.tbl_REG_Employee_Registration">
         <MappingFragment StoreEntitySet="tbl_REG_Employee_Registration">
+          <ScalarProperty Name="FirstLogIn" ColumnName="FirstLogIn" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
           <ScalarProperty Name="First_Name" ColumnName="First_Name" />
           <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />

@@ -38,6 +38,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                     Mission = companyMasterViewModel.Mission,
                     Vision = companyMasterViewModel.Vision,
                     Logo = companyMasterViewModel.Logo,
+                    CompanySize = companyMasterViewModel.CompanySize,
 
                     Active = true,
                     Encoded_By = companyMasterViewModel.Encoded_By,
@@ -92,6 +93,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Mission = Convert.ToString(row["Mission"]),
                 Vision = Convert.ToString(row["Vision"]),
                 Logo = Convert.ToString(row["Logo"]),
+                CompanySize = Convert.ToString(row["CompanySize"]),
 
                 CompanyLocation = Convert.ToString(row["CompanyLocation"]),
                 IndustryTypeDisplay = Convert.ToString(row["IndustryTypeDisplay"]),
@@ -144,6 +146,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Mission = Convert.ToString(row["Mission"]),
                 Vision = Convert.ToString(row["Vision"]),
                 Logo = Convert.ToString(row["Logo"]),
+                CompanySize = Convert.ToString(row["CompanySize"]),
 
                 CompanyLocation = Convert.ToString(row["CompanyLocation"]),
                 IndustryTypeDisplay = Convert.ToString(row["IndustryTypeDisplay"]),
@@ -235,6 +238,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 RowToUpdate.Vision = companyMasterViewModel.Vision;
                 RowToUpdate.Mission = companyMasterViewModel.Mission;
                 RowToUpdate.Logo = companyMasterViewModel.Logo;
+                RowToUpdate.CompanySize = companyMasterViewModel.CompanySize;
                 RowToUpdate.Active = companyMasterViewModel.Active;
                 RowToUpdate.LastChanged_By = companyMasterViewModel.Encoded_By;
                 RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();

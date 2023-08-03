@@ -134,6 +134,7 @@
     <Property Name="LastChanged_Date" Type="datetime" />
     <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
     <Property Name="FoundingDate" Type="datetime" />
+    <Property Name="CompanySize" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tbl_MST_Country_Master">
     <Key>
@@ -266,6 +267,7 @@
     <Property Name="LastChanged_By" Type="int" />
     <Property Name="LastChanged_Date" Type="datetime" />
     <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="FirstLogIn" Type="bit" />
   </EntityType>
   <Association Name="FK__tbl_CMP_G__Compa__625A9A57">
     <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
@@ -577,6 +579,8 @@
   </Function>
   <Function Name="procWWA_MST_Goal_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="GoalId" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
   <Function Name="procWWA_MST_IndustryType_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -593,6 +597,8 @@
   </Function>
   <Function Name="procWWA_MST_Value_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ValueId" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
   <Function Name="procWWA_REG_Employee_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

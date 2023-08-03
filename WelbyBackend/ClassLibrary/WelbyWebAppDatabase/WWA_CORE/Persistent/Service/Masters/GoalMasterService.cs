@@ -27,7 +27,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 {
                     Title = goalMasterViewModel.Title,
                     Description = goalMasterViewModel.Description,
-                    DurationFrom = goalMasterViewModel.DurationFrom,
+                    DurationFrom = globalFunctions.GetServerDateTime(),
                     DurationTo = goalMasterViewModel.DurationTo,
                     
                     Active = true,
@@ -59,6 +59,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALID, goalMasterViewModel.GoalId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALTITLE, goalMasterViewModel.Title),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION, goalMasterViewModel.Description),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, goalMasterViewModel.Active),
                 }
             };

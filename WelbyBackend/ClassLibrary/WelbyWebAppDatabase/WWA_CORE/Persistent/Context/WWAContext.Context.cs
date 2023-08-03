@@ -281,17 +281,25 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Gender_Master_Get", genderIdParameter, biologicalParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_Goal_Master_Get(Nullable<int> goalId, Nullable<bool> active)
+        public virtual int procWWA_MST_Goal_Master_Get(Nullable<int> goalId, string title, string description, Nullable<bool> active)
         {
             var goalIdParameter = goalId.HasValue ?
                 new ObjectParameter("GoalId", goalId) :
                 new ObjectParameter("GoalId", typeof(int));
     
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Goal_Master_Get", goalIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Goal_Master_Get", goalIdParameter, titleParameter, descriptionParameter, activeParameter);
         }
     
         public virtual int procWWA_MST_IndustryType_Master_Get(Nullable<int> industryTypeId, Nullable<bool> active)
@@ -333,17 +341,25 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Strength_Master_Get", strengthIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_Value_Master_Get(Nullable<int> valueId, Nullable<bool> active)
+        public virtual int procWWA_MST_Value_Master_Get(Nullable<int> valueId, string title, string description, Nullable<bool> active)
         {
             var valueIdParameter = valueId.HasValue ?
                 new ObjectParameter("ValueId", valueId) :
                 new ObjectParameter("ValueId", typeof(int));
     
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Value_Master_Get", valueIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Value_Master_Get", valueIdParameter, titleParameter, descriptionParameter, activeParameter);
         }
     
         public virtual int procWWA_REG_Employee_Get(Nullable<int> employeeId, Nullable<bool> active)

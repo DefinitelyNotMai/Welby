@@ -139,6 +139,7 @@
           <Property Name="LastChanged_Date" Type="datetime" />
           <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
           <Property Name="FoundingDate" Type="datetime" />
+          <Property Name="CompanySize" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_MST_Country_Master">
           <Key>
@@ -271,6 +272,7 @@
           <Property Name="LastChanged_By" Type="int" />
           <Property Name="LastChanged_Date" Type="datetime" />
           <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="FirstLogIn" Type="bit" />
         </EntityType>
         <Association Name="FK__tbl_CMP_G__Compa__625A9A57">
           <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
@@ -582,6 +584,8 @@
         </Function>
         <Function Name="procWWA_MST_Goal_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GoalId" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_IndustryType_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -598,6 +602,8 @@
         </Function>
         <Function Name="procWWA_MST_Value_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ValueId" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_REG_Employee_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -870,6 +876,7 @@
           <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_MST_C__Compu__45F365D3" FromRole="tbl_MST_Company" ToRole="tbl_MST_Country_Master" />
           <NavigationProperty Name="tbl_MST_IndustryType_Master" Relationship="Self.FK__tbl_MST_C__Indus__46E78A0C" FromRole="tbl_MST_Company" ToRole="tbl_MST_IndustryType_Master" />
           <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_REG_E__Compa__0D0FEE32" FromRole="tbl_MST_Company" ToRole="tbl_REG_Employee_Registration" />
+          <Property Name="CompanySize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_MST_Country_Master">
           <Key>
@@ -1022,6 +1029,7 @@
           <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_REG_E__Compa__0D0FEE32" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Company" />
           <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_REG_E__Count__0B27A5C0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Country_Master" />
           <NavigationProperty Name="tbl_MST_Gender_Master" Relationship="Self.FK__tbl_REG_E__Gende__0C1BC9F9" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Gender_Master" />
+          <Property Name="FirstLogIn" Type="Boolean" />
         </EntityType>
         <Association Name="FK__tbl_CMP_G__Compa__625A9A57">
           <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
@@ -1431,6 +1439,8 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Goal_Master_Get">
             <Parameter Name="GoalId" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_IndustryType_Master_Get">
@@ -1447,6 +1457,8 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Value_Master_Get">
             <Parameter Name="ValueId" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_REG_Employee_Get">
@@ -1592,6 +1604,7 @@
           <EntitySetMapping Name="tbl_MST_Company">
             <EntityTypeMapping TypeName="WWAModel.tbl_MST_Company">
               <MappingFragment StoreEntitySet="tbl_MST_Company">
+                <ScalarProperty Name="CompanySize" ColumnName="CompanySize" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1723,6 +1736,7 @@
           <EntitySetMapping Name="tbl_REG_Employee_Registration">
             <EntityTypeMapping TypeName="WWAModel.tbl_REG_Employee_Registration">
               <MappingFragment StoreEntitySet="tbl_REG_Employee_Registration">
+                <ScalarProperty Name="FirstLogIn" ColumnName="FirstLogIn" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />

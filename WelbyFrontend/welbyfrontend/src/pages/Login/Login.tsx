@@ -77,7 +77,7 @@ const Login = () => {
 
                                 const id = result[0].EmployeeId
                                 setUserId(id);
-                                navigate('/employee/dashboard'); // For Navigating into the Dashboard Page
+                                navigate('/employee/dashboard', { state: userId }); // For Navigating into the Dashboard Page
                             }
                         }
                     });
@@ -143,7 +143,7 @@ const Login = () => {
                     <Center>
                         <MainFormButton
                             width={['70%', '50%', '50%']}
-                            onClickEvent={tempLogin}
+                            onClickEvent={handleLogin}
                         >
                             Submit
                         </MainFormButton>

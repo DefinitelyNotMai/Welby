@@ -121,6 +121,9 @@ const SignUp = () => {
     const [CompanyData, setCompanyData] = useState(COMPANY_INITIAL_DATA);
     const [CompanyAdminData, setCompanyAdminData] = useState(COMPANY_ADMIN_INITIAL_DATA);
 
+    const [companyId, setCompanyId] = useState("");
+    const [companyAdminId, setCompanyAdminId] = useState('')
+
     const navigate = useNavigate();
 
     function updateCompanyFields(fields: Partial<CompanyFormData>) {
@@ -152,41 +155,23 @@ const SignUp = () => {
         <Step6 {...CompanyAdminData} updateFields={updateCompanyAdminFields} />,
     ]);
 
-    //companySignup
-    const companySignUp = async () => { // setting up company information done by company admin
+    
+    const companySignUp = () => { // temporary sign up?
 
-        // 1. add values and goals to master table
-        addGoalsAndValues();
-
-        // 2. add company to master table
-        addCompanyToMasterTable();
-
-        // 3. add company values and company goals to database
-        addCompanyGoalsAndCompanyValues();
-
-        // 4. proceed to admin sign up
         nextStep();
     };
 
-    const companyAdminSignUp = async () => {
-        // 1. Add Company Admin to WelbyDatabase
-        addCompanyAdminToEmployee();
-
-        // 2. Add Company Admi to OWS
-        addCompanyAdmin()
-
-        // 3. User needs to log in
+    const companyAdminSignUp = () => { // temporary sign up?
+        
         navigate('/');
     };
 
-
-
-
-    // ------------------------------------------ ADD GOALS AND VALUES TO MASTER TABLE ------------------------------------------
-    
-    const addValuesToMasterTable = () => { // ------------ VALUES
+    //Company Sign Up
+    const handleCompanySignUp = async () => {
         const config = {
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+            },
         };
 
         let values: { title: string; description: string; }[] = [ // ------------ needs to change once dynamically adding of values is there, might not be needed
@@ -200,324 +185,234 @@ const SignUp = () => {
             },
         ];
 
-        var addValuesUrl = 'https://localhost:44373/api/AddValues';
-
-        //can add multiple values
-        for (let x = 0; x < values.length; x++) {
-            let value = {
-                Title: values[x].title,
-                Description: values[x].description
-            };
-
-            // send to backend
-            axios
-                .post(addValuesUrl, value, config)
-                .then((response) => {
-                    // Handle the response from the server
-                    console.log(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-    };
-
-    const addGoalsToMasterTable = () => {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-        };
-
         let goals: { title: string; description: string; durationTo: string; }[] = [ // ------------ needs to change once dynamically adding of values is there, might not be needed
             {
                 title: CompanyData.CompanyGoalTitle1,
                 description: CompanyData.CompanyGoalDescription1,
-                durationTo: "" // -- temporary data
+                durationTo: CompanyData.CompanyGoalCompletedBy1
             }
         ];
 
-        var addGoalsUrl = 'https://localhost:44373/api/AddGoals';
+        try {
+            //#region 1 --------------  Add Company
+            let company = {
+                "Name": CompanyData.Name,
+                "Email": CompanyData.Email,
+                "Phone_Number": CompanyData.Phone_Number,
+                "Website": CompanyData.Website,
+                "FoundingDate": CompanyData.FoundingDate,
+                "Vision": CompanyData.Vision,
+                "Mission": CompanyData.Mission,
+                "CountryId": CompanyData.CountryId,
+                "IndustryTypeId": CompanyData.IndustryTypeId,
+                "CompanySize": CompanyData.CompanySize
+            }
 
-        //can add multiple goals
-        for (let x = 0; x < goals.length; x++) {
-            let goal = {
-                Title: goals[x].title,
-                Description: goals[x].description,
-                DurationTo: goals[x].durationTo // ----- durationTo is the date that was set in the frontend
-            };
+            var addCompanyUrl = 'https://localhost:44373/api/AddCompany';
 
-            // send to backend
-            axios
-                .post(addGoalsUrl, goal, config)
+            const addCompany = await axios // sends company ot backend
+                .post(addCompanyUrl, company, config)
                 .then((response) => {
                     // Handle the response from the server
                     console.log(response.data);
+                    return response.data // returns company info as an object
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-    };
+            //#endregion
 
-    function addGoalsAndValues() {
-        addValuesToMasterTable();
-        addGoalsToMasterTable();
-    }
+            
+            if (addCompany != null) { 
+                // if addition of company is successful, it gets the company id that was generatad
 
+                //#region 2 --------------  Get CompanyId
+                const getCompanyUrl = 'https://localhost:44373/api/GetCompany';
+                var result = null;
+                let param = {
+                    "Email": CompanyData.Email,
+                    "Phone_Number": CompanyData.Phone_Number,
+                };
 
+                const company = await axios // get method
+                    .get(getCompanyUrl, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' },
+                        params: param,
+                    })
+                    .then((response) => {
+                        result = response.data;
+                        if (result != null) {
+                            if (result.length > 0) {
+                                console.log(result[0]);
+                                let id = result[0].CompanyId;
+                                setCompanyId(id); // sets CompanyId variable
 
-    // ------------------------------------------ ADD COMPANY TO MASTER TABLE ------------------------------------------
+                                return result[0]; // returns the whole company object <---- what's being used in the program
+                            }
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                    //#endregion
 
-    const addCompanyToMasterTable = () => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
+                if (company != null) { 
+                    // when company id or object is present, it will continue to add Value in Values Master then get the ValueId generated to use it with CompanyId to put to Company Values Table
 
-        let company = {
-            "Name": CompanyData.Name,
-            "Email": CompanyData.Email,
-            "Phone_Number": CompanyData.Phone_Number,
-            "Website": CompanyData.Website,
-            "FoundingDate": CompanyData.FoundingDate,
-            "Vision": CompanyData.Vision,
-            "Mission": CompanyData.Mission,
-            "CountryId": CompanyData.CountryId,
-            "IndustryTypeId": CompanyData.IndustryTypeId,
-            "CompanySize": CompanyData.CompanySize
-        }
+                    //#region 3.0 --------------   Add Company Value and Goals
+                    // urls declaration outside the loops to avoid re-declration
+                    var addValuesUrl = 'https://localhost:44373/api/AddValue';
+                    var getValuesUrl = 'https://localhost:44373/api/GetValueByTitleDescription'
+                    var addCompanyValueUrl = 'https://localhost:44373/api/AddCompanyValues';
 
-        var addCompanyUrl = 'https://localhost:44373/api/AddCompany';
-        axios
-            .post(addCompanyUrl, company, config)
-            .then((response) => {
-                // Handle the response from the server
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+                    var addGoalsUrl = 'https://localhost:44373/api/AddGoal';
+                    var getGoalsUrl = 'https://localhost:44373/api/GetGoalByTitleDescription'
+                    var addCompanyGoalUrl = 'https://localhost:44373/api/AddCompanyGoal';
 
+                     
+                    for (let x = 0; x < values.length; x++) { 
+                        //#region 3.1 --- Add Value To Master Table
+                        let value = {
+                            "Title": values[x].title,
+                            "Description": values[x].description
+                        };
 
+                        // send value to backend
+                        const masterValue = await axios
+                            .post(addValuesUrl, value, config)
+                            .then((response) => {
+                                // Handle the response from the server
+                                console.log(response.data);
+                                return response.data;
+                            })
+                        //#endregion
 
-    // ------------------------------------------ GET & ADD COMPANY VALUES & COMPANY GOALS  ------------------------------------------
+                        //#region 3.2 --- Get the Value Id
+                        if (masterValue != null) {
+                            // if value successfully added to master, it will retrieve the generated value id
+                            var result = null;
 
-    let companyValues: { ValueId: number; Title: string; Description: string; }[] = [];
-    let companyGoals: { GoalId: number; Title: string; Description: string; }[] = []
+                            console.log(param)
+                            const getValue = await axios
+                                .get(getValuesUrl, {
+                                    method: 'GET',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    params: value,
+                                })
+                                .then((response) => {
+                                    result = response.data;
+                                    if (result != null) {
+                                        if (result.length > 0) {
+                                            console.log(result);
 
-    const [companyId, setCompanyId] = useState('');
+                                            return result[0]
+                                        }
+                                    }
+                                });
+                         //#endregion
 
-
-
-    // 1. Get Company ID from Company Master Table 
-    const getCompanyId = () => { 
-        const getCompanyUrl = 'https://localhost:44373/api/GetCompany';
-        var result = null;
-        let param = {
-            "Email": CompanyData.Email,
-            "Phone_Number": CompanyData.Phone_Number,
-        };
-
-        axios
-            .get(getCompanyUrl, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                params: param,
-            })
-            .then((response) => {
-                result = response.data;
-                if (result != null) {
-                    if (result.length > 0) {
-                        console.log(result);
-                        let id = result[0].CompanyId;
-
-                        setCompanyId(id);
-                        //submitCompanyGoalsAndValues(id);
+                        //#region 3.3 --- Add Company Value using ValueId from Master and CompanyId
+                            if (getValue != null) {
+                                console.log("Value: " + value)
+                                let companyValue = {
+                                    "CompanyId": company.CompanyId,
+                                    "ValueId": getValue.ValueId
+                                }
+                                console.log("Company Value: " + companyValue)
+                                axios
+                                    .post(addCompanyValueUrl, companyValue, config)
+                                    .then((response) => {
+                                        console.log(response.data);
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error)
+                                    });
+                                }
+                        }
+                        //#endregion
                     }
+                    
+
+                    for (let x = 0; x < goals.length; x++) {
+                        //#region 3.4 --- Add Goals to Master Table
+                        let goal = {
+                            "Title": goals[x].title,
+                            "Description": goals[x].description,
+                            "DurationTo": goals[x].durationTo
+                        };
+                        console.log(goal)
+                        // send to backend
+                        const masterGoal = await axios
+                            .post(addGoalsUrl, goal, config)
+                            .then((response) => {
+                                // Handle the response from the server
+                                console.log(response.data);
+                                return response.data
+                            })
+                         //#endregion
+
+                        // #region 3.5 --- Get the GoalId
+                        if (masterGoal != null) {
+                            var result = null;
+
+                            const getGoal = await axios
+                                .get(getGoalsUrl, {
+                                    method: 'GET',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    params: goal,
+                                })
+                                .then((response) => {
+                                    result = response.data;
+                                    if (result != null) {
+                                        if (result.length > 0) {
+                                            console.log(result);
+
+                                            return result[0]
+                                        }
+                                    }
+                                });
+                                //#endregion
+
+                        //#region 3.6 --- Add Company Goal using GoalId and CompanyId
+                            if (getGoal != null) {
+                                console.log("Goal: "+goal)
+                                let companyGoal = {
+                                    CompanyId: company.CompanyId,
+                                    GoalId: getGoal.GoalId
+                                }
+                                console.log("Company Goal: " + companyGoal)
+                                axios
+                                    .post(addCompanyGoalUrl, companyGoal, config)
+                                    .then((response) => {
+                                        console.log(response.data);
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error)
+                                    });
+                            }
+
+                            //#endregion
+
+                        }
+                        
+                    }
+                    
+                    //#endregion
                 }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-
-
-
-    // 2. Use CompanyId to get Values from Value Master Table and add results in the companyValues array.
-    const getCompanyValues = () => {
-        const getValuesUrl = 'https://localhost:44373/api/GetValueList'
-
-        let values: { title: string; description: string; }[] = [ // ------------ temporary array until figure out how to dynamically add
-            {
-                title: CompanyData.CompanyValueTitle1,
-                description: CompanyData.CompanyValueDescription1
-            },
-            {
-                title: CompanyData.CompanyValueTitle2,
-                description: CompanyData.CompanyValueDescription2
-            },
-        ];
-
-        // -- loop to get all values that was put in the values array during sign up
-        for (let i = 0; i < values.length; i++) {
-            var result = null;
-            let param = {
-                "Title": values[i].title, 
-                "Description": values[i].description 
-            } 
-
-            axios
-                .get(getValuesUrl, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                    params: param,
-                })
-                .then((response) => {
-                    result = response.data;
-                    if (result != null) {
-                        if (result.length > 0) {
-                            console.log(result);
-
-                            // adding to companyValues array that was initiated
-                            companyValues.push({
-                                ValueId: result[0].ValueId,
-                                Title: result[0].Title,
-                                Description: result[0].Description
-                            })
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-        
-    };
-
-
-
-
-    // 3. Use CompanyId to get Goals from Goal Master Table and add results in the companyGoals array.
-    const getCompanyGoals = () => {
-        const getGoalsUrl = 'https://localhost:44373/api/GetGoalList'
-
-        let goals: { title: string; description: string; }[] = [ // ------------ temporary array until figure out how to dynamically add
-            {
-                title: CompanyData.CompanyValueTitle1,
-                description: CompanyData.CompanyValueDescription1
-            },
-            {
-                title: CompanyData.CompanyValueTitle2,
-                description: CompanyData.CompanyValueDescription2
-            },
-        ];
-
-        // -- loop to get all goals that was put in the values array during sign up
-        for (let i = 0; i < goals.length; i++) {
-            var result = null;
-            let param = {
-                "Title": goals[i].title,
-                "Description": goals[i].description
+                    
             }
-
-            axios
-                .get(getGoalsUrl, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                    params: param,
-                })
-                .then((response) => {
-                    result = response.data;
-                    if (result != null) {
-                        if (result.length > 0) {
-                            console.log(result);
-
-                            // adding to companyGoals array that was initiated
-                            companyGoals.push({
-                                GoalId: result[0].GoalId,
-                                Title: result[0].Title,
-                                Description: result[0].Description
-                            })
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+        }
+        catch (error) {
+            // Handle network or other error
+            console.error('An error occurred:', error);
         }
 
-    };
+        nextStep();
 
-
-
-    // 4. Add items from companyValues array to Company Values Table in database
-    const addCompanyValues = () => {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-        };
-
-        var addCompanyValueUrl = 'https://localhost:44373/api/AddCompanyValue';
-
-        for (let i = 0; i < companyValues.length; i++) {
-            let value = {
-                CompanyId: companyId,
-                ValueId: companyValues[i].ValueId
-            }
-
-            axios
-                .post(addCompanyValueUrl, value, config)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error)
-                });
-        }
     }
 
-
-
-
-    // 5. Add items from companyGoals array to Company Goals Table in database
-    const addCompanyGoals = () => {
+    //Company Admin Sign Up
+    const handleCompanyAdminSignUp = async () => {
         const config = {
-            headers: { 'Content-Type': 'application/json' },
-        };
-
-        var addCompanyGoalUrl = 'https://localhost:44373/api/AddCompanyGoal';
-
-        for (let i = 0; i < companyGoals.length; i++) {
-            let goal = {
-                CompanyId: companyId,
-                GoalId: companyValues[i].ValueId
-            }
-
-            axios
-                .post(addCompanyGoalUrl, goal, config)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error)
-                });
-        }
-    }
-
-    function addCompanyGoalsAndCompanyValues() {
-        addCompanyGoals();
-        addCompanyValues();
-    }
-
-
-
-    // ------------------------------------------ COMPANY ADMIN SIGN UP ------------------------------------------
-
-    // 1. --- ADD COMPANY ADMIN TO EMPLOYEE REGISTRATION TABLE
-    const addCompanyAdminToEmployee = () => {
-        const config = {
-            headers: {'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         }
 
         let companyAdmin = {
@@ -543,86 +438,72 @@ const SignUp = () => {
             "Other_Notes": CompanyAdminData.AdminOtherNotes,
             //"FirstLogIn": "false" // still need to figure out the backend update for this
         }
-
         var addCompanyAdminUrl = 'https://localhost:44373/api/AddEmployee'
 
-        axios
-            .post(addCompanyAdminUrl, companyAdmin, config)
-            .then(response => {
-                // Handle the response from the server
-                console.log(response.data);
-            }).catch(function (error) {
-                console.log(error);
-            });
-    }
+        try {
+            const addCompanyAdmin = await axios
+                .post(addCompanyAdminUrl, companyAdmin, config)
+                .then(response => {
+                    // Handle the response from the server
+                    console.log(response.data);
+                    return response.data;
+                });
+            if (addCompanyAdmin != null) {
+                const getCompanyAdminUrl = 'https://localhost:44373/api/GetAllEmployees';
 
-    // 2. --- ADD COMPANY ADMIN TO OWS
-    const [companyAdminId, setCompanyAdminId] = useState('')
-
-    // -------- 2.1 --- GET COMPANY ADMIN ID
-    const getCompamuAdminId = () => {
-
-        const getCompanyAdminUrl = 'https://localhost:44373/api/GetAllEmployees';
-
-        var result = null;
-        let param = {
-            "Email": CompanyAdminData.AdminEmail,
-            "Phone_Number": CompanyAdminData.AdminPhoneNumber
-        }
-
-        axios
-            .get(getCompanyAdminUrl, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                params: param,
-            })
-            .then((response) => {
-                result = response.data;
-                if (result != null) {
-                    if (result.length > 0) {
-                        console.log(result);
-
-                        //setting company admin id
-                        let id = result[0].EmployeeId
-                        setCompanyAdminId(id)
-                    }
+                var result = null;
+                let param = {
+                    "Email": CompanyAdminData.AdminEmail,
+                    "Phone_Number": CompanyAdminData.AdminPhoneNumber
                 }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
 
-    // -------- 2.2 --- ADD COMPANY ADMIN INFO TO OWS
-    const addCompanyAdminToOWS = () => {
-        const config = {
-            headers: { 'Content-Type': 'application/json' }
+                const companyAdmin = await axios
+                    .get(getCompanyAdminUrl, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' },
+                        params: param,
+                    })
+                    .then((response) => {
+                        result = response.data;
+                        if (result != null) {
+                            if (result.length > 0) {
+                                console.log(result);
+
+                                //setting company admin id
+                                let id = result[0].EmployeeId
+                                setCompanyAdminId(id)
+                                return result[0]
+                            }
+                        }
+                    });
+                if (companyAdmin != null) {
+                    const addToOWSUrl = 'http://localhost:58258/api/AddSystemUsers';
+
+                    let user = {
+                        "UserCode": companyAdminId, // FK from referencing from Registration table
+                        "UserName": CompanyAdminData.AdminEmail,
+                        "Password": CompanyAdminData.AdminPassword
+                    }
+
+                    axios
+                        .post(addToOWSUrl, user, config)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch(function (error) {
+                            console.log(error)
+                        });
+                }
+            }
+
+        }
+        catch (error) {
+            // Handle network or other error
+            console.error('An error occurred:', error);
         }
 
-        const addToOWSUrl = 'http://localhost:58258/api/AddSystemUsers';
-
-        let user = {
-            "UserCode": companyAdminId, // FK from referencing from Registration table
-            "UserName": CompanyAdminData.AdminEmail,
-            "Password": CompanyAdminData.AdminPassword
-        }
-
-        axios
-            .post(addToOWSUrl, user, config)
-            .then((response) => {
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                console.log(error)
-            });
     }
-
-    function addCompanyAdmin() {
-        // 2.1 Get Company Admin ID
-        getCompamuAdminId();
-        // 2.2 Add Company Admin to OWS
-        addCompanyAdminToOWS();
-    }
+    
 
     // ------------------------------------------ FRONT-END ------------------------------------------
     return (
@@ -641,13 +522,13 @@ const SignUp = () => {
                             </MainFormButton>
                         )}
                         {currentStepIndex === 3 ? (
-                            <MainFormButton width="50%" onClickEvent={companySignUp}>
+                            <MainFormButton width="50%" onClickEvent={handleCompanySignUp}>
                                 <Text>Proceed to Admin Sign Up</Text>
                             </MainFormButton>
                         ) : (
                             <MainFormButton
                                 width="25%"
-                                onClickEvent={currentStepIndex === steps.length - 1 ? companyAdminSignUp : nextStep}
+                                onClickEvent={currentStepIndex === steps.length - 1 ? handleCompanyAdminSignUp : nextStep}
                             >
                                 <Text>{isLastStep ? 'SUBMIT' : 'NEXT'}</Text>
                             </MainFormButton>

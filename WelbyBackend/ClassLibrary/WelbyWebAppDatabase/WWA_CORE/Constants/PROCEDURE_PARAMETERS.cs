@@ -45,12 +45,14 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_GENDER_MASTER_GET_BIOLOGICAL = "@Biological";
 
         public const string PARA_MST_GOAL_MASTER_GET_GOALID = "@GoalId";
-        public const string PARA_MST_GOAL_MASTER_GET_GOALTITLE = "@Title";
-        public const string PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION = "@Description";
+
+        public const string PARA_MST_GOAL_MASTER_GET_GOALTITLE = "@Title"; //PAGEWISE PARAM
+        public const string PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION = "@Description"; //PAGEWISE PARAM
 
         public const string PARA_MST_VALUE_MASTER_GET_VALUEID = "@ValueId";
-        public const string PARA_MST_VALUE_MASTER_GET_VALUETITLE = "@Title";
-        public const string PARA_MST_VALUE_MASTER_GET_VALUEDESCRIPTION = "@Description";
+
+        public const string PARA_MST_VALUE_MASTER_GET_VALUETITLE = "@Title"; //PAGEWISE PARAM
+        public const string PARA_MST_VALUE_MASTER_GET_VALUEDESCRIPTION = "@Description"; //PAGEWISE PARAM
 
         public const string PARA_MST_INTEREST_MASTER_GET_INTERESTID = "@InterestId";
 
@@ -70,23 +72,18 @@ namespace WWA_CORE.Constants
         #region EMPLOYEE
         public const string PARA_EMP_INTEREST_GET_EMPLOYEEINTERESTLID = "@EmployeeInterestId";
         public const string PARA_EMP_INTEREST_GET_EMPLOYEEID = "@EmployeeId";
-        public const string PARA_EMP_INTEREST_GET_INTERESTID = "@InterestId";
 
         public const string PARA_EMP_LEARNED_BEHAVIORS_GET_LEARNEDBEHAVIORSID = "@LearnedBehaviorsId";
         public const string PARA_EMP_LEARNED_BEHAVIORS_GET_EMPLOYEEID = "@EmployeeId";
-        public const string PARA_EMP_LEARNED_BEHAVIORS_GET_STRENGTHID = "@StrengthId";
 
         public const string PARA_EMP_REALIZED_STRENGTH_GET_REALIZEDSTRENGTHSID = "@RealizedStrengthsId";
         public const string PARA_EMP_REALIZED_STRENGTH_GET_EMPLOYEEID = "@EmployeeId";
-        public const string PARA_EMP_REALIZED_STRENGTH_GET_STRENGTHID = "@StrengthId";
 
         public const string PARA_EMP_UNREALIZED_STRENGTH_GET_UNREALIZEDSTRENGTHSID = "@UnrealizedStrengthsId";
         public const string PARA_EMP_UNREALIZED_STRENGTH_GET_EMPLOYEEID = "@EmployeeId";
-        public const string PARA_EMP_UNREALIZED_STRENGTH_GET_STRENGTHID = "@StrengthId";
 
         public const string PARA_EMP_WEAKNESS_GET_EMPLOYEEWEAKNESSID = "@EmployeeWeaknessId";
         public const string PARA_EMP_WEAKNESS_GET_EMPLOYEEID = "@EmployeeId";
-        public const string PARA_EMP_WEAKNESS_GET_STRENGTHID = "@StrengthId";
         #endregion
 
         #region SECURITY

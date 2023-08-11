@@ -25,6 +25,9 @@ namespace WWA_CORE.Constants
         public const string PROC_MST_INTEREST_MASTER_GET = "procWWA_MST_Interest_Master_Get";
         public const string PROC_MST_STRENGTH_MASTER_GET = "procWWA_MST_Strength_Master_Get";
         public const string PROC_MST_VALUE_MASTER_GET = "procWWA_MST_Value_Master_Get";
+
+        public const string PROC_MST_VALUE_MASTER_PAGEWISE_GET = "procWWA_MST_Value_Master_Pagewise_Get";
+        public const string PROC_MST_GOAL_MASTER_PAGEWISE_GET = "procWWA_MST_Goal_Master_Pagewise_Get";
         #endregion
 
         #region COMPANY
@@ -34,6 +37,8 @@ namespace WWA_CORE.Constants
 
         #region EMPLOYEE
         public const string PROC_EMP_INTEREST_GET = "procWWA_EMP_Interest_Get";
+        public const string PROC_EMP_INTEREST_BY_EMPLOYEEID_GET = "procWWA_EMP_Interest_By_EmployeeId_Get";
+
         public const string PROC_EMP_LEARNED_BEHAVIORS_GET = "procWWA_EMP_Learned_Behaviors_Get";
         public const string PROC_EMP_REALIZED_STRENGTHS_GET = "procWWA_EMP_Realized_Strengths_Get";
         public const string PROC_EMP_UNREALIZED_STRENGTHS_GET = "procWWA_EMP_Unrealized_Strengths_Get";

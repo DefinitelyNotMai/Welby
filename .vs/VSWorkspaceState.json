@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WelbyBackend",
+    "\\WelbyBackend\\WelbyAPI"
   ],
+  "SelectedNode": "\\WelbyBackend",
   "PreviewInSolutionExplorer": false
 }

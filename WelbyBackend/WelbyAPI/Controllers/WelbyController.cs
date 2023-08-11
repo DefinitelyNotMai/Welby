@@ -101,11 +101,19 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region VALUE
-        [Route("~/api/GetAllValue")]
+        [Route("~/api/GetValueByTitleDescription")]
         [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValues([FromUri] ValueMasterViewModel param)
         {
-            var model = await _wwauow.Value.GetAllValues(param);
+            var model = await _wwauow.Value.GetValueByTitleDescription(param);
+            return model;
+        }
+
+        [Route("~/api/GetValues")]
+        [HttpGet]
+        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromUri] ValueMasterViewModel param)
+        {
+            var model = await _wwauow.Value.GetValues(param);
             return model;
         }
 
@@ -333,11 +341,19 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region GOAL
-        [Route("~/api/GetAllGoal")]
+        [Route("~/api/GetGoalByTitleDescription")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromUri] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals([FromUri] GoalMasterViewModel param)
         {
-            var model = await _wwauow.Goal.GetGoalList(param);
+            var model = await _wwauow.Goal.GetGoalByTitleDescription(param);
+            return model;
+        }
+
+        [Route("~/api/GetGoals")]
+        [HttpGet]
+        public async Task<IEnumerable<GoalMasterViewModel>> GetAllGoals([FromUri] GoalMasterViewModel param)
+        {
+            var model = await _wwauow.Goal.GetGoals(param);
             return model;
         }
 
@@ -634,9 +650,17 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE INTEREST
         [Route("~/api/GetEmployeeInterests")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromUri] EmployeeInterestViewModel param)
+        public async Task<IEnumerable<EmployeeInterestViewModel>> GetAllEmployeeInterests([FromUri] EmployeeInterestViewModel param)
         {
             var model = await _wwauow.EmployeeInterest.GetEmployeeInterests(param);
+            return model;
+        }
+
+        [Route("~/api/GetEmployeeInterestsById")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterest([FromUri] EmployeeInterestViewModel param)
+        {
+            var model = await _wwauow.EmployeeInterest.GetEmployeeInterestsById(param);
             return model;
         }
 
@@ -930,7 +954,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-        [Route("~/api/AddCompanyGoals")]
+        [Route("~/api/AddCompanyGoal")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddCompanyGoal([FromBody] CompanyGoalsViewModel param)
         {

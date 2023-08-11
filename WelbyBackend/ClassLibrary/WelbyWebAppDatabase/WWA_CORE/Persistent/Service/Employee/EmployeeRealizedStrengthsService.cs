@@ -59,7 +59,6 @@ namespace WWA_CORE.Persistent.Service.Employee
                {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_REALIZED_STRENGTH_GET_REALIZEDSTRENGTHSID , employeeRealizedStrengthsViewModel.RealizedStrengthsId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_REALIZED_STRENGTH_GET_EMPLOYEEID , employeeRealizedStrengthsViewModel.EmployeeId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_REALIZED_STRENGTH_GET_STRENGTHID , employeeRealizedStrengthsViewModel.StrengthId),
 
              }
             };

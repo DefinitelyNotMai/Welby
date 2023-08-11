@@ -59,7 +59,6 @@ namespace WWA_CORE.Persistent.Service.Employee
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_LEARNED_BEHAVIORS_GET_LEARNEDBEHAVIORSID , employeeLearnedBehaviorsViewModel.LearnedBehaviorsId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_LEARNED_BEHAVIORS_GET_EMPLOYEEID , employeeLearnedBehaviorsViewModel.EmployeeId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_LEARNED_BEHAVIORS_GET_STRENGTHID , employeeLearnedBehaviorsViewModel.StrengthId),
 
               }
             };

@@ -11,6 +11,7 @@ using WWA_CORE.Persistent.Context;
 using WWA_CORE.Persistent.ViewModel.Masters;
 using WWA_CORE.Utilities;
 using System.Data.Entity;
+using WWA_CORE.Persistent.ViewModel.Registration;
 
 namespace WWA_CORE.Persistent.Service.Masters
 {
@@ -26,7 +27,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_Value_Master
                 {
                     Title = valueMasterViewModel.Title,
-                    Description = valueMasterViewModel.Title,
+                    Description = valueMasterViewModel.Description,
 
                     Active = true,
                     Encoded_By = valueMasterViewModel.Encoded_By,
@@ -48,16 +49,24 @@ namespace WWA_CORE.Persistent.Service.Masters
             return valueMasterViewModel;
         }
 
-        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues(ValueMasterViewModel valueMasterViewModel)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValueByTitleDescription(ValueMasterViewModel valueMasterViewModel)
         {
             var query = new SqlQueryObject
             {
-                ProcedureName = PROCEDURE_NAME.PROC_MST_VALUE_MASTER_GET,
+                ProcedureName = PROCEDURE_NAME.PROC_MST_VALUE_MASTER_PAGEWISE_GET,
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
+
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM , valueMasterViewModel.DateFrom),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO , valueMasterViewModel.DateTo),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_NO , valueMasterViewModel.PageNo),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_SIZE , valueMasterViewModel.PageSize),
+
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEID, valueMasterViewModel.ValueId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, valueMasterViewModel.Active),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUETITLE, valueMasterViewModel.Title),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEDESCRIPTION, valueMasterViewModel.Description),
+
                 }
             };
 
@@ -65,10 +74,10 @@ namespace WWA_CORE.Persistent.Service.Masters
 
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new ValueMasterViewModel()
             {
+
                 ValueId = Convert.ToInt32(row["ValueId"]),
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
-               
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
@@ -78,6 +87,46 @@ namespace WWA_CORE.Persistent.Service.Masters
                 LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
                 EncodedByName = "",
                 LastChangedByName = "",
+
+                TotalRows = Convert.ToInt32(row["TotalRows"]),
+                TotalPage = Convert.ToInt32(row["TotalPage"]),
+
+            }).ToList();
+            query.Dispose();
+            valueMasterViewModel.Dispose();
+            return ReturnedList;
+        }
+
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValues(ValueMasterViewModel valueMasterViewModel)
+        {
+            var query = new SqlQueryObject
+            {
+                ProcedureName = PROCEDURE_NAME.PROC_MST_VALUE_MASTER_GET,
+                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
+                Parameters = new SqlParameter[]
+                {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEID, valueMasterViewModel.ValueId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, valueMasterViewModel.Active)
+
+                }
+            };
+
+            await query.ExecuteAsync();
+
+            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new ValueMasterViewModel()
+            {
+
+                ValueId = Convert.ToInt32(row["ValueId"]),
+                Title = Convert.ToString(row["Title"]),
+                Description = Convert.ToString(row["Description"]),
+
+                Active = Convert.ToBoolean(row["Active"]),
+                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
+                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
+                Computer_Name = Convert.ToString(row["Computer_Name"]),
+                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
+                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
+                EncodedByName = ""
 
             }).ToList();
             query.Dispose();

@@ -60,7 +60,7 @@ namespace WWA_CORE.Persistent.Service.Company
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_VALUES_GET_COMPANYVALUESID , companyValuesViewModel.CompanyValuesId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_VALUES_GET_COMPANYID , companyValuesViewModel.CompanyId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_VALUES_GET_VALUEID , companyValuesViewModel.ValueId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, companyValuesViewModel.Active),
 
               }
             };

@@ -59,9 +59,48 @@ namespace WWA_CORE.Persistent.Service.Employee
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_EMPLOYEEINTERESTLID , employeeInterestViewModel.EmployeeInterestId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_EMPLOYEEID , employeeInterestViewModel.EmployeeId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_INTERESTID , employeeInterestViewModel.InterestId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeInterestViewModel.Active),
                     
+              }
+            };
+
+            await query.ExecuteAsync();
+
+            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeInterestViewModel()
+            {
+                EmployeeInterestId = Convert.ToInt32(row["EmployeeInterestId"]),
+                EmployeeId = Convert.ToInt32(row["EmployeeId"]),
+                InterestId = Convert.ToInt32(row["InterestId"]),
+
+                EmployeeFirstNameDisplay = Convert.ToString(row["EmployeeFirstNameDisplay"]),
+                InterestNameDisplay = Convert.ToString(row["InterestNameDisplay"]),
+
+                Active = Convert.ToBoolean(row["Active"]),
+                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
+                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
+                Computer_Name = Convert.ToString(row["Computer_Name"]),
+                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
+                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
+                EncodedByName = "",
+                LastChangedByName = "",
+            });
+
+            query.Dispose();
+            employeeInterestViewModel.Dispose();
+            return ReturnedList;
+        }
+
+        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsById(EmployeeInterestViewModel employeeInterestViewModel)
+        {
+            var query = new SqlQueryObject
+            {
+                ProcedureName = PROCEDURE_NAME.PROC_EMP_INTEREST_BY_EMPLOYEEID_GET,
+                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
+                Parameters = new SqlParameter[]
+                {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_EMPLOYEEID , employeeInterestViewModel.EmployeeId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeInterestViewModel.Active),
+
               }
             };
 

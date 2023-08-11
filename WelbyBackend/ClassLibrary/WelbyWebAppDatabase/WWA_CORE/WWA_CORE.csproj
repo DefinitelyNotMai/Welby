@@ -202,8 +202,6 @@
     <Compile Include="Persistent\Resource\Masters\CityMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CompanyMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CountryMasterResource.cs" />
-    <Compile Include="Persistent\Resource\Masters\GoalMasterResource.cs" />
-    <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
     <Compile Include="Persistent\Service\Company\CompanyGoalsService.cs" />
     <Compile Include="Persistent\Service\Company\CompanyValuesService.cs" />

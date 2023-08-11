@@ -517,43 +517,35 @@
         <Function Name="procWWA_CMP_Goals_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyGoalsId" Type="int" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="GoalId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_CMP_Values_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyValuesId" Type="int" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="ValueId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Interest_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmployeeInterestId" Type="int" Mode="In" />
-          <Parameter Name="EmployeeId" Type="int" Mode="In" />
-          <Parameter Name="InterestId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Learned_Behaviors_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LearnedBehaviorsId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
-          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Realized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RealizedStrengthsId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
-          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Unrealized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UnrealizedStrengthsId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
-          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Weakness_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmployeeWeaknessId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
-          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_City_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -584,8 +576,6 @@
         </Function>
         <Function Name="procWWA_MST_Goal_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GoalId" Type="int" Mode="In" />
-          <Parameter Name="Title" Type="nvarchar" Mode="In" />
-          <Parameter Name="Description" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_IndustryType_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -602,8 +592,6 @@
         </Function>
         <Function Name="procWWA_MST_Value_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ValueId" Type="int" Mode="In" />
-          <Parameter Name="Title" Type="nvarchar" Mode="In" />
-          <Parameter Name="Description" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_REG_Employee_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1372,43 +1360,35 @@
           <FunctionImport Name="procWWA_CMP_Goals_Get">
             <Parameter Name="CompanyGoalsId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="GoalId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_CMP_Values_Get">
             <Parameter Name="CompanyValuesId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="ValueId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Interest_Get">
             <Parameter Name="EmployeeInterestId" Mode="In" Type="Int32" />
-            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="InterestId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Learned_Behaviors_Get">
             <Parameter Name="LearnedBehaviorsId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Realized_Strengths_Get">
             <Parameter Name="RealizedStrengthsId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">
             <Parameter Name="UnrealizedStrengthsId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Weakness_Get">
             <Parameter Name="EmployeeWeaknessId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_City_Master_Get">
@@ -1439,8 +1419,6 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Goal_Master_Get">
             <Parameter Name="GoalId" Mode="In" Type="Int32" />
-            <Parameter Name="Title" Mode="In" Type="String" />
-            <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_IndustryType_Master_Get">
@@ -1457,8 +1435,6 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Value_Master_Get">
             <Parameter Name="ValueId" Mode="In" Type="Int32" />
-            <Parameter Name="Title" Mode="In" Type="String" />
-            <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_REG_Employee_Get">

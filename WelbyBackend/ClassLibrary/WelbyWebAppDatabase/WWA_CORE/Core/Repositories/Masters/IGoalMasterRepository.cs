@@ -12,7 +12,8 @@ namespace WWA_CORE.Core.Repositories.Masters
         Task<GoalMasterViewModel> AddGoal(GoalMasterViewModel goalMasterViewModel);
         Task<GoalMasterViewModel> UpdateGoal(GoalMasterViewModel goalMasterViewModel);
         Task<GoalMasterViewModel> RemoveGoal(GoalMasterViewModel goalMasterViewModel);
-        Task<GoalMasterViewModel> ReturnGoal(GoalMasterViewModel goalMasterViewModel);
-        Task<IEnumerable<GoalMasterViewModel>> GetGoalList(GoalMasterViewModel goalMasterViewModel);
+        Task<GoalMasterViewModel> ReturnGoal(GoalMasterViewModel goalMasterViewModel); 
+        Task<IEnumerable<GoalMasterViewModel>> GetGoalByTitleDescription(GoalMasterViewModel goalMasterViewModel);
+        Task<IEnumerable<GoalMasterViewModel>> GetGoals(GoalMasterViewModel goalMasterViewModel);
     }
 }

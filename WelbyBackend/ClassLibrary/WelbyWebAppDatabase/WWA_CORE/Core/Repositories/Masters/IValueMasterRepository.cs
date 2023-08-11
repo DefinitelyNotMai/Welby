@@ -13,6 +13,8 @@ namespace WWA_CORE.Core.Repositories.Masters
         Task<ValueMasterViewModel> UpdateValue(ValueMasterViewModel valueMasterViewModel);
         Task<ValueMasterViewModel> RemoveValue(ValueMasterViewModel valueMasterViewModel);
         Task<ValueMasterViewModel> ReturnValue(ValueMasterViewModel valueMasterViewModel);
-        Task<IEnumerable<ValueMasterViewModel>> GetAllValues(ValueMasterViewModel valueMasterViewModel);
+        Task<IEnumerable<ValueMasterViewModel>> GetValueByTitleDescription(ValueMasterViewModel valueMasterViewModel);
+        Task<IEnumerable<ValueMasterViewModel>> GetValues(ValueMasterViewModel valueMasterViewModel);
+
     }
 }

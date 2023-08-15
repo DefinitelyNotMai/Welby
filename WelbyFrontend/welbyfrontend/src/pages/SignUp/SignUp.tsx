@@ -445,8 +445,11 @@ const SignUp = () => {
                 .post(addCompanyAdminUrl, companyAdmin, config)
                 .then(response => {
                     // Handle the response from the server
+                    console.log("adding");
                     console.log(response.data);
                     return response.data;
+                }).catch(function (error) {
+                    console.log(error);
                 });
             if (addCompanyAdmin != null) {
                 const getCompanyAdminUrl = 'https://localhost:44373/api/GetAllEmployees';
@@ -475,24 +478,73 @@ const SignUp = () => {
                                 return result[0]
                             }
                         }
+                    }).catch(function (error) {
+                        console.log(error);
                     });
                 if (companyAdmin != null) {
-                    const addToOWSUrl = 'http://localhost:58258/api/AddSystemUsers';
+                    const tokenUrl = 'http://localhost:58258/token';
+                    let header = {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Access-Control-Allow-Origin': '*',
+                    };
 
-                    let user = {
-                        "UserCode": companyAdminId, // FK from referencing from Registration table
-                        "UserName": CompanyAdminData.AdminEmail,
-                        "Password": CompanyAdminData.AdminPassword
+                    const formData = new URLSearchParams();
+                    formData.append('grant_type', 'password');
+                    formData.append('username', "micahangelachua@email.com");
+                    formData.append('password', "password");
+
+                    const tokenResponse = await fetch(tokenUrl, {
+                        method: 'POST',
+                        headers: header,
+                        body: formData,
+                    }).then((res) => {
+                        return res.json();
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    if (tokenResponse != null) {
+                        var token = tokenResponse.access_token;
+                        const addToOWSUrl = 'http://localhost:58258/api/AddSystemUsers';
+
+                        let user = {
+                            "UserCode": companyAdmin.EmployeeId, // from WelbyAPI EmployeeId
+                            "UserName": CompanyAdminData.AdminEmail,
+                            "Password": CompanyAdminData.AdminPassword,
+                            "AccountLocked": false,
+                            "LoggedIn": false,
+                            "PasswordNoExpiry": null,
+                            "ExpiryDays": null,
+                            "AccountVerified": null,
+                            "VerifiedDate": null,
+                            "CurrentOTP": null,
+                            "Encoded_By": 24286,
+                            "Active": true
+                        }
+
+                        axios
+                            .post(addToOWSUrl, user, {
+                                headers: {
+                                    'Authorization': `Bearer ${token}`,
+                                    'Content-Type': 'application/json',
+                                }
+
+                            })
+                            .then((response) => {
+                                console.log("asdfghjk")
+                                console.log(response.data);
+                            })
+                            .catch(function (error) {
+                                console.log(error)
+                            });
                     }
-
-                    axios
-                        .post(addToOWSUrl, user, config)
-                        .then((response) => {
-                            console.log(response.data);
-                        })
-                        .catch(function (error) {
-                            console.log(error)
-                        });
+                    if (tokenResponse.ok) {
+                        // Handle successful API tokenResponse
+                        let json = tokenResponse;
+                        console.log('Signup successful');
+                    } else {
+                        // Handle API error
+                        console.error('Signup failed');
+                    }
                 }
             }
 
@@ -502,6 +554,7 @@ const SignUp = () => {
             console.error('An error occurred:', error);
         }
 
+        navigate('/');
     }
     
 

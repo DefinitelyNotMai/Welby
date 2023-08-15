@@ -75,9 +75,10 @@ const Login = () => {
                             if (result.length > 0) {
                                 console.log(result)
 
-                                const id = result[0].EmployeeId
+                                const id = result[0].UserCode
                                 setUserId(id);
-                                navigate('/employee/dashboard', { state: userId }); // For Navigating into the Dashboard Page
+                                console.log("login id: " + userId);
+                                navigate('/dashboard', { state: userId }); // For Navigating into the Dashboard Page
                             }
                         }
                     });

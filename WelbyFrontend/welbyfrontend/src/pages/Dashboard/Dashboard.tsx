@@ -11,6 +11,7 @@ const Dashboard = () => {
     const [Nickname, setNickname] = useState('');
 
     useEffect(() => {
+        console.log(userId)
         const fetchUserData = async () => {
             var userUrl = 'https://localhost:44373/api/GetEmployee';
             var result = null;

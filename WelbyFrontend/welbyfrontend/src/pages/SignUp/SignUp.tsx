@@ -523,6 +523,7 @@ const SignUp = () => {
 
                         axios
                             .post(addToOWSUrl, user, {
+                                timeout: 10000,
                                 headers: {
                                     'Authorization': `Bearer ${token}`,
                                     'Content-Type': 'application/json',

@@ -9,6 +9,7 @@ import MainFormCard from '../../components/Main/FormCard';
 import MainFormTextbox from '../../components/Main/FormTextbox';
 import MainFormButton from '../../components/Main/FormButton';
 import axios from 'axios';
+import * as bcrypt from 'bcryptjs';
 
 const Login = () => {
     // navigate
@@ -50,11 +51,12 @@ const Login = () => {
                 var token = tokenResponse.access_token;
                 var loginUrl = 'http://localhost:58258/api/GetSystemUsers';
                 var result = null;
+
                 let param = {
                     "UserId": 0, // Identity Key
                     "UserCode": "", // FK from referencing from Registration table
                     "UserName": UserName,// Username
-                    "Password": Password,
+                    "Password": "",
                     "CurrentOTP": null,
                     "PageNo": 0,
                     "PageSize": 0,
@@ -74,11 +76,16 @@ const Login = () => {
                         if (result != null) {
                             if (result.length > 0) {
                                 console.log(result)
-
-                                const id = result[0].UserCode
-                                setUserId(id);
-                                console.log("login id: " + userId);
-                                navigate('/dashboard', { state: userId }); // For Navigating into the Dashboard Page
+                                
+                                const password = bcrypt.compareSync(Password, result[0].Password)
+                                if (password) {
+                                    const id = result[0].UserCode
+                                    setUserId(id);
+                                    navigate('/dashboard', { state: userId }); // For Navigating into the Dashboard Page
+                                }
+                                else {
+                                    console.log("Wrong Password");
+                                }
                             }
                         }
                     });

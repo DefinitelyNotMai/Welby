@@ -14,6 +14,7 @@ import Step3 from './Step3';
 import Step4 from './Step4';
 import Step5 from './Step5';
 import Step6 from './Step6';
+import * as bcrypt from 'bcryptjs';
 
 type CompanyFormData = { 
     // Step1
@@ -241,7 +242,7 @@ const SignUp = () => {
                         result = response.data;
                         if (result != null) {
                             if (result.length > 0) {
-                                console.log(result[0]);
+                                //console.log(result[0]);
                                 let id = result[0].CompanyId;
                                 setCompanyId(id); // sets CompanyId variable
 
@@ -301,7 +302,7 @@ const SignUp = () => {
                                     result = response.data;
                                     if (result != null) {
                                         if (result.length > 0) {
-                                            console.log(result);
+                                            //console.log(result);
 
                                             return result[0]
                                         }
@@ -320,7 +321,7 @@ const SignUp = () => {
                                 axios
                                     .post(addCompanyValueUrl, companyValue, config)
                                     .then((response) => {
-                                        console.log(response.data);
+                                        //console.log(response.data);
                                     })
                                     .catch(function (error) {
                                         console.log(error)
@@ -344,7 +345,7 @@ const SignUp = () => {
                             .post(addGoalsUrl, goal, config)
                             .then((response) => {
                                 // Handle the response from the server
-                                console.log(response.data);
+                                //console.log(response.data);
                                 return response.data
                             })
                          //#endregion
@@ -363,7 +364,7 @@ const SignUp = () => {
                                     result = response.data;
                                     if (result != null) {
                                         if (result.length > 0) {
-                                            console.log(result);
+                                            //console.log(result);
 
                                             return result[0]
                                         }
@@ -382,7 +383,7 @@ const SignUp = () => {
                                 axios
                                     .post(addCompanyGoalUrl, companyGoal, config)
                                     .then((response) => {
-                                        console.log(response.data);
+                                        //console.log(response.data);
                                     })
                                     .catch(function (error) {
                                         console.log(error)
@@ -435,8 +436,7 @@ const SignUp = () => {
             "Work": CompanyAdminData.AdminWork,
             "Connect": CompanyAdminData.AdminConnect,
             "Support": CompanyAdminData.AdminSupport,
-            "Other_Notes": CompanyAdminData.AdminOtherNotes,
-            //"FirstLogIn": "false" // still need to figure out the backend update for this
+            "Other_Notes": CompanyAdminData.AdminOtherNotes
         }
         var addCompanyAdminUrl = 'https://localhost:44373/api/AddEmployee'
 
@@ -445,7 +445,7 @@ const SignUp = () => {
                 .post(addCompanyAdminUrl, companyAdmin, config)
                 .then(response => {
                     // Handle the response from the server
-                    console.log("adding");
+                    console.log("adding to welby");
                     console.log(response.data);
                     return response.data;
                 }).catch(function (error) {
@@ -471,7 +471,7 @@ const SignUp = () => {
                         if (result != null) {
                             if (result.length > 0) {
                                 console.log(result);
-
+                                console.log("added to welby")
                                 //setting company admin id
                                 let id = result[0].EmployeeId
                                 setCompanyAdminId(id)
@@ -498,6 +498,7 @@ const SignUp = () => {
                         headers: header,
                         body: formData,
                     }).then((res) => {
+                        console.log("adding to ows")
                         return res.json();
                     }).catch(function (error) {
                         console.log(error);
@@ -506,10 +507,19 @@ const SignUp = () => {
                         var token = tokenResponse.access_token;
                         const addToOWSUrl = 'http://localhost:58258/api/AddSystemUsers';
 
+                        //const emailToHash = CompanyAdminData.AdminEmail; //supposedly email is encrypted too
+                        const passwordToHash = CompanyAdminData.AdminPassword;
+
+                        const saltRounds = 10;
+                        const salt = bcrypt.genSaltSync(saltRounds);
+
+                        //const hashedEmail = bcrypt.hashSync(emailToHash, salt);
+                        const hashedPassword = bcrypt.hashSync(passwordToHash, salt);
+
                         let user = {
                             "UserCode": companyAdmin.EmployeeId, // from WelbyAPI EmployeeId
                             "UserName": CompanyAdminData.AdminEmail,
-                            "Password": CompanyAdminData.AdminPassword,
+                            "Password": hashedPassword,
                             "AccountLocked": false,
                             "LoggedIn": false,
                             "PasswordNoExpiry": null,
@@ -531,7 +541,7 @@ const SignUp = () => {
 
                             })
                             .then((response) => {
-                                console.log("asdfghjk")
+                                console.log("added to ows");
                                 console.log(response.data);
                             })
                             .catch(function (error) {

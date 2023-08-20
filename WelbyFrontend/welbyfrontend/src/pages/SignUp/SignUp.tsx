@@ -16,7 +16,7 @@ import Step5 from './Step5';
 import Step6 from './Step6';
 import * as bcrypt from 'bcryptjs';
 
-type CompanyFormData = { 
+export type CompanyFormData = { 
     // Step1
     Name: string;
     Email: string;
@@ -152,7 +152,7 @@ const SignUp = () => {
         <Step2 {...CompanyData} updateFields={updateCompanyFields} />,
         <Step3 {...CompanyData} updateFields={updateCompanyFields} />,
         <Step4 {...CompanyData} updateFields={updateCompanyFields} />,
-        <Step5 {...CompanyAdminData} updateFields={updateCompanyAdminFields} />,
+        <Step5 {...CompanyAdminData} CompanyData={CompanyData} updateFields={updateCompanyAdminFields} />,
         <Step6 {...CompanyAdminData} updateFields={updateCompanyAdminFields} />,
     ]);
 

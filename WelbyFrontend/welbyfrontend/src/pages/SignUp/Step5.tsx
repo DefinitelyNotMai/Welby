@@ -2,9 +2,9 @@ import { Grid, Heading, Text, Flex, Icon } from '@chakra-ui/react';
 import { FiPlus } from 'react-icons/fi';
 import CustomTextbox from '../../components/Main/FormTextbox';
 import GenderSelection from '../../components/Main/GenderSelection';
+import { CompanyFormData } from './SignUp';
 
 type Step5Data = {
-    AdminEmail: string;
     AdminPassword: string;
     AdminConfirmPassword: string;
     AdminFirstName: string;
@@ -17,11 +17,11 @@ type Step5Data = {
 };
 
 type Step5Props = Step5Data & {
+    CompanyData: CompanyFormData;
     updateFields: (fields: Partial<Step5Data>) => void;
 };
 
 const Step5 = ({
-    AdminEmail,
     AdminPassword,
     AdminConfirmPassword,
     AdminFirstName,
@@ -31,6 +31,7 @@ const Step5 = ({
     AdminBirthdate,
     AdminGender,
     AdminPhoneNumber,
+    CompanyData,
     updateFields,
 }: Step5Props) => {
     return (
@@ -89,11 +90,9 @@ const Step5 = ({
                         <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500">
                             Email
                         </Text>
-                        <CustomTextbox
-                            placeholder="Email"
-                            value={AdminEmail}
-                            onChange={(e) => updateFields({ AdminEmail: e.target.value })}
-                        />
+                        <Text as="u" color="#ffffff" fontFamily="Montserrat" fontWeight="500" mb="4">
+                        {CompanyData.Email}
+                        </Text>
                         <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500">
                             Password
                         </Text>

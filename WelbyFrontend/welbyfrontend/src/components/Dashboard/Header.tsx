@@ -1,8 +1,20 @@
 import { useState } from 'react';
-import { Avatar, Box, Flex, Icon, Image, Link, Text, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import {
+    Avatar,
+    Box,
+    Flex,
+    Icon,
+    Image,
+    Link,
+    Text,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+} from '@chakra-ui/react';
 import { TbBell, TbCalendarEvent } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
-import DashboardSearch from '../Search';
+import DashboardSearch from './Search';
 import WelbyLogo from '../../../assets/images/welby_logoAndName_primary-1_flat.svg';
 
 type CustomDashboardHeaderProps = {
@@ -18,19 +30,18 @@ const DashboardHeader = ({ name }: CustomDashboardHeaderProps) => {
     };
 
     const handleProfileSelection = () => {
-        navigate("profile");
+        navigate('profile');
     };
 
     const handleLogoutSelection = () => {
         // Add logout logic here. (Clear cookie/token from localStorage?)
         /*
-            if successful 
-                alert "Logout successful"
-                navigate to "/"
-        */
-        navigate("/");
+                if successful 
+                    alert "Logout successful"
+                    navigate to "/"
+            */
+        navigate('/');
     };
-
 
     return (
         <Box

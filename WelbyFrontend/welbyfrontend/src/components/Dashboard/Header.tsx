@@ -15,7 +15,7 @@ import {
 import { TbBell, TbCalendarEvent } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import DashboardSearch from './Search';
-import WelbyLogo from '../../../assets/images/welby_logoAndName_primary-1_flat.svg';
+import WelbyLogo from '../../assets/images/welby_logoAndName_primary-1_flat.svg';
 
 type CustomDashboardHeaderProps = {
     name: string;

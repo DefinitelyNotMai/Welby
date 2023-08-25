@@ -52,6 +52,8 @@ const Login = () => {
                 var loginUrl = 'http://localhost:58258/api/GetSystemUsers';
                 var result = null;
 
+                // retrieve hashedPassword from database and compare to enteredPassword.
+
                 let param = {
                     "UserId": 0, // Identity Key
                     "UserCode": "", // FK from referencing from Registration table

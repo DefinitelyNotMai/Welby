@@ -12,6 +12,7 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\build</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\components\AdminView\AdminContentPanels\" />
     <Folder Include="src\components\Dashboard\Profile\Header\" />
     <Folder Include="src\components\Dashboard\Profile\Card\" />
     <Folder Include="src\components\Dashboard\Profile\CardHeader\" />
@@ -24,6 +25,7 @@
     <Folder Include="src\pages\Employee\SignUp\" />
     <Folder Include="src\pages\Login\" />
     <Folder Include="src\pages\Dashboard\" />
+    <Folder Include="src\pages\AdminView\" />
     <Folder Include="src\pages\SignUp\" />
   </ItemGroup>
 </Project>

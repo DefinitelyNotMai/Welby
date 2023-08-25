@@ -4,12 +4,14 @@ import WelcomePage from './pages/Welcome'
 import LoginPage from './pages/Login'
 import SignUpPage from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
+import AdminView from './pages/AdminView'
 
 function App() {
     return (
         <UserContextProvider>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/admin-view" element={<AdminView/> }></Route>
                     <Route path="/" element={<WelcomePage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignUpPage />} />

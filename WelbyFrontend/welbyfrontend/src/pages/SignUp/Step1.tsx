@@ -2,9 +2,9 @@ import { Box, Grid, Heading, Image, Text, Flex, Icon } from '@chakra-ui/react';
 import { FiPlus } from 'react-icons/fi';
 import WelbyLogo from '../../assets/images/welby_logoAndName_primary-1_flat.svg';
 import CustomTextbox from '../../components/Main/FormTextbox';
-import CustomButton from '../../components/Main/FormButton';
 import CountrySelection from '../../components/Main/CountrySelection';
 import IndustrySelection from '../../components/Main/IndustrySelection';
+import CompanySizeSelection from '../../components/Main/CompanySizeSelection';
 
 type Step1Data = {
     Name: string;
@@ -155,8 +155,7 @@ const Step1 = ({
                                 <Text color="#ffffff" fontFamily="Montserrat" fontWeight="500">
                                     Company Size
                                 </Text>
-                                <CustomTextbox
-                                    placeholder="0 - 10"
+                                <CompanySizeSelection
                                     value={CompanySize}
                                     onChange={(e) =>
                                         updateFields({ CompanySize: e.target.value })

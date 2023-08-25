@@ -574,7 +574,6 @@ const SignUp = () => {
         <MainLayout>
             <MainHeader />
             <Heading textAlign="center">
-                {currentStepIndex + 1} / {steps.length}
             </Heading>
             <MainFormCard w={['100%', '65%']}>
                 <Flex flexDirection="column" p="0">

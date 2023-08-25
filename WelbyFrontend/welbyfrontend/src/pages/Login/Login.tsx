@@ -153,7 +153,7 @@ const Login = () => {
                             width={['70%', '50%', '50%']}
                             onClickEvent={handleLogin}
                         >
-                            Submit
+                            Login
                         </MainFormButton>
                     </Center>
                 </Flex>

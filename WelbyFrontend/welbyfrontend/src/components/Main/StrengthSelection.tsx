@@ -17,7 +17,6 @@ type StrengthSelectProps = {
 
 const StrengthSelect = ({ value, onChange, width, mr }: StrengthSelectProps): JSX.Element => {
     const [strengths, setStrengths] = useState<Strengths[]>([]);
-    const [selectedStrength, setSelectedStrength] = useState<Strengths | undefined>(undefined);
 
     useEffect(() => {
         const fetchStrengths = async () => {
@@ -41,12 +40,6 @@ const StrengthSelect = ({ value, onChange, width, mr }: StrengthSelectProps): JS
 
         fetchStrengths();
     }, []);
-
-    const handleStrengthChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selected = strengths.find((strength) => strength.Strength === event.target.value)
-        console.log(selected)
-        setSelectedStrength(selected);
-    };
 
     return (
         <Select

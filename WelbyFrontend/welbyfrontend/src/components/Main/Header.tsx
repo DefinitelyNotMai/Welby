@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
-import WelbyLogo from '../../../assets/images/welby.svg';
+import WelbyLogo from '../../assets/images/welby.svg';
 
 const MainHeader = () => {
     return (

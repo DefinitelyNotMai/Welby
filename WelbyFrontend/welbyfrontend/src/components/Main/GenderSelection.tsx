@@ -14,7 +14,6 @@ type GenderSelectProps = {
 
 const GenderSelect = ({ value, onChange }: GenderSelectProps): JSX.Element => {
     const [genders, setGenders] = useState<Gender[]>([]);
-    const [selectedGender, setSelectedGender] = useState<Gender | undefined>(undefined);
 
     useEffect(() => {
         const fetchGenders = async () => {
@@ -38,14 +37,6 @@ const GenderSelect = ({ value, onChange }: GenderSelectProps): JSX.Element => {
 
         fetchGenders();
     }, []);
-
-
-    const handleGenderChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selected = genders.find((gender) => gender.Gender === event.target.value)
-        console.log(selected)
-        setSelectedGender(selected);
-    };
-
 
     return (
         <Select

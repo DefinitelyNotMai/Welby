@@ -15,7 +15,6 @@ type CountrySelectProps = {
 
 const CountrySelect = ({ value, onChange }: CountrySelectProps): JSX.Element => {
     const [countries, setCountries] = useState<Country[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -39,12 +38,6 @@ const CountrySelect = ({ value, onChange }: CountrySelectProps): JSX.Element => 
 
         fetchCountries();
     }, []);
-    
-    const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selected = countries.find((country) => country.Name === event.target.value)
-        console.log(selected)
-        setSelectedCountry(selected);
-    };
 
     return (
         <Select

@@ -8,7 +8,6 @@ interface Company {
     Name: string;
 }
 
-
 type CompanySelectProps = {
     value: string;
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -16,7 +15,6 @@ type CompanySelectProps = {
 
 const CompanySelect = ({ value, onChange }: CompanySelectProps): JSX.Element => {
     const [companies, setCompanies] = useState<Company[]>([]);
-    const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(undefined);
 
     useEffect(() => {
         const fetchCompanies = async () => {
@@ -40,14 +38,6 @@ const CompanySelect = ({ value, onChange }: CompanySelectProps): JSX.Element => 
 
         fetchCompanies();
     }, []);
-
-    
-    const handleCompanyChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selected = companies.find((company) => company.Name === event.target.value)
-        console.log(selected)
-        setSelectedCompany(selected);
-    };
-    
 
     return (
         <Select

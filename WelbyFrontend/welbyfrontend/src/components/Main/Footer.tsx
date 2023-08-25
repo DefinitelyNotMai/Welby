@@ -6,7 +6,7 @@ import {
     FaFacebook,
     FaLinkedin,
 } from 'react-icons/fa';
-import WelbyLogo from '../../../assets/images/welby.svg';
+import WelbyLogo from '../../assets/images/welby.svg';
 
 const MainFooter = () => {
     return (

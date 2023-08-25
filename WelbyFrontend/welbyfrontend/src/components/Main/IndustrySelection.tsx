@@ -15,7 +15,6 @@ type IndustryTypeSelectProps = {
 
 const IndustryTypeSelect = ({ value, onChange, width }: IndustryTypeSelectProps): JSX.Element => {
     const [industryTypes, setIndustryTypes] = useState<IndustryTypes[]>([]);
-    const [selectedIndustryType, setSelectedIndustryType] = useState<IndustryTypes | undefined>(undefined);
 
     useEffect(() => {
         const fetchIndustryTypes = async () => {
@@ -39,12 +38,6 @@ const IndustryTypeSelect = ({ value, onChange, width }: IndustryTypeSelectProps)
 
         fetchIndustryTypes();
     }, []);
-
-    const handleIndustryTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selected = industryTypes.find((industryType) => industryType.Industry_Name === event.target.value)
-        console.log(selected)
-        setSelectedIndustryType(selected);
-    };
 
     return (
         <Select

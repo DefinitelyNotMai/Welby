@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import BackgroundImage from '../../../assets/images/workshop.png';
+import BackgroundImage from '../../assets/images/workshop.png';
 
 type MainLayoutProps = {
     children: ReactNode;

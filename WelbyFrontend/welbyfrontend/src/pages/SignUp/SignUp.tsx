@@ -14,7 +14,7 @@ import Step3 from './Step3';
 import Step4 from './Step4';
 import Step5 from './Step5';
 import Step6 from './Step6';
-import * as bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs'
 
 export type CompanyFormData = { 
     // Step1
@@ -125,6 +125,12 @@ const SignUp = () => {
     const [companyId, setCompanyId] = useState("");
     const [companyAdminId, setCompanyAdminId] = useState('')
 
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
     const navigate = useNavigate();
 
     function updateCompanyFields(fields: Partial<CompanyFormData>) {
@@ -156,142 +162,113 @@ const SignUp = () => {
         <Step6 {...CompanyAdminData} updateFields={updateCompanyAdminFields} />,
     ]);
 
-    
+
     const companySignUp = () => { // temporary sign up?
 
         nextStep();
     };
 
     const companyAdminSignUp = () => { // temporary sign up?
-        
+
         navigate('/');
     };
 
-    //Company Sign Up
-    const handleCompanySignUp = async () => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-
-        let values: { title: string; description: string; }[] = [ // ------------ needs to change once dynamically adding of values is there, might not be needed
-            {
-                title: CompanyData.CompanyValueTitle1,
-                description: CompanyData.CompanyValueDescription1
-            },
-            {
-                title: CompanyData.CompanyValueTitle2,
-                description: CompanyData.CompanyValueDescription2
-            },
-        ];
-
-        let goals: { title: string; description: string; durationTo: string; }[] = [ // ------------ needs to change once dynamically adding of values is there, might not be needed
-            {
-                title: CompanyData.CompanyGoalTitle1,
-                description: CompanyData.CompanyGoalDescription1,
-                durationTo: CompanyData.CompanyGoalCompletedBy1
-            }
-        ];
+    const handleCompanyRegistration = async () => {
+        let company_info = {
+            "Name": CompanyData.Name,
+            "Email": CompanyData.Email,
+            "Phone_Number": CompanyData.Phone_Number,
+            "Website": CompanyData.Website,
+            "FoundingDate": CompanyData.FoundingDate,
+            "Vision": CompanyData.Vision,
+            "Mission": CompanyData.Mission,
+            "CountryId": CompanyData.CountryId,
+            "IndustryTypeId": CompanyData.IndustryTypeId,
+            "CompanySize": CompanyData.CompanySize
+        }
 
         try {
-            //#region 1 --------------  Add Company
-            let company = {
-                "Name": CompanyData.Name,
-                "Email": CompanyData.Email,
-                "Phone_Number": CompanyData.Phone_Number,
-                "Website": CompanyData.Website,
-                "FoundingDate": CompanyData.FoundingDate,
-                "Vision": CompanyData.Vision,
-                "Mission": CompanyData.Mission,
-                "CountryId": CompanyData.CountryId,
-                "IndustryTypeId": CompanyData.IndustryTypeId,
-                "CompanySize": CompanyData.CompanySize
-            }
-
             var addCompanyUrl = 'https://localhost:44373/api/AddCompany';
-
-            const addCompany = await axios // sends company ot backend
-                .post(addCompanyUrl, company, config)
+            const addCompany = await axios
+                .post(addCompanyUrl, company_info, config)
                 .then((response) => {
                     // Handle the response from the server
                     console.log(response.data);
-                    return response.data // returns company info as an object
+                    return response.data;
+                }).catch((error) => {
+                    console.log(error);
                 })
-            //#endregion
 
-            
-            if (addCompany != null) { 
-                // if addition of company is successful, it gets the company id that was generatad
-
-                //#region 2 --------------  Get CompanyId
+            if (addCompany != null) {
                 const getCompanyUrl = 'https://localhost:44373/api/GetCompany';
-                var result = null;
                 let param = {
                     "Email": CompanyData.Email,
-                    "Phone_Number": CompanyData.Phone_Number,
+                    "Phone_Number": CompanyData.Phone_Number
                 };
 
-                const company = await axios // get method
+                const company = await axios
                     .get(getCompanyUrl, {
                         method: 'GET',
                         headers: { 'Content-Type': 'application/json' },
                         params: param,
-                    })
-                    .then((response) => {
-                        result = response.data;
+                    }).then((response) => {
+                        var result = response.data;
                         if (result != null) {
                             if (result.length > 0) {
-                                //console.log(result[0]);
                                 let id = result[0].CompanyId;
-                                setCompanyId(id); // sets CompanyId variable
+                                setCompanyId(id);
 
-                                return result[0]; // returns the whole company object <---- what's being used in the program
+                                return result[0]
                             }
                         }
-                    })
-                    .catch(function (error) {
+                    }).catch((error) => {
                         console.log(error);
                     });
-                    //#endregion
 
-                if (company != null) { 
-                    // when company id or object is present, it will continue to add Value in Values Master then get the ValueId generated to use it with CompanyId to put to Company Values Table
+                if (company != null) {
 
-                    //#region 3.0 --------------   Add Company Value and Goals
-                    // urls declaration outside the loops to avoid re-declration
-                    var addValuesUrl = 'https://localhost:44373/api/AddValue';
-                    var getValuesUrl = 'https://localhost:44373/api/GetValueByTitleDescription'
-                    var addCompanyValueUrl = 'https://localhost:44373/api/AddCompanyValues';
 
-                    var addGoalsUrl = 'https://localhost:44373/api/AddGoal';
-                    var getGoalsUrl = 'https://localhost:44373/api/GetGoalByTitleDescription'
                     var addCompanyGoalUrl = 'https://localhost:44373/api/AddCompanyGoal';
 
-                     
-                    for (let x = 0; x < values.length; x++) { 
-                        //#region 3.1 --- Add Value To Master Table
+                    let values: { title: string; description: string; }[] = [ // ------------ needs to change once dynamically adding of values is there, might not be needed
+                        {
+                            title: CompanyData.CompanyValueTitle1,
+                            description: CompanyData.CompanyValueDescription1
+                        },
+                        {
+                            title: CompanyData.CompanyValueTitle2,
+                            description: CompanyData.CompanyValueDescription2
+                        },
+                    ];
+
+                    let goals: { title: string; description: string; durationTo: string; }[] = [ // ------------ needs to change once dynamically adding of values is there, might not be needed
+                        {
+                            title: CompanyData.CompanyGoalTitle1,
+                            description: CompanyData.CompanyGoalDescription1,
+                            durationTo: CompanyData.CompanyGoalCompletedBy1
+                        }
+                    ];
+
+
+                    for (let i = 0; i < values.length; i++) {
+                        var addValuesUrl = 'https://localhost:44373/api/AddValue';
                         let value = {
-                            "Title": values[x].title,
-                            "Description": values[x].description
+                            "Title": values[i].title,
+                            "Description": values[i].description
                         };
 
-                        // send value to backend
-                        const masterValue = await axios
+                        const toMasterValue = await axios
                             .post(addValuesUrl, value, config)
                             .then((response) => {
                                 // Handle the response from the server
                                 console.log(response.data);
                                 return response.data;
-                            })
-                        //#endregion
+                            }).catch((error) => {
+                                console.log(error)
+                            });
 
-                        //#region 3.2 --- Get the Value Id
-                        if (masterValue != null) {
-                            // if value successfully added to master, it will retrieve the generated value id
-                            var result = null;
-
-                            console.log(param)
+                        if (toMasterValue != null) {
+                            var getValuesUrl = 'https://localhost:44373/api/GetValueByTitleDescription'
                             const getValue = await axios
                                 .get(getValuesUrl, {
                                     method: 'GET',
@@ -299,7 +276,7 @@ const SignUp = () => {
                                     params: value,
                                 })
                                 .then((response) => {
-                                    result = response.data;
+                                    var result = response.data;
                                     if (result != null) {
                                         if (result.length > 0) {
                                             //console.log(result);
@@ -307,121 +284,102 @@ const SignUp = () => {
                                             return result[0]
                                         }
                                     }
+                                }).catch((error) => {
+                                    console.log(error)
                                 });
-                         //#endregion
 
-                        //#region 3.3 --- Add Company Value using ValueId from Master and CompanyId
                             if (getValue != null) {
-                                console.log("Value: " + value)
+                                var addCompanyValueUrl = 'https://localhost:44373/api/AddCompanyValues';
                                 let companyValue = {
-                                    "CompanyId": company.CompanyId,
+                                    "CompanyId": companyId,
                                     "ValueId": getValue.ValueId
                                 }
-                                console.log("Company Value: " + companyValue)
+
                                 axios
                                     .post(addCompanyValueUrl, companyValue, config)
                                     .then((response) => {
-                                        //console.log(response.data);
+                                        console.log(response.data);
+                                        console.log("Added company value")
                                     })
                                     .catch(function (error) {
                                         console.log(error)
                                     });
-                                }
+                            }
                         }
-                        //#endregion
                     }
-                    
 
-                    for (let x = 0; x < goals.length; x++) {
-                        //#region 3.4 --- Add Goals to Master Table
+                    for (let i = 0; i < goals.length; i++) {
+                        var addGoalsUrl = 'https://localhost:44373/api/AddGoal';
                         let goal = {
-                            "Title": goals[x].title,
-                            "Description": goals[x].description,
-                            "DurationTo": goals[x].durationTo
-                        };
-                        console.log(goal)
-                        // send to backend
+                            "Title": goals[i].title,
+                            "Description": goals[i].description,
+                            "DurationTo": goals[i].durationTo
+                        }
+
                         const masterGoal = await axios
                             .post(addGoalsUrl, goal, config)
                             .then((response) => {
                                 // Handle the response from the server
                                 //console.log(response.data);
                                 return response.data
-                            })
-                         //#endregion
+                            }).catch((error) => {
+                                console.log(error)
+                            });
 
-                        // #region 3.5 --- Get the GoalId
                         if (masterGoal != null) {
-                            var result = null;
-
+                            var getGoalsUrl = 'https://localhost:44373/api/GetGoalByTitleDescription'
                             const getGoal = await axios
                                 .get(getGoalsUrl, {
                                     method: 'GET',
                                     headers: { 'Content-Type': 'application/json' },
-                                    params: goal,
-                                })
-                                .then((response) => {
-                                    result = response.data;
+                                    params: goal
+                                }).then((response) => {
+                                    var result = response.data
                                     if (result != null) {
                                         if (result.length > 0) {
-                                            //console.log(result);
-
                                             return result[0]
                                         }
                                     }
+                                }).catch((error) => {
+                                    console.log(error)
                                 });
-                                //#endregion
 
-                        //#region 3.6 --- Add Company Goal using GoalId and CompanyId
                             if (getGoal != null) {
-                                console.log("Goal: "+goal)
                                 let companyGoal = {
-                                    CompanyId: company.CompanyId,
-                                    GoalId: getGoal.GoalId
+                                    "CompanyId": companyId,
+                                    "GoalId": getGoal.GoalId
                                 }
-                                console.log("Company Goal: " + companyGoal)
+
                                 axios
                                     .post(addCompanyGoalUrl, companyGoal, config)
                                     .then((response) => {
-                                        //console.log(response.data);
+                                        console.log(response.data);
+                                        console.log("Added company goals")
                                     })
                                     .catch(function (error) {
                                         console.log(error)
                                     });
                             }
-
-                            //#endregion
-
                         }
-                        
                     }
-                    
-                    //#endregion
+
+                    nextStep();
                 }
-                    
             }
-        }
-        catch (error) {
+
+        } catch (error) {
             // Handle network or other error
             console.error('An error occurred:', error);
         }
+    };
 
-        nextStep();
-
-    }
-
-    //Company Admin Sign Up
     const handleCompanyAdminSignUp = async () => {
-        const config = {
-            headers: { 'Content-Type': 'application/json' }
-        }
-
         let companyAdmin = {
             "First_Name": CompanyAdminData.AdminFirstName,
             "Middle_Name": CompanyAdminData.AdminMiddleName,
             "Last_Name": CompanyAdminData.AdminLastName,
             "Nickname": CompanyAdminData.AdminNickname,
-            "Email": CompanyAdminData.AdminEmail,
+            "Email": CompanyData.Email,
             "Phone_Number": CompanyAdminData.AdminPhoneNumber,
             "Address": CompanyAdminData.AdminAddress,
             "Birthday": CompanyAdminData.AdminBirthdate,
@@ -438,25 +396,22 @@ const SignUp = () => {
             "Support": CompanyAdminData.AdminSupport,
             "Other_Notes": CompanyAdminData.AdminOtherNotes
         }
-        var addCompanyAdminUrl = 'https://localhost:44373/api/AddEmployee'
 
         try {
+            var addCompanyAdminUrl = 'https://localhost:44373/api/AddEmployee'
             const addCompanyAdmin = await axios
                 .post(addCompanyAdminUrl, companyAdmin, config)
-                .then(response => {
-                    // Handle the response from the server
-                    console.log("adding to welby");
-                    console.log(response.data);
-                    return response.data;
-                }).catch(function (error) {
-                    console.log(error);
+                .then((response) => {
+                    console.log(response.data)
+                    return response.data
+                }).catch((error) => {
+                    console.log(error)
                 });
+
             if (addCompanyAdmin != null) {
                 const getCompanyAdminUrl = 'https://localhost:44373/api/GetAllEmployees';
-
-                var result = null;
                 let param = {
-                    "Email": CompanyAdminData.AdminEmail,
+                    "Email": CompanyData.Email,
                     "Phone_Number": CompanyAdminData.AdminPhoneNumber
                 }
 
@@ -467,7 +422,7 @@ const SignUp = () => {
                         params: param,
                     })
                     .then((response) => {
-                        result = response.data;
+                        var result = response.data;
                         if (result != null) {
                             if (result.length > 0) {
                                 console.log(result);
@@ -481,59 +436,55 @@ const SignUp = () => {
                     }).catch(function (error) {
                         console.log(error);
                     });
+
                 if (companyAdmin != null) {
+
                     const tokenUrl = 'http://localhost:58258/token';
                     let header = {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Access-Control-Allow-Origin': '*',
                     };
 
+                    const adminUserName = "Venancio"
+                    const adminUserPassword = "Jones"
+
                     const formData = new URLSearchParams();
                     formData.append('grant_type', 'password');
-                    formData.append('username', "micahangelachua@email.com");
-                    formData.append('password', "password");
+                    formData.append('username', adminUserName);
+                    formData.append('password', adminUserPassword);
 
                     const tokenResponse = await fetch(tokenUrl, {
                         method: 'POST',
                         headers: header,
                         body: formData,
                     }).then((res) => {
-                        console.log("adding to ows")
                         return res.json();
                     }).catch(function (error) {
                         console.log(error);
                     });
+
                     if (tokenResponse != null) {
                         var token = tokenResponse.access_token;
                         const addToOWSUrl = 'http://localhost:58258/api/AddSystemUsers';
 
-                        //const emailToHash = CompanyAdminData.AdminEmail; //supposedly email is encrypted too
-                        const passwordToHash = CompanyAdminData.AdminPassword;
-
-                        const saltRounds = 10;
-                        const salt = bcrypt.genSaltSync(saltRounds);
-
-                        //const hashedEmail = bcrypt.hashSync(emailToHash, salt);
-                        const hashedPassword = bcrypt.hashSync(passwordToHash, salt);
+                        const hashedPassword = await bcrypt.hash(CompanyAdminData.AdminPassword, 10)
 
                         let user = {
-                            "UserCode": companyAdmin.EmployeeId, // from WelbyAPI EmployeeId
-                            "UserName": CompanyAdminData.AdminEmail,
+                            "UserCode": companyAdminId,
+                            "UserName": CompanyData.Email,
                             "Password": hashedPassword,
-                            "AccountLocked": false,
-                            "LoggedIn": false,
+                            "AccountLocked": 0,
+                            "LoggedIn": 0,
                             "PasswordNoExpiry": null,
                             "ExpiryDays": null,
                             "AccountVerified": null,
                             "VerifiedDate": null,
-                            "CurrentOTP": null,
                             "Encoded_By": 24286,
                             "Active": true
                         }
 
                         axios
                             .post(addToOWSUrl, user, {
-                                timeout: 10000,
                                 headers: {
                                     'Authorization': `Bearer ${token}`,
                                     'Content-Type': 'application/json',
@@ -541,33 +492,23 @@ const SignUp = () => {
 
                             })
                             .then((response) => {
-                                console.log("added to ows");
                                 console.log(response.data);
+                                alert("Success! Log in to access your dashboard.")
+                                console.log("Successful")
+                                navigate('/')
                             })
                             .catch(function (error) {
                                 console.log(error)
                             });
                     }
-                    if (tokenResponse.ok) {
-                        // Handle successful API tokenResponse
-                        let json = tokenResponse;
-                        console.log('Signup successful');
-                    } else {
-                        // Handle API error
-                        console.error('Signup failed');
-                    }
+
                 }
             }
 
+        } catch (error) {
+            console.log('An error ocurred:', error)
         }
-        catch (error) {
-            // Handle network or other error
-            console.error('An error occurred:', error);
-        }
-
-        navigate('/');
     }
-    
 
     // ------------------------------------------ FRONT-END ------------------------------------------
     return (
@@ -585,13 +526,13 @@ const SignUp = () => {
                             </MainFormButton>
                         )}
                         {currentStepIndex === 3 ? (
-                            <MainFormButton width="50%" onClickEvent={handleCompanySignUp}>
+                            <MainFormButton width="50%" onClickEvent={companySignUp}>
                                 <Text>Proceed to Admin Sign Up</Text>
                             </MainFormButton>
                         ) : (
                             <MainFormButton
                                 width="25%"
-                                onClickEvent={currentStepIndex === steps.length - 1 ? handleCompanyAdminSignUp : nextStep}
+                                    onClickEvent={currentStepIndex === steps.length - 1 ? companyAdminSignUp : nextStep}
                             >
                                 <Text>{isLastStep ? 'SUBMIT' : 'NEXT'}</Text>
                             </MainFormButton>

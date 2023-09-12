@@ -9,7 +9,7 @@ import MainFormCard from '../../components/Main/FormCard';
 import MainFormTextbox from '../../components/Main/FormTextbox';
 import MainFormButton from '../../components/Main/FormButton';
 import axios from 'axios';
-import * as bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs'
 
 const Login = () => {
     // navigate
@@ -18,6 +18,9 @@ const Login = () => {
     const { userId, setUserId } = useUserContext();
     const [UserName, setUserName] = useState('');
     const [Password, setPassword] = useState('');
+
+    const adminUserName = "Venancio";
+    const adminUserPassword = "Jones";
 
     const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserName(e.target.value);
@@ -36,10 +39,11 @@ const Login = () => {
 
         const formData = new URLSearchParams();
         formData.append('grant_type', 'password');
-        formData.append('username', UserName);
-        formData.append('password', Password);
+        formData.append('username', adminUserName);
+        formData.append('password', adminUserPassword);
 
         try {
+
             const tokenResponse = await fetch(tokenUrl, {
                 method: 'POST',
                 headers: header,
@@ -52,55 +56,55 @@ const Login = () => {
                 var loginUrl = 'http://localhost:58258/api/GetSystemUsers';
                 var result = null;
 
-                // retrieve hashedPassword from database and compare to enteredPassword.
 
                 let param = {
-                    "UserId": 0, // Identity Key
-                    "UserCode": "", // FK from referencing from Registration table
                     "UserName": UserName,// Username
-                    "Password": "",
-                    "CurrentOTP": null,
-                    "PageNo": 0,
-                    "PageSize": 0,
                     "Active": true
                 };
                 axios
                     .get(loginUrl, {
                         method: 'GET',
                         headers: {
-                            Authorization: `Bearer ${token}`,
+                            'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json',
                         },
                         params: param,
                     })
                     .then((response) => {
                         result = response.data;
+                        console.log(result)
                         if (result != null) {
                             if (result.length > 0) {
-                                console.log(result)
+                                let id = result[0].UserId
+                                setUserId(id)
+
+                                const storedPassword = result[0].Password; // Use the same salt rounds used during registration
+
+                                bcrypt.compare(Password, storedPassword, (err, result) => {
+                                    if (err) {
+                                        // Handle error
+                                        alert(err)
+                                        console.log(err)
+                                    } else if (result === true) {
+                                        // Passwords match; login is successful
+                                        //alert("PasswordMatch")
+                                        
+                                        navigate('/dashboard', { state: userId});
+                                    } else {
+                                        // Passwords do not match; login failed
+                                        alert("WrongPassword")
+                                    }
+                                });
+
                                 
-                                const password = bcrypt.compareSync(Password, result[0].Password)
-                                if (password) {
-                                    const id = result[0].UserCode
-                                    setUserId(id);
-                                    navigate('/dashboard', { state: userId }); // For Navigating into the Dashboard Page
-                                }
-                                else {
-                                    console.log("Wrong Password");
-                                }
+                                
                             }
                         }
+                    }).catch(function (error) {
+                        console.log(error);
                     });
             }
 
-            if (tokenResponse.ok) {
-                // Handle successful API tokenResponse
-                let json = tokenResponse;
-                console.log('Login successful');
-            } else {
-                // Handle API error
-                console.error('Login failed');
-            }
 
 
         } catch (error) {
@@ -109,7 +113,7 @@ const Login = () => {
         }
     };
 
-    
+
     const tempLogin = () => {
         navigate('/dashboard');
     };
@@ -153,7 +157,7 @@ const Login = () => {
                     <Center>
                         <MainFormButton
                             width={['70%', '50%', '50%']}
-                            onClickEvent={handleLogin}
+                            onClickEvent={tempLogin}
                         >
                             Login
                         </MainFormButton>

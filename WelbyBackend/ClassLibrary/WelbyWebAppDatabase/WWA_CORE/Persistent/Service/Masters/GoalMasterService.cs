@@ -29,7 +29,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                     Description = goalMasterViewModel.Description,
                     DurationFrom = globalFunctions.GetServerDateTime(),
                     DurationTo = goalMasterViewModel.DurationTo,
-                    
+
                     Active = true,
                     Encoded_By = goalMasterViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),
@@ -116,7 +116,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Description = Convert.ToString(row["Description"]),
                 DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
                 DurationTo = DBNull.Value != row["DurationTo"] ? (DateTime?)row["DurationTo"] : null,
-                
+
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

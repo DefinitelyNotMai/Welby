@@ -36,11 +36,19 @@ type Country = {
     Active: boolean;
 };
 
+const COUNTRY_DATA: Country = {
+    CountryId: '',
+    Name: '',
+    Nationality: '',
+    Flag_Image: '',
+    Active: true,
+}
+
 const Countries = () => {
     document.title = "Countries | Welby";
 
     const [countries, setCountries] = useState<Country[]>([]);
-
+    const [countryData, setCountryData] = useState<Country>(COUNTRY_DATA);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);

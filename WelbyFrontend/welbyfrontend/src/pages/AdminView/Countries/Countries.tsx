@@ -33,6 +33,7 @@ type Country = {
     Name: string;
     Nationality: string;
     Flag_Image: string;
+    Active: boolean;
 };
 
 const Countries = () => {

@@ -105,6 +105,7 @@ const Countries = () => {
 
     const handleRowClick = (country: Country) => {
         setSelectedCountry(country);
+        setCountryData({ ...country });
         setIsFormOpen(true);
     };
 

@@ -129,6 +129,7 @@ const Countries = () => {
             duration: 5000,
             isClosable: true,
         });
+        console.log(countryData);
         setIsFormOpen(false);
         setIsUpdateButtonClicked(false);
         setSelectedCountry(null);
@@ -261,13 +262,19 @@ const Countries = () => {
                                         </Flex>
                                         <Flex flexDirection="column">
                                             <FormItem label="Name">
-                                                <Textbox defaultValue={selectedCountry.Name} />
+                                            <Textbox
+                                                value={countryData.Name}
+                                                onChange={(e) => setCountryData({ ...countryData, Name: e.target.value })}
+                                            />
                                             </FormItem>
                                         </Flex>
                                     </Grid>
                                     <Flex alignContent="center">
                                         <FormItem label="Nationality">
-                                            <Textbox defaultValue={selectedCountry.Nationality} />
+                                            <Textbox
+                                                value={countryData.Nationality}
+                                                onChange={(e) => setCountryData({ ...countryData, Nationality: e.target.value })}
+                                            />
                                         </FormItem>
                                     </Flex>
                                 </>

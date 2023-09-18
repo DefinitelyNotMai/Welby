@@ -1,1 +1,0 @@
-export { CompanyMasterPanel, IndustryTypePanel } from './ContentPanels';

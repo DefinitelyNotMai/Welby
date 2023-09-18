@@ -526,13 +526,13 @@ const SignUp = () => {
                             </MainFormButton>
                         )}
                         {currentStepIndex === 3 ? (
-                            <MainFormButton width="50%" onClickEvent={companySignUp}>
+                            <MainFormButton width="50%" onClickEvent={handleCompanyRegistration}>
                                 <Text>Proceed to Admin Sign Up</Text>
                             </MainFormButton>
                         ) : (
                             <MainFormButton
                                 width="25%"
-                                    onClickEvent={currentStepIndex === steps.length - 1 ? companyAdminSignUp : nextStep}
+                                    onClickEvent={currentStepIndex === steps.length - 1 ? handleCompanyAdminSignUp : nextStep}
                             >
                                 <Text>{isLastStep ? 'SUBMIT' : 'NEXT'}</Text>
                             </MainFormButton>

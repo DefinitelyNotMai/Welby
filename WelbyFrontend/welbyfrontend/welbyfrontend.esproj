@@ -12,10 +12,19 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\build</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\components\AdminView\Forms\" />
     <Folder Include="src\components\Dashboard\Profile\Header\" />
     <Folder Include="src\components\Dashboard\Profile\Card\" />
     <Folder Include="src\components\Dashboard\Profile\CardHeader\" />
     <Folder Include="src\hooks\" />
+    <Folder Include="src\pages\AdminView\Companies\" />
+    <Folder Include="src\pages\AdminView\Countries\" />
+    <Folder Include="src\pages\AdminView\Goals\" />
+    <Folder Include="src\pages\AdminView\Genders\" />
+    <Folder Include="src\pages\AdminView\IndustryTypes\" />
+    <Folder Include="src\pages\AdminView\Employees\" />
+    <Folder Include="src\pages\AdminView\Values\" />
+    <Folder Include="src\pages\AdminView\Strengths\" />
     <Folder Include="src\pages\Employee\SignUp\" />
     <Folder Include="src\pages\Login\" />
     <Folder Include="src\pages\SignUp\" />

@@ -1,32 +1,41 @@
-import { Flex } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { useUserContext } from '../../context/UserContext';
-import { LuLayoutDashboard } from 'react-icons/lu';
-import { AiOutlineTeam } from 'react-icons/ai';
-import { MdOutlineBusinessCenter } from 'react-icons/md';
+// ui and utility imports
+import { Box, Flex } from '@chakra-ui/react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { AiOutlineTeam } from 'react-icons/ai';
+import { LuLayoutDashboard } from 'react-icons/lu';
+import { MdOutlineBusinessCenter } from 'react-icons/md';
+import { useUserContext } from '../../context/UserContext';
+
+// components
 import DashboardHeader from '../../components/Dashboard/Header';
-import DashboardSidebar from '../../components/Dashboard/Sidebar';
-import DashboardSidebarItem from '../../components/Dashboard/SidebarItem';
+import Sidebar from '../../components/Sidebar';
+import SidebarItem from '../../components/SidebarItem';
+
+// pages
 import MyDashboard from './MyDashboard';
 import MyTeam from './MyTeam';
 import OurCompany from './OurCompany/OurCompany';
 
-type ComponentName = 'My Dashboard' | 'My Team' | 'Our Company';
+type ContentMapping = {
+    [key: string]: React.ReactNode;
+};
 
 const Dashboard = () => {
-    const [activeItem, setActiveItem] = useState<ComponentName>('My Dashboard');
+    document.title = 'Dashboard | Welby';
+
     const { userId } = useUserContext();
+    const [selectedItem, setSelectedItem] = useState<string | null>('MyDashboard');
     const [Nickname, setNickname] = useState('');
 
-    const handleItemClick = (itemName: ComponentName) => {
-        setActiveItem(itemName);
+    const handleItemClick = (itemName: string) => {
+        setSelectedItem(itemName);
     };
 
-    const components: Record<ComponentName, JSX.Element> = {
-        'My Dashboard': <MyDashboard />,
-        'My Team': <MyTeam />,
-        'Our Company': <OurCompany />,
+    const contentMapping: ContentMapping = {
+        MyDashboard: <MyDashboard />,
+        MyTeam: <MyTeam />,
+        OurCompany: <OurCompany />,
     };
 
     useEffect(() => {
@@ -57,36 +66,36 @@ const Dashboard = () => {
 
 
     return (
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" backgroundColor="#f2f2f2" minH="full" minW="full">
             <DashboardHeader name={Nickname} />
             <Flex flexDirection="row">
-                <DashboardSidebar>
-                    <DashboardSidebarItem
+                <Sidebar>
+                    <SidebarItem
                         icon={LuLayoutDashboard}
-                        color={activeItem === 'My Dashboard' ? '#89b4fa' : '#bcbcbc'}
-                        onClick={() => handleItemClick('My Dashboard')}
+                        color={selectedItem === 'MyDashboard' ? '#89b4fa' : '#bcbcbc'}
+                        onClick={() => handleItemClick('MyDashboard')}
                     >
                         My Dashboard
-                    </DashboardSidebarItem>
-                    <DashboardSidebarItem
+                    </SidebarItem>
+                    <SidebarItem
                         icon={AiOutlineTeam}
-                        color={activeItem === 'My Team' ? '#89b4fa' : '#bcbcbc'}
-                        onClick={() => handleItemClick('My Team')}
+                        color={selectedItem === 'MyTeam' ? '#89b4fa' : '#bcbcbc'}
+                        onClick={() => handleItemClick('MyTeam')}
                     >
                         My Team
-                    </DashboardSidebarItem>
-                    <DashboardSidebarItem
+                    </SidebarItem>
+                    <SidebarItem
                         icon={MdOutlineBusinessCenter}
-                        color={activeItem === 'Our Company' ? '#89b4fa' : '#bcbcbc'}
-                        onClick={() => handleItemClick('Our Company')}
+                        color={selectedItem === 'OurCompany' ? '#89b4fa' : '#bcbcbc'}
+                        onClick={() => handleItemClick('OurCompany')}
                     >
                         Our Company
-                    </DashboardSidebarItem>
-                </DashboardSidebar>
+                    </SidebarItem>
+                </Sidebar>
 
-                <Flex flexDirection="column" bg="#f2f2f2" height="100vh" width="100vw">
-                    {components[activeItem]}
-                </Flex>
+                <Box overflow="hidden" flex="1">
+                    {selectedItem && contentMapping[selectedItem]}
+                </Box>
             </Flex>
         </Flex>
     );

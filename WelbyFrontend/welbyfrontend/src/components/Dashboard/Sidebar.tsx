@@ -9,7 +9,7 @@ const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
     return (
         <Flex
             flexDirection="column"
-            h="100%"
+            h="full"
             borderRight="2px solid #ebebeb"
             pr="10"
         >

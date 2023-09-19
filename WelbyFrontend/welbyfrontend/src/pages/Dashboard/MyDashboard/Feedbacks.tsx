@@ -1,9 +1,10 @@
 import Card from "../../../components/Dashboard/Card";
 
 const Feedbacks = () => {
+    document.title = "Feedbacks | Welby";
+
     return (
         <>
-            <Card title="Feedbacks">Placeholder Text</Card>
         </>
     );
 };

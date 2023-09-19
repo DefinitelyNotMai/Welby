@@ -7,52 +7,42 @@ import Notifications from './Notifications';
 import Overview from './Overview';
 import Wellbeing from './Well-being';
 
-type ComponentName = 'Dashboard Overview' | 'Dashboard Notifications' | 'Dashboard Well-being' | 'Dashboard Feedbacks';
+type ContentMapping = {
+    [key: string]: React.ReactNode;
+};
 
 const MyDashboard = () => {
-    const [activeItem, setActiveItem] = useState<ComponentName>('Dashboard Overview');
+    const [selectedItem, setSelectedItem] = useState<string | null>('Overview');
 
-    const handleItemClick = (itemName: ComponentName) => {
-        setActiveItem(itemName);
+    const handleItemClick = (itemName: string) => {
+        setSelectedItem(itemName);
     };
 
-    const components: Record<ComponentName, JSX.Element> = {
-        'Dashboard Overview': <Overview />,
-        'Dashboard Notifications': <Notifications />,
-        'Dashboard Well-being': <Wellbeing />,
-        'Dashboard Feedbacks': <Feedbacks />,
+    const contentMapping: ContentMapping = {
+        Overview: <Overview />,
+        WellBeing: <Wellbeing />,
+        //Notifications: <Notifications />,
+        //Feedbacks: <Feedbacks />,
     };
     return (
         <Flex flexDirection="column">
             <DashboardTab>
                 <DashboardTabItem
-                    color={activeItem === 'Dashboard Overview' ? '#89b4fa' : '#bcbcbc'}
-                    onClick={() => handleItemClick('Dashboard Overview')}
+                    color={selectedItem === 'Overview' ? '#89b4fa' : '#bcbcbc'}
+                    onClick={() => handleItemClick('Overview')}
                 >
                     Overview
                 </DashboardTabItem>
                 <DashboardTabItem
-                    color={activeItem === 'Dashboard Notifications' ? '#89b4fa' : '#bcbcbc'}
-                    onClick={() => handleItemClick('Dashboard Notifications')}
-                >
-                    Notifications
-                </DashboardTabItem>
-                <DashboardTabItem
-                    color={activeItem === 'Dashboard Well-being' ? '#89b4fa' : '#bcbcbc'}
-                    onClick={() => handleItemClick('Dashboard Well-being')}
+                    color={selectedItem === 'WellBeing' ? '#89b4fa' : '#bcbcbc'}
+                    onClick={() => handleItemClick('WellBeing')}
                 >
                     Well-being
-                </DashboardTabItem>
-                <DashboardTabItem
-                    color={activeItem === 'Dashboard Feedbacks' ? '#89b4fa' : '#bcbcbc'}
-                    onClick={() => handleItemClick('Dashboard Feedbacks')}
-                >
-                    Feedbacks
                 </DashboardTabItem>
             </DashboardTab>
 
             <Flex flexDirection="column" mt="4" ml="4">
-                {components[activeItem]}
+                {selectedItem && contentMapping[selectedItem]}
             </Flex>
         </Flex>
     );

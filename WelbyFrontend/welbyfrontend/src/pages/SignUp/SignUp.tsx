@@ -387,7 +387,7 @@ const SignUp = () => {
             "Facebook": CompanyAdminData.AdminFacebook,
             "Instagram": CompanyAdminData.AdminInstagram,
             "TikTok": CompanyAdminData.AdminTikTok,
-            //"ProfilePhoto": CompanyAdminData.AdminProfilePhoto,
+            "ProfilePhoto": CompanyAdminData.AdminProfilePhoto,
             "GenderId": CompanyAdminData.AdminGender,
             "CompanyId": companyId,
             "CountryId": CompanyAdminData.AdminCountryId,
@@ -508,6 +508,15 @@ const SignUp = () => {
         } catch (error) {
             console.log('An error ocurred:', error)
         }
+    }
+
+    function addRole(id:string) {
+        var addRoleUrl = 'http://localhost:58258/api/MapSystemUsersToSecurityGroupMapping'
+        let parameter = {
+            //to add parameters here
+        }
+
+        //add axios here
     }
 
     // ------------------------------------------ FRONT-END ------------------------------------------

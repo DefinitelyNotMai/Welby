@@ -33,10 +33,16 @@ type Interest = {
     Name: string;
 };
 
+const INTEREST_DATA: Interest = {
+    InterestId: '',
+    Name: '',
+}
+
 const Interests = () => {
     document.title = "Interests | Welby";
 
     const [interests, setInterests] = useState<Interest[]>([]);
+    const [interestData, setInterestData] = useState<Interest>(INTEREST_DATA)
     const [selectedInterest, setSelectedInterest] = useState<Interest | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -45,6 +51,12 @@ const Interests = () => {
     const itemsPerPage = 10;
 
     const toast = useToast();
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
 
     useEffect(() => {
         const fetchInterests = async () => {
@@ -97,41 +109,81 @@ const Interests = () => {
     };
 
     const handleAddInterest = () => {
-        toast({
-            title: 'Interest added.',
-            description: `${selectedInterest?.Name} has been added.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setSelectedInterest(null);
+        const interest = {
+            "Name": interestData.Name
+        }
+
+        var addInterestUrl = 'https://localhost:44373/api/AddInterest'
+
+        axios
+            .post(addInterestUrl, interest, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Interest added.',
+                    description: `${interestData.Name} has been added.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setSelectedInterest(null);
+            })
+       
     };
 
     const handleUpdateInterest = () => {
-        toast({
-            title: 'Interest updated.',
-            description: `${selectedInterest?.Name} has been updated.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setIsUpdateButtonClicked(false);
-        setSelectedInterest(null);
+        const interest = {
+            "InterestId": selectedInterest?.InterestId,
+        }
+
+        var updateInterestUrl = 'https://localhost:44373/api/UpdateInterest'
+
+        axios
+            .patch(updateInterestUrl, interest, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Interest updated.',
+                    description: `${selectedInterest?.Name} has been updated.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setIsUpdateButtonClicked(false);
+                setSelectedInterest(null);
+            }).catch((error) => {
+                console.log(error)
+            });
+        
     };
 
     const handleDeleteInterest = () => {
-        toast({
-            title: 'Interest deleted.',
-            description: `${selectedInterest?.Name} has been deleted.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setIsDeleteButtonClicked(false);
-        setSelectedInterest(null);
+        const interest = {
+            "InterestId": selectedInterest?.InterestId,
+        }
+
+        var deleteInterestUrl = 'https://localhost:44373/api/RemoveInterest'
+
+        axios
+            .patch(deleteInterestUrl, interest, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Interest deleted.',
+                    description: `Interest with InterestId:${selectedInterest?.InterestId} has been deleted.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setIsDeleteButtonClicked(false);
+                setSelectedInterest(null);
+            }).catch((error) => {
+                console.log(error)
+            });
+        
     };
 
     return (
@@ -244,7 +296,10 @@ const Interests = () => {
                                         </Flex>
                                         <Flex flexDirection="column">
                                             <FormItem label="Name">
-                                                <Textbox defaultValue={selectedInterest.Name} />
+                                                <Textbox
+                                                    value={selectedInterest.Name}
+                                                    onChange={(e) => setInterestData({...interestData, Name: e.target.value}) }
+                                                />
                                             </FormItem>
                                         </Flex>
                                     </Grid>

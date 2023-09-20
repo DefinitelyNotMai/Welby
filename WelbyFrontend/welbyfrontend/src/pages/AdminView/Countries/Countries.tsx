@@ -58,6 +58,12 @@ const Countries = () => {
 
     const toast = useToast();
 
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
     useEffect(() => {
         const fetchCountries = async () => {
             try {
@@ -109,43 +115,93 @@ const Countries = () => {
         setIsFormOpen(true);
     };
 
-    const handleAddCountry = () => {
-        toast({
-            title: 'Country added.',
-            description: `${selectedCountry?.Name} has been added.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setSelectedCountry(null);
+    const handleAddCountry =  () => {
+        const country = {
+            "Name": selectedCountry?.Name,
+            "Nationality": selectedCountry?.Nationality,
+            "Flag_Image": selectedCountry?.Flag_Image,
+            "Encoded_By": 24287 // need to change this once roles are set in sign up.
+        }
+
+        var addCountryUrl = 'https://localhost:44373/api/AddCountry'
+
+        axios
+            .post(addCountryUrl, country, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Country added.',
+                    description: `${countryData.Name} has been added.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setSelectedCountry(null);
+            }).catch((error) => {
+                console.log(error)
+            });
     };
 
     const handleUpdateCountry = () => {
-        toast({
-            title: 'Country updated.',
-            description: `${selectedCountry?.Name} has been updated.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        console.log(countryData);
-        setIsFormOpen(false);
-        setIsUpdateButtonClicked(false);
-        setSelectedCountry(null);
+        const country = {
+            "CountryId": countryData.CountryId,
+            "Name": countryData.Name,
+            "Nationality": countryData.Nationality,
+            "Flag_Image": countryData.Flag_Image,
+            "Active": 1,
+            "Encoded_By": 24287 // need to change this once roles are set in sign up.
+        }
+
+        var updateCountryUrl = 'https://localhost:44373/api/UpdateCountry'
+
+        axios
+            .patch(updateCountryUrl, country, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Country updated.',
+                    description: `${selectedCountry?.Name} has been updated.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setIsUpdateButtonClicked(false);
+                setSelectedCountry(null);
+            }).catch((error) => {
+                console.log(error)
+            });
+
+        
     };
 
     const handleDeleteCountry = () => {
-        toast({
-            title: 'Country deleted.',
-            description: `${selectedCountry?.Name} has been deleted.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setIsDeleteButtonClicked(false);
-        setSelectedCountry(null);
+        const country = {
+            "CountryId": selectedCountry?.CountryId,
+            "Encoded_By": 24287 // need to change this once roles are set in sign up.
+        }
+
+        var deleteCountryUrl = 'https://localhost:44373/api/RemoveCountry'
+
+        axios
+            .patch(deleteCountryUrl, country, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Country deleted.',
+                    description: `${selectedCountry?.Name} has been deleted.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setIsDeleteButtonClicked(false);
+                setSelectedCountry(null);
+            }).catch((error) => {
+                console.log(error)
+            });
+        // need to reload set of datas after changes
     };
 
     return (

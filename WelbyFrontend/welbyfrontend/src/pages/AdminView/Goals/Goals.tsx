@@ -22,6 +22,14 @@ type Goal = {
     DurationTo: string;
 };
 
+const GOAL_DATA: Goal = {
+    GoalId: 0,
+    Title: '',
+    Description: '',
+    DurationFrom: '',
+    DurationTo: '',
+}
+
 const Goals = () => {
     document.title = "Goals | Welby";
 

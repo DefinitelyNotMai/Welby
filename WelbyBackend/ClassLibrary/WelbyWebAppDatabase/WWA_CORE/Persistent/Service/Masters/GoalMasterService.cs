@@ -54,7 +54,7 @@ namespace WWA_CORE.Persistent.Service.Masters
         {
             var query = new SqlQueryObject
             {
-                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_PAGEWISE_GET,
+                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_GET,
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {

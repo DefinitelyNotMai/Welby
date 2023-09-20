@@ -43,16 +43,38 @@ type Company = {
     FoundingDate: string;
 };
 
+const COMPANY_DATA: Company = {
+    CompanyId: '',
+    Name: '',
+    Email: '',
+    Phone_Number: '',
+    Website: '',
+    Address: '',
+    Vision: '',
+    Mission: '',
+    Logo: '',
+    CountryId: '',
+    IndustryTypeId: '',
+    FoundingDate: '',
+}
+
 const Companies = () => {
     document.title = 'Companies | Welby';
 
     const [companies, setCompanies] = useState<Company[]>([]);
+    const [companyData, setCompanyData] = useState<Company>(COMPANY_DATA)
     const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
 
     const toast = useToast();
 
@@ -107,41 +129,107 @@ const Companies = () => {
     };
 
     const handleAddCompany = () => {
-        toast({
-            title: 'Company added.',
-            description: `${selectedCompany?.Name} has been added.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setSelectedCompany(null);
+        const company = {
+            "Name": companyData.Name,
+            "Email": companyData.Email,
+            "Phone_Number": companyData.Phone_Number,
+            "Website": companyData.Website,
+            "Address": companyData.Address,
+            "Vision": companyData.Vision,
+            "Mission": companyData.Mission,
+            "Logo": companyData.Logo,
+            "CountryId": companyData.CountryId,
+            "IndustryTypeId": companyData.IndustryTypeId,
+            "FoundingDate": companyData.FoundingDate,
+        }
+
+        var addCompanyUrl = 'https://localhost:44373/api/AddCompany'
+
+        axios
+            .post(addCompanyUrl, company, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Company added.',
+                    description: `${companyData.Name} has been added.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setSelectedCompany(null);
+            }).catch((error) => {
+                console.log(error)
+            });
+        
     };
 
     const handleUpdateCompany = () => {
-        toast({
-            title: 'Company updated.',
-            description: `${selectedCompany?.Name} has been updated.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setIsUpdateButtonClicked(false);
-        setSelectedCompany(null);
+        const company = {
+            "CompanyId": selectedCompany?.CompanyId,
+            "Name": companyData.Name,
+            "Email": companyData.Email,
+            "Phone_Number": companyData.Phone_Number,
+            "Website": companyData.Website,
+            "Address": companyData.Address,
+            "Vision": companyData.Vision,
+            "Mission": companyData.Mission,
+            "Logo": companyData.Logo,
+            "CountryId": companyData.CountryId,
+            "IndustryTypeId": companyData.IndustryTypeId,
+            "FoundingDate": companyData.FoundingDate,
+            "Active": 1,
+            "Encoded_By": 24287
+
+        }
+
+        var updateCompanyUrl = 'https://localhost:44373/api/UpdateCompany'
+
+        axios
+            .patch(updateCompanyUrl, company, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Company updated.',
+                    description: `Company with CompanyId: ${selectedCompany?.CompanyId} has been updated.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setIsUpdateButtonClicked(false);
+                setSelectedCompany(null);
+            }).catch((error) => {
+                console.log(error)
+            });
+       
     };
 
     const handleDeleteCompany = () => {
-        toast({
-            title: 'Company deleted.',
-            description: `${selectedCompany?.Name} has been deleted.`,
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
-        setIsFormOpen(false);
-        setIsDeleteButtonClicked(false);
-        setSelectedCompany(null);
+        const company = {
+            "CompanyId": selectedCompany?.CompanyId,
+            "Encoded_By": 24287
+        }
+
+        var deleteCompanyUrl = 'https://localhost:44373/api/RemoveCompany'
+
+        axios
+            .patch(deleteCompanyUrl, company, config)
+            .then((response) => {
+                console.log(response.data)
+                toast({
+                    title: 'Company deleted.',
+                    description: `Company with CompanyId:${selectedCompany?.CompanyId} has been deleted.`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setIsFormOpen(false);
+                setIsDeleteButtonClicked(false);
+                setSelectedCompany(null);
+            }).catch((error) => {
+                console.log(error)
+            });
     };
 
     return (
@@ -272,33 +360,60 @@ const Companies = () => {
                                                 />
                                             </FormItem>
                                             <FormItem label="Email">
-                                                <Textbox defaultValue={selectedCompany.Email} />
+                                                <Textbox
+                                                    value={selectedCompany.Email}
+                                                    onChange={(e) => setCompanyData({...companyData, Email: e.target.value})}
+                                                />
                                             </FormItem>
                                             <FormItem label="Website">
-                                                <Textbox defaultValue={selectedCompany.Website} />
+                                                <Textbox
+                                                    value={selectedCompany.Website}
+                                                    onChange={(e) => setCompanyData({...companyData, Website: e.target.value})}
+                                                />
                                             </FormItem>
                                             <FormItem label="Vision">
-                                                <Textbox defaultValue={selectedCompany.Vision} />
+                                                <Textbox
+                                                    value={selectedCompany.Vision}
+                                                    onChange={(e) => setCompanyData({ ...companyData, Vision: e.target.value }) }
+                                                />
                                             </FormItem>
                                             <FormItem label="CountryId">
-                                                <Textbox defaultValue={selectedCompany.CountryId} />
+                                                <Textbox 
+                                                    value={selectedCompany.CountryId}
+                                                    onChange={(e) => setCompanyData({ ...companyData, CountryId: e.target.value })}
+                                                 />
                                             </FormItem>
                                         </Flex>
                                         <Flex flexDirection="column">
                                             <FormItem label="Name">
-                                                <Textbox defaultValue={selectedCompany.Name} />
+                                                <Textbox 
+                                                    value={selectedCompany.Name}
+                                                    onChange={(e) => setCompanyData({ ...companyData, Name: e.target.value })}
+                                                />
                                             </FormItem>
                                             <FormItem label="Phone_Number">
-                                                <Textbox defaultValue={selectedCompany.Phone_Number} />
+                                                <Textbox 
+                                                    value={selectedCompany.Phone_Number}
+                                                    onChange={(e) => setCompanyData({ ...companyData, Phone_Number: e.target.value })}
+                                                />
                                             </FormItem>
                                             <FormItem label="Address">
-                                                <Textbox defaultValue={selectedCompany.Address} />
+                                                <Textbox  
+                                                    value={selectedCompany.Address}
+                                                    onChange={(e) => setCompanyData({ ...companyData, Address: e.target.value })}
+                                                />
                                             </FormItem>
                                             <FormItem label="Mission">
-                                                <Textbox defaultValue={selectedCompany.Mission} />
+                                                <Textbox  
+                                                    value={selectedCompany.Mission}
+                                                    onChange={(e) => setCompanyData({ ...companyData, Mission: e.target.value })}
+                                                />
                                             </FormItem>
                                             <FormItem label="IndustryTypeId">
-                                                <Textbox defaultValue={selectedCompany.IndustryTypeId} />
+                                                <Textbox  
+                                                    value={selectedCompany.IndustryTypeId}
+                                                    onChange={(e) => setCompanyData({ ...companyData, IndustryTypeId: e.target.value })}
+                                                />
                                             </FormItem>
                                         </Flex>
                                     </Grid>
@@ -306,7 +421,8 @@ const Companies = () => {
                                         <FormItem label="FoundingDate">
                                             <Textbox
                                                 type="datetime-local"
-                                                defaultValue={selectedCompany.FoundingDate}
+                                                value={selectedCompany.FoundingDate}
+                                                onChange={(e) => setCompanyData({ ...companyData, FoundingDate: e.target.value })}
                                             />
                                         </FormItem>
                                     </Flex>

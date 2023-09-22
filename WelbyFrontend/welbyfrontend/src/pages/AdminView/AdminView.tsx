@@ -46,8 +46,7 @@ const AdminView = () => {
     };
 
     return (
-        <Flex direction="column" backgroundColor="#f2f2f2" minH="100vh" minW="full">
-            <Flex flexDirection="column" h="full">
+        <Flex direction="column" backgroundColor="#f2f2f2" minH="full" minW="full">
                 <Header />
                 <Flex flexDirection="row">
                     <Sidebar>
@@ -131,7 +130,6 @@ const AdminView = () => {
                     </Box>
                 </Flex>
             </Flex>
-        </Flex>
     );
 };
 

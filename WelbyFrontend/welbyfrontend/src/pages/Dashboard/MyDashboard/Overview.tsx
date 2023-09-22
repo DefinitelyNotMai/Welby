@@ -46,7 +46,6 @@ const Overview = () => {
 
     useEffect(() => {
         // Fetch data from the database and store the values in variables.
-
         //const autonomyValue = data.autonomy;
         //const focusAtWorkValue = data.focusAtWork;
         //const positiveEmotionValue = data.positiveEmotion;
@@ -54,7 +53,6 @@ const Overview = () => {
         //const autonomyPillarValue = data.autonomyPillar;
         //const competencePillarValue = data.competencePillar;
         //const connectionPillarValue = data.connectionPillar;
-
         //setAutonomyData(autonomyValue);
         //setFocusAtWorkData(focusAtWorkValue);
         //setPositiveEmotionData(positiveEmotionValue);

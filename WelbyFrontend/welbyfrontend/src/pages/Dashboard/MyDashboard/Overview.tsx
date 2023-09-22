@@ -1,26 +1,27 @@
-import { Flex, Icon } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Flex, Icon } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 
 // icons
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { BsPerson } from "react-icons/bs";
+import { AiOutlineQuestionCircle } from 'react-icons/ai';
+import { BsPerson } from 'react-icons/bs';
 import { CiDumbbell } from 'react-icons/ci';
-import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
-import { GiHummingbird, GiMeshNetwork } from "react-icons/gi";
+import { FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa';
+import { GiHummingbird, GiMeshNetwork } from 'react-icons/gi';
 import { TbTargetArrow } from 'react-icons/tb';
 
 // components
-import CustomButton from "../../../components/Button";
-import ChartDoughnut from "../../../components/Dashboard/ChartDoughnut";
-import Card from "../../../components/Dashboard/Card";
-import Section from "../../../components/Dashboard/Section";
+import CustomButton from '../../../components/Button';
+import ChartDoughnut from '../../../components/Dashboard/ChartDoughnut';
+import Card from '../../../components/Dashboard/Card';
+import Section from '../../../components/Dashboard/Section';
 
 type Wellbeing = {
     Autonomy: number;
 };
 
 const Overview = () => {
-    document.title = "Overview | Welby";
+    document.title = 'Overview | Welby';
+
     const [autonomyData, setAutonomyData] = useState(0);
     const [focusAtWorkData, setFocusAtWorkData] = useState(0);
     const [positiveEmotionData, setPositiveEmotionData] = useState(0);

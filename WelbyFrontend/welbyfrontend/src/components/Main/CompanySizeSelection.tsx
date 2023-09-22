@@ -1,44 +1,11 @@
-import { useEffect, useState, ChangeEvent } from 'react';
 import { Select } from '@chakra-ui/react';
-import axios from 'axios';
 
-// property names need to be the same as column names
-interface CompanySize {
-    CompanySize: string;
-    Name: string;
-}
-
-type CompanySizeSelectProps = {
+type SelectCompanySizeProps = {
     value: string;
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+};
 
-const CompanySizeSelect = ({ value, onChange }: CompanySizeSelectProps): JSX.Element => {
-    const [companySizes, setCompanySize] = useState<CompanySize[]>([]);
-
-    useEffect(() => {
-        const fetchCompanySizes = async () => {
-            try {
-                var companySizeUrl = 'https://localhost:44373/api/GetCompanies';
-                var companySize = null;
-                let param = { "Active": 1 };
-
-                axios.get(companySizeUrl, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                    params: param
-                }).then(response => {
-                    companySize = response.data;
-                    setCompanySize(companySize);
-                })
-            } catch (error) {
-                console.error('Error fetching countries:', error);
-            }
-        };
-
-        fetchCompanySizes();
-    }, []);
-
+const SelectCompanySize = ({ value, onChange }: SelectCompanySizeProps) => {
     return (
         <Select
             placeholder="Choose your Company Size"
@@ -50,13 +17,18 @@ const CompanySizeSelect = ({ value, onChange }: CompanySizeSelectProps): JSX.Ele
             onChange={onChange}
             value={value}
         >
-            {companySizes.map((companySize) => (
-                <option key={companySize.CompanySize} value={companySize.CompanySize}>
-                    {companySize.Name}
-                </option>
-            ))}
+            <option value="1-5">1 - 5</option>
+            <option value="6-10">6 - 10</option>
+            <option value="11-15">11 - 15</option>
+            <option value="16-20">16 - 20</option>
+            <option value="21-30">21 - 30</option>
+            <option value="31-40">31 - 40</option>
+            <option value="41-50">41 - 50</option>
+            <option value="51-100">51 - 100</option>
+            <option value="more than 100">more than 100</option>
         </Select>
     );
 };
 
-export default CompanySizeSelect;
+export default SelectCompanySize;
+

@@ -14,6 +14,8 @@ import CustomButton from '../../../components/Button';
 import ChartDoughnut from '../../../components/Dashboard/ChartDoughnut';
 import Card from '../../../components/Dashboard/Card';
 import Section from '../../../components/Dashboard/Section';
+import DailyCheckIn from '../../../components/Form/DailyCheckIn';
+import QuarterlyAssessment from '../../../components/Form/QuarterlyAssessment';
 
 type Wellbeing = {
     Autonomy: number;
@@ -22,6 +24,10 @@ type Wellbeing = {
 const Overview = () => {
     document.title = 'Overview | Welby';
 
+    const [isDailyCheckInOpen, setIsDailyCheckInOpen] = useState(false);
+    const [isQuarterlyAssessmentOpen, setIsQuarterlyAssessmentOpen] =
+        useState(false);
+
     const [autonomyData, setAutonomyData] = useState(0);
     const [focusAtWorkData, setFocusAtWorkData] = useState(0);
     const [positiveEmotionData, setPositiveEmotionData] = useState(0);
@@ -29,6 +35,14 @@ const Overview = () => {
     const [autonomyPillarData, setAutonomyPillarData] = useState(0);
     const [competencePillarData, setCompetencePillarData] = useState(0);
     const [connectionPillarData, setConnectionPillarData] = useState(0);
+
+    const toggleDailyCheckIn = () => {
+        setIsDailyCheckInOpen(!isDailyCheckInOpen);
+    };
+
+    const toggleQuarterlyAssessment = () => {
+        setIsQuarterlyAssessmentOpen(!isQuarterlyAssessmentOpen);
+    };
 
     useEffect(() => {
         // Fetch data from the database and store the values in variables.
@@ -55,7 +69,17 @@ const Overview = () => {
             <Section
                 mb="4"
                 title="How is your well-being at work?"
-                headerComponents={[<CustomButton color="#ffffff">Do Daily Check-in</CustomButton>, <Icon as={AiOutlineQuestionCircle} boxSize="8" color="#24a2f0" mr="32" />]}
+                headerComponents={[
+                    <CustomButton color="#ffffff" onClick={toggleDailyCheckIn}>
+                        Do Daily Check-in
+                    </CustomButton>,
+                    <Icon
+                        as={AiOutlineQuestionCircle}
+                        boxSize="8"
+                        color="#24a2f0"
+                        mr="32"
+                    />,
+                ]}
             >
                 <Flex flexDirection="row" justifyContent="space-between">
                     {/*<Card icon={BsPerson} dataValue={80} title="Autonomy" />*/}
@@ -71,7 +95,17 @@ const Overview = () => {
             <Section
                 mb="4"
                 title="How are the pillars of your ability to thrive at this work?"
-                headerComponents={[<CustomButton color="#ffffff">Take Quarterly Assessment</CustomButton>, <Icon as={AiOutlineQuestionCircle} boxSize="8" color="#24a2f0" mr="32" />]}
+                headerComponents={[
+                    <CustomButton color="#ffffff" onClick={toggleQuarterlyAssessment}>
+                        Take Quarterly Assessment
+                    </CustomButton>,
+                    <Icon
+                        as={AiOutlineQuestionCircle}
+                        boxSize="8"
+                        color="#24a2f0"
+                        mr="32"
+                    />,
+                ]}
             >
                 <Flex flexDirection="row" justifyContent="space-between">
                     {/*<ChartDoughnut dataValue={75} icon={GiHummingbird} title="Autonomy" />*/}
@@ -82,6 +116,19 @@ const Overview = () => {
                     <ChartDoughnut dataValue={connectionPillarData} icon={GiMeshNetwork} title="Connection" />
                 </Flex>
             </Section>
+
+            {isDailyCheckInOpen && (
+                <DailyCheckIn
+                    isOpen={isDailyCheckInOpen}
+                    onClose={toggleDailyCheckIn}
+                />
+            )}
+            {isQuarterlyAssessmentOpen && (
+                <QuarterlyAssessment
+                    isOpen={isQuarterlyAssessmentOpen}
+                    onClose={toggleQuarterlyAssessment}
+                />
+            )}
         </>
     );
 };

@@ -63,6 +63,7 @@ type CompanyAdminFormData = {
     AdminInstagram: string;
     AdminLinkedIn: string;
     AdminTikTok: string;
+    AdminProfilePhoto: string;
     AdminWork: string;
     AdminConnect: string;
     AdminSupport: string;
@@ -112,6 +113,7 @@ const COMPANY_ADMIN_INITIAL_DATA: CompanyAdminFormData = {
     AdminInstagram: '',
     AdminLinkedIn: '',
     AdminTikTok: '',
+    AdminProfilePhoto: '',
     AdminWork: '',
     AdminConnect: '',
     AdminSupport: '',

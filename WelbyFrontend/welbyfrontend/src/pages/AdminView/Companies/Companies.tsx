@@ -66,6 +66,7 @@ const Companies = () => {
     const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -162,7 +163,7 @@ const Companies = () => {
             }).catch((error) => {
                 console.log(error)
             });
-        
+
     };
 
     const handleUpdateCompany = () => {
@@ -203,7 +204,7 @@ const Companies = () => {
             }).catch((error) => {
                 console.log(error)
             });
-       
+
     };
 
     const handleDeleteCompany = () => {
@@ -233,10 +234,34 @@ const Companies = () => {
             });
     };
 
+    const resetCompanyData = () => {
+        setCompanyData({
+            CompanyId: '',
+            Name: '',
+            Email: '',
+            Phone_Number: '',
+            Website: '',
+            Address: '',
+            Vision: '',
+            Mission: '',
+            Logo: '',
+            CountryId: '',
+            IndustryTypeId: '',
+            FoundingDate: '',
+        });
+    };
+
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton
@@ -245,6 +270,7 @@ const Companies = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}
                 >
@@ -257,6 +283,7 @@ const Companies = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}
                 >
@@ -333,10 +360,114 @@ const Companies = () => {
 
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetCompanyData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Company
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <UploadPhoto label="Logo" />
+                                <Grid templateColumns="1fr 1fr" gap="4" mt="4">
+                                    <Flex flexDirection="column">
+                                        <FormItem label="CompanyId" w="25%">
+                                            <Textbox
+                                                defaultValue={companyData.CompanyId}
+                                                isDisabled
+                                            />
+                                        </FormItem>
+                                        <FormItem label="Email">
+                                            <Textbox
+                                                value={companyData.Email}
+                                                onChange={(e) => setCompanyData({ ...companyData, Email: e.target.value })}
+                                            />
+                                        </FormItem>
+                                        <FormItem label="Website">
+                                            <Textbox
+                                                value={companyData.Website}
+                                                onChange={(e) => setCompanyData({ ...companyData, Website: e.target.value })}
+                                            />
+                                        </FormItem>
+                                        <FormItem label="Vision">
+                                            <Textbox
+                                                value={companyData.Vision}
+                                                onChange={(e) => setCompanyData({ ...companyData, Vision: e.target.value })}
+                                            />
+                                        </FormItem>
+                                        <FormItem label="CountryId">
+                                            <Textbox
+                                                value={companyData.CountryId}
+                                                onChange={(e) => setCompanyData({ ...companyData, CountryId: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                    <Flex flexDirection="column">
+                                        <FormItem label="Name">
+                                            <Textbox
+                                                value={companyData.Name}
+                                                onChange={(e) => setCompanyData({ ...companyData, Name: e.target.value })}
+                                            />
+                                        </FormItem>
+                                        <FormItem label="Phone_Number">
+                                            <Textbox
+                                                value={companyData.Phone_Number}
+                                                onChange={(e) => setCompanyData({ ...companyData, Phone_Number: e.target.value })}
+                                            />
+                                        </FormItem>
+                                        <FormItem label="Address">
+                                            <Textbox
+                                                value={companyData.Address}
+                                                onChange={(e) => setCompanyData({ ...companyData, Address: e.target.value })}
+                                            />
+                                        </FormItem>
+                                        <FormItem label="Mission">
+                                            <Textbox
+                                                value={companyData.Mission}
+                                                onChange={(e) => setCompanyData({ ...companyData, Mission: e.target.value })}
+                                            />
+                                        </FormItem>
+                                        <FormItem label="IndustryTypeId">
+                                            <Textbox
+                                                value={companyData.IndustryTypeId}
+                                                onChange={(e) => setCompanyData({ ...companyData, IndustryTypeId: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                </Grid>
+                                <Flex alignContent="center">
+                                    <FormItem label="FoundingDate">
+                                        <Textbox
+                                            type="datetime-local"
+                                            value={companyData.FoundingDate}
+                                            onChange={(e) => setCompanyData({ ...companyData, FoundingDate: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                            </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddCompany}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader
@@ -363,55 +494,55 @@ const Companies = () => {
                                             <FormItem label="Email">
                                                 <Textbox
                                                     value={selectedCompany.Email}
-                                                    onChange={(e) => setCompanyData({...companyData, Email: e.target.value})}
+                                                    onChange={(e) => setCompanyData({ ...companyData, Email: e.target.value })}
                                                 />
                                             </FormItem>
                                             <FormItem label="Website">
                                                 <Textbox
                                                     value={selectedCompany.Website}
-                                                    onChange={(e) => setCompanyData({...companyData, Website: e.target.value})}
+                                                    onChange={(e) => setCompanyData({ ...companyData, Website: e.target.value })}
                                                 />
                                             </FormItem>
                                             <FormItem label="Vision">
                                                 <Textbox
                                                     value={selectedCompany.Vision}
-                                                    onChange={(e) => setCompanyData({ ...companyData, Vision: e.target.value }) }
+                                                    onChange={(e) => setCompanyData({ ...companyData, Vision: e.target.value })}
                                                 />
                                             </FormItem>
                                             <FormItem label="CountryId">
-                                                <Textbox 
+                                                <Textbox
                                                     value={selectedCompany.CountryId}
                                                     onChange={(e) => setCompanyData({ ...companyData, CountryId: e.target.value })}
-                                                 />
+                                                />
                                             </FormItem>
                                         </Flex>
                                         <Flex flexDirection="column">
                                             <FormItem label="Name">
-                                                <Textbox 
+                                                <Textbox
                                                     value={selectedCompany.Name}
                                                     onChange={(e) => setCompanyData({ ...companyData, Name: e.target.value })}
                                                 />
                                             </FormItem>
                                             <FormItem label="Phone_Number">
-                                                <Textbox 
+                                                <Textbox
                                                     value={selectedCompany.Phone_Number}
                                                     onChange={(e) => setCompanyData({ ...companyData, Phone_Number: e.target.value })}
                                                 />
                                             </FormItem>
                                             <FormItem label="Address">
-                                                <Textbox  
+                                                <Textbox
                                                     value={selectedCompany.Address}
                                                     onChange={(e) => setCompanyData({ ...companyData, Address: e.target.value })}
                                                 />
                                             </FormItem>
                                             <FormItem label="Mission">
-                                                <Textbox  
+                                                <Textbox
                                                     value={selectedCompany.Mission}
                                                     onChange={(e) => setCompanyData({ ...companyData, Mission: e.target.value })}
                                                 />
                                             </FormItem>
                                             <FormItem label="IndustryTypeId">
-                                                <Textbox  
+                                                <Textbox
                                                     value={selectedCompany.IndustryTypeId}
                                                     onChange={(e) => setCompanyData({ ...companyData, IndustryTypeId: e.target.value })}
                                                 />

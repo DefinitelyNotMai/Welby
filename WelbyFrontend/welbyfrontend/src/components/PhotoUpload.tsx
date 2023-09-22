@@ -8,7 +8,7 @@ type UploadPhotoProps = {
     value?: string;
 };
 
-const UploadPhoto = ({ label }: UploadPhotoProps) => {
+const UploadPhoto = ({ label, value }: UploadPhotoProps) => {
     const [fileBase64, setFileBase64] = useState<string>('');
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -83,6 +83,7 @@ const UploadPhoto = ({ label }: UploadPhotoProps) => {
                 ref={fileInputRef}
                 style={{ display: 'none' }}
                 onChange={(e) => convertFile(e.target.files)}
+                value={value}
             />
         </Flex>
     );

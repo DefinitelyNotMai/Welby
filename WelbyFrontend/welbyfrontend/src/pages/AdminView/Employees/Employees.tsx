@@ -82,6 +82,7 @@ const Employees = () => {
     const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -188,7 +189,7 @@ const Employees = () => {
 
     const handleUpdateEmployee = () => {
         const employee = {
-            "EmployeeId":selectedEmployee?.EmployeeId,
+            "EmployeeId": selectedEmployee?.EmployeeId,
             "First_Name": employeeData.First_Name,
             "Middle_Name": employeeData.Middle_Name,
             "Last_Name": employeeData.Last_Name,
@@ -264,7 +265,14 @@ const Employees = () => {
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton
@@ -273,6 +281,7 @@ const Employees = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}
                 >
@@ -285,6 +294,7 @@ const Employees = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}
                 >
@@ -380,6 +390,149 @@ const Employees = () => {
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Country
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <UploadPhoto label="Profile_Photo" />
+                            <Grid templateColumns="1fr 1fr" gap="4" mt="4">
+                                <Flex flexDirection="column">
+                                    <FormItem label="EmployeeId" w="25%">
+                                        <Textbox
+                                            defaultValue={employeeData.EmployeeId}
+                                            isDisabled
+                                        />
+                                    </FormItem>
+                                    <FormItem label="First_Name">
+                                        <Textbox
+                                            value={employeeData.First_Name}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, First_Name: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="Middle_Name">
+                                        <Textbox
+                                            value={employeeData.Middle_Name}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, Middle_Name: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                                <Flex flexDirection="column">
+                                    <FormItem label="Nickname">
+                                        <Textbox
+                                            value={employeeData.Nickname}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, Nickname: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="Last_Name">
+                                        <Textbox
+                                            value={employeeData.Last_Name}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, Last_Name: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="Birthday">
+                                        <Textbox
+                                            type="datetime-local"
+                                            value={employeeData.Birthday}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, Birthday: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                            </Grid>
+                            <Flex flexDirection="column">
+                                <FormItem label="Address">
+                                    <Textbox
+                                        value={employeeData.Address}
+                                        onChange={(e) => setEmployeeData({ ...employeeData, Address: e.target.value })}
+                                    />
+                                </FormItem>
+                                <FormItem label="Email">
+                                    <Textbox
+                                        value={employeeData.Email}
+                                        onChange={(e) => setEmployeeData({ ...employeeData, Email: e.target.value })}
+                                    />
+                                </FormItem>
+                                <FormItem label="Phone_Number">
+                                    <Textbox
+                                        value={employeeData.Phone_Number}
+                                        onChange={(e) => setEmployeeData({ ...employeeData, Phone_Number: e.target.value })}
+                                    />
+                                </FormItem>
+                            </Flex>
+                            <Grid templateColumns="1fr 1fr" gap="4" mt="4">
+                                <Flex flexDirection="column">
+                                    <FormItem label="Linkedin" w="25%">
+                                        <Textbox
+                                            value={employeeData.Linkedin}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, Linkedin: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="Facebook">
+                                        <Textbox
+                                            value={employeeData.Facebook}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, Facebook: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                                <Flex flexDirection="column">
+                                    <FormItem label="Instagram">
+                                        <Textbox
+                                            value={employeeData.Instagram}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, Instagram: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="TikTok">
+                                        <Textbox
+                                            value={employeeData.TikTok}
+                                            onChange={(e) => setEmployeeData({ ...employeeData, TikTok: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                            </Grid>
+                            <Flex flexDirection="column">
+                                <FormItem label="Work">
+                                    <Textbox
+                                        value={employeeData.Work}
+                                        onChange={(e) => setEmployeeData({ ...employeeData, Work: e.target.value })}
+                                    />
+                                </FormItem>
+                                <FormItem label="Connect">
+                                    <Textbox
+                                        value={employeeData.Connect}
+                                        onChange={(e) => setEmployeeData({ ...employeeData, Connect: e.target.value })}
+                                    />
+                                </FormItem>
+                                <FormItem label="Support">
+                                    <Textbox
+                                        value={employeeData.Support}
+                                        onChange={(e) => setEmployeeData({ ...employeeData, Support: e.target.value })}
+                                    />
+                                </FormItem>
+                                <FormItem label="Other_Notes">
+                                    <Textbox
+                                        value={employeeData.Other_Notes}
+                                        onChange={(e) => setEmployeeData({ ...employeeData, Other_Notes: e.target.value })}
+                                    />
+                                </FormItem>
+                            </Flex>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsUpdateButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddEmployee}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader
@@ -388,7 +541,7 @@ const Employees = () => {
                             textAlign="center"
                             color="#ffffff"
                         >
-                        Update Country
+                            Update Country
                         </ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
@@ -398,7 +551,7 @@ const Employees = () => {
                                     <Grid templateColumns="1fr 1fr" gap="4" mt="4">
                                         <Flex flexDirection="column">
                                             <FormItem label="EmployeeId" w="25%">
-                                                <Textbox 
+                                                <Textbox
                                                     defaultValue={selectedEmployee.EmployeeId}
                                                     isDisabled
                                                 />

@@ -1,5 +1,5 @@
-import { Center, Card, Icon, Text, Flex } from '@chakra-ui/react';
-import { Chart as ChartJS, ArcElement } from 'chart.js';
+import { Card, Center, Flex, Icon, Text } from '@chakra-ui/react';
+import { ArcElement, Chart as ChartJS } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement);

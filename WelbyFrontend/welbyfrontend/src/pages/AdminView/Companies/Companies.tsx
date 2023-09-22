@@ -141,6 +141,7 @@ const Companies = () => {
             "CountryId": companyData.CountryId,
             "IndustryTypeId": companyData.IndustryTypeId,
             "FoundingDate": companyData.FoundingDate,
+            "Encoded_By": 24287,
         }
 
         var addCompanyUrl = 'https://localhost:44373/api/AddCompany'

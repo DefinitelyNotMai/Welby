@@ -110,7 +110,8 @@ const Interests = () => {
 
     const handleAddInterest = () => {
         const interest = {
-            "Name": interestData.Name
+            "Name": interestData.Name,
+            "Encoded_By": 24287,
         }
 
         var addInterestUrl = 'https://localhost:44373/api/AddInterest'
@@ -135,6 +136,9 @@ const Interests = () => {
     const handleUpdateInterest = () => {
         const interest = {
             "InterestId": selectedInterest?.InterestId,
+            "Name": interestData.Name,
+            "Active": 1,
+            "Encoded_By": 24287,
         }
 
         var updateInterestUrl = 'https://localhost:44373/api/UpdateInterest'

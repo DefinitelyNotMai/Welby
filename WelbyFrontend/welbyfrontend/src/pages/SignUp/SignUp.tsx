@@ -387,7 +387,7 @@ const SignUp = () => {
             "Facebook": CompanyAdminData.AdminFacebook,
             "Instagram": CompanyAdminData.AdminInstagram,
             "TikTok": CompanyAdminData.AdminTikTok,
-            "ProfilePhoto": CompanyAdminData.AdminProfilePhoto,
+            //"ProfilePhoto": CompanyAdminData.AdminProfilePhoto,
             "GenderId": CompanyAdminData.AdminGender,
             "CompanyId": companyId,
             "CountryId": CompanyAdminData.AdminCountryId,

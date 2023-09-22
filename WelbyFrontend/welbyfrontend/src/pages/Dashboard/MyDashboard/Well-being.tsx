@@ -57,10 +57,12 @@ const WellBeing = () => {
                 ]}
             >
                 <Flex flexDirection="column">
-                    <Flex flexDirection="row" justifyContent="space-between" mb="4">
-                    </Flex>
-                    <Flex flexDirection="row" justifyContent="space-between">
-                    </Flex>
+                    <Flex
+                        flexDirection="row"
+                        justifyContent="space-between"
+                        mb="4"
+                    ></Flex>
+                    <Flex flexDirection="row" justifyContent="space-between"></Flex>
                 </Flex>
             </Section>
             {isDailyCheckInOpen && (
@@ -80,4 +82,3 @@ const WellBeing = () => {
 };
 
 export default WellBeing;
-

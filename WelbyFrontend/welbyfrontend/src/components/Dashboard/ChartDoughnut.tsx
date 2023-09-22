@@ -51,6 +51,11 @@ const ChartDoughnut = ({
 
     const options = {
         cutout: '75%',
+        plugins: {
+            tooltip: {
+                enabled: false,
+            },
+        },
     };
 
     const textValue = getTextValue(dataValue);

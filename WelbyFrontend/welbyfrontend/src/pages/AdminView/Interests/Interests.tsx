@@ -129,6 +129,8 @@ const Interests = () => {
                 });
                 setIsFormOpen(false);
                 setSelectedInterest(null);
+            }).catch((error) => {
+                console.log(error)                                                        
             })
        
     };

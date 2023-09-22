@@ -21,6 +21,7 @@ import {
 import { TbFilePencil, TbFilePlus, TbTrash } from 'react-icons/tb';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import CustomButton from '../../../components/Button';
 import FormItem from '../../../components/Form/FormItem';
 import Textbox from '../../../components/Textbox';
@@ -126,6 +127,8 @@ const IndustryTypes = () => {
                 });
                 setIsFormOpen(false);
                 setSelectedIndustryType(null);
+            }).catch((error) => {
+                console.log(error)
             })
     }
 
@@ -235,7 +238,10 @@ const IndustryTypes = () => {
                     </Thead>
                     <Tbody>
                         {displayedIndustryTypes.map((industryType, index) => (
-                            <Tr key={index}>
+                            <Tr key={index}
+                                borderBottom="1px solid #ebebeb"
+                                onClick={() => (isUpdateButtonClicked || isDeleteButtonClicked) && handleRowClick(interest)}
+                            >
                                 <Td>{index + 1}</Td>
                                 <Td>{industryType.IndustryTypeId}</Td>
                                 <Td>{industryType.Industry_Name}</Td>
@@ -265,7 +271,7 @@ const IndustryTypes = () => {
                             textAlign="center"
                             color="#ffffff"
                         >
-                            UpdateGoal
+                            Update Industry Type
                         </ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
@@ -297,7 +303,7 @@ const IndustryTypes = () => {
                                     setIsUpdateButtonClicked(false);
                                 }}>Cancel
                                 </CustomButton>
-                                <CustomButton bg="#f0d124" onClick={handleUpdateIdustryType}>Update</CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleUpdateIndustryType}>Update</CustomButton>
                             </Flex>
                         </ModalBody>
                     </ModalContent>
@@ -310,7 +316,7 @@ const IndustryTypes = () => {
                             textAlign="center"
                             color="#ffffff"
                         >
-                            Delete Interest
+                            Delete Industry Type
                         </ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>

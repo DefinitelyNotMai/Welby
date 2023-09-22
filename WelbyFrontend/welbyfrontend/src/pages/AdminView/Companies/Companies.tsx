@@ -383,13 +383,7 @@ const Companies = () => {
                                 <UploadPhoto label="Logo" />
                                 <Grid templateColumns="1fr 1fr" gap="4" mt="4">
                                     <Flex flexDirection="column">
-                                        <FormItem label="CompanyId" w="25%">
-                                            <Textbox
-                                                defaultValue={companyData.CompanyId}
-                                                isDisabled
-                                            />
-                                        </FormItem>
-                                        <FormItem label="Email">
+                                        <FormItem label="Email" w="25%">
                                             <Textbox
                                                 value={companyData.Email}
                                                 onChange={(e) => setCompanyData({ ...companyData, Email: e.target.value })}

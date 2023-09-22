@@ -47,6 +47,8 @@ const Genders = () => {
     const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -190,6 +192,14 @@ const Genders = () => {
             }).catch((error) => {
                 console.log(error)
             });
+    };
+
+    const resetGenderData = () => {
+        setGenderData({
+            GenderId: '',
+            Gender: '',
+            Biological: '',
+        })
     }
 
     return (
@@ -268,9 +278,42 @@ const Genders = () => {
             </Flex>
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetGenderData();
+                }}
                 isCentered>
-                <ModalOverlay/>
+                <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent>
+                        <ModalHeader>
+                        Add Gender
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <Grid templateColumns="1fr 1fr" gap="4" mt="4">
+                                    <Flex flexDirection="column">
+                                        <FormItem label="Gender" w="25%">
+                                            <Textbox
+                                                value={genderData.Gender}
+                                                onChange={(e) => setGenderData({ ...genderData, Gender: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                    <Flex flexDirection="column">
+                                        <FormItem label="Biological">
+                                            <Textbox
+                                                value={genderData.Biological}
+                                                onChange={(e) => setGenderData({ ...genderData, Biological: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                </Grid>
+                            </>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                     {isUpdateButtonClicked && (
                         <ModalContent bg="#24a2f0" minW="50%">
                             <ModalHeader
@@ -295,9 +338,9 @@ const Genders = () => {
                                                 </FormItem>
                                             </Flex>
                                             <Flex flexDirection="column">
-                                                <FormItem label="Gender">
+                                            <FormItem label="Gender" w="25%">
                                                     <Textbox
-                                                        value={genderData.Gender}
+                                                    value={selectedGender.Gender}
                                                         onChange={(e) => setGenderData({ ...genderData, Gender: e.target.value })}
                                                     />
                                                 </FormItem>
@@ -305,7 +348,7 @@ const Genders = () => {
                                             <Flex flexDirection="column">
                                                 <FormItem label="Biological">
                                                     <Textbox
-                                                        value={genderData.Biological}
+                                                    value={selectedGender.Biological}
                                                         onChange={(e) => setGenderData({ ...genderData, Biological: e.target.value })}
                                                     />
                                                 </FormItem>

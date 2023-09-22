@@ -52,6 +52,8 @@ const Countries = () => {
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -204,6 +206,16 @@ const Countries = () => {
         // need to reload set of datas after changes
     };
 
+    const resetCountryData = () => {
+        setCountryData({
+            CountryId: '',
+            Name: '',
+            Nationality: '',
+            Flag_Image: '',
+            Active: true,
+        });
+    };
+
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
@@ -288,10 +300,57 @@ const Countries = () => {
 
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetCountryData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Country
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <UploadPhoto label="Logo" />
+                                <Grid templateColumns="1fr 1fr" gap="4" mt="4">
+                                    <Flex flexDirection="column">
+                                        <FormItem label="Name" w="25%">
+                                            <Textbox
+                                                value={countryData.Name}
+                                                onChange={(e) => setCountryData({ ...countryData, Name: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                    <Flex flexDirection="column">
+                                        <FormItem label="Nationality">
+                                            <Textbox
+                                                value={countryData.Nationality}
+                                                onChange={(e) => setCountryData({ ...countryData, Nationality: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                </Grid>
+                            </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddCountry}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader
@@ -319,7 +378,7 @@ const Countries = () => {
                                         <Flex flexDirection="column">
                                             <FormItem label="Name">
                                             <Textbox
-                                                value={countryData.Name}
+                                                value={selectedCountry?.Name}
                                                 onChange={(e) => setCountryData({ ...countryData, Name: e.target.value })}
                                             />
                                             </FormItem>
@@ -328,7 +387,7 @@ const Countries = () => {
                                     <Flex alignContent="center">
                                         <FormItem label="Nationality">
                                             <Textbox
-                                                value={countryData.Nationality}
+                                                value={selectedCountry?.Nationality}
                                                 onChange={(e) => setCountryData({ ...countryData, Nationality: e.target.value })}
                                             />
                                         </FormItem>

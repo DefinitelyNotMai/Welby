@@ -125,7 +125,7 @@ const Employees = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const startNumber = startIndex + 1;
-    const displayedCountries = employees.slice(startIndex, endIndex);
+    const displayedEmployees = employees.slice(startIndex, endIndex);
     const totalPages = Math.ceil(employees.length / itemsPerPage);
 
     const handleNextPage = () => {
@@ -262,6 +262,31 @@ const Employees = () => {
             });
     }
 
+    const resetEmployeesData = () => {
+        setEmployeeData({
+            EmployeeId: '',
+            First_Name: '',
+            Middle_Name: '',
+            Last_Name: '',
+            Nickname: '',
+            Email: '',
+            Phone_Number: '',
+            Address: '',
+            Birthday: '',
+            Linkedin: '',
+            Facebook: '',
+            Instagram: '',
+            TikTok: '',
+            Work: '',
+            Connect: '',
+            Support: '',
+            Other_Notes: '',
+            GenderId: '',
+            CompanyId: '',
+            CountryId: '',
+        })
+    }
+
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
@@ -343,7 +368,7 @@ const Employees = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {employees.map((employee, index) => (
+                        {displayedEmployees.map((employee, index) => (
                             <Tr key={index}
                                 borderBottom="1px solid #ebebeb"
                                 onClick={() => (isUpdateButtonClicked || isDeleteButtonClicked) && handleRowClick(employee)}
@@ -386,7 +411,10 @@ const Employees = () => {
 
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetEmployeesData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
@@ -405,13 +433,7 @@ const Employees = () => {
                             <UploadPhoto label="Profile_Photo" />
                             <Grid templateColumns="1fr 1fr" gap="4" mt="4">
                                 <Flex flexDirection="column">
-                                    <FormItem label="EmployeeId" w="25%">
-                                        <Textbox
-                                            defaultValue={employeeData.EmployeeId}
-                                            isDisabled
-                                        />
-                                    </FormItem>
-                                    <FormItem label="First_Name">
+                                    <FormItem label="First_Name" w="25%">
                                         <Textbox
                                             value={employeeData.First_Name}
                                             onChange={(e) => setEmployeeData({ ...employeeData, First_Name: e.target.value })}

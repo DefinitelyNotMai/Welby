@@ -26,7 +26,8 @@ ChartJS.register(
 const generateRandomNumbers = (count: number) => {
     const randomNumbers = [];
     for (let i = 0; i < count; i++) {
-        const randomNumber = Math.random() * 5; // Generates a random float between 0 and 5
+        const randomNumber = Math.floor(Math.random() * 5) + 1;
+
         randomNumbers.push(randomNumber);
     }
     return randomNumbers;

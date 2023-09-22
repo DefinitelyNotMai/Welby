@@ -47,89 +47,89 @@ const AdminView = () => {
 
     return (
         <Flex direction="column" backgroundColor="#f2f2f2" minH="full" minW="full">
-                <Header />
-                <Flex flexDirection="row">
-                    <Sidebar>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Countries' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Countries' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Countries')}
-                        >
-                            Countries
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Companies' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Companies' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Companies')}
-                        >
-                            Companies
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Interests' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Interests' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Interests')}
-                        >
-                            Interests
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Goals' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Goals' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Goals')}
-                        >
-                            Goals
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Genders' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Genders' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Genders')}
-                        >
-                            Genders
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Strengths' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Strengths' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Strengths')}
-                        >
-                            Strengths
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={
-                                selectedItem === 'IndustryTypes' ? '#24a2f0' : '#ffffff'
-                            }
-                            color={selectedItem === 'IndustryTypes' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('IndustryTypes')}
-                        >
-                            Industry Types
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Values' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Values' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Values')}
-                        >
-                            Values
-                        </SidebarItem>
-                        <SidebarItem
-                            borderLeft={selectedItem === 'Employees' ? '#24a2f0' : '#ffffff'}
-                            color={selectedItem === 'Employees' ? '#24a2f0' : '#bcbcbc'}
-                            icon={AiOutlineFolder}
-                            onClick={() => handleItemClick('Employees')}
-                        >
-                            Employees
-                        </SidebarItem>
-                    </Sidebar>
-                    <Box overflow="hidden" flex="1">
-                        {selectedItem && contentMapping[selectedItem]}
-                    </Box>
-                </Flex>
+            <Header />
+            <Flex flexDirection="row">
+                <Sidebar>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Countries' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Countries' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Countries')}
+                    >
+                        Countries
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Companies' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Companies' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Companies')}
+                    >
+                        Companies
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Interests' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Interests' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Interests')}
+                    >
+                        Interests
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Goals' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Goals' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Goals')}
+                    >
+                        Goals
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Genders' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Genders' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Genders')}
+                    >
+                        Genders
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Strengths' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Strengths' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Strengths')}
+                    >
+                        Strengths
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={
+                            selectedItem === 'IndustryTypes' ? '#24a2f0' : '#ffffff'
+                        }
+                        color={selectedItem === 'IndustryTypes' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('IndustryTypes')}
+                    >
+                        Industry Types
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Values' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Values' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Values')}
+                    >
+                        Values
+                    </SidebarItem>
+                    <SidebarItem
+                        borderLeft={selectedItem === 'Employees' ? '#24a2f0' : '#ffffff'}
+                        color={selectedItem === 'Employees' ? '#24a2f0' : '#bcbcbc'}
+                        icon={AiOutlineFolder}
+                        onClick={() => handleItemClick('Employees')}
+                    >
+                        Employees
+                    </SidebarItem>
+                </Sidebar>
+                <Box overflow="hidden" flex="1">
+                    {selectedItem && contentMapping[selectedItem]}
+                </Box>
             </Flex>
+        </Flex>
     );
 };
 

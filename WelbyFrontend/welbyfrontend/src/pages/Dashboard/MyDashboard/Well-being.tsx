@@ -1,11 +1,13 @@
-import { Flex, Icon } from "@chakra-ui/react";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import CustomButton from "../../../components/Button";
-import ChartBar from "../../../components/Dashboard/ChartBar";
-import Section from "../../../components/Dashboard/Section";
+import { Flex, Icon } from '@chakra-ui/react';
+import { useState } from 'react';
+import { AiOutlineQuestionCircle } from 'react-icons/ai';
+import CustomButton from '../../../components/Button';
+import ChartBar from '../../../components/Dashboard/ChartBar';
+import Section from '../../../components/Dashboard/Section';
 
 const WellBeing = () => {
-    document.title = "Well-being | Welby";
+    document.title = 'Well-being | Welby';
+
     return (
         <>
             <Section

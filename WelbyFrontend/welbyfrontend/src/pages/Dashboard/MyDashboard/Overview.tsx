@@ -85,9 +85,21 @@ const Overview = () => {
                     {/*<Card icon={FaRegThumbsUp} dataValue={55} title="Positive Emotion" />*/}
                     {/*<Card icon={FaRegThumbsDown} dataValue={25} title="Negative Emotion" />*/}
                     <Card icon={BsPerson} dataValue={autonomyData} title="Autonomy" />
-                    <Card icon={TbTargetArrow} dataValue={focusAtWorkData} title="Focus At Work" />
-                    <Card icon={FaRegThumbsUp} dataValue={positiveEmotionData} title="Positive Emotion" />
-                    <Card icon={FaRegThumbsDown} dataValue={negativeEmotionData} title="Negative Emotion" />
+                    <Card
+                        icon={TbTargetArrow}
+                        dataValue={focusAtWorkData}
+                        title="Focus At Work"
+                    />
+                    <Card
+                        icon={FaRegThumbsUp}
+                        dataValue={positiveEmotionData}
+                        title="Positive Emotion"
+                    />
+                    <Card
+                        icon={FaRegThumbsDown}
+                        dataValue={negativeEmotionData}
+                        title="Negative Emotion"
+                    />
                 </Flex>
             </Section>
             <Section
@@ -109,9 +121,21 @@ const Overview = () => {
                     {/*<ChartDoughnut dataValue={75} icon={GiHummingbird} title="Autonomy" />*/}
                     {/*<ChartDoughnut dataValue={45} icon={CiDumbbell} title="Competence" />*/}
                     {/*<ChartDoughnut dataValue={50} icon={GiMeshNetwork} title="Connection" />*/}
-                    <ChartDoughnut dataValue={autonomyPillarData} icon={GiHummingbird} title="Autonomy" />
-                    <ChartDoughnut dataValue={competencePillarData} icon={CiDumbbell} title="Competence" />
-                    <ChartDoughnut dataValue={connectionPillarData} icon={GiMeshNetwork} title="Connection" />
+                    <ChartDoughnut
+                        dataValue={autonomyPillarData}
+                        icon={GiHummingbird}
+                        title="Autonomy"
+                    />
+                    <ChartDoughnut
+                        dataValue={competencePillarData}
+                        icon={CiDumbbell}
+                        title="Competence"
+                    />
+                    <ChartDoughnut
+                        dataValue={connectionPillarData}
+                        icon={GiMeshNetwork}
+                        title="Connection"
+                    />
                 </Flex>
             </Section>
 

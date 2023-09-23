@@ -47,6 +47,8 @@ const Values = () => {
     const [selectedValue, setSelectedValue] = useState<Value | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -192,10 +194,25 @@ const Values = () => {
             });
     };
 
+    const resetValueData = () => {
+        setValueData({
+            ValueId: '',
+            Title: '',
+            Description: '',
+        })
+    };
+
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton
@@ -204,6 +221,7 @@ const Values = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}
                 >
@@ -216,6 +234,7 @@ const Values = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}
                 >
@@ -271,10 +290,52 @@ const Values = () => {
             </Flex>
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetValueData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Value
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <Flex flexDirection="column">
+                                    <FormItem label="Title" w="25%">
+                                        <Textbox
+                                            value={valueData.Title}
+                                            onChange={(e) => setValueData({ ...valueData, Title: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="Description">
+                                        <Textbox
+                                            value={valueData.Description}
+                                            onChange={(e) => setValueData({ ...valueData, Description: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                            </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddValue}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader

@@ -45,6 +45,8 @@ const IndustryTypes = () => {
     const [selectedIndustryType, setSelectedIndustryType] = useState<IndustryType | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -111,8 +113,8 @@ const IndustryTypes = () => {
         const industry = {
             "Industry_Name": industryTypeData.Industry_Name,
             "Encoded_By": 24287,
-        }
-        var addIndustryTypeUrl = 'https://localhost:44373/api/AddIndustryType'
+        };
+        var  addIndustryTypeUrl = 'https://localhost:44373/api/AddIndustryType'
 
         axios
             .post(addIndustryTypeUrl, industry, config)
@@ -129,8 +131,8 @@ const IndustryTypes = () => {
                 setSelectedIndustryType(null);
             }).catch((error) => {
                 console.log(error)
-            })
-    }
+            });
+    };
 
     const handleUpdateIndustryType = () => {
         const industry = {
@@ -157,12 +159,12 @@ const IndustryTypes = () => {
             }).catch((error) => {
                 console.log(error)
             });
-    }
+    };
 
     const handleDeleteIndustryType = () => {
         const industry = {
             "IndustryTypeId": selectedIndustryType?.IndustryTypeId,
-        }
+        };
 
         var deleteIndustryTypeUrl = 'https://localhost:44373/api/RemoveInterest'
 
@@ -183,13 +185,27 @@ const IndustryTypes = () => {
             }).catch((error) => {
                 console.log(error)
             });
-    }
+    };
+
+    const resetIndustryTypeData = () => {
+        setIndustryTypeData({
+            IndustryTypeId: '',
+            Industry_Name: '',
+        })
+    };
 
 
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton bg={isUpdateButtonClicked ? "#f0d124" : "#ffffff"}
@@ -197,6 +213,7 @@ const IndustryTypes = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}>
                     Update
@@ -208,6 +225,7 @@ const IndustryTypes = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}>
                     Delete
@@ -240,7 +258,7 @@ const IndustryTypes = () => {
                         {displayedIndustryTypes.map((industryType, index) => (
                             <Tr key={index}
                                 borderBottom="1px solid #ebebeb"
-                                onClick={() => (isUpdateButtonClicked || isDeleteButtonClicked) && handleRowClick(interest)}
+                                onClick={() => (isUpdateButtonClicked || isDeleteButtonClicked) && handleRowClick(industryType)}
                             >
                                 <Td>{index + 1}</Td>
                                 <Td>{industryType.IndustryTypeId}</Td>
@@ -260,10 +278,56 @@ const IndustryTypes = () => {
             </Flex>
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetIndustryTypeData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Industry Type
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <Grid templateColumns="1fr 1fr" gap="4" mt="4">
+                                    <Flex flexDirection="column">
+                                        <FormItem label="IndustryTypeId" w="25%">
+                                            <Textbox
+                                                defaultValue={industryTypeData.IndustryTypeId}
+                                                isDisabled
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                    <Flex flexDirection="column">
+                                        <FormItem label="IndustryType">
+                                            <Textbox
+                                                value={industryTypeData.Industry_Name}
+                                                onChange={(e) => setIndustryTypeData({ ...industryTypeData, Industry_Name: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                </Grid>
+                            </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddIndustryType}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader fontFamily="Montserrat"

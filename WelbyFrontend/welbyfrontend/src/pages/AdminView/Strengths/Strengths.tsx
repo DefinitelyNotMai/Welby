@@ -49,6 +49,8 @@ const Strengths = () => {
     const [selectedStrength, setSelectedStrength] = useState<Strength | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -138,7 +140,7 @@ const Strengths = () => {
                 console.log(error)
             });
 
-    }
+    };
 
     const handleUpdateStrength = () => {
         const strength = {
@@ -168,7 +170,7 @@ const Strengths = () => {
             }).catch((error) => {
                 console.log(error)
             });
-    }
+    };
 
     const handleDeleteStrength = () => {
         const strength = {
@@ -194,13 +196,29 @@ const Strengths = () => {
             }).catch((error) => {
                 console.log(error)
             });
+    };
+
+    const resetStrengthData = () => {
+        setStrengthData({
+            StrengthId: '',
+            Strength: '',
+            Category: '',
+            Description: '',
+        })
     }
 
 
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton
@@ -209,6 +227,7 @@ const Strengths = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}
                 >
@@ -221,6 +240,7 @@ const Strengths = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}
                 >
@@ -277,10 +297,65 @@ const Strengths = () => {
             </Flex>
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetStrengthData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Strength
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <Grid templateColumns="1fr 1fr" gap="4" mt="4">
+                                    <Flex flexDirection="column">
+                                        <FormItem label="Strength">
+                                            <Textbox
+                                                value={strengthData.Strength}
+                                                onChange={(e) => setStrengthData({ ...strengthData, Strength: e.target.value })}
+                                            />
+                                        </FormItem>
+
+                                    </Flex>
+                                    <Flex flexDirection="column">
+                                        <FormItem label="Category">
+                                            <Textbox
+                                                value={strengthData.Category}
+                                                onChange={(e) => setStrengthData({ ...strengthData, Category: e.target.value })}
+                                            />
+                                        </FormItem>
+                                    </Flex>
+                                </Grid>
+                                <Flex alignContent="center">
+                                    <FormItem label="Description">
+                                        <Textbox
+                                            value={strengthData.Description}
+                                            onChange={(e) => setStrengthData({ ...strengthData, Description: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>        
+                            </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddStrength}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader

@@ -547,7 +547,7 @@ const Employees = () => {
                             <Flex flexDirection="row-reverse">
                                 <CustomButton bg="#ffffff" ml="4" onClick={() => {
                                     setIsFormOpen(false);
-                                    setIsUpdateButtonClicked(false);
+                                    setIsAddButtonClicked(false);
                                 }}>Cancel
                                 </CustomButton>
                                 <CustomButton bg="#f0d124" onClick={handleAddEmployee}>Add</CustomButton>

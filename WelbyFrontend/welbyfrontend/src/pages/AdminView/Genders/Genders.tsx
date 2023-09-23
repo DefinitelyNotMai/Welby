@@ -205,7 +205,14 @@ const Genders = () => {
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton
@@ -214,6 +221,7 @@ const Genders = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}>
                     Update
@@ -225,6 +233,7 @@ const Genders = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}>
                     Delete
@@ -285,9 +294,14 @@ const Genders = () => {
                 isCentered>
                 <ModalOverlay />
                 {isAddButtonClicked && (
-                    <ModalContent>
-                        <ModalHeader>
-                        Add Gender
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Gender
                         </ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
@@ -311,6 +325,14 @@ const Genders = () => {
                                     </Flex>
                                 </Grid>
                             </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddGender}>Add</CustomButton>
+                            </Flex>
                         </ModalBody>
                     </ModalContent>
                 )}
@@ -340,7 +362,7 @@ const Genders = () => {
                                             <Flex flexDirection="column">
                                             <FormItem label="Gender" w="25%">
                                                     <Textbox
-                                                    value={selectedGender.Gender}
+                                                        value={selectedGender.Gender}
                                                         onChange={(e) => setGenderData({ ...genderData, Gender: e.target.value })}
                                                     />
                                                 </FormItem>
@@ -348,7 +370,7 @@ const Genders = () => {
                                             <Flex flexDirection="column">
                                                 <FormItem label="Biological">
                                                     <Textbox
-                                                    value={selectedGender.Biological}
+                                                        value={selectedGender.Biological}
                                                         onChange={(e) => setGenderData({ ...genderData, Biological: e.target.value })}
                                                     />
                                                 </FormItem>

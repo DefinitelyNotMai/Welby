@@ -51,6 +51,8 @@ const Goals = () => {
     const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null)
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -139,7 +141,7 @@ const Goals = () => {
             }).catch((error) => {
                 console.log(error)
             });
-    }
+    };
 
     const handleUpdateGoal = () => {
         const goal = {
@@ -150,7 +152,7 @@ const Goals = () => {
             //duration from is set in the api to the date and time it was added
             "Encoded_By": 24287,
             "Active": 1
-        }
+        };
 
         var updateGoalUrl = 'https://localhost:44373/api/UpdateGoal'
         axios
@@ -169,8 +171,8 @@ const Goals = () => {
                 setSelectedGoal(null);
             }).catch((error) => {
                 console.log(error)
-            })
-    }
+            });
+    };
 
     const handleDeleteGoal = () => {
         const goal = {
@@ -195,13 +197,30 @@ const Goals = () => {
                 setSelectedGoal(null);
             }).catch((error) => {
                 console.log(error)
-            })
+            });
+    };
+
+    const resetGoalData = () => {
+        setGoalData({
+            GoalId: '',
+            Title: '',
+            Description: '',
+            DurationFrom: '',
+            DurationTo: '',
+        })
     }
 
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton
@@ -210,6 +229,7 @@ const Goals = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}>
                     Update
@@ -221,6 +241,7 @@ const Goals = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}>
                     Delete
@@ -279,10 +300,59 @@ const Goals = () => {
             </Flex>
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetGoalData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg="#24a2f0" minW="50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Goal
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <Flex flexDirection="column">
+                                    <FormItem label="Title">
+                                        <Textbox
+                                            value={goalData.Title}
+                                            onChange={(e) => setGoalData({ ...goalData, Title: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="Description">
+                                        <Textbox
+                                            value={goalData.Description}
+                                            onChange={(e) => setGoalData({ ...goalData, Description: e.target.value })}
+                                        />
+                                    </FormItem>
+                                    <FormItem label="DurationTo">
+                                        <Textbox
+                                            type="datetime-local"
+                                            value={goalData.DurationTo}
+                                            onChange={(e) => setGoalData({ ...goalData, DurationTo: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                            </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddGoal}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader fontFamily="Montserrat"
@@ -305,13 +375,13 @@ const Goals = () => {
                                         </FormItem>
                                         <FormItem label="Title">
                                             <Textbox
-                                                value={goalData.Title}
+                                                value={selectedGoal.Title}
                                                 onChange={(e) => setGoalData({ ...goalData, Title: e.target.value })}
                                             />
                                         </FormItem>
                                         <FormItem label="Description">
                                             <Textbox
-                                                value={goalData.Description}
+                                                value={selectedGoal.Description}
                                                 onChange={(e) => setGoalData({ ...goalData, Description: e.target.value })}
                                             />
                                         </FormItem>
@@ -330,7 +400,7 @@ const Goals = () => {
                                             <FormItem label="DurationTo">
                                                 <Textbox
                                                     type="datetime-local"
-                                                    value={selectedGoal.DurationTo}
+                                                    value={selectedGoal?.DurationTo}
                                                     onChange={(e) => setGoalData({ ...goalData, DurationTo: e.target.value })}
                                                 />
                                             </FormItem>
@@ -338,6 +408,14 @@ const Goals = () => {
                                     </Grid>
                                 </>
                             )}
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsUpdateButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleUpdateGoal}>Update</CustomButton>
+                            </Flex>
                         </ModalBody>
                     </ModalContent>
                 )}

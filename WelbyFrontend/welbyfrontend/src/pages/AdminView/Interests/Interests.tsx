@@ -24,7 +24,6 @@ import axios from 'axios';
 
 import CustomButton from '../../../components/Button';
 import FormItem from '../../../components/Form/FormItem';
-import UploadPhoto from '../../../components/PhotoUpload';
 import Textbox from '../../../components/Textbox';
 import Pagination from '../../../components/AdminView/Pagination';
 
@@ -46,6 +45,8 @@ const Interests = () => {
     const [selectedInterest, setSelectedInterest] = useState<Interest | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [isAddButtonClicked, setIsAddButtonClicked] = useState(false);
     const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false);
     const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
     const itemsPerPage = 10;
@@ -192,10 +193,24 @@ const Interests = () => {
         
     };
 
+    const resetInterestData = () => {
+        setInterestData({
+            InterestId: '',
+            Name: '',
+        });
+    };
+
     return (
         <Flex flexDirection="column" w="full">
             <Flex flexDirection="row" m="4">
-                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4">
+                <CustomButton bg="#ffffff" icon={TbFilePlus} iconColor="#44a348" mr="4"
+                    onClick={() => {
+                        setIsAddButtonClicked(!isAddButtonClicked);
+                        setIsUpdateButtonClicked(false);
+                        setIsDeleteButtonClicked(false);
+                        setIsFormOpen(true);
+                    }}
+                >
                     Add
                 </CustomButton>
                 <CustomButton
@@ -204,6 +219,7 @@ const Interests = () => {
                     iconColor="#24a2f0"
                     onClick={() => {
                         setIsUpdateButtonClicked(!isUpdateButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsDeleteButtonClicked(false);
                     }}
                 >
@@ -216,6 +232,7 @@ const Interests = () => {
                     iconColor="#295555"
                     onClick={() => {
                         setIsDeleteButtonClicked(!isDeleteButtonClicked);
+                        setIsAddButtonClicked(false);
                         setIsUpdateButtonClicked(false);
                     }}
                 >
@@ -272,10 +289,46 @@ const Interests = () => {
 
             <Modal
                 isOpen={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
+                onClose={() => {
+                    setIsFormOpen(false);
+                    resetInterestData();
+                }}
                 isCentered
             >
                 <ModalOverlay />
+                {isAddButtonClicked && (
+                    <ModalContent bg = "#24a2f0" minW = "50%">
+                        <ModalHeader
+                            fontFamily="Montserrat"
+                            fontWeight="800"
+                            textAlign="center"
+                            color="#ffffff"
+                        >
+                            Add Interest
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <>
+                                <Flex flexDirection="column">
+                                    <FormItem label="Name">
+                                        <Textbox
+                                            value={interestData.Name}
+                                            onChange={(e) => setInterestData({ ...interestData, Name: e.target.value })}
+                                        />
+                                    </FormItem>
+                                </Flex>
+                            </>
+                            <Flex flexDirection="row-reverse">
+                                <CustomButton bg="#ffffff" ml="4" onClick={() => {
+                                    setIsFormOpen(false);
+                                    setIsAddButtonClicked(false);
+                                }}>Cancel
+                                </CustomButton>
+                                <CustomButton bg="#f0d124" onClick={handleAddInterest}>Add</CustomButton>
+                            </Flex>
+                        </ModalBody>
+                    </ModalContent>
+                )}
                 {isUpdateButtonClicked && (
                     <ModalContent bg="#24a2f0" minW="50%">
                         <ModalHeader
@@ -290,7 +343,6 @@ const Interests = () => {
                         <ModalBody>
                             {selectedInterest && (
                                 <>
-                                    <UploadPhoto label="Logo" />
                                     <Grid templateColumns="1fr 1fr" gap="4" mt="4">
                                         <Flex flexDirection="column">
                                             <FormItem label="InterestId" w="25%">

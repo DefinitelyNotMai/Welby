@@ -1,30 +1,43 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { UserContextProvider } from './context/UserContext';
-import WelcomePage from './pages/Welcome'
-import LoginPage from './pages/Login'
-import SignUpPage from './pages/SignUp'
+import Welcome from './pages/Welcome'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
-import MyDashboard from './pages/Dashboard/MyDashboard'
-import MyTeam from './pages/Dashboard/MyTeam/MyTeam'
-import OurCompany from './pages/Dashboard/OurCompany'
 import AdminView from './pages/AdminView'
 import Profile from './pages/Dashboard/Profile';
 
-function App() {
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Welcome />,
+    },
+    {
+        path: 'login',
+        element: <Login />,
+    },
+    {
+        path: 'signup',
+        element: <SignUp />,
+    },
+    {
+        path: 'dashboard',
+        element: <Dashboard />,
+    },
+    {
+        path: '/dashboard/profile',
+        element: <Profile />,
+    },
+    {
+        path: 'admin-view',
+        element: <AdminView />,
+    },
+]);
+
+const App = () => {
     return (
         <UserContextProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/admin-view" element={<AdminView/> }></Route>
-                    <Route path="/" element={<WelcomePage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignUpPage />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/dashboard/my-dashboard" element={<MyDashboard />} />
-                    <Route path="/dashboard/my-team" element={<MyTeam />} />
-                    <Route path="/dashboard/our-company" element={<OurCompany />} />
-                </Routes>
-            </BrowserRouter>
+            <RouterProvider router={router} />
         </UserContextProvider>
     );
 }

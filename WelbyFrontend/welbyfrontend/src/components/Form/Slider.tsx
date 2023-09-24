@@ -7,7 +7,7 @@ type CustomSliderProps = {
     max?: number;
 };
 
-const CustomSlider = ({ arrowThumb = true, defaultValue, max = 5, onChange }: CustomSliderProps) => {
+const CustomSlider = ({ arrowThumb = true, defaultValue, max = 100, onChange }: CustomSliderProps) => {
     return (
         <Slider
             defaultValue={defaultValue}

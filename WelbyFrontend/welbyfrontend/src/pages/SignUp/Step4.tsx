@@ -1,4 +1,5 @@
 import { Flex, Heading, Textarea } from '@chakra-ui/react';
+import DateTimePicker from '../../components/Form/DateTimePicker';
 import CustomTextbox from '../../components/Main/FormTextbox';
 
 type Step4Data = {
@@ -50,9 +51,8 @@ const Step4 = ({
                         updateFields({ CompanyGoalDescription1: e.target.value })
                     }
                 />
-                <CustomTextbox
+                <DateTimePicker
                     placeholder="The goal should be completed by..."
-                    mb="1"
                     value={CompanyGoalCompletedBy1}
                     onChange={(e) =>
                         updateFields({ CompanyGoalCompletedBy1: e.target.value })

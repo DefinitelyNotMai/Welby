@@ -2,21 +2,24 @@ import { Box, Card, CardBody, CardHeader, Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 type SectionProps = {
+    borderRadius?: string;
     children: ReactNode;
     headerComponents?: ReactNode[];
     mb?: string;
+    minH?: string;
     title: string;
 };
 
-const Section = ({ children, headerComponents, mb, title }: SectionProps) => {
+const Section = ({ borderRadius = "1rem 0 0 1rem", children, headerComponents, mb, minH, title }: SectionProps) => {
     return (
         <>
             <Card
                 boxShadow="md"
                 bg="#ffffff"
                 p="0"
-                borderRadius="1rem 0 0 1rem"
+                borderRadius={borderRadius}
                 mb={mb}
+                minH={minH}
             >
                 <CardHeader borderBottom="2px solid #ebebeb" display="flex" alignItems="center" justifyContent="space-between">
                     <Text fontFamily="Montserrat" fontWeight="700" fontSize="20">

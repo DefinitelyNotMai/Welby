@@ -1,4 +1,4 @@
-import { Flex, Icon } from '@chakra-ui/react';
+import { Box, Flex, Icon } from '@chakra-ui/react';
 import { useState } from 'react';
 import { AiOutlineQuestionCircle } from 'react-icons/ai';
 import CustomButton from '../../../components/Button';
@@ -23,7 +23,7 @@ const WellBeing = () => {
     };
 
     return (
-        <>
+        <Box mt="4">
             <Section
                 title="Well-being Journey Details"
                 mb="4"
@@ -77,7 +77,7 @@ const WellBeing = () => {
                     onClose={toggleQuarterlyAssessment}
                 />
             )}
-        </>
+        </Box>
     );
 };
 

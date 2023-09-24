@@ -1,11 +1,10 @@
-import { Flex, Grid } from '@chakra-ui/react';
+import { Flex, Grid, Text } from '@chakra-ui/react';
+import CompanySizeSelect from '../Main/CompanySizeSelection';
 import CountrySelect from '../Main/CountrySelection';
 import IndustryTypeSelect from '../Main/IndustrySelection';
 import UploadPhoto from '../PhotoUpload';
 import Textbox from '../Textbox';
 import FormItem from './FormItem';
-import { Text } from '@chakra-ui/react';
-import CompanySizeSelect from '../Main/CompanySizeSelection';
 
 type CompanyData = {
     CompanyId: string;
@@ -23,11 +22,7 @@ type CompanyData = {
     Logo: string;
 };
 
-type AddCompanyProps = CompanyData & {
-    updateFields: (fields: Partial<CompanyData>) => void;
-};
-
-type UpdateCompanyProps = CompanyData & {
+type CompanyFormProps = CompanyData & {
     updateFields: (fields: Partial<CompanyData>) => void;
 };
 
@@ -35,7 +30,7 @@ type DeleteCompanyProps = {
     Name: string;
 };
 
-const AddCompany = ({
+const CompanyForm = ({
     CompanyId,
     Name,
     Email,
@@ -50,7 +45,7 @@ const AddCompany = ({
     CompanySize,
     Logo,
     updateFields,
-}: AddCompanyProps) => {
+}: CompanyFormProps) => {
     return (
         <>
             <UploadPhoto label="Logo" value={Logo} />
@@ -58,105 +53,6 @@ const AddCompany = ({
                 <Flex flexDirection="column">
                     <FormItem label="Company Id" w="25%">
                         <Textbox value={CompanyId} isDisabled />
-                    </FormItem>
-                    <FormItem label="Email">
-                        <Textbox
-                            value={Email}
-                            onChange={(e) => updateFields({ Email: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Website">
-                        <Textbox
-                            value={Website}
-                            onChange={(e) => updateFields({ Website: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Vision">
-                        <Textbox
-                            value={Vision}
-                            onChange={(e) => updateFields({ Vision: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Country">
-                        <CountrySelect
-                            value={CountryId}
-                            onChange={(e) => updateFields({ CountryId: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Company Size">
-                        <CompanySizeSelect
-                            value={CompanySize}
-                            onChange={(e) => updateFields({ CompanySize: e.target.value })}
-                        />
-                    </FormItem>
-                </Flex>
-                <Flex flexDirection="column">
-                    <FormItem label="Name">
-                        <Textbox
-                            value={Name}
-                            onChange={(e) => updateFields({ Name: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Phone Number">
-                        <Textbox
-                            value={Phone_Number}
-                            onChange={(e) => updateFields({ Phone_Number: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Address">
-                        <Textbox
-                            value={Address}
-                            onChange={(e) => updateFields({ Address: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Mission">
-                        <Textbox
-                            value={Mission}
-                            onChange={(e) => updateFields({ Mission: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Industry Type">
-                        <IndustryTypeSelect
-                            value={IndustryTypeId}
-                            onChange={(e) => updateFields({ IndustryTypeId: e.target.value })}
-                        />
-                    </FormItem>
-                    <FormItem label="Founding Date">
-                        <Textbox
-                            type="datetime-local"
-                            value={FoundingDate}
-                            onChange={(e) => updateFields({ FoundingDate: e.target.value })}
-                        />
-                    </FormItem>
-                </Flex>
-            </Grid>
-        </>
-    );
-};
-
-const UpdateCompany = ({
-    CompanyId,
-    Name,
-    Email,
-    Phone_Number,
-    Website,
-    Address,
-    Vision,
-    Mission,
-    CountryId,
-    IndustryTypeId,
-    FoundingDate,
-    CompanySize,
-    Logo,
-    updateFields,
-}: UpdateCompanyProps) => {
-    return (
-        <>
-            <UploadPhoto label="Logo" value={Logo} />
-            <Grid templateColumns="1fr 1fr" gap="4" mt="4">
-                <Flex flexDirection="column">
-                    <FormItem label="CompanyId" w="25%">
-                        <Textbox defaultValue={CompanyId} isDisabled />
                     </FormItem>
                     <FormItem label="Email">
                         <Textbox
@@ -243,4 +139,4 @@ const DeleteCompany = ({ Name }: DeleteCompanyProps) => {
     );
 };
 
-export { AddCompany, UpdateCompany, DeleteCompany };
+export { CompanyForm, DeleteCompany };

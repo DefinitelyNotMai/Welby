@@ -1,36 +1,53 @@
 import { Button, Icon, Text } from '@chakra-ui/react';
-import { ReactNode } from 'react';
 
 type CustomButtonProps = {
     bg?: string;
     color?: string;
+    children?: React.ReactNode;
+    icon?: React.ElementType;
+    iconColor?: string;
+    isDisabled?: boolean;
+    onClick?: () => void;
+    width?: string | string[];
     m?: string;
     mb?: string;
     ml?: string;
     mr?: string;
     mt?: string;
-    icon?: React.ElementType;
-    iconColor?: string;
-    width?: string | string[];
-    children?: ReactNode;
-    onClick?: () => void;
-    isDisabled?: boolean;
+    mx?: string;
+    my?: string;
+    p?: string;
+    pb?: string;
+    pl?: string;
+    pr?: string;
+    pt?: string;
+    px?: string;
+    py?: string;
 };
 
 const CustomButton = ({
     bg = '#24a2f0',
     color,
+    children,
+    icon: IconComponent,
+    iconColor,
+    isDisabled,
+    onClick,
+    width,
     m,
     mb,
     ml,
     mr,
     mt,
-    icon: IconComponent,
-    iconColor,
-    width,
-    children,
-    onClick,
-    isDisabled,
+    mx,
+    my,
+    p,
+    pb,
+    pl,
+    pr,
+    pt,
+    px,
+    py,
 }: CustomButtonProps) => {
     return (
         <Button

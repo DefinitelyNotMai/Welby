@@ -1,9 +1,7 @@
-import { Flex } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useState } from 'react';
 import DashboardTab from '../../../components/Dashboard/Tab';
 import DashboardTabItem from '../../../components/Dashboard/TabItem';
-import Feedbacks from './Feedbacks';
-import Notifications from './Notifications';
 import Overview from './Overview';
 import Wellbeing from './Well-being';
 
@@ -21,11 +19,10 @@ const MyDashboard = () => {
     const contentMapping: ContentMapping = {
         Overview: <Overview />,
         WellBeing: <Wellbeing />,
-        //Notifications: <Notifications />,
-        //Feedbacks: <Feedbacks />,
     };
+
     return (
-        <Flex flexDirection="column">
+        <Box mt="4" ml="4">
             <DashboardTab>
                 <DashboardTabItem
                     color={selectedItem === 'Overview' ? '#89b4fa' : '#bcbcbc'}
@@ -41,10 +38,10 @@ const MyDashboard = () => {
                 </DashboardTabItem>
             </DashboardTab>
 
-            <Flex flexDirection="column" mt="4" ml="4">
+            <Box overflow="hidden" flex="1">
                 {selectedItem && contentMapping[selectedItem]}
-            </Flex>
-        </Flex>
+            </Box>
+        </Box>
     );
 };
 

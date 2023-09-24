@@ -125,7 +125,6 @@ const SignUp = () => {
     const [CompanyAdminData, setCompanyAdminData] = useState(COMPANY_ADMIN_INITIAL_DATA);
 
     const [companyId, setCompanyId] = useState("");
-    const [companyAdminId, setCompanyAdminId] = useState('')
 
     const config = {
         headers: {
@@ -430,8 +429,6 @@ const SignUp = () => {
                                 console.log(result);
                                 console.log("added to welby")
                                 //setting company admin id
-                                let id = result[0].EmployeeId
-                                setCompanyAdminId(id)
                                 return result[0]
                             }
                         }
@@ -472,7 +469,7 @@ const SignUp = () => {
                         const hashedPassword = await bcrypt.hash(CompanyAdminData.AdminPassword, 10)
 
                         let user = {
-                            "UserCode": companyAdminId,
+                            "UserCode": companyAdmin.EmployeeId,
                             "UserName": CompanyData.Email,
                             "Password": hashedPassword,
                             "AccountLocked": 0,

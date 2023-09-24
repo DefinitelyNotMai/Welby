@@ -30,6 +30,7 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
+
     const handleLogin = async () => {
         const tokenUrl = 'http://localhost:58258/token';
         let header = {
@@ -56,7 +57,6 @@ const Login = () => {
                 var loginUrl = 'http://localhost:58258/api/GetSystemUsers';
                 var result = null;
 
-
                 let param = {
                     "UserName": UserName,// Username
                     "Active": true
@@ -72,13 +72,10 @@ const Login = () => {
                     })
                     .then((response) => {
                         result = response.data;
-                        console.log(result)
                         if (result != null) {
                             if (result.length > 0) {
-                                let id = result[0].UserId
-                                setUserId(id)
-
                                 const storedPassword = result[0].Password; // Use the same salt rounds used during registration
+                                setUserId(result[0].UserCode);
 
                                 bcrypt.compare(Password, storedPassword, (err, result) => {
                                     if (err) {
@@ -88,16 +85,12 @@ const Login = () => {
                                     } else if (result === true) {
                                         // Passwords match; login is successful
                                         //alert("PasswordMatch")
-                                        
                                         navigate('/dashboard', { state: userId});
                                     } else {
                                         // Passwords do not match; login failed
                                         alert("WrongPassword")
                                     }
                                 });
-
-                                
-                                
                             }
                         }
                     }).catch(function (error) {
@@ -157,7 +150,7 @@ const Login = () => {
                     <Center>
                         <MainFormButton
                             width={['70%', '50%', '50%']}
-                            onClickEvent={tempLogin}
+                            onClickEvent={handleLogin}
                         >
                             Login
                         </MainFormButton>

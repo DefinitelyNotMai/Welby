@@ -8,6 +8,7 @@ import MyDashboard from './pages/Dashboard/MyDashboard'
 import MyTeam from './pages/Dashboard/MyTeam/MyTeam'
 import OurCompany from './pages/Dashboard/OurCompany'
 import AdminView from './pages/AdminView'
+import Profile from './pages/Dashboard/Profile';
 
 function App() {
     return (

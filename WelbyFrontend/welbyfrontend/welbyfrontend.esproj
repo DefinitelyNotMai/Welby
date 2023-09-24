@@ -24,6 +24,7 @@
     <Folder Include="src\pages\AdminView\Employees\" />
     <Folder Include="src\pages\AdminView\Values\" />
     <Folder Include="src\pages\AdminView\Strengths\" />
+    <Folder Include="src\pages\Dashboard\Profile\" />
     <Folder Include="src\pages\Login\" />
     <Folder Include="src\pages\SignUp\" />
   </ItemGroup>

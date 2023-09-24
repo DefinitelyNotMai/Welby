@@ -1,4 +1,4 @@
-import { Flex, Icon } from '@chakra-ui/react';
+import { Box, Flex, Icon } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 // icons
@@ -63,7 +63,7 @@ const Overview = () => {
     }, []);
 
     return (
-        <>
+        <Box mt="4">
             <Section
                 mb="4"
                 title="How is your well-being at work?"
@@ -151,7 +151,7 @@ const Overview = () => {
                     onClose={toggleQuarterlyAssessment}
                 />
             )}
-        </>
+        </Box>
     );
 };
 

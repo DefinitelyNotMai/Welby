@@ -164,12 +164,12 @@ const SignUp = () => {
     ]);
 
 
-    const companySignUp = () => { // temporary sign up?
+    const tempSignUp = () => { // temporary sign up?
 
         nextStep();
     };
 
-    const companyAdminSignUp = () => { // temporary sign up?
+    const tempAdminSignUp = () => { // temporary sign up?
 
         navigate('/');
     };
@@ -482,7 +482,7 @@ const SignUp = () => {
                             "Active": true
                         }
 
-                        axios
+                        const addToOWS = await axios
                             .post(addToOWSUrl, user, {
                                 headers: {
                                     'Authorization': `Bearer ${token}`,
@@ -492,14 +492,72 @@ const SignUp = () => {
                             })
                             .then((response) => {
                                 console.log(response.data);
-                                alert("Success! Log in to access your dashboard.")
-                                console.log("Successful")
-                                navigate('/')
+                                //alert("Success! Log in to access your dashboard.")
+                                console.log("Successfully added to OWS")
+                                return response.data
+                                //navigate('/')
                             })
                             .catch(function (error) {
                                 console.log(error)
                             });
-                    }
+
+                        if (addToOWS != null) {
+                            const tokenUrl = 'http://localhost:58258/token';
+                            let header = {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'Access-Control-Allow-Origin': '*',
+                            };
+
+                            const adminUserName = "Venancio"
+                            const adminUserPassword = "Jones"
+
+                            const formData = new URLSearchParams();
+                            formData.append('grant_type', 'password');
+                            formData.append('username', adminUserName);
+                            formData.append('password', adminUserPassword);
+
+                            const tokenResponse = await fetch(tokenUrl, {
+                                method: 'POST',
+                                headers: header,
+                                body: formData,
+                            }).then((res) => {
+                                return res.json();
+                            }).catch(function (error) {
+                                console.log(error);
+                            });
+
+                            if (tokenResponse != null) {
+                                var token = tokenResponse.access_token;
+                                const mapCompanyAdminrUrl = 'http://localhost:58258/api/MapSystemUsersToSecurityGroupMapping';
+
+                                let mapAdmin = {
+                                    "SecurityGroupId": 5,
+                                    "UserId": addToOWS.UserId,
+                                    "Encoded_By": 24286
+                                }
+                               
+
+                                axios
+                                    .post(mapCompanyAdminrUrl, mapAdmin, {
+                                        headers: {
+                                            'Authorization': `Bearer ${token}`,
+                                            'Content-Type': 'application/json',
+                                        }
+
+                                    })
+                                    .then((response) => {
+                                        console.log(response.data);
+                                        alert("Success! Log in to access your dashboard.")
+                                        console.log("Mapped Admin")
+                                        navigate('/')
+                                        return response.data                                    })
+                                    .catch(function (error) {
+                                        console.log(error)
+                                    });
+                            }
+                        }
+                        
+                    }   
 
                 }
             }

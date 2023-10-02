@@ -43,7 +43,7 @@ namespace WWA_CORE.Persistent.Context
         public string Other_Notes { get; set; }
         public string ProfilePhoto { get; set; }
         public Nullable<int> GenderId { get; set; }
-        public int CompanyId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public Nullable<int> CountryId { get; set; }
         public bool Active { get; set; }
         public int Encoded_By { get; set; }
@@ -52,6 +52,7 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
         public Nullable<bool> FirstLogIn { get; set; }
+        public string CompanyPosition { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_Interest> tbl_EMP_Interest { get; set; }

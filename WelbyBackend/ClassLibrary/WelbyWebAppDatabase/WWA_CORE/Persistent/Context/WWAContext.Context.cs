@@ -45,6 +45,19 @@ namespace WWA_CORE.Persistent.Context
         public virtual DbSet<tbl_MST_Value_Master> tbl_MST_Value_Master { get; set; }
         public virtual DbSet<tbl_REG_Employee_Registration> tbl_REG_Employee_Registration { get; set; }
     
+        public virtual int procWWA_CMP_Goals_By_CompanyId_Get(Nullable<int> companyId, Nullable<bool> active)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_CMP_Goals_By_CompanyId_Get", companyIdParameter, activeParameter);
+        }
+    
         public virtual int procWWA_CMP_Goals_Get(Nullable<int> companyGoalsId, Nullable<int> companyId, Nullable<bool> active)
         {
             var companyGoalsIdParameter = companyGoalsId.HasValue ?
@@ -62,6 +75,19 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_CMP_Goals_Get", companyGoalsIdParameter, companyIdParameter, activeParameter);
         }
     
+        public virtual int procWWA_CMP_Values_By_CompanyId_Get(Nullable<int> companyId, Nullable<bool> active)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_CMP_Values_By_CompanyId_Get", companyIdParameter, activeParameter);
+        }
+    
         public virtual int procWWA_CMP_Values_Get(Nullable<int> companyValuesId, Nullable<int> companyId, Nullable<bool> active)
         {
             var companyValuesIdParameter = companyValuesId.HasValue ?
@@ -77,6 +103,19 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_CMP_Values_Get", companyValuesIdParameter, companyIdParameter, activeParameter);
+        }
+    
+        public virtual int procWWA_EMP_Interest_By_EmployeeId_Get(Nullable<int> employeeId, Nullable<bool> active)
+        {
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_Interest_By_EmployeeId_Get", employeeIdParameter, activeParameter);
         }
     
         public virtual int procWWA_EMP_Interest_Get(Nullable<int> employeeInterestId, Nullable<bool> active)
@@ -262,6 +301,39 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Goal_Master_Get", goalIdParameter, activeParameter);
         }
     
+        public virtual int procWWA_MST_Goal_Master_Pagewise_Get(Nullable<int> goalId, string title, string description, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
+        {
+            var goalIdParameter = goalId.HasValue ?
+                new ObjectParameter("GoalId", goalId) :
+                new ObjectParameter("GoalId", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var pageNoParameter = pageNo.HasValue ?
+                new ObjectParameter("PageNo", pageNo) :
+                new ObjectParameter("PageNo", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var dateFromParameter = dateFrom != null ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(string));
+    
+            var dateToParameter = dateTo != null ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Goal_Master_Pagewise_Get", goalIdParameter, titleParameter, descriptionParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
+        }
+    
         public virtual int procWWA_MST_IndustryType_Master_Get(Nullable<int> industryTypeId, Nullable<bool> active)
         {
             var industryTypeIdParameter = industryTypeId.HasValue ?
@@ -312,6 +384,39 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Value_Master_Get", valueIdParameter, activeParameter);
+        }
+    
+        public virtual int procWWA_MST_Value_Master_Pagewise_Get(Nullable<int> valueId, string title, string description, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
+        {
+            var valueIdParameter = valueId.HasValue ?
+                new ObjectParameter("ValueId", valueId) :
+                new ObjectParameter("ValueId", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var pageNoParameter = pageNo.HasValue ?
+                new ObjectParameter("PageNo", pageNo) :
+                new ObjectParameter("PageNo", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var dateFromParameter = dateFrom != null ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(string));
+    
+            var dateToParameter = dateTo != null ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Value_Master_Pagewise_Get", valueIdParameter, titleParameter, descriptionParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
         }
     
         public virtual int procWWA_REG_Employee_Get(Nullable<int> employeeId, Nullable<bool> active)

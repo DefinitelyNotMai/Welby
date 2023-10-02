@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="278f0a11280a43e4b40942eb6848d9fc" Name="Diagram1" ZoomLevel="66">
+      <Diagram DiagramId="140eb04da69b491b8e0890a3fbf61332" Name="Diagram1" ZoomLevel="46">
         <EntityTypeShape EntityType="WWAModel.tbl_CMP_Goals" Width="1.5" PointX="8.25" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_CMP_Values" Width="1.5" PointX="11.25" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_EMP_Interest" Width="1.5" PointX="16.5" PointY="15.875" IsExpanded="true" />
@@ -18,24 +18,24 @@
         <EntityTypeShape EntityType="WWAModel.tbl_MST_Gender_Master" Width="1.5" PointX="12" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_MST_Goal_Master" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_MST_IndustryType_Master" Width="1.5" PointX="3.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Interest_Master" Width="1.5" PointX="14.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Interest_Master" Width="1.5" PointX="14.25" PointY="23" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_MST_Strength_Master" Width="1.5" PointX="14.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_MST_Value_Master" Width="1.5" PointX="9" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_REG_Employee_Registration" Width="1.5" PointX="14.25" PointY="13.5" IsExpanded="true" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__Compa__625A9A57" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__GoalI__634EBE90" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Compa__662B2B3B" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Value__671F4F74" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Emplo__1F2E9E6D" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Inter__2022C2A6" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Emplo__178D7CA5" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Stren__1881A0DE" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Emplo__13BCEBC1" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Stren__14B10FFA" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Emplo__0FEC5ADD" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Stren__10E07F16" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Emplo__1B5E0D89" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Stren__1C5231C2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WWAModel.tbl_REG_Employee_Registration" Width="1.5" PointX="14.25" PointY="13.375" IsExpanded="true" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__Compa__0169315C" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__GoalI__025D5595" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Compa__0539C240" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Value__062DE679" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Emplo__7D98A078" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Inter__7E8CC4B1" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Emplo__75F77EB0" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Stren__76EBA2E9" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Emplo__7226EDCC" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Stren__731B1205" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Emplo__6E565CE8" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Stren__6F4A8121" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Emplo__79C80F94" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Stren__7ABC33CD" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Compu__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Compu__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Indus__46E78A0C" ManuallyRouted="false" />

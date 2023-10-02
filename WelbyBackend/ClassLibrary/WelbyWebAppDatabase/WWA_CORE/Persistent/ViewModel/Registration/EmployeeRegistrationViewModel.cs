@@ -23,11 +23,13 @@ namespace WWA_CORE.Persistent.ViewModel.Registration
         public string Instagram { get; set; }
         public string TikTok { get; set; }
         public string ProfilePhoto { get; set; }
+        public string CompanyPosition { get;set; }
 
 
         public int GenderId { get; set; }
         public int CompanyId { get; set; }
         public int CountryId { get; set; } 
+        public bool? FirstLogIn { get; set; }
 
         public string Work { get; set; }
         public string Connect { get; set; }

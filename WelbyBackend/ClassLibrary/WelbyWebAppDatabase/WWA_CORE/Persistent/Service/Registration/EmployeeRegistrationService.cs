@@ -46,6 +46,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     Support = employeeRegistrationViewModel.Support,
                     ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto,
                     Other_Notes = employeeRegistrationViewModel.Other_Notes,
+                    FirstLogIn = employeeRegistrationViewModel.FirstLogIn,
 
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
@@ -107,11 +108,12 @@ namespace WWA_CORE.Persistent.Service.Registration
                 Facebook = Convert.ToString(row["Facebook"]),
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
+                CompanyPosition = Convert.ToString(row["Address"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 CountryId = Convert.ToInt32(row["CountryId"]),
-                
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
                 Work = Convert.ToString(row["Work"]),
                 Connect= Convert.ToString(row["Connect"]),
@@ -173,10 +175,12 @@ namespace WWA_CORE.Persistent.Service.Registration
                 Facebook = Convert.ToString(row["Facebook"]),
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
+                CompanyPosition = Convert.ToString(row["CompanyPosition"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 CountryId = Convert.ToInt32(row["CountryId"]),
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
 
                 Work = Convert.ToString(row["Work"]),
@@ -286,6 +290,8 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.Support = employeeRegistrationViewModel.Support;
                 RowToUpdate.ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto;
                 RowToUpdate.Other_Notes = employeeRegistrationViewModel.Other_Notes;
+                RowToUpdate.CompanyPosition = employeeRegistrationViewModel.CompanyPosition;
+                RowToUpdate.FirstLogIn = employeeRegistrationViewModel.FirstLogIn;
 
                 RowToUpdate.Active = employeeRegistrationViewModel.Active;
                 RowToUpdate.Computer_Name = employeeRegistrationViewModel.Computer_Name;

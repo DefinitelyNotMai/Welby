@@ -291,7 +291,7 @@
     <Property Name="Other_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ProfilePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="GenderId" Type="Int32" />
-    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" />
     <Property Name="CountryId" Type="Int32" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Encoded_By" Type="Int32" Nullable="false" />
@@ -308,6 +308,7 @@
     <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_REG_E__Count__0B27A5C0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Country_Master" />
     <NavigationProperty Name="tbl_MST_Gender_Master" Relationship="Self.FK__tbl_REG_E__Gende__0C1BC9F9" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Gender_Master" />
     <Property Name="FirstLogIn" Type="Boolean" />
+    <Property Name="CompanyPosition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK__tbl_CMP_G__Compa__625A9A57">
     <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
@@ -735,6 +736,36 @@
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Phone_Number" Mode="In" Type="String" />
       <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="PageNo" Mode="In" Type="Int32" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+      <Parameter Name="DateFrom" Mode="In" Type="String" />
+      <Parameter Name="DateTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_CMP_Goals_By_CompanyId_Get">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_CMP_Values_By_CompanyId_Get">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Goal_Master_Pagewise_Get">
+      <Parameter Name="GoalId" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="PageNo" Mode="In" Type="Int32" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+      <Parameter Name="DateFrom" Mode="In" Type="String" />
+      <Parameter Name="DateTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_MST_Value_Master_Pagewise_Get">
+      <Parameter Name="ValueId" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="PageNo" Mode="In" Type="Int32" />
       <Parameter Name="PageSize" Mode="In" Type="Int32" />
       <Parameter Name="DateFrom" Mode="In" Type="String" />

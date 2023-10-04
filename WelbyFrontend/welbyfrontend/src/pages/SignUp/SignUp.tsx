@@ -395,7 +395,8 @@ const SignUp = () => {
             "Work": CompanyAdminData.AdminWork,
             "Connect": CompanyAdminData.AdminConnect,
             "Support": CompanyAdminData.AdminSupport,
-            "Other_Notes": CompanyAdminData.AdminOtherNotes
+            "Other_Notes": CompanyAdminData.AdminOtherNotes,
+            "FirstLogIn": 0
         }
 
         try {
@@ -567,14 +568,6 @@ const SignUp = () => {
         }
     }
 
-    function addRole(id:string) {
-        var addRoleUrl = 'http://localhost:58258/api/MapSystemUsersToSecurityGroupMapping'
-        let parameter = {
-            //to add parameters here
-        }
-
-        //add axios here
-    }
 
     // ------------------------------------------ FRONT-END ------------------------------------------
     return (

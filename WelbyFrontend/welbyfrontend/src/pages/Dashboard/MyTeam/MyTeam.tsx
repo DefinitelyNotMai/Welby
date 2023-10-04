@@ -13,9 +13,29 @@ type ContentMapping = {
     [key: string]: React.ReactNode;
 };
 
+type EmployeeFormData = {
+    Email: string;
+    Password: string;
+    Role: string;
+}
+
+const EMPLOYEE_DATA: EmployeeFormData = {
+    Email: '',
+    Password: '',
+    Role: '',
+}
+
 const MyTeam = () => {
     const [selectedItem, setSelectedItem] = useState<string | null>('Overview');
     const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
+    const [employeeData, setEmployeeData] = useState(EMPLOYEE_DATA);
+
+    const updateEmployeeData = (fields: Partial<EmployeeFormData>) => {
+        setEmployeeData((prev) => {
+            return { ...prev, ...fields };
+        });
+    };
+
 
     const toggleAddEmployee = () => {
         setIsAddEmployeeOpen(!isAddEmployeeOpen);
@@ -61,6 +81,7 @@ const MyTeam = () => {
                 <AddEmployee
                     isOpen={isAddEmployeeOpen}
                     onClose={toggleAddEmployee}
+                    {...employeeData} updateFields={updateEmployeeData}
                 />
             )}
         </Grid>

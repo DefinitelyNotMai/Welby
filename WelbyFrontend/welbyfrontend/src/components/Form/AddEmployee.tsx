@@ -5,6 +5,7 @@ import Label from "./Label";
 import Textbox from "./Textbox";
 import { useUserContext } from '../../context/UserContext'
 import axios from "axios";
+import bcrypt from 'bcryptjs'
 
 type EmployeeFormData = {
     Email: string;
@@ -21,9 +22,12 @@ const EMPLOYEE_DATA: EmployeeFormData = {
 type ModalAddEmployeeProps = {
     isOpen: boolean;
     onClose: () => void;
+    updateFields: (fields: Partial<EmployeeFormData>) => void;
 }
 
-const AddEmployee = ({ isOpen, onClose }: ModalAddEmployeeProps) => {
+
+
+const AddEmployee = ({ isOpen, onClose, updateFields }: ModalAddEmployeeProps) => {
     const [addEmployeeData, setAddEmployeeData] = useState(EMPLOYEE_DATA);
     const { userId } = useUserContext();
 
@@ -42,12 +46,14 @@ const AddEmployee = ({ isOpen, onClose }: ModalAddEmployeeProps) => {
     const handleSubmit = async () => {
         let temporaryData = {
             "Email": addEmployeeData.Email,
+            //"CompanyId": use,
             "CompanyPosition": addEmployeeData.Role,
+            "FirstLogIn": 1,
             "Encoded_By": userId,
         }
 
         try {
-            var addEmployeeUrl = 'https://localhost:44373/api/AddEmployee'
+            var addEmployeeUrl = 'https://localhost:44373/api/AddEmployee' 
             const addEmployee = await axios
                 .post(addEmployeeUrl, temporaryData, config)
                 .then((response) => {
@@ -58,7 +64,7 @@ const AddEmployee = ({ isOpen, onClose }: ModalAddEmployeeProps) => {
                 });
 
             if (addEmployee != null) {
-                const getEmployeeUrl = 'https://localhost:44373/api/GetAllEmployees'
+                const getEmployeeUrl = 'https://localhost:44373/api/GetEmployee'
                 let param = {
                     "Email": addEmployeeData.Email,
                 }
@@ -111,10 +117,12 @@ const AddEmployee = ({ isOpen, onClose }: ModalAddEmployeeProps) => {
                         var token = tokenResponse.access_token;
                         const addToOWSUrl = 'http://localhost:58258/api/AddSystemUsers';
 
+                        const hashedPassword = await bcrypt.hash(addEmployeeData.Password, 10)
+
                         let user = {
                             "UserCode": employee.EmployeeId,
                             "UserName": addEmployeeData.Email,
-                            "Password": addEmployeeData.Password,
+                            "Password": hashedPassword,
                             "AccountLocked": 0,
                             "LoggedIn": 0,
                             "PasswordNoExpiry": null,
@@ -189,7 +197,7 @@ const AddEmployee = ({ isOpen, onClose }: ModalAddEmployeeProps) => {
                                     })
                                     .then((response) => {
                                         console.log(response.data);
-                                        alert("Success! Log in to access your dashboard.")
+                                        alert("Success! Added member to your team!")
                                         console.log("Mapped Admin")
                                         return response.data
                                     })
@@ -220,20 +228,29 @@ const AddEmployee = ({ isOpen, onClose }: ModalAddEmployeeProps) => {
                     <Text fontFamily="Montserrat" fontWeight="700" fontSize="24">Add Employee</Text>
                 </ModalHeader>
                 <ModalBody>
-                    <Grid templateColumns="1fr 2fr" mb="8">
-                        <VStack justifyContent="center">
-                            <Label name="Member Email:" pb="4" />
+                    <Grid templateColumns="1fr 2fr" mb="8" gap={2}>
+                        <VStack justifyContent="center" alignItems="flex-end">
+                            <Label name="Member Email:" pb="4"  />
                             <Label name="Member Temporary Password:" />
                             <Label name="Member Role:" />
                         </VStack>
                         <VStack>
-                            <Textbox placeholder="Email" />
-                            <Textbox placeholder="Temporary member password" />
-                            <Textbox placeholder="Team Leader || Team Member" />
+                            <Textbox
+                                placeholder="Email"
+                                onChange={(e) => updateFields({Email: e.target.value})}
+                            />
+                            <Textbox
+                                placeholder="Temporary member password"
+                                onChange={(e) => updateFields({Password: e.target.value })}
+                            />
+                            <Textbox
+                                placeholder="Team Leader || Team Member"
+                                onChange={(e) => updateFields({Role: e.target.value })}  
+                            />
                         </VStack>
                     </Grid>
                     <Flex flexDirection="row-reverse" gap="4" mb="4">
-                        <CustomButton color="#ffffff" width="25%">Add</CustomButton>
+                        <CustomButton color="#ffffff" width="25%" onClick={handleSubmit}>Add</CustomButton>
                         <CustomButton color="#ffffff" bg="#bcbcbc" width="25%" onClick={onClose}>Cancel</CustomButton>
                     </Flex>
                 </ModalBody>

@@ -19,6 +19,12 @@ const Login = () => {
     const [UserName, setUserName] = useState('');
     const [Password, setPassword] = useState('');
 
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
     const adminUserName = "Venancio";
     const adminUserPassword = "Jones";
 
@@ -30,6 +36,31 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
+    const handleFirstLogIn = () => {
+        const getSystemUserUrl = 'https://localhost:44373/api/GetEmployee'
+        let param = {
+            "Email": UserName
+        }
+
+        const systemUser = axios
+            .get(getSystemUserUrl, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                params: param,
+            })
+            .then((response) => {
+                var result = response.data;
+                if (result != null) {
+                    if (result.length > 0) {
+                        if (result[0].FirstLogIn) {
+
+                        }
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }
 
     const handleLogin = async () => {
         const tokenUrl = 'http://localhost:58258/token';

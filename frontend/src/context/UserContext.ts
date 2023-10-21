@@ -5,6 +5,8 @@ export type UserContextType = {
   setCompanyId: (id: string) => void;
   userId: string;
   setUserId: (id: string) => void;
+  isLoggedIn: boolean;
+  setIsLoggedIn: (value: boolean) => void;
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -12,4 +14,6 @@ export const UserContext = createContext<UserContextType>({
   setCompanyId: () => {},
   userId: "",
   setUserId: () => {},
+  isLoggedIn: false,
+  setIsLoggedIn: () => {},
 });

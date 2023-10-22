@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 type CustomButtonProps = {
   backgroundColor?: string;
+  borderColor?: string;
   children: ReactNode;
   fontSize?: string[];
   onClick?: () => void;
@@ -12,6 +13,7 @@ type CustomButtonProps = {
 
 const CustomButton = ({
   backgroundColor = "primary.1",
+  borderColor = "white",
   children,
   fontSize = ["xs", "sm"],
   onClick,
@@ -21,7 +23,9 @@ const CustomButton = ({
   return (
     <Button
       backgroundColor={backgroundColor}
-      border="2px solid white"
+      borderWidth="2px"
+      borderStyle="solid"
+      borderColor={borderColor}
       fontSize={fontSize}
       onClick={onClick}
       type={type}

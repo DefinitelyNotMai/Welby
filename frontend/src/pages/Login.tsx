@@ -93,7 +93,7 @@ const Login = () => {
                       isClosable: true,
                     });
                     setIsLoggedIn(true);
-                    navigate("/dashboard");
+                    navigate("/dashboard/my-dashboard/overview");
                   } else {
                     // Passwords do not match; login failed
                     toast({

@@ -138,9 +138,7 @@ const ForgotPassword = ({ isOpen, onClose }: ForgotPasswordProps) => {
       <ModalOverlay />
       <ModalContent backgroundColor="primary.1" marginX={4} padding={8}>
         <ModalHeader textAlign="center">
-          <CustomText fontSize={["2xl"]} fontWeight="bold">
-            Forgot Password?
-          </CustomText>
+          <CustomText fontWeight="bold">Forgot Password?</CustomText>
         </ModalHeader>
         <ModalCloseButton color="white" />
         <Form onSubmit={handleSubmit}>

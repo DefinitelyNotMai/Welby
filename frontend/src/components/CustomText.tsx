@@ -5,7 +5,6 @@ type CustomTextProps = {
   children: ReactNode;
   color?: string;
   fontFamily?: string;
-  fontSize?: string[];
   fontWeight?:
     | "black"
     | "bold"
@@ -23,7 +22,6 @@ const CustomText = ({
   children,
   color = "white",
   fontFamily = "Montserrat",
-  fontSize = ["sm", "md"],
   fontWeight = "normal",
   noOfLines,
 }: CustomTextProps) => {
@@ -31,7 +29,6 @@ const CustomText = ({
     <Text
       color={color}
       fontFamily={fontFamily}
-      fontSize={fontSize}
       fontWeight={fontWeight}
       noOfLines={noOfLines}
     >

@@ -8,7 +8,7 @@ type WelcomeCardProps = {
 
 const WelcomeCard = ({
   children,
-  width = ["90%", "75%", "60%", "40%"],
+  width = ["90%", "75%", "60%"],
 }: WelcomeCardProps) => {
   return (
     <Card

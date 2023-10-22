@@ -1,10 +1,11 @@
 import { Button } from "@chakra-ui/react";
-import CustomText from "./CustomText";
+import { ReactNode } from "react";
 
 type CustomButtonProps = {
   backgroundColor?: string;
-  children: string;
-  onClick: () => void;
+  children: ReactNode;
+  fontSize?: string[];
+  onClick?: () => void;
   type: "button" | "submit";
   width?: string[];
 };
@@ -12,19 +13,21 @@ type CustomButtonProps = {
 const CustomButton = ({
   backgroundColor = "primary.1",
   children,
+  fontSize = ["xs", "sm"],
   onClick,
   type,
-  width = ["100%"],
+  width = ["60%", "50%"],
 }: CustomButtonProps) => {
   return (
     <Button
       backgroundColor={backgroundColor}
       border="2px solid white"
+      fontSize={fontSize}
       onClick={onClick}
       type={type}
       width={width}
     >
-      <CustomText fontWeight="medium">{children}</CustomText>
+      {children}
     </Button>
   );
 };

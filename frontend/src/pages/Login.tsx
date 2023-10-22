@@ -1,4 +1,4 @@
-import { Flex, Link, VStack, useToast } from "@chakra-ui/react";
+import { Center, Flex, Heading, Link, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { FormEvent, useState } from "react";
@@ -9,7 +9,6 @@ import { CustomTextbox } from "../components/Form/CustomInput";
 import FormItem from "../components/Form/FormItem";
 import ForgotPassword from "../components/Modals/ForgotPassword";
 import WelcomeCard from "../components/Welcome/WelcomeCard";
-import WelcomeCardHeader from "../components/Welcome/WelcomeCardHeader";
 import useUserContext from "../hooks/useUserContext";
 import WelcomeLayout from "../layout/WelcomeLayout";
 
@@ -127,55 +126,66 @@ const Login = () => {
 
   return (
     <WelcomeLayout>
-      <WelcomeCard>
-        <Flex
-          flexDirection="column"
-          height="full"
-          width="full"
-          padding={[8, 16]}
-        >
-          <WelcomeCardHeader isCentered>
-            Welcome to your happy portal
-          </WelcomeCardHeader>
+      <WelcomeCard width={["90%", "75%", "60%", "40%"]}>
+        <Flex flexDirection="column" width="full" padding={[8, 10, 12, 16]}>
+          <Heading
+            as="h1"
+            fontSize={["2xl", "4xl"]}
+            marginBottom={10}
+            textAlign="center"
+          >
+            <CustomText fontWeight="bold">
+              Welcome to your happy portal
+            </CustomText>
+          </Heading>
           <Form onSubmit={handleSubmit} style={{ width: "100%" }}>
-            <VStack gap={5}>
-              <FormItem htmlFor="username" label="Email" isRequired>
-                <CustomTextbox
-                  autoComplete="email"
-                  id="username"
-                  name="username"
-                  onChange={(e) => {
-                    setUserName(e.target.value);
-                  }}
-                  placeholder="Email Address"
-                  type="email"
-                  value={UserName}
-                />
-              </FormItem>
-              <FormItem htmlFor="password" label="Password" isRequired>
-                <CustomTextbox
-                  autoComplete="current-password"
-                  id="password"
-                  name="password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  placeholder="Password"
-                  type="password"
-                  value={Password}
-                />
-              </FormItem>
-              <Link
-                alignSelf="left"
-                width="full"
-                onClick={toggleForgotPassword}
+            <Center>
+              <Flex
+                alignSelf="center"
+                flexDirection="column"
+                gap={4}
+                width={["90%", "75%"]}
               >
-                <CustomText>Forgot Password?</CustomText>
-              </Link>
-              <CustomButton onClick={() => {}} type="submit" width={["50%"]}>
-                Log In
+                <FormItem htmlFor="username" label="Email" isRequired>
+                  <CustomTextbox
+                    autoComplete="email"
+                    id="username"
+                    name="username"
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                    }}
+                    placeholder="Email Address"
+                    type="email"
+                    value={UserName}
+                  />
+                </FormItem>
+                <FormItem htmlFor="password" label="Password" isRequired>
+                  <CustomTextbox
+                    autoComplete="current-password"
+                    id="password"
+                    name="password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    placeholder="Password"
+                    type="password"
+                    value={Password}
+                  />
+                </FormItem>
+                <Link
+                  fontSize={["sm", "md"]}
+                  marginBottom={4}
+                  onClick={toggleForgotPassword}
+                >
+                  <CustomText>Forgot Password?</CustomText>
+                </Link>
+              </Flex>
+            </Center>
+            <Center>
+              <CustomButton onClick={() => {}} type="submit">
+                <CustomText fontWeight="medium">Log In</CustomText>
               </CustomButton>
-            </VStack>
+            </Center>
           </Form>
         </Flex>
       </WelcomeCard>

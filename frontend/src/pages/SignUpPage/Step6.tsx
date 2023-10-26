@@ -1,80 +1,96 @@
-import { Flex, Grid, Heading } from "@chakra-ui/react";
-import CustomText from "../../components/CustomText";
-import {
-  CustomTextbox,
-  DateTimePicker,
-  UploadPhoto,
-} from "../../components/Form/CustomInput";
-import { SelectGender } from "../../components/Form/CustomSelect";
+import { Flex, Grid } from "@chakra-ui/react";
 import FormItem from "../../components/Form/FormItem";
-import { CompanyFormData } from "./SignUp";
+import Input from "../../components/Form/Input";
+import { SelectGender } from "../../components/Form/Select";
+import UploadPhoto from "../../components/Form/UploadPhoto";
+import Heading from "../../components/Typography/Heading";
 
-type Step6Data = {
-  AdminProfilePhoto: string;
-  AdminPassword: string;
-  AdminConfirmPassword: string;
-  AdminFirstName: string;
-  AdminNickname: string;
-  AdminMiddleName: string;
-  AdminLastName: string;
-  AdminBirthdate: string;
-  AdminGender: string;
-  AdminPhoneNumber: string;
-};
+interface Step6Data {
+  adminProfilePhoto: string;
+  adminPassword: string;
+  adminConfirmPassword: string;
+  adminFirstName: string;
+  adminNickname: string;
+  adminMiddleName: string;
+  adminLastName: string;
+  adminBirthdate: string;
+  adminGenderId: string;
+  adminPhoneNumber: string;
+  companyEmail: string;
+  companyName: string;
+}
 
-type Step6Props = Step6Data & {
-  CompanyData: CompanyFormData;
+interface Step6Props extends Step6Data {
   updateFields: (fields: Partial<Step6Data>) => void;
-};
+}
 
 const Step6 = ({
-  AdminProfilePhoto,
-  AdminPassword,
-  AdminConfirmPassword,
-  AdminFirstName,
-  AdminNickname,
-  AdminMiddleName,
-  AdminLastName,
-  AdminBirthdate,
-  AdminGender,
-  AdminPhoneNumber,
-  CompanyData,
+  adminProfilePhoto,
+  adminPassword,
+  adminConfirmPassword,
+  adminFirstName,
+  adminNickname,
+  adminMiddleName,
+  adminLastName,
+  adminBirthdate,
+  adminGenderId,
+  adminPhoneNumber,
+  companyEmail,
+  companyName,
   updateFields,
 }: Step6Props) => {
   return (
     <Flex flexDirection="column" padding={8}>
-      <Heading as="h1" marginBottom={8} textAlign="center">
-        <CustomText fontWeight="bold">Hello Company Admin of</CustomText>
-        <CustomText fontWeight="bold">{CompanyData.Name}</CustomText>
-        <CustomText fontWeight="bold">Please introduce yourself.</CustomText>
-      </Heading>
-      <Flex alignItems="center" flexDirection="column" justifyContent="center">
-        <FormItem htmlFor="company-admin-photo">
+      <Flex flexDirection="column" marginBottom={10} textAlign="center">
+        <Heading fontSize={["xl", "3xl"]} variant="white">
+          Hello Company Admin of
+        </Heading>
+        <Heading fontSize={["2xl", "4xl"]} variant="white">
+          {companyName}
+        </Heading>
+        <Heading fontSize={["xl", "3xl"]} variant="white">
+          Please introduce yourself.
+        </Heading>
+      </Flex>
+      <Flex flexDirection="column" alignItems="center" justifyContent="center">
+        <FormItem htmlFor="company-admin-profile-photo">
           <UploadPhoto
-            id="company-admin-photo"
+            buttonWidth={["50%", "25%"]}
+            id="company-admin-profile-photo"
+            name="company-admin-profile-photo"
             label="Profile Photo"
-            name="company-admin-photo"
-            onChange={(e) => updateFields({ AdminProfilePhoto: e ?? "" })}
-            value={AdminProfilePhoto}
+            onChange={(e) => updateFields({ adminProfilePhoto: e })}
+            value={adminProfilePhoto}
           />
         </FormItem>
-        <Flex flexDirection="column" width={["100%", "80%", "60%"]} gap={4}>
-          <FormItem htmlFor="" label="Email">
-            <CustomText>{CompanyData.Email}</CustomText>
+        <Flex
+          flexDirection="column"
+          gap={4}
+          width={["100%", "90%", "80%", "70%"]}
+        >
+          <FormItem htmlFor="company-admin-email" label="Email">
+            <Input
+              id="company-admin-email"
+              isDisabled
+              name="company-admin-email"
+              onChange={() => {}}
+              placeholder="Company Email"
+              type="email"
+              value={companyEmail}
+            />
           </FormItem>
           <FormItem
             htmlFor="company-admin-password"
             label="Password"
             isRequired
           >
-            <CustomTextbox
-              autoComplete="new-password"
+            <Input
               id="company-admin-password"
               name="company-admin-password"
-              onChange={(e) => updateFields({ AdminPassword: e.target.value })}
+              onChange={(e) => updateFields({ adminPassword: e.target.value })}
               placeholder="Password"
               type="password"
-              value={AdminPassword}
+              value={adminPassword}
             />
           </FormItem>
           <FormItem
@@ -82,35 +98,33 @@ const Step6 = ({
             label="Confirm Password"
             isRequired
           >
-            <CustomTextbox
-              autoComplete="new-password"
+            <Input
               id="company-admin-confirm-password"
               name="company-admin-confirm-password"
               onChange={(e) =>
-                updateFields({ AdminConfirmPassword: e.target.value })
+                updateFields({ adminConfirmPassword: e.target.value })
               }
               placeholder="Confirm Password"
               type="password"
-              value={AdminConfirmPassword}
+              value={adminConfirmPassword}
             />
           </FormItem>
-          <Grid templateColumns={["1fr", "1fr 1fr"]} gap={[4, 8]}>
+          <Grid templateColumns={["1fr", "1fr", "1fr 1fr"]} gap={8}>
             <Flex flexDirection="column" gap={4}>
               <FormItem
                 htmlFor="company-admin-first-name"
                 label="First Name"
                 isRequired
               >
-                <CustomTextbox
-                  autoComplete="given-name"
+                <Input
                   id="company-admin-first-name"
                   name="company-admin-first-name"
                   onChange={(e) =>
-                    updateFields({ AdminFirstName: e.target.value })
+                    updateFields({ adminFirstName: e.target.value })
                   }
                   placeholder="First Name"
                   type="text"
-                  value={AdminFirstName}
+                  value={adminFirstName}
                 />
               </FormItem>
               <FormItem
@@ -118,16 +132,15 @@ const Step6 = ({
                 label="Middle Name"
                 isRequired
               >
-                <CustomTextbox
-                  autoComplete="additional-name"
+                <Input
                   id="company-admin-middle-name"
                   name="company-admin-middle-name"
                   onChange={(e) =>
-                    updateFields({ AdminMiddleName: e.target.value })
+                    updateFields({ adminMiddleName: e.target.value })
                   }
                   placeholder="Middle Name"
                   type="text"
-                  value={AdminMiddleName}
+                  value={adminMiddleName}
                 />
               </FormItem>
               <FormItem
@@ -135,13 +148,15 @@ const Step6 = ({
                 label="Birthdate"
                 isRequired
               >
-                <DateTimePicker
+                <Input
                   id="company-admin-birthdate"
                   name="company-admin-birthdate"
                   onChange={(e) =>
-                    updateFields({ AdminBirthdate: e.target.value })
+                    updateFields({ adminBirthdate: e.target.value })
                   }
-                  value={AdminBirthdate}
+                  placeholder="yyyy-mm-dd"
+                  type="date"
+                  value={adminBirthdate}
                 />
               </FormItem>
             </Flex>
@@ -151,16 +166,15 @@ const Step6 = ({
                 label="Nickname"
                 isRequired
               >
-                <CustomTextbox
-                  autoComplete="off"
+                <Input
                   id="company-admin-nickname"
                   name="company-admin-nickname"
-                  placeholder="Nickname"
                   onChange={(e) =>
-                    updateFields({ AdminNickname: e.target.value })
+                    updateFields({ adminNickname: e.target.value })
                   }
+                  placeholder="Nickname"
                   type="text"
-                  value={AdminNickname}
+                  value={adminNickname}
                 />
               </FormItem>
               <FormItem
@@ -168,24 +182,29 @@ const Step6 = ({
                 label="Last Name"
                 isRequired
               >
-                <CustomTextbox
-                  autoComplete="family-name"
+                <Input
                   id="company-admin-last-name"
                   name="company-admin-last-name"
                   onChange={(e) =>
-                    updateFields({ AdminLastName: e.target.value })
+                    updateFields({ adminLastName: e.target.value })
                   }
                   placeholder="Last Name"
                   type="text"
-                  value={AdminLastName}
+                  value={adminLastName}
                 />
               </FormItem>
-              <FormItem htmlFor="" label="Gender" isRequired>
+              <FormItem
+                htmlFor="company-admin-gender"
+                label="Gender"
+                isRequired
+              >
                 <SelectGender
-                  onClick={(selectedGenderId) =>
-                    updateFields({ AdminGender: selectedGenderId })
+                  id="company-admin-gender"
+                  name="company-admin-gender"
+                  onChange={(e) =>
+                    updateFields({ adminGenderId: e.target.value })
                   }
-                  value={AdminGender}
+                  value={adminGenderId}
                 />
               </FormItem>
             </Flex>
@@ -195,16 +214,15 @@ const Step6 = ({
             label="Mobile Number"
             isRequired
           >
-            <CustomTextbox
-              autoComplete="off"
+            <Input
               id="company-admin-phone-number"
               name="company-admin-phone-number"
               onChange={(e) =>
-                updateFields({ AdminPhoneNumber: e.target.value })
+                updateFields({ adminPhoneNumber: e.target.value })
               }
               placeholder="09123456789"
               type="text"
-              value={AdminPhoneNumber}
+              value={adminPhoneNumber}
             />
           </FormItem>
         </Flex>

@@ -1,88 +1,95 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../layout/Root";
-import AdminView from "../pages/AdminView";
-import Dashboard from "../pages/Dashboard";
-import MyDashboard from "../pages/Dashboard/MyDashboard";
-import MyDashboardOverview from "../pages/Dashboard/MyDashboard/MyDashboardOverview";
-import MyDashboardWellBeing from "../pages/Dashboard/MyDashboard/MyDashboardWellBeing";
-import MyTeam from "../pages/Dashboard/MyTeam";
-import MyTeamOverview from "../pages/Dashboard/MyTeam/MyTeamOverview";
-import MyTeamProfile from "../pages/Dashboard/MyTeam/MyTeamProfile";
-import OurCompany from "../pages/Dashboard/OurCompany";
-import OurCompanyGoals from "../pages/Dashboard/OurCompany/OurCompanyGoals";
-import OurCompanyMissionAndVision from "../pages/Dashboard/OurCompany/OurCompanyMissionAndVision";
-import Login from "../pages/Login";
-import SignUp from "../pages/SignUp";
-import Welcome from "../pages/Welcome";
+import EmployeeSignUpPage from "../pages/EmployeeSignUpPage";
+import LoginPage from "../pages/LoginPage";
+import NotFoundPage from "../pages/NotFoundPage";
+import SignUpPage from "../pages/SignUpPage";
+import Welcome from "../pages/WelcomePage";
 
 const routes = createBrowserRouter([
   {
     element: <Root />,
     children: [
       {
+        path: "*",
+        element: <NotFoundPage />,
+      },
+      {
         path: "/",
         element: <Welcome />,
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <LoginPage />,
       },
       {
         path: "/signup",
-        element: <SignUp />,
+        element: <SignUpPage />,
+      },
+      {
+        path: "/employee-signup",
+        element: <EmployeeSignUpPage />,
       },
       {
         path: "/admin-view",
-        element: <AdminView />,
+        element: <div>admin view</div>,
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
-        children: [
-          {
-            path: "my-dashboard",
-            element: <MyDashboard />,
-            children: [
-              {
-                path: "overview",
-                element: <MyDashboardOverview />,
-              },
-              {
-                path: "well-being",
-                element: <MyDashboardWellBeing />,
-              },
-            ],
-          },
-          {
-            path: "my-team",
-            element: <MyTeam />,
-            children: [
-              {
-                path: "overview",
-                element: <MyTeamOverview />,
-              },
-              {
-                path: "profile",
-                element: <MyTeamProfile />,
-              },
-            ],
-          },
-          {
-            path: "our-company",
-            element: <OurCompany />,
-            children: [
-              {
-                path: "mission-and-vision",
-                element: <OurCompanyMissionAndVision />,
-              },
-              {
-                path: "company-goals",
-                element: <OurCompanyGoals />,
-              },
-            ],
-          },
-        ],
+        element: <div>dashboard</div>,
       },
+      // {
+      //   path: "/admin-view",
+      //   element: <AdminView />,
+      // },
+      // {
+      //   path: "/dashboard",
+      //   element: <Dashboard />,
+      //   children: [
+      //     {
+      //       path: "my-dashboard",
+      //       element: <MyDashboard />,
+      //       children: [
+      //         {
+      //           path: "overview",
+      //           element: <MyDashboardOverview />,
+      //         },
+      //         {
+      //           path: "well-being",
+      //           element: <MyDashboardWellBeing />,
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       path: "my-team",
+      //       element: <MyTeam />,
+      //       children: [
+      //         {
+      //           path: "overview",
+      //           element: <MyTeamOverview />,
+      //         },
+      //         {
+      //           path: "profile",
+      //           element: <MyTeamProfile />,
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       path: "our-company",
+      //       element: <OurCompany />,
+      //       children: [
+      //         {
+      //           path: "mission-and-vision",
+      //           element: <OurCompanyMissionAndVision />,
+      //         },
+      //         {
+      //           path: "company-goals",
+      //           element: <OurCompanyGoals />,
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
     ],
   },
 ]);

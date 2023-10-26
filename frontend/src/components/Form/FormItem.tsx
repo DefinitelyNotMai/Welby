@@ -1,26 +1,35 @@
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormLabel, FormLabelProps } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
-type FormItemProps = {
-  children: React.ReactNode;
-  htmlFor: string;
+interface FormItemProps extends FormLabelProps {
+  children: ReactNode;
+  htmlFor?: string;
   isRequired?: boolean;
   label?: string;
-};
+  hideIndicator?: boolean;
+}
 
-const FormItem = ({ children, htmlFor, isRequired, label }: FormItemProps) => {
+const FormItem = ({
+  children,
+  hideIndicator,
+  htmlFor,
+  isRequired,
+  label,
+  ...props
+}: FormItemProps) => {
   return (
     <FormControl isRequired={isRequired}>
-      {label && (
-        <FormLabel
-          color="white"
-          fontFamily="Montserrat"
-          fontWeight="medium"
-          fontSize={["sm", "md"]}
-          htmlFor={htmlFor}
-        >
-          {label}
-        </FormLabel>
-      )}
+      <FormLabel
+        color="white"
+        fontFamily="Montserrat"
+        fontWeight="medium"
+        fontSize={["sm", "md"]}
+        htmlFor={htmlFor}
+        requiredIndicator={hideIndicator ? <span /> : <span> *</span>}
+        {...props}
+      >
+        {label}
+      </FormLabel>
       {children}
     </FormControl>
   );

@@ -8,16 +8,13 @@ type UserContextProviderProps = {
 const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [companyId, setCompanyId] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
     <UserContext.Provider
       value={{
         companyId,
-        setCompanyId,
-        isLoggedIn,
-        setIsLoggedIn,
         userId,
+        setCompanyId,
         setUserId,
       }}
     >

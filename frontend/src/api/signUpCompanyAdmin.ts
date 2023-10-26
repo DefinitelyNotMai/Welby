@@ -1,0 +1,159 @@
+import axios from "axios";
+import bcrypt from "bcryptjs";
+import { CompanyAdminFormData, CompanyFormData } from "../types/formTypes";
+import fetchAccessToken from "./tokenService";
+
+const signUpCompanyAdmin = async (
+  CompanyAdminData: CompanyAdminFormData,
+  CompanyData: CompanyFormData,
+  companyId: string,
+) => {
+  const companyAdmin = {
+    First_Name: CompanyAdminData.adminFirstName,
+    Middle_Name: CompanyAdminData.adminMiddleName,
+    Last_Name: CompanyAdminData.adminLastName,
+    Nickname: CompanyAdminData.adminNickname,
+    Email: CompanyData.companyEmail,
+    Phone_Number: CompanyAdminData.adminPhoneNumber,
+    Address: CompanyAdminData.adminAddress,
+    Birthday: CompanyAdminData.adminBirthdate,
+    Linkedin: CompanyAdminData.adminLinkedIn,
+    Facebook: CompanyAdminData.adminFacebook,
+    Instagram: CompanyAdminData.adminInstagram,
+    TikTok: CompanyAdminData.adminTikTok,
+    ProfilePhoto: CompanyAdminData.adminProfilePhoto,
+    GenderId: CompanyAdminData.adminGenderId,
+    CompanyId: companyId,
+    CountryId: CompanyAdminData.adminCountryId,
+    Work: CompanyAdminData.adminWork,
+    Connect: CompanyAdminData.adminConnect,
+    Support: CompanyAdminData.adminSupport,
+    Other_Notes: CompanyAdminData.adminOtherNotes,
+    FirstLogIn: 0,
+  };
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const addCompanyAdminUrl = "https://localhost:44373/api/AddEmployee";
+    const addCompanyAdmin = await axios
+      .post(addCompanyAdminUrl, companyAdmin, config)
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    if (addCompanyAdmin) {
+      const getCompanyAdminUrl = "https://localhost:44373/api/GetAllEmployees";
+
+      const companyAdmin = await axios
+        .get(getCompanyAdminUrl, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          params: {
+            Email: CompanyData.companyEmail,
+            Phone_Number: CompanyAdminData.adminPhoneNumber,
+          },
+        })
+        .then((response) => {
+          const result = response.data;
+          if (result && result.length > 0) {
+            console.log(result);
+            console.log("added to welby");
+            //setting company admin id
+            return result[0];
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      if (companyAdmin != null) {
+        const tokenResponse = await fetchAccessToken();
+
+        if (tokenResponse) {
+          const token = tokenResponse;
+          const addToOWSUrl = "http://localhost:58258/api/AddSystemUsers";
+
+          const hashedPassword = await bcrypt.hash(
+            CompanyAdminData.adminPassword,
+            10,
+          );
+
+          const user = {
+            UserCode: companyAdmin.EmployeeId,
+            UserName: CompanyData.companyEmail,
+            Password: hashedPassword,
+            AccountLocked: 0,
+            LoggedIn: 0,
+            PasswordNoExpiry: null,
+            ExpiryDays: null,
+            AccountVerified: null,
+            VerifiedDate: null,
+            Encoded_By: 24286,
+            Active: true,
+          };
+
+          const addToOWS = await axios
+            .post(addToOWSUrl, user, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            })
+            .then((response) => {
+              console.log(response.data);
+              console.log("Successfully added to OWS");
+              return response.data;
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+          if (addToOWS) {
+            const tokenResponse = await fetchAccessToken();
+
+            if (tokenResponse) {
+              const token = tokenResponse;
+              const mapCompanyAdminUrl =
+                "http://localhost:58258/api/MapSystemUsersToSecurityGroupMapping";
+
+              const mapAdmin = {
+                SecurityGroup: 5,
+                UserId: addToOWS.UserId,
+                Encoded_By: 24286,
+              };
+
+              axios
+                .post(mapCompanyAdminUrl, mapAdmin, {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
+                })
+                .then((response) => {
+                  console.log(response.data);
+                  alert("Success! Log in to access your dashboard.");
+                  console.log("Mapped Admin");
+                  return response.data;
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error("An error has occured: ", error);
+  }
+};
+
+export default signUpCompanyAdmin;

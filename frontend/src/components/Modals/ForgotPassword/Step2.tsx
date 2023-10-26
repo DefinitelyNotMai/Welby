@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
-import CustomText from "../../CustomText";
-import { CustomTextbox } from "../../Form/CustomInput";
 import FormItem from "../../Form/FormItem";
+import Input from "../../Form/Input";
+import Text from "../../Typography/Text";
 
 type Step2Data = {
   VerificationCode: string;
@@ -15,13 +15,12 @@ const Step2 = ({ VerificationCode, updateFields }: Step2Props) => {
   return (
     <>
       <Flex textAlign="center">
-        <CustomText fontSize={["md"]}>
+        <Text fontSize={["md"]} variant="white">
           Enter the 6-digit verification code you received.
-        </CustomText>
+        </Text>
       </Flex>
       <FormItem htmlFor="code" label="Verification Code" isRequired>
-        <CustomTextbox
-          autoComplete="none"
+        <Input
           id="code"
           maxLength={6}
           name="code"

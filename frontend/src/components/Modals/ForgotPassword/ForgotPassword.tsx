@@ -11,8 +11,8 @@ import {
 import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
 import useMultiStepForm from "../../../hooks/useMultiStepForm";
-import CustomButton from "../../CustomButton";
-import CustomText from "../../CustomText";
+import Button from "../../Form/Button";
+import Heading from "../../Typography/Heading";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
@@ -138,20 +138,27 @@ const ForgotPassword = ({ isOpen, onClose }: ForgotPasswordProps) => {
       <ModalOverlay />
       <ModalContent backgroundColor="primary.1" marginX={4} padding={8}>
         <ModalHeader textAlign="center">
-          <CustomText fontWeight="bold">Forgot Password?</CustomText>
+          <Heading fontSize="2xl" variant="white">
+            Forgot Password?
+          </Heading>
         </ModalHeader>
         <ModalCloseButton color="white" />
         <Form onSubmit={handleSubmit}>
           <Flex flexDirection="column" gap={8}>
             {step}
             <Center>
-              <CustomButton onClick={() => {}} type="submit" width={["50%"]}>
+              <Button
+                onClick={() => {}}
+                type="submit"
+                variant="primary"
+                width={["50%"]}
+              >
                 {isFirstStep
                   ? "NEXT"
                   : currentStepIndex === 1
                   ? "VERIFY"
                   : "SUBMIT"}
-              </CustomButton>
+              </Button>
             </Center>
           </Flex>
         </Form>

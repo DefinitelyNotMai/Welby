@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
-import CustomText from "../../CustomText";
-import { CustomTextbox } from "../../Form/CustomInput";
 import FormItem from "../../Form/FormItem";
+import Input from "../../Form/Input";
+import Text from "../../Typography/Text";
 
 type Step1Data = {
   Email: string;
@@ -15,13 +15,13 @@ const Step1 = ({ Email, updateFields }: Step1Props) => {
   return (
     <>
       <Flex textAlign="center">
-        <CustomText fontSize={["md"]}>
+        <Text fontSize={["md"]} variant="white">
           Please enter your email address to receive a <br />
           6-digit verification code.
-        </CustomText>
+        </Text>
       </Flex>
       <FormItem htmlFor="email" label="Email Address" isRequired>
-        <CustomTextbox
+        <Input
           autoComplete="email"
           id="email"
           name="email"

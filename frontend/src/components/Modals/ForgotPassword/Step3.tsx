@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
-import CustomText from "../../CustomText";
-import { CustomTextbox } from "../../Form/CustomInput";
 import FormItem from "../../Form/FormItem";
+import Input from "../../Form/Input";
+import Text from "../../Typography/Text";
 
 type Step3Data = {
   NewPassword: string;
@@ -20,10 +20,12 @@ const Step3 = ({
   return (
     <>
       <Flex textAlign="center">
-        <CustomText fontSize={["md"]}>Enter your new password</CustomText>
+        <Text fontSize={["md"]} variant="white">
+          Enter your new password
+        </Text>
       </Flex>
       <FormItem htmlFor="new-password" label="New Password" isRequired>
-        <CustomTextbox
+        <Input
           autoComplete="new-password"
           id="new-password"
           name="new-password"
@@ -38,7 +40,7 @@ const Step3 = ({
         label="Confirm New Password"
         isRequired
       >
-        <CustomTextbox
+        <Input
           autoComplete="new-password"
           id="confirm-new-password"
           name="confirm-new-password"

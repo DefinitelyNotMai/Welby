@@ -1,22 +1,35 @@
-import { Center, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import BackgroundImage from "../assets/images/workshop.png";
-import WelcomeFooter from "../components/Welcome/WelcomeFooter";
-import WelcomeHeader from "../components/Welcome/WelcomeHeader";
+import Footer from "../components/DataDisplay/Footer";
+import WelcomeHeader from "../components/DataDisplay/WelcomeHeader";
 
-type WelcomeLayoutProps = {
+interface WelcomeLayoutProps {
   children: ReactNode;
-};
+  noBackground?: boolean;
+}
 
-const WelcomeLayout = ({ children }: WelcomeLayoutProps) => {
+const WelcomeLayout = ({ children, noBackground }: WelcomeLayoutProps) => {
   return (
-    <Flex flexDirection="column" flex={1}>
+    <>
       <WelcomeHeader />
-      <Center backgroundImage={BackgroundImage} backgroundSize="cover" flex={1}>
-        {children}
-      </Center>
-      <WelcomeFooter />
-    </Flex>
+      {!noBackground ? (
+        <Flex
+          alignItems="center"
+          backgroundImage={BackgroundImage}
+          backgroundSize="cover"
+          justifyContent="center"
+          flex={1}
+        >
+          {children}
+        </Flex>
+      ) : (
+        <Flex alignItems="center" justifyContent="center" flex={1}>
+          {children}
+        </Flex>
+      )}
+      <Footer />
+    </>
   );
 };
 

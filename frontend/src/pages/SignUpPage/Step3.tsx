@@ -4,43 +4,39 @@ import Input from "../../components/Form/Input";
 import Textarea from "../../components/Form/Textarea";
 import Heading from "../../components/Typography/Heading";
 import Link from "../../components/Typography/Link";
+import { Value } from "../../data/typesForm";
 
-interface CompanyValue {
-  title: string;
-  description: string;
-}
+type Step3Data = {
+  values: Value[];
+};
 
-interface Step3Data {
-  companyValues: CompanyValue[];
-}
-
-interface Step3Props extends Step3Data {
+type Step3Props = Step3Data & {
   updateFields: (fields: Partial<Step3Data>) => void;
-}
+};
 
-const Step3 = ({ companyValues, updateFields }: Step3Props) => {
+const Step3 = ({ values, updateFields }: Step3Props) => {
   const handleTitleChange = (index: number, value: string) => {
-    const updatedValues = [...companyValues];
+    const updatedValues = [...values];
     updatedValues[index].title = value;
-    updateFields({ companyValues: updatedValues });
+    updateFields({ values: updatedValues });
   };
 
   const handleDescriptionChange = (index: number, value: string) => {
-    const updatedValues = [...companyValues];
+    const updatedValues = [...values];
     updatedValues[index].description = value;
-    updateFields({ companyValues: updatedValues });
+    updateFields({ values: updatedValues });
   };
 
   const handleAddValue = () => {
-    const updatedValues = [...companyValues, { title: "", description: "" }];
-    updateFields({ companyValues: updatedValues });
+    const updatedValues = [...values, { title: "", description: "" }];
+    updateFields({ values: updatedValues });
   };
 
   const handleRemoveValue = () => {
-    if (companyValues.length > 1) {
-      const updatedValues = [...companyValues];
+    if (values.length > 1) {
+      const updatedValues = [...values];
       updatedValues.pop();
-      updateFields({ companyValues: updatedValues });
+      updateFields({ values: updatedValues });
     }
   };
 
@@ -58,7 +54,7 @@ const Step3 = ({ companyValues, updateFields }: Step3Props) => {
       >
         Next, let your workforce know what you value as a company.
       </Heading>
-      {companyValues.map((value, index) => (
+      {values.map((value, index) => (
         <Flex key={index} flexDirection="column" marginBottom={8}>
           <FormItem
             htmlFor={generateIdAndName("value-title", index)}
@@ -96,12 +92,10 @@ const Step3 = ({ companyValues, updateFields }: Step3Props) => {
       ))}
       <Flex
         flexDirection="row"
-        justifyContent={
-          companyValues.length === 1 ? "flex-end" : "space-between"
-        }
+        justifyContent={values.length === 1 ? "flex-end" : "space-between"}
         marginY={2}
       >
-        {companyValues.length > 1 && (
+        {values.length > 1 && (
           <Link fontSize={["xs", "sm"]} onClick={handleRemoveValue}>
             - Remove Value
           </Link>

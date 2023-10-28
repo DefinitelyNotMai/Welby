@@ -1,19 +1,18 @@
 import { Flex, Grid } from "@chakra-ui/react";
 import { FormEvent, useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import signUpCompany from "../../api/signUpCompany";
 import signUpCompanyAdmin from "../../api/signUpCompanyAdmin";
 import Card from "../../components/DataDisplay/Card";
 import Button from "../../components/Form/Button";
-import useMultiStepForm from "../../hooks/useMultiStepForm";
-import useUserContext from "../../hooks/useUserContext";
-import WelcomeLayout from "../../layout/WelcomeLayout";
 import {
   COMPANY_ADMIN_INITIAL_DATA,
   COMPANY_INITIAL_DATA,
-  CompanyAdminFormData,
-  CompanyFormData,
-} from "../../types/formTypes";
+} from "../../data/initForm";
+import { CompanyAdminFormData, CompanyFormData } from "../../data/typesForm";
+import useMultiStepForm from "../../hooks/useMultiStepForm";
+import useUserContext from "../../hooks/useUserContext";
+import WelcomeLayout from "../../layout/WelcomeLayout";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
@@ -26,15 +25,14 @@ import Step8 from "./Step8";
 const SignUpPage = () => {
   document.title = "Welby | Sign Up";
 
-  // states
   const [companyData, setCompanyData] =
     useState<CompanyFormData>(COMPANY_INITIAL_DATA);
   const [companyAdminData, setCompanyAdminData] =
     useState<CompanyAdminFormData>(COMPANY_ADMIN_INITIAL_DATA);
-
   const { companyId, setCompanyId } = useUserContext();
 
-  // methods
+  const navigate = useNavigate();
+
   const updateCompanyFields = (fields: Partial<CompanyFormData>) => {
     setCompanyData((prev) => {
       return { ...prev, ...fields };
@@ -57,19 +55,24 @@ const SignUpPage = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!isLastStep && currentStepIndex !== 3) {
-      nextStep();
+
+    if (isLastStep) {
+      navigate("/dashboard");
     } else if (currentStepIndex === 3) {
       handleCompanySignUp();
       nextStep();
-    } else {
+    } else if (currentStepIndex === steps.length - 2) {
       handleCompanyAdminSignUp();
+      nextStep();
+    } else {
+      nextStep();
     }
   };
 
   const {
     currentStepIndex,
     step,
+    steps,
     isFirstStep,
     isLastStep,
     prevStep,

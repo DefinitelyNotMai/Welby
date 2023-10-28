@@ -6,16 +6,16 @@ import Textarea from "../../components/Form/Textarea";
 import Heading from "../../components/Typography/Heading";
 
 type Step7Data = {
-  adminAddress: string;
-  adminCountryId: string;
-  adminFacebook: string;
-  adminInstagram: string;
-  adminLinkedIn: string;
-  adminTikTok: string;
-  adminWork: string;
-  adminConnect: string;
-  adminSupport: string;
-  adminOtherNotes: string;
+  address: string;
+  countryId: string;
+  facebook: string;
+  instagram: string;
+  linkedIn: string;
+  tikTok: string;
+  work: string;
+  connect: string;
+  support: string;
+  otherNotes: string;
 };
 
 type Step7Props = Step7Data & {
@@ -23,16 +23,16 @@ type Step7Props = Step7Data & {
 };
 
 const Step7 = ({
-  adminAddress,
-  adminCountryId,
-  adminFacebook,
-  adminInstagram,
-  adminLinkedIn,
-  adminTikTok,
-  adminWork,
-  adminConnect,
-  adminSupport,
-  adminOtherNotes,
+  address,
+  countryId,
+  facebook,
+  instagram,
+  linkedIn,
+  tikTok,
+  work,
+  connect,
+  support,
+  otherNotes,
   updateFields,
 }: Step7Props) => {
   return (
@@ -57,36 +57,30 @@ const Step7 = ({
                 <Input
                   id="company-admin-address"
                   name="company-admin-address"
-                  onChange={(e) =>
-                    updateFields({ adminAddress: e.target.value })
-                  }
+                  onChange={(e) => updateFields({ address: e.target.value })}
                   placeholder="Address"
                   type="text"
-                  value={adminAddress}
+                  value={address}
                 />
               </FormItem>
               <FormItem htmlFor="company-admin-facebook" label="Facebook">
                 <Input
                   id="company-admin-facebook"
                   name="company-admin-facebook"
-                  onChange={(e) =>
-                    updateFields({ adminFacebook: e.target.value })
-                  }
+                  onChange={(e) => updateFields({ facebook: e.target.value })}
                   placeholder="Facebook"
                   type="text"
-                  value={adminFacebook}
+                  value={facebook}
                 />
               </FormItem>
               <FormItem htmlFor="company-admin-linkedin" label="LinkedIn">
                 <Input
                   id="company-admin-linkedin"
                   name="company-admin-linkedin"
-                  onChange={(e) =>
-                    updateFields({ adminLinkedIn: e.target.value })
-                  }
+                  onChange={(e) => updateFields({ linkedIn: e.target.value })}
                   placeholder="LinkedIn"
                   type="text"
-                  value={adminLinkedIn}
+                  value={linkedIn}
                 />
               </FormItem>
             </Flex>
@@ -99,34 +93,28 @@ const Step7 = ({
                 <SelectCountry
                   id="company-admin-country"
                   name="company-admin-country"
-                  onChange={(e) =>
-                    updateFields({ adminCountryId: e.target.value })
-                  }
-                  value={adminCountryId}
+                  onChange={(e) => updateFields({ countryId: e.target.value })}
+                  value={countryId}
                 />
               </FormItem>
               <FormItem htmlFor="company-admin-instagram" label="Instagram">
                 <Input
                   id="company-admin-instagram"
                   name="company-admin-instagram"
-                  onChange={(e) =>
-                    updateFields({ adminInstagram: e.target.value })
-                  }
+                  onChange={(e) => updateFields({ instagram: e.target.value })}
                   placeholder="Instagram"
                   type="text"
-                  value={adminInstagram}
+                  value={instagram}
                 />
               </FormItem>
               <FormItem htmlFor="company-admin-tiktok" label="TikTok">
                 <Input
                   id="company-admin-tiktok"
                   name="company-admin-tiktok"
-                  onChange={(e) =>
-                    updateFields({ adminTikTok: e.target.value })
-                  }
+                  onChange={(e) => updateFields({ tikTok: e.target.value })}
                   placeholder="TikTok"
                   type="text"
-                  value={adminTikTok}
+                  value={tikTok}
                 />
               </FormItem>
             </Flex>
@@ -137,9 +125,9 @@ const Step7 = ({
                 height="2rem"
                 id="company-admin-work"
                 name="company-admin-work"
-                onChange={(e) => updateFields({ adminWork: e.target.value })}
+                onChange={(e) => updateFields({ work: e.target.value })}
                 placeholder="Type here..."
-                value={adminWork}
+                value={work}
               />
             </FormItem>
             <FormItem
@@ -150,9 +138,9 @@ const Step7 = ({
                 height="2rem"
                 id="company-admin-connect"
                 name="company-admin-connect"
-                onChange={(e) => updateFields({ adminConnect: e.target.value })}
+                onChange={(e) => updateFields({ connect: e.target.value })}
                 placeholder="Type here..."
-                value={adminConnect}
+                value={connect}
               />
             </FormItem>
             <FormItem
@@ -163,9 +151,9 @@ const Step7 = ({
                 height="2rem"
                 id="company-admin-support"
                 name="company-admin-support"
-                onChange={(e) => updateFields({ adminSupport: e.target.value })}
+                onChange={(e) => updateFields({ support: e.target.value })}
                 placeholder="Type here..."
-                value={adminSupport}
+                value={support}
               />
             </FormItem>
             <FormItem
@@ -176,11 +164,9 @@ const Step7 = ({
                 height="2rem"
                 id="company-admin-notes"
                 name="company-admin-notes"
-                onChange={(e) =>
-                  updateFields({ adminOtherNotes: e.target.value })
-                }
+                onChange={(e) => updateFields({ otherNotes: e.target.value })}
                 placeholder="Type here..."
-                value={adminOtherNotes}
+                value={otherNotes}
               />
             </FormItem>
           </Flex>

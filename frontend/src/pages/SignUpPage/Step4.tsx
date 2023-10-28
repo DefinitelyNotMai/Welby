@@ -4,53 +4,48 @@ import Input from "../../components/Form/Input";
 import Textarea from "../../components/Form/Textarea";
 import Heading from "../../components/Typography/Heading";
 import Link from "../../components/Typography/Link";
+import { Goal } from "../../data/typesForm";
 
-interface CompanyGoal {
-  title: string;
-  description: string;
-  durationTo: string;
-}
+type Step4Data = {
+  goals: Goal[];
+};
 
-interface Step4Data {
-  companyGoals: CompanyGoal[];
-}
-
-interface Step4Props extends Step4Data {
+type Step4Props = Step4Data & {
   updateFields: (fields: Partial<Step4Data>) => void;
-}
+};
 
-const Step4 = ({ companyGoals, updateFields }: Step4Props) => {
+const Step4 = ({ goals, updateFields }: Step4Props) => {
   const handleTitleChange = (index: number, value: string) => {
-    const updatedGoals = [...companyGoals];
+    const updatedGoals = [...goals];
     updatedGoals[index].title = value;
-    updateFields({ companyGoals: updatedGoals });
+    updateFields({ goals: updatedGoals });
   };
 
   const handleDescriptionChange = (index: number, value: string) => {
-    const updatedGoals = [...companyGoals];
+    const updatedGoals = [...goals];
     updatedGoals[index].description = value;
-    updateFields({ companyGoals: updatedGoals });
+    updateFields({ goals: updatedGoals });
   };
 
   const handleDurationChange = (index: number, value: string) => {
-    const updatedGoals = [...companyGoals];
+    const updatedGoals = [...goals];
     updatedGoals[index].durationTo = value;
-    updateFields({ companyGoals: updatedGoals });
+    updateFields({ goals: updatedGoals });
   };
 
   const handleAddGoal = () => {
     const updatedGoals = [
-      ...companyGoals,
+      ...goals,
       { title: "", description: "", durationTo: "" },
     ];
-    updateFields({ companyGoals: updatedGoals });
+    updateFields({ goals: updatedGoals });
   };
 
   const handleRemoveGoal = () => {
-    if (companyGoals.length > 1) {
-      const updatedGoals = [...companyGoals];
+    if (goals.length > 1) {
+      const updatedGoals = [...goals];
       updatedGoals.pop();
-      updateFields({ companyGoals: updatedGoals });
+      updateFields({ goals: updatedGoals });
     }
   };
 
@@ -68,7 +63,7 @@ const Step4 = ({ companyGoals, updateFields }: Step4Props) => {
       >
         Lastly, let your workforce know what your goals are as a company.
       </Heading>
-      {companyGoals.map((goal, index) => (
+      {goals.map((goal, index) => (
         <Flex flexDirection="column" key={index} marginBottom={8}>
           <FormItem
             htmlFor={generateIdAndName("goal-title", index)}
@@ -121,12 +116,10 @@ const Step4 = ({ companyGoals, updateFields }: Step4Props) => {
       ))}
       <Flex
         flexDirection="row"
-        justifyContent={
-          companyGoals.length === 1 ? "flex-end" : "space-between"
-        }
+        justifyContent={goals.length === 1 ? "flex-end" : "space-between"}
         marginY={2}
       >
-        {companyGoals.length > 1 && (
+        {goals.length > 1 && (
           <Link fontSize={["xs", "sm"]} onClick={handleRemoveGoal}>
             - Remove Goal
           </Link>

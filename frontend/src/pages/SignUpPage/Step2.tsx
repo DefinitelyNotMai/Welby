@@ -3,16 +3,16 @@ import FormItem from "../../components/Form/FormItem";
 import Textarea from "../../components/Form/Textarea";
 import Heading from "../../components/Typography/Heading";
 
-interface Step2Data {
-  companyVision: string;
-  companyMission: string;
-}
+type Step2Data = {
+  vision: string;
+  mission: string;
+};
 
-interface Step2Props extends Step2Data {
+type Step2Props = Step2Data & {
   updateFields: (fields: Partial<Step2Data>) => void;
-}
+};
 
-const Step2 = ({ companyVision, companyMission, updateFields }: Step2Props) => {
+const Step2 = ({ vision, mission, updateFields }: Step2Props) => {
   return (
     <Flex flexDirection="column" padding={[8, 16]} paddingBottom={[8, 4]}>
       <Heading fontSize={["lg", "2xl"]} textAlign="center" variant="white">
@@ -33,10 +33,10 @@ const Step2 = ({ companyVision, companyMission, updateFields }: Step2Props) => {
             id="company-vision"
             name="company-vision"
             onChange={(e) => {
-              updateFields({ companyVision: e.target.value });
+              updateFields({ vision: e.target.value });
             }}
             placeholder="Type here..."
-            value={companyVision}
+            value={vision}
           />
         </FormItem>
         <FormItem htmlFor="company-mission" label="MISSION" isRequired>
@@ -44,10 +44,10 @@ const Step2 = ({ companyVision, companyMission, updateFields }: Step2Props) => {
             id="company-mission"
             name="company-mission"
             onChange={(e) => {
-              updateFields({ companyMission: e.target.value });
+              updateFields({ mission: e.target.value });
             }}
             placeholder="Type here..."
-            value={companyMission}
+            value={mission}
           />
         </FormItem>
       </Flex>

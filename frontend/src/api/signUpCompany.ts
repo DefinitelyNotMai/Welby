@@ -1,27 +1,23 @@
 import axios from "axios";
-import { CompanyFormData } from "../types/formTypes";
+import { CompanyFormData } from "../data/typesForm";
 
-/*
- * NOTE: Currently not working, cannot use "setCompanyId" from useUserContext since this file is not a React Component
- * Everything else works except for setting the companyId to be used in Company Admin's Sign Up process.
- */
 const signUpCompany = async (
   CompanyData: CompanyFormData,
   companyId: string,
   setCompanyId: (id: string) => void,
 ) => {
   const company_info = {
-    Name: CompanyData.companyName,
-    Email: CompanyData.companyEmail,
-    Logo: CompanyData.companyLogo,
-    Phone_Number: CompanyData.companyPhoneNumber,
-    Website: CompanyData.companyWebsite,
-    FoundingDate: CompanyData.companyFoundingDate,
-    Vision: CompanyData.companyVision,
-    Mission: CompanyData.companyMission,
-    CountryId: CompanyData.companyCountryId,
-    IndustryTypeId: CompanyData.companyIndustryTypeId,
-    CompanySize: CompanyData.companySize,
+    Name: CompanyData.name,
+    Email: CompanyData.email,
+    Logo: CompanyData.logo,
+    Phone_Number: CompanyData.phoneNumber,
+    Website: CompanyData.website,
+    FoundingDate: CompanyData.foundingDate,
+    Vision: CompanyData.vision,
+    Mission: CompanyData.mission,
+    CountryId: CompanyData.countryId,
+    IndustryTypeId: CompanyData.industryTypeId,
+    CompanySize: CompanyData.size,
   };
 
   const config = {
@@ -51,8 +47,8 @@ const signUpCompany = async (
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            Email: CompanyData.companyEmail,
-            Phone_Number: CompanyData.companyPhoneNumber,
+            Email: CompanyData.email,
+            Phone_Number: CompanyData.phoneNumber,
           },
         })
         .then((response) => {
@@ -73,13 +69,13 @@ const signUpCompany = async (
         const values: {
           title: string;
           description: string;
-        }[] = CompanyData.companyValues;
+        }[] = CompanyData.values;
 
         const goals: {
           title: string;
           description: string;
           durationTo: string;
-        }[] = CompanyData.companyGoals;
+        }[] = CompanyData.goals;
 
         for (let i = 0; i < values.length; i++) {
           const addValuesUrl = "https://localhost:44373/api/AddValue";

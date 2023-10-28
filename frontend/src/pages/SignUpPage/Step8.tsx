@@ -2,11 +2,11 @@ import { Avatar, Flex } from "@chakra-ui/react";
 import Heading from "../../components/Typography/Heading";
 
 interface Step8Props {
-  adminNickname: string;
-  adminProfilePhoto: string;
+  nickname: string;
+  profilePhoto: string;
 }
 
-const Step8 = ({ adminNickname, adminProfilePhoto }: Step8Props) => {
+const Step8 = ({ nickname, profilePhoto }: Step8Props) => {
   return (
     <Flex flexDirection="column" alignItems="center" gap={8} padding={[8, 16]}>
       <Heading
@@ -18,9 +18,9 @@ const Step8 = ({ adminNickname, adminProfilePhoto }: Step8Props) => {
         Welcome to the Team!
       </Heading>
       <Heading fontSize={["3xl", "5xl"]} variant="white">
-        {adminNickname}
+        {nickname}
       </Heading>
-      <Avatar boxSize={[32, 64]} src={adminProfilePhoto} />
+      <Avatar boxSize={[32, 64]} src={profilePhoto} />
       <Heading fontSize={["2xl", "4xl"]} fontWeight="normal" variant="white">
         You are all set-up!
       </Heading>

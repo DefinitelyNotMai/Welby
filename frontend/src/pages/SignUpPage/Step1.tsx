@@ -11,33 +11,32 @@ import UploadPhoto from "../../components/Form/UploadPhoto";
 import Heading from "../../components/Typography/Heading";
 import Text from "../../components/Typography/Text";
 
-interface Step1Data {
-  companyId: string;
-  companyName: string;
-  companyEmail: string;
-  companyLogo: string;
-  companyWebsite: string;
-  companySize: string;
-  companyPhoneNumber: string;
-  companyFoundingDate: string;
-  companyCountryId: string; // can be string because it is being converted in the backend
-  companyIndustryTypeId: string;
-}
+type Step1Data = {
+  name: string;
+  email: string;
+  logo: string;
+  website: string;
+  size: string;
+  phoneNumber: string;
+  foundingDate: string;
+  countryId: string;
+  industryTypeId: string;
+};
 
-interface Step1Props extends Step1Data {
+type Step1Props = Step1Data & {
   updateFields: (fields: Partial<Step1Data>) => void;
-}
+};
 
 const Step1 = ({
-  companyName,
-  companyEmail,
-  companyLogo,
-  companyWebsite,
-  companySize,
-  companyPhoneNumber,
-  companyFoundingDate,
-  companyCountryId,
-  companyIndustryTypeId,
+  name,
+  email,
+  logo,
+  website,
+  size,
+  phoneNumber,
+  foundingDate,
+  countryId,
+  industryTypeId,
   updateFields,
 }: Step1Props) => {
   return (
@@ -76,11 +75,11 @@ const Step1 = ({
                   id="company-name"
                   name="company-name"
                   onChange={(e) => {
-                    updateFields({ companyName: e.target.value });
+                    updateFields({ name: e.target.value });
                   }}
                   placeholder="Name"
                   type="text"
-                  value={companyName}
+                  value={name}
                 />
               </FormItem>
               <FormItem
@@ -92,11 +91,11 @@ const Step1 = ({
                   id="company-email"
                   name="company-email"
                   onChange={(e) => {
-                    updateFields({ companyEmail: e.target.value });
+                    updateFields({ email: e.target.value });
                   }}
                   placeholder="hello@email.com"
                   type="email"
-                  value={companyEmail}
+                  value={email}
                 />
               </FormItem>
             </Flex>
@@ -108,9 +107,9 @@ const Step1 = ({
                   label="Company Logo"
                   name="company-logo"
                   onChange={(e) => {
-                    updateFields({ companyLogo: e });
+                    updateFields({ logo: e });
                   }}
-                  value={companyLogo}
+                  value={logo}
                 />
               </FormItem>
             </Flex>
@@ -121,20 +120,16 @@ const Step1 = ({
             marginBottom={4}
           >
             <Flex flexDirection="column" gap={4}>
-              <FormItem
-                htmlFor="company-website"
-                label="Company Website"
-                isRequired
-              >
+              <FormItem htmlFor="company-website" label="Company Website">
                 <Input
                   id="company-website"
                   onChange={(e) => {
-                    updateFields({ companyWebsite: e.target.value });
+                    updateFields({ website: e.target.value });
                   }}
                   name="company-website"
                   placeholder="www.website.com"
                   type="text"
-                  value={companyWebsite}
+                  value={website}
                 />
               </FormItem>
               <FormItem
@@ -146,11 +141,11 @@ const Step1 = ({
                   id="company-number"
                   name="company-number"
                   onChange={(e) => {
-                    updateFields({ companyPhoneNumber: e.target.value });
+                    updateFields({ phoneNumber: e.target.value });
                   }}
                   placeholder="09123456789"
                   type="text"
-                  value={companyPhoneNumber}
+                  value={phoneNumber}
                 />
               </FormItem>
               <FormItem htmlFor="company-location" label="Location" isRequired>
@@ -158,9 +153,9 @@ const Step1 = ({
                   id="company-location"
                   name="company-location"
                   onChange={(e) => {
-                    updateFields({ companyCountryId: e.target.value });
+                    updateFields({ countryId: e.target.value });
                   }}
-                  value={companyCountryId}
+                  value={countryId}
                 />
               </FormItem>
             </Flex>
@@ -170,9 +165,9 @@ const Step1 = ({
                   id="company-size"
                   name="company-size"
                   onChange={(e) => {
-                    updateFields({ companySize: e.target.value });
+                    updateFields({ size: e.target.value });
                   }}
-                  value={companySize}
+                  value={size}
                 />
               </FormItem>
               <FormItem
@@ -184,11 +179,11 @@ const Step1 = ({
                   id="company-founding-year"
                   name="company-founding-year"
                   onChange={(e) => {
-                    updateFields({ companyFoundingDate: e.target.value });
+                    updateFields({ foundingDate: e.target.value });
                   }}
                   placeholder="09123456789"
                   type="date"
-                  value={companyFoundingDate}
+                  value={foundingDate}
                 />
               </FormItem>
               <FormItem
@@ -200,9 +195,9 @@ const Step1 = ({
                   id="company-industry-type"
                   name="company-industry-type"
                   onChange={(e) => {
-                    updateFields({ companyIndustryTypeId: e.target.value });
+                    updateFields({ industryTypeId: e.target.value });
                   }}
-                  value={companyIndustryTypeId}
+                  value={industryTypeId}
                 />
               </FormItem>
             </Flex>

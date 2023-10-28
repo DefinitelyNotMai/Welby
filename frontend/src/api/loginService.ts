@@ -1,16 +1,11 @@
 import axios from "axios";
 import bcrypt from "bcryptjs";
+import { LoginData } from "../data/typesForm";
 import fetchAccessToken from "./tokenService";
 
-interface UserData {
-  email: string;
-  password: string;
-}
-
 const processLogin = async (
-  userData: UserData,
+  loginData: LoginData,
   setUserId: (id: string) => void,
-  setSecurityGroupId: (id: string) => void,
 ): Promise<boolean> => {
   try {
     const tokenResponse = await fetchAccessToken();
@@ -19,7 +14,7 @@ const processLogin = async (
       const token = tokenResponse;
       const loginUrl = "http://localhost:58258/api/GetSystemUsers";
       const param = {
-        UserName: userData.email,
+        UserName: loginData.email,
         Active: true,
       };
 
@@ -40,7 +35,7 @@ const processLogin = async (
               const storedPassword = result[0].Password;
 
               bcrypt.compare(
-                userData.password,
+                loginData.password,
                 storedPassword,
                 (err, passwordMatch) => {
                   if (err) {
@@ -50,7 +45,6 @@ const processLogin = async (
                   } else if (passwordMatch) {
                     // passwords match, login successful
                     setUserId(result[0].UserId);
-                    setSecurityGroupId(result[0].LoggedIn);
                     resolve(true);
                   } else {
                     // passwords do not match; login failed

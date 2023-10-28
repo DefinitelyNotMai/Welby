@@ -6,38 +6,29 @@ import Card from "../components/DataDisplay/Card";
 import Button from "../components/Form/Button";
 import FormItem from "../components/Form/FormItem";
 import Input from "../components/Form/Input";
-import ForgotPassword from "../components/Modals/ForgotPassword";
 import Heading from "../components/Typography/Heading";
 import Link from "../components/Typography/Link";
+import { INITIAL_LOGIN_DATA } from "../data/initForm";
+import { LoginData } from "../data/typesForm";
 import useRedirect from "../hooks/useRedirect";
 import useUserContext from "../hooks/useUserContext";
 import WelcomeLayout from "../layout/WelcomeLayout";
 
-interface LoginInfo {
-  email: string;
-  password: string;
-}
-
-const INITIAL_LOGIN_DATA: LoginInfo = {
-  email: "",
-  password: "",
-};
-
 const LoginPage = () => {
   document.title = "Login | Welby";
 
-  const [userData, setUserData] = useState<LoginInfo>(INITIAL_LOGIN_DATA);
+  const [userData, setUserData] = useState<LoginData>(INITIAL_LOGIN_DATA);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] =
     useState<boolean>(false);
 
   const toast = useToast();
-  const { setSecurityGroupId, setUserId } = useUserContext();
+  const { setUserId } = useUserContext();
 
   const toggleForgotPassword = () => {
     setIsForgotPasswordOpen(!isForgotPasswordOpen);
   };
 
-  const updateLoginFields = (fields: Partial<LoginInfo>) => {
+  const updateLoginFields = (fields: Partial<LoginData>) => {
     setUserData((prev) => {
       return { ...prev, ...fields };
     });
@@ -54,11 +45,7 @@ const LoginPage = () => {
       password: userData.password,
     };
 
-    const loginSuccess = await processLogin(
-      data,
-      setSecurityGroupId,
-      setUserId,
-    );
+    const loginSuccess = await processLogin(data, setUserId);
 
     if (loginSuccess) {
       toast({
@@ -128,12 +115,12 @@ const LoginPage = () => {
           </Form>
         </Flex>
       </Card>
-      {isForgotPasswordOpen && (
+      {/* {isForgotPasswordOpen && (
         <ForgotPassword
           isOpen={isForgotPasswordOpen}
           onClose={toggleForgotPassword}
         />
-      )}
+      )} */}
     </WelcomeLayout>
   );
 };

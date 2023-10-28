@@ -1,34 +1,34 @@
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import { CompanyAdminFormData, CompanyFormData } from "../types/formTypes";
+import { CompanyAdminFormData, CompanyFormData } from "../data/typesForm";
 import fetchAccessToken from "./tokenService";
 
 const signUpCompanyAdmin = async (
   CompanyAdminData: CompanyAdminFormData,
   CompanyData: CompanyFormData,
-  companyId: string,
+  id: string,
 ) => {
-  const companyAdmin = {
-    First_Name: CompanyAdminData.adminFirstName,
-    Middle_Name: CompanyAdminData.adminMiddleName,
-    Last_Name: CompanyAdminData.adminLastName,
-    Nickname: CompanyAdminData.adminNickname,
-    Email: CompanyData.companyEmail,
-    Phone_Number: CompanyAdminData.adminPhoneNumber,
-    Address: CompanyAdminData.adminAddress,
-    Birthday: CompanyAdminData.adminBirthdate,
-    Linkedin: CompanyAdminData.adminLinkedIn,
-    Facebook: CompanyAdminData.adminFacebook,
-    Instagram: CompanyAdminData.adminInstagram,
-    TikTok: CompanyAdminData.adminTikTok,
-    ProfilePhoto: CompanyAdminData.adminProfilePhoto,
-    GenderId: CompanyAdminData.adminGenderId,
-    CompanyId: companyId,
-    CountryId: CompanyAdminData.adminCountryId,
-    Work: CompanyAdminData.adminWork,
-    Connect: CompanyAdminData.adminConnect,
-    Support: CompanyAdminData.adminSupport,
-    Other_Notes: CompanyAdminData.adminOtherNotes,
+  const admin = {
+    First_Name: CompanyAdminData.firstName,
+    Middle_Name: CompanyAdminData.middleName,
+    Last_Name: CompanyAdminData.lastName,
+    Nickname: CompanyAdminData.nickname,
+    Email: CompanyData.email,
+    Phone_Number: CompanyAdminData.phoneNumber,
+    Address: CompanyAdminData.address,
+    Birthday: CompanyAdminData.birthdate,
+    Linkedin: CompanyAdminData.linkedIn,
+    Facebook: CompanyAdminData.facebook,
+    Instagram: CompanyAdminData.instagram,
+    TikTok: CompanyAdminData.tikTok,
+    ProfilePhoto: CompanyAdminData.profilePhoto,
+    GenderId: CompanyAdminData.genderId,
+    CompanyId: id,
+    CountryId: CompanyAdminData.countryId,
+    Work: CompanyAdminData.work,
+    Connect: CompanyAdminData.connect,
+    Support: CompanyAdminData.support,
+    Other_Notes: CompanyAdminData.otherNotes,
     FirstLogIn: 0,
   };
 
@@ -37,10 +37,11 @@ const signUpCompanyAdmin = async (
       "Content-Type": "application/json",
     },
   };
+
   try {
     const addCompanyAdminUrl = "https://localhost:44373/api/AddEmployee";
     const addCompanyAdmin = await axios
-      .post(addCompanyAdminUrl, companyAdmin, config)
+      .post(addCompanyAdminUrl, admin, config)
       .then((response) => {
         console.log(response.data);
         return response.data;
@@ -52,13 +53,13 @@ const signUpCompanyAdmin = async (
     if (addCompanyAdmin) {
       const getCompanyAdminUrl = "https://localhost:44373/api/GetAllEmployees";
 
-      const companyAdmin = await axios
+      const admin = await axios
         .get(getCompanyAdminUrl, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            Email: CompanyData.companyEmail,
-            Phone_Number: CompanyAdminData.adminPhoneNumber,
+            Email: CompanyData.email,
+            Phone_Number: CompanyAdminData.phoneNumber,
           },
         })
         .then((response) => {
@@ -74,7 +75,7 @@ const signUpCompanyAdmin = async (
           console.log(error);
         });
 
-      if (companyAdmin != null) {
+      if (admin != null) {
         const tokenResponse = await fetchAccessToken();
 
         if (tokenResponse) {
@@ -82,13 +83,13 @@ const signUpCompanyAdmin = async (
           const addToOWSUrl = "http://localhost:58258/api/AddSystemUsers";
 
           const hashedPassword = await bcrypt.hash(
-            CompanyAdminData.adminPassword,
+            CompanyAdminData.password,
             10,
           );
 
           const user = {
-            UserCode: companyAdmin.EmployeeId,
-            UserName: CompanyData.companyEmail,
+            UserCode: admin.EmployeeId,
+            UserName: CompanyData.email,
             Password: hashedPassword,
             AccountLocked: 0,
             LoggedIn: 0,
@@ -139,7 +140,6 @@ const signUpCompanyAdmin = async (
                 })
                 .then((response) => {
                   console.log(response.data);
-                  alert("Success! Log in to access your dashboard.");
                   console.log("Mapped Admin");
                   return response.data;
                 })

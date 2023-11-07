@@ -7,17 +7,17 @@ const signUpCompany = async (
   setCompanyId: (id: string) => void,
 ) => {
   const company_info = {
-    Name: CompanyData.name,
-    Email: CompanyData.email,
-    Logo: CompanyData.logo,
-    Phone_Number: CompanyData.phoneNumber,
-    Website: CompanyData.website,
-    FoundingDate: CompanyData.foundingDate,
-    Vision: CompanyData.vision,
-    Mission: CompanyData.mission,
-    CountryId: CompanyData.countryId,
-    IndustryTypeId: CompanyData.industryTypeId,
-    CompanySize: CompanyData.size,
+    Name: CompanyData.Name,
+    Email: CompanyData.companyEmail,
+    Logo: CompanyData.Logo,
+    Phone_Number: CompanyData.Phone_Number,
+    Website: CompanyData.Website,
+    FoundingDate: CompanyData.FoundingDate,
+    Vision: CompanyData.Vision,
+    Mission: CompanyData.Mission,
+    CountryId: CompanyData.CountryId,
+    IndustryTypeId: CompanyData.IndustryTypeId,
+    CompanySize: CompanyData.CompanySize,
   };
 
   const config = {
@@ -47,8 +47,8 @@ const signUpCompany = async (
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            Email: CompanyData.email,
-            Phone_Number: CompanyData.phoneNumber,
+            Email: CompanyData.companyEmail,
+            Phone_Number: CompanyData.Phone_Number,
           },
         })
         .then((response) => {
@@ -66,22 +66,22 @@ const signUpCompany = async (
       if (company) {
         const addCompanyGoalUrl = "https://localhost:44373/api/AddCompanyGoal";
 
-        const values: {
+        const Values: {
           title: string;
           description: string;
-        }[] = CompanyData.values;
+        }[] = CompanyData.Values;
 
-        const goals: {
+        const Goals: {
           title: string;
           description: string;
           durationTo: string;
-        }[] = CompanyData.goals;
+        }[] = CompanyData.Goals;
 
-        for (let i = 0; i < values.length; i++) {
+        for (let i = 0; i < Values.length; i++) {
           const addValuesUrl = "https://localhost:44373/api/AddValue";
           const value = {
-            Title: values[i].title,
-            Description: values[i].description,
+            Title: Values[i].title,
+            Description: Values[i].description,
           };
 
           const toMasterValue = await axios
@@ -134,12 +134,12 @@ const signUpCompany = async (
           }
         }
 
-        for (let i = 0; i < goals.length; i++) {
+        for (let i = 0; i < Goals.length; i++) {
           const addGoalsUrl = "https://localhost:44373/api/AddGoal";
           const goal = {
-            Title: goals[i].title,
-            Description: goals[i].description,
-            DurationTo: goals[i].durationTo,
+            Title: Goals[i].title,
+            Description: Goals[i].description,
+            DurationTo: Goals[i].durationTo,
           };
 
           const masterGoal = await axios

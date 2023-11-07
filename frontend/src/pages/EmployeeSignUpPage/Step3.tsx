@@ -3,59 +3,55 @@ import FormItem from "../../components/Form/FormItem";
 import { SelectStrength } from "../../components/Form/Select";
 import Heading from "../../components/Typography/Heading";
 
-interface Step3Data {
-  realizedStrengths: string[];
-  unrealizedStrengths: string[];
-  learnedBehaviors: string[];
-  weakness: string;
-}
+type Step3Data = {
+  RealizedStrengths: string[];
+  UnrealizedStrengths: string[];
+  LearnedBehaviors: string[];
+  Weakness: string;
+};
 
-interface Step3Props extends Step3Data {
+type Step3Props = Step3Data & {
   updateFields: (fields: Partial<Step3Data>) => void;
-}
+};
 
 const Step3 = ({
-  realizedStrengths,
-  unrealizedStrengths,
-  learnedBehaviors,
-  weakness,
+  RealizedStrengths,
+  UnrealizedStrengths,
+  LearnedBehaviors,
+  Weakness,
   updateFields,
 }: Step3Props) => {
   const handleRealizedStrengthSelect = (index: number, value: string) => {
-    const updatedStrengths = [...realizedStrengths];
+    const updatedStrengths = [...RealizedStrengths];
     updatedStrengths[index] = value;
-    updateFields({ realizedStrengths: updatedStrengths });
+    updateFields({ RealizedStrengths: updatedStrengths });
   };
 
   const handleUnrealizedStrengthSelect = (index: number, value: string) => {
-    const updatedStrengths = [...unrealizedStrengths];
+    const updatedStrengths = [...UnrealizedStrengths];
     updatedStrengths[index] = value;
-    updateFields({ unrealizedStrengths: updatedStrengths });
+    updateFields({ UnrealizedStrengths: updatedStrengths });
   };
 
   const handleLearnedBehaviorSelect = (index: number, value: string) => {
-    const updatedStrengths = [...learnedBehaviors];
+    const updatedStrengths = [...LearnedBehaviors];
     updatedStrengths[index] = value;
-    updateFields({ learnedBehaviors: updatedStrengths });
+    updateFields({ LearnedBehaviors: updatedStrengths });
   };
 
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Box marginBottom={10} textAlign="center">
-        <Heading fontSize={["2xl", "3xl", "4xl"]} variant="white">
+        <Heading color="white" fontSize={["2xl", "3xl", "4xl"]}>
           Share your strengths to the team.
         </Heading>
-        <Heading
-          fontSize={["lg", "xl", "2xl"]}
-          marginBottom={4}
-          variant="white"
-        >
+        <Heading color="white" fontSize={["lg", "xl", "2xl"]} marginBottom={4}>
           &quot;Play with your strengths.&quot;
         </Heading>
         <Heading
+          color="white"
           fontSize={["md", "lg", "xl"]}
           fontWeight="normal"
-          variant="white"
         >
           - Jennifer Lopez
         </Heading>
@@ -77,7 +73,7 @@ const Step3 = ({
                   onChange={(e) => {
                     handleRealizedStrengthSelect(index, e.target.value);
                   }}
-                  value={realizedStrengths[index]}
+                  value={RealizedStrengths[index]}
                 />
               </FormItem>
             ))}
@@ -99,7 +95,7 @@ const Step3 = ({
                   onChange={(e) => {
                     handleUnrealizedStrengthSelect(index, e.target.value);
                   }}
-                  value={unrealizedStrengths[index]}
+                  value={UnrealizedStrengths[index]}
                 />
               </FormItem>
             ))}
@@ -121,7 +117,7 @@ const Step3 = ({
                   onChange={(e) => {
                     handleLearnedBehaviorSelect(index, e.target.value);
                   }}
-                  value={learnedBehaviors[index]}
+                  value={LearnedBehaviors[index]}
                 />
               </FormItem>
             ))}
@@ -135,9 +131,9 @@ const Step3 = ({
                 id="weakness"
                 name="weakness"
                 onChange={(e) => {
-                  updateFields({ weakness: e.target.value });
+                  updateFields({ Weakness: e.target.value });
                 }}
-                value={weakness}
+                value={Weakness}
               />
             </FormItem>
             <Flex width="full" />

@@ -9,26 +9,26 @@ const signUpCompanyAdmin = async (
   id: string,
 ) => {
   const admin = {
-    First_Name: CompanyAdminData.firstName,
-    Middle_Name: CompanyAdminData.middleName,
-    Last_Name: CompanyAdminData.lastName,
-    Nickname: CompanyAdminData.nickname,
-    Email: CompanyData.email,
-    Phone_Number: CompanyAdminData.phoneNumber,
-    Address: CompanyAdminData.address,
-    Birthday: CompanyAdminData.birthdate,
-    Linkedin: CompanyAdminData.linkedIn,
-    Facebook: CompanyAdminData.facebook,
-    Instagram: CompanyAdminData.instagram,
-    TikTok: CompanyAdminData.tikTok,
-    ProfilePhoto: CompanyAdminData.profilePhoto,
-    GenderId: CompanyAdminData.genderId,
+    First_Name: CompanyAdminData.First_Name,
+    Middle_Name: CompanyAdminData.Middle_Name,
+    Last_Name: CompanyAdminData.Last_Name,
+    Nickname: CompanyAdminData.Nickname,
+    Email: CompanyData.companyEmail,
+    Phone_Number: CompanyAdminData.Phone_Number,
+    Address: CompanyAdminData.Address,
+    Birthday: CompanyAdminData.Birthday,
+    Linkedin: CompanyAdminData.Linkedin,
+    Facebook: CompanyAdminData.Facebook,
+    Instagram: CompanyAdminData.Instagram,
+    TikTok: CompanyAdminData.TikTok,
+    ProfilePhoto: CompanyAdminData.ProfilePhoto,
+    GenderId: CompanyAdminData.GenderId,
     CompanyId: id,
-    CountryId: CompanyAdminData.countryId,
-    Work: CompanyAdminData.work,
-    Connect: CompanyAdminData.connect,
-    Support: CompanyAdminData.support,
-    Other_Notes: CompanyAdminData.otherNotes,
+    CountryId: CompanyAdminData.CountryId,
+    Work: CompanyAdminData.Work,
+    Connect: CompanyAdminData.Connect,
+    Support: CompanyAdminData.Support,
+    Other_Notes: CompanyAdminData.Other_Notes,
     FirstLogIn: 0,
   };
 
@@ -58,8 +58,8 @@ const signUpCompanyAdmin = async (
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            Email: CompanyData.email,
-            Phone_Number: CompanyAdminData.phoneNumber,
+            Email: CompanyData.companyEmail,
+            Phone_Number: CompanyAdminData.Phone_Number,
           },
         })
         .then((response) => {
@@ -83,13 +83,13 @@ const signUpCompanyAdmin = async (
           const addToOWSUrl = "http://localhost:58258/api/AddSystemUsers";
 
           const hashedPassword = await bcrypt.hash(
-            CompanyAdminData.password,
+            CompanyAdminData.Password,
             10,
           );
 
           const user = {
             UserCode: admin.EmployeeId,
-            UserName: CompanyData.email,
+            UserName: CompanyData.companyEmail,
             Password: hashedPassword,
             AccountLocked: 0,
             LoggedIn: 0,

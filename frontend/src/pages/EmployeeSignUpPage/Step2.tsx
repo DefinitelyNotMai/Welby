@@ -3,28 +3,28 @@ import FormItem from "../../components/Form/FormItem";
 import Textarea from "../../components/Form/Textarea";
 import Heading from "../../components/Typography/Heading";
 
-interface Step2Data {
-  work: string;
-  connect: string;
-  support: string;
-}
+type Step2Data = {
+  Work: string;
+  Connect: string;
+  Support: string;
+};
 
-interface Step2Props extends Step2Data {
+type Step2Props = Step2Data & {
   updateFields: (fields: Partial<Step2Data>) => void;
-}
+};
 
-const Step2 = ({ work, connect, support, updateFields }: Step2Props) => {
+const Step2 = ({ Work, Connect, Support, updateFields }: Step2Props) => {
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Box marginBottom={10} textAlign="center">
-        <Heading variant="white">
+        <Heading color="white">
           Let your colleagues know how you can thrive
         </Heading>
-        <Heading fontSize={["xl", "2xl"]} marginBottom={4} variant="white">
+        <Heading color="white" fontSize={["xl", "2xl"]} marginBottom={4}>
           &quot;It is only in your thriving that you have anything to offer
           anyone&quot;
         </Heading>
-        <Heading fontSize={["lg", "xl"]} fontWeight="normal" variant="white">
+        <Heading color="white" fontSize={["lg", "xl"]} fontWeight="normal">
           - Esther Hicks
         </Heading>
       </Box>
@@ -33,9 +33,9 @@ const Step2 = ({ work, connect, support, updateFields }: Step2Props) => {
           <Textarea
             id="work"
             name="work"
-            onChange={(e) => updateFields({ work: e.target.value })}
+            onChange={(e) => updateFields({ Work: e.target.value })}
             placeholder="Type here..."
-            value={work}
+            value={Work}
           />
         </FormItem>
         <FormItem
@@ -46,18 +46,18 @@ const Step2 = ({ work, connect, support, updateFields }: Step2Props) => {
           <Textarea
             id="connect"
             name="connect"
-            onChange={(e) => updateFields({ connect: e.target.value })}
+            onChange={(e) => updateFields({ Connect: e.target.value })}
             placeholder="Type here..."
-            value={connect}
+            value={Connect}
           />
         </FormItem>
         <FormItem htmlFor="support" label="What I need support in?" isRequired>
           <Textarea
             id="support"
             name="support"
-            onChange={(e) => updateFields({ support: e.target.value })}
+            onChange={(e) => updateFields({ Support: e.target.value })}
             placeholder="Type here..."
-            value={support}
+            value={Support}
           />
         </FormItem>
       </Flex>

@@ -3,22 +3,22 @@ import FormItem from "../../components/Form/FormItem";
 import Textarea from "../../components/Form/Textarea";
 import Heading from "../../components/Typography/Heading";
 
-interface Step5Data {
-  otherNotes: string;
-}
+type Step5Data = {
+  Other_Notes: string;
+};
 
-interface Step5Props extends Step5Data {
+type Step5Props = Step5Data & {
   updateFields: (fields: Partial<Step5Data>) => void;
-}
+};
 
-const Step5 = ({ otherNotes, updateFields }: Step5Props) => {
+const Step5 = ({ Other_Notes, updateFields }: Step5Props) => {
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Heading
+        color="white"
         fontSize={["xl", "2xl", "3xl"]}
         marginBottom={16}
         textAlign="center"
-        variant="white"
       >
         Anything else you want your colleagues to take note of?
       </Heading>
@@ -30,9 +30,9 @@ const Step5 = ({ otherNotes, updateFields }: Step5Props) => {
           <Textarea
             id="other-notes"
             name="other-notes"
-            onChange={(e) => updateFields({ otherNotes: e.target.value })}
+            onChange={(e) => updateFields({ Other_Notes: e.target.value })}
             placeholder="Type here..."
-            value={otherNotes}
+            value={Other_Notes}
           />
         </FormItem>
       </Box>

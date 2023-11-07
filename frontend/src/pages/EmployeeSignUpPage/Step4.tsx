@@ -2,44 +2,36 @@ import { Box, Flex } from "@chakra-ui/react";
 import InterestCheckbox from "../../components/Form/InterestCheckbox";
 import Heading from "../../components/Typography/Heading";
 
-interface Step4Data {
-  interests: string[];
-}
+type Step4Data = {
+  Interests: string[];
+};
 
-interface Step4Props extends Step4Data {
+type Step4Props = Step4Data & {
   updateFields: (fields: Partial<Step4Data>) => void;
-}
+};
 
-const Step4 = ({ interests, updateFields }: Step4Props) => {
-  // const handleInterestsChange = (values: string[]) => {
-  //   updateFields({ interests: values });
-  // };
-
+const Step4 = ({ Interests, updateFields }: Step4Props) => {
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Box marginBottom={10} textAlign="center">
-        <Heading fontSize={["2xl", "3xl", "4xl"]} variant="white">
+        <Heading color="white" fontSize={["2xl", "3xl", "4xl"]}>
           Share your strengths to the team.
         </Heading>
-        <Heading
-          fontSize={["lg", "xl", "2xl"]}
-          marginBottom={4}
-          variant="white"
-        >
+        <Heading color="white" fontSize={["lg", "xl", "2xl"]} marginBottom={4}>
           &quot;Play with your strengths.&quot;
         </Heading>
         <Heading
+          color="white"
           fontSize={["md", "lg", "xl"]}
           fontWeight="normal"
-          variant="white"
         >
           - Jennifer Lopez
         </Heading>
       </Box>
       <Flex flexDirection="column" width="full">
         <InterestCheckbox
-          value={interests}
-          onChange={(e) => updateFields({ interests: e })}
+          value={Interests}
+          onChange={(e) => updateFields({ Interests: e })}
         />
       </Flex>
     </Flex>

@@ -1,6 +1,9 @@
+// npm package imports
 import { Box, Flex, Image, List, ListItem } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// local imports
 import WelbyLogo from "../../assets/images/welby.svg";
 
 const WelcomeHeader = () => {

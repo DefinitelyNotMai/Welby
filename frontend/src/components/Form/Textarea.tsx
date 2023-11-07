@@ -23,7 +23,7 @@ const Textarea = ({
   return (
     <ChakraTextarea
       backgroundColor="white"
-      color="input.text"
+      color="#757575"
       fontFamily="Montserrat"
       fontSize={["sm", "md"]}
       fontWeight="medium"
@@ -32,7 +32,7 @@ const Textarea = ({
       name={name}
       onChange={onChange}
       placeholder={placeholder}
-      _placeholder={{ color: "input.placeholder" }}
+      _placeholder={{ color: "#bcbcbc" }}
       value={value}
       {...props}
     />

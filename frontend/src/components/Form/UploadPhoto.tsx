@@ -70,7 +70,7 @@ const UploadPhoto = ({
             width="full"
           />
         ) : (
-          <Text variant="white">{label}</Text>
+          <Text color="#ffffff">{label}</Text>
         )}
         <Input
           accept="image/*"
@@ -84,6 +84,7 @@ const UploadPhoto = ({
         />
       </Flex>
       <Button
+        buttonVariant="primary"
         onClick={() => {
           const fileInput = document.getElementById(id);
           if (fileInput) {
@@ -91,10 +92,9 @@ const UploadPhoto = ({
           }
         }}
         type="button"
-        variant="primary"
         width={buttonWidth}
       >
-        <Text variant="white">{value ? "Change Photo" : "Upload Photo"}</Text>
+        {value ? "Change Photo" : "Upload Photo"}
       </Button>
     </Flex>
   );

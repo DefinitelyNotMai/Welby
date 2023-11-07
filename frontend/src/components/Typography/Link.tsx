@@ -2,17 +2,17 @@ import {
   Link as ChakraLink,
   LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react";
-import { ReactNode } from "react";
 
-interface LinkProps extends ChakraLinkProps {
-  children: ReactNode;
+type LinkProps = ChakraLinkProps & {
+  children: ChakraLinkProps["children"];
+  color: ChakraLinkProps["color"];
   onClick: () => void;
-}
+};
 
-const Link = ({ children, onClick, ...props }: LinkProps) => {
+const Link = ({ children, color, onClick, ...props }: LinkProps) => {
   return (
     <ChakraLink
-      color="white"
+      color={color}
       fontFamily="Montserrat"
       fontSize={["sm", "md"]}
       onClick={onClick}

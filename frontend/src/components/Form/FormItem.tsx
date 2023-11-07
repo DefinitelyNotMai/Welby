@@ -1,13 +1,12 @@
 import { FormControl, FormLabel, FormLabelProps } from "@chakra-ui/react";
-import { ReactNode } from "react";
 
-interface FormItemProps extends FormLabelProps {
-  children: ReactNode;
-  htmlFor?: string;
+type FormItemProps = FormLabelProps & {
+  children: FormLabelProps["children"];
+  htmlFor?: FormLabelProps["htmlFor"];
   isRequired?: boolean;
   label?: string;
   hideIndicator?: boolean;
-}
+};
 
 const FormItem = ({
   children,
@@ -20,12 +19,18 @@ const FormItem = ({
   return (
     <FormControl isRequired={isRequired}>
       <FormLabel
-        color="white"
+        color="#ffffff"
         fontFamily="Montserrat"
         fontWeight="medium"
         fontSize={["sm", "md"]}
         htmlFor={htmlFor}
-        requiredIndicator={hideIndicator ? <span /> : <span> *</span>}
+        requiredIndicator={
+          hideIndicator ? (
+            <span />
+          ) : (
+            <span style={{ color: "#ff0000" }}> *</span>
+          )
+        }
         {...props}
       >
         {label}

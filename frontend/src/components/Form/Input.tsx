@@ -2,16 +2,15 @@ import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
 } from "@chakra-ui/react";
-import { ChangeEvent } from "react";
 
-interface InputProps extends ChakraInputProps {
-  id: string;
-  name: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  type: string;
-  value: string;
-}
+type InputProps = ChakraInputProps & {
+  id: ChakraInputProps["id"];
+  name: ChakraInputProps["name"];
+  onChange: ChakraInputProps["onChange"];
+  placeholder: ChakraInputProps["placeholder"];
+  type: ChakraInputProps["type"];
+  value: ChakraInputProps["value"];
+};
 
 const Input = ({
   id,
@@ -24,8 +23,9 @@ const Input = ({
 }: InputProps) => {
   return (
     <ChakraInput
-      backgroundColor="white"
-      color="input.text"
+      autoComplete="off"
+      backgroundColor="#ffffff"
+      color="#757575"
       fontFamily="Montserrat"
       fontSize={["sm", "md"]}
       fontWeight="medium"
@@ -33,7 +33,7 @@ const Input = ({
       name={name}
       onChange={onChange}
       placeholder={placeholder}
-      _placeholder={{ color: "input.placeholder" }}
+      _placeholder={{ color: "#bcbcbc" }}
       type={type}
       value={value}
       {...props}

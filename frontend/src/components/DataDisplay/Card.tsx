@@ -1,24 +1,23 @@
+// npm package imports
 import {
   Card as ChakraCard,
   CardProps as ChakraCardProps,
 } from "@chakra-ui/react";
 
-import { ReactNode } from "react";
+type CardProps = ChakraCardProps & {
+  children: ChakraCardProps["children"];
+  cardVariant: "welcome" | "data";
+};
 
-interface CardProps extends ChakraCardProps {
-  children: ReactNode;
-  variant: "welcome" | "data";
-}
-
-const Card = ({ children, variant, ...props }: CardProps) => {
+const Card = ({ children, cardVariant, ...props }: CardProps) => {
   const cardVariants = {
     welcome: {
-      backgroundColor: "primary.1",
+      backgroundColor: "#24a2f0",
       boxShadow: "dark-lg",
       marginY: 16,
     },
     data: {
-      backgroundColor: "white",
+      backgroundColor: "#ffffff",
     },
   };
 
@@ -26,7 +25,7 @@ const Card = ({ children, variant, ...props }: CardProps) => {
     <ChakraCard
       borderRadius="xl"
       width={["90%", "75%", "60%", "40%"]}
-      {...cardVariants[variant]}
+      {...cardVariants[cardVariant]}
       {...props}
     >
       {children}

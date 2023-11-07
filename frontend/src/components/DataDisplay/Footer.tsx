@@ -1,6 +1,9 @@
+// npm package imports
 import { Box, Flex, Grid, Image, Link, Text } from "@chakra-ui/react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { FaEnvelope, FaFacebook, FaLinkedin, FaPhone } from "react-icons/fa";
+
+// local imports
 import WelbyLogo from "../../assets/images/welby.svg";
 
 const Footer = () => {

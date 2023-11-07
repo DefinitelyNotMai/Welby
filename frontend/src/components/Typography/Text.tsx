@@ -2,29 +2,19 @@ import {
   Text as ChakraText,
   TextProps as ChakraTextProps,
 } from "@chakra-ui/react";
-import { ReactNode } from "react";
 
-interface TextProps extends ChakraTextProps {
-  children: ReactNode;
-  variant: "white" | "black";
-}
+type TextProps = ChakraTextProps & {
+  children: ChakraTextProps["children"];
+  color: ChakraTextProps["color"];
+};
 
-const Text = ({ children, variant, ...props }: TextProps) => {
-  const textVariants = {
-    white: {
-      color: "white",
-    },
-    black: {
-      color: "black",
-    },
-  };
-
+const Text = ({ children, color, ...props }: TextProps) => {
   return (
     <ChakraText
+      color={color}
       fontFamily="Montserrat"
       fontSize={["sm", "md"]}
       fontWeight="medium"
-      {...textVariants[variant]}
       {...props}
     >
       {children}

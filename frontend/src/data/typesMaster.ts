@@ -1,24 +1,30 @@
+/*
+ * NOTE: these are type definitions for Master db
+ * NOTE2: make sure capitalization is the same as table columns
+ */
+
 export type Company = {
-  companyId: string;
-  name: string;
-  email: string;
-  phoneNumber: string;
-  website: string;
-  address: string;
-  vision: string;
-  mission: string;
-  logo: string;
-  countryId: string;
-  industryTypeId: string;
-  foundingDate: string;
-  size: string;
+  CompanyId: string;
+  Name: string;
+  Email: string;
+  Phone_Number: string;
+  Website: string;
+  Address: string;
+  Vision: string;
+  Mission: string;
+  Logo: string;
+  CountryId: string;
+  IndustryTypeId: string;
+  Active: boolean;
+  FoundingDate: string;
+  CompanySize: string;
 };
 
 export type Country = {
-  countryId: string;
-  name: string;
-  nationality: string;
-  flagImage: string;
+  CountryId: string;
+  Name: string;
+  Nationality: string;
+  Flag_Image: string;
 };
 
 export type Employee = {
@@ -47,38 +53,38 @@ export type Employee = {
 };
 
 export type Gender = {
-  genderId: string;
-  gender: string;
-  biological: number;
+  GenderId: string;
+  Gender: string;
+  Biological: number;
 };
 
 export type Goal = {
-  goalId: number;
-  title: string;
-  description: string;
-  durationFrom: string;
-  durationTo: string;
+  GoalId: number;
+  Title: string;
+  Description: string;
+  DurationFrom: string;
+  DurationTo: string;
 };
 
 export type IndustryType = {
-  industryTypeId: number;
-  industryName: string;
+  IndustryTypeId: number;
+  Industry_Name: string;
 };
 
 export type Interests = {
-  interestId: number;
-  name: string;
+  InterestId: number;
+  Name: string;
 };
 
 export type Strength = {
-  strengthId: number;
-  strength: string;
-  category: string;
-  description: string;
+  StrengthId: number;
+  Strength: string;
+  Category: string;
+  Description: string;
 };
 
 export type Value = {
-  valueId: number;
-  title: string;
-  description: string;
+  ValueId: number;
+  Title: string;
+  Description: string;
 };

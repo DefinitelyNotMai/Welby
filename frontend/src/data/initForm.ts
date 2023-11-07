@@ -1,56 +1,94 @@
 /*
  * NOTE: these are initial values for the forms
  */
-import { CompanyAdminFormData, CompanyFormData, LoginData } from "./typesForm";
+import {
+  CompanyAdminFormData,
+  CompanyFormData,
+  EmployeeFormData,
+  LoginData,
+} from "./typesForm";
 
 export const INITIAL_LOGIN_DATA: LoginData = {
-  email: "",
-  password: "",
+  UserName: "",
+  Password: "",
 };
 
 export const COMPANY_INITIAL_DATA: CompanyFormData = {
-  id: "",
-  name: "",
-  email: "",
-  logo: "",
-  website: "",
-  size: "",
-  phoneNumber: "",
-  foundingDate: "",
-  countryId: "",
-  industryTypeId: "",
+  Name: "",
+  companyEmail: "",
+  Logo: "",
+  Website: "",
+  CompanySize: "",
+  Phone_Number: "",
+  FoundingDate: "",
+  CountryId: "",
+  IndustryTypeId: "",
 
-  vision: "",
-  mission: "",
+  Vision: "",
+  Mission: "",
 
-  values: [{ title: "", description: "" }],
+  Values: [{ title: "", description: "" }],
 
-  goals: [{ title: "", description: "", durationTo: "" }],
+  Goals: [{ title: "", description: "", durationTo: "" }],
 };
 
 export const COMPANY_ADMIN_INITIAL_DATA: CompanyAdminFormData = {
   // step 6
-  profilePhoto: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-  firstName: "",
-  nickname: "",
-  middleName: "",
-  lastName: "",
-  birthdate: "",
-  genderId: "",
-  phoneNumber: "",
+  ProfilePhoto: "",
+  Email: "",
+  Password: "",
+  Confirm_Password: "",
+  First_Name: "",
+  Nickname: "",
+  Middle_Name: "",
+  Last_Name: "",
+  Birthday: "",
+  GenderId: "",
+  Phone_Number: "",
 
   // step 7
-  address: "",
-  countryId: "",
-  facebook: "",
-  instagram: "",
-  linkedIn: "",
-  tikTok: "",
-  work: "",
-  connect: "",
-  support: "",
-  otherNotes: "",
+  Address: "",
+  CountryId: "",
+  Facebook: "",
+  Instagram: "",
+  Linkedin: "",
+  TikTok: "",
+  Work: "",
+  Connect: "",
+  Support: "",
+  Other_Notes: "",
+};
+
+export const EMPLOYEE_INITIAL_DATA: EmployeeFormData = {
+  // step 1
+  First_Name: "",
+  Middle_Name: "",
+  Birthday: "",
+  Nickname: "",
+  Last_Name: "",
+  GenderId: "",
+  ProfilePhoto: "",
+  Phone_Number: "",
+  CountryId: "",
+  Instagram: "",
+  TikTok: "",
+  Linkedin: "",
+  Facebook: "",
+
+  // step 2
+  Work: "",
+  Connect: "",
+  Support: "",
+
+  // step 3
+  RealizedStrengths: [],
+  UnrealizedStrengths: [],
+  LearnedBehaviors: [],
+  Weakness: "",
+
+  // step 4
+  Interests: [],
+
+  // step 5
+  Other_Notes: "",
 };

@@ -1,37 +1,33 @@
-import { Box, Flex, VStack } from "@chakra-ui/react";
+// lib
+import { Button, Card, Flex, Heading, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import Card from "../components/DataDisplay/Card";
-import Button from "../components/Form/Button";
-import Heading from "../components/Typography/Heading";
-import WelcomeLayout from "../layout/WelcomeLayout";
 
-const WelcomePage = () => {
-  document.title = "Welcome to your happy portal | Welby";
+// local
+import { WelcomeLayout } from "../layout/WelcomeLayout";
+
+export const WelcomePage = () => {
+  document.title = "Welcome | Welby";
 
   const navigate = useNavigate();
 
-  //useRedirect();
   return (
     <WelcomeLayout>
       <Card variant="welcome">
         <Flex flexDirection="column" padding={[8, 12, 16]}>
-          <Box marginBottom={10}>
-            <Heading textAlign="center" variant="white">
-              Welcome to your happy portal
-            </Heading>
-          </Box>
-          <VStack alignSelf="center" gap={4} width="50%">
-            <Button onClick={() => navigate("/signup")} variant="primary">
-              Sign Up
-            </Button>
-            <Button onClick={() => navigate("/login")} variant="primary">
-              Login
-            </Button>
-          </VStack>
+          <Heading marginBottom={10} textAlign="center">
+            Welcome to your happy portal
+          </Heading>
+          <Stack
+            alignSelf="center"
+            direction="column"
+            gap={4}
+            width={["75%", "50%"]}
+          >
+            <Button onClick={() => navigate("/signup")}>Sign Up</Button>
+            <Button onClick={() => navigate("/login")}>Log In</Button>
+          </Stack>
         </Flex>
       </Card>
     </WelcomeLayout>
   );
 };
-
-export default WelcomePage;

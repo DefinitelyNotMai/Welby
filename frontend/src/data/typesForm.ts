@@ -10,7 +10,15 @@ export type LoginData = {
   Password: string;
 };
 
+export type ForgotPasswordData = {
+  Email: string;
+  VerificationCode: string;
+  NewPassword: string;
+  ConfirmNewPassword: string;
+};
+
 export type CompanyFormData = {
+  // step 1
   Name: string;
   companyEmail: string;
   Logo: string;
@@ -21,14 +29,17 @@ export type CompanyFormData = {
   CountryId: string;
   IndustryTypeId: string;
 
+  // step 2
   Vision: string;
   Mission: string;
 
+  // step 3
   Values: {
     title: string;
     description: string;
   }[];
 
+  // step 4
   Goals: {
     title: string;
     description: string;

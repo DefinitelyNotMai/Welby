@@ -1,8 +1,10 @@
-import { Flex } from "@chakra-ui/react";
-import Heading from "../components/Typography/Heading";
-import WelcomeLayout from "../layout/WelcomeLayout";
+// lib
+import { Flex, Heading } from "@chakra-ui/react";
 
-const NotFoundPage = () => {
+//local
+import { WelcomeLayout } from "../layout/WelcomeLayout";
+
+export const NotFoundPage = () => {
   document.title = "404: This page could not be found";
 
   return (
@@ -10,20 +12,14 @@ const NotFoundPage = () => {
       <Flex alignItems="center" justifyContent="center" minHeight="100vh">
         <Flex>
           <Heading
-            borderRight="1px solid black"
-            color="black"
+            borderRight="1px solid #000000"
+            color="#000000"
+            fontFamily="Roboto"
             fontWeight="medium"
-            fontSize={["xl", "2xl"]}
-            variant="black"
           >
             404&nbsp;
           </Heading>
-          <Heading
-            fontFamily="Roboto"
-            fontWeight="normal"
-            fontSize={["xl", "2xl"]}
-            variant="black"
-          >
+          <Heading color="#000000" fontFamily="Roboto" fontWeight="normal">
             &nbsp;This page could not be found
           </Heading>
         </Flex>
@@ -31,5 +27,3 @@ const NotFoundPage = () => {
     </WelcomeLayout>
   );
 };
-
-export default NotFoundPage;

@@ -1,6 +1,6 @@
-import { Box, Flex } from "@chakra-ui/react";
-import InterestCheckbox from "../../components/Form/InterestCheckbox";
-import Heading from "../../components/Typography/Heading";
+// lib
+import { Box, Flex, Heading } from "@chakra-ui/react";
+import { InterestCheckbox } from "../../components/Form/InterestCheckbox";
 
 type Step4Data = {
   Interests: string[];
@@ -14,17 +14,11 @@ const Step4 = ({ Interests, updateFields }: Step4Props) => {
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Box marginBottom={10} textAlign="center">
-        <Heading color="white" fontSize={["2xl", "3xl", "4xl"]}>
-          Share your strengths to the team.
-        </Heading>
-        <Heading color="white" fontSize={["lg", "xl", "2xl"]} marginBottom={4}>
+        <Heading fontSize="1.875rem">Share your strengths to the team.</Heading>
+        <Heading fontSize="1.25rem" marginBottom={4}>
           &quot;Play with your strengths.&quot;
         </Heading>
-        <Heading
-          color="white"
-          fontSize={["md", "lg", "xl"]}
-          fontWeight="normal"
-        >
+        <Heading fontSize="0.875rem" fontWeight="normal">
           - Jennifer Lopez
         </Heading>
       </Box>

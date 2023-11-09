@@ -1,7 +1,10 @@
+// lib
 import axios from "axios";
+
+// local
 import { CompanyFormData } from "../data/typesForm";
 
-const signUpCompany = async (
+export const signUpCompany = async (
   CompanyData: CompanyFormData,
   companyId: string,
   setCompanyId: (id: string) => void,
@@ -31,8 +34,7 @@ const signUpCompany = async (
     const addCompany = await axios
       .post(addCompanyUrl, company_info, config)
       .then((response) => {
-        // Handle the response from the server
-        console.log(response.data);
+        // console.log(response.data)
         return response.data;
       })
       .catch((error) => {
@@ -64,8 +66,6 @@ const signUpCompany = async (
         });
 
       if (company) {
-        const addCompanyGoalUrl = "https://localhost:44373/api/AddCompanyGoal";
-
         const Values: {
           title: string;
           description: string;
@@ -87,7 +87,7 @@ const signUpCompany = async (
           const toMasterValue = await axios
             .post(addValuesUrl, value, config)
             .then((response) => {
-              console.log(response.data);
+              // console.log(response.data)
               return response.data;
             })
             .catch((error) => {
@@ -97,10 +97,11 @@ const signUpCompany = async (
           if (toMasterValue) {
             const getValuesUrl =
               "https://localhost:44373/api/GetValueByTitleDescription";
+
             const getValue = await axios
               .get(getValuesUrl, {
                 method: "GET",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application.json" },
                 params: value,
               })
               .then((response) => {
@@ -113,9 +114,11 @@ const signUpCompany = async (
               .catch((error) => {
                 console.log(error);
               });
-            if (getValue != null) {
+
+            if (getValue) {
               const addCompanyValueUrl =
                 "https://localhost:44373/api/AddCompanyValues";
+
               const companyValue = {
                 CompanyId: companyId,
                 ValueId: getValue.ValueId,
@@ -123,11 +126,12 @@ const signUpCompany = async (
 
               axios
                 .post(addCompanyValueUrl, companyValue, config)
-                .then((response) => {
-                  console.log(response.data);
+                .then(() => {
+                  // (response)
+                  // console.log(response.data)
                   console.log("Added company value");
                 })
-                .catch(function (error) {
+                .catch((error) => {
                   console.log(error);
                 });
             }
@@ -145,17 +149,18 @@ const signUpCompany = async (
           const masterGoal = await axios
             .post(addGoalsUrl, goal, config)
             .then((response) => {
-              // Handle the response from the server
-              //console.log(response.data);
+              // handle the response from the server
+              // console.log(response.data)
               return response.data;
             })
             .catch((error) => {
               console.log(error);
             });
 
-          if (masterGoal != null) {
+          if (masterGoal) {
             const getGoalsUrl =
               "https://localhost:44373/api/GetGoalByTitleDescription";
+
             const getGoal = await axios
               .get(getGoalsUrl, {
                 method: "GET",
@@ -164,17 +169,17 @@ const signUpCompany = async (
               })
               .then((response) => {
                 const result = response.data;
-                if (result != null) {
-                  if (result.length > 0) {
-                    return result[0];
-                  }
+                if (result && result.length > 0) {
+                  return result[0];
                 }
               })
               .catch((error) => {
                 console.log(error);
               });
 
-            if (getGoal != null) {
+            if (getGoal) {
+              const addCompanyGoalUrl =
+                "https://localhost:44373/api/AddCompanyGoal";
               const companyGoal = {
                 CompanyId: companyId,
                 GoalId: getGoal.GoalId,
@@ -182,11 +187,12 @@ const signUpCompany = async (
 
               axios
                 .post(addCompanyGoalUrl, companyGoal, config)
-                .then((response) => {
-                  console.log(response.data);
-                  console.log("Added company goals");
+                .then(() => {
+                  // (response)
+                  // console.log(response.data);
+                  // console.log("Added company goals");
                 })
-                .catch(function (error) {
+                .catch((error) => {
                   console.log(error);
                 });
             }
@@ -195,9 +201,7 @@ const signUpCompany = async (
       }
     }
   } catch (error) {
-    // Handle network or other error
-    console.error("An error occurred:", error);
+    // handle network or other error
+    console.error("An error occured: ", error);
   }
 };
-
-export default signUpCompany;

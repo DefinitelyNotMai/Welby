@@ -1,23 +1,25 @@
-import { Flex } from "@chakra-ui/react";
 import { FormEvent, useState } from "react";
-import { Form } from "react-router-dom";
-import Card from "../../components/DataDisplay/Card";
-import Button from "../../components/Form/Button";
-import { EMPLOYEE_INITIAL_DATA } from "../../data/initForm";
 import { EmployeeFormData } from "../../data/typesForm";
-import useMultiStepForm from "../../hooks/useMultiStepForm";
-import WelcomeLayout from "../../layout/WelcomeLayout";
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
+import { EMPLOYEE_INITIAL_DATA } from "../../data/initForm";
+import { useMultiStepForm } from "../../hooks/useMultiStepForm";
+import { Step1 } from "./Step1";
+import { WelcomeLayout } from "../../layout/WelcomeLayout";
+import { Button, Card, Flex } from "@chakra-ui/react";
+import { Form, useNavigate } from "react-router-dom";
+import { Step2 } from "./Step2";
+import { Step3 } from "./Step3";
 import Step4 from "./Step4";
-import Step5 from "./Step5";
-import Step6 from "./Step6";
+import { Step5 } from "./Step5";
+import { Step6 } from "./Step6";
 
-const EmployeeSignUpPage = () => {
+export const EmployeeSignUpPage = () => {
+  document.title = "Employee Sign Up | Welby";
+
   const [employeeData, setEmployeeData] = useState<EmployeeFormData>(
     EMPLOYEE_INITIAL_DATA,
   );
+
+  const navigate = useNavigate();
 
   const updateEmployeeFields = (fields: Partial<EmployeeFormData>) => {
     setEmployeeData((prev) => {
@@ -25,14 +27,10 @@ const EmployeeSignUpPage = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    nextStep();
-  };
-
   const {
     currentStepIndex,
     step,
+    steps,
     isFirstStep,
     isLastStep,
     prevStep,
@@ -43,12 +41,29 @@ const EmployeeSignUpPage = () => {
     <Step3 key={3} {...employeeData} updateFields={updateEmployeeFields} />,
     <Step4 key={4} {...employeeData} updateFields={updateEmployeeFields} />,
     <Step5 key={5} {...employeeData} updateFields={updateEmployeeFields} />,
-    <Step6 key={5} {...employeeData} />,
+    <Step6 key={6} {...employeeData} />,
   ]);
+
+  // NOTE: This is where the api call for signing up employee should be done
+  const handleEmployeeSignUp = () => {
+    // yee
+    nextStep();
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (isLastStep) {
+      navigate("/login");
+    } else if (currentStepIndex === steps.length - 2) {
+      handleEmployeeSignUp();
+    } else {
+      nextStep();
+    }
+  };
 
   return (
     <WelcomeLayout>
-      <Card cardVariant="welcome" width={["90%", "75%", "60%"]}>
+      <Card variant="welcome" width={["90%", "75%", "50%"]}>
         <Form onSubmit={handleSubmit}>
           {step}
           {isFirstStep || isLastStep ? (
@@ -59,11 +74,11 @@ const EmployeeSignUpPage = () => {
               marginBottom={8}
             >
               <Button
-                buttonVariant={isLastStep ? "secondary" : "primary"}
                 type="submit"
+                variant={isLastStep ? "submit" : "primary"}
                 width={["50%", "25%"]}
               >
-                {isLastStep ? "Go to My Dashboard" : "NEXT"}
+                {isLastStep ? "Proceed to Login" : "NEXT"}
               </Button>
             </Flex>
           ) : (
@@ -73,16 +88,12 @@ const EmployeeSignUpPage = () => {
               marginRight={8}
               marginBottom={8}
             >
-              <Button
-                buttonVariant="primary"
-                onClick={() => prevStep()}
-                type="button"
-                width={["50%", "25%"]}
-              >
+              <Button onClick={prevStep} width={["50%", "25%"]}>
                 BACK
               </Button>
+
               <Button
-                buttonVariant={currentStepIndex === 4 ? "secondary" : "primary"}
+                variant={currentStepIndex === 4 ? "submit" : "primary"}
                 type="submit"
                 width={["50%", "25%"]}
               >
@@ -95,5 +106,3 @@ const EmployeeSignUpPage = () => {
     </WelcomeLayout>
   );
 };
-
-export default EmployeeSignUpPage;

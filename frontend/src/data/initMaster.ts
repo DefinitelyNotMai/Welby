@@ -18,4 +18,5 @@ export const COMPANY_DATA: Company = {
   IndustryTypeId: "",
   FoundingDate: "",
   CompanySize: "",
+  Active: false,
 };

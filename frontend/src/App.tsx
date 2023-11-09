@@ -1,6 +1,9 @@
+// lib
 import { RouterProvider } from "react-router-dom";
-import routes from "./configuration/routes";
-import UserContextProvider from "./context/UserContextProvider";
+
+// local
+import { UserContextProvider } from "./context/UserContext";
+import { routes } from "./configuration/routes";
 
 const App = () => {
   return (

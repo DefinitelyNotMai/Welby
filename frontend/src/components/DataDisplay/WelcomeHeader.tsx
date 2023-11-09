@@ -1,12 +1,12 @@
-// npm package imports
+// lib
 import { Box, Flex, Image, List, ListItem } from "@chakra-ui/react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-// local imports
+// local
 import WelbyLogo from "../../assets/images/welby.svg";
 
-const WelcomeHeader = () => {
+export const WelcomeHeader = () => {
   const [selectedItem, setSelectedItem] = useState("Home");
 
   const navigate = useNavigate();
@@ -45,16 +45,11 @@ const WelcomeHeader = () => {
               width="full"
             />
           </Box>
-          <List
-            display={["none", "flex"]}
-            alignItems="center"
-            fontFamily="Montserrat"
-            gap={6}
-          >
+          <List display={["none", "flex"]} alignItems="center" gap={6}>
             {menuItems.map((item) => (
               <ListItem
                 key={item}
-                color={selectedItem === item ? "secondary.y" : "white"}
+                color={selectedItem === item ? "#f0d124" : "#ffffff"}
                 cursor="pointer"
                 fontWeight={selectedItem === item ? "semibold" : "medium"}
                 onClick={() => {
@@ -70,5 +65,3 @@ const WelcomeHeader = () => {
     </Box>
   );
 };
-
-export default WelcomeHeader;

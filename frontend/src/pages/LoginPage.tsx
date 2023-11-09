@@ -1,34 +1,41 @@
-import { Box, Flex, VStack, useToast } from "@chakra-ui/react";
+// lib
+import {
+  Box,
+  Button,
+  Card,
+  Flex,
+  Heading,
+  Input,
+  Link,
+  Modal,
+  useToast,
+} from "@chakra-ui/react";
+import { Form, useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
-import { Form } from "react-router-dom";
-import processLogin from "../api/loginService";
-import Card from "../components/DataDisplay/Card";
-import Button from "../components/Form/Button";
-import FormItem from "../components/Form/FormItem";
-import Input from "../components/Form/Input";
-import Heading from "../components/Typography/Heading";
-import Link from "../components/Typography/Link";
+
+// local
+import { ForgotPassword } from "../components/Modal/ForgotPassword/ForgotPassword";
+import { FormItem } from "../components/Form/FormItem";
 import { INITIAL_LOGIN_DATA } from "../data/initForm";
 import { LoginData } from "../data/typesForm";
-import useRedirect from "../hooks/useRedirect";
-import useUserContext from "../hooks/useUserContext";
-import WelcomeLayout from "../layout/WelcomeLayout";
+import { SystemUsers } from "../data/typesOWS";
+import { WelcomeLayout } from "../layout/WelcomeLayout";
+import { processLogin } from "../api/loginService";
 
-const LoginPage = () => {
+export const LoginPage = () => {
   document.title = "Login | Welby";
 
   const [userData, setUserData] = useState<LoginData>(INITIAL_LOGIN_DATA);
-  const [isForgotPasswordOpen, setIsForgotPasswordOpen] =
-    useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  const navigate = useNavigate();
   const toast = useToast();
-  const { setUserId } = useUserContext();
 
-  const toggleForgotPassword = () => {
-    setIsForgotPasswordOpen(!isForgotPasswordOpen);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
-  const updateLoginFields = (fields: Partial<LoginData>) => {
+  const updateLoginFields = (fields: Partial<SystemUsers>) => {
     setUserData((prev) => {
       return { ...prev, ...fields };
     });
@@ -41,13 +48,13 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     const data = {
-      email: userData.email,
-      password: userData.password,
+      UserName: userData.UserName,
+      Password: userData.Password,
     };
 
-    const loginSuccess = await processLogin(data, setUserId);
+    const loginSuccess = await processLogin(data);
 
-    if (loginSuccess) {
+    if (loginSuccess.loginSuccess) {
       toast({
         title: "SUCCESS",
         description: "Welcome to your dashboard",
@@ -56,10 +63,12 @@ const LoginPage = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate(loginSuccess.path);
     } else {
       toast({
         title: "ERROR",
-        description: "Login failed. Please check your credentials.",
+        description:
+          "Login failed. Please check your credentials and try again.",
         status: "error",
         position: "top",
         duration: 5000,
@@ -68,61 +77,56 @@ const LoginPage = () => {
     }
   };
 
-  useRedirect();
   return (
     <WelcomeLayout>
       <Card variant="welcome">
         <Flex flexDirection="column" padding={[8, 12, 16]}>
-          <Box marginBottom={10}>
-            <Heading textAlign="center" variant="white">
-              Welcome to your happy portal
-            </Heading>
-          </Box>
+          <Heading marginBottom={10} textAlign="center">
+            Welcome to your happy portal
+          </Heading>
           <Form onSubmit={handleSubmit}>
-            <VStack gap={4} marginBottom={4}>
-              <FormItem htmlFor="email" label="Email Address" isRequired>
+            <Flex alignSelf="center" flexDirection="column" gap={[4]}>
+              <FormItem htmlFor="user-email" isRequired label="Email">
                 <Input
-                  autoComplete="email"
-                  id="email"
-                  name="email"
-                  onChange={(e) => updateLoginFields({ email: e.target.value })}
+                  id="user-email"
+                  name="user-email"
+                  onChange={(e) =>
+                    updateLoginFields({ UserName: e.target.value })
+                  }
                   placeholder="Email"
                   type="email"
-                  value={userData.email}
                 />
               </FormItem>
-              <FormItem htmlFor="password" label="Password" isRequired>
+              <FormItem htmlFor="user-password" isRequired label="Password">
                 <Input
-                  id="password"
-                  name="password"
+                  id="user-password"
+                  name="user-password"
                   onChange={(e) =>
-                    updateLoginFields({ password: e.target.value })
+                    updateLoginFields({ Password: e.target.value })
                   }
                   placeholder="Password"
                   type="password"
-                  value={userData.password}
                 />
               </FormItem>
-            </VStack>
-            <Link onClick={toggleForgotPassword} textAlign="left">
-              Forgot Password?
-            </Link>
-            <Flex justifyContent="center" marginTop={4}>
-              <Button variant="primary" type="submit" width="50%">
-                Login
+              <Box>
+                <Link onClick={toggleModal}>Forgot Password?</Link>
+              </Box>
+              <Button alignSelf="center" type="submit" width="50%">
+                Log In
               </Button>
             </Flex>
           </Form>
         </Flex>
       </Card>
-      {/* {isForgotPasswordOpen && (
-        <ForgotPassword
-          isOpen={isForgotPasswordOpen}
-          onClose={toggleForgotPassword}
-        />
-      )} */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        isCentered
+        closeOnOverlayClick={false}
+        closeOnEsc={false}
+      >
+        <ForgotPassword onClose={toggleModal} />
+      </Modal>
     </WelcomeLayout>
   );
 };
-
-export default LoginPage;

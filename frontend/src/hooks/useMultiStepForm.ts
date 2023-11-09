@@ -1,17 +1,18 @@
+// lib
 import { ReactElement, useState } from "react";
 
-const useMultiStepForm = (steps: ReactElement[]) => {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+export const useMultiStepForm = (steps: ReactElement[]) => {
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
 
   const nextStep = () => {
-    setCurrentStepIndex((i) => {
+    setCurrentStepIndex((i: number) => {
       if (i >= steps.length - 1) return i;
       return i + 1;
     });
   };
 
   const prevStep = () => {
-    setCurrentStepIndex((i) => {
+    setCurrentStepIndex((i: number) => {
       if (i <= 0) return i;
       return i - 1;
     });
@@ -33,5 +34,3 @@ const useMultiStepForm = (steps: ReactElement[]) => {
     prevStep,
   };
 };
-
-export default useMultiStepForm;

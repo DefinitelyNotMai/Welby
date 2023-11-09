@@ -9,7 +9,7 @@ export type Company = {
   Email: string;
   Phone_Number: string;
   Website: string;
-  Address: string;
+  Address: string; // NOTE: Remove this
   Vision: string;
   Mission: string;
   Logo: string;
@@ -25,66 +25,73 @@ export type Country = {
   Name: string;
   Nationality: string;
   Flag_Image: string;
+  Active: boolean;
 };
 
 export type Employee = {
-  employeeId: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  nickname: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  birthdate: string;
-  linkedIn: string;
-  facebook: string;
-  instagram: string;
-  tikTok: string;
-  work: string;
-  connect: string;
-  support: string;
-  otherNotes: string;
-  profilePhoto: string;
-  genderId: string;
-  companyId: string;
-  countryId: string;
-  firstLogin: number;
+  EmployeeId: string;
+  First_Name: string;
+  Middle_Name: string;
+  Last_Name: string;
+  Nickname: string;
+  Email: string;
+  Phone_Number: string;
+  Address: string;
+  Birthday: string;
+  Linkedin: string;
+  Facebook: string;
+  Instagram: string;
+  TikTok: string;
+  Work: string;
+  Connect: string;
+  Support: string;
+  Other_Notes: string;
+  ProfilePhoto: string;
+  GenderId: string;
+  CompanyId: string;
+  Active: boolean;
+  FirstLogIn: boolean;
 };
 
 export type Gender = {
   GenderId: string;
   Gender: string;
   Biological: number;
+  Active: boolean;
 };
 
 export type Goal = {
-  GoalId: number;
+  GoalId: string;
   Title: string;
   Description: string;
   DurationFrom: string;
   DurationTo: string;
+  Active: boolean;
 };
 
 export type IndustryType = {
-  IndustryTypeId: number;
+  IndustryTypeId: string;
   Industry_Name: string;
+  Active: boolean;
 };
 
-export type Interests = {
-  InterestId: number;
+export type Interest = {
+  InterestId: string;
   Name: string;
+  Active: boolean;
 };
 
 export type Strength = {
-  StrengthId: number;
+  StrengthId: string;
   Strength: string;
   Category: string;
   Description: string;
+  Active: boolean;
 };
 
 export type Value = {
-  ValueId: number;
+  ValueId: string;
   Title: string;
   Description: string;
+  Active: boolean;
 };

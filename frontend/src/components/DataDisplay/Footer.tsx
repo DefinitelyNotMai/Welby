@@ -1,14 +1,14 @@
-// npm package imports
-import { Box, Flex, Grid, Image, Link, Text } from "@chakra-ui/react";
+// lib
 import { AiOutlineClockCircle } from "react-icons/ai";
+import { Box, Flex, Grid, Image, Link, Text } from "@chakra-ui/react";
 import { FaEnvelope, FaFacebook, FaLinkedin, FaPhone } from "react-icons/fa";
 
-// local imports
+// local
 import WelbyLogo from "../../assets/images/welby.svg";
 
-const Footer = () => {
+export const Footer = () => {
   return (
-    <Box as="footer" backgroundColor="primary.1">
+    <Box as="footer" backgroundColor="#24a2f0">
       <Flex
         flexDirection="column"
         marginLeft="auto"
@@ -37,14 +37,14 @@ const Footer = () => {
         </Flex>
         <Flex
           flexDirection={{ base: "column", md: "row" }}
-          color="white"
+          color="#ffffff"
           fontFamily="Montserrat"
           columnGap={32}
           rowGap={16}
         >
           <Box alignSelf={{ base: "center", md: "self-start" }}>
             <Grid
-              color="white"
+              color="#ffffff"
               gridTemplateColumns="1.8rem 1fr"
               justifyItems="start"
               placeItems="center"
@@ -121,5 +121,3 @@ const Footer = () => {
     </Box>
   );
 };
-
-export default Footer;

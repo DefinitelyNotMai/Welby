@@ -1,18 +1,16 @@
-import { Flex, Image } from "@chakra-ui/react";
-import Text from "../Typography/Text";
-import Button from "./Button";
-import Input from "./Input";
+// lib
+import { Button, Flex, Image, Input, Text } from "@chakra-ui/react";
 
-interface UploadPhotoProps {
+type UploadPhotoProps = {
   buttonWidth: string[];
   id: string;
   label: string;
   name: string;
   onChange: (base64: string) => void;
   value: string;
-}
+};
 
-const UploadPhoto = ({
+export const UploadPhoto = ({
   buttonWidth,
   label,
   id,
@@ -24,6 +22,7 @@ const UploadPhoto = ({
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
+
     if (file) {
       const base64Image = await convertToBase64(file);
       onChange(base64Image);
@@ -56,7 +55,6 @@ const UploadPhoto = ({
         borderRadius="lg"
         boxSize={[32, 40]}
         flexDirection="column"
-        fontSize={["sm", "md"]}
         justifyContent="center"
         marginBottom={4}
         textAlign="center"
@@ -70,8 +68,9 @@ const UploadPhoto = ({
             width="full"
           />
         ) : (
-          <Text color="#ffffff">{label}</Text>
+          <Text>{label}</Text>
         )}
+
         <Input
           accept="image/*"
           display="none"
@@ -83,10 +82,11 @@ const UploadPhoto = ({
           value=""
         />
       </Flex>
+
       <Button
-        buttonVariant="primary"
         onClick={() => {
           const fileInput = document.getElementById(id);
+
           if (fileInput) {
             fileInput.click();
           }
@@ -99,5 +99,3 @@ const UploadPhoto = ({
     </Flex>
   );
 };
-
-export default UploadPhoto;

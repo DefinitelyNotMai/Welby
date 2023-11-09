@@ -1,9 +1,10 @@
-import { Flex, Grid, GridItem } from "@chakra-ui/react";
-import FormItem from "../../components/Form/FormItem";
-import Input from "../../components/Form/Input";
+// lib
+import { Flex, Grid, GridItem, Heading, Input } from "@chakra-ui/react";
+
+// local
+import { FormItem } from "../../components/Form/FormItem";
 import { SelectCountry, SelectGender } from "../../components/Form/Select";
-import UploadPhoto from "../../components/Form/UploadPhoto";
-import Heading from "../../components/Typography/Heading";
+import { UploadPhoto } from "../../components/Form/UploadPhoto";
 
 type Step1Data = {
   First_Name: string;
@@ -25,7 +26,7 @@ type Step1Props = Step1Data & {
   updateFields: (fields: Partial<Step1Data>) => void;
 };
 
-const Step1 = ({
+export const Step1 = ({
   First_Name,
   Middle_Name,
   Birthday,
@@ -44,11 +45,11 @@ const Step1 = ({
   return (
     <Grid gap={4} templateColumns={["2fr 1fr"]} padding={[8, 16]}>
       <GridItem colSpan={3} textAlign="center">
-        <Heading color="white">Welcome to</Heading>
-        <Heading color="white" fontSize={["4xl", "5xl"]} marginBottom={8}>
+        <Heading fontSize="2.5rem">Welcome to</Heading>
+        <Heading fontSize="3.125rem" marginBottom={4}>
           COMPANY NAME!
         </Heading>
-        <Heading color="white" marginBottom={4}>
+        <Heading fontSize="1.875rem" marginBottom={10}>
           Please introduce yourself.
         </Heading>
       </GridItem>
@@ -61,7 +62,6 @@ const Step1 = ({
               name="first-name"
               onChange={(e) => updateFields({ First_Name: e.target.value })}
               placeholder="First Name"
-              type="text"
               value={First_Name}
             />
           </FormItem>
@@ -71,7 +71,6 @@ const Step1 = ({
               name="middle-name"
               onChange={(e) => updateFields({ Middle_Name: e.target.value })}
               placeholder="Middle Name"
-              type="text"
               value={Middle_Name}
             />
           </FormItem>
@@ -93,7 +92,6 @@ const Step1 = ({
               name="nickname"
               onChange={(e) => updateFields({ Nickname: e.target.value })}
               placeholder="Nickname"
-              type="text"
               value={Nickname}
             />
           </FormItem>
@@ -103,7 +101,6 @@ const Step1 = ({
               name="last-name"
               onChange={(e) => updateFields({ Last_Name: e.target.value })}
               placeholder="Last Name"
-              type="text"
               value={Last_Name}
             />
           </FormItem>
@@ -123,7 +120,6 @@ const Step1 = ({
               name="phone-number"
               onChange={(e) => updateFields({ Phone_Number: e.target.value })}
               placeholder="09123456789"
-              type="text"
               value={Phone_Number}
             />
           </FormItem>
@@ -145,7 +141,6 @@ const Step1 = ({
               name="instagram"
               onChange={(e) => updateFields({ Instagram: e.target.value })}
               placeholder="Instagram"
-              type="text"
               value={Instagram}
             />
           </FormItem>
@@ -155,7 +150,6 @@ const Step1 = ({
               name="tiktok"
               onChange={(e) => updateFields({ TikTok: e.target.value })}
               placeholder="TikTok"
-              type="text"
               value={TikTok}
             />
           </FormItem>
@@ -167,7 +161,6 @@ const Step1 = ({
               name="linked-in"
               onChange={(e) => updateFields({ Linkedin: e.target.value })}
               placeholder="LinkedIn"
-              type="text"
               value={Linkedin}
             />
           </FormItem>
@@ -177,7 +170,6 @@ const Step1 = ({
               name="facebook"
               onChange={(e) => updateFields({ Facebook: e.target.value })}
               placeholder="Facebook"
-              type="text"
               value={Facebook}
             />
           </FormItem>
@@ -196,5 +188,3 @@ const Step1 = ({
     </Grid>
   );
 };
-
-export default Step1;

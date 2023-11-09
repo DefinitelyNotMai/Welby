@@ -5,6 +5,7 @@ import {
   CompanyAdminFormData,
   CompanyFormData,
   EmployeeFormData,
+  ForgotPasswordData,
   LoginData,
 } from "./typesForm";
 
@@ -13,7 +14,20 @@ export const INITIAL_LOGIN_DATA: LoginData = {
   Password: "",
 };
 
+export const FORGOT_PASSWORD_INITIAL_DATA: ForgotPasswordData = {
+  // step 1
+  Email: "",
+
+  // step 2
+  VerificationCode: "",
+
+  // step 3
+  NewPassword: "",
+  ConfirmNewPassword: "",
+};
+
 export const COMPANY_INITIAL_DATA: CompanyFormData = {
+  // step 1
   Name: "",
   companyEmail: "",
   Logo: "",
@@ -24,11 +38,14 @@ export const COMPANY_INITIAL_DATA: CompanyFormData = {
   CountryId: "",
   IndustryTypeId: "",
 
+  // step 2
   Vision: "",
   Mission: "",
 
+  // step 3
   Values: [{ title: "", description: "" }],
 
+  // step 4
   Goals: [{ title: "", description: "", durationTo: "" }],
 };
 

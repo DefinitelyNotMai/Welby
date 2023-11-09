@@ -1,10 +1,10 @@
-interface TokenResponse {
+type TokenResponse = {
   access_token: string;
   token_type: string;
   expires_in: number;
-}
+};
 
-const fetchAccessToken = async (): Promise<string> => {
+export const fetchAccessToken = async (): Promise<string> => {
   const adminUserName = "Venancio";
   const adminUserPassword = "Jones";
 
@@ -33,5 +33,3 @@ const fetchAccessToken = async (): Promise<string> => {
   const tokenResponse = (await response.json()) as TokenResponse;
   return tokenResponse.access_token;
 };
-
-export default fetchAccessToken;

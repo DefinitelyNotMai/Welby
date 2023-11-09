@@ -1,65 +1,64 @@
-import axios from "axios";
 import bcrypt from "bcryptjs";
 import { LoginData } from "../data/typesForm";
-import fetchAccessToken from "./tokenService";
+import { fetchAccessToken } from "./tokenService";
 
-const processLogin = async (
+export const processLogin = async (
   loginData: LoginData,
 ): Promise<{ loginSuccess: boolean; path: string }> => {
   let path = "";
+
   try {
     const tokenResponse = await fetchAccessToken();
 
-    if (tokenResponse !== null) {
+    if (tokenResponse) {
       const token = tokenResponse;
       const loginUrl = "http://localhost:58258/api/GetSystemUsers";
-      const param = {
+      const params = new URLSearchParams({
         UserName: loginData.UserName,
-        Active: true,
-      };
+        Active: "true",
+      });
 
       return new Promise<{ loginSuccess: boolean; path: string }>(
         (resolve, reject) => {
-          axios
-            .get(loginUrl, {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-              params: param,
-            })
+          fetch(`${loginUrl}?${params.toString()}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          })
             .then((response) => {
-              const result = response.data;
-
-              if (result !== null && result.length > 0) {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((result) => {
+              if (result && result.length > 0) {
                 const storedPassword = result[0].Password;
-
                 bcrypt.compare(
                   loginData.Password,
                   storedPassword,
                   (err, passwordMatch) => {
                     if (err) {
-                      // handle error
                       console.error(err);
                       reject(err);
                     } else if (passwordMatch) {
-                      // passwords match, login successful
                       localStorage.setItem("userId", result[0].UserId);
-                      if (result[0].Nickname === "com") {
+                      if (result[0].FirstLogin == 0) {
                         path = "/employee-signup";
                       } else {
                         path = "/dashboard";
                       }
                       resolve({ loginSuccess: true, path });
                     } else {
-                      // passwords do not match; login failed
+                      // FAIL: passwords don't match
                       resolve({ loginSuccess: false, path });
                     }
                   },
                 );
               } else {
-                // User not found
+                // handle case when result is empty
                 resolve({ loginSuccess: false, path });
               }
             })
@@ -69,12 +68,11 @@ const processLogin = async (
             });
         },
       );
+    } else {
+      return { loginSuccess: false, path };
     }
-    return { loginSuccess: false, path };
   } catch (error) {
     console.error(error);
     return { loginSuccess: false, path };
   }
 };
-
-export default processLogin;

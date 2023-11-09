@@ -1,9 +1,12 @@
+// lib
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import { CompanyAdminFormData, CompanyFormData } from "../data/typesForm";
-import fetchAccessToken from "./tokenService";
 
-const signUpCompanyAdmin = async (
+// local
+import { CompanyAdminFormData, CompanyFormData } from "../data/typesForm";
+import { fetchAccessToken } from "./tokenService";
+
+export const signUpCompanyAdmin = async (
   CompanyAdminData: CompanyAdminFormData,
   CompanyData: CompanyFormData,
   id: string,
@@ -155,5 +158,3 @@ const signUpCompanyAdmin = async (
     console.error("An error has occured: ", error);
   }
 };
-
-export default signUpCompanyAdmin;

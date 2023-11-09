@@ -1,41 +1,39 @@
-import { Checkbox, CheckboxGroup, Grid, GridItem } from "@chakra-ui/react";
-import axios from "axios";
+import {
+  Checkbox,
+  CheckboxGroup,
+  Grid,
+  GridItem,
+  Text,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import Text from "../Typography/Text";
+import { fetchData } from "../../api/fetchData";
 
-interface Interests {
+type Interests = {
   InterestId: number;
   Name: string;
-}
+};
 
 type InterestCheckboxProps = {
   value: string[];
   onChange?: (event: string[]) => void;
 };
 
-const InterestCheckbox = ({ value, onChange }: InterestCheckboxProps) => {
+export const InterestCheckbox = ({
+  value,
+  onChange,
+}: InterestCheckboxProps) => {
   const [interests, setInterests] = useState<Interests[]>([]);
 
   useEffect(() => {
     const fetchInterests = async () => {
       try {
         const interestsUrl = "https://localhost:44373/api/GetAllInterest";
-
-        axios
-          .get(interestsUrl, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            params: { Active: 1 },
-          })
-          .then((response) => {
-            const interest = response.data;
-            setInterests(interest);
-          });
+        const data = await fetchData(interestsUrl, { Active: "1" });
+        setInterests(data);
       } catch (error) {
         console.error("Error fetching interests:", error);
       }
     };
-
     fetchInterests();
   }, []);
 
@@ -53,7 +51,7 @@ const InterestCheckbox = ({ value, onChange }: InterestCheckboxProps) => {
         {interests.map((interest) => (
           <GridItem key={interest.InterestId}>
             <Checkbox size="lg" value={String(interest.InterestId)}>
-              <Text fontWeight="normal" variant="black">
+              <Text color="#000000" fontWeight="normal">
                 {interest.Name}
               </Text>
             </Checkbox>
@@ -63,5 +61,3 @@ const InterestCheckbox = ({ value, onChange }: InterestCheckboxProps) => {
     </CheckboxGroup>
   );
 };
-
-export default InterestCheckbox;

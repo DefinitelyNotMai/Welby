@@ -1,7 +1,8 @@
-import { Box, Flex } from "@chakra-ui/react";
-import FormItem from "../../components/Form/FormItem";
-import Textarea from "../../components/Form/Textarea";
-import Heading from "../../components/Typography/Heading";
+// lib
+import { Box, Flex, Heading, Textarea } from "@chakra-ui/react";
+
+// local
+import { FormItem } from "../../components/Form/FormItem";
 
 type Step5Data = {
   Other_Notes: string;
@@ -11,13 +12,13 @@ type Step5Props = Step5Data & {
   updateFields: (fields: Partial<Step5Data>) => void;
 };
 
-const Step5 = ({ Other_Notes, updateFields }: Step5Props) => {
+export const Step5 = ({ Other_Notes, updateFields }: Step5Props) => {
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Heading
-        color="white"
-        fontSize={["xl", "2xl", "3xl"]}
+        fontSize="1.75rem"
         marginBottom={16}
+        noOfLines={2}
         textAlign="center"
       >
         Anything else you want your colleagues to take note of?
@@ -39,5 +40,3 @@ const Step5 = ({ Other_Notes, updateFields }: Step5Props) => {
     </Flex>
   );
 };
-
-export default Step5;

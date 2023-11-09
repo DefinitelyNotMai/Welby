@@ -1,7 +1,9 @@
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
-import FormItem from "../../components/Form/FormItem";
+// lib
+import { Box, Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
+
+// local
+import { FormItem } from "../../components/Form/FormItem";
 import { SelectStrength } from "../../components/Form/Select";
-import Heading from "../../components/Typography/Heading";
 
 type Step3Data = {
   RealizedStrengths: string[];
@@ -14,7 +16,7 @@ type Step3Props = Step3Data & {
   updateFields: (fields: Partial<Step3Data>) => void;
 };
 
-const Step3 = ({
+export const Step3 = ({
   RealizedStrengths,
   UnrealizedStrengths,
   LearnedBehaviors,
@@ -42,17 +44,11 @@ const Step3 = ({
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Box marginBottom={10} textAlign="center">
-        <Heading color="white" fontSize={["2xl", "3xl", "4xl"]}>
-          Share your strengths to the team.
-        </Heading>
-        <Heading color="white" fontSize={["lg", "xl", "2xl"]} marginBottom={4}>
+        <Heading fontSize="1.875rem">Share your strengths to the team.</Heading>
+        <Heading fontSize="1.25rem" marginBottom={4}>
           &quot;Play with your strengths.&quot;
         </Heading>
-        <Heading
-          color="white"
-          fontSize={["md", "lg", "xl"]}
-          fontWeight="normal"
-        >
+        <Heading fontSize="0.875rem" fontWeight="normal">
           - Jennifer Lopez
         </Heading>
       </Box>
@@ -144,5 +140,3 @@ const Step3 = ({
     </Flex>
   );
 };
-
-export default Step3;

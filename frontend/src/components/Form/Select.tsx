@@ -1,10 +1,8 @@
-import {
-  Select as ChakraSelect,
-  SelectProps as ChakraSelectProps,
-} from "@chakra-ui/react";
+// lib
 import { ChangeEvent, useEffect, useState } from "react";
-import { fetchData } from "../../api/fetchData";
-import fetchAccessToken from "../../api/tokenService";
+import { Select } from "@chakra-ui/react";
+
+// local
 import {
   Country,
   Gender,
@@ -12,87 +10,22 @@ import {
   Strength,
 } from "../../data/typesMaster";
 import { SystemSecurityGroup } from "../../data/typesOWS";
+import { fetchAccessToken } from "../../api/tokenService";
+import { fetchData } from "../../api/fetchData";
 
-type Option = {
-  id: string;
-  label: string;
-};
-
-type SelectProps = ChakraSelectProps & {
-  additionalHeaders?: Record<string, string>;
-  fetchUrl: string;
-  mapOptions: (data: any) => Option[];
-  placeholder: string;
-  sliceData?: number;
-};
-
-type SelectChildProps = {
+type CustomSelectProps = {
   id: string;
   name: string;
-  onChange: (selectedValue: ChangeEvent<HTMLSelectElement>) => void;
-  options?: { value: string; label: string }[]; // Add this line
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   value: string;
 };
 
-const Select = ({
-  fetchUrl,
-  mapOptions,
-  placeholder,
-  ...props
-}: SelectProps) => {
-  const [options, setOptions] = useState<Option[]>([]);
-
-  useEffect(() => {
-    const fetchDataAndSetOptions = async () => {
-      try {
-        const data = await fetchData(fetchUrl, { Active: "1" });
-        setOptions(mapOptions(data));
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-      // try {
-      //   const response = await axios.get(fetchUrl, {
-      //     method: "GET",
-      //     headers: { "Content-Type": "application/json" },
-      //     params: { Active: 1 },
-      //   });
-
-      //   const data = response.data;
-      //   setOptions(mapOptions(data));
-      // } catch (error) {
-      //   console.error("Error fetching data: ", error);
-      // }
-    };
-    fetchDataAndSetOptions();
-  }, [fetchUrl, mapOptions]);
-
-  return (
-    <ChakraSelect
-      backgroundColor="#ffffff"
-      color="#757575"
-      fontFamily="Montserrat"
-      fontSize={["sm", "md"]}
-      fontWeight="medium"
-      _placeholder={{ color: "#bcbcbc" }}
-      placeholder={placeholder}
-      {...props}
-    >
-      {options.map((option) => (
-        <option key={option.id} value={option.id}>
-          {option.label}
-        </option>
-      ))}
-    </ChakraSelect>
-  );
-};
-
-const SelectCompanySize = ({
+export const SelectCompanySize = ({
   id,
   name,
   onChange,
   value,
-  ...props
-}: SelectChildProps) => {
+}: CustomSelectProps) => {
   const companySizeOptions = [
     { id: "1 - 5", label: "1 - 5" },
     { id: "6 - 10", label: "6 - 10" },
@@ -106,121 +39,187 @@ const SelectCompanySize = ({
   ];
 
   return (
-    <ChakraSelect
-      backgroundColor="white"
-      color="#757575"
-      fontFamily="Montserrat"
-      fontSize={["sm", "md"]}
-      fontWeight="medium"
+    <Select
       id={id}
       name={name}
       onChange={onChange}
       placeholder="Select Company Size..."
-      _placeholder={{ color: "#bcbcbc" }}
-      {...props}
       value={value}
     >
       {companySizeOptions.map((companySize) => (
-        <option key={companySize.id} value={companySize.label}>
+        <option key={companySize.id} value={companySize.id}>
           {companySize.label}
         </option>
       ))}
-    </ChakraSelect>
+    </Select>
   );
 };
 
-const SelectCountry = ({ id, name, onChange, value }: SelectChildProps) => {
+export const SelectCountry = ({
+  id,
+  name,
+  onChange,
+  value,
+}: CustomSelectProps) => {
+  const [countries, setCountries] = useState<Country[]>([]);
+
+  const countriesUrl = "https://localhost:44373/api/GetAllCountry";
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const data = await fetchData(countriesUrl, { Active: "1" });
+        setCountries(data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchCountries();
+  }, []);
+
   return (
     <Select
-      fetchUrl="https://localhost:44373/api/GetAllCountry"
       id={id}
-      mapOptions={(data) =>
-        data.map((country: Country) => ({
-          id: country.CountryId,
-          label: country.Name,
-        }))
-      }
       name={name}
       onChange={onChange}
       placeholder="Select Country..."
       value={value}
-    />
+    >
+      {countries.map((country) => (
+        <option key={country.CountryId} value={country.CountryId}>
+          {country.Name}
+        </option>
+      ))}
+    </Select>
   );
 };
 
-const SelectGender = ({ id, name, onChange, value }: SelectChildProps) => {
+export const SelectGender = ({
+  id,
+  name,
+  onChange,
+  value,
+}: CustomSelectProps) => {
+  const [genders, setGenders] = useState<Gender[]>([]);
+
+  const gendersUrl = "https://localhost:44373/api/GetGender";
+  useEffect(() => {
+    const fetchGenders = async () => {
+      try {
+        const data = await fetchData(gendersUrl, { Active: "1" });
+        setGenders(data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchGenders();
+  }, []);
+
   return (
     <Select
-      fetchUrl="https://localhost:44373/api/GetGender"
       id={id}
-      mapOptions={(data) =>
-        data.map((gender: Gender) => ({
-          id: gender.GenderId,
-          label: gender.Gender,
-        }))
-      }
       name={name}
       onChange={onChange}
       placeholder="Select Gender..."
       value={value}
-    />
+    >
+      {genders.map((gender) => (
+        <option key={gender.GenderId} value={gender.GenderId}>
+          {gender.Gender}
+        </option>
+      ))}
+    </Select>
   );
 };
 
-const SelectIndustryType = ({
+export const SelectIndustryType = ({
   id,
   name,
   onChange,
   value,
-}: SelectChildProps) => {
+}: CustomSelectProps) => {
+  const [industryTypes, setIndustryTypes] = useState<IndustryType[]>([]);
+
+  const industryTypesUrl = "https://localhost:44373/api/GetIndustryTypes";
+  useEffect(() => {
+    const fetchIndustryTypes = async () => {
+      try {
+        const data = await fetchData(industryTypesUrl, { Active: "1" });
+        setIndustryTypes(data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchIndustryTypes();
+  }, []);
+
   return (
     <Select
-      fetchUrl="https://localhost:44373/api/GetIndustryTypes"
       id={id}
-      mapOptions={(data) =>
-        data.map((industryType: IndustryType) => ({
-          id: industryType.IndustryTypeId,
-          label: industryType.Industry_Name,
-        }))
-      }
       name={name}
       onChange={onChange}
       placeholder="Select Industry Type..."
       value={value}
-    />
+    >
+      {industryTypes.map((industryType) => (
+        <option
+          key={industryType.IndustryTypeId}
+          value={industryType.IndustryTypeId}
+        >
+          {industryType.Industry_Name}
+        </option>
+      ))}
+    </Select>
   );
 };
 
-const SelectStrength = ({ id, name, onChange, value }: SelectChildProps) => {
-  return (
-    <Select
-      fetchUrl="https://localhost:44373/api/GetStrength"
-      id={id}
-      mapOptions={(data) =>
-        data.map((strength: Strength) => ({
-          id: strength.StrengthId,
-          label: strength.Strength,
-        }))
-      }
-      name={name}
-      onChange={onChange}
-      placeholder="Choose here..."
-      value={value}
-    />
-  );
-};
-
-const SelectRole = ({
+export const SelectStrength = ({
   id,
   name,
   onChange,
   value,
-  ...props
-}: SelectChildProps) => {
-  const [options, setOptions] = useState<SystemSecurityGroup[]>([]);
+}: CustomSelectProps) => {
+  const [strengths, setStrengths] = useState<Strength[]>([]);
+
+  const strengthsUrl = "https://localhost:44373/api/GetStrength";
+  useEffect(() => {
+    const fetchStrengths = async () => {
+      try {
+        const data = await fetchData(strengthsUrl, { Active: "1" });
+        setStrengths(data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchStrengths();
+  }, []);
+
+  return (
+    <Select
+      id={id}
+      name={name}
+      onChange={onChange}
+      placeholder="Choose here..."
+      value={value}
+    >
+      {strengths.map((strength) => (
+        <option key={strength.StrengthId} value={strength.StrengthId}>
+          {strength.Strength}
+        </option>
+      ))}
+    </Select>
+  );
+};
+
+export const SelectRole = ({
+  id,
+  name,
+  onChange,
+  value,
+}: CustomSelectProps) => {
+  const [roles, setRoles] = useState<SystemSecurityGroup[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRoles = async () => {
       try {
         const token = await fetchAccessToken();
         const securityGroupUrl =
@@ -240,43 +239,27 @@ const SelectRole = ({
 
         const data = await response.json();
         const result = data.slice(2); // slice first 2 options
-        setOptions(result);
+        setRoles(result);
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.log("Error fetching data: ", error);
       }
     };
-    fetchData();
-  });
+    fetchRoles();
+  }, []);
 
   return (
-    <ChakraSelect
-      backgroundColor="white"
-      color="#757575"
-      fontFamily="Montserrat"
-      fontSize={["sm", "md"]}
-      fontWeight="medium"
+    <Select
       id={id}
       name={name}
       onChange={onChange}
       placeholder="Select Role..."
-      _placeholder={{ color: "#bcbcbc" }}
       value={value}
-      {...props}
     >
-      {options.map((option) => (
-        <option key={option.SecurityGroupId} value={option.SecurityGroupId}>
-          {option.SecurityGroupName}
+      {roles.map((role) => (
+        <option key={role.SecurityGroupId} value={role.SecurityGroupId}>
+          {role.SecurityGroupName}
         </option>
       ))}
-    </ChakraSelect>
+    </Select>
   );
-};
-
-export {
-  SelectCompanySize,
-  SelectCountry,
-  SelectGender,
-  SelectIndustryType,
-  SelectRole,
-  SelectStrength,
 };

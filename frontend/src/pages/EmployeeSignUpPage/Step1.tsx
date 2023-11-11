@@ -49,7 +49,7 @@ export const Step1 = ({
       <GridItem colSpan={3} textAlign="center">
         <Heading fontSize="2.5rem">Welcome to</Heading>
         <Heading fontSize="3.125rem" marginBottom={4}>
-          {Email}
+          {First_Name}
         </Heading>
         <Heading fontSize="1.875rem" marginBottom={10}>
           Please introduce yourself.

@@ -32,7 +32,7 @@ export const signUpCompanyAdmin = async (
     Connect: CompanyAdminData.Connect,
     Support: CompanyAdminData.Support,
     Other_Notes: CompanyAdminData.Other_Notes,
-    FirstLogIn: 0,
+    FirstLogIn: 1,
   };
 
   const config = {

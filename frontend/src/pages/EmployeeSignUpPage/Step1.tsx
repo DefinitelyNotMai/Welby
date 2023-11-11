@@ -20,6 +20,7 @@ type Step1Data = {
   Linkedin: string;
   Facebook: string;
   ProfilePhoto: string;
+  Email: string;
 };
 
 type Step1Props = Step1Data & {
@@ -37,6 +38,7 @@ export const Step1 = ({
   CountryId,
   Instagram,
   TikTok,
+  Email,
   Linkedin,
   Facebook,
   ProfilePhoto,
@@ -47,7 +49,7 @@ export const Step1 = ({
       <GridItem colSpan={3} textAlign="center">
         <Heading fontSize="2.5rem">Welcome to</Heading>
         <Heading fontSize="3.125rem" marginBottom={4}>
-          COMPANY NAME!
+          {Email}
         </Heading>
         <Heading fontSize="1.875rem" marginBottom={10}>
           Please introduce yourself.

@@ -4,8 +4,9 @@ import { fetchAccessToken } from "./tokenService";
 
 export const processLogin = async (
   loginData: LoginData,
-): Promise<{ loginSuccess: boolean; path: string }> => {
+): Promise<{ loginSuccess: boolean; path: string; id: string }> => {
   let path = "";
+  let id = "";
 
   try {
     const tokenResponse = await fetchAccessToken();
@@ -18,7 +19,7 @@ export const processLogin = async (
         Active: "true",
       });
 
-      return new Promise<{ loginSuccess: boolean; path: string }>(
+      return new Promise<{ loginSuccess: boolean; path: string; id: string }>(
         (resolve, reject) => {
           fetch(`${loginUrl}?${params.toString()}`, {
             method: "GET",
@@ -47,19 +48,20 @@ export const processLogin = async (
                       localStorage.setItem("userId", result[0].UserId);
                       if (result[0].FirstLogin == 0) {
                         path = "/employee-signup";
+                        id = result[0].UserId;
                       } else {
-                        path = "/dashboard";
+                        path = "/employee-signup";
                       }
-                      resolve({ loginSuccess: true, path });
+                      resolve({ loginSuccess: true, path, id });
                     } else {
                       // FAIL: passwords don't match
-                      resolve({ loginSuccess: false, path });
+                      resolve({ loginSuccess: false, path, id });
                     }
                   },
                 );
               } else {
                 // handle case when result is empty
-                resolve({ loginSuccess: false, path });
+                resolve({ loginSuccess: false, path, id });
               }
             })
             .catch((error) => {
@@ -69,10 +71,10 @@ export const processLogin = async (
         },
       );
     } else {
-      return { loginSuccess: false, path };
+      return { loginSuccess: false, path, id };
     }
   } catch (error) {
     console.error(error);
-    return { loginSuccess: false, path };
+    return { loginSuccess: false, path, id };
   }
 };

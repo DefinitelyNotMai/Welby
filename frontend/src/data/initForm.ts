@@ -78,6 +78,7 @@ export const COMPANY_ADMIN_INITIAL_DATA: CompanyAdminFormData = {
 
 export const EMPLOYEE_INITIAL_DATA: EmployeeFormData = {
   // step 1
+  EmployeeId: "",
   First_Name: "",
   Middle_Name: "",
   Birthday: "",
@@ -91,6 +92,9 @@ export const EMPLOYEE_INITIAL_DATA: EmployeeFormData = {
   TikTok: "",
   Linkedin: "",
   Facebook: "",
+  Email: "",
+  Address: "",
+  CompanyId: "",
 
   // step 2
   Work: "",

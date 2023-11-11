@@ -76,6 +76,7 @@ export type CompanyAdminFormData = {
 
 export type EmployeeFormData = {
   // step 1
+  EmployeeId: string;
   First_Name: string;
   Middle_Name: string;
   Birthday: string;
@@ -89,6 +90,9 @@ export type EmployeeFormData = {
   TikTok: string;
   Linkedin: string;
   Facebook: string;
+  Email: string;
+  Address: string;
+  CompanyId: string;
 
   // step 2
   Work: string;

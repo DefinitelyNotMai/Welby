@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { EmployeeFormData } from "../../data/typesForm";
 import { EMPLOYEE_INITIAL_DATA } from "../../data/initForm";
 import { useMultiStepForm } from "../../hooks/useMultiStepForm";
@@ -11,6 +11,7 @@ import { Step3 } from "./Step3";
 import Step4 from "./Step4";
 import { Step5 } from "./Step5";
 import { Step6 } from "./Step6";
+import { fetchData } from "../../api/fetchData";
 
 export const EmployeeSignUpPage = () => {
   document.title = "Employee Sign Up | Welby";
@@ -18,6 +19,7 @@ export const EmployeeSignUpPage = () => {
   const [employeeData, setEmployeeData] = useState<EmployeeFormData>(
     EMPLOYEE_INITIAL_DATA,
   );
+  const [dumdum, setDumdum] = useState();
 
   const navigate = useNavigate();
 
@@ -26,6 +28,29 @@ export const EmployeeSignUpPage = () => {
       return { ...prev, ...fields };
     });
   };
+
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    const employeeUrl = "https://localhost:44373/api/GetEmployee";
+
+    const fetchAndSetEmployee = async () => {
+      try {
+        //console.log(userId); // NOTE: this works
+        const data = await fetchData(employeeUrl, { EmployeeId: userId });
+        //console.log(data); // NOTE: this works
+        setDumdum(data);
+        //console.log(dumdum);
+        //setEmployeeData(data);
+        //console.log(employeeData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAndSetEmployee();
+    //console.log(employeeData);
+  }, [userId]);
+  console.log(dumdum);
 
   const {
     currentStepIndex,
@@ -48,6 +73,7 @@ export const EmployeeSignUpPage = () => {
   const handleEmployeeSignUp = () => {
     // yee
     nextStep();
+    //signUpEmployee();
   };
 
   const handleSubmit = (e: FormEvent) => {

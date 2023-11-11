@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Form, useNavigate } from "react-router-dom";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
 
 // local
 import { ForgotPassword } from "../components/Modal/ForgotPassword/ForgotPassword";
@@ -21,6 +21,7 @@ import { LoginData } from "../data/typesForm";
 import { SystemUsers } from "../data/typesOWS";
 import { WelcomeLayout } from "../layout/WelcomeLayout";
 import { processLogin } from "../api/loginService";
+import { UserContext } from "../context/UserContext";
 
 export const LoginPage = () => {
   document.title = "Login | Welby";

@@ -16,6 +16,8 @@ using System.Web.Script.Serialization;
 using System.Text;
 using System.Web.UI;
 using System.EnterpriseServices.Internal;
+using System.Web.Http.Cors;
+using WWA_CORE.Persistent.ViewModel.Algo;
 
 namespace WelbyAPI.Controllers
 {
@@ -28,6 +30,54 @@ namespace WelbyAPI.Controllers
             this._wwauow = this._wwauow ?? new WWAUnitOfWork();
         }
 
+        #region ALGO
+        [Route("~/api/GetAllDailyCheckIn")]
+        [HttpGet]
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
+        {
+            var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
+
+            return model;
+        }
+
+        [Route("~/api/AddDailyCheckIn")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.DailyCheckIn.AddDailyCheckIn(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveDailyCheckIn")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.DailyCheckIn.RemoveDailyCheckIn(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnDailyCheckIn")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnEmployee([FromBody] DailyCheckInViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.DailyCheckIn.ReturnDailyCheckIn(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        #endregion
+
         #region EMPLOYEES
         [Route("~/api/GetEmployees")]
         [HttpGet]
@@ -36,6 +86,16 @@ namespace WelbyAPI.Controllers
             var model = await _wwauow.Employee.GetAllEmployees(param);
             return model;
         }
+
+        //GetSingle Employee
+        [Route("~/api/GetEmployee")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromUri] EmployeeRegistrationViewModel param)
+        {
+            var model = await _wwauow.Employee.GetEmployee(param);
+            return model;
+        }
+
         [Route("~/api/AddEmployee")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployee([FromBody] EmployeeRegistrationViewModel param)
@@ -91,11 +151,19 @@ namespace WelbyAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
         {
-            var model = await _wwauow.Value.GetAllValues(param);
+            var model = await _wwauow.Value.GetValueByTitleDescription(param);
             return model;
         }
 
-        [Route("~/api/AddValue")]
+        [Route("~/api/GetValues")]
+        [HttpGet]
+        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromUri] ValueMasterViewModel param)
+        {
+            var model = await _wwauow.Value.GetValues(param);
+            return model;
+        }
+
+    [Route("~/api/AddValue")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddValue([FromBody] ValueMasterViewModel param)
         {
@@ -321,7 +389,15 @@ namespace WelbyAPI.Controllers
         #region GOAL
         [Route("~/api/GetAllGoal")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList([FromUri] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals([FromUri] GoalMasterViewModel param)
+        {
+            var model = await _wwauow.Goal.GetGoalByTitleDescription(param);
+            return model;
+        }
+
+        [Route("~/api/GetGoals")]
+        [HttpGet]
+        public async Task<IEnumerable<GoalMasterViewModel>> GetAllGoals([FromUri] GoalMasterViewModel param)
         {
             var model = await _wwauow.Goal.GetGoalList(param);
             return model;
@@ -549,64 +625,6 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
-        #endregion
-
-        #region CITY
-        [Route("~/api/GetAllCity")]
-        [HttpGet]
-        public async Task<IEnumerable<CityMasterViewModel>> GetCityList([FromUri] CityMasterViewModel param)
-        {
-            var model = await _wwauow.City.GetCityList(param);
-            return model;
-        }
-
-        [Route("~/api/AddCity")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddCity([FromBody] CityMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.City.AddCity(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateCity")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateCity([FromBody] CityMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.City.UpdateCity(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveCity")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveCity([FromBody] CityMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.City.RemoveCity(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnCity")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnCity([FromBody] CityMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.City.ReturnCity(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
         #endregion
 
         #region EMPLOYEE INTEREST

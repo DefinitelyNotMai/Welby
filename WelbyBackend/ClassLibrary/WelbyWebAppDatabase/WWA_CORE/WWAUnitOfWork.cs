@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WWA_CORE.Core.Repositories;
+using WWA_CORE.Core.Repositories.Algo;
 using WWA_CORE.Core.Repositories.Company;
 using WWA_CORE.Core.Repositories.Employee;
 using WWA_CORE.Core.Repositories.Masters;
 using WWA_CORE.Core.Repositories.Registration;
 using WWA_CORE.Persistent.Context;
+using WWA_CORE.Persistent.Service.Algo;
 using WWA_CORE.Persistent.Service.Company;
 using WWA_CORE.Persistent.Service.Employee;
 using WWA_CORE.Persistent.Service.Masters;
@@ -41,6 +43,7 @@ namespace WWA_CORE
         public IEmployeeWeaknessRepository EmployeeWeakness { get; private set; }
         public ICompanyGoalsRepository CompanyGoals { get; private set; }
         public ICompanyValuesRepository CompanyValues { get; private set; }
+        public IDailyCheckInRepository DailyCheckIn { get; private set; }
         public GlobalFunctions GlobalFunctions { get; set; }
         public DbContextTransaction Transaction
         {
@@ -71,6 +74,7 @@ namespace WWA_CORE
             this.EmployeeWeakness = new EmployeeWeaknessService();
             this.CompanyGoals = new CompanyGoalsService();
             this.CompanyValues = new CompanyValuesService();
+            this.DailyCheckIn = new DailyCheckInService();
         }
 
         public void BeginTransaction()

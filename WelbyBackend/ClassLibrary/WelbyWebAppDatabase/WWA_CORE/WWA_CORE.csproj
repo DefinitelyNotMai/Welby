@@ -107,6 +107,7 @@
     <Compile Include="Constants\PROCEDURE_NAME.cs" />
     <Compile Include="Constants\PROCEDURE_PARAMETERS.cs" />
     <Compile Include="Constants\REPORT_PARAMETER.cs" />
+    <Compile Include="Core\Repositories\Algo\IDailyCheckInRepository.cs" />
     <Compile Include="Core\Repositories\Company\ICompanyGoalsRepository.cs" />
     <Compile Include="Core\Repositories\Company\ICompanyValuesRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeInterestRepository.cs" />
@@ -130,6 +131,9 @@
       <DependentUpon>WWAContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Persistent\Context\tbl_CMP_Values.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_DailyCheckIn.cs">
       <DependentUpon>WWAContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Persistent\Context\tbl_EMP_Interest.cs">
@@ -205,6 +209,7 @@
     <Compile Include="Persistent\Resource\Masters\GoalMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
+    <Compile Include="Persistent\Service\Algo\DailyCheckInService.cs" />
     <Compile Include="Persistent\Service\Company\CompanyGoalsService.cs" />
     <Compile Include="Persistent\Service\Company\CompanyValuesService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeInterestService.cs" />
@@ -222,6 +227,7 @@
     <Compile Include="Persistent\Service\Masters\StrengthMasterService.cs" />
     <Compile Include="Persistent\Service\Masters\ValueMasterService.cs" />
     <Compile Include="Persistent\Service\Registration\EmployeeRegistrationService.cs" />
+    <Compile Include="Persistent\ViewModel\Algo\DailyCheckInViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Company\CompanyGoalsViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Company\CompanyValuesViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeInterestViewModel.cs" />

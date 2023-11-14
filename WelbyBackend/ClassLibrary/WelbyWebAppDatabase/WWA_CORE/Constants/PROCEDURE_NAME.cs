@@ -8,6 +8,12 @@ namespace WWA_CORE.Constants
 {
     public class PROCEDURE_NAME
     {
+        #region ALGO
+        public const string PROC_EMP_DAILYCHECKIN_GET = "procWWA_EMP_DailyCheckIn_Get";
+        public const string PROC_EMP_TISE_GET = "procWWA_EMP_TISE_Get";
+        #endregion
+
+
         #region REGISTRATION
         public const string PROC_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET = "procWWA_REG_Employee_Registration_Get";
         #endregion

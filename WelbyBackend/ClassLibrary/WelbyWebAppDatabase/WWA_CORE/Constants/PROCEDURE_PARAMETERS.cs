@@ -16,6 +16,11 @@ namespace WWA_CORE.Constants
         public const string PARA_COMMON_ACTIVE = "@Active";
         #endregion
 
+        #region ALGO
+        public const string PARA_EMP_DAILYCHECKIN_GET_EMPLOYEEID = "@EmployeeId";
+        public const string PARA_EMP_TISE_GET_EMPLOYEEID = "@EmployeeId";
+        #endregion
+
         #region REGISTRATION
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMPLOYEEID = "@EmployeeId";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_PHONE_NUMBER = "@Phone_Number";

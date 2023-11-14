@@ -22,6 +22,7 @@ namespace WWA_CORE.Persistent.Context
             this.tbl_EMP_Realized_Strengths = new HashSet<tbl_EMP_Realized_Strengths>();
             this.tbl_EMP_Unrealized_Strengths = new HashSet<tbl_EMP_Unrealized_Strengths>();
             this.tbl_EMP_Weakness = new HashSet<tbl_EMP_Weakness>();
+            this.tbl_EMP_DailyCheckIn = new HashSet<tbl_EMP_DailyCheckIn>();
         }
     
         public int EmployeeId { get; set; }
@@ -65,5 +66,7 @@ namespace WWA_CORE.Persistent.Context
         public virtual tbl_MST_Company tbl_MST_Company { get; set; }
         public virtual tbl_MST_Country_Master tbl_MST_Country_Master { get; set; }
         public virtual tbl_MST_Gender_Master tbl_MST_Gender_Master { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }
     }
 }

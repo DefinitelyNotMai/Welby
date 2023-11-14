@@ -142,6 +142,7 @@
           <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
           <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
           <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
+          <ScalarProperty Name="CompanySize" ColumnName="CompanySize" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -282,8 +283,53 @@
           <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
           <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
           <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+          <ScalarProperty Name="FirstLogIn" ColumnName="FirstLogIn" />
+          <ScalarProperty Name="CompanyPosition" ColumnName="CompanyPosition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_By_CompanyId_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_By_CompanyId_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_By_CompanyId_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_By_CompanyId_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_By_EmployeeId_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_By_EmployeeId_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Realized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Realized_Strengths_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Unrealized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Unrealized_Strengths_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Weakness_Get" FunctionName="WWAModel.Store.procWWA_EMP_Weakness_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_City_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_City_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Login_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Login_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Country_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Country_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Gender_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Gender_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Goal_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Goal_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Goal_Master_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_MST_Goal_Master_Pagewise_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_IndustryType_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_IndustryType_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Interest_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Interest_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Strength_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Strength_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Pagewise_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
+    <EntitySetMapping Name="tbl_EMP_DailyCheckIn">
+      <EntityTypeMapping TypeName="WWAModel.tbl_EMP_DailyCheckIn">
+        <MappingFragment StoreEntitySet="tbl_EMP_DailyCheckIn">
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="NegativeEmotions" ColumnName="NegativeEmotions" />
+          <ScalarProperty Name="PositiveEmotions" ColumnName="PositiveEmotions" />
+          <ScalarProperty Name="FocusAtWork" ColumnName="FocusAtWork" />
+          <ScalarProperty Name="EnergyAtWork" ColumnName="EnergyAtWork" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="DailyCheckInId" ColumnName="DailyCheckInId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_DailyCheckIn_Get" FunctionName="WWAModel.Store.procWWA_EMP_DailyCheckIn_Get" />
   </EntityContainerMapping>
 </Mapping>

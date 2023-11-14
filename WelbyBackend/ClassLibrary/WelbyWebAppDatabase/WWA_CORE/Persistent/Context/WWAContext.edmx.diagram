@@ -39,9 +39,11 @@
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Compu__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Compu__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Indus__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Compa__76969D2E" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Count__74AE54BC" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Gende__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Compa__0D0FEE32" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Count__0B27A5C0" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Gende__0C1BC9F9" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_DailyCheckIn" Width="1.5" PointX="16.5" PointY="23.75" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_D__Emplo__269AB60B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

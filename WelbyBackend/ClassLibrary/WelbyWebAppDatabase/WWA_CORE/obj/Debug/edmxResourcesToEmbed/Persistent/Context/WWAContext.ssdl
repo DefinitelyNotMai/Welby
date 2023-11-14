@@ -28,6 +28,23 @@
     <Property Name="LastChanged_Date" Type="datetime" />
     <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
   </EntityType>
+  <EntityType Name="tbl_EMP_DailyCheckIn">
+    <Key>
+      <PropertyRef Name="DailyCheckInId" />
+    </Key>
+    <Property Name="DailyCheckInId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="EnergyAtWork" Type="int" />
+    <Property Name="FocusAtWork" Type="int" />
+    <Property Name="PositiveEmotions" Type="int" />
+    <Property Name="NegativeEmotions" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Encoded_By" Type="int" Nullable="false" />
+    <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
+    <Property Name="LastChanged_By" Type="int" />
+    <Property Name="LastChanged_Date" Type="datetime" />
+    <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
   <EntityType Name="tbl_EMP_Interest">
     <Key>
       <PropertyRef Name="EmployeeInterestId" />
@@ -315,7 +332,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbl_EMP_I__Emplo__0E6E26BF">
+  <Association Name="FK__tbl_EMP_D__Emplo__269AB60B">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_DailyCheckIn">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_I__Emplo__7D98A078">
     <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
     <End Role="tbl_EMP_Interest" Type="Self.tbl_EMP_Interest" Multiplicity="*" />
     <ReferentialConstraint>
@@ -507,9 +536,135 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="procWWA_CMP_Goals_By_CompanyId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_CMP_Goals_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyGoalsId" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_CMP_Values_By_CompanyId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_CMP_Values_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyValuesId" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_EMP_DailyCheckIn_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_EMP_Interest_By_EmployeeId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_EMP_Interest_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeInterestId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_EMP_Learned_Behaviors_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LearnedBehaviorsId" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_EMP_Realized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RealizedStrengthsId" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_EMP_Unrealized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UnrealizedStrengthsId" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_EMP_Weakness_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeWeaknessId" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_City_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CityId" Type="int" Mode="In" />
+    <Parameter Name="CountryId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Company_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Company_Master_Login_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Country_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CountryId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Gender_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GenderId" Type="int" Mode="In" />
+    <Parameter Name="Biological" Type="bit" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Goal_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GoalId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Goal_Master_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GoalId" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+    <Parameter Name="PageNo" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+    <Parameter Name="DateTo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_IndustryType_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IndustryTypeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Interest_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InterestId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Strength_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StrengthId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Value_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ValueId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_MST_Value_Master_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ValueId" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+    <Parameter Name="PageNo" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+    <Parameter Name="DateTo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="procWWA_REG_Employee_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_REG_Employee_Registration_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="PageNo" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+    <Parameter Name="DateTo" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="WWAModelStoreContainer">
     <EntitySet Name="tbl_CMP_Goals" EntityType="Self.tbl_CMP_Goals" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_CMP_Values" EntityType="Self.tbl_CMP_Values" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_EMP_DailyCheckIn" EntityType="Self.tbl_EMP_DailyCheckIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_EMP_Interest" EntityType="Self.tbl_EMP_Interest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_EMP_Learned_Behaviors" EntityType="Self.tbl_EMP_Learned_Behaviors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_EMP_Realized_Strengths" EntityType="Self.tbl_EMP_Realized_Strengths" Schema="dbo" store:Type="Tables" />
@@ -541,7 +696,11 @@
       <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
       <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_EMP_I__Emplo__0E6E26BF" Association="Self.FK__tbl_EMP_I__Emplo__0E6E26BF">
+    <AssociationSet Name="FK__tbl_EMP_D__Emplo__269AB60B" Association="Self.FK__tbl_EMP_D__Emplo__269AB60B">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_I__Emplo__7D98A078" Association="Self.FK__tbl_EMP_I__Emplo__7D98A078">
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
       <End Role="tbl_EMP_Interest" EntitySet="tbl_EMP_Interest" />
     </AssociationSet>

@@ -17,12 +17,13 @@ namespace WWA_CORE.Persistent.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_REG_Employee_Registration()
         {
+            this.tbl_EMP_DailyCheckIn = new HashSet<tbl_EMP_DailyCheckIn>();
             this.tbl_EMP_Interest = new HashSet<tbl_EMP_Interest>();
             this.tbl_EMP_Learned_Behaviors = new HashSet<tbl_EMP_Learned_Behaviors>();
             this.tbl_EMP_Realized_Strengths = new HashSet<tbl_EMP_Realized_Strengths>();
+            this.tbl_EMP_TISE = new HashSet<tbl_EMP_TISE>();
             this.tbl_EMP_Unrealized_Strengths = new HashSet<tbl_EMP_Unrealized_Strengths>();
             this.tbl_EMP_Weakness = new HashSet<tbl_EMP_Weakness>();
-            this.tbl_EMP_DailyCheckIn = new HashSet<tbl_EMP_DailyCheckIn>();
         }
     
         public int EmployeeId { get; set; }
@@ -44,7 +45,7 @@ namespace WWA_CORE.Persistent.Context
         public string Other_Notes { get; set; }
         public string ProfilePhoto { get; set; }
         public Nullable<int> GenderId { get; set; }
-        public int CompanyId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public Nullable<int> CountryId { get; set; }
         public bool Active { get; set; }
         public int Encoded_By { get; set; }
@@ -52,7 +53,11 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<int> LastChanged_By { get; set; }
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
+        public Nullable<bool> FirstLogIn { get; set; }
+        public string CompanyPosition { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_Interest> tbl_EMP_Interest { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -60,13 +65,13 @@ namespace WWA_CORE.Persistent.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_Realized_Strengths> tbl_EMP_Realized_Strengths { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_EMP_TISE> tbl_EMP_TISE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_Unrealized_Strengths> tbl_EMP_Unrealized_Strengths { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_Weakness> tbl_EMP_Weakness { get; set; }
         public virtual tbl_MST_Company tbl_MST_Company { get; set; }
         public virtual tbl_MST_Country_Master tbl_MST_Country_Master { get; set; }
         public virtual tbl_MST_Gender_Master tbl_MST_Gender_Master { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }
     }
 }

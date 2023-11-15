@@ -12,18 +12,18 @@ namespace WWA_CORE.Persistent.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_EMP_DailyCheckIn
+    public partial class tbl_EMP_TISE
     {
-        public int DailyCheckInId { get; set; }
+        public int TiseId { get; set; }
         public int EmployeeId { get; set; }
-        public Nullable<int> EnergyAtWork_int { get; set; }
-        public string EnergyAtWork_value { get; set; }
-        public Nullable<int> FocusAtWork_int { get; set; }
-        public string FocusAtWork_value { get; set; }
-        public Nullable<int> PositiveEmotions_int { get; set; }
-        public string PositiveEmotions_value { get; set; }
-        public Nullable<int> NegativeEmotions_int { get; set; }
-        public string NegativeEmotions_value { get; set; }
+        public Nullable<double> Factor_1 { get; set; }
+        public Nullable<double> Factor_2 { get; set; }
+        public Nullable<double> Factor_3 { get; set; }
+        public Nullable<double> Factor_4 { get; set; }
+        public Nullable<int> Factor_5 { get; set; }
+        public Nullable<int> Factor_6 { get; set; }
+        public Nullable<int> Factor_7 { get; set; }
+        public Nullable<int> Factor_8 { get; set; }
         public bool Active { get; set; }
         public int Encoded_By { get; set; }
         public System.DateTime Encoded_Date { get; set; }

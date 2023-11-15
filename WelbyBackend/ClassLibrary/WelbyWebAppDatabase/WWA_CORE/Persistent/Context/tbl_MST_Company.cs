@@ -40,6 +40,7 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
         public Nullable<System.DateTime> FoundingDate { get; set; }
+        public string CompanySize { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_CMP_Goals> tbl_CMP_Goals { get; set; }

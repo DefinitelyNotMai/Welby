@@ -12,6 +12,8 @@ namespace WWA_CORE.Persistent.Context
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class WWAEntities : DbContext
     {
@@ -27,9 +29,11 @@ namespace WWA_CORE.Persistent.Context
     
         public virtual DbSet<tbl_CMP_Goals> tbl_CMP_Goals { get; set; }
         public virtual DbSet<tbl_CMP_Values> tbl_CMP_Values { get; set; }
+        public virtual DbSet<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }
         public virtual DbSet<tbl_EMP_Interest> tbl_EMP_Interest { get; set; }
         public virtual DbSet<tbl_EMP_Learned_Behaviors> tbl_EMP_Learned_Behaviors { get; set; }
         public virtual DbSet<tbl_EMP_Realized_Strengths> tbl_EMP_Realized_Strengths { get; set; }
+        public virtual DbSet<tbl_EMP_TISE> tbl_EMP_TISE { get; set; }
         public virtual DbSet<tbl_EMP_Unrealized_Strengths> tbl_EMP_Unrealized_Strengths { get; set; }
         public virtual DbSet<tbl_EMP_Weakness> tbl_EMP_Weakness { get; set; }
         public virtual DbSet<tbl_MST_City_Master> tbl_MST_City_Master { get; set; }
@@ -42,7 +46,7 @@ namespace WWA_CORE.Persistent.Context
         public virtual DbSet<tbl_MST_Strength_Master> tbl_MST_Strength_Master { get; set; }
         public virtual DbSet<tbl_MST_Value_Master> tbl_MST_Value_Master { get; set; }
         public virtual DbSet<tbl_REG_Employee_Registration> tbl_REG_Employee_Registration { get; set; }
-        public virtual DbSet<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }
+        public virtual DbSet<tbl_Results> tbl_Results { get; set; }
     
         public virtual int procWWA_CMP_Goals_By_CompanyId_Get(Nullable<int> companyId, Nullable<bool> active)
         {
@@ -102,6 +106,19 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_CMP_Values_Get", companyValuesIdParameter, companyIdParameter, activeParameter);
+        }
+    
+        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> employeeId, Nullable<bool> active)
+        {
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", employeeIdParameter, activeParameter);
         }
     
         public virtual int procWWA_EMP_Interest_By_EmployeeId_Get(Nullable<int> employeeId, Nullable<bool> active)
@@ -423,6 +440,19 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Get", employeeIdParameter, activeParameter);
         }
     
+        public virtual int procWWA_REG_Employee_GetBy_Company(Nullable<int> companyId, Nullable<bool> active)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_GetBy_Company", companyIdParameter, activeParameter);
+        }
+    
         public virtual int procWWA_REG_Employee_Registration_Pagewise_Get(Nullable<int> employeeId, string phone_Number, string email, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
         {
             var employeeIdParameter = employeeId.HasValue ?
@@ -454,19 +484,6 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("DateTo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, phone_NumberParameter, emailParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
-        }
-    
-        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> employeeId, Nullable<bool> active)
-        {
-            var employeeIdParameter = employeeId.HasValue ?
-                new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(int));
-    
-            var activeParameter = active.HasValue ?
-                new ObjectParameter("Active", active) :
-                new ObjectParameter("Active", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", employeeIdParameter, activeParameter);
         }
     }
 }

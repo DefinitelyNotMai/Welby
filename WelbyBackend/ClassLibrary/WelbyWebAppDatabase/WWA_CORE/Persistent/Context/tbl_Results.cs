@@ -12,25 +12,15 @@ namespace WWA_CORE.Persistent.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_EMP_DailyCheckIn
+    public partial class tbl_Results
     {
-        public int DailyCheckInId { get; set; }
-        public int EmployeeId { get; set; }
-        public Nullable<int> EnergyAtWork_int { get; set; }
-        public string EnergyAtWork_value { get; set; }
-        public Nullable<int> FocusAtWork_int { get; set; }
-        public string FocusAtWork_value { get; set; }
-        public Nullable<int> PositiveEmotions_int { get; set; }
-        public string PositiveEmotions_value { get; set; }
-        public Nullable<int> NegativeEmotions_int { get; set; }
-        public string NegativeEmotions_value { get; set; }
+        public int ResultsId { get; set; }
+        public string ResultDescription { get; set; }
         public bool Active { get; set; }
         public int Encoded_By { get; set; }
         public System.DateTime Encoded_Date { get; set; }
         public Nullable<int> LastChanged_By { get; set; }
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
-    
-        public virtual tbl_REG_Employee_Registration tbl_REG_Employee_Registration { get; set; }
     }
 }

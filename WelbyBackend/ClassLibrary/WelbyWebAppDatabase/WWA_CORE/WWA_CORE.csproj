@@ -108,6 +108,8 @@
     <Compile Include="Constants\PROCEDURE_PARAMETERS.cs" />
     <Compile Include="Constants\REPORT_PARAMETER.cs" />
     <Compile Include="Core\Repositories\Algo\IDailyCheckInRepository.cs" />
+    <Compile Include="Core\Repositories\Algo\IResultsRepository.cs" />
+    <Compile Include="Core\Repositories\Algo\ITiseRepository.cs" />
     <Compile Include="Core\Repositories\Company\ICompanyGoalsRepository.cs" />
     <Compile Include="Core\Repositories\Company\ICompanyValuesRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeInterestRepository.cs" />
@@ -143,6 +145,9 @@
       <DependentUpon>WWAContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Persistent\Context\tbl_EMP_Realized_Strengths.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_TISE.cs">
       <DependentUpon>WWAContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Persistent\Context\tbl_EMP_Unrealized_Strengths.cs">
@@ -181,6 +186,9 @@
     <Compile Include="Persistent\Context\tbl_REG_Employee_Registration.cs">
       <DependentUpon>WWAContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Persistent\Context\tbl_Results.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Persistent\Context\WWAContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -210,6 +218,8 @@
     <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
     <Compile Include="Persistent\Service\Algo\DailyCheckInService.cs" />
+    <Compile Include="Persistent\Service\Algo\ResultsService.cs" />
+    <Compile Include="Persistent\Service\Algo\TiseService.cs" />
     <Compile Include="Persistent\Service\Company\CompanyGoalsService.cs" />
     <Compile Include="Persistent\Service\Company\CompanyValuesService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeInterestService.cs" />
@@ -228,6 +238,8 @@
     <Compile Include="Persistent\Service\Masters\ValueMasterService.cs" />
     <Compile Include="Persistent\Service\Registration\EmployeeRegistrationService.cs" />
     <Compile Include="Persistent\ViewModel\Algo\DailyCheckInViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Algo\ResultsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Algo\TiseViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Company\CompanyGoalsViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Company\CompanyValuesViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeInterestViewModel.cs" />

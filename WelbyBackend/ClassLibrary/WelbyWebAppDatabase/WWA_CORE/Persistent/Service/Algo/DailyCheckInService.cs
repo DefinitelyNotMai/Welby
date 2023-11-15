@@ -26,10 +26,15 @@ namespace WWA_CORE.Persistent.Service.Algo
                 var rowToInsert = new tbl_EMP_DailyCheckIn
                 {
                     EmployeeId = dailyCheckInViewModel.EmployeeId,
-                    FocusAtWork = dailyCheckInViewModel.FocusAtWork,
-                    EnergyAtWork = dailyCheckInViewModel.EnergyAtWork,
-                    PositiveEmotions = dailyCheckInViewModel.PositiveEmotions,
-                    NegativeEmotions = dailyCheckInViewModel.NegativeEmotions,
+                    FocusAtWork_int = dailyCheckInViewModel.FocusAtWork_int,
+                    EnergyAtWork_int = dailyCheckInViewModel.EnergyAtWork_int,
+                    PositiveEmotions_int = dailyCheckInViewModel.PositiveEmotions_int,
+                    NegativeEmotions_int = dailyCheckInViewModel.NegativeEmotions_int,
+
+                    FocusAtWork_value = dailyCheckInViewModel.FocusAtWork_value,
+                    EnergyAtWork_value = dailyCheckInViewModel.EnergyAtWork_value,
+                    PositiveEmotions_value = dailyCheckInViewModel.PositiveEmotions_value,
+                    NegativeEmotions_value = dailyCheckInViewModel.NegativeEmotions_value,
 
                     Active = true,
                     Encoded_By = dailyCheckInViewModel.Encoded_By,
@@ -69,10 +74,15 @@ namespace WWA_CORE.Persistent.Service.Algo
             {
                 DailyCheckInId = Convert.ToInt32(row["DailyCheckInId"]),
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
-                EnergyAtWork = Convert.ToInt32(row["EnergyAtWork"]),
-                FocusAtWork = Convert.ToInt32(row["FocusAtWork"]),
-                PositiveEmotions = Convert.ToInt32(row["PositiveEmotions"]),
-                NegativeEmotions = Convert.ToInt32(row["NegativeEmotions"]),
+                EnergyAtWork_int = Convert.ToInt32(row["EnergyAtWork_int"]),
+                FocusAtWork_int = Convert.ToInt32(row["FocusAtWork_int"]),
+                PositiveEmotions_int = Convert.ToInt32(row["PositiveEmotions_int"]),
+                NegativeEmotions_int = Convert.ToInt32(row["NegativeEmotions_int"]),
+
+                EnergyAtWork_value = Convert.ToString(row["EnergyAtWork_value"]),
+                FocusAtWork_value = Convert.ToString(row["FocusAtWork_value"]),
+                PositiveEmotions_value = Convert.ToString(row["PositiveEmotions_value"]),
+                NegativeEmotions_value = Convert.ToString(row["NegativeEmotions_value"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

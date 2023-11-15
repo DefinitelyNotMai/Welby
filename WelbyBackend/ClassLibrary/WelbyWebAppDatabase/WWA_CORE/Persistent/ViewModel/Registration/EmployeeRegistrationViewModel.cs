@@ -31,6 +31,7 @@ namespace WWA_CORE.Persistent.ViewModel.Registration
 
         public string Work { get; set; }
         public string Contact { get; set; }
+        public string Connect { get; set; }
         public string Support { get; set; }
         public string Other_Notes { get; set; }
     }

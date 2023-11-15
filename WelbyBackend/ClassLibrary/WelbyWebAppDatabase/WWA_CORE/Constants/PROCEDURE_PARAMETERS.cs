@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WWA_CORE.Persistent.ViewModel.Registration;
 
 namespace WWA_CORE.Constants
 {
@@ -19,12 +20,20 @@ namespace WWA_CORE.Constants
         #region ALGO
         public const string PARA_EMP_DAILYCHECKIN_GET_EMPLOYEEID = "@EmployeeId";
         public const string PARA_EMP_TISE_GET_EMPLOYEEID = "@EmployeeId";
+
+        public const string PARA_GET_RESULTID = "@ResultId";
+
         #endregion
 
         #region REGISTRATION
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMPLOYEEID = "@EmployeeId";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_PHONE_NUMBER = "@Phone_Number";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS = "@Email";
+
+        public const string PARA_REG_EMPLOYEE_REGISTRATION_GET_COMPANYID = "@CompanyId";
+
+        public const string PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID = "@EmployeeId";
+
         #endregion
 
         #region MASTERS

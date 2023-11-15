@@ -11,11 +11,14 @@ namespace WWA_CORE.Constants
         #region ALGO
         public const string PROC_EMP_DAILYCHECKIN_GET = "procWWA_EMP_DailyCheckIn_Get";
         public const string PROC_EMP_TISE_GET = "procWWA_EMP_TISE_Get";
+        public const string PROC_GET_RESULT = "procWWA_Get_Results";
         #endregion
 
 
         #region REGISTRATION
-        public const string PROC_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET = "procWWA_REG_Employee_Registration_Get";
+        public const string PROC_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET = "procWWA_REG_Employee_Registration_Pagewise_Get";
+        public const string PROC_REG_EMPLOYEE_REGISTRATION_GET = "procWWA_REG_Employee_Get";
+        public const string PROC_REG_EMPLOYEE_GETBY_COMPANY = "procWWA_REG_Employee_GetBy_Company";
         #endregion
 
         #region MASTERS
@@ -43,15 +46,5 @@ namespace WWA_CORE.Constants
         public const string PROC_EMP_WEAKNESS_GET = "procWWA_EMP_Weakness_Get";
         #endregion
 
-        #region SECURITY
-        /**
-        public const string PROC_SSA_SYSTEM_CONTROLS_GET = "procMBS_SSA_System_Module_Controls_Get";
-        public const string PROC_SSA_SYSTEM_GROUP_GET = "procMBS_SSA_System_Group_Get";
-        public const string PROC_SSA_SYSTEM_GROUP_CONTROL_MAPPING_GET = "procMBS_SSA_System_Group_Control_Mapping_Get";
-        public const string PROC_SSA_SYSTEM_USERS_GET = "procMBS_SSA_System_Users_Get";
-        public const string PROC_SSA_SYSTEM_USERS_ACCOUNT_LOGS_GET = "procMBS_SSA_User_Account_Logs_Get";
-        public const string PROC_SSA_SYSTEM_USERS_SYSTEM_LOGS_GET = "procMBS_SSA_User_System_Logs_Get";
-        **/
-        #endregion
     }
 }

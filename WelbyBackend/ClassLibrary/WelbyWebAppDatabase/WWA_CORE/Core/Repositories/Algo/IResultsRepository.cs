@@ -9,9 +9,9 @@ namespace WWA_CORE.Core.Repositories.Algo
 {
     public interface IResultsRepository
     {
-        Task<ResultsViewModel> AddResults(ResultsViewModel resultsViewModel);
-        Task<ResultsViewModel> UpdateResults(ResultsViewModel resultsViewModel);
-        Task<ResultsViewModel> RemoveResults(ResultsViewModel resultsViewModel);
+        Task<ResultsViewModel> AddResult(ResultsViewModel resultsViewModel);
+        Task<ResultsViewModel> UpdateResult(ResultsViewModel resultsViewModel);
+        Task<ResultsViewModel> RemoveResult(ResultsViewModel resultsViewModel);
         Task<ResultsViewModel> ReturnResult(ResultsViewModel resultsViewModel);
         Task<IEnumerable<ResultsViewModel>> GetResult(ResultsViewModel resultsViewModel);
     }

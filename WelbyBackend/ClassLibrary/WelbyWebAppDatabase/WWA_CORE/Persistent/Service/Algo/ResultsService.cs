@@ -16,7 +16,7 @@ namespace WWA_CORE.Persistent.Service.Algo
 {
     public class ResultsService : IResultsRepository
     {
-        public async Task<ResultsViewModel> AddResults(ResultsViewModel resultsViewModel)
+        public async Task<ResultsViewModel> AddResult(ResultsViewModel resultsViewModel)
         {
             var context = new WWAEntities();
             var globalFunctions = new GlobalFunctions();
@@ -79,7 +79,7 @@ namespace WWA_CORE.Persistent.Service.Algo
             return ReturnedList;
         }
 
-        public async Task<ResultsViewModel> RemoveResults(ResultsViewModel resultsViewModel)
+        public async Task<ResultsViewModel> RemoveResult(ResultsViewModel resultsViewModel)
         {
             var context = new WWAEntities();
             var globalFunctions = new GlobalFunctions();
@@ -129,7 +129,7 @@ namespace WWA_CORE.Persistent.Service.Algo
             return resultsViewModel;
         }
 
-        public Task<ResultsViewModel> UpdateResults(ResultsViewModel resultsViewModel)
+        public Task<ResultsViewModel> UpdateResult(ResultsViewModel resultsViewModel)
         {
             throw new NotImplementedException();
         }

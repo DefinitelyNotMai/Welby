@@ -30,7 +30,7 @@ namespace WelbyAPI.Controllers
             this._wwauow = this._wwauow ?? new WWAUnitOfWork();
         }
 
-        #region ALGO
+        #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
         public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
@@ -42,7 +42,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/AddDailyCheckIn")]
         [HttpPost]
-        public async Task<HttpResponseMessage> AddDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<HttpResponseMessage> AddDailyCheckIns([FromBody] DailyCheckInViewModel param)
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.DailyCheckIn.AddDailyCheckIn(param);
@@ -54,7 +54,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/RemoveDailyCheckIn")]
         [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<HttpResponseMessage> RemoveDailyCheckIns([FromBody] DailyCheckInViewModel param)
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.DailyCheckIn.RemoveDailyCheckIn(param);
@@ -66,7 +66,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/ReturnDailyCheckIn")]
         [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnEmployee([FromBody] DailyCheckInViewModel param)
+        public async Task<HttpResponseMessage> ReturnDailyCheckIns([FromBody] DailyCheckInViewModel param)
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.DailyCheckIn.ReturnDailyCheckIn(param);
@@ -76,6 +76,53 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
+        #endregion
+
+        #region TISE
+        [Route("~/api/GetAllTise")]
+        [HttpGet]
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetTise([FromUri] TiseViewModel param)
+        {
+            var model = await _wwauow.Tise.GetTise(param);
+
+            return model;
+        }
+
+        [Route("~/api/AddTise")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddTise([FromBody] TiseViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Tise.AddTise(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveTise")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveTise([FromBody] TiseViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Tise.RemoveTise(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnTise")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnTise([FromBody] TiseViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Tise.ReturnTise(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
         #endregion
 
         #region EMPLOYEES
@@ -1034,6 +1081,53 @@ namespace WelbyAPI.Controllers
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.CompanyValues.ReturnCompanyValue(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region RESULTS
+        [Route("~/api/GetAllResults")]
+        [HttpGet]
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetResults([FromBody] ResultsViewModel param)
+        {
+            var model = await _wwauow.Results.GetResult(param);
+
+            return model;
+        }
+
+        [Route("~/api/AddResult")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddResults([FromBody] ResultsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Results.AddResults(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveResult")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveResults([FromBody] ResultsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Results.RemoveResult(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnResult")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnResults([FromBody] ResultsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Results.ReturnResult(param);
             var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
             var sample = js.Serialize(model);
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");

@@ -44,6 +44,8 @@ namespace WWA_CORE
         public ICompanyGoalsRepository CompanyGoals { get; private set; }
         public ICompanyValuesRepository CompanyValues { get; private set; }
         public IDailyCheckInRepository DailyCheckIn { get; private set; }
+        public ITiseRepository Tise { get; private set; }
+        public IResultsRepository Results { get; private set; }
         public GlobalFunctions GlobalFunctions { get; set; }
         public DbContextTransaction Transaction
         {
@@ -75,6 +77,8 @@ namespace WWA_CORE
             this.CompanyGoals = new CompanyGoalsService();
             this.CompanyValues = new CompanyValuesService();
             this.DailyCheckIn = new DailyCheckInService();
+            this.Tise = new TiseService();
+            this.Results = new ResultsService();
         }
 
         public void BeginTransaction()

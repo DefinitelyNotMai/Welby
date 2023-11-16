@@ -33,6 +33,8 @@ namespace WWA_CORE.Core.Repositories
         ICompanyGoalsRepository CompanyGoals { get; }
         ICompanyValuesRepository CompanyValues { get; }
         IDailyCheckInRepository DailyCheckIn { get; }
+        ITiseRepository Tise { get; }
+        IResultsRepository Results { get; }
 
         GlobalFunctions GlobalFunctions { get; set; }
         DbContextTransaction Transaction { get; }

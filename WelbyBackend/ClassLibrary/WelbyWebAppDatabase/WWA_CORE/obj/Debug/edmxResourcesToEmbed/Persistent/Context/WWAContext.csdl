@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="CompanyGoalsId" />
     </Key>
-    <Property Name="CompanyGoalsId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyGoalsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CompanyId" Type="Int32" Nullable="false" />
     <Property Name="GoalId" Type="Int32" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -20,7 +20,7 @@
     <Key>
       <PropertyRef Name="CompanyValuesId" />
     </Key>
-    <Property Name="CompanyValuesId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyValuesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CompanyId" Type="Int32" Nullable="false" />
     <Property Name="ValueId" Type="Int32" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -32,11 +32,33 @@
     <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_CMP_V__Compa__0539C240" FromRole="tbl_CMP_Values" ToRole="tbl_MST_Company" />
     <NavigationProperty Name="tbl_MST_Value_Master" Relationship="Self.FK__tbl_CMP_V__Value__062DE679" FromRole="tbl_CMP_Values" ToRole="tbl_MST_Value_Master" />
   </EntityType>
+  <EntityType Name="tbl_EMP_DailyCheckIn">
+    <Key>
+      <PropertyRef Name="DailyCheckInId" />
+    </Key>
+    <Property Name="DailyCheckInId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="EnergyAtWork_int" Type="Int32" />
+    <Property Name="EnergyAtWork_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FocusAtWork_int" Type="Int32" />
+    <Property Name="FocusAtWork_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PositiveEmotions_int" Type="Int32" />
+    <Property Name="PositiveEmotions_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NegativeEmotions_int" Type="Int32" />
+    <Property Name="NegativeEmotions_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Encoded_By" Type="Int32" Nullable="false" />
+    <Property Name="Encoded_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastChanged_By" Type="Int32" />
+    <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
+    <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_D__Emplo__269AB60B" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
+  </EntityType>
   <EntityType Name="tbl_EMP_Interest">
     <Key>
       <PropertyRef Name="EmployeeInterestId" />
     </Key>
-    <Property Name="EmployeeInterestId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeInterestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="InterestId" Type="Int32" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -52,7 +74,7 @@
     <Key>
       <PropertyRef Name="LearnedBehaviorsId" />
     </Key>
-    <Property Name="LearnedBehaviorsId" Type="Int32" Nullable="false" />
+    <Property Name="LearnedBehaviorsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="StrengthId" Type="Int32" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -68,7 +90,7 @@
     <Key>
       <PropertyRef Name="RealizedStrengthsId" />
     </Key>
-    <Property Name="RealizedStrengthsId" Type="Int32" Nullable="false" />
+    <Property Name="RealizedStrengthsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="StrengthId" Type="Int32" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -80,11 +102,33 @@
     <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_R__Emplo__7226EDCC" FromRole="tbl_EMP_Realized_Strengths" ToRole="tbl_REG_Employee_Registration" />
     <NavigationProperty Name="tbl_MST_Strength_Master" Relationship="Self.FK__tbl_EMP_R__Stren__731B1205" FromRole="tbl_EMP_Realized_Strengths" ToRole="tbl_MST_Strength_Master" />
   </EntityType>
+  <EntityType Name="tbl_EMP_TISE">
+    <Key>
+      <PropertyRef Name="TiseId" />
+    </Key>
+    <Property Name="TiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="Factor_1" Type="Double" />
+    <Property Name="Factor_2" Type="Double" />
+    <Property Name="Factor_3" Type="Double" />
+    <Property Name="Factor_4" Type="Double" />
+    <Property Name="Factor_5" Type="Int32" />
+    <Property Name="Factor_6" Type="Int32" />
+    <Property Name="Factor_7" Type="Int32" />
+    <Property Name="Factor_8" Type="Int32" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Encoded_By" Type="Int32" Nullable="false" />
+    <Property Name="Encoded_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastChanged_By" Type="Int32" />
+    <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
+    <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_T__Emplo__3D7E1B63" FromRole="tbl_EMP_TISE" ToRole="tbl_REG_Employee_Registration" />
+  </EntityType>
   <EntityType Name="tbl_EMP_Unrealized_Strengths">
     <Key>
       <PropertyRef Name="UnrealizedStrengthsId" />
     </Key>
-    <Property Name="UnrealizedStrengthsId" Type="Int32" Nullable="false" />
+    <Property Name="UnrealizedStrengthsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="StrengthId" Type="Int32" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -100,7 +144,7 @@
     <Key>
       <PropertyRef Name="EmployeeWeaknessId" />
     </Key>
-    <Property Name="EmployeeWeaknessId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeWeaknessId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="StrengthId" Type="Int32" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -172,13 +216,13 @@
     <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_MST_City_Master" Relationship="Self.FK__tbl_MST_C__Compu__3F466844" FromRole="tbl_MST_Country_Master" ToRole="tbl_MST_City_Master" />
     <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_MST_C__Compu__45F365D3" FromRole="tbl_MST_Country_Master" ToRole="tbl_MST_Company" />
-    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_REG_E__Count__74AE54BC" FromRole="tbl_MST_Country_Master" ToRole="tbl_REG_Employee_Registration" />
+    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_REG_E__Count__0B27A5C0" FromRole="tbl_MST_Country_Master" ToRole="tbl_REG_Employee_Registration" />
   </EntityType>
   <EntityType Name="tbl_MST_Gender_Master">
     <Key>
       <PropertyRef Name="GenderId" />
     </Key>
-    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Biological" Type="Boolean" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -187,7 +231,7 @@
     <Property Name="LastChanged_By" Type="Int32" />
     <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
     <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_REG_E__Gende__75A278F5" FromRole="tbl_MST_Gender_Master" ToRole="tbl_REG_Employee_Registration" />
+    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_REG_E__Gende__0C1BC9F9" FromRole="tbl_MST_Gender_Master" ToRole="tbl_REG_Employee_Registration" />
   </EntityType>
   <EntityType Name="tbl_MST_Goal_Master">
     <Key>
@@ -224,7 +268,7 @@
     <Key>
       <PropertyRef Name="InterestId" />
     </Key>
-    <Property Name="InterestId" Type="Int32" Nullable="false" />
+    <Property Name="InterestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Encoded_By" Type="Int32" Nullable="false" />
@@ -291,7 +335,7 @@
     <Property Name="Other_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ProfilePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="GenderId" Type="Int32" />
-    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" />
     <Property Name="CountryId" Type="Int32" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Encoded_By" Type="Int32" Nullable="false" />
@@ -301,15 +345,29 @@
     <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="FirstLogIn" Type="Boolean" />
     <Property Name="CompanyPosition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Emplo__269AB60B" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
     <NavigationProperty Name="tbl_EMP_Interest" Relationship="Self.FK__tbl_EMP_I__Emplo__7D98A078" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Interest" />
     <NavigationProperty Name="tbl_EMP_Learned_Behaviors" Relationship="Self.FK__tbl_EMP_L__Emplo__75F77EB0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Learned_Behaviors" />
     <NavigationProperty Name="tbl_EMP_Realized_Strengths" Relationship="Self.FK__tbl_EMP_R__Emplo__7226EDCC" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Realized_Strengths" />
+    <NavigationProperty Name="tbl_EMP_TISE" Relationship="Self.FK__tbl_EMP_T__Emplo__3D7E1B63" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_TISE" />
     <NavigationProperty Name="tbl_EMP_Unrealized_Strengths" Relationship="Self.FK__tbl_EMP_U__Emplo__6E565CE8" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Unrealized_Strengths" />
     <NavigationProperty Name="tbl_EMP_Weakness" Relationship="Self.FK__tbl_EMP_W__Emplo__79C80F94" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Weakness" />
     <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_REG_E__Compa__0D0FEE32" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Company" />
     <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_REG_E__Count__0B27A5C0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Country_Master" />
     <NavigationProperty Name="tbl_MST_Gender_Master" Relationship="Self.FK__tbl_REG_E__Gende__0C1BC9F9" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Gender_Master" />
-    <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="WWAModel.FK__tbl_EMP_D__Emplo__269AB60B" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
+  </EntityType>
+  <EntityType Name="tbl_Results">
+    <Key>
+      <PropertyRef Name="ResultsId" />
+    </Key>
+    <Property Name="ResultsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResultDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Encoded_By" Type="Int32" Nullable="false" />
+    <Property Name="Encoded_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastChanged_By" Type="Int32" />
+    <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
+    <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK__tbl_CMP_G__Compa__0169315C">
     <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="1" />
@@ -356,6 +414,18 @@
       </Principal>
       <Dependent Role="tbl_CMP_Values">
         <PropertyRef Name="ValueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_D__Emplo__269AB60B">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_DailyCheckIn">
+        <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -428,6 +498,18 @@
       </Principal>
       <Dependent Role="tbl_EMP_Realized_Strengths">
         <PropertyRef Name="StrengthId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_EMP_T__Emplo__3D7E1B63">
+    <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+    <End Role="tbl_EMP_TISE" Type="Self.tbl_EMP_TISE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_REG_Employee_Registration">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tbl_EMP_TISE">
+        <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -527,7 +609,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbl_REG_E__Count__74AE54BC">
+  <Association Name="FK__tbl_REG_E__Count__0B27A5C0">
     <End Role="tbl_MST_Country_Master" Type="Self.tbl_MST_Country_Master" Multiplicity="0..1" />
     <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
     <ReferentialConstraint>
@@ -539,7 +621,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbl_REG_E__Gende__75A278F5">
+  <Association Name="FK__tbl_REG_E__Gende__0C1BC9F9">
     <End Role="tbl_MST_Gender_Master" Type="Self.tbl_MST_Gender_Master" Multiplicity="0..1" />
     <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="*" />
     <ReferentialConstraint>
@@ -554,9 +636,11 @@
   <EntityContainer Name="WWAEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tbl_CMP_Goals" EntityType="Self.tbl_CMP_Goals" />
     <EntitySet Name="tbl_CMP_Values" EntityType="Self.tbl_CMP_Values" />
+    <EntitySet Name="tbl_EMP_DailyCheckIn" EntityType="Self.tbl_EMP_DailyCheckIn" />
     <EntitySet Name="tbl_EMP_Interest" EntityType="Self.tbl_EMP_Interest" />
     <EntitySet Name="tbl_EMP_Learned_Behaviors" EntityType="Self.tbl_EMP_Learned_Behaviors" />
     <EntitySet Name="tbl_EMP_Realized_Strengths" EntityType="Self.tbl_EMP_Realized_Strengths" />
+    <EntitySet Name="tbl_EMP_TISE" EntityType="Self.tbl_EMP_TISE" />
     <EntitySet Name="tbl_EMP_Unrealized_Strengths" EntityType="Self.tbl_EMP_Unrealized_Strengths" />
     <EntitySet Name="tbl_EMP_Weakness" EntityType="Self.tbl_EMP_Weakness" />
     <EntitySet Name="tbl_MST_City_Master" EntityType="Self.tbl_MST_City_Master" />
@@ -569,6 +653,7 @@
     <EntitySet Name="tbl_MST_Strength_Master" EntityType="Self.tbl_MST_Strength_Master" />
     <EntitySet Name="tbl_MST_Value_Master" EntityType="Self.tbl_MST_Value_Master" />
     <EntitySet Name="tbl_REG_Employee_Registration" EntityType="Self.tbl_REG_Employee_Registration" />
+    <EntitySet Name="tbl_Results" EntityType="Self.tbl_Results" />
     <AssociationSet Name="FK__tbl_CMP_G__Compa__0169315C" Association="Self.FK__tbl_CMP_G__Compa__0169315C">
       <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
       <End Role="tbl_CMP_Goals" EntitySet="tbl_CMP_Goals" />
@@ -584,6 +669,10 @@
     <AssociationSet Name="FK__tbl_CMP_V__Value__062DE679" Association="Self.FK__tbl_CMP_V__Value__062DE679">
       <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
       <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_D__Emplo__269AB60B" Association="Self.FK__tbl_EMP_D__Emplo__269AB60B">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
     </AssociationSet>
     <AssociationSet Name="FK__tbl_EMP_I__Emplo__7D98A078" Association="Self.FK__tbl_EMP_I__Emplo__7D98A078">
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
@@ -608,6 +697,10 @@
     <AssociationSet Name="FK__tbl_EMP_R__Stren__731B1205" Association="Self.FK__tbl_EMP_R__Stren__731B1205">
       <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
       <End Role="tbl_EMP_Realized_Strengths" EntitySet="tbl_EMP_Realized_Strengths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_EMP_T__Emplo__3D7E1B63" Association="Self.FK__tbl_EMP_T__Emplo__3D7E1B63">
+      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
+      <End Role="tbl_EMP_TISE" EntitySet="tbl_EMP_TISE" />
     </AssociationSet>
     <AssociationSet Name="FK__tbl_EMP_U__Emplo__6E565CE8" Association="Self.FK__tbl_EMP_U__Emplo__6E565CE8">
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
@@ -637,15 +730,15 @@
       <End Role="tbl_MST_IndustryType_Master" EntitySet="tbl_MST_IndustryType_Master" />
       <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_REG_E__Compa__76969D2E" Association="Self.FK__tbl_REG_E__Compa__76969D2E">
+    <AssociationSet Name="FK__tbl_REG_E__Compa__0D0FEE32" Association="Self.FK__tbl_REG_E__Compa__0D0FEE32">
       <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_REG_E__Count__74AE54BC" Association="Self.FK__tbl_REG_E__Count__74AE54BC">
+    <AssociationSet Name="FK__tbl_REG_E__Count__0B27A5C0" Association="Self.FK__tbl_REG_E__Count__0B27A5C0">
       <End Role="tbl_MST_Country_Master" EntitySet="tbl_MST_Country_Master" />
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_REG_E__Gende__75A278F5" Association="Self.FK__tbl_REG_E__Gende__75A278F5">
+    <AssociationSet Name="FK__tbl_REG_E__Gende__0C1BC9F9" Association="Self.FK__tbl_REG_E__Gende__0C1BC9F9">
       <End Role="tbl_MST_Gender_Master" EntitySet="tbl_MST_Gender_Master" />
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
     </AssociationSet>
@@ -665,6 +758,10 @@
     <FunctionImport Name="procWWA_CMP_Values_Get">
       <Parameter Name="CompanyValuesId" Mode="In" Type="Int32" />
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get">
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">
@@ -761,6 +858,10 @@
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="procWWA_REG_Employee_GetBy_Company">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
     <FunctionImport Name="procWWA_REG_Employee_Registration_Pagewise_Get">
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Phone_Number" Mode="In" Type="String" />
@@ -770,44 +871,5 @@
       <Parameter Name="DateFrom" Mode="In" Type="String" />
       <Parameter Name="DateTo" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="tbl_EMP_DailyCheckIn" EntityType="WWAModel.tbl_EMP_DailyCheckIn" />
-    <AssociationSet Name="FK__tbl_EMP_D__Emplo__269AB60B" Association="WWAModel.FK__tbl_EMP_D__Emplo__269AB60B">
-      <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
-      <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
-    </AssociationSet>
-    <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get">
-      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-      <Parameter Name="Active" Mode="In" Type="Boolean" />
-    </FunctionImport>
   </EntityContainer>
-  <EntityType Name="tbl_EMP_DailyCheckIn">
-    <Key>
-      <PropertyRef Name="DailyCheckInId" />
-    </Key>
-    <Property Name="DailyCheckInId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-    <Property Name="EnergyAtWork" Type="Int32" />
-    <Property Name="FocusAtWork" Type="Int32" />
-    <Property Name="PositiveEmotions" Type="Int32" />
-    <Property Name="NegativeEmotions" Type="Int32" />
-    <Property Name="Active" Type="Boolean" Nullable="false" />
-    <Property Name="Encoded_By" Type="Int32" Nullable="false" />
-    <Property Name="Encoded_Date" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="LastChanged_By" Type="Int32" />
-    <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
-    <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="WWAModel.FK__tbl_EMP_D__Emplo__269AB60B" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
-  </EntityType>
-  <Association Name="FK__tbl_EMP_D__Emplo__269AB60B">
-    <End Type="WWAModel.tbl_REG_Employee_Registration" Role="tbl_REG_Employee_Registration" Multiplicity="1" />
-    <End Type="WWAModel.tbl_EMP_DailyCheckIn" Role="tbl_EMP_DailyCheckIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_REG_Employee_Registration">
-        <PropertyRef Name="EmployeeId" />
-      </Principal>
-      <Dependent Role="tbl_EMP_DailyCheckIn">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

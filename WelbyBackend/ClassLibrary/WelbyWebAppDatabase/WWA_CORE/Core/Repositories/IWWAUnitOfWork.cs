@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WWA_CORE.Core.Repositories.Algo;
 using WWA_CORE.Core.Repositories.Company;
 using WWA_CORE.Core.Repositories.Employee;
 using WWA_CORE.Core.Repositories.Masters;
@@ -31,6 +32,9 @@ namespace WWA_CORE.Core.Repositories
         IEmployeeWeaknessRepository EmployeeWeakness { get; }
         ICompanyGoalsRepository CompanyGoals { get; }
         ICompanyValuesRepository CompanyValues { get; }
+        IDailyCheckInRepository DailyCheckIn { get; }
+        ITiseRepository Tise { get; }
+        IResultsRepository Results { get; }
 
         GlobalFunctions GlobalFunctions { get; set; }
         DbContextTransaction Transaction { get; }

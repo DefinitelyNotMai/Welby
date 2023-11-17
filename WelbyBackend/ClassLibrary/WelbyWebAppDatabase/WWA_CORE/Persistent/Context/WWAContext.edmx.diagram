@@ -4,44 +4,49 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0d363356aa2c49ee9fde710ebbd00b3a" Name="Diagram1">
-        <EntityTypeShape EntityType="WWAModel.tbl_CMP_Goals" Width="1.5" PointX="8.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_CMP_Values" Width="1.5" PointX="11.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Interest" Width="1.5" PointX="16.5" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Learned_Behaviors" Width="1.5" PointX="19.5" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Realized_Strengths" Width="1.5" PointX="16.5" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Unrealized_Strengths" Width="1.5" PointX="16.5" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Weakness" Width="1.5" PointX="19.5" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_City_Master" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Company" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Country_Master" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Gender_Master" Width="1.5" PointX="12" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Goal_Master" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_IndustryType_Master" Width="1.5" PointX="3.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Interest_Master" Width="1.5" PointX="14.25" PointY="22" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Strength_Master" Width="1.5" PointX="14.25" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_MST_Value_Master" Width="1.5" PointX="9" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WWAModel.tbl_REG_Employee_Registration" Width="1.5" PointX="14.25" PointY="13.5" IsExpanded="true" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__Compa__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__GoalI__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Compa__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Value__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Emplo__0E6E26BF" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Inter__0F624AF8" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Emplo__01142BA1" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Stren__02084FDA" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Emplo__7D439ABD" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Stren__7E37BEF6" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Emplo__797309D9" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Stren__7A672E12" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Emplo__04E4BC85" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Stren__05D8E0BE" ManuallyRouted="false" />
+      <Diagram DiagramId="fa4caaf43c8144eba92e7001e9706bbb" Name="Diagram1" ZoomLevel="36">
+        <EntityTypeShape EntityType="WWAModel.tbl_CMP_Goals" Width="1.5" PointX="8.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_CMP_Values" Width="1.5" PointX="11.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_DailyCheckIn" Width="1.5" PointX="16.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Interest" Width="1.5" PointX="16.5" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Learned_Behaviors" Width="1.5" PointX="19.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Realized_Strengths" Width="1.5" PointX="19.5" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_TISE" Width="1.5" PointX="16.5" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Unrealized_Strengths" Width="1.5" PointX="19.5" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_EMP_Weakness" Width="1.5" PointX="16.5" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_City_Master" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Company" Width="1.5" PointX="6" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Country_Master" Width="1.5" PointX="0.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Gender_Master" Width="1.5" PointX="12" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Goal_Master" Width="1.5" PointX="6" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_IndustryType_Master" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Interest_Master" Width="1.5" PointX="14.25" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Strength_Master" Width="1.5" PointX="17.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_MST_Value_Master" Width="1.5" PointX="9" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_REG_Employee_Registration" Width="1.5" PointX="14.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WWAModel.tbl_Results" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__Compa__0169315C" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_G__GoalI__025D5595" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Compa__0539C240" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_CMP_V__Value__062DE679" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_D__Emplo__269AB60B" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Emplo__7D98A078" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_I__Inter__7E8CC4B1" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Emplo__75F77EB0" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_L__Stren__76EBA2E9" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Emplo__7226EDCC" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_R__Stren__731B1205" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_T__Emplo__3D7E1B63" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Emplo__6E565CE8" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_U__Stren__6F4A8121" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Emplo__79C80F94" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_EMP_W__Stren__7ABC33CD" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Compu__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Compu__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="WWAModel.FK__tbl_MST_C__Indus__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Compa__76969D2E" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Count__74AE54BC" ManuallyRouted="false" />
-        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Gende__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Compa__0D0FEE32" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Count__0B27A5C0" ManuallyRouted="false" />
+        <AssociationConnector Association="WWAModel.FK__tbl_REG_E__Gende__0C1BC9F9" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

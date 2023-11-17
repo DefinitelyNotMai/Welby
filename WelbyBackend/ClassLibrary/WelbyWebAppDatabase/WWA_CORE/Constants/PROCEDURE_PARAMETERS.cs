@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WWA_CORE.Persistent.ViewModel.Registration;
 
 namespace WWA_CORE.Constants
 {
@@ -16,10 +17,23 @@ namespace WWA_CORE.Constants
         public const string PARA_COMMON_ACTIVE = "@Active";
         #endregion
 
+        #region ALGO
+        public const string PARA_EMP_DAILYCHECKIN_GET_EMPLOYEEID = "@EmployeeId";
+        public const string PARA_EMP_TISE_GET_EMPLOYEEID = "@EmployeeId";
+
+        public const string PARA_GET_RESULTID = "@ResultId";
+
+        #endregion
+
         #region REGISTRATION
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMPLOYEEID = "@EmployeeId";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_PHONE_NUMBER = "@Phone_Number";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS = "@Email";
+
+        public const string PARA_REG_EMPLOYEE_REGISTRATION_GET_COMPANYID = "@CompanyId";
+
+        public const string PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID = "@EmployeeId";
+
         #endregion
 
         #region MASTERS
@@ -87,13 +101,15 @@ namespace WWA_CORE.Constants
         public const string PARA_SSA_SYSTEM_GROUP_CONTROL_MAPPING_MAPPINGID = "@MappingId";
         public const string PARA_SSA_SYSTEM_GROUP_CONTROL_MAPPING_CONTROLID = "@ControlId";
 
+        public const string PARA_SSA_SYSTEM_USERS_USER_NAME = "@User_Name";
+        public const string PARA_SSA_SYSTEM_USERS_PASSWORD = "@Password";
+
         /**
         public const string PARA_SSA_SYSTEM_USERS_GROUPID = "@GroupId";
         public const string PARA_SSA_SYSTEM_USERS_USERID = "@UserId";
         public const string PARA_SSA_SYSTEM_USERS_BRANCHID = "@BranchId";
         public const string PARA_SSA_SYSTEM_USERS_EMP_NO = "@Emp_No";
-        public const string PARA_SSA_SYSTEM_USERS_USER_NAME = "@User_Name";
-        public const string PARA_SSA_SYSTEM_USERS_PASSWORD = "@Password";
+        
         public const string PARA_SSA_SYSTEM_USERS_ACCOUNT_LOGS_USERID = "@UserId";
         public const string PARA_SSA_SYSTEM_USERS_ACCOUNT_LOGS_RECORDID = "@RecordId";
         public const string PARA_SSA_SYSTEM_USERS_SYSTEM_LOGS_EMP_NO = "@Emp_No";

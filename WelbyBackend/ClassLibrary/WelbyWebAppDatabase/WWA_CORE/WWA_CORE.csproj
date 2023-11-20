@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C6E55878-E998-4893-8FD9-3718CB3339C2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WWA_CORE</RootNamespace>
+    <AssemblyName>WWA_CORE</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>..\..\CoreReferences\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Enterprise.Framework">
+      <HintPath>..\..\CoreReferences\CrystalDecisions.Enterprise.Framework.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore">
+      <HintPath>..\..\CoreReferences\CrystalDecisions.Enterprise.InfoStore.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>..\..\CoreReferences\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>..\..\CoreReferences\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="stdole, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CoreReferences\stdole.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls">
+      <HintPath>..\..\CoreReferences\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI">
+      <HintPath>..\..\CoreReferences\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikCommon">
+      <HintPath>..\..\CoreReferences\TelerikCommon.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\PROCEDURE_NAME.cs" />
+    <Compile Include="Constants\PROCEDURE_PARAMETERS.cs" />
+    <Compile Include="Constants\REPORT_PARAMETER.cs" />
+    <Compile Include="Core\Repositories\Company\ICompanyGoalsRepository.cs" />
+    <Compile Include="Core\Repositories\Company\ICompanyValuesRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeInterestRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeLearnedBehaviorsRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeRealizedStrengthsRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeUnrealizedStrengthsRepository.cs" />
+    <Compile Include="Core\Repositories\Employee\IEmployeeWeaknessRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\ICompanyMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\ICityMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\IIndustryTypeMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\ICountryMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\IGenderMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\IGoalMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\IInterestMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\IStrengthMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Masters\IValueMasterRepository.cs" />
+    <Compile Include="Core\Repositories\Registration\IEmployeeRegistrationRepository.cs" />
+    <Compile Include="Core\Repositories\IWWAUnitOfWork.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="Persistent\Context\tbl_CMP_Goals.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_CMP_Values.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Interest.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Learned_Behaviors.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Realized_Strengths.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Unrealized_Strengths.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Weakness.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_City_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Company.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Country_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Gender_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Goal_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_IndustryType_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Interest_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Strength_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Value_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_REG_Employee_Registration.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\WWAContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WWAContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\WWAContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\WWAContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Resource\Company\CompanyGoalsResource.cs" />
+    <Compile Include="Persistent\Resource\Company\CompanyValuesResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeInterestsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeLearnedBehaviorsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeRealizedStrengthsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeUnrealizedStrengthsResource.cs" />
+    <Compile Include="Persistent\Resource\Employee\EmployeeWeaknessResource.cs" />
+    <Compile Include="Persistent\Resource\Masters\CityMasterResource.cs" />
+    <Compile Include="Persistent\Resource\Masters\CompanyMasterResource.cs" />
+    <Compile Include="Persistent\Resource\Masters\CountryMasterResource.cs" />
+    <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
+    <Compile Include="Persistent\Service\Company\CompanyGoalsService.cs" />
+    <Compile Include="Persistent\Service\Company\CompanyValuesService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeInterestService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeLearnedBehaviorsService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeRealizedStrengthsService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeUnrealizedStrengthsService.cs" />
+    <Compile Include="Persistent\Service\Employee\EmployeeWeaknessService.cs" />
+    <Compile Include="Persistent\Service\Masters\CityMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\IndustryTypeMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\CompanyMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\CountryMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\GenderMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\GoalMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\InterestMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\StrengthMasterService.cs" />
+    <Compile Include="Persistent\Service\Masters\ValueMasterService.cs" />
+    <Compile Include="Persistent\Service\Registration\EmployeeRegistrationService.cs" />
+    <Compile Include="Persistent\ViewModel\Company\CompanyGoalsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Company\CompanyValuesViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeInterestViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeLearnedBehaviorsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeRealizedStrengthsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeUnrealizedStrengthsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Employee\EmployeeWeaknessViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\CityMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\IndustryTypeMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\CompanyMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\CountryMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\GenderMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\GoalMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\InterestMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\StrengthMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Masters\ValueMasterViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Registration\EmployeeRegistrationViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\CommonSchema.cs" />
+    <Compile Include="Utilities\EnumClass.cs" />
+    <Compile Include="Utilities\GlobalFunctions.cs" />
+    <Compile Include="Utilities\IQueryableExtensions.cs" />
+    <Compile Include="Utilities\IQueryObject.cs" />
+    <Compile Include="Utilities\KeyValuePair.cs" />
+    <Compile Include="Utilities\PredicateBuilder.cs" />
+    <Compile Include="Utilities\QueryResult.cs" />
+    <Compile Include="Utilities\SqlQueryObject.cs" />
+    <Compile Include="Utilities\WWA_COREDefaults.cs" />
+    <Compile Include="WWAUnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="obj\Debug\WWA_CORE.csproj.AssemblyReference.cache" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="Persistent\Context\WWAContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WWAContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Persistent\Context\WWAContext.edmx.diagram">
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Persistent\Resource\Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Persistent\Context\WWAContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+      <LastGenOutput>WWAContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Persistent\Context\WWAContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+      <LastGenOutput>WWAContext.cs</LastGenOutput>
+    </Content>
+    <Content Include="WWA.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WWA_log.ldf">
+      <DependentUpon>WWA.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

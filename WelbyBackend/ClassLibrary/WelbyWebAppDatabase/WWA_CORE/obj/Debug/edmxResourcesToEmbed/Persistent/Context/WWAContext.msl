@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WWAModelStoreContainer" CdmEntityContainer="WWAEntities">
+    <EntitySetMapping Name="tbl_CMP_Goals">
+      <EntityTypeMapping TypeName="WWAModel.tbl_CMP_Goals">
+        <MappingFragment StoreEntitySet="tbl_CMP_Goals">
+          <ScalarProperty Name="CompanyGoalsId" ColumnName="CompanyGoalsId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="GoalId" ColumnName="GoalId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_CMP_Values">
+      <EntityTypeMapping TypeName="WWAModel.tbl_CMP_Values">
+        <MappingFragment StoreEntitySet="tbl_CMP_Values">
+          <ScalarProperty Name="CompanyValuesId" ColumnName="CompanyValuesId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="ValueId" ColumnName="ValueId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_EMP_Interest">
+      <EntityTypeMapping TypeName="WWAModel.tbl_EMP_Interest">
+        <MappingFragment StoreEntitySet="tbl_EMP_Interest">
+          <ScalarProperty Name="EmployeeInterestId" ColumnName="EmployeeInterestId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="InterestId" ColumnName="InterestId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_EMP_Learned_Behaviors">
+      <EntityTypeMapping TypeName="WWAModel.tbl_EMP_Learned_Behaviors">
+        <MappingFragment StoreEntitySet="tbl_EMP_Learned_Behaviors">
+          <ScalarProperty Name="LearnedBehaviorsId" ColumnName="LearnedBehaviorsId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="StrengthId" ColumnName="StrengthId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_EMP_Realized_Strengths">
+      <EntityTypeMapping TypeName="WWAModel.tbl_EMP_Realized_Strengths">
+        <MappingFragment StoreEntitySet="tbl_EMP_Realized_Strengths">
+          <ScalarProperty Name="RealizedStrengthsId" ColumnName="RealizedStrengthsId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="StrengthId" ColumnName="StrengthId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_EMP_Unrealized_Strengths">
+      <EntityTypeMapping TypeName="WWAModel.tbl_EMP_Unrealized_Strengths">
+        <MappingFragment StoreEntitySet="tbl_EMP_Unrealized_Strengths">
+          <ScalarProperty Name="UnrealizedStrengthsId" ColumnName="UnrealizedStrengthsId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="StrengthId" ColumnName="StrengthId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_EMP_Weakness">
+      <EntityTypeMapping TypeName="WWAModel.tbl_EMP_Weakness">
+        <MappingFragment StoreEntitySet="tbl_EMP_Weakness">
+          <ScalarProperty Name="EmployeeWeaknessId" ColumnName="EmployeeWeaknessId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="StrengthId" ColumnName="StrengthId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_City_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_City_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_City_Master">
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_Company">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_Company">
+        <MappingFragment StoreEntitySet="tbl_MST_Company">
+          <ScalarProperty Name="CompanySize" ColumnName="CompanySize" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Vision" ColumnName="Vision" />
+          <ScalarProperty Name="Mission" ColumnName="Mission" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="IndustryTypeId" ColumnName="IndustryTypeId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+          <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_Country_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_Country_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_Country_Master">
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Flag_Image" ColumnName="Flag_Image" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_Gender_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_Gender_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_Gender_Master">
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Biological" ColumnName="Biological" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_Goal_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_Goal_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_Goal_Master">
+          <ScalarProperty Name="GoalId" ColumnName="GoalId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DurationFrom" ColumnName="DurationFrom" />
+          <ScalarProperty Name="DurationTo" ColumnName="DurationTo" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_IndustryType_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_IndustryType_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_IndustryType_Master">
+          <ScalarProperty Name="IndustryTypeId" ColumnName="IndustryTypeId" />
+          <ScalarProperty Name="Industry_Name" ColumnName="Industry_Name" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_Interest_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_Interest_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_Interest_Master">
+          <ScalarProperty Name="InterestId" ColumnName="InterestId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_Strength_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_Strength_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_Strength_Master">
+          <ScalarProperty Name="StrengthId" ColumnName="StrengthId" />
+          <ScalarProperty Name="Strength" ColumnName="Strength" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_MST_Value_Master">
+      <EntityTypeMapping TypeName="WWAModel.tbl_MST_Value_Master">
+        <MappingFragment StoreEntitySet="tbl_MST_Value_Master">
+          <ScalarProperty Name="ValueId" ColumnName="ValueId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_REG_Employee_Registration">
+      <EntityTypeMapping TypeName="WWAModel.tbl_REG_Employee_Registration">
+        <MappingFragment StoreEntitySet="tbl_REG_Employee_Registration">
+          <ScalarProperty Name="CompanyPosition" ColumnName="CompanyPosition" />
+          <ScalarProperty Name="FirstLogIn" ColumnName="FirstLogIn" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Linkedin" ColumnName="Linkedin" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="TikTok" ColumnName="TikTok" />
+          <ScalarProperty Name="Work" ColumnName="Work" />
+          <ScalarProperty Name="Connect" ColumnName="Connect" />
+          <ScalarProperty Name="Support" ColumnName="Support" />
+          <ScalarProperty Name="Other_Notes" ColumnName="Other_Notes" />
+          <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
+          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
+          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
+          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
+          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Realized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Realized_Strengths_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Unrealized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Unrealized_Strengths_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Weakness_Get" FunctionName="WWAModel.Store.procWWA_EMP_Weakness_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_City_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_City_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Login_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Login_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Country_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Country_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Gender_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Gender_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Goal_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Goal_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_IndustryType_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_IndustryType_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Interest_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Interest_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Strength_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Strength_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_By_CompanyId_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_By_CompanyId_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_By_CompanyId_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_By_CompanyId_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_By_EmployeeId_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_By_EmployeeId_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Goal_Master_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_MST_Goal_Master_Pagewise_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Pagewise_Get" />
+  </EntityContainerMapping>
+</Mapping>

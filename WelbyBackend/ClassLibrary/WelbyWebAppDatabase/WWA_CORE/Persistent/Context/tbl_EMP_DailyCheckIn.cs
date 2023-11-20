@@ -15,7 +15,8 @@ namespace WWA_CORE.Persistent.Context
     public partial class tbl_EMP_DailyCheckIn
     {
         public int DailyCheckInId { get; set; }
-        public int EmployeeId { get; set; }
+        public Nullable<int> EmployeeId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public Nullable<int> EnergyAtWork_int { get; set; }
         public string EnergyAtWork_value { get; set; }
         public Nullable<int> FocusAtWork_int { get; set; }
@@ -24,6 +25,7 @@ namespace WWA_CORE.Persistent.Context
         public string PositiveEmotions_value { get; set; }
         public Nullable<int> NegativeEmotions_int { get; set; }
         public string NegativeEmotions_value { get; set; }
+        public Nullable<int> Productivity { get; set; }
         public bool Active { get; set; }
         public int Encoded_By { get; set; }
         public System.DateTime Encoded_Date { get; set; }
@@ -31,6 +33,7 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
     
+        public virtual tbl_MST_Company tbl_MST_Company { get; set; }
         public virtual tbl_REG_Employee_Registration tbl_REG_Employee_Registration { get; set; }
     }
 }

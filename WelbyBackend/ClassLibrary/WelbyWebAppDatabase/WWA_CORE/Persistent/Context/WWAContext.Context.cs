@@ -108,17 +108,17 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_CMP_Values_Get", companyValuesIdParameter, companyIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> employeeId, Nullable<bool> active)
+        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> companyId, Nullable<bool> active)
         {
-            var employeeIdParameter = employeeId.HasValue ?
-                new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(int));
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", employeeIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", companyIdParameter, activeParameter);
         }
     
         public virtual int procWWA_EMP_Interest_By_EmployeeId_Get(Nullable<int> employeeId, Nullable<bool> active)
@@ -181,6 +181,19 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_Realized_Strengths_Get", realizedStrengthsIdParameter, employeeIdParameter, activeParameter);
         }
     
+        public virtual int procWWA_EMP_TISE_Get(Nullable<int> companyId, Nullable<bool> active)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_TISE_Get", companyIdParameter, activeParameter);
+        }
+    
         public virtual int procWWA_EMP_Unrealized_Strengths_Get(Nullable<int> unrealizedStrengthsId, Nullable<int> employeeId, Nullable<bool> active)
         {
             var unrealizedStrengthsIdParameter = unrealizedStrengthsId.HasValue ?
@@ -213,6 +226,19 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_Weakness_Get", employeeWeaknessIdParameter, employeeIdParameter, activeParameter);
+        }
+    
+        public virtual int procWWA_Get_Results(Nullable<int> resultsId, Nullable<bool> active)
+        {
+            var resultsIdParameter = resultsId.HasValue ?
+                new ObjectParameter("ResultsId", resultsId) :
+                new ObjectParameter("ResultsId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_Get_Results", resultsIdParameter, activeParameter);
         }
     
         public virtual int procWWA_MST_City_Master_Get(Nullable<int> cityId, Nullable<int> countryId, Nullable<bool> active)

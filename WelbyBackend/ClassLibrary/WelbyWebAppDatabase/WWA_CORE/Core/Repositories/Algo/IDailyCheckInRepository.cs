@@ -12,7 +12,8 @@ namespace WWA_CORE.Core.Repositories.Algo
         Task<DailyCheckInViewModel> AddDailyCheckIn(DailyCheckInViewModel dailyCheckInViewModel);
         Task<DailyCheckInViewModel> RemoveDailyCheckIn(DailyCheckInViewModel dailyCheckInViewModel);
         Task<DailyCheckInViewModel> ReturnDailyCheckIn(DailyCheckInViewModel dailyCheckInViewModel);
-
+        Task<DailyCheckInViewModel> UpdateDailyCheckIn(DailyCheckInViewModel dailyCheckInViewModel);
         Task<IEnumerable<DailyCheckInViewModel>> GetAllDailyCheckIn(DailyCheckInViewModel dailyCheckInViewModel);
+        
     }
 }

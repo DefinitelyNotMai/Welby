@@ -11,6 +11,7 @@ using WWA_CORE.Persistent.ViewModel.Algo;
 using WWA_CORE.Utilities;
 using System.Data;
 using System.Data.Entity;
+using WWA_CORE.Persistent.ViewModel.Employee;
 
 namespace WWA_CORE.Persistent.Service.Algo
 {
@@ -26,6 +27,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                 var rowToInsert = new tbl_EMP_DailyCheckIn
                 {
                     EmployeeId = dailyCheckInViewModel.EmployeeId,
+                    CompanyId = dailyCheckInViewModel.CompanyId,
                     FocusAtWork_int = dailyCheckInViewModel.FocusAtWork_int,
                     EnergyAtWork_int = dailyCheckInViewModel.EnergyAtWork_int,
                     PositiveEmotions_int = dailyCheckInViewModel.PositiveEmotions_int,
@@ -35,6 +37,8 @@ namespace WWA_CORE.Persistent.Service.Algo
                     EnergyAtWork_value = dailyCheckInViewModel.EnergyAtWork_value,
                     PositiveEmotions_value = dailyCheckInViewModel.PositiveEmotions_value,
                     NegativeEmotions_value = dailyCheckInViewModel.NegativeEmotions_value,
+                    Productivity = dailyCheckInViewModel.Productivity,
+
 
                     Active = true,
                     Encoded_By = dailyCheckInViewModel.Encoded_By,
@@ -64,7 +68,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_DAILYCHECKIN_GET_EMPLOYEEID, dailyCheckInViewModel.EmployeeId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_COMPANYID, dailyCheckInViewModel.CompanyId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, dailyCheckInViewModel.Active)
                 }
             };
@@ -74,6 +78,7 @@ namespace WWA_CORE.Persistent.Service.Algo
             {
                 DailyCheckInId = Convert.ToInt32(row["DailyCheckInId"]),
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
                 EnergyAtWork_int = Convert.ToInt32(row["EnergyAtWork_int"]),
                 FocusAtWork_int = Convert.ToInt32(row["FocusAtWork_int"]),
                 PositiveEmotions_int = Convert.ToInt32(row["PositiveEmotions_int"]),
@@ -83,6 +88,9 @@ namespace WWA_CORE.Persistent.Service.Algo
                 FocusAtWork_value = Convert.ToString(row["FocusAtWork_value"]),
                 PositiveEmotions_value = Convert.ToString(row["PositiveEmotions_value"]),
                 NegativeEmotions_value = Convert.ToString(row["NegativeEmotions_value"]),
+
+                CompanyName = Convert.ToString(row["CompanyName"]),
+                EmployeeName = Convert.ToString(row["EmployeeName"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
@@ -144,6 +152,36 @@ namespace WWA_CORE.Persistent.Service.Algo
             context.Dispose();
             globalFunctions.Dispose();
 
+            return dailyCheckInViewModel;
+        }
+
+        public async Task<DailyCheckInViewModel> UpdateDailyCheckIn(DailyCheckInViewModel dailyCheckInViewModel)
+        {
+            var context = new WWAEntities();
+            var globalFunctions = new GlobalFunctions();
+
+            try
+            {
+                var RowToUpdate = await context.tbl_EMP_DailyCheckIn.FirstOrDefaultAsync(c => c.DailyCheckInId == dailyCheckInViewModel.DailyCheckInId);
+
+                RowToUpdate.Productivity = dailyCheckInViewModel.Productivity;
+
+                RowToUpdate.Active = dailyCheckInViewModel.Active;
+                RowToUpdate.Computer_Name = dailyCheckInViewModel.Computer_Name;
+                RowToUpdate.LastChanged_By = dailyCheckInViewModel.Encoded_By;
+                RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();
+
+                await context.SaveChangesAsync();
+                dailyCheckInViewModel.Message_Code = $"{WWA_COREDefaults.DEFAULT_SUCCESS_UPDATE_MESSAGE_CODE}";
+
+            } 
+            catch(Exception ex)
+            {
+                dailyCheckInViewModel.Message_Code = $"{ex.Message} \n {ex.InnerException.ToString() ?? ""}";
+            }
+
+            context.Dispose();
+            globalFunctions.Dispose();
             return dailyCheckInViewModel;
         }
     }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_CMP_Goals">
           <Key>
             <PropertyRef Name="CompanyGoalsId" />
@@ -38,7 +38,8 @@
             <PropertyRef Name="DailyCheckInId" />
           </Key>
           <Property Name="DailyCheckInId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
           <Property Name="EnergyAtWork_int" Type="int" />
           <Property Name="EnergyAtWork_value" Type="nvarchar" MaxLength="50" />
           <Property Name="FocusAtWork_int" Type="int" />
@@ -47,6 +48,7 @@
           <Property Name="PositiveEmotions_value" Type="nvarchar" MaxLength="50" />
           <Property Name="NegativeEmotions_int" Type="int" />
           <Property Name="NegativeEmotions_value" Type="nvarchar" MaxLength="50" />
+          <Property Name="Productivity" Type="int" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Encoded_By" Type="int" Nullable="false" />
           <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
@@ -102,6 +104,7 @@
           </Key>
           <Property Name="TiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
           <Property Name="Factor_1" Type="float" />
           <Property Name="Factor_2" Type="float" />
           <Property Name="Factor_3" Type="float" />
@@ -378,8 +381,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_D__Emplo__269AB60B">
-          <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+        <Association Name="FK__tbl_EMP_D__Compa__62AFA012">
+          <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="0..1" />
+          <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_MST_Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="tbl_EMP_DailyCheckIn">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_EMP_D__Emplo__61BB7BD9">
+          <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="0..1" />
           <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_REG_Employee_Registration">
@@ -459,6 +474,18 @@
             </Principal>
             <Dependent Role="tbl_EMP_Realized_Strengths">
               <PropertyRef Name="StrengthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_EMP_T__Compa__4BCC3ABA">
+          <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="0..1" />
+          <End Role="tbl_EMP_TISE" Type="Self.tbl_EMP_TISE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_MST_Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="tbl_EMP_TISE">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -613,7 +640,7 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_DailyCheckIn_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Interest_By_EmployeeId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -634,6 +661,10 @@
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
+        <Function Name="procWWA_EMP_TISE_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
         <Function Name="procWWA_EMP_Unrealized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UnrealizedStrengthsId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
@@ -642,6 +673,10 @@
         <Function Name="procWWA_EMP_Weakness_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmployeeWeaknessId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="procWWA_Get_Results" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ResultsId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_City_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -760,7 +795,11 @@
             <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
             <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_D__Emplo__269AB60B" Association="Self.FK__tbl_EMP_D__Emplo__269AB60B">
+          <AssociationSet Name="FK__tbl_EMP_D__Compa__62AFA012" Association="Self.FK__tbl_EMP_D__Compa__62AFA012">
+            <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+            <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_EMP_D__Emplo__61BB7BD9" Association="Self.FK__tbl_EMP_D__Emplo__61BB7BD9">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
             <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
           </AssociationSet>
@@ -787,6 +826,10 @@
           <AssociationSet Name="FK__tbl_EMP_R__Stren__731B1205" Association="Self.FK__tbl_EMP_R__Stren__731B1205">
             <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
             <End Role="tbl_EMP_Realized_Strengths" EntitySet="tbl_EMP_Realized_Strengths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_EMP_T__Compa__4BCC3ABA" Association="Self.FK__tbl_EMP_T__Compa__4BCC3ABA">
+            <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+            <End Role="tbl_EMP_TISE" EntitySet="tbl_EMP_TISE" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_EMP_T__Emplo__3D7E1B63" Association="Self.FK__tbl_EMP_T__Emplo__3D7E1B63">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
@@ -833,8 +876,7 @@
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -875,7 +917,8 @@
             <PropertyRef Name="DailyCheckInId" />
           </Key>
           <Property Name="DailyCheckInId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
           <Property Name="EnergyAtWork_int" Type="Int32" />
           <Property Name="EnergyAtWork_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FocusAtWork_int" Type="Int32" />
@@ -884,13 +927,15 @@
           <Property Name="PositiveEmotions_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NegativeEmotions_int" Type="Int32" />
           <Property Name="NegativeEmotions_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Productivity" Type="Int32" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="Encoded_By" Type="Int32" Nullable="false" />
           <Property Name="Encoded_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastChanged_By" Type="Int32" />
           <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
           <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_D__Emplo__269AB60B" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
+          <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_EMP_D__Compa__5EDF0F2E" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_MST_Company" />
+          <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_D__Emplo__5DEAEAF5" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
         </EntityType>
         <EntityType Name="tbl_EMP_Interest">
           <Key>
@@ -946,6 +991,7 @@
           </Key>
           <Property Name="TiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" />
           <Property Name="Factor_1" Type="Double" />
           <Property Name="Factor_2" Type="Double" />
           <Property Name="Factor_3" Type="Double" />
@@ -960,6 +1006,7 @@
           <Property Name="LastChanged_By" Type="Int32" />
           <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
           <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_EMP_T__Compa__4BCC3ABA" FromRole="tbl_EMP_TISE" ToRole="tbl_MST_Company" />
           <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_T__Emplo__3D7E1B63" FromRole="tbl_EMP_TISE" ToRole="tbl_REG_Employee_Registration" />
         </EntityType>
         <EntityType Name="tbl_EMP_Unrealized_Strengths">
@@ -1034,6 +1081,8 @@
           <Property Name="CompanySize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_CMP_Goals" Relationship="Self.FK__tbl_CMP_G__Compa__0169315C" FromRole="tbl_MST_Company" ToRole="tbl_CMP_Goals" />
           <NavigationProperty Name="tbl_CMP_Values" Relationship="Self.FK__tbl_CMP_V__Compa__0539C240" FromRole="tbl_MST_Company" ToRole="tbl_CMP_Values" />
+          <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Compa__5EDF0F2E" FromRole="tbl_MST_Company" ToRole="tbl_EMP_DailyCheckIn" />
+          <NavigationProperty Name="tbl_EMP_TISE" Relationship="Self.FK__tbl_EMP_T__Compa__4BCC3ABA" FromRole="tbl_MST_Company" ToRole="tbl_EMP_TISE" />
           <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_MST_C__Compu__45F365D3" FromRole="tbl_MST_Company" ToRole="tbl_MST_Country_Master" />
           <NavigationProperty Name="tbl_MST_IndustryType_Master" Relationship="Self.FK__tbl_MST_C__Indus__46E78A0C" FromRole="tbl_MST_Company" ToRole="tbl_MST_IndustryType_Master" />
           <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_REG_E__Compa__0D0FEE32" FromRole="tbl_MST_Company" ToRole="tbl_REG_Employee_Registration" />
@@ -1183,7 +1232,7 @@
           <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="FirstLogIn" Type="Boolean" />
           <Property Name="CompanyPosition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Emplo__269AB60B" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
+          <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Emplo__5DEAEAF5" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
           <NavigationProperty Name="tbl_EMP_Interest" Relationship="Self.FK__tbl_EMP_I__Emplo__7D98A078" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Interest" />
           <NavigationProperty Name="tbl_EMP_Learned_Behaviors" Relationship="Self.FK__tbl_EMP_L__Emplo__75F77EB0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Learned_Behaviors" />
           <NavigationProperty Name="tbl_EMP_Realized_Strengths" Relationship="Self.FK__tbl_EMP_R__Emplo__7226EDCC" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Realized_Strengths" />
@@ -1255,8 +1304,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_EMP_D__Emplo__269AB60B">
-          <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="1" />
+        <Association Name="FK__tbl_EMP_D__Compa__5EDF0F2E">
+          <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="0..1" />
+          <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_MST_Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="tbl_EMP_DailyCheckIn">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_EMP_D__Emplo__5DEAEAF5">
+          <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="0..1" />
           <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_REG_Employee_Registration">
@@ -1336,6 +1397,18 @@
             </Principal>
             <Dependent Role="tbl_EMP_Realized_Strengths">
               <PropertyRef Name="StrengthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_EMP_T__Compa__4BCC3ABA">
+          <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="0..1" />
+          <End Role="tbl_EMP_TISE" Type="Self.tbl_EMP_TISE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_MST_Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="tbl_EMP_TISE">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1508,7 +1581,11 @@
             <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
             <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_EMP_D__Emplo__269AB60B" Association="Self.FK__tbl_EMP_D__Emplo__269AB60B">
+          <AssociationSet Name="FK__tbl_EMP_D__Compa__5EDF0F2E" Association="Self.FK__tbl_EMP_D__Compa__5EDF0F2E">
+            <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+            <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_EMP_D__Emplo__5DEAEAF5" Association="Self.FK__tbl_EMP_D__Emplo__5DEAEAF5">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
             <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
           </AssociationSet>
@@ -1535,6 +1612,10 @@
           <AssociationSet Name="FK__tbl_EMP_R__Stren__731B1205" Association="Self.FK__tbl_EMP_R__Stren__731B1205">
             <End Role="tbl_MST_Strength_Master" EntitySet="tbl_MST_Strength_Master" />
             <End Role="tbl_EMP_Realized_Strengths" EntitySet="tbl_EMP_Realized_Strengths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_EMP_T__Compa__4BCC3ABA" Association="Self.FK__tbl_EMP_T__Compa__4BCC3ABA">
+            <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
+            <End Role="tbl_EMP_TISE" EntitySet="tbl_EMP_TISE" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_EMP_T__Emplo__3D7E1B63" Association="Self.FK__tbl_EMP_T__Emplo__3D7E1B63">
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
@@ -1599,7 +1680,7 @@
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get">
-            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">
@@ -1620,6 +1701,10 @@
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="procWWA_EMP_TISE_Get">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">
             <Parameter Name="UnrealizedStrengthsId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
@@ -1628,6 +1713,10 @@
           <FunctionImport Name="procWWA_EMP_Weakness_Get">
             <Parameter Name="EmployeeWeaknessId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_Get_Results">
+            <Parameter Name="ResultsId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_City_Master_Get">
@@ -1751,6 +1840,7 @@
               <MappingFragment StoreEntitySet="tbl_EMP_DailyCheckIn">
                 <ScalarProperty Name="DailyCheckInId" ColumnName="DailyCheckInId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="EnergyAtWork_int" ColumnName="EnergyAtWork_int" />
                 <ScalarProperty Name="EnergyAtWork_value" ColumnName="EnergyAtWork_value" />
                 <ScalarProperty Name="FocusAtWork_int" ColumnName="FocusAtWork_int" />
@@ -1759,6 +1849,7 @@
                 <ScalarProperty Name="PositiveEmotions_value" ColumnName="PositiveEmotions_value" />
                 <ScalarProperty Name="NegativeEmotions_int" ColumnName="NegativeEmotions_int" />
                 <ScalarProperty Name="NegativeEmotions_value" ColumnName="NegativeEmotions_value" />
+                <ScalarProperty Name="Productivity" ColumnName="Productivity" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
                 <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
@@ -1818,6 +1909,7 @@
               <MappingFragment StoreEntitySet="tbl_EMP_TISE">
                 <ScalarProperty Name="TiseId" ColumnName="TiseId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Factor_1" ColumnName="Factor_1" />
                 <ScalarProperty Name="Factor_2" ColumnName="Factor_2" />
                 <ScalarProperty Name="Factor_3" ColumnName="Factor_3" />
@@ -2070,8 +2162,10 @@
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Realized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Realized_Strengths_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_EMP_TISE_Get" FunctionName="WWAModel.Store.procWWA_EMP_TISE_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Unrealized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Unrealized_Strengths_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Weakness_Get" FunctionName="WWAModel.Store.procWWA_EMP_Weakness_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_Get_Results" FunctionName="WWAModel.Store.procWWA_Get_Results" />
           <FunctionImportMapping FunctionImportName="procWWA_MST_City_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_City_Master_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Login_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Login_Get" />
@@ -2101,7 +2195,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

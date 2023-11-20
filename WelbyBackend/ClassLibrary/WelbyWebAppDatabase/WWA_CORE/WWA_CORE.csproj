@@ -204,6 +204,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WWAContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Persistent\Resource\Algo\DailyCheckInResource.cs" />
     <Compile Include="Persistent\Resource\Company\CompanyGoalsResource.cs" />
     <Compile Include="Persistent\Resource\Company\CompanyValuesResource.cs" />
     <Compile Include="Persistent\Resource\Employee\EmployeeInterestsResource.cs" />

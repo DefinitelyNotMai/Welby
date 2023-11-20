@@ -18,8 +18,8 @@ namespace WWA_CORE.Constants
         #endregion
 
         #region ALGO
-        public const string PARA_EMP_DAILYCHECKIN_GET_EMPLOYEEID = "@EmployeeId";
-        public const string PARA_EMP_TISE_GET_EMPLOYEEID = "@EmployeeId";
+        public const string PARA_CMP_DAILYCHECKIN_GET_COMPANYID = "@CompanyId";
+        public const string PARA_CMP_TISE_GET_COMPANYID = "@CompanyId";
 
         public const string PARA_GET_RESULTID = "@ResultId";
 
@@ -52,8 +52,12 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_GENDER_MASTER_GET_BIOLOGICAL = "@Biological";
 
         public const string PARA_MST_GOAL_MASTER_GET_GOALID = "@GoalId";
+        public const string PARA_MST_GOAL_MASTER_GET_GOALTITLE = "@Title"; //PAGEWISE PARAM
+        public const string PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION = "@Description"; //PAGEWISE PARAM
 
         public const string PARA_MST_VALUE_MASTER_GET_VALUEID = "@ValueId";
+        public const string PARA_MST_VALUE_MASTER_GET_VALUETITLE = "@Title"; //PAGEWISE PARAM
+        public const string PARA_MST_VALUE_MASTER_GET_VALUEDESCRIPTION = "@Description"; //PAGEWISE PARAM
 
         public const string PARA_MST_INTEREST_MASTER_GET_INTERESTID = "@InterestId";
 

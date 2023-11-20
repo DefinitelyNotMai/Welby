@@ -51,11 +51,11 @@ namespace WWA_CORE.Persistent.Service.Masters
             return goalMasterViewModel;
         }
 
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalList(GoalMasterViewModel goalMasterViewModel)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals(GoalMasterViewModel goalMasterViewModel)
         {
             var query = new SqlQueryObject
             {
-                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_GET,
+                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_PAGEWISE_GET,
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
@@ -71,8 +71,53 @@ namespace WWA_CORE.Persistent.Service.Masters
                 GoalId = Convert.ToInt32(row["GoalId"]),
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
-                DurationFrom = Convert.ToDateTime(row["DurationFrom"]), 
-                DurationTo = Convert.ToDateTime(row["DurationTo"]),
+                DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
+                DurationTo = DBNull.Value != row["DurationTo"] ? (DateTime?)row["DurationTo"] : null,
+
+
+                Active = Convert.ToBoolean(row["Active"]),
+                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
+                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
+                Computer_Name = Convert.ToString(row["Computer_Name"]),
+                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
+                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
+                EncodedByName = "",
+                LastChangedByName = "",
+
+            }).ToList();
+            query.Dispose();
+            goalMasterViewModel.Dispose();
+            return ReturnedList;
+        }
+
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalByTitleDescription(GoalMasterViewModel goalMasterViewModel)
+        {
+            var query = new SqlQueryObject
+            {
+                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_PAGEWISE_GET,
+                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
+                Parameters = new SqlParameter[]
+                {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM , goalMasterViewModel.DateFrom),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO , goalMasterViewModel.DateTo),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_NO , goalMasterViewModel.PageNo),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_SIZE , goalMasterViewModel.PageSize),
+
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALTITLE, goalMasterViewModel.Title),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION, goalMasterViewModel.Description),
+                }
+            };
+
+            await query.ExecuteAsync();
+
+            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new GoalMasterViewModel()
+            {
+                GoalId = Convert.ToInt32(row["GoalId"]),
+                Title = Convert.ToString(row["Title"]),
+                Description = Convert.ToString(row["Description"]),
+                DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
+                DurationTo = DBNull.Value != row["DurationTo"] ? (DateTime?)row["DurationTo"] : null,
+
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

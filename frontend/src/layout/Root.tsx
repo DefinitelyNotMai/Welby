@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 export const Root = () => {
   return (
-    <Flex flexDirection="column" minHeight="100vh">
+    <Flex flexDirection="column" height="100vh">
       <Outlet />
     </Flex>
   );

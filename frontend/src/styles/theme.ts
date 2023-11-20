@@ -9,6 +9,8 @@ import { inputStyle as Input } from "./component/form/inputStyle";
 import { linkStyle as Link } from "./component/typography/linkStyle";
 import { modalStyle as Modal } from "./component/overlay/modalStyle";
 import { selectStyle as Select } from "./component/form/selectStyle";
+import { sliderStyle as Slider } from "./component/form/sliderStyle";
+import { tabStyle as Tab } from "./component/disclosure/tabStyle";
 import { textStyle as Text } from "./component/typography/textStyle";
 import { textareaStyle as Textarea } from "./component/form/textareaStyle";
 
@@ -25,6 +27,8 @@ export const overrides = extendTheme({
     Link,
     Modal,
     Select,
+    Slider,
+    Tab,
     Text,
     Textarea,
   },

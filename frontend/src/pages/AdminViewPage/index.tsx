@@ -1,0 +1,1 @@
+export { AdminViewPage } from "./AdminViewPage";

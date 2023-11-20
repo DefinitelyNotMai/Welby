@@ -4,6 +4,7 @@
 import {
   CompanyAdminFormData,
   CompanyFormData,
+  DailyCheckInFormData,
   EmployeeFormData,
   ForgotPasswordData,
   LoginData,
@@ -112,4 +113,13 @@ export const EMPLOYEE_INITIAL_DATA: EmployeeFormData = {
 
   // step 5
   Other_Notes: "",
+};
+
+export const DAILY_CHECKIN_INITIAL_DATA: DailyCheckInFormData = {
+  DailyCheckInId: "",
+  EmployeeId: "",
+  EnergyAtWork: { int: 0, value: "Low" },
+  FocusAtWork: { int: 0, value: "Low" },
+  PositiveEmotions: { int: 0, value: "Low" },
+  NegativeEmotions: { int: 0, value: "Low" },
 };

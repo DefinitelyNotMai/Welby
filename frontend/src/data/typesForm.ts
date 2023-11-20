@@ -122,3 +122,29 @@ export type Goal = {
   description: string;
   durationTo: string;
 };
+
+export type DailyCheckInFormData = {
+  DailyCheckInId: string;
+  EmployeeId: string;
+  EnergyAtWork: {
+    int: number;
+    value: string;
+  };
+  FocusAtWork: {
+    int: number;
+    value: string;
+  };
+  PositiveEmotions: {
+    int: number;
+    value: string;
+  };
+  NegativeEmotions: {
+    int: number;
+    value: string;
+  };
+};
+
+export type TISE = {
+  TiseId: string;
+  EmployeeId: string;
+};

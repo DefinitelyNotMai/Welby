@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Form, useNavigate } from "react-router-dom";
-import { FormEvent, useState, useContext } from "react";
+import { FormEvent, useState } from "react";
 
 // local
 import { ForgotPassword } from "../components/Modal/ForgotPassword/ForgotPassword";
@@ -21,7 +21,6 @@ import { LoginData } from "../data/typesForm";
 import { SystemUsers } from "../data/typesOWS";
 import { WelcomeLayout } from "../layout/WelcomeLayout";
 import { processLogin } from "../api/loginService";
-import { UserContext } from "../context/UserContext";
 
 export const LoginPage = () => {
   document.title = "Login | Welby";
@@ -54,8 +53,9 @@ export const LoginPage = () => {
     };
 
     const loginSuccess = await processLogin(data);
+    console.log(loginSuccess.loginSuccess);
 
-    if (loginSuccess.loginSuccess) {
+    if (loginSuccess.loginSuccess == true) {
       toast({
         title: "SUCCESS",
         description: "Welcome to your dashboard",
@@ -64,7 +64,7 @@ export const LoginPage = () => {
         duration: 5000,
         isClosable: true,
       });
-      navigate(loginSuccess.path);
+      navigate("/dashboard");
     } else {
       toast({
         title: "ERROR",

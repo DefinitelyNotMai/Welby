@@ -2,7 +2,7 @@
 import { Flex } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-//local
+// local
 import BackgroundImage from "../assets/images/workshop.png";
 import { Footer } from "../components/DataDisplay/Footer";
 import { WelcomeHeader } from "../components/DataDisplay/WelcomeHeader";

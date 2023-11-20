@@ -7,6 +7,11 @@ export const textStyle = defineStyleConfig({
       color: "#ffffff",
       fontSize: "0.875rem",
     },
+    "slider-label": {
+      color: "#ffffff",
+      fontSize: "1.25rem",
+      fontWeight: "bold",
+    },
   },
   defaultProps: {
     variant: "form",

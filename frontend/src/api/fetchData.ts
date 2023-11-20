@@ -1,6 +1,6 @@
 export const fetchData = async (
   fetchUrl: string,
-  params: Record<string | null, string | null> = {},
+  params: Record<string | null | number, string | null | number> = {},
 ) => {
   try {
     const queryString = Object.keys(params)

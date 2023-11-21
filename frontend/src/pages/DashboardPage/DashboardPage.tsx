@@ -4,57 +4,21 @@ import { Button, Flex } from "@chakra-ui/react";
 import { LuLayout } from "react-icons/lu";
 import { MdBusinessCenter } from "react-icons/md";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // local
 import { DashboardHeader } from "../../components/Dashboard/DashboardHeader";
 import { Sidebar } from "../../components/DataDisplay/Sidebar";
-import { UserContext } from "../../context/UserContext";
 
 export const DashboardPage = () => {
   const [selectedItem, setSelectedItem] = useState<string>("");
 
   const navigate = useNavigate();
   const location = useLocation();
-  const userContext = useContext(UserContext);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userUrl = "https:/localhost:44373/api/GetEmployee";
-      const userId = localStorage.getItem("userId");
-
-      if (userId) {
-        const params = new URLSearchParams({ EmployeeId: userId });
-        const urlWithParams = `${userUrl}?${params.toString()}`;
-
-        try {
-          const response = await fetch(urlWithParams, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-
-          if (response.ok) {
-            const result = await response.json();
-            if (result) {
-              userContext.setCompanyId(result[0].CompanyId);
-              userContext.setPhone(result[0].Phone_Number);
-              userContext.setEmail(result[0].Email);
-            }
-          } else {
-            console.error(
-              `Failed to fetch user data. Status: ${response.status}`,
-            );
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      }
-    };
-    fetchUserData();
     setSelectedItem(location.pathname.replace("/dashboard/", "").split("/")[0]);
-  }, [location.pathname, userContext]);
+  }, [location.pathname]);
 
   const handleItemClick = (item: string, route: string) => {
     setSelectedItem(item);

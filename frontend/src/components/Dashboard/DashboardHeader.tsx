@@ -34,7 +34,6 @@ export const DashboardHeader = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       const userUrl = "https://localhost:44373/api/GetEmployee";
-
       try {
         const result = await fetchData(userUrl, { EmployeeId: userId });
         if (result) {
@@ -45,9 +44,8 @@ export const DashboardHeader = () => {
         console.error("Error fetching user data:", error);
       }
     };
-
     fetchUserData();
-  }, [userId, setProfilePhoto]);
+  }, [userId]);
 
   const handleProfileClick = () => {
     setIsMenuOpen(!isMenuOpen);

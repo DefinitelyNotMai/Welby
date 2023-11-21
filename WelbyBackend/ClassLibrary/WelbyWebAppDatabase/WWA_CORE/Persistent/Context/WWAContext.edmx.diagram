@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="54ef5a0628504af7b7f4fef06ed0620d" Name="Diagram1">
+      <Diagram DiagramId="7f163329bdf14b44b1cf79202245c198" Name="Diagram1">
         <EntityTypeShape EntityType="WWAModel.tbl_CMP_Goals" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_CMP_Values" Width="1.5" PointX="11.25" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="WWAModel.tbl_EMP_DailyCheckIn" Width="1.5" PointX="8.25" PointY="16" IsExpanded="true" />

@@ -28,7 +28,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                     Title = goalMasterViewModel.Title,
                     GoalId = goalMasterViewModel.GoalId,
                     Description = goalMasterViewModel.Description,
-                    DurationFrom = goalMasterViewModel.DurationFrom,
+                    DurationFrom = globalFunctions.GetServerDateTime(),
                     DurationTo = goalMasterViewModel.DurationTo,
                     
                     Active = true,

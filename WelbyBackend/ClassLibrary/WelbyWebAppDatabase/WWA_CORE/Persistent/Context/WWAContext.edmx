@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_CMP_Goals">
           <Key>
             <PropertyRef Name="CompanyGoalsId" />
@@ -645,6 +645,10 @@
           <Parameter Name="EmployeeId" Type="bit" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
+        <Function Name="procWWA_EMP_DailyCheckIn_Get_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
         <Function Name="procWWA_EMP_Interest_By_EmployeeId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
@@ -878,7 +882,8 @@
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1687,6 +1692,10 @@
             <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get_Employee">
+            <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
@@ -2163,6 +2172,7 @@
           <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_By_CompanyId_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_By_CompanyId_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_DailyCheckIn_Get" FunctionName="WWAModel.Store.procWWA_EMP_DailyCheckIn_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_EMP_DailyCheckIn_Get_Employee" FunctionName="WWAModel.Store.procWWA_EMP_DailyCheckIn_Get_Employee" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_By_EmployeeId_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_By_EmployeeId_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
@@ -2200,7 +2210,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -17,7 +17,6 @@ namespace WWA_CORE.Persistent.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_MST_Country_Master()
         {
-            this.tbl_MST_City_Master = new HashSet<tbl_MST_City_Master>();
             this.tbl_MST_Company = new HashSet<tbl_MST_Company>();
             this.tbl_REG_Employee_Registration = new HashSet<tbl_REG_Employee_Registration>();
         }
@@ -33,8 +32,6 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_MST_City_Master> tbl_MST_City_Master { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_MST_Company> tbl_MST_Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

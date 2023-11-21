@@ -87,10 +87,11 @@ namespace WWA_CORE.Persistent.Service.Masters
                 CountryId = Convert.ToInt32(row["CountryId"]),
                 IndustryTypeId = Convert.ToInt32(row["IndustryTypeId"]),
 
-                FoundingDate = Convert.ToDateTime(row["FoundingDate"]),
+                FoundingDate = DBNull.Value != row["FoundingDate"] ? (DateTime?)row["FoundingDate"] : null,
                 Mission = Convert.ToString(row["Mission"]),
                 Vision = Convert.ToString(row["Vision"]),
                 Logo = Convert.ToString(row["Logo"]),
+                CompanySize = Convert.ToString(row["CompanySize"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
@@ -102,6 +103,59 @@ namespace WWA_CORE.Persistent.Service.Masters
                 LastChangedByName = "",
 
 
+
+            }).ToList();
+            query.Dispose();
+            companyMasterViewModel.Dispose();
+            return ReturnedList;
+        }
+
+        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompany(CompanyMasterViewModel companyMasterViewModel)
+        {
+            var query = new SqlQueryObject
+            {
+                ProcedureName = PROCEDURE_NAME.PROC_MST_COMPANY_MASTER_LOGIN_GET,
+                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
+                Parameters = new SqlParameter[]
+               {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYID, companyMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYEMAIL, companyMasterViewModel.Email),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_LOGIN_GET_PHONE_NUMBER, companyMasterViewModel.Phone_Number),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, companyMasterViewModel.Active),
+               }
+            };
+
+            await query.ExecuteAsync();
+
+            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new CompanyMasterViewModel()
+            {
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
+                Name = Convert.ToString(row["Name"]),
+                Email = Convert.ToString(row["Email"]),
+                Phone_Number = Convert.ToString(row["Phone_Number"]),
+                Website = Convert.ToString(row["Website"]),
+                Address = Convert.ToString(row["Address"]),
+
+                CountryId = Convert.ToInt32(row["CountryId"]),
+                IndustryTypeId = Convert.ToInt32(row["IndustryTypeId"]),
+
+                FoundingDate = DBNull.Value != row["FoundingDate"] ? (DateTime?)row["FoundingDate"] : null,
+                Mission = Convert.ToString(row["Mission"]),
+                Vision = Convert.ToString(row["Vision"]),
+                Logo = Convert.ToString(row["Logo"]),
+                CompanySize = Convert.ToString(row["CompanySize"]),
+
+                CompanyLocation = Convert.ToString(row["CompanyLocation"]),
+                IndustryTypeDisplay = Convert.ToString(row["IndustryTypeDisplay"]),
+
+                Active = Convert.ToBoolean(row["Active"]),
+                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
+                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
+                Computer_Name = Convert.ToString(row["Computer_Name"]),
+                LastChanged_By = row["LastChanged_By"] != DBNull.Value ? Convert.ToInt32(row["LastChanged_By"]) : 0,
+                LastChanged_Date = row["LastChanged_Date"] != DBNull.Value ? (DateTime?)row["LastChanged_Date"] : null,
+                EncodedByName = "",
+                LastChangedByName = "",
 
             }).ToList();
             query.Dispose();

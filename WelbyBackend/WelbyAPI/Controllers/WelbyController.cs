@@ -7,7 +7,6 @@ using System.Web.Http;
 using WWA_CORE.Core.Repositories;
 using WWA_CORE.Persistent.ViewModel.Masters;
 using WWA_CORE.Persistent.ViewModel.Employee;
-using WWA_CORE.Persistent.ViewModel.Company;
 using WWA_CORE.Persistent.ViewModel.Registration;
 using WWA_CORE;
 using System.Net;
@@ -33,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
 
@@ -41,7 +40,7 @@ namespace WelbyAPI.Controllers
         }
         [Route("~/api/GetAllEmployeeDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromUri] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllEmployeeDailyCheckIn(param);
 
@@ -165,7 +164,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/GetEmployeesByCompany")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployee([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployee([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetAllEmployeesByCompany(param);
             return model;
@@ -222,11 +221,11 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region VALUE
-        [Route("~/api/GetAllValue")]
+        [Route("~/api/GetValueByCompany")]
         [HttpGet]
         public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
         {
-            var model = await _wwauow.Value.GetValueByTitleDescription(param);
+            var model = await _wwauow.Value.GetValueByCompany(param);
             return model;
         }
 
@@ -348,7 +347,7 @@ namespace WelbyAPI.Controllers
         #region INTEREST
         [Route("~/api/GetAllInterest")]
         [HttpGet]
-        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromBody] InterestMasterViewModel param)
+        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromUri] InterestMasterViewModel param)
         {
             var model = await _wwauow.Interest.GetInterestsList(param);
             return model;
@@ -462,11 +461,11 @@ namespace WelbyAPI.Controllers
         #endregion
 
         #region GOAL
-        [Route("~/api/GetAllGoal")]
+        [Route("~/api/GetGoalByCompany")]
         [HttpGet]
         public async Task<IEnumerable<GoalMasterViewModel>> GetGoals([FromUri] GoalMasterViewModel param)
         {
-            var model = await _wwauow.Goal.GetGoalByTitleDescription(param);
+            var model = await _wwauow.Goal.GetGoalByCompany(param);
             return model;
         }
 
@@ -649,6 +648,14 @@ namespace WelbyAPI.Controllers
         public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromUri] CompanyMasterViewModel param)
         {
             var model = await _wwauow.Company.GetCompanyList(param);
+            return model;
+        }
+
+        [Route("~/api/GetCompany")]
+        [HttpGet]
+        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompany([FromUri] CompanyMasterViewModel param)
+        {
+            var model = await _wwauow.Company.GetCompany(param);
             return model;
         }
 
@@ -985,122 +992,6 @@ namespace WelbyAPI.Controllers
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.EmployeeWeakness.ReturnEmployeeWeakness(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region COMPANY GOALS
-        [Route("~/api/GetCompanyGoals")]
-        [HttpGet]
-        public async Task<IEnumerable<CompanyGoalsViewModel>> GetCompanyGoalsList([FromUri] CompanyGoalsViewModel param)
-        {
-            var model = await _wwauow.CompanyGoals.GetCompanyGoals(param);
-            return model;
-        }
-
-        [Route("~/api/AddCompanyGoals")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddCompanyGoal([FromBody] CompanyGoalsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyGoals.AddCompanyGoal(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateCompanyGoals")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateCompanyGoal([FromBody] CompanyGoalsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyGoals.UpdateCompanyGoal(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveCompanyGoals")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveCompanyGoal([FromBody] CompanyGoalsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyGoals.RemoveCompanyGoal(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnCompanyGoals")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnCompanyGoal([FromBody] CompanyGoalsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyGoals.ReturnCompanyGoal(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region COMPANY VALUES
-        [Route("~/api/GetCompanyValues/{Companyid}")]
-        [HttpGet]
-        public async Task<IEnumerable<CompanyValuesViewModel>> GetCompanyValuesList([FromUri] CompanyValuesViewModel param)
-        {
-            var model = await _wwauow.CompanyValues.GetCompanyValues(param);
-            return model;
-        }
-
-        [Route("~/api/AddCompanyValues")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddCompanyValue([FromBody] CompanyValuesViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyValues.AddCompanyValue(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateCompanyValues")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateCompanyValue([FromBody] CompanyValuesViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyValues.UpdateCompanyValue(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveCompanyValues")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveCompanyValue([FromBody] CompanyValuesViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyValues.RemoveCompanyValue(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnCompanyValues")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnCompanyValue([FromBody] CompanyValuesViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.CompanyValues.ReturnCompanyValue(param);
             var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
             var sample = js.Serialize(model);
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");

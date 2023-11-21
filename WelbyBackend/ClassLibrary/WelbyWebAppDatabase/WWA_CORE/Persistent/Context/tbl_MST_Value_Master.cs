@@ -14,13 +14,8 @@ namespace WWA_CORE.Persistent.Context
     
     public partial class tbl_MST_Value_Master
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_MST_Value_Master()
-        {
-            this.tbl_CMP_Values = new HashSet<tbl_CMP_Values>();
-        }
-    
         public int ValueId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
@@ -30,7 +25,6 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_CMP_Values> tbl_CMP_Values { get; set; }
+        public virtual tbl_MST_Company tbl_MST_Company { get; set; }
     }
 }

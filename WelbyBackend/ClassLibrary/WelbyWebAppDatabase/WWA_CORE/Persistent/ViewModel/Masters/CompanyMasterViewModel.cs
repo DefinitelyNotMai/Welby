@@ -15,7 +15,8 @@ namespace WWA_CORE.Persistent.ViewModel.Masters
         public string Phone_Number { get; set; }
         public string Website { get; set; }
         public string Address { get; set; }
-        public DateTime FoundingDate { get; set; }
+        public DateTime? FoundingDate { get; set; }
+        public string CompanySize { get; set; }
 
         public string Vision { get; set; }
         public string Mission { get; set; }

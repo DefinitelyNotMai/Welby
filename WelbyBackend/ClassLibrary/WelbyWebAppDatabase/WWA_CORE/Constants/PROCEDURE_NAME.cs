@@ -20,13 +20,18 @@ namespace WWA_CORE.Constants
         public const string PROC_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET = "procWWA_REG_Employee_Registration_Pagewise_Get";
         public const string PROC_REG_EMPLOYEE_REGISTRATION_GET = "procWWA_REG_Employee_Get";
         public const string PROC_REG_EMPLOYEE_GETBY_COMPANY = "procWWA_REG_Employee_GetBy_Company";
+
+        public const string PROC_MST_COMPANY_MASTER_LOGIN_GET = "procWWA_MST_Company_Master_Login_Get";
         #endregion
 
         #region MASTERS
         public const string PROC_MST_CITY_MASTER_GET = "procWWA_MST_City_Master_Get";
         public const string PROC_MST_COUNTRY_MASTER_GET = "procWWA_MST_Country_Master_Get";
         public const string PROC_MST_INDUSTRY_TYPE_MASTER_GET = "procWWA_MST_IndustryType_Master_Get";
+
         public const string PROC_MST_COMPANY_MASTER_GET = "procWWA_MST_Company_Master_Get";
+
+
         public const string PROC_MST_GENDER_MASTER_GET = "procWWA_MST_Gender_Master_Get";
         public const string PROC_MST_GOAL_MASTER_GET = "procWWA_MST_Goal_Master_Get";
         public const string PROC_MST_INTEREST_MASTER_GET = "procWWA_MST_Interest_Master_Get";

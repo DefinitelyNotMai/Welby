@@ -8,9 +8,10 @@ using WWA_CORE.Utilities;
 
 namespace WWA_CORE.Persistent.ViewModel.Masters
 {
-    public class ValueMasterViewModel : ValueMasterResource
+    public class ValueMasterViewModel : CommonSchema
     {
         public int ValueId { get; set; }
+        public int CompanyId {  get; set; }
         public string Title { get; set; }
         public string Description { get; set;}
 

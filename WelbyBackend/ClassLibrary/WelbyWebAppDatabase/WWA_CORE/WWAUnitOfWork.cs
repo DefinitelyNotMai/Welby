@@ -7,13 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using WWA_CORE.Core.Repositories;
 using WWA_CORE.Core.Repositories.Algo;
-using WWA_CORE.Core.Repositories.Company;
 using WWA_CORE.Core.Repositories.Employee;
 using WWA_CORE.Core.Repositories.Masters;
 using WWA_CORE.Core.Repositories.Registration;
 using WWA_CORE.Persistent.Context;
 using WWA_CORE.Persistent.Service.Algo;
-using WWA_CORE.Persistent.Service.Company;
 using WWA_CORE.Persistent.Service.Employee;
 using WWA_CORE.Persistent.Service.Masters;
 using WWA_CORE.Persistent.Service.Registration;
@@ -26,7 +24,6 @@ namespace WWA_CORE
         private readonly WWAEntities WWAContext;
         private DbContextTransaction _transaction;
 
-        public ICityMasterRepository City { get; private set; }
         public ICompanyMasterRepository Company { get; private set; }
         public ICountryMasterRepository Country { get; private set; }
         public IGenderMasterRepository Gender { get; private set; }
@@ -41,8 +38,6 @@ namespace WWA_CORE
         public IEmployeeRealizedStrengthsRepository EmployeeRealizedStrengths { get; private set; }
         public IEmployeeUnrealizedStrengthsRepository EmployeeUnrealizedStrengths { get; private set; }
         public IEmployeeWeaknessRepository EmployeeWeakness { get; private set; }
-        public ICompanyGoalsRepository CompanyGoals { get; private set; }
-        public ICompanyValuesRepository CompanyValues { get; private set; }
         public IDailyCheckInRepository DailyCheckIn { get; private set; }
         public ITiseRepository Tise { get; private set; }
         public IResultsRepository Results { get; private set; }
@@ -59,7 +54,6 @@ namespace WWA_CORE
             this.GlobalFunctions = new GlobalFunctions();
             this.WWAContext = new WWAEntities();
 
-            this.City = new CityMasterService();
             this.Company = new CompanyMasterService();
             this.Country = new CountryMasterService();
             this.Gender = new GenderMasterService();
@@ -74,8 +68,6 @@ namespace WWA_CORE
             this.EmployeeRealizedStrengths = new EmployeeRealizedStrengthsService();
             this.EmployeeUnrealizedStrengths = new EmployeeUnrealizedStrengthsService();
             this.EmployeeWeakness = new EmployeeWeaknessService();
-            this.CompanyGoals = new CompanyGoalsService();
-            this.CompanyValues = new CompanyValuesService();
             this.DailyCheckIn = new DailyCheckInService();
             this.Tise = new TiseService();
             this.Results = new ResultsService();

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WWA_CORE.Core.Repositories.Algo;
-using WWA_CORE.Core.Repositories.Company;
 using WWA_CORE.Core.Repositories.Employee;
 using WWA_CORE.Core.Repositories.Masters;
 using WWA_CORE.Core.Repositories.Registration;
@@ -15,7 +14,6 @@ namespace WWA_CORE.Core.Repositories
 {
     public interface IWWAUnitOfWork : IDisposable
     {
-        ICityMasterRepository City { get; }
         ICompanyMasterRepository Company { get; }
         ICountryMasterRepository Country { get; }
         IGenderMasterRepository Gender { get; }
@@ -30,8 +28,6 @@ namespace WWA_CORE.Core.Repositories
         IEmployeeRealizedStrengthsRepository EmployeeRealizedStrengths { get; }
         IEmployeeUnrealizedStrengthsRepository EmployeeUnrealizedStrengths { get; }
         IEmployeeWeaknessRepository EmployeeWeakness { get; }
-        ICompanyGoalsRepository CompanyGoals { get; }
-        ICompanyValuesRepository CompanyValues { get; }
         IDailyCheckInRepository DailyCheckIn { get; }
         ITiseRepository Tise { get; }
         IResultsRepository Results { get; }

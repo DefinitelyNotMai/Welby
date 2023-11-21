@@ -26,9 +26,10 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_Goal_Master
                 {
                     Title = goalMasterViewModel.Title,
+                    CompanyId = goalMasterViewModel.CompanyId,
                     GoalId = goalMasterViewModel.GoalId,
                     Description = goalMasterViewModel.Description,
-                    DurationFrom = goalMasterViewModel.DurationFrom,
+                    DurationFrom = globalFunctions.GetServerDateTime(),
                     DurationTo = goalMasterViewModel.DurationTo,
                     
                     Active = true,
@@ -69,6 +70,7 @@ namespace WWA_CORE.Persistent.Service.Masters
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new GoalMasterViewModel()
             {
                 GoalId = Convert.ToInt32(row["GoalId"]),
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
                 DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
@@ -90,7 +92,7 @@ namespace WWA_CORE.Persistent.Service.Masters
             return ReturnedList;
         }
 
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalByTitleDescription(GoalMasterViewModel goalMasterViewModel)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalByCompany(GoalMasterViewModel goalMasterViewModel)
         {
             var query = new SqlQueryObject
             {
@@ -98,13 +100,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM , goalMasterViewModel.DateFrom),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO , goalMasterViewModel.DateTo),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_NO , goalMasterViewModel.PageNo),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_SIZE , goalMasterViewModel.PageSize),
-
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALTITLE, goalMasterViewModel.Title),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION, goalMasterViewModel.Description),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALTITLE, goalMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, goalMasterViewModel.Active),
                 }
             };
 
@@ -113,6 +110,7 @@ namespace WWA_CORE.Persistent.Service.Masters
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new GoalMasterViewModel()
             {
                 GoalId = Convert.ToInt32(row["GoalId"]),
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
                 DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
@@ -196,6 +194,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var RowToUpdate = await context.tbl_MST_Goal_Master.FirstOrDefaultAsync(c => c.GoalId == goalMasterViewModel.GoalId);
 
                 RowToUpdate.Title = goalMasterViewModel.Title;
+                RowToUpdate.CompanyId = goalMasterViewModel.CompanyId;
                 RowToUpdate.Description = goalMasterViewModel.Description;
                 RowToUpdate.DurationFrom = goalMasterViewModel.DurationFrom;
                 RowToUpdate.DurationTo = goalMasterViewModel.DurationTo;

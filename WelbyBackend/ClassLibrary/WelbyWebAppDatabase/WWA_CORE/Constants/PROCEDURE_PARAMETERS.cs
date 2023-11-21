@@ -35,6 +35,10 @@ namespace WWA_CORE.Constants
 
         public const string PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID = "@EmployeeId";
 
+        public const string PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYID = "@CompanyId";
+        public const string PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYEMAIL = "@Email";
+        public const string PARA_MST_COMPANY_MASTER_LOGIN_GET_PHONE_NUMBER = "@Phone_Number";
+
         #endregion
 
         #region MASTERS
@@ -45,9 +49,7 @@ namespace WWA_CORE.Constants
 
         public const string PARA_MST_COUNTRY_MASTER_GET_COUNTRYID = "@CountryId";
 
-        public const string PARA_MST_COMPANY_MASTER_GET_COMPANYID = "@ComapnyId";
-        public const string PARA_MST_COMPANY_MASTER_GET_COUNTRYID = "@CountryId";
-        public const string PARA_MST_COMPANY_MASTER_GET_INDUSTRYTYPEID = "@IndustryTypeId";
+        public const string PARA_MST_COMPANY_MASTER_GET_COMPANYID = "@CompanyId";
 
         public const string PARA_MST_GENDER_MASTER_GET_GENDERID = "@GenderId";
         public const string PARA_MST_GENDER_MASTER_GET_BIOLOGICAL = "@Biological";

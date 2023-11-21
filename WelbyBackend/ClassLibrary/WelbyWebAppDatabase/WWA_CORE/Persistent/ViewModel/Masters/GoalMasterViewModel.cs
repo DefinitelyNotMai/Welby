@@ -10,6 +10,7 @@ namespace WWA_CORE.Persistent.ViewModel.Masters
     public class GoalMasterViewModel : CommonSchema
     {
         public int GoalId { get; set; }
+        public int CompanyId {  get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? DurationFrom { get; set; }

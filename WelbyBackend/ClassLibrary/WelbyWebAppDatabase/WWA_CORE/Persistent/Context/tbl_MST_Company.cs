@@ -17,10 +17,10 @@ namespace WWA_CORE.Persistent.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_MST_Company()
         {
-            this.tbl_CMP_Goals = new HashSet<tbl_CMP_Goals>();
-            this.tbl_CMP_Values = new HashSet<tbl_CMP_Values>();
             this.tbl_EMP_DailyCheckIn = new HashSet<tbl_EMP_DailyCheckIn>();
             this.tbl_EMP_TISE = new HashSet<tbl_EMP_TISE>();
+            this.tbl_MST_Goal_Master = new HashSet<tbl_MST_Goal_Master>();
+            this.tbl_MST_Value_Master = new HashSet<tbl_MST_Value_Master>();
             this.tbl_REG_Employee_Registration = new HashSet<tbl_REG_Employee_Registration>();
         }
     
@@ -45,15 +45,15 @@ namespace WWA_CORE.Persistent.Context
         public string CompanySize { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_CMP_Goals> tbl_CMP_Goals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_CMP_Values> tbl_CMP_Values { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_TISE> tbl_EMP_TISE { get; set; }
         public virtual tbl_MST_Country_Master tbl_MST_Country_Master { get; set; }
         public virtual tbl_MST_IndustryType_Master tbl_MST_IndustryType_Master { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_MST_Goal_Master> tbl_MST_Goal_Master { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_MST_Value_Master> tbl_MST_Value_Master { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_REG_Employee_Registration> tbl_REG_Employee_Registration { get; set; }
     }

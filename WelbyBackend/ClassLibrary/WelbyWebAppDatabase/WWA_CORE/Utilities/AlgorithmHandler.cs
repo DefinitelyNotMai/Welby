@@ -1,94 +1,96 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Accord.MachineLearning;
 using Accord.Statistics.Models.Regression.Linear;
-using Microsoft.ML;
-using Microsoft.ML.Data;
-using Microsoft.ML.Trainers;
-using Microsoft.ML.Transforms;
-using WWA_CORE.Constants;
-using WWA_CORE.Persistent.ViewModel.Algo;
+using WWA_CORE.Persistent.Context;
 
 namespace WWA_CORE.Utilities
 {
-    public class EmployeeData
+    public class EmployeeTrainingData
     {
-        [LoadColumn(0)]
-        public float EnergyAtWork { get; set; }
-
-        [LoadColumn(1)]
-        public float FocusAtWork { get; set; }
-
-        [LoadColumn(2)]
-        public float PositiveEmotions { get; set; }
-
-        [LoadColumn(3)]
-        public float NegativeEmotions { get; set; }
-
-        [LoadColumn(4)]
-        public float Productivity { get; set; }    
+        public int EmployeeID { get; set; }
+        public double EnergyAtWork { get; set; }
+        public double FocusAtWork { get; set; }
+        public double NegativeEmotions { get; set; }
+        public double PositiveEmotions { get; set; }
+        public double Productivity { get; set; }
     }
+    class EmployeePredictor
+    {
+        //private List<tbl_EMP_DailyCheckIn> employeeTrainingData;
 
-    
+        // Training data: EnergyAtWork, FocusAtWork, NegativeEmotions, PositiveEmotions, Productivity
+        private double[][] inputs = {
+            new double[] { 5, 4, 4, 2 },
+            new double[] { 4, 4, 4, 2 },
+            new double[] { 3, 3, 3, 3 },
+            new double[] { 3, 4, 3, 2 },
+            new double[] { 3, 4, 3, 4 },
+            new double[] { 3, 4, 3, 3 },
+            new double[] {4,4,4,4},
+            new double[] {5,4,5,1},
+            new double[] {3,3,3,3},
+            new double[] {1,3,2,4},
+        };
+
+        private double[] outputs = {
+                40,  // Example productivity for the first set of inputs
+                100,80,100,80,60,40,80,40,0// Corresponding productivity for each set of inputs
+        };
+
+        private MultipleLinearRegression regression;
+        public EmployeePredictor()
+        {
+            //using (var context = new WWAEntities())
+            //{
+            //    employeeTrainingData = context.tbl_EMP_DailyCheckIn.Where(x => x.EmployeeId == 1011).ToList();
+            //}
+
+            //int rows = employeeTrainingData.Count;
+            //double[][] trainingInputs = new double[rows][];
+            //double[] trainingOutputs = new double[rows];
+            //for (int i = 0; i < rows; i++)
+            //{
+            //    inputs[i] = new double[] {
+            //    (double)employeeTrainingData[i].EnergyAtWork_int,
+            //    (double)employeeTrainingData[i].FocusAtWork_int,
+            //    (double)employeeTrainingData[i].NegativeEmotions_int,
+            //    (double)employeeTrainingData[i].PositiveEmotions_int
+            //};
+
+            //    outputs[i] = (double)employeeTrainingData[i].Productivity;
+            //}
+
+            regression = new MultipleLinearRegression();
+            var teacher = new OrdinaryLeastSquares();
+            regression = teacher.Learn(inputs, outputs);
+            //regression = teacher.Learn(trainingInputs, trainingOutputs);
+        }
+
+        public double PredictProductivity(double energy, double focus, double negEmotions, double posEmotions)
+        {
+            double[] input = { energy, focus, negEmotions, posEmotions };
+            return regression.Transform(input);
+        }
+    }
 
     public class AlgorithmHandler :IDisposable
     {
-        public float ApplyAlgorithm(int e_id, int eaw, int faw, int pe, int ne)
+        public float ImplementAlgo(int eaw, int faw, int pe, int ne)
         {
-            var query = new SqlQueryObject
-            {
-                ProcedureName = PROCEDURE_NAME.PROC_EMP_DAILYCHECKIN_GET_EMPLOYEE,
-                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
-                Parameters = new SqlParameter[]
-                {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_EMPLOYEEID, e_id),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, true)
-                }
-            };
+            EmployeePredictor predictor = new EmployeePredictor();
 
-            query.Execute();
+            // Example prediction for an employee
+            double predictedProductivity = predictor.PredictProductivity(
+                Convert.ToDouble(eaw),
+                Convert.ToDouble(faw),
+                Convert.ToDouble(pe),
+                Convert.ToDouble(ne));
 
-            var mlContext = new MLContext();
-            var dataList = mlContext.Data.LoadFromEnumerable(query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeData()
-            {
-                EnergyAtWork = Convert.ToSingle(row["EnergyAtWork_int"]),
-                FocusAtWork = Convert.ToSingle(row["FocusAtWork_int"]),
-                PositiveEmotions = Convert.ToSingle(row["PositiveEmotions_int"]),
-                NegativeEmotions = Convert.ToSingle(row["NegativeEmotions_int"]),
-                Productivity = Convert.ToSingle(row["Productivity"])
-            }));
-
-            // Define the training pipeline
-            var pipeline = mlContext.Transforms.Concatenate("Features", nameof(EmployeeData.EnergyAtWork),
-                nameof(EmployeeData.FocusAtWork),
-                nameof(EmployeeData.PositiveEmotions),
-                nameof(EmployeeData.NegativeEmotions))
-                .Append(mlContext.Regression.Trainers.Sdca(labelColumnName: nameof(EmployeeData.Productivity)));
-
-            // Train the model
-            var model = pipeline.Fit(dataList);
-
-            var newEmployee = new EmployeeData
-            {
-                EnergyAtWork = Convert.ToSingle(eaw), // Replace with actual values
-                FocusAtWork = Convert.ToSingle(faw), // Replace with actual values
-                PositiveEmotions = Convert.ToSingle(pe), // Replace with actual values
-                NegativeEmotions = Convert.ToSingle(ne) // Replace with actual values
-
-            };
-
-            // Make predictions using the trained model
-            var predictionEngine = mlContext.Model.CreatePredictionEngine<EmployeeData, EmployeeData>(model);
-            var prediction = predictionEngine.Predict(newEmployee);
-            
-            query.Dispose();
-            return prediction.Productivity;
+            return Convert.ToSingle(predictedProductivity);
         }
 
         #region Disposable Implementation
@@ -125,4 +127,5 @@ namespace WWA_CORE.Utilities
 
         #endregion
     }
+
 }

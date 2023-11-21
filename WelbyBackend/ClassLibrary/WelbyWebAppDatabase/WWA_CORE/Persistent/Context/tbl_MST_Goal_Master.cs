@@ -14,13 +14,8 @@ namespace WWA_CORE.Persistent.Context
     
     public partial class tbl_MST_Goal_Master
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_MST_Goal_Master()
-        {
-            this.tbl_CMP_Goals = new HashSet<tbl_CMP_Goals>();
-        }
-    
         public int GoalId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> DurationFrom { get; set; }
@@ -32,7 +27,6 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_CMP_Goals> tbl_CMP_Goals { get; set; }
+        public virtual tbl_MST_Company tbl_MST_Company { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_Value_Master
                 {
                     Title = valueMasterViewModel.Title,
+                    CompanyId = valueMasterViewModel.CompanyId,
                     ValueId = valueMasterViewModel.ValueId,
                     Description = valueMasterViewModel.Title,
                     
@@ -50,7 +51,7 @@ namespace WWA_CORE.Persistent.Service.Masters
             return valueMasterViewModel;
         }
 
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueByTitleDescription(ValueMasterViewModel valueMasterViewModel)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValueByCompany(ValueMasterViewModel valueMasterViewModel)
         {
             var query = new SqlQueryObject
             {
@@ -58,15 +59,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM , valueMasterViewModel.DateFrom),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO , valueMasterViewModel.DateTo),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_NO , valueMasterViewModel.PageNo),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_SIZE , valueMasterViewModel.PageSize),
-
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEID, valueMasterViewModel.ValueId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUETITLE, valueMasterViewModel.Title),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEDESCRIPTION, valueMasterViewModel.Description),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEID, valueMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, valueMasterViewModel.Active),
 
                 }
             };
@@ -77,6 +71,7 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
 
                 ValueId = Convert.ToInt32(row["ValueId"]),
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
 
@@ -118,6 +113,7 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
 
                 ValueId = Convert.ToInt32(row["ValueId"]),
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
 
@@ -198,6 +194,7 @@ namespace WWA_CORE.Persistent.Service.Masters
 
                 RowToUpdate.Title = valueMasterViewModel.Title;
                 RowToUpdate.Description = valueMasterViewModel.Description;
+                RowToUpdate.CompanyId = valueMasterViewModel.CompanyId;
                 
 
                 RowToUpdate.Active = valueMasterViewModel.Active;

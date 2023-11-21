@@ -1,36 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="WWAModelStoreContainer" CdmEntityContainer="WWAEntities">
-    <EntitySetMapping Name="tbl_CMP_Goals">
-      <EntityTypeMapping TypeName="WWAModel.tbl_CMP_Goals">
-        <MappingFragment StoreEntitySet="tbl_CMP_Goals">
-          <ScalarProperty Name="CompanyGoalsId" ColumnName="CompanyGoalsId" />
-          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-          <ScalarProperty Name="GoalId" ColumnName="GoalId" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
-          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
-          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
-          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
-          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbl_CMP_Values">
-      <EntityTypeMapping TypeName="WWAModel.tbl_CMP_Values">
-        <MappingFragment StoreEntitySet="tbl_CMP_Values">
-          <ScalarProperty Name="CompanyValuesId" ColumnName="CompanyValuesId" />
-          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-          <ScalarProperty Name="ValueId" ColumnName="ValueId" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
-          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
-          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
-          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
-          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbl_EMP_DailyCheckIn">
       <EntityTypeMapping TypeName="WWAModel.tbl_EMP_DailyCheckIn">
         <MappingFragment StoreEntitySet="tbl_EMP_DailyCheckIn">
@@ -154,21 +124,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_MST_City_Master">
-      <EntityTypeMapping TypeName="WWAModel.tbl_MST_City_Master">
-        <MappingFragment StoreEntitySet="tbl_MST_City_Master">
-          <ScalarProperty Name="CityId" ColumnName="CityId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
-          <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
-          <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
-          <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
-          <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbl_MST_Company">
       <EntityTypeMapping TypeName="WWAModel.tbl_MST_Company">
         <MappingFragment StoreEntitySet="tbl_MST_Company">
@@ -229,6 +184,7 @@
       <EntityTypeMapping TypeName="WWAModel.tbl_MST_Goal_Master">
         <MappingFragment StoreEntitySet="tbl_MST_Goal_Master">
           <ScalarProperty Name="GoalId" ColumnName="GoalId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DurationFrom" ColumnName="DurationFrom" />
@@ -290,6 +246,7 @@
       <EntityTypeMapping TypeName="WWAModel.tbl_MST_Value_Master">
         <MappingFragment StoreEntitySet="tbl_MST_Value_Master">
           <ScalarProperty Name="ValueId" ColumnName="ValueId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
@@ -350,11 +307,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_By_CompanyId_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_By_CompanyId_Get" />
-    <FunctionImportMapping FunctionImportName="procWWA_CMP_Goals_Get" FunctionName="WWAModel.Store.procWWA_CMP_Goals_Get" />
-    <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_By_CompanyId_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_By_CompanyId_Get" />
-    <FunctionImportMapping FunctionImportName="procWWA_CMP_Values_Get" FunctionName="WWAModel.Store.procWWA_CMP_Values_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_DailyCheckIn_Get" FunctionName="WWAModel.Store.procWWA_EMP_DailyCheckIn_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_DailyCheckIn_Get_Employee" FunctionName="WWAModel.Store.procWWA_EMP_DailyCheckIn_Get_Employee" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_By_EmployeeId_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_By_EmployeeId_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
@@ -363,7 +317,6 @@
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Unrealized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Unrealized_Strengths_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Weakness_Get" FunctionName="WWAModel.Store.procWWA_EMP_Weakness_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_Get_Results" FunctionName="WWAModel.Store.procWWA_Get_Results" />
-    <FunctionImportMapping FunctionImportName="procWWA_MST_City_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_City_Master_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Login_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Login_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_MST_Country_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Country_Master_Get" />

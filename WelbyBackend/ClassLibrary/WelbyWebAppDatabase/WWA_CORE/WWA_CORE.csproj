@@ -188,15 +188,12 @@
     <Compile Include="Core\Repositories\Algo\IDailyCheckInRepository.cs" />
     <Compile Include="Core\Repositories\Algo\IResultsRepository.cs" />
     <Compile Include="Core\Repositories\Algo\ITiseRepository.cs" />
-    <Compile Include="Core\Repositories\Company\ICompanyGoalsRepository.cs" />
-    <Compile Include="Core\Repositories\Company\ICompanyValuesRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeInterestRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeLearnedBehaviorsRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeRealizedStrengthsRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeUnrealizedStrengthsRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeWeaknessRepository.cs" />
     <Compile Include="Core\Repositories\Masters\ICompanyMasterRepository.cs" />
-    <Compile Include="Core\Repositories\Masters\ICityMasterRepository.cs" />
     <Compile Include="Core\Repositories\Masters\IIndustryTypeMasterRepository.cs" />
     <Compile Include="Core\Repositories\Masters\ICountryMasterRepository.cs" />
     <Compile Include="Core\Repositories\Masters\IGenderMasterRepository.cs" />
@@ -207,31 +204,89 @@
     <Compile Include="Core\Repositories\Registration\IEmployeeRegistrationRepository.cs" />
     <Compile Include="Core\Repositories\IWWAUnitOfWork.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="Persistent\Context\tbl_EMP_DailyCheckIn.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Interest.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Learned_Behaviors.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Realized_Strengths.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_TISE.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Unrealized_Strengths.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_EMP_Weakness.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Company.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Country_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Gender_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Goal_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_IndustryType_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Interest_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Strength_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_MST_Value_Master.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_REG_Employee_Registration.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\tbl_Results.cs">
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\WWAContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WWAContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\WWAContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WWAContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persistent\Context\WWAContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Persistent\Resource\Algo\DailyCheckInResource.cs" />
-    <Compile Include="Persistent\Resource\Company\CompanyGoalsResource.cs" />
-    <Compile Include="Persistent\Resource\Company\CompanyValuesResource.cs" />
     <Compile Include="Persistent\Resource\Employee\EmployeeInterestsResource.cs" />
     <Compile Include="Persistent\Resource\Employee\EmployeeLearnedBehaviorsResource.cs" />
     <Compile Include="Persistent\Resource\Employee\EmployeeRealizedStrengthsResource.cs" />
     <Compile Include="Persistent\Resource\Employee\EmployeeUnrealizedStrengthsResource.cs" />
     <Compile Include="Persistent\Resource\Employee\EmployeeWeaknessResource.cs" />
-    <Compile Include="Persistent\Resource\Masters\CityMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CompanyMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CountryMasterResource.cs" />
-    <Compile Include="Persistent\Resource\Masters\GoalMasterResource.cs" />
-    <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
     <Compile Include="Persistent\Service\Algo\DailyCheckInService.cs" />
     <Compile Include="Persistent\Service\Algo\ResultsService.cs" />
     <Compile Include="Persistent\Service\Algo\TiseService.cs" />
-    <Compile Include="Persistent\Service\Company\CompanyGoalsService.cs" />
-    <Compile Include="Persistent\Service\Company\CompanyValuesService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeInterestService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeLearnedBehaviorsService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeRealizedStrengthsService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeUnrealizedStrengthsService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeWeaknessService.cs" />
-    <Compile Include="Persistent\Service\Masters\CityMasterService.cs" />
     <Compile Include="Persistent\Service\Masters\IndustryTypeMasterService.cs" />
     <Compile Include="Persistent\Service\Masters\CompanyMasterService.cs" />
     <Compile Include="Persistent\Service\Masters\CountryMasterService.cs" />
@@ -244,14 +299,11 @@
     <Compile Include="Persistent\ViewModel\Algo\DailyCheckInViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Algo\ResultsViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Algo\TiseViewModel.cs" />
-    <Compile Include="Persistent\ViewModel\Company\CompanyGoalsViewModel.cs" />
-    <Compile Include="Persistent\ViewModel\Company\CompanyValuesViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeInterestViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeLearnedBehaviorsViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeRealizedStrengthsViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeUnrealizedStrengthsViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeWeaknessViewModel.cs" />
-    <Compile Include="Persistent\ViewModel\Masters\CityMasterViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Masters\IndustryTypeMasterViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Masters\CompanyMasterViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Masters\CountryMasterViewModel.cs" />
@@ -279,11 +331,17 @@
     <None Include="App.config" />
     <None Include="obj\Debug\WWA_CORE.csproj.AssemblyReference.cache" />
     <None Include="packages.config" />
+    <EntityDeploy Include="Persistent\Context\WWAContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WWAContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Persistent\Context\WWAContext.edmx.diagram">
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Persistent\Context\" />
     <Folder Include="Persistent\Resource\Security\" />
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +360,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Persistent\Context\WWAContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+      <LastGenOutput>WWAContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Persistent\Context\WWAContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WWAContext.edmx</DependentUpon>
+      <LastGenOutput>WWAContext.cs</LastGenOutput>
+    </Content>
     <Content Include="WWA.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

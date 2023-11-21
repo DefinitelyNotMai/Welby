@@ -108,17 +108,21 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_CMP_Values_Get", companyValuesIdParameter, companyIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> companyId, Nullable<bool> active)
+        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> companyId, Nullable<bool> employeeId, Nullable<bool> active)
         {
             var companyIdParameter = companyId.HasValue ?
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
     
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(bool));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", companyIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", companyIdParameter, employeeIdParameter, activeParameter);
         }
     
         public virtual int procWWA_EMP_Interest_By_EmployeeId_Get(Nullable<int> employeeId, Nullable<bool> active)

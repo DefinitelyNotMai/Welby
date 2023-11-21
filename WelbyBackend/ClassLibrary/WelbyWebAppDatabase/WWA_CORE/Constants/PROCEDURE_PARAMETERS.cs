@@ -19,6 +19,7 @@ namespace WWA_CORE.Constants
 
         #region ALGO
         public const string PARA_CMP_DAILYCHECKIN_GET_COMPANYID = "@CompanyId";
+        public const string PARA_CMP_DAILYCHECKIN_GET_EMPLOYEEID = "@EmployeeId";
         public const string PARA_CMP_TISE_GET_COMPANYID = "@CompanyId";
 
         public const string PARA_GET_RESULTID = "@ResultId";

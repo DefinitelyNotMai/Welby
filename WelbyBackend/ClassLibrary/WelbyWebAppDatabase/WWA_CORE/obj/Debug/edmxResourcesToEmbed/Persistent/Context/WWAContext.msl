@@ -46,6 +46,7 @@
           <ScalarProperty Name="NegativeEmotions_int" ColumnName="NegativeEmotions_int" />
           <ScalarProperty Name="NegativeEmotions_value" ColumnName="NegativeEmotions_value" />
           <ScalarProperty Name="Productivity" ColumnName="Productivity" />
+          <ScalarProperty Name="Prediction" ColumnName="Prediction" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
           <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />

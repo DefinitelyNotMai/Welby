@@ -23,6 +23,7 @@ namespace WWA_CORE.Persistent.ViewModel.Algo
         public string PositiveEmotions_value { get; set; }
         public string NegativeEmotions_value { get; set; }
 
-        public int Productivity { get; set; }
+        public int? Productivity { get; set; }
+        public float Prediction {  get; set; }
     }
 }

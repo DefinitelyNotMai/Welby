@@ -44,6 +44,7 @@
     <Property Name="NegativeEmotions_int" Type="int" />
     <Property Name="NegativeEmotions_value" Type="nvarchar" MaxLength="50" />
     <Property Name="Productivity" Type="int" />
+    <Property Name="Prediction" Type="float" />
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Encoded_By" Type="int" Nullable="false" />
     <Property Name="Encoded_Date" Type="datetime" Nullable="false" />
@@ -376,7 +377,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbl_EMP_D__Compa__5EDF0F2E">
+  <Association Name="FK__tbl_EMP_D__Compa__06ED0088">
     <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="0..1" />
     <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
     <ReferentialConstraint>
@@ -388,7 +389,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbl_EMP_D__Emplo__5DEAEAF5">
+  <Association Name="FK__tbl_EMP_D__Emplo__05F8DC4F">
     <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="0..1" />
     <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
     <ReferentialConstraint>
@@ -636,6 +637,7 @@
   </Function>
   <Function Name="procWWA_EMP_DailyCheckIn_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="bit" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
   <Function Name="procWWA_EMP_Interest_By_EmployeeId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -790,11 +792,11 @@
       <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
       <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_EMP_D__Compa__5EDF0F2E" Association="Self.FK__tbl_EMP_D__Compa__5EDF0F2E">
+    <AssociationSet Name="FK__tbl_EMP_D__Compa__06ED0088" Association="Self.FK__tbl_EMP_D__Compa__06ED0088">
       <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
       <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_EMP_D__Emplo__5DEAEAF5" Association="Self.FK__tbl_EMP_D__Emplo__5DEAEAF5">
+    <AssociationSet Name="FK__tbl_EMP_D__Emplo__05F8DC4F" Association="Self.FK__tbl_EMP_D__Emplo__05F8DC4F">
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
       <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
     </AssociationSet>

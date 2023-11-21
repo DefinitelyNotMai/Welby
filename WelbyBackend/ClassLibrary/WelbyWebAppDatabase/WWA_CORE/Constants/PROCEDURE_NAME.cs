@@ -10,6 +10,7 @@ namespace WWA_CORE.Constants
     {
         #region ALGO
         public const string PROC_EMP_DAILYCHECKIN_GET = "procWWA_EMP_DailyCheckIn_Get";
+        public const string PROC_EMP_DAILYCHECKIN_GET_EMPLOYEE = "procWWA_EMP_DailyCheckIn_Get_Employee";
         public const string PROC_EMP_TISE_GET = "procWWA_EMP_TISE_Get";
         public const string PROC_GET_RESULT = "procWWA_Get_Results";
         #endregion

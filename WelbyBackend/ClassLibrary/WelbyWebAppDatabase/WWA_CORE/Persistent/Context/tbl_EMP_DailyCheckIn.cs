@@ -26,6 +26,7 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<int> NegativeEmotions_int { get; set; }
         public string NegativeEmotions_value { get; set; }
         public Nullable<int> Productivity { get; set; }
+        public Nullable<double> Prediction { get; set; }
         public bool Active { get; set; }
         public int Encoded_By { get; set; }
         public System.DateTime Encoded_Date { get; set; }

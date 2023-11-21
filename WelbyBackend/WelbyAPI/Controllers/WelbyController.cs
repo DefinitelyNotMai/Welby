@@ -33,9 +33,17 @@ namespace WelbyAPI.Controllers
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromBody] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
+
+            return model;
+        }
+        [Route("~/api/GetAllEmployeeDailyCheckIn")]
+        [HttpGet]
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        {
+            var model = await _wwauow.DailyCheckIn.GetAllEmployeeDailyCheckIn(param);
 
             return model;
         }
@@ -71,6 +79,18 @@ namespace WelbyAPI.Controllers
             var js = new JavaScriptSerializer();
             var model = await _wwauow.DailyCheckIn.ReturnDailyCheckIn(param);
             var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateProductivity")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateDailyCheckProductivity([FromBody] DailyCheckInViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.DailyCheckIn.UpdateProductivity(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
             var sample = js.Serialize(model);
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
             return response;

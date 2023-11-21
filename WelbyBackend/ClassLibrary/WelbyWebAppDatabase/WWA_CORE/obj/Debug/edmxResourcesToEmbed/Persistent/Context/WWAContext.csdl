@@ -48,14 +48,15 @@
     <Property Name="NegativeEmotions_int" Type="Int32" />
     <Property Name="NegativeEmotions_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Productivity" Type="Int32" />
+    <Property Name="Prediction" Type="Double" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Encoded_By" Type="Int32" Nullable="false" />
     <Property Name="Encoded_Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="LastChanged_By" Type="Int32" />
     <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
     <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_EMP_D__Compa__5EDF0F2E" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_MST_Company" />
-    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_D__Emplo__5DEAEAF5" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
+    <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_EMP_D__Compa__06ED0088" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_MST_Company" />
+    <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_D__Emplo__05F8DC4F" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
   </EntityType>
   <EntityType Name="tbl_EMP_Interest">
     <Key>
@@ -201,7 +202,7 @@
     <Property Name="CompanySize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_CMP_Goals" Relationship="Self.FK__tbl_CMP_G__Compa__0169315C" FromRole="tbl_MST_Company" ToRole="tbl_CMP_Goals" />
     <NavigationProperty Name="tbl_CMP_Values" Relationship="Self.FK__tbl_CMP_V__Compa__0539C240" FromRole="tbl_MST_Company" ToRole="tbl_CMP_Values" />
-    <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Compa__5EDF0F2E" FromRole="tbl_MST_Company" ToRole="tbl_EMP_DailyCheckIn" />
+    <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Compa__06ED0088" FromRole="tbl_MST_Company" ToRole="tbl_EMP_DailyCheckIn" />
     <NavigationProperty Name="tbl_EMP_TISE" Relationship="Self.FK__tbl_EMP_T__Compa__4BCC3ABA" FromRole="tbl_MST_Company" ToRole="tbl_EMP_TISE" />
     <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_MST_C__Compu__45F365D3" FromRole="tbl_MST_Company" ToRole="tbl_MST_Country_Master" />
     <NavigationProperty Name="tbl_MST_IndustryType_Master" Relationship="Self.FK__tbl_MST_C__Indus__46E78A0C" FromRole="tbl_MST_Company" ToRole="tbl_MST_IndustryType_Master" />
@@ -352,7 +353,7 @@
     <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="FirstLogIn" Type="Boolean" />
     <Property Name="CompanyPosition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Emplo__5DEAEAF5" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
+    <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Emplo__05F8DC4F" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
     <NavigationProperty Name="tbl_EMP_Interest" Relationship="Self.FK__tbl_EMP_I__Emplo__7D98A078" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Interest" />
     <NavigationProperty Name="tbl_EMP_Learned_Behaviors" Relationship="Self.FK__tbl_EMP_L__Emplo__75F77EB0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Learned_Behaviors" />
     <NavigationProperty Name="tbl_EMP_Realized_Strengths" Relationship="Self.FK__tbl_EMP_R__Emplo__7226EDCC" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Realized_Strengths" />
@@ -424,7 +425,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbl_EMP_D__Compa__5EDF0F2E">
+  <Association Name="FK__tbl_EMP_D__Compa__06ED0088">
     <End Role="tbl_MST_Company" Type="Self.tbl_MST_Company" Multiplicity="0..1" />
     <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
     <ReferentialConstraint>
@@ -436,7 +437,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbl_EMP_D__Emplo__5DEAEAF5">
+  <Association Name="FK__tbl_EMP_D__Emplo__05F8DC4F">
     <End Role="tbl_REG_Employee_Registration" Type="Self.tbl_REG_Employee_Registration" Multiplicity="0..1" />
     <End Role="tbl_EMP_DailyCheckIn" Type="Self.tbl_EMP_DailyCheckIn" Multiplicity="*" />
     <ReferentialConstraint>
@@ -701,11 +702,11 @@
       <End Role="tbl_MST_Value_Master" EntitySet="tbl_MST_Value_Master" />
       <End Role="tbl_CMP_Values" EntitySet="tbl_CMP_Values" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_EMP_D__Compa__5EDF0F2E" Association="Self.FK__tbl_EMP_D__Compa__5EDF0F2E">
+    <AssociationSet Name="FK__tbl_EMP_D__Compa__06ED0088" Association="Self.FK__tbl_EMP_D__Compa__06ED0088">
       <End Role="tbl_MST_Company" EntitySet="tbl_MST_Company" />
       <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbl_EMP_D__Emplo__5DEAEAF5" Association="Self.FK__tbl_EMP_D__Emplo__5DEAEAF5">
+    <AssociationSet Name="FK__tbl_EMP_D__Emplo__05F8DC4F" Association="Self.FK__tbl_EMP_D__Emplo__05F8DC4F">
       <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
       <End Role="tbl_EMP_DailyCheckIn" EntitySet="tbl_EMP_DailyCheckIn" />
     </AssociationSet>
@@ -801,6 +802,7 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get">
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">

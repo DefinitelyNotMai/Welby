@@ -23,24 +23,6 @@ export const Step3 = ({
   Weakness,
   updateFields,
 }: Step3Props) => {
-  const handleRealizedStrengthSelect = (index: number, value: string) => {
-    const updatedStrengths = [...RealizedStrengths];
-    updatedStrengths[index] = value;
-    updateFields({ RealizedStrengths: updatedStrengths });
-  };
-
-  const handleUnrealizedStrengthSelect = (index: number, value: string) => {
-    const updatedStrengths = [...UnrealizedStrengths];
-    updatedStrengths[index] = value;
-    updateFields({ UnrealizedStrengths: updatedStrengths });
-  };
-
-  const handleLearnedBehaviorSelect = (index: number, value: string) => {
-    const updatedStrengths = [...LearnedBehaviors];
-    updatedStrengths[index] = value;
-    updateFields({ LearnedBehaviors: updatedStrengths });
-  };
-
   return (
     <Flex flexDirection="column" padding={[8, 16]}>
       <Box marginBottom={10} textAlign="center">
@@ -57,19 +39,25 @@ export const Step3 = ({
           <Flex flexDirection={["column", "row"]} gap={[1, 4]}>
             {[...Array(3)].map((_, index) => (
               <FormItem
-                key={index}
-                hideIndicator={index !== 0}
+                key={`realized-strength-${index}`}
+                hideIndicator={true}
                 htmlFor={`realized-strength-${index}`}
                 isRequired
-                label={index == 0 ? "Top 3 Realized Strengths" : "⠀"}
+                label={index === 0 ? "Top 3 Realized Strengths" : "⠀"}
               >
                 <SelectStrength
                   id={`realized-strength-${index}`}
                   name={`realized-strength-${index}`}
                   onChange={(e) => {
-                    handleRealizedStrengthSelect(index, e.target.value);
+                    const updatedRealizedStrengths = [
+                      ...(RealizedStrengths || []),
+                    ];
+                    updatedRealizedStrengths[index] = e.target.value;
+                    updateFields({
+                      RealizedStrengths: updatedRealizedStrengths,
+                    });
                   }}
-                  value={RealizedStrengths[index]}
+                  value={(RealizedStrengths || [])[index]}
                 />
               </FormItem>
             ))}
@@ -79,19 +67,25 @@ export const Step3 = ({
           <Flex flexDirection={["column", "row"]} gap={[1, 4]}>
             {[...Array(3)].map((_, index) => (
               <FormItem
-                key={index}
-                hideIndicator={index !== 0}
+                key={`unrealized-strength-${index}`}
+                hideIndicator={true}
                 htmlFor={`unrealized-strength-${index}`}
                 isRequired
-                label={index == 0 ? "Top 3 Unrealized Strengths" : "⠀"}
+                label={index === 0 ? "Top 3 Unrealized Strengths" : "⠀"}
               >
                 <SelectStrength
                   id={`unrealized-strength-${index}`}
                   name={`unrealized-strength-${index}`}
                   onChange={(e) => {
-                    handleUnrealizedStrengthSelect(index, e.target.value);
+                    const updatedUnrealizedStrengths = [
+                      ...(UnrealizedStrengths || []),
+                    ];
+                    updatedUnrealizedStrengths[index] = e.target.value;
+                    updateFields({
+                      UnrealizedStrengths: updatedUnrealizedStrengths,
+                    });
                   }}
-                  value={UnrealizedStrengths[index]}
+                  value={(UnrealizedStrengths || [])[index]}
                 />
               </FormItem>
             ))}
@@ -101,19 +95,25 @@ export const Step3 = ({
           <Flex flexDirection={["column", "row"]} gap={[1, 4]}>
             {[...Array(2)].map((_, index) => (
               <FormItem
-                key={index}
-                hideIndicator={index !== 0}
+                key={`learned-behavior-${index}`}
+                hideIndicator={true}
                 htmlFor={`learned-behavior-${index}`}
                 isRequired
-                label={index == 0 ? "Top 2 Learned Behaviors" : "⠀"}
+                label={index === 0 ? "Top 2 Learned Behaviors" : "⠀"}
               >
                 <SelectStrength
                   id={`learned-behavior-${index}`}
-                  name={`learned behavior-${index}`}
+                  name={`learned-behavior-${index}`}
                   onChange={(e) => {
-                    handleLearnedBehaviorSelect(index, e.target.value);
+                    const updatedLearnedBehaviors = [
+                      ...(LearnedBehaviors || []),
+                    ];
+                    updatedLearnedBehaviors[index] = e.target.value;
+                    updateFields({
+                      LearnedBehaviors: updatedLearnedBehaviors,
+                    });
                   }}
-                  value={LearnedBehaviors[index]}
+                  value={(LearnedBehaviors || [])[index]}
                 />
               </FormItem>
             ))}

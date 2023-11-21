@@ -91,6 +91,7 @@ export type EmployeeFormData = {
   Linkedin: string;
   Facebook: string;
   Email: string;
+  Password: string;
   Address: string;
   CompanyId: string;
 

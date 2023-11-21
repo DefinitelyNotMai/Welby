@@ -54,7 +54,7 @@ export const signUpCompanyAdmin = async (
       });
 
     if (addCompanyAdmin) {
-      const getCompanyAdminUrl = "https://localhost:44373/api/GetAllEmployees";
+      const getCompanyAdminUrl = "https://localhost:44373/api/GetEmployees";
 
       const admin = await axios
         .get(getCompanyAdminUrl, {

@@ -80,73 +80,31 @@ export const signUpCompany = async (
         for (let i = 0; i < Values.length; i++) {
           const addValuesUrl = "https://localhost:44373/api/AddValue";
           const value = {
+            CompanyId: companyId,
             Title: Values[i].title,
             Description: Values[i].description,
           };
-
-          const toMasterValue = await axios
+          axios
             .post(addValuesUrl, value, config)
             .then((response) => {
+              // handle the response from the server
               // console.log(response.data)
               return response.data;
             })
             .catch((error) => {
               console.log(error);
             });
-
-          if (toMasterValue) {
-            const getValuesUrl =
-              "https://localhost:44373/api/GetValueByTitleDescription";
-
-            const getValue = await axios
-              .get(getValuesUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application.json" },
-                params: value,
-              })
-              .then((response) => {
-                const result = response.data;
-
-                if (result && result.length > 0) {
-                  return result[0];
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-
-            if (getValue) {
-              const addCompanyValueUrl =
-                "https://localhost:44373/api/AddCompanyValues";
-
-              const companyValue = {
-                CompanyId: companyId,
-                ValueId: getValue.ValueId,
-              };
-
-              axios
-                .post(addCompanyValueUrl, companyValue, config)
-                .then(() => {
-                  // (response)
-                  // console.log(response.data)
-                  console.log("Added company value");
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }
-          }
         }
 
         for (let i = 0; i < Goals.length; i++) {
           const addGoalsUrl = "https://localhost:44373/api/AddGoal";
           const goal = {
+            CompanyId: companyId,
             Title: Goals[i].title,
             Description: Goals[i].description,
             DurationTo: Goals[i].durationTo,
           };
-
-          const masterGoal = await axios
+          axios
             .post(addGoalsUrl, goal, config)
             .then((response) => {
               // handle the response from the server
@@ -156,47 +114,6 @@ export const signUpCompany = async (
             .catch((error) => {
               console.log(error);
             });
-
-          if (masterGoal) {
-            const getGoalsUrl =
-              "https://localhost:44373/api/GetGoalByTitleDescription";
-
-            const getGoal = await axios
-              .get(getGoalsUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                params: goal,
-              })
-              .then((response) => {
-                const result = response.data;
-                if (result && result.length > 0) {
-                  return result[0];
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-
-            if (getGoal) {
-              const addCompanyGoalUrl =
-                "https://localhost:44373/api/AddCompanyGoal";
-              const companyGoal = {
-                CompanyId: companyId,
-                GoalId: getGoal.GoalId,
-              };
-
-              axios
-                .post(addCompanyGoalUrl, companyGoal, config)
-                .then(() => {
-                  // (response)
-                  // console.log(response.data);
-                  // console.log("Added company goals");
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }
-          }
         }
       }
     }

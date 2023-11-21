@@ -1,4 +1,4 @@
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useContext } from "react";
 import { EmployeeFormData } from "../../data/typesForm";
 import { EMPLOYEE_INITIAL_DATA } from "../../data/initForm";
 import { useMultiStepForm } from "../../hooks/useMultiStepForm";
@@ -13,14 +13,17 @@ import { Step5 } from "./Step5";
 import { Step6 } from "./Step6";
 import { fetchData } from "../../api/fetchData";
 import { signUpEmployee } from "../../api/signUpEmployee";
+import { UserContext } from "../../context/UserContext";
 
 export const EmployeeSignUpPage = () => {
   document.title = "Employee Sign Up | Welby";
 
-  const [employeeData, setEmployeeData] = useState<EmployeeFormData>(
-    EMPLOYEE_INITIAL_DATA,
-  );
-  //const [dumdum, setDumdum] = useState();
+  const userContext = useContext(UserContext);
+
+  const [employeeData, setEmployeeData] = useState<EmployeeFormData>({
+    ...EMPLOYEE_INITIAL_DATA,
+    Email: userContext.email,
+  });
 
   const navigate = useNavigate();
 

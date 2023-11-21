@@ -68,6 +68,7 @@ export const Step1 = ({
         console.error("Error fetching company data: ", error);
       }
     };
+
     fetchCompanyData();
   }, [userContext.companyId]);
 
@@ -87,6 +88,7 @@ export const Step1 = ({
           <FormItem htmlFor="email" label="Email" isRequired>
             <Input
               autoComplete="off"
+              disabled
               id="email"
               name="email"
               onChange={(e) => updateFields({ Email: e.target.value })}

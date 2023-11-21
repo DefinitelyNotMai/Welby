@@ -32,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
 
@@ -40,7 +40,7 @@ namespace WelbyAPI.Controllers
         }
         [Route("~/api/GetAllEmployeeDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromUri] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllEmployeeDailyCheckIn(param);
 
@@ -223,7 +223,7 @@ namespace WelbyAPI.Controllers
         #region VALUE
         [Route("~/api/GetValueByCompany")]
         [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromBody] ValueMasterViewModel param)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
         {
             var model = await _wwauow.Value.GetValueByCompany(param);
             return model;
@@ -231,7 +231,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/GetValues")]
         [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromBody] ValueMasterViewModel param)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromUri] ValueMasterViewModel param)
         {
             var model = await _wwauow.Value.GetValues(param);
             return model;
@@ -463,7 +463,7 @@ namespace WelbyAPI.Controllers
         #region GOAL
         [Route("~/api/GetGoalByCompany")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals([FromBody] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals([FromUri] GoalMasterViewModel param)
         {
             var model = await _wwauow.Goal.GetGoalByCompany(param);
             return model;
@@ -471,7 +471,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/GetGoals")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetAllGoals([FromBody] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetAllGoals([FromUri] GoalMasterViewModel param)
         {
             var model = await _wwauow.Goal.GetGoals(param);
             return model;

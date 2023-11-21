@@ -99,9 +99,10 @@ namespace WWA_CORE.Persistent.Service.Registration
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
-                Phone_Number = Convert.ToString(row["Mobile_Number"]),
-                Email = Convert.ToString(row["Email_Address"]),
-                Birthday = Convert.ToDateTime(row["Birthday"]),
+                Nickname = Convert.ToString(row["Nickname"]),
+                Phone_Number = Convert.ToString(row["Phone_Number"]),
+                Email = Convert.ToString(row["Email"]),
+                Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
                 Facebook = Convert.ToString(row["Facebook"]),
@@ -111,29 +112,27 @@ namespace WWA_CORE.Persistent.Service.Registration
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 CountryId = Convert.ToInt32(row["CountryId"]),
-                
+
 
                 Work = Convert.ToString(row["Work"]),
-                Contact= Convert.ToString(row["Contact"]),
+                Connect = Convert.ToString(row["Connect"]),
                 Support = Convert.ToString(row["Support"]),
                 Other_Notes = Convert.ToString(row["Other_Notes"]),
 
 
-                EmployeeFullName = Convert.ToString(row["ClientFullName"]),
+                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
                 GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
                 CountryDisplay = Convert.ToString(row["CountryDisplay"]),
                 EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
 
+                Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
                 Computer_Name = Convert.ToString(row["Computer_Name"]),
                 LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
                 LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
-                Active = Convert.ToBoolean(row["Active"]),
                 EncodedByName = "",
                 LastChangedByName = "",
-                TotalRows = Convert.ToInt32(row["TotalRows"]),
-                TotalPage = Convert.ToInt32(row["TotalPage"]),
             }).ToList();
 
             query.Dispose();

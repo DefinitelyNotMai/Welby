@@ -33,9 +33,17 @@ namespace WelbyAPI.Controllers
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromBody] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
+
+            return model;
+        }
+        [Route("~/api/GetAllEmployeeDailyCheckIn")]
+        [HttpGet]
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        {
+            var model = await _wwauow.DailyCheckIn.GetAllEmployeeDailyCheckIn(param);
 
             return model;
         }
@@ -48,7 +56,7 @@ namespace WelbyAPI.Controllers
             var model = await _wwauow.DailyCheckIn.AddDailyCheckIn(param);
             var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
             var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json"); 
             return response;
         }
 
@@ -76,12 +84,24 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
+        [Route("~/api/UpdateProductivity")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateDailyCheckProductivity([FromBody] DailyCheckInViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.DailyCheckIn.UpdateProductivity(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
         #endregion
 
         #region TISE
         [Route("~/api/GetAllTise")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetTise([FromUri] TiseViewModel param)
+        public async Task<IEnumerable<TiseViewModel>> GetTise([FromUri] TiseViewModel param)
         {
             var model = await _wwauow.Tise.GetTise(param);
 
@@ -145,7 +165,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/GetEmployeesByCompany")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployee([FromUri] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployee([FromBody] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetAllEmployeesByCompany(param);
             return model;
@@ -454,7 +474,7 @@ namespace WelbyAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<GoalMasterViewModel>> GetAllGoals([FromUri] GoalMasterViewModel param)
         {
-            var model = await _wwauow.Goal.GetGoalList(param);
+            var model = await _wwauow.Goal.GetGoals(param);
             return model;
         }
 
@@ -1091,7 +1111,7 @@ namespace WelbyAPI.Controllers
         #region RESULTS
         [Route("~/api/GetAllResults")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetResults([FromBody] ResultsViewModel param)
+        public async Task<IEnumerable<ResultsViewModel>> GetResults([FromUri] ResultsViewModel param)
         {
             var model = await _wwauow.Results.GetResult(param);
 
@@ -1103,7 +1123,7 @@ namespace WelbyAPI.Controllers
         public async Task<HttpResponseMessage> AddResults([FromBody] ResultsViewModel param)
         {
             var js = new JavaScriptSerializer();
-            var model = await _wwauow.Results.AddResults(param);
+            var model = await _wwauow.Results.AddResult(param);
             var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
             var sample = js.Serialize(model);
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");

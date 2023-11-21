@@ -16,6 +16,7 @@ namespace WWA_CORE.Persistent.Context
     {
         public int TiseId { get; set; }
         public int EmployeeId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public Nullable<double> Factor_1 { get; set; }
         public Nullable<double> Factor_2 { get; set; }
         public Nullable<double> Factor_3 { get; set; }
@@ -31,6 +32,7 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
     
+        public virtual tbl_MST_Company tbl_MST_Company { get; set; }
         public virtual tbl_REG_Employee_Registration tbl_REG_Employee_Registration { get; set; }
     }
 }

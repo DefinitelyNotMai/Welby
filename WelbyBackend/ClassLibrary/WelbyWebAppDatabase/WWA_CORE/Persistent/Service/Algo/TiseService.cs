@@ -26,6 +26,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                 var rowToInsert = new tbl_EMP_TISE
                 {
                     EmployeeId = tiseViewModel.EmployeeId,
+                    CompanyId = tiseViewModel.CompanyId,
                     Factor_1 = tiseViewModel.Factor_1,
                     Factor_2 = tiseViewModel.Factor_2,
                     Factor_3 = tiseViewModel.Factor_3,
@@ -64,7 +65,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_TISE_GET_EMPLOYEEID, tiseViewModel.EmployeeId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_TISE_GET_COMPANYID, tiseViewModel.CompanyId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, tiseViewModel.Active)
                 }
             };
@@ -75,6 +76,7 @@ namespace WWA_CORE.Persistent.Service.Algo
             {
                 TiseId = Convert.ToInt32(row["TiseId"]),
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
                 Factor_1 = Convert.ToSingle(row["Factor_1"]),
                 Factor_2 = Convert.ToSingle(row["Factor_2"]),
                 Factor_3 = Convert.ToSingle(row["Factor_3"]),

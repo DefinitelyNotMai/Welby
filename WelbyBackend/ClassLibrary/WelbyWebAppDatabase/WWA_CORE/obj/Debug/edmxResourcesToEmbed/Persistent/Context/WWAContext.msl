@@ -36,6 +36,7 @@
         <MappingFragment StoreEntitySet="tbl_EMP_DailyCheckIn">
           <ScalarProperty Name="DailyCheckInId" ColumnName="DailyCheckInId" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="EnergyAtWork_int" ColumnName="EnergyAtWork_int" />
           <ScalarProperty Name="EnergyAtWork_value" ColumnName="EnergyAtWork_value" />
           <ScalarProperty Name="FocusAtWork_int" ColumnName="FocusAtWork_int" />
@@ -44,6 +45,8 @@
           <ScalarProperty Name="PositiveEmotions_value" ColumnName="PositiveEmotions_value" />
           <ScalarProperty Name="NegativeEmotions_int" ColumnName="NegativeEmotions_int" />
           <ScalarProperty Name="NegativeEmotions_value" ColumnName="NegativeEmotions_value" />
+          <ScalarProperty Name="Productivity" ColumnName="Productivity" />
+          <ScalarProperty Name="Prediction" ColumnName="Prediction" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="Encoded_By" ColumnName="Encoded_By" />
           <ScalarProperty Name="Encoded_Date" ColumnName="Encoded_Date" />
@@ -103,6 +106,7 @@
         <MappingFragment StoreEntitySet="tbl_EMP_TISE">
           <ScalarProperty Name="TiseId" ColumnName="TiseId" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="Factor_1" ColumnName="Factor_1" />
           <ScalarProperty Name="Factor_2" ColumnName="Factor_2" />
           <ScalarProperty Name="Factor_3" ColumnName="Factor_3" />
@@ -355,8 +359,10 @@
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Interest_Get" FunctionName="WWAModel.Store.procWWA_EMP_Interest_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Learned_Behaviors_Get" FunctionName="WWAModel.Store.procWWA_EMP_Learned_Behaviors_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Realized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Realized_Strengths_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_EMP_TISE_Get" FunctionName="WWAModel.Store.procWWA_EMP_TISE_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Unrealized_Strengths_Get" FunctionName="WWAModel.Store.procWWA_EMP_Unrealized_Strengths_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_EMP_Weakness_Get" FunctionName="WWAModel.Store.procWWA_EMP_Weakness_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_Get_Results" FunctionName="WWAModel.Store.procWWA_Get_Results" />
     <FunctionImportMapping FunctionImportName="procWWA_MST_City_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_City_Master_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_MST_Company_Master_Login_Get" FunctionName="WWAModel.Store.procWWA_MST_Company_Master_Login_Get" />

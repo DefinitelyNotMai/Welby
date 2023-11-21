@@ -10,6 +10,7 @@ namespace WWA_CORE.Constants
     {
         #region ALGO
         public const string PROC_EMP_DAILYCHECKIN_GET = "procWWA_EMP_DailyCheckIn_Get";
+        public const string PROC_EMP_DAILYCHECKIN_GET_EMPLOYEE = "procWWA_EMP_DailyCheckIn_Get_Employee";
         public const string PROC_EMP_TISE_GET = "procWWA_EMP_TISE_Get";
         public const string PROC_GET_RESULT = "procWWA_Get_Results";
         #endregion
@@ -31,6 +32,9 @@ namespace WWA_CORE.Constants
         public const string PROC_MST_INTEREST_MASTER_GET = "procWWA_MST_Interest_Master_Get";
         public const string PROC_MST_STRENGTH_MASTER_GET = "procWWA_MST_Strength_Master_Get";
         public const string PROC_MST_VALUE_MASTER_GET = "procWWA_MST_Value_Master_Get";
+
+        public const string PROC_MST_VALUE_MASTER_PAGEWISE_GET = "procWWA_MST_Value_Master_Pagewise_Get";
+        public const string PROC_MST_GOAL_MASTER_PAGEWISE_GET = "procWWA_MST_Goal_Master_Pagewise_Get";
         #endregion
 
         #region COMPANY

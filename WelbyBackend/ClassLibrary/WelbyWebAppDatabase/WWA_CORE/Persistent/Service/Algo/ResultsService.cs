@@ -54,7 +54,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_DAILYCHECKIN_GET_EMPLOYEEID, resultsViewModel.ResultsId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_GET_RESULTID, resultsViewModel.ResultsId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, resultsViewModel.Active)
                 }
             };

@@ -11,6 +11,7 @@ namespace WWA_CORE.Persistent.ViewModel.Algo
     {
         public int TiseId { get; set; }
         public int EmployeeId { get; set; }
+        public int CompanyId {  get; set; }
         public float Factor_1 {  get; set; }
         public float Factor_2 { get; set; }
         public float Factor_3 { get; set; }

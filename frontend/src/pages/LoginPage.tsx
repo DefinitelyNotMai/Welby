@@ -64,7 +64,7 @@ export const LoginPage = () => {
         duration: 5000,
         isClosable: true,
       });
-      navigate("/dashboard");
+      navigate(loginSuccess.path);
     } else {
       toast({
         title: "ERROR",

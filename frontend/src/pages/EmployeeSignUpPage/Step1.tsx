@@ -1,10 +1,13 @@
 // lib
 import { Flex, Grid, GridItem, Heading, Input } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 
 // local
 import { FormItem } from "../../components/Form/FormItem";
 import { SelectCountry, SelectGender } from "../../components/Form/Select";
 import { UploadPhoto } from "../../components/Form/UploadPhoto";
+import { UserContext } from "../../context/UserContext";
+import { fetchData } from "../../api/fetchData";
 
 type Step1Data = {
   First_Name: string;
@@ -21,6 +24,7 @@ type Step1Data = {
   Facebook: string;
   ProfilePhoto: string;
   Email: string;
+  Password: string;
 };
 
 type Step1Props = Step1Data & {
@@ -39,17 +43,41 @@ export const Step1 = ({
   Instagram,
   TikTok,
   Email,
+  Password,
   Linkedin,
   Facebook,
   ProfilePhoto,
   updateFields,
 }: Step1Props) => {
+  const [companyName, setCompanyName] = useState<string>("");
+
+  const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    const companyUrl = "https://localhost:44373/api/GetCompanies";
+
+    const fetchCompanyData = async () => {
+      try {
+        const result = await fetchData(companyUrl, {
+          CompanyId: userContext.companyId,
+        });
+        if (result) {
+          setCompanyName(result[0].Name);
+        }
+      } catch (error) {
+        console.error("Error fetching company data: ", error);
+      }
+    };
+
+    fetchCompanyData();
+  }, [userContext.companyId]);
+
   return (
     <Grid gap={4} templateColumns={["2fr 1fr"]} padding={[8, 16]}>
       <GridItem colSpan={3} textAlign="center">
         <Heading fontSize="2.5rem">Welcome to</Heading>
         <Heading fontSize="3.125rem" marginBottom={4}>
-          {First_Name}
+          {companyName}
         </Heading>
         <Heading fontSize="1.875rem" marginBottom={10}>
           Please introduce yourself.
@@ -57,6 +85,18 @@ export const Step1 = ({
       </GridItem>
       <Grid gap={4} templateColumns={["1fr 1fr"]}>
         <Flex flexDirection="column" gap={4}>
+          <FormItem htmlFor="email" label="Email" isRequired>
+            <Input
+              autoComplete="off"
+              disabled
+              id="email"
+              name="email"
+              onChange={(e) => updateFields({ Email: e.target.value })}
+              placeholder="Email"
+              type="email"
+              value={Email}
+            />
+          </FormItem>
           <FormItem htmlFor="first-name" label="First Name" isRequired>
             <Input
               autoComplete="off"
@@ -88,6 +128,17 @@ export const Step1 = ({
           </FormItem>
         </Flex>
         <Flex flexDirection="column" gap={4}>
+          <FormItem htmlFor="password" label="Password" isRequired>
+            <Input
+              autoComplete="off"
+              id="password"
+              name="password"
+              onChange={(e) => updateFields({ Password: e.target.value })}
+              placeholder="Password"
+              type="password"
+              value={Password}
+            />
+          </FormItem>
           <FormItem htmlFor="nickname" label="Nickname" isRequired>
             <Input
               id="nickname"

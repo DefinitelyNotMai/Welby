@@ -94,6 +94,7 @@ export const EMPLOYEE_INITIAL_DATA: EmployeeFormData = {
   Linkedin: "",
   Facebook: "",
   Email: "",
+  Password: "",
   Address: "",
   CompanyId: "",
 

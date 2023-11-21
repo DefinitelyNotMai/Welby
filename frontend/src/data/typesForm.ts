@@ -126,6 +126,7 @@ export type Goal = {
 export type DailyCheckInFormData = {
   DailyCheckInId: string;
   EmployeeId: string;
+  CompanyId: string;
   EnergyAtWork: {
     int: number;
     value: string;

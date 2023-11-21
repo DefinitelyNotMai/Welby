@@ -22,6 +22,7 @@ import { Step3 } from "./Step3";
 import { useMultiStepForm } from "../../../hooks/useMultiStepForm";
 import { Step4 } from "./Step4";
 import { Form } from "react-router-dom";
+import axios from "axios";
 
 type DailyCheckinProps = {
   isOpen: boolean;
@@ -74,6 +75,36 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
 
   // NOTE: this is where api call for submitting daily check in should be done
   const handleDailyCheckInSubmit = () => {
+    const dailyCheckInUrl = "https://localhost:44373/api/AddDailyCheckIn";
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+    const dailyCheckin = {
+      "EmployeeId": dailyCheckinData.EmployeeId,
+      "CompanyId": dailyCheckinData.CompanyId,
+      "EnergyAtWork_int": dailyCheckinData.EnergyAtWork.int,
+      "EnergyAtWork_value": dailyCheckinData.EnergyAtWork.value,
+      "FocusAtWork_int": dailyCheckinData.FocusAtWork.int,
+      "FocusAtWork_value": dailyCheckinData.FocusAtWork.value,
+      "PositiveEmotions_int": dailyCheckinData.PositiveEmotions.int,
+      "PositiveEmotions_value": dailyCheckinData.PositiveEmotions.value,
+      "NegativeEmotions_int": dailyCheckinData.NegativeEmotions.int, 
+      "NegativeEmotions_value": dailyCheckinData.PositiveEmotions.value,
+      "Productivity": 0,
+      "Active": true
+    }
+    axios
+      .post(dailyCheckInUrl,dailyCheckin,config)
+      .then((response) => {
+        console.log(response);
+        const result = response.data;
+        if (result && result.length > 0) {
+          localStorage.setItem("dailyCheckinId", result[0].dailyCheckinId); // this is for setting the id
+        }
+      }).catch((error) => {console.log(error)});
+      
     // if successful statement here:
     console.log(dailyCheckinData);
     const trybool = true;

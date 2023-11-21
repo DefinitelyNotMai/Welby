@@ -39,11 +39,9 @@ export const MyTeamPage = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const employeesUrl = "https://localhost:44373/api/GetAllEmployees";
+        const employeesUrl = "https://localhost:44373/api/GetEmployeesByCompany";
 
         const data = await fetchData(employeesUrl, {
-          Email: email,
-          Phone_Number: phone,
           CompanyId: companyId,
         });
         setEmployees(data);

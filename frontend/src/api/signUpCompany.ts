@@ -179,7 +179,7 @@ export const signUpCompany = async (
 
             if (getGoal) {
               const addCompanyGoalUrl =
-                "https://localhost:44373/api/AddCompanyGoal";
+                "https://localhost:44373/api/AddCompanyGoals";
               const companyGoal = {
                 CompanyId: companyId,
                 GoalId: getGoal.GoalId,

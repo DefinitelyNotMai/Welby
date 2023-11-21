@@ -348,7 +348,7 @@ namespace WelbyAPI.Controllers
         #region INTEREST
         [Route("~/api/GetAllInterest")]
         [HttpGet]
-        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromUri] InterestMasterViewModel param)
+        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromBody] InterestMasterViewModel param)
         {
             var model = await _wwauow.Interest.GetInterestsList(param);
             return model;

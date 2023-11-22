@@ -74,7 +74,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
   ]);
 
   // NOTE: this is where api call for submitting daily check in should be done
-  const handleDailyCheckInSubmit = () => {
+  const handleDailyCheckInSubmit = async () => {
     const dailyCheckInUrl = "https://localhost:44373/api/AddDailyCheckIn";
     const config = {
       headers: {

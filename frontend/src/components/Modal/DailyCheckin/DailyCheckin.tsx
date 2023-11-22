@@ -101,7 +101,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
         console.log(response);
         const result = response.data;
         if (result && result.length > 0) {
-          localStorage.setItem("dailyCheckinId", result[0].dailyCheckinId); // this is for setting the id
+          localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId); // this is for setting the id
         }
       }).catch((error) => {console.log(error)});
       

@@ -120,8 +120,8 @@ export const DAILY_CHECKIN_INITIAL_DATA: DailyCheckInFormData = {
   DailyCheckInId: "",
   EmployeeId: "",
   CompanyId: "",
-  EnergyAtWork: { int: 0, value: "Low" },
-  FocusAtWork: { int: 0, value: "Low" },
-  PositiveEmotions: { int: 0, value: "Low" },
-  NegativeEmotions: { int: 0, value: "Low" },
+  EnergyAtWork: { int: 1, value: "Low" },
+  FocusAtWork: { int: 1, value: "Low" },
+  PositiveEmotions: { int: 1, value: "Low" },
+  NegativeEmotions: { int: 1, value: "Low" },
 };

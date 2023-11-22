@@ -123,6 +123,8 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM, dailyCheckInViewModel.DateFrom),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO, DateTime.Now),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_EMPLOYEEID, dailyCheckInViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, dailyCheckInViewModel.Active)
                 }

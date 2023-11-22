@@ -160,6 +160,12 @@ namespace WWA_CORE.Utilities
         {
             return GetFirstDayOfMonth(givenDate).AddMonths(1).Subtract(new TimeSpan(1, 0, 0, 0, 0));
         }
+        public DateTime GetSevenDays(DateTime givenDate)
+        {
+            return givenDate.AddDays(-7);
+        }
+
+
         public Image ConvertFromStringBase64(string imagestring)
         {
             Image img;

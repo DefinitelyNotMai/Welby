@@ -41,7 +41,6 @@ namespace WWA_CORE.Utilities
     
     class EmployeePredictor
     {
-
         // Training data: EnergyAtWork, FocusAtWork, NegativeEmotions, PositiveEmotions, Productivity
         private double[][] inputs = {
             new double[] { 5, 4, 4, 2 },
@@ -50,44 +49,22 @@ namespace WWA_CORE.Utilities
             new double[] { 3, 4, 3, 2 },
             new double[] { 3, 4, 3, 4 },
             new double[] { 3, 4, 3, 3 },
-            new double[] {4,4,4,4},
-            new double[] {5,4,5,1},
-            new double[] {3,3,3,3},
-            new double[] {1,3,2,4},
+            new double[] { 4, 4, 4, 4 },
+            new double[] { 5, 4, 5, 1 },
+            new double[] { 3, 3, 3, 3 },
+            new double[] { 1, 3, 2, 4 },
         };
 
         private double[] outputs = {
-                40,  // Example productivity for the first set of inputs
-                100,80,100,80,60,40,80,40,0// Corresponding productivity for each set of inputs
+                40,100,80,100,80,60,40,80,40,0
         };
 
         private MultipleLinearRegression regression;
         public EmployeePredictor()
         {
-            //using (var context = new WWAEntities())
-            //{
-            //    employeeTrainingData = context.tbl_EMP_DailyCheckIn.Where(x => x.EmployeeId == 1011).ToList();
-            //}
-
-            //int rows = employeeTrainingData.Count;
-            //double[][] trainingInputs = new double[rows][];
-            //double[] trainingOutputs = new double[rows];
-            //for (int i = 0; i < rows; i++)
-            //{
-            //    inputs[i] = new double[] {
-            //    (double)employeeTrainingData[i].EnergyAtWork_int,
-            //    (double)employeeTrainingData[i].FocusAtWork_int,
-            //    (double)employeeTrainingData[i].NegativeEmotions_int,
-            //    (double)employeeTrainingData[i].PositiveEmotions_int
-            //};
-
-            //    outputs[i] = (double)employeeTrainingData[i].Productivity;
-            //}
-
             regression = new MultipleLinearRegression();
             var teacher = new OrdinaryLeastSquares();
             regression = teacher.Learn(inputs, outputs);
-            //regression = teacher.Learn(trainingInputs, trainingOutputs);
         }
 
         public double PredictProductivity(double energy, double focus, double negEmotions, double posEmotions)
@@ -95,12 +72,14 @@ namespace WWA_CORE.Utilities
             double[] input = { energy, focus, negEmotions, posEmotions };
             return regression.Transform(input);
         }
-    }
-
-    class EmployeePredictor2
-    {
+        //
+        //
+        //
+        //
+        //
+        //
+        //
         private IEnumerable<EmployeeTrainingData> employeeTrainingData;
-
         public IEnumerable<EmployeeTrainingData> GetTrainingSet(EmployeeTrainingData employeeTrainingData)
         {
             var query = new SqlQueryObject
@@ -126,10 +105,7 @@ namespace WWA_CORE.Utilities
             query.Dispose();
             employeeTrainingData.Dispose();
             return ReturnedList;
-
         }
-
-    }
 
     public class AlgorithmHandler :IDisposable
     {
@@ -142,34 +118,49 @@ namespace WWA_CORE.Utilities
                 Convert.ToDouble(pe),
                 Convert.ToDouble(ne));
 
-            EmployeePredictor2 predictor = new EmployeePredictor2();
+            EmployeePredictor predictor = new EmployeePredictor();
 
             IEnumerable<EmployeeTrainingData> employeeTrainingData = predictor.GetTrainingSet(employee);
             var trainingData = employeeTrainingData.ToList();
 
-            double[][] trainingInputs = new double[trainingData.Count][];
-            double[] trainingOutputs = new double[trainingData.Count];
+            
 
-            for (int i = 0; i < trainingData.Count; i++)
+            if (employeeTrainingData == null ||  trainingData.Count < 4)
             {
-                trainingInputs[i] = new double[] {
+                // Example prediction for an employee
+                double predictedProductivity = predictor.PredictProductivity(
+                    Convert.ToDouble(eaw),
+                    Convert.ToDouble(faw),
+                    Convert.ToDouble(pe),
+                    Convert.ToDouble(ne));
+
+                return Convert.ToSingle(predictedProductivity);
+            } else
+            {
+                double[][] trainingInputs = new double[trainingData.Count][];
+                double[] trainingOutputs = new double[trainingData.Count];
+
+                for (int i = 0; i < trainingData.Count; i++)
+                {
+                    trainingInputs[i] = new double[] {
                     trainingData[i].EnergyAtWork,
                     trainingData[i].FocusAtWork,
                     trainingData[i].NegativeEmotions,
                     trainingData[i].PositiveEmotions
                 };
 
-                trainingOutputs[i] = (double)trainingData[i].Productivity;
-            }
-            MultipleLinearRegression regression = new MultipleLinearRegression();
-            var teacher = new OrdinaryLeastSquares();
-            regression = teacher.Learn(trainingInputs, trainingOutputs);
-            double[] input = {Convert.ToDouble(eaw),
+                    trainingOutputs[i] = (double)trainingData[i].Productivity;
+                }
+                MultipleLinearRegression regression = new MultipleLinearRegression();
+                var teacher = new OrdinaryLeastSquares();
+                regression = teacher.Learn(trainingInputs, trainingOutputs);
+                double[] input = {Convert.ToDouble(eaw),
                 Convert.ToDouble(faw),
                 Convert.ToDouble(pe),
                 Convert.ToDouble(ne)};
 
-            return Convert.ToSingle(regression.Transform(input));
+                return Convert.ToSingle(regression.Transform(input));
+            }
         }
 
         public float ImplementAlgo(int eaw, int faw, int pe, int ne)

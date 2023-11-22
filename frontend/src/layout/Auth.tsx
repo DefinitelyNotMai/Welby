@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 // local
 import { UserContext } from "../context/UserContext";
 import { fetchData } from "../api/fetchData";
+import { fetchAccessToken } from "../api/tokenService";
 
 type AuthProps = {
   children: ReactNode;
@@ -17,9 +18,10 @@ export const Auth = ({ children }: AuthProps) => {
   const userContext = useContext(UserContext);
 
   useEffect(() => {
+    const userId = localStorage.getItem("userId");
+
     const fetchContext = async () => {
       const employeeUrl = "https://localhost:44373/api/GetEmployee";
-      const userId = localStorage.getItem("userId");
 
       try {
         const result = await fetchData(employeeUrl, {
@@ -45,9 +47,35 @@ export const Auth = ({ children }: AuthProps) => {
       }
     };
 
+    const fetchRole = async () => {
+      const roleUrl = "";
+
+      try {
+        const token = fetchAccessToken(); // token
+
+        /*
+        const response = axios call
+
+
+
+
+             method: "GET",
+             headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+             },
+             userContext.setRole(result[0].id)
+        */
+        userContext.setRole;
+      } catch (error) {
+        console.error("Error fetching role: ", error);
+      }
+    };
+
     fetchContext();
   }, [navigate, toast, userContext]);
 
+  console.log(userContext.role);
   return userContext.companyId && userContext.email && userContext.phone ? (
     <>{children}</>
   ) : null;

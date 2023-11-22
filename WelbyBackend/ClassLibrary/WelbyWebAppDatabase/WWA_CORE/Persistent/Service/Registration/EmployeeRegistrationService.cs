@@ -53,7 +53,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto,
                     Other_Notes = employeeRegistrationViewModel.Other_Notes,
 
-                    FirstLogIn = employeeRegistrationViewModel.FirstLogin,
+                    FirstLogIn = employeeRegistrationViewModel.FirstLogIn,
 
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
@@ -122,7 +122,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
 
-                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
@@ -191,7 +191,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
 
-                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
@@ -260,7 +260,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
 
-                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
@@ -380,7 +380,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto;
                 RowToUpdate.Other_Notes = employeeRegistrationViewModel.Other_Notes;
 
-                RowToUpdate.FirstLogIn = employeeRegistrationViewModel.FirstLogin;
+                RowToUpdate.FirstLogIn = employeeRegistrationViewModel.FirstLogIn;
 
                 RowToUpdate.Active = employeeRegistrationViewModel.Active;
                 RowToUpdate.Computer_Name = employeeRegistrationViewModel.Computer_Name;

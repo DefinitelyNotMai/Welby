@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -86,7 +86,7 @@ const data = {
       tension: 0.2,
     },
     {
-      label: "Focus",
+      label: "Focus at Work",
       data: generateRandomNumbers(30),
       backgroundColor: "#f0d124",
       borderColor: "#f0d124",
@@ -94,10 +94,18 @@ const data = {
       tension: 0.2,
     },
     {
-      label: "Satisfaction",
+      label: "Positive Emotions",
       data: generateRandomNumbers(30),
       backgroundColor: "#78e1e8",
       borderColor: "#78e1e8",
+      pointRadius: 5,
+      tension: 0.2,
+    },
+    {
+      label: "Negative Emotions",
+      data: generateRandomNumbers(30),
+      backgroundColor: "#34313a",
+      borderColor: "#34313a",
       pointRadius: 5,
       tension: 0.2,
     },
@@ -106,8 +114,8 @@ const data = {
 
 export const ChartBar = () => {
   return (
-    <Box w="85%">
+    <Flex flexDirection="row" flex={1} padding={8}>
       <Line options={options} data={data} />
-    </Box>
+    </Flex>
   );
 };

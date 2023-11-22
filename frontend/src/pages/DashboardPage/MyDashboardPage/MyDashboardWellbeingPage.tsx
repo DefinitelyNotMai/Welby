@@ -1,11 +1,13 @@
 // lib
-import { Button, Grid } from "@chakra-ui/react";
+import { Button, Flex, Grid } from "@chakra-ui/react";
 import { useState } from "react";
 
 // local
 import { Section } from "../../../components/DataDisplay/Section";
 import { DailyCheckin } from "../../../components/Modal/DailyCheckin";
 import { QuarterlyAssessment } from "../../../components/Modal/QuarterlyAssessment";
+import { ChartBar } from "../../../components/Charts/ChartBar";
+import { PredictionChart } from "../../../components/Charts/PredictionChart";
 
 export const MyDashboardWellbeingPage = () => {
   document.title = "Well-Being | Welby";
@@ -26,7 +28,9 @@ export const MyDashboardWellbeingPage = () => {
           </Button>,
         ]}
       >
-        HELLO
+        <Flex flexDirection="column" gap={8}>
+          <ChartBar />
+        </Flex>
       </Section>
       <Section
         title="The Pillars of your Ability to Thrive"
@@ -40,7 +44,7 @@ export const MyDashboardWellbeingPage = () => {
           </Button>,
         ]}
       >
-        HELLO
+        <PredictionChart />
       </Section>
       {modalOpen === "daily-checkin" && (
         <DailyCheckin

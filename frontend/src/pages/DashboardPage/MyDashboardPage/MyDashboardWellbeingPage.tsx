@@ -1,5 +1,5 @@
 // lib
-import { Button, Grid, Modal } from "@chakra-ui/react";
+import { Button, Grid } from "@chakra-ui/react";
 import { useState } from "react";
 
 // local
@@ -49,15 +49,10 @@ export const MyDashboardWellbeingPage = () => {
         />
       )}
       {modalOpen === "quarterly-assessment" && (
-        <Modal
+        <QuarterlyAssessment
           isOpen={modalOpen === "quarterly-assessment"}
           onClose={() => setModalOpen("")}
-          isCentered
-          closeOnEsc={false}
-          closeOnOverlayClick={false}
-        >
-          <QuarterlyAssessment />
-        </Modal>
+        />
       )}
     </Grid>
   );

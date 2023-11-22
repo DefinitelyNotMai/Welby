@@ -93,15 +93,10 @@ export const MyDashboardOverviewPage = () => {
         />
       )}
       {modalOpen === "quarterly-assessment" && (
-        <Modal
+        <QuarterlyAssessment
           isOpen={modalOpen === "quarterly-assessment"}
           onClose={() => setModalOpen("")}
-          isCentered
-          closeOnEsc={false}
-          closeOnOverlayClick={false}
-        >
-          <QuarterlyAssessment />
-        </Modal>
+        />
       )}
     </Flex>
   );

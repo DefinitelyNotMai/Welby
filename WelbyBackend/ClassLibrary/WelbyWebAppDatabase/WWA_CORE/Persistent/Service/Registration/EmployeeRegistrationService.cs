@@ -26,28 +26,34 @@ namespace WWA_CORE.Persistent.Service.Registration
             {
                 var rowtoInsert = new tbl_REG_Employee_Registration
                 {
-                    EmployeeId = employeeRegistrationViewModel.EmployeeId,
                     CompanyId = employeeRegistrationViewModel.CompanyId,
+
                     First_Name = employeeRegistrationViewModel.First_Name, 
                     Middle_Name = employeeRegistrationViewModel.Middle_Name,
                     Last_Name = employeeRegistrationViewModel.Last_Name,
                     Nickname = employeeRegistrationViewModel.Nickname,
+
                     GenderId = employeeRegistrationViewModel.GenderId,
                     Email = employeeRegistrationViewModel.Email,
                     Phone_Number = employeeRegistrationViewModel.Phone_Number,
                     CountryId = employeeRegistrationViewModel.CountryId,
                     Address = employeeRegistrationViewModel.Address,
+
                     Birthday = employeeRegistrationViewModel.Birthday,
+
                     Linkedin = employeeRegistrationViewModel.Linkedin,
                     Facebook = employeeRegistrationViewModel.Facebook,
                     Instagram = employeeRegistrationViewModel.Instagram,
                     TikTok = employeeRegistrationViewModel.TikTok,
+
                     Work = employeeRegistrationViewModel.Work,
-                    Connect = employeeRegistrationViewModel.Contact,
+                    Connect = employeeRegistrationViewModel.Connect,
                     Support = employeeRegistrationViewModel.Support,
+
                     ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto,
                     Other_Notes = employeeRegistrationViewModel.Other_Notes,
-                    FirstLogIn = employeeRegistrationViewModel.FirstLogin,
+
+                    FirstLogIn = employeeRegistrationViewModel.FirstLogIn,
 
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
@@ -98,24 +104,29 @@ namespace WWA_CORE.Persistent.Service.Registration
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
             {
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
+
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
                 Nickname = Convert.ToString(row["Nickname"]),
+
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
                 Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
+
+                TikTok = Convert.ToString(row["TikTok"]),
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
                 Facebook = Convert.ToString(row["Facebook"]),
+
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
+
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 CountryId = Convert.ToInt32(row["CountryId"]),
-
-                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
 
 
                 Work = Convert.ToString(row["Work"]),
@@ -162,20 +173,25 @@ namespace WWA_CORE.Persistent.Service.Registration
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
             {
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
+
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
                 Nickname = Convert.ToString(row["Nickname"]),
+                
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
                 Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
+
+                TikTok = Convert.ToString(row["TikTok"]),
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
                 Facebook = Convert.ToString(row["Facebook"]),
+
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
 
-                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
@@ -226,24 +242,30 @@ namespace WWA_CORE.Persistent.Service.Registration
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
             {
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
+
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
                 Nickname = Convert.ToString(row["Nickname"]),
+
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
                 Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
+
+                TikTok = Convert.ToString(row["TikTok"]),
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
                 Facebook = Convert.ToString(row["Facebook"]),
+
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
+
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 CountryId = Convert.ToInt32(row["CountryId"]),
 
-                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
 
                 Work = Convert.ToString(row["Work"]),
                 Connect = Convert.ToString(row["Connect"]),
@@ -331,26 +353,34 @@ namespace WWA_CORE.Persistent.Service.Registration
             {
                 var RowToUpdate = await context.tbl_REG_Employee_Registration.FirstOrDefaultAsync(c => c.EmployeeId == employeeRegistrationViewModel.EmployeeId);
 
-                RowToUpdate.EmployeeId = employeeRegistrationViewModel.EmployeeId;
                 RowToUpdate.CompanyId = employeeRegistrationViewModel.CompanyId;
+
                 RowToUpdate.First_Name = employeeRegistrationViewModel.First_Name;
                 RowToUpdate.Middle_Name = employeeRegistrationViewModel.Middle_Name;
                 RowToUpdate.Last_Name = employeeRegistrationViewModel.Last_Name;
+                RowToUpdate.Nickname = employeeRegistrationViewModel.Nickname;
+
+                RowToUpdate.TikTok = employeeRegistrationViewModel.TikTok;
                 RowToUpdate.GenderId = employeeRegistrationViewModel.GenderId;
                 RowToUpdate.Email = employeeRegistrationViewModel.Email;
+
                 RowToUpdate.Phone_Number = employeeRegistrationViewModel.Phone_Number;
                 RowToUpdate.Birthday = employeeRegistrationViewModel.Birthday;
                 RowToUpdate.Address = employeeRegistrationViewModel.Address;
                 RowToUpdate.CountryId = employeeRegistrationViewModel.CountryId;
+
                 RowToUpdate.Linkedin = employeeRegistrationViewModel.Linkedin;
                 RowToUpdate.Facebook = employeeRegistrationViewModel.Facebook;
                 RowToUpdate.Instagram = employeeRegistrationViewModel.Instagram;
-                RowToUpdate.TikTok = employeeRegistrationViewModel.TikTok;
+
                 RowToUpdate.Work = employeeRegistrationViewModel.Work;
-                RowToUpdate.Connect = employeeRegistrationViewModel.Contact;
+                RowToUpdate.Connect = employeeRegistrationViewModel.Connect;
                 RowToUpdate.Support = employeeRegistrationViewModel.Support;
+
                 RowToUpdate.ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto;
                 RowToUpdate.Other_Notes = employeeRegistrationViewModel.Other_Notes;
+
+                RowToUpdate.FirstLogIn = employeeRegistrationViewModel.FirstLogIn;
 
                 RowToUpdate.Active = employeeRegistrationViewModel.Active;
                 RowToUpdate.Computer_Name = employeeRegistrationViewModel.Computer_Name;

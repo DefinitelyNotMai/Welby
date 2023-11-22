@@ -1,4 +1,5 @@
 // lib
+import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import { ReactNode, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -48,23 +49,31 @@ export const Auth = ({ children }: AuthProps) => {
     };
 
     const fetchRole = async () => {
-      const roleUrl = "";
+      const roleUrl = "http://localhost:58258/api/GetSystemUsersToSecurityGroupMapping";
 
       try {
         const token = fetchAccessToken(); // token
-
+        const userRole = axios.get(roleUrl, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          params: {
+            "GroupToUserMappingId": null,
+	          "SecurityGroupId": null,
+	          "UserId": userId
+          }
+        }).then((response) => {
+          const result = response.data
+          if (result && result.length > 0) {
+            console.log(result)
+            userContext.setRole(result[0].SecurityGroupId)
+          }
+        })
         /*
         const response = axios call
-
-
-
-
-             method: "GET",
-             headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-             },
-             userContext.setRole(result[0].id)
+             
         */
         userContext.setRole;
       } catch (error) {

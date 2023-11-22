@@ -52,7 +52,8 @@ export const ProductivityRating = ({
     }
     const productivityUpdate = {
       "DailyCheckInId": dailyCheckInId,
-      "Productivity": productivity
+      "Productivity": productivity,
+      "Completion": "Completed"
     }
 
     axios.patch(updateProductivityUrl, productivityUpdate, config)

@@ -92,6 +92,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
       "PositiveEmotions_value": dailyCheckinData.PositiveEmotions.value,
       "NegativeEmotions_int": dailyCheckinData.NegativeEmotions.int, 
       "NegativeEmotions_value": dailyCheckinData.PositiveEmotions.value,
+      "Completion": "Partial",
       "Productivity": 0,
       "Active": true
     }
@@ -111,8 +112,6 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
 
     // NOTE: use this to store dailyCheckinId so it will persist through refreshes
     // This will be cleared on logout
-
-    //localStorage.setItem("dailyCheckinId", result[0].dailyCheckinId); // this is for setting the id
 
     if (trybool) {
       toast({

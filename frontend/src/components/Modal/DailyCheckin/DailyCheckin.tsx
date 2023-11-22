@@ -112,7 +112,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             params: {
-              "DateFrom": new Date.now(),
+              "DateFrom": new Date(),
               "EmployeeId": dailyCheckinData.EmployeeId
             },
           }).then((response) => {

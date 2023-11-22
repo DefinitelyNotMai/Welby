@@ -545,9 +545,11 @@
     <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="EmployeeId" Type="bit" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
+    <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+    <Parameter Name="DateTo" Type="varchar" Mode="In" />
   </Function>
   <Function Name="procWWA_EMP_DailyCheckIn_Get_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="EmployeeId" Type="bit" Mode="In" />
+    <Parameter Name="EmployeeId" Type="int" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
   <Function Name="procWWA_EMP_Interest_By_EmployeeId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -649,6 +651,10 @@
     <Parameter Name="PageSize" Type="int" Mode="In" />
     <Parameter Name="DateFrom" Type="varchar" Mode="In" />
     <Parameter Name="DateTo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="procWWA_TrainingSet_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeId" Type="bit" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
   <EntityContainer Name="WWAModelStoreContainer">
     <EntitySet Name="tbl_EMP_DailyCheckIn" EntityType="Self.tbl_EMP_DailyCheckIn" Schema="dbo" store:Type="Tables" />

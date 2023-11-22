@@ -54,7 +54,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     Other_Notes = employeeRegistrationViewModel.Other_Notes,
 
                     FirstLogIn = employeeRegistrationViewModel.FirstLogIn,
-
+                    
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),

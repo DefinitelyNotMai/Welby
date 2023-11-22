@@ -689,9 +689,11 @@
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
+      <Parameter Name="DateFrom" Mode="In" Type="String" />
+      <Parameter Name="DateTo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get_Employee">
-      <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">
@@ -793,6 +795,10 @@
       <Parameter Name="PageSize" Mode="In" Type="Int32" />
       <Parameter Name="DateFrom" Mode="In" Type="String" />
       <Parameter Name="DateTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_TrainingSet_Get">
+      <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

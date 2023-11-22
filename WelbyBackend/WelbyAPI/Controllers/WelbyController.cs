@@ -32,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromBody] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
 
@@ -40,7 +40,7 @@ namespace WelbyAPI.Controllers
         }
         [Route("~/api/GetAllEmployeeDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromUri] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromBody] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllEmployeeDailyCheckIn(param);
 
@@ -237,7 +237,7 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
-    [Route("~/api/AddValue")]
+        [Route("~/api/AddValue")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddValue([FromBody] ValueMasterViewModel param)
         {

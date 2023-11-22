@@ -331,5 +331,6 @@
     <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company" />
     <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
+    <FunctionImportMapping FunctionImportName="procWWA_TrainingSet_Get" FunctionName="WWAModel.Store.procWWA_TrainingSet_Get" />
   </EntityContainerMapping>
 </Mapping>

@@ -47,10 +47,10 @@ export const processLogin = async (
         localStorage.setItem("userId", result[0].UserCode);
         id = result[0].UserCode;
 
-        if (result[0].FirstLogin === 0) {
-          path = "/dashboard";
-        } else {
+        if (result[0].FirstLogin === 1) {
           path = "/employee-signup";
+        } else {
+          path = "/dashboard";
         }
 
         return { loginSuccess: true, path, id };

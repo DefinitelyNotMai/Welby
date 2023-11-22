@@ -18,7 +18,7 @@ type TeamMember = {
 };
 
 export const MyTeamPage = () => {
-  const [selectedItem, setSelectedItem] = useState<string>("overview");
+  const [selectedItem, setSelectedItem] = useState<string>("");
   const [employees, setEmployees] = useState<TeamMember[]>([]);
   const [selectedEmployee, setSelectedEmployee] = useState<
     TeamMember | undefined
@@ -39,7 +39,8 @@ export const MyTeamPage = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const employeesUrl = "https://localhost:44373/api/GetEmployeesByCompany";
+        const employeesUrl =
+          "https://localhost:44373/api/GetEmployeesByCompany";
 
         const data = await fetchData(employeesUrl, {
           CompanyId: companyId,
@@ -86,8 +87,12 @@ export const MyTeamPage = () => {
                 key={member.EmployeeId}
                 onClick={() => {
                   if (selectedEmployee?.EmployeeId === member.EmployeeId) {
+                    setSelectedItem("");
+                    navigate("/dashboard/my-team");
                     setSelectedEmployee(undefined);
                   } else {
+                    setSelectedItem("overview");
+                    navigate("overview");
                     setSelectedEmployee(member);
                   }
                 }}
@@ -109,6 +114,7 @@ export const MyTeamPage = () => {
             }
             color={selectedItem === "overview" ? "#24a2f0" : "#bcbcbc"}
             fontWeight={selectedItem === "overview" ? "medium" : "normal"}
+            isDisabled={selectedEmployee === undefined ? true : false}
             onClick={() => handleItemClick("overview", "overview")}
             variant="tab"
           >

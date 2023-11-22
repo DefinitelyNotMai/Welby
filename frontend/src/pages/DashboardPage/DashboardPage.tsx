@@ -55,7 +55,7 @@ export const DashboardPage = () => {
             color={selectedItem === "my-team" ? "#24a2f0" : "#bcbcbc"}
             fontWeight={selectedItem === "my-team" ? "medium" : "normal"}
             leftIcon={<AiOutlineTeam />}
-            onClick={() => handleItemClick("my-team", "my-team/overview")}
+            onClick={() => handleItemClick("my-team", "my-team")}
             variant="sidebar"
           >
             My Team

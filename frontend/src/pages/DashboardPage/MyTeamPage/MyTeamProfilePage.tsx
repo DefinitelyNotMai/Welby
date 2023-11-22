@@ -44,7 +44,7 @@ export const MyTeamProfilePage = () => {
       <Flex flexDirection="column" gap={4} height="full">
         <Avatar
           alignSelf="center"
-          boxShadow="2xl"
+          boxShadow="xl"
           boxSize={48}
           src={employeeData.ProfilePhoto}
         />

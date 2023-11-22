@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_EMP_DailyCheckIn">
           <Key>
             <PropertyRef Name="DailyCheckInId" />
@@ -550,9 +550,11 @@
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="bit" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+          <Parameter Name="DateTo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_DailyCheckIn_Get_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="EmployeeId" Type="bit" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Interest_By_EmployeeId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -654,6 +656,10 @@
           <Parameter Name="PageSize" Type="int" Mode="In" />
           <Parameter Name="DateFrom" Type="varchar" Mode="In" />
           <Parameter Name="DateTo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="procWWA_TrainingSet_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="WWAModelStoreContainer">
           <EntitySet Name="tbl_EMP_DailyCheckIn" EntityType="Self.tbl_EMP_DailyCheckIn" Schema="dbo" store:Type="Tables" />
@@ -758,8 +764,7 @@
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1452,9 +1457,11 @@
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="DateFrom" Mode="In" Type="String" />
+            <Parameter Name="DateTo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get_Employee">
-            <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">
@@ -1556,6 +1563,10 @@
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
             <Parameter Name="DateFrom" Mode="In" Type="String" />
             <Parameter Name="DateTo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="procWWA_TrainingSet_Get">
+            <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -1894,6 +1905,7 @@
           <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company" />
           <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
+          <FunctionImportMapping FunctionImportName="procWWA_TrainingSet_Get" FunctionName="WWAModel.Store.procWWA_TrainingSet_Get" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

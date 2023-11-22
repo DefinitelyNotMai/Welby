@@ -23,6 +23,7 @@ namespace WWA_CORE.Persistent.Service.Algo
             var context = new WWAEntities();
             var globalFunctions = new GlobalFunctions();
             var algorithmHandler = new AlgorithmHandler();
+
             try
             {
                 var rowToInsert = new tbl_EMP_DailyCheckIn
@@ -49,7 +50,11 @@ namespace WWA_CORE.Persistent.Service.Algo
                             dailyCheckInViewModel.NegativeEmotions_int
                         ),
                     //Prediction = dailyCheckInViewModel.Prediction,  
-
+                    //Prediction = algorithmHandler.UseAlgo(id,
+                    //            dailyCheckInViewModel.EnergyAtWork_int,
+                    //        dailyCheckInViewModel.FocusAtWork_int,
+                    //        dailyCheckInViewModel.PositiveEmotions_int,
+                    //        dailyCheckInViewModel.NegativeEmotions_int),
                     Active = true,
                     Encoded_By = dailyCheckInViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),

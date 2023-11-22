@@ -45,7 +45,7 @@ namespace WWA_CORE.Persistent.Context
         public virtual DbSet<tbl_REG_Employee_Registration> tbl_REG_Employee_Registration { get; set; }
         public virtual DbSet<tbl_Results> tbl_Results { get; set; }
     
-        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> companyId, Nullable<bool> employeeId, Nullable<bool> active)
+        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> companyId, Nullable<bool> employeeId, Nullable<bool> active, string dateFrom, string dateTo)
         {
             var companyIdParameter = companyId.HasValue ?
                 new ObjectParameter("CompanyId", companyId) :
@@ -59,14 +59,22 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", companyIdParameter, employeeIdParameter, activeParameter);
+            var dateFromParameter = dateFrom != null ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(string));
+    
+            var dateToParameter = dateTo != null ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_DailyCheckIn_Get", companyIdParameter, employeeIdParameter, activeParameter, dateFromParameter, dateToParameter);
         }
     
-        public virtual int procWWA_EMP_DailyCheckIn_Get_Employee(Nullable<bool> employeeId, Nullable<bool> active)
+        public virtual int procWWA_EMP_DailyCheckIn_Get_Employee(Nullable<int> employeeId, Nullable<bool> active)
         {
             var employeeIdParameter = employeeId.HasValue ?
                 new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(bool));
+                new ObjectParameter("EmployeeId", typeof(int));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
@@ -407,6 +415,19 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("DateTo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, phone_NumberParameter, emailParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
+        }
+    
+        public virtual int procWWA_TrainingSet_Get(Nullable<bool> employeeId, Nullable<bool> active)
+        {
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(bool));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_TrainingSet_Get", employeeIdParameter, activeParameter);
         }
     }
 }

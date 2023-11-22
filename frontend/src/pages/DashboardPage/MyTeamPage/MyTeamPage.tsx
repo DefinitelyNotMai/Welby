@@ -1,5 +1,5 @@
 // lib
-import { Box, Button, Flex, Grid, Modal } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";

@@ -29,19 +29,14 @@ const EMPLOYEE_DATA: EmployeeFormData = {
   Role: "",
 };
 
-type AddEmployeeProps = EmployeeFormData & {
+type AddEmployeeProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-export const AddEmployee = ({
-  Email,
-  Password,
-  Role,
-  isOpen,
-  onClose,
-}: AddEmployeeProps) => {
-  const [addEmployeeData, setAddEmployeeData] = useState(EMPLOYEE_DATA);
+export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
+  const [addEmployeeData, setAddEmployeeData] =
+    useState<EmployeeFormData>(EMPLOYEE_DATA);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -258,7 +253,7 @@ export const AddEmployee = ({
                     updateAddEmployeeFields({ Email: e.target.value })
                   }
                   type="email"
-                  value={Email}
+                  value={addEmployeeData.Email}
                 />
                 <Input
                   border="2px solid #f6f6f6"
@@ -269,7 +264,7 @@ export const AddEmployee = ({
                     updateAddEmployeeFields({ Password: e.target.value })
                   }
                   type="password"
-                  value={Password}
+                  value={addEmployeeData.Password}
                 />
                 <SelectRole
                   id="employee-role"
@@ -277,7 +272,7 @@ export const AddEmployee = ({
                   onChange={(e) =>
                     updateAddEmployeeFields({ Role: e.target.value })
                   }
-                  value={Role}
+                  value={addEmployeeData.Role}
                 />
               </Flex>
             </Grid>

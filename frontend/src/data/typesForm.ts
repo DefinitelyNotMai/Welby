@@ -149,4 +149,13 @@ export type DailyCheckInFormData = {
 export type TISE = {
   TiseId: string;
   EmployeeId: string;
+  CompanyId: string;
+  Factor_1: number;
+  Factor_2: number;
+  Factor_3: number;
+  Factor_4: number;
+  Factor_5: number;
+  Factor_6: number;
+  Factor_7: number;
+  Factor_8: number;
 };

@@ -25,7 +25,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var rowToInsert = new tbl_MST_Gender_Master
                 {
-                    GenderId = genderMasterViewModel.GenderId,
                     Gender = genderMasterViewModel.Gender,
                     Biological = genderMasterViewModel.Biological,
 

@@ -24,6 +24,8 @@ namespace WWA_CORE.Constants
 
         public const string PARA_GET_RESULTID = "@ResultId";
 
+        public const string PARA_GET_TRAININGSET_EMPLOYEEID = "@EmployeeId";
+
         #endregion
 
         #region REGISTRATION
@@ -55,12 +57,10 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_GENDER_MASTER_GET_BIOLOGICAL = "@Biological";
 
         public const string PARA_MST_GOAL_MASTER_GET_GOALID = "@GoalId";
-        public const string PARA_MST_GOAL_MASTER_GET_GOALTITLE = "@Title"; //PAGEWISE PARAM
-        public const string PARA_MST_GOAL_MASTER_GET_GOALDESCRIPTION = "@Description"; //PAGEWISE PARAM
+        public const string PARA_MST_GOAL_MASTER_GET_GOAL_COMPANYID = "@CompanyId"; //PAGEWISE PARAM
 
         public const string PARA_MST_VALUE_MASTER_GET_VALUEID = "@ValueId";
-        public const string PARA_MST_VALUE_MASTER_GET_VALUETITLE = "@Title"; //PAGEWISE PARAM
-        public const string PARA_MST_VALUE_MASTER_GET_VALUEDESCRIPTION = "@Description"; //PAGEWISE PARAM
+        public const string PARA_MST_VALUE_MASTER_GET_COMPANYID = "@CompanyId"; //PAGEWISE PARAM
 
         public const string PARA_MST_INTEREST_MASTER_GET_INTERESTID = "@InterestId";
 

@@ -25,12 +25,13 @@ namespace WWA_CORE.Persistent.Service.Masters
             {
                 var rowToInsert = new tbl_MST_Company
                 {
-                    CompanyId = companyMasterViewModel.CompanyId,
                     Name = companyMasterViewModel.Name,
                     Email = companyMasterViewModel.Email,
                     Phone_Number = companyMasterViewModel.Phone_Number,
                     Website = companyMasterViewModel.Website,
                     Address = companyMasterViewModel.Address,
+
+                    CompanySize = companyMasterViewModel.CompanySize,
 
                     CountryId = companyMasterViewModel.CountryId,
                     IndustryTypeId = companyMasterViewModel.IndustryTypeId,

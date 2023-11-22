@@ -51,7 +51,7 @@ export const Step3 = ({ PositiveEmotions, updateFields }: Step3Props) => {
       <Slider
         defaultValue={PositiveEmotions.int}
         max={5}
-        min={0}
+        min={1}
         step={1}
         onChange={handleSliderChange}
         onMouseEnter={() => setShowTooltip(true)}

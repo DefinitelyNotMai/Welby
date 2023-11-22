@@ -51,7 +51,7 @@ export const Step1 = ({ EnergyAtWork, updateFields }: Step1Props) => {
       <Slider
         defaultValue={EnergyAtWork.int}
         max={5}
-        min={0}
+        min={1}
         step={1}
         onChange={handleSliderChange}
         onMouseEnter={() => setShowTooltip(true)}

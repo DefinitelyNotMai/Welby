@@ -105,7 +105,7 @@ namespace WWA_CORE.Utilities
         {
             var query = new SqlQueryObject
             {
-                ProcedureName = PROCEDURE_NAME.PROC_GET_TRAININGSET,
+                ProcedureName = PROCEDURE_NAME.PROC_EMP_DAILYCHECKIN_GET_EMPLOYEE,
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {

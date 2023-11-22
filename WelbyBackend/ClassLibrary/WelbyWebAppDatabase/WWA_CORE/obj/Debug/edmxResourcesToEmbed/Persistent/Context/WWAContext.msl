@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tbl_EMP_DailyCheckIn">
       <EntityTypeMapping TypeName="WWAModel.tbl_EMP_DailyCheckIn">
         <MappingFragment StoreEntitySet="tbl_EMP_DailyCheckIn">
+          <ScalarProperty Name="Completion" ColumnName="Completion" />
           <ScalarProperty Name="DailyCheckInId" ColumnName="DailyCheckInId" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />

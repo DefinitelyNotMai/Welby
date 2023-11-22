@@ -33,6 +33,7 @@ namespace WWA_CORE.Persistent.Context
         public Nullable<int> LastChanged_By { get; set; }
         public Nullable<System.DateTime> LastChanged_Date { get; set; }
         public string Computer_Name { get; set; }
+        public string Completion { get; set; }
     
         public virtual tbl_MST_Company tbl_MST_Company { get; set; }
         public virtual tbl_REG_Employee_Registration tbl_REG_Employee_Registration { get; set; }

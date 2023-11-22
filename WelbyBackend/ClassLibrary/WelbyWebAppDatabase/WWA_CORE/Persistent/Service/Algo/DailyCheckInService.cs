@@ -39,10 +39,10 @@ namespace WWA_CORE.Persistent.Service.Algo
                     EnergyAtWork_value = dailyCheckInViewModel.EnergyAtWork_value,
                     PositiveEmotions_value = dailyCheckInViewModel.PositiveEmotions_value,
                     NegativeEmotions_value = dailyCheckInViewModel.NegativeEmotions_value,
-
+                    Completion = dailyCheckInViewModel.Completion,
                     Productivity = dailyCheckInViewModel.Productivity == null? 0: dailyCheckInViewModel.Productivity,
 
-                    // Predict productivity base on EnergyAtWork_int, FocusAtWork_int, PositiveEmotions_int, NegativeEmotions
+                    // Predict productivity base on EnergyAtWork_int, FocusAtWork_int, PositiveEmotions_int, NegativeEmotions this is not good practice
                     Prediction = algorithmHandler.ImplementAlgo(
                             dailyCheckInViewModel.EnergyAtWork_int,
                             dailyCheckInViewModel.FocusAtWork_int,
@@ -55,6 +55,8 @@ namespace WWA_CORE.Persistent.Service.Algo
                     //        dailyCheckInViewModel.FocusAtWork_int,
                     //        dailyCheckInViewModel.PositiveEmotions_int,
                     //        dailyCheckInViewModel.NegativeEmotions_int),
+                    
+                    
                     Active = true,
                     Encoded_By = dailyCheckInViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),
@@ -106,6 +108,7 @@ namespace WWA_CORE.Persistent.Service.Algo
 
                 Productivity = Convert.ToInt32(row["Productivity"]),
                 Prediction = Convert.ToSingle(row["Prediction"]),
+                Completion = Convert.ToString(row["Completion"]),
 
                 CompanyName = Convert.ToString(row["CompanyName"]),
                 EmployeeName = Convert.ToString(row["EmployeeName"]),
@@ -153,6 +156,7 @@ namespace WWA_CORE.Persistent.Service.Algo
 
                 Productivity = Convert.ToInt32(row["Productivity"]),
                 Prediction = Convert.ToSingle(row["Prediction"]),
+                Completion = Convert.ToString(row["Completion"]),
 
                 CompanyName = Convert.ToString(row["CompanyName"]),
                 EmployeeName = Convert.ToString(row["EmployeeName"]),

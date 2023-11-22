@@ -27,7 +27,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 {
                     Title = goalMasterViewModel.Title,
                     CompanyId = goalMasterViewModel.CompanyId,
-                    GoalId = goalMasterViewModel.GoalId,
                     Description = goalMasterViewModel.Description,
                     DurationFrom = globalFunctions.GetServerDateTime(),
                     DurationTo = goalMasterViewModel.DurationTo,
@@ -56,7 +55,7 @@ namespace WWA_CORE.Persistent.Service.Masters
         {
             var query = new SqlQueryObject
             {
-                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_PAGEWISE_GET,
+                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_GET,
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
@@ -100,7 +99,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALTITLE, goalMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOAL_COMPANYID, goalMasterViewModel.CompanyId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, goalMasterViewModel.Active),
                 }
             };

@@ -25,7 +25,6 @@ namespace WWA_CORE.Persistent.Service.Employee
             {
                 var rowToInsert = new tbl_EMP_Learned_Behaviors
                 {
-                    LearnedBehaviorsId = employeeLearnedBehaviorsViewModel.LearnedBehaviorsId,
                     EmployeeId = employeeLearnedBehaviorsViewModel.EmployeeId,
                     StrengthId = employeeLearnedBehaviorsViewModel.StrengthId,
 

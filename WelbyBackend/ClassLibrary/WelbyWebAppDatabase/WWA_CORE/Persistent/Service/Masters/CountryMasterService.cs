@@ -26,7 +26,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowToInsert = new tbl_MST_Country_Master
                 {
                     Name = countryMasterViewModel.Name,
-                    CountryId = countryMasterViewModel.CountryId,
                     Flag_Image = countryMasterViewModel.Flag_Image,
                     Nationality = countryMasterViewModel.Nationality,
                     Active = true,

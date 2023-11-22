@@ -25,7 +25,6 @@ namespace WWA_CORE.Persistent.Service.Employee
             {
                 var rowToInsert = new tbl_EMP_Weakness
                 {
-                    EmployeeWeaknessId = employeeWeaknessViewModel.EmployeeWeaknessId,
                     EmployeeId = employeeWeaknessViewModel.EmployeeId,
                     StrengthId = employeeWeaknessViewModel.StrengthId,
 

@@ -25,7 +25,6 @@ namespace WWA_CORE.Persistent.Service.Employee
             {
                 var rowToInsert = new tbl_EMP_Realized_Strengths
                 {
-                    RealizedStrengthsId = employeeRealizedStrengthsViewModel.RealizedStrengthsId,
                     EmployeeId = employeeRealizedStrengthsViewModel.EmployeeId,
                     StrengthId = employeeRealizedStrengthsViewModel.StrengthId,
 

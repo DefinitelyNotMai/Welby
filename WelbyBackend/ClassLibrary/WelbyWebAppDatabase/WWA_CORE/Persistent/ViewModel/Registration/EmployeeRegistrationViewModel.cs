@@ -24,6 +24,8 @@ namespace WWA_CORE.Persistent.ViewModel.Registration
         public string TikTok { get; set; }
         public string ProfilePhoto { get; set; }
 
+        public bool FirstLogin { get;set; }
+
 
         public int GenderId { get; set; }
         public int CompanyId { get; set; }

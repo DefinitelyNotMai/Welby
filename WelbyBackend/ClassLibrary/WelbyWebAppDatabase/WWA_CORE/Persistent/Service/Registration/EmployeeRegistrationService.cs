@@ -31,6 +31,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     First_Name = employeeRegistrationViewModel.First_Name, 
                     Middle_Name = employeeRegistrationViewModel.Middle_Name,
                     Last_Name = employeeRegistrationViewModel.Last_Name,
+                    Nickname = employeeRegistrationViewModel.Nickname,
                     GenderId = employeeRegistrationViewModel.GenderId,
                     Email = employeeRegistrationViewModel.Email,
                     Phone_Number = employeeRegistrationViewModel.Phone_Number,
@@ -46,6 +47,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     Support = employeeRegistrationViewModel.Support,
                     ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto,
                     Other_Notes = employeeRegistrationViewModel.Other_Notes,
+                    FirstLogIn = employeeRegistrationViewModel.FirstLogin,
 
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
@@ -113,6 +115,8 @@ namespace WWA_CORE.Persistent.Service.Registration
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 CountryId = Convert.ToInt32(row["CountryId"]),
 
+                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
+
 
                 Work = Convert.ToString(row["Work"]),
                 Connect = Convert.ToString(row["Connect"]),
@@ -170,6 +174,8 @@ namespace WWA_CORE.Persistent.Service.Registration
                 Facebook = Convert.ToString(row["Facebook"]),
                 ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
                 Address = Convert.ToString(row["Address"]),
+
+                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
@@ -237,6 +243,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 CountryId = Convert.ToInt32(row["CountryId"]),
 
+                FirstLogin = Convert.ToBoolean(row["FirstLogIn"]),
 
                 Work = Convert.ToString(row["Work"]),
                 Connect = Convert.ToString(row["Connect"]),

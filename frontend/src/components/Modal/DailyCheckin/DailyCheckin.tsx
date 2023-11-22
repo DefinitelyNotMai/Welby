@@ -81,29 +81,52 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
         "Content-Type": "application/json",
       },
     }
-    const dailyCheckin = {
-      "EmployeeId": dailyCheckinData.EmployeeId,
-      "CompanyId": dailyCheckinData.CompanyId,
-      "EnergyAtWork_int": dailyCheckinData.EnergyAtWork.int,
-      "EnergyAtWork_value": dailyCheckinData.EnergyAtWork.value,
-      "FocusAtWork_int": dailyCheckinData.FocusAtWork.int,
-      "FocusAtWork_value": dailyCheckinData.FocusAtWork.value,
-      "PositiveEmotions_int": dailyCheckinData.PositiveEmotions.int,
-      "PositiveEmotions_value": dailyCheckinData.PositiveEmotions.value,
-      "NegativeEmotions_int": dailyCheckinData.NegativeEmotions.int, 
-      "NegativeEmotions_value": dailyCheckinData.PositiveEmotions.value,
-      "Productivity": 0,
-      "Active": true
+
+    try {
+      const dailyCheckin = {
+        "EmployeeId": dailyCheckinData.EmployeeId,
+        "CompanyId": dailyCheckinData.CompanyId,
+        "EnergyAtWork_int": dailyCheckinData.EnergyAtWork.int,
+        "EnergyAtWork_value": dailyCheckinData.EnergyAtWork.value,
+        "FocusAtWork_int": dailyCheckinData.FocusAtWork.int,
+        "FocusAtWork_value": dailyCheckinData.FocusAtWork.value,
+        "PositiveEmotions_int": dailyCheckinData.PositiveEmotions.int,
+        "PositiveEmotions_value": dailyCheckinData.PositiveEmotions.value,
+        "NegativeEmotions_int": dailyCheckinData.NegativeEmotions.int, 
+        "NegativeEmotions_value": dailyCheckinData.PositiveEmotions.value,
+        "Completion": "Partial",
+        "Productivity": 0,
+        "Active": true
+      }
+      const addDailyCheckin = await axios
+        .post(dailyCheckInUrl, dailyCheckin, config)
+        .then((response) => {
+          console.log(response);
+          return response.data[0]
+        }).catch((error) => {console.log(error)});
+  
+        if (addDailyCheckin) {
+          const getDailyCheckinUrl = "https://localhost:44373/api/GetDailyCheckIn";
+          axios
+          .get(getDailyCheckinUrl, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+            params: {
+              "DateFrom": new Date.now(),
+              "EmployeeId": dailyCheckinData.EmployeeId
+            },
+          }).then((response) => {
+            const result = response.data;
+            if (result && result.length > 0) {
+              localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId); // this is for setting the id
+            }
+          }).catch((error) => {console.log(error)});
+        } 
+
+    } catch (error) {
+      console.log(error)
     }
-    axios
-      .post(dailyCheckInUrl,dailyCheckin,config)
-      .then((response) => {
-        console.log(response);
-        const result = response.data;
-        if (result && result.length > 0) {
-          localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId); // this is for setting the id
-        }
-      }).catch((error) => {console.log(error)});
+    
       
     // if successful statement here:
     console.log(dailyCheckinData);

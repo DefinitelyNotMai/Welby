@@ -18,6 +18,7 @@ import {
 import { Form, useNavigate } from "react-router-dom";
 import { FormEvent, useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import axios from "axios";
 
 type ProductivityRatingProps = {
   isOpen: boolean;
@@ -42,8 +43,26 @@ export const ProductivityRating = ({
 
   // NOTE: add the api calls for adding productivity to db here.
   const handleLogout = () => {
-    const trybool = true;
     const dailyCheckInId = localStorage.getItem("dailyCheckInId");
+    const updateProductivityUrl = "https://localhost:44373/api/UpdateProductivity";
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+    const productivityUpdate = {
+      "DailyCheckInId": dailyCheckInId,
+      "Productivity": productivity
+    }
+
+    axios.patch(updateProductivityUrl, productivityUpdate, config)
+      .then((response)=> {
+        console.log(response)
+      }).catch((error)=> {console.log(error)});
+
+
+    const trybool = true;
+    
 
     if (trybool) {
       toast({

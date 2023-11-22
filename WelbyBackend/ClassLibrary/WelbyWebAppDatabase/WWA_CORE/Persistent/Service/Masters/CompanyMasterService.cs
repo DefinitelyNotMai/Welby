@@ -31,6 +31,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                     Website = companyMasterViewModel.Website,
                     Address = companyMasterViewModel.Address,
 
+                    CompanySize = companyMasterViewModel.CompanySize,
+
                     CountryId = companyMasterViewModel.CountryId,
                     IndustryTypeId = companyMasterViewModel.IndustryTypeId,
                     

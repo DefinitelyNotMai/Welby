@@ -182,9 +182,9 @@ export const routes = createBrowserRouter([
         path: "/employee-signup",
         //
         element: (
-          <Auth>
+          
             <EmployeeSignUpPage />
-          </Auth>
+          
         ),
       },
     ],

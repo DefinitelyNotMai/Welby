@@ -58,6 +58,10 @@ export const DashboardHeader = () => {
   const handleLogoutSelection = () => {
     setIsLoggingOut(!isLoggingOut);
   };
+  const realLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  }
 
   return (
     <Box
@@ -106,7 +110,7 @@ export const DashboardHeader = () => {
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={handleProfileSelection}>My Profile</MenuItem>
-                <MenuItem onClick={handleLogoutSelection}>Logout</MenuItem>
+                <MenuItem onClick={realLogout}>Logout</MenuItem>
               </MenuList>
             </Menu>
             <Heading as="h1" fontSize="md" marginLeft={2}>

@@ -48,7 +48,7 @@ export const Auth = ({ children }: AuthProps) => {
     fetchContext();
   }, [navigate, toast, userContext]);
 
-  return userContext.companyId && userContext.email && userContext.phone ? (
+  return userContext.companyId && userContext.email ? (
     <>{children}</>
   ) : null;
 };

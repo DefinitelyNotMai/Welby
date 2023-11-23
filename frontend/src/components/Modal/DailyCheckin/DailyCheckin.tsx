@@ -11,7 +11,8 @@ import {
   ModalOverlay,
   useToast,
 } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 
 // local
 import { DAILY_CHECKIN_INITIAL_DATA } from "../../../data/initForm";
@@ -73,6 +74,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     />,
   ]);
 
+  const userContext = useContext(UserContext);
   // NOTE: this is where api call for submitting daily check in should be done
   const handleDailyCheckInSubmit = () => {
     const dailyCheckInUrl = "https://localhost:44373/api/AddDailyCheckIn";
@@ -81,9 +83,11 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
         "Content-Type": "application/json",
       },
     }
+    
+    var dateNow = new Date().getDate();
     const dailyCheckin = {
-      "EmployeeId": dailyCheckinData.EmployeeId,
-      "CompanyId": dailyCheckinData.CompanyId,
+      "EmployeeId": localStorage.getItem("userId"),
+      "CompanyId": userContext.companyId,
       "EnergyAtWork_int": dailyCheckinData.EnergyAtWork.int,
       "EnergyAtWork_value": dailyCheckinData.EnergyAtWork.value,
       "FocusAtWork_int": dailyCheckinData.FocusAtWork.int,
@@ -93,7 +97,9 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
       "NegativeEmotions_int": dailyCheckinData.NegativeEmotions.int, 
       "NegativeEmotions_value": dailyCheckinData.PositiveEmotions.value,
       "Productivity": 0,
+      "Encoded_Date": dateNow, 
       "Active": true
+
     }
     axios
       .post(dailyCheckInUrl,dailyCheckin,config)

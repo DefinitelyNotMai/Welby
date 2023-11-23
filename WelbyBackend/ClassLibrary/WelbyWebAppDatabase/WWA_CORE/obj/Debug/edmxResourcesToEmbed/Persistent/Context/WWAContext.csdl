@@ -803,5 +803,10 @@
       <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="procWWA_REG_Employee_GetBy_Company_and_Email">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

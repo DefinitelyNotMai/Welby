@@ -437,5 +437,22 @@ namespace WWA_CORE.Persistent.Context
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_TrainingSet_Get", employeeIdParameter, activeParameter);
         }
+    
+        public virtual int procWWA_REG_Employee_GetBy_Company_and_Email(Nullable<int> companyId, string email, Nullable<bool> active)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_GetBy_Company_and_Email", companyIdParameter, emailParameter, activeParameter);
+        }
     }
 }

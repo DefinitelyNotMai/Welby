@@ -170,6 +170,14 @@ namespace WelbyAPI.Controllers
             return model;
         }
 
+        [Route("~/api/GetAllEmployeesByCompanyAndEmail")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployeeByEmail([FromUri] EmployeeRegistrationViewModel param)
+        {
+            var model = await _wwauow.Employee.GetAllEmployeesByCompanyAndEmail(param);
+            return model;
+        }
+
         [Route("~/api/AddEmployee")]
         [HttpPost]
         public async Task<HttpResponseMessage> AddEmployee([FromBody] EmployeeRegistrationViewModel param)

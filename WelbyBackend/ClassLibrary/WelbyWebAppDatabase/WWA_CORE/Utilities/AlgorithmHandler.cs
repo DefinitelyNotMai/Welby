@@ -54,7 +54,6 @@ namespace WWA_CORE.Utilities
             new double[] { 3, 3, 3, 3 },
             new double[] { 1, 3, 2, 4 },
         };
-
         private double[] outputs = {
                 40,100,80,100,80,60,40,80,40,0
         };
@@ -72,13 +71,7 @@ namespace WWA_CORE.Utilities
             double[] input = { energy, focus, negEmotions, posEmotions };
             return regression.Transform(input);
         }
-        //
-        //
-        //
-        //
-        //
-        //
-        //
+
         private IEnumerable<EmployeeTrainingData> employeeTrainingData;
         public IEnumerable<EmployeeTrainingData> GetTrainingSet(EmployeeTrainingData employeeTrainingData)
         {
@@ -106,68 +99,28 @@ namespace WWA_CORE.Utilities
             employeeTrainingData.Dispose();
             return ReturnedList;
         }
-
-        public class AlgorithmHandler : IDisposable
+    }
+    
+    public class AlgorithmHandler : IDisposable
+    {
+        public float UseAlgo(int e_id, int eaw, int faw, int pe, int ne)
         {
-            public float UseAlgo(int e_id, int eaw, int faw, int pe, int ne)
-            {
-                EmployeeTrainingData employee = new EmployeeTrainingData(
-                    e_id,
-                    Convert.ToDouble(eaw),
-                    Convert.ToDouble(faw),
-                    Convert.ToDouble(pe),
-                    Convert.ToDouble(ne));
-
-                EmployeePredictor predictor = new EmployeePredictor();
-
-                IEnumerable<EmployeeTrainingData> employeeTrainingData = predictor.GetTrainingSet(employee);
-                var trainingData = employeeTrainingData.ToList();
-
-
-
-                if (employeeTrainingData == null || trainingData.Count < 4)
-                {
-                    // Example prediction for an employee
-                    double predictedProductivity = predictor.PredictProductivity(
-                        Convert.ToDouble(eaw),
-                        Convert.ToDouble(faw),
-                        Convert.ToDouble(pe),
-                        Convert.ToDouble(ne));
-
-                    return Convert.ToSingle(predictedProductivity);
-                }
-                else
-                {
-                    double[][] trainingInputs = new double[trainingData.Count][];
-                    double[] trainingOutputs = new double[trainingData.Count];
-
-                    for (int i = 0; i < trainingData.Count; i++)
-                    {
-                        trainingInputs[i] = new double[] {
-                    trainingData[i].EnergyAtWork,
-                    trainingData[i].FocusAtWork,
-                    trainingData[i].NegativeEmotions,
-                    trainingData[i].PositiveEmotions
-                };
-
-                        trainingOutputs[i] = (double)trainingData[i].Productivity;
-                    }
-                    MultipleLinearRegression regression = new MultipleLinearRegression();
-                    var teacher = new OrdinaryLeastSquares();
-                    regression = teacher.Learn(trainingInputs, trainingOutputs);
-                    double[] input = {Convert.ToDouble(eaw),
+            EmployeeTrainingData employee = new EmployeeTrainingData(
+                e_id,
+                Convert.ToDouble(eaw),
                 Convert.ToDouble(faw),
                 Convert.ToDouble(pe),
-                Convert.ToDouble(ne)};
+                Convert.ToDouble(ne));
 
-                    return Convert.ToSingle(regression.Transform(input));
-                }
-            }
+            EmployeePredictor predictor = new EmployeePredictor();
 
-            public float ImplementAlgo(int eaw, int faw, int pe, int ne)
+            IEnumerable<EmployeeTrainingData> employeeTrainingData = predictor.GetTrainingSet(employee);
+            var trainingData = employeeTrainingData.ToList();
+
+
+
+            if (employeeTrainingData == null || trainingData.Count < 4)
             {
-                EmployeePredictor predictor = new EmployeePredictor();
-
                 // Example prediction for an employee
                 double predictedProductivity = predictor.PredictProductivity(
                     Convert.ToDouble(eaw),
@@ -177,41 +130,81 @@ namespace WWA_CORE.Utilities
 
                 return Convert.ToSingle(predictedProductivity);
             }
-
-            #region Disposable Implementation
-            private bool disposed = false;
-            private readonly Component component = new Component();
-            private IntPtr handle;
-
-            public void Dispose()
+            else
             {
-                Dispose(true);
-                GC.SuppressFinalize(this);
-            }
+                double[][] trainingInputs = new double[trainingData.Count][];
+                double[] trainingOutputs = new double[trainingData.Count];
 
-            private void Dispose(bool disposing)
-            {
-                if (!this.disposed)
+                for (int i = 0; i < trainingData.Count; i++)
                 {
-                    if (disposing)
-                        component.Dispose();
+                    trainingInputs[i] = new double[] {
+                trainingData[i].EnergyAtWork,
+                trainingData[i].FocusAtWork,
+                trainingData[i].NegativeEmotions,
+                trainingData[i].PositiveEmotions
+            };
 
-                    CloseHandle(handle);
-                    handle = IntPtr.Zero;
-                    disposed = true;
+                    trainingOutputs[i] = (double)trainingData[i].Productivity;
                 }
+                MultipleLinearRegression regression = new MultipleLinearRegression();
+                var teacher = new OrdinaryLeastSquares();
+                regression = teacher.Learn(trainingInputs, trainingOutputs);
+                double[] input = {Convert.ToDouble(eaw),
+            Convert.ToDouble(faw),
+            Convert.ToDouble(pe),
+            Convert.ToDouble(ne)};
+
+                return Convert.ToSingle(regression.Transform(input));
             }
-
-            [System.Runtime.InteropServices.DllImport("Kernel32")]
-            private extern static Boolean CloseHandle(IntPtr handle);
-
-            ~AlgorithmHandler()
-            {
-                Dispose(false);
-            }
-
-            #endregion
         }
+
+        public float ImplementAlgo(int eaw, int faw, int pe, int ne)
+        {
+            EmployeePredictor predictor = new EmployeePredictor();
+
+            // Example prediction for an employee
+            double predictedProductivity = predictor.PredictProductivity(
+                Convert.ToDouble(eaw),
+                Convert.ToDouble(faw),
+                Convert.ToDouble(pe),
+                Convert.ToDouble(ne));
+
+            return Convert.ToSingle(predictedProductivity);
+        }
+
+        #region Disposable Implementation
+        private bool disposed = false;
+        private readonly Component component = new Component();
+        private IntPtr handle;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                    component.Dispose();
+
+                CloseHandle(handle);
+                handle = IntPtr.Zero;
+                disposed = true;
+            }
+        }
+
+        [System.Runtime.InteropServices.DllImport("Kernel32")]
+        private extern static Boolean CloseHandle(IntPtr handle);
+
+        ~AlgorithmHandler()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 
 }

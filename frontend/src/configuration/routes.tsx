@@ -21,6 +21,19 @@ import { OurCompanyMissionAndVisionPage } from "../pages/DashboardPage/OurCompan
 import { OurCompanyPage } from "../pages/DashboardPage/OurCompanyPage";
 import { Root } from "../layout/Root";
 import { WelcomePage } from "../pages/WelcomePage";
+import { CompaniesPage } from "../pages/AdminViewPage/CompaniesPage";
+import { EmployeesPage } from "../pages/AdminViewPage/EmployeesPage";
+import { GoalsPage } from "../pages/AdminViewPage/GoalsPage";
+import { IndustryTypesPage } from "../pages/AdminViewPage/IndustryTypesPage";
+import { ValuesPage } from "../pages/AdminViewPage/ValuesPage";
+import { CitiesPage } from "../pages/AdminViewPage/CitiesPage";
+import { CountriesPage } from "../pages/AdminViewPage/CountriesPage";
+import { GendersPage } from "../pages/AdminViewPage/GendersPage";
+import { InterestsPage } from "../pages/AdminViewPage/InterestsPage";
+import { StrengthsPage } from "../pages/AdminViewPage/StrengthsPage";
+import { GroupsPage } from "../pages/AdminViewPage/GroupsPage";
+import { UsersPage } from "../pages/AdminViewPage/UsersPage";
+import { UserToGroupPage } from "../pages/AdminViewPage/UserToGroupPage";
 
 export const routes = createBrowserRouter([
   {
@@ -45,6 +58,60 @@ export const routes = createBrowserRouter([
             <AdminViewPage />
           </Auth>
         ),
+        children: [
+          {
+            path: "companies",
+            element: <CompaniesPage />,
+          },
+          {
+            path: "employees",
+            element: <EmployeesPage />,
+          },
+          {
+            path: "goals",
+            element: <GoalsPage />,
+          },
+          {
+            path: "industry-types",
+            element: <IndustryTypesPage />,
+          },
+          {
+            path: "values",
+            element: <ValuesPage />,
+          },
+          {
+            path: "cities",
+            element: <CitiesPage />,
+          },
+          {
+            path: "countries",
+            element: <CountriesPage />,
+          },
+          {
+            path: "genders",
+            element: <GendersPage />,
+          },
+          {
+            path: "interests",
+            element: <InterestsPage />,
+          },
+          {
+            path: "strengths",
+            element: <StrengthsPage />,
+          },
+          {
+            path: "groups",
+            element: <GroupsPage />,
+          },
+          {
+            path: "users",
+            element: <UsersPage />,
+          },
+          {
+            path: "user-to-group",
+            element: <UserToGroupPage />,
+          },
+        ],
       },
       {
         path: "/signup",

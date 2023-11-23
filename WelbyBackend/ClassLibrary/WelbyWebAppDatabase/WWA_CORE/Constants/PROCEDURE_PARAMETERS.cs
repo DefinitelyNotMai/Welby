@@ -31,6 +31,7 @@ namespace WWA_CORE.Constants
         #region REGISTRATION
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMPLOYEEID = "@EmployeeId";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_PHONE_NUMBER = "@Phone_Number";
+
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS = "@Email";
 
         public const string PARA_REG_EMPLOYEE_REGISTRATION_GET_COMPANYID = "@CompanyId";

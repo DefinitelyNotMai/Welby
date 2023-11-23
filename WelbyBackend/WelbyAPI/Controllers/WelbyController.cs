@@ -32,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
 
@@ -40,7 +40,7 @@ namespace WelbyAPI.Controllers
         }
         [Route("~/api/GetAllEmployeeDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromUri] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllEmployeeDailyCheckIn(param);
 
@@ -167,6 +167,14 @@ namespace WelbyAPI.Controllers
         public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployee([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetAllEmployeesByCompany(param);
+            return model;
+        }
+
+        [Route("~/api/GetAllEmployeesByCompanyAndEmail")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployeeByEmail([FromUri] EmployeeRegistrationViewModel param)
+        {
+            var model = await _wwauow.Employee.GetAllEmployeesByCompanyAndEmail(param);
             return model;
         }
 

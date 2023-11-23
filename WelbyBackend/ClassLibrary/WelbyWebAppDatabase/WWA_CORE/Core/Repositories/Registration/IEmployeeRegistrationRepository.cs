@@ -17,6 +17,7 @@ namespace WWA_CORE.Core.Repositories.Registration
         Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployees(EmployeeRegistrationViewModel employeeRegistrationViewModel);
         Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee(EmployeeRegistrationViewModel employeeRegistrationViewModel);
         Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployeesByCompany(EmployeeRegistrationViewModel employeeRegistrationViewModel);
+        Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployeesByCompanyAndEmail(EmployeeRegistrationViewModel employeeRegistrationViewModel);
 
 
     }

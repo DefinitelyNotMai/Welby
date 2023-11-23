@@ -25,6 +25,7 @@
     <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_EMP_D__Compa__06ED0088" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_MST_Company" />
     <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_D__Emplo__05F8DC4F" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
+    <Property Name="Completion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tbl_EMP_Interest">
     <Key>
@@ -695,6 +696,8 @@
     <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get_Employee">
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
+      <Parameter Name="DateFrom" Mode="In" Type="String" />
+      <Parameter Name="DateTo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Interest_By_EmployeeId_Get">
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
@@ -798,6 +801,11 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_TrainingSet_Get">
       <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="procWWA_REG_Employee_GetBy_Company_and_Email">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Email" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
   </EntityContainer>

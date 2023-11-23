@@ -23,6 +23,7 @@
     <Property Name="LastChanged_By" Type="int" />
     <Property Name="LastChanged_Date" Type="datetime" />
     <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Completion" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tbl_EMP_Interest">
     <Key>
@@ -551,6 +552,8 @@
   <Function Name="procWWA_EMP_DailyCheckIn_Get_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmployeeId" Type="int" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
+    <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+    <Parameter Name="DateTo" Type="varchar" Mode="In" />
   </Function>
   <Function Name="procWWA_EMP_Interest_By_EmployeeId_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmployeeId" Type="int" Mode="In" />
@@ -641,6 +644,11 @@
   </Function>
   <Function Name="procWWA_REG_Employee_GetBy_Company" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="procWWA_REG_Employee_GetBy_Company_and_Email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
   <Function Name="procWWA_REG_Employee_Registration_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

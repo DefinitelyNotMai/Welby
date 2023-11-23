@@ -23,7 +23,11 @@ namespace WWA_CORE.Persistent.Service.Algo
             var context = new WWAEntities();
             var globalFunctions = new GlobalFunctions();
             var algorithmHandler = new AlgorithmHandler();
-
+            float predicted = algorithmHandler.UseAlgo(dailyCheckInViewModel.EmployeeId,
+                            dailyCheckInViewModel.EnergyAtWork_int,
+                            dailyCheckInViewModel.FocusAtWork_int,
+                            dailyCheckInViewModel.PositiveEmotions_int,
+                            dailyCheckInViewModel.NegativeEmotions_int);
             try
             {
                 var rowToInsert = new tbl_EMP_DailyCheckIn
@@ -40,28 +44,14 @@ namespace WWA_CORE.Persistent.Service.Algo
                     PositiveEmotions_value = dailyCheckInViewModel.PositiveEmotions_value,
                     NegativeEmotions_value = dailyCheckInViewModel.NegativeEmotions_value,
                     Completion = dailyCheckInViewModel.Completion,
-                    Productivity = dailyCheckInViewModel.Productivity == null? 0: dailyCheckInViewModel.Productivity,
-
-                    // Predict productivity base on EnergyAtWork_int, FocusAtWork_int, PositiveEmotions_int, NegativeEmotions this is not good practice
-                    Prediction = algorithmHandler.ImplementAlgo(
-                            dailyCheckInViewModel.EnergyAtWork_int,
-                            dailyCheckInViewModel.FocusAtWork_int,
-                            dailyCheckInViewModel.PositiveEmotions_int,
-                            dailyCheckInViewModel.NegativeEmotions_int
-                        ),
-                    //Prediction = dailyCheckInViewModel.Prediction,  
-                    //Prediction = algorithmHandler.UseAlgo(id,
-                    //            dailyCheckInViewModel.EnergyAtWork_int,
-                    //        dailyCheckInViewModel.FocusAtWork_int,
-                    //        dailyCheckInViewModel.PositiveEmotions_int,
-                    //        dailyCheckInViewModel.NegativeEmotions_int),
-                    
+                    Productivity = dailyCheckInViewModel.Productivity == null ? 0 : dailyCheckInViewModel.Productivity,
+                    Prediction = predicted,
                     
                     Active = true,
                     Encoded_By = dailyCheckInViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),
                     Computer_Name = dailyCheckInViewModel.Computer_Name
-
+                    
                 };
                 context.tbl_EMP_DailyCheckIn.Add(rowToInsert);
                 await context.SaveChangesAsync();
@@ -133,6 +123,8 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM, dailyCheckInViewModel.DateFrom),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO, DateTime.Now),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_EMPLOYEEID, dailyCheckInViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, dailyCheckInViewModel.Active)
                 }
@@ -234,6 +226,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                 var RowToUpdate = await context.tbl_EMP_DailyCheckIn.FirstOrDefaultAsync(c => c.DailyCheckInId == dailyCheckInViewModel.DailyCheckInId);
 
                 RowToUpdate.Productivity = dailyCheckInViewModel.Productivity;
+                RowToUpdate.Completion = dailyCheckInViewModel.Completion;
 
                 RowToUpdate.Active = true;
                 RowToUpdate.Computer_Name = dailyCheckInViewModel.Computer_Name;

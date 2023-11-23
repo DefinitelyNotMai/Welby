@@ -1,11 +1,11 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, FlexProps } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-type SidebarProps = {
+type SidebarProps = FlexProps & {
   children: ReactNode;
 };
 
-export const Sidebar = ({ children }: SidebarProps) => {
+export const Sidebar = ({ children, ...props }: SidebarProps) => {
   return (
     <Flex
       backgroundColor="#ffffff"
@@ -16,6 +16,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
       paddingTop={4}
       maxWidth={["50%", "40%", "30%", "15%"]}
       minWidth={["50%", "40%", "30%", "15%"]}
+      {...props}
     >
       {children}
     </Flex>

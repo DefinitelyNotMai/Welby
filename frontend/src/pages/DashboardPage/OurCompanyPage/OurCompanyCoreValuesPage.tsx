@@ -1,19 +1,65 @@
 // lib
-import { Grid } from "@chakra-ui/react";
+import { Button, Grid } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 
 // local
+import { VALUE_DATA } from "../../../data/initMaster";
+import { Value } from "../../../data/typesMaster";
 import { Section } from "../../../components/DataDisplay/Section";
+import { UserContext } from "../../../context/UserContext";
+import { fetchData } from "../../../api/fetchData";
 
 export const OurCompanyCoreValuesPage = () => {
-  document.title = "Core Values | Welby";
+  document.title = "Company Core Values | Welby";
+
+  const [values, setValues] = useState<Value[]>([]);
+  const [selectedValue, setSelectedValue] = useState<Value>(VALUE_DATA);
+
+  const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchValues = async () => {
+      try {
+        const valuesUrl = "https://localhost:44373/api/GetValueByCompany";
+
+        const data = await fetchData(valuesUrl, {
+          CompanyId: userContext.companyId,
+        });
+        setValues(data);
+      } catch (error) {
+        console.log("Error fetching data: ", error);
+      }
+    };
+    fetchValues();
+  }, [userContext.companyId]);
 
   return (
     <Grid gap={4} templateColumns="1.25fr 2fr" width="full">
-      <Section borderRadius="1rem 1rem 0 0" title="Core Values">
-        HELLO
+      <Section borderRadius="1rem 1rem 0 0" title="Company Goals">
+        {values.map((value) => (
+          <Button
+            backgroundColor={
+              selectedValue.ValueId === value.ValueId ? "#24a2f0" : "#cccccc"
+            }
+            key={value.ValueId}
+            onClick={() => {
+              if (selectedValue.ValueId === value.ValueId) {
+                setSelectedValue(VALUE_DATA);
+              } else {
+                setSelectedValue(value);
+              }
+            }}
+            variant="list"
+          >
+            {value.Title}
+          </Button>
+        ))}
       </Section>
-      <Section borderRadius="1rem 0 0 0" title="Value Name">
-        HELLO
+      <Section
+        borderRadius="1rem 0 0 0"
+        title={selectedValue.Title || "Value Name"}
+      >
+        {selectedValue.Description}
       </Section>
     </Grid>
   );

@@ -49,6 +49,7 @@ export type Employee = {
   ProfilePhoto: string;
   GenderId: string;
   CompanyId: string;
+  CountryId: string;
   Active: boolean;
   FirstLogIn: boolean;
 };

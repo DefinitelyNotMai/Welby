@@ -83,6 +83,7 @@ export const ChartDoughnut = ({
             fontFamily="Montserrat"
             fontWeight="700"
             fontSize="md"
+            textAlign="center"
           >
             {title}
           </Text>

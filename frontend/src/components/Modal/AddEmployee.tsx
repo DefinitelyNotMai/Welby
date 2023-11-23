@@ -12,10 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
 import { SelectRole } from "../Form/Select";
 import axios from "axios";
 import bcrypt from "bcryptjs";
+import { UserContext } from "../../context/UserContext";
 
 type EmployeeFormData = {
   Email: string;
@@ -29,19 +30,14 @@ const EMPLOYEE_DATA: EmployeeFormData = {
   Role: "",
 };
 
-type AddEmployeeProps = EmployeeFormData & {
+type AddEmployeeProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-export const AddEmployee = ({
-  Email,
-  Password,
-  Role,
-  isOpen,
-  onClose,
-}: AddEmployeeProps) => {
-  const [addEmployeeData, setAddEmployeeData] = useState(EMPLOYEE_DATA);
+export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
+  const [addEmployeeData, setAddEmployeeData] =
+    useState<EmployeeFormData>(EMPLOYEE_DATA);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -61,13 +57,17 @@ export const AddEmployee = ({
   };
 
   const userId = localStorage.getItem("userId");
-
+  const userContext = useContext(UserContext);
   const handleAddEmployee = async () => {
     const temporaryData = {
+      Nickname: addEmployeeData.Email,
       Email: addEmployeeData.Email,
-      //"CompanyId": use,
+      CompanyId: userContext.companyId,
+      CountryId: 1000,
+      GenderId: 1,
       CompanyPosition: addEmployeeData.Role,
-      FirstLogIn: 1,
+      Active: true,
+      FirstLogIn: 0,
       Encoded_By: userId,
     };
 
@@ -83,9 +83,10 @@ export const AddEmployee = ({
           console.log(error);
         });
       if (addEmployee != null) {
-        const getEmployeeUrl = "https://localhost:44373/api/GetEmployee";
+        const getEmployeeUrl = "https://localhost:44373/api/GetAllEmployeesByCompanyAndEmail";
         const param = {
-          Email: addEmployeeData.Email,
+          CompanyId: userContext.companyId,
+          Email: addEmployee.Email,
         };
         const employee = await axios
           .get(getEmployeeUrl, {
@@ -258,7 +259,7 @@ export const AddEmployee = ({
                     updateAddEmployeeFields({ Email: e.target.value })
                   }
                   type="email"
-                  value={Email}
+                  value={addEmployeeData.Email}
                 />
                 <Input
                   border="2px solid #f6f6f6"
@@ -269,7 +270,7 @@ export const AddEmployee = ({
                     updateAddEmployeeFields({ Password: e.target.value })
                   }
                   type="password"
-                  value={Password}
+                  value={addEmployeeData.Password}
                 />
                 <SelectRole
                   id="employee-role"
@@ -277,7 +278,7 @@ export const AddEmployee = ({
                   onChange={(e) =>
                     updateAddEmployeeFields({ Role: e.target.value })
                   }
-                  value={Role}
+                  value={addEmployeeData.Role}
                 />
               </Flex>
             </Grid>

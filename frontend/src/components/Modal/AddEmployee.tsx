@@ -12,10 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
 import { SelectRole } from "../Form/Select";
 import axios from "axios";
 import bcrypt from "bcryptjs";
+import { UserContext } from "../../context/UserContext";
 
 type EmployeeFormData = {
   Email: string;
@@ -56,14 +57,19 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
   };
 
   const userId = localStorage.getItem("userId");
+  const userContext = useContext(UserContext);
 
   const handleAddEmployee = async () => {
     const temporaryData = {
+      Nickname: addEmployeeData.Email,
       Email: addEmployeeData.Email,
-      //"CompanyId": use,
+      CompanyId: userContext.companyId,
       CompanyPosition: addEmployeeData.Role,
-      FirstLogIn: 1,
+      FirstLogIn: 0,
       Encoded_By: userId,
+      CountryId: 1000,
+      GenderId: 1,
+
     };
 
     try {
@@ -78,9 +84,11 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
           console.log(error);
         });
       if (addEmployee != null) {
-        const getEmployeeUrl = "https://localhost:44373/api/GetEmployee";
+        const getEmployeeUrl = "https://localhost:44373/api/GetAllEmployeesByCompanyAndEmail";
         const param = {
-          Email: addEmployeeData.Email,
+          CompanyId: userContext.companyId,
+          Email: addEmployeeData.Email
+
         };
         const employee = await axios
           .get(getEmployeeUrl, {

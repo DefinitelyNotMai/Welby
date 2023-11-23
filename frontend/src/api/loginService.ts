@@ -50,7 +50,7 @@ export const processLogin = async (
         if (result[0].FirstLogin === 1) {
           path = "/employee-signup";
         } else {
-          path = "/dashboard";
+          path = "/dashboard/my-dashboard/overview";
         }
 
         return { loginSuccess: true, path, id };

@@ -11,7 +11,8 @@ import {
   ModalOverlay,
   useToast,
 } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState,useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 
 // local
 import { DAILY_CHECKIN_INITIAL_DATA } from "../../../data/initForm";
@@ -73,6 +74,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     />,
   ]);
 
+  const userContext = useContext(UserContext)
   // NOTE: this is where api call for submitting daily check in should be done
   const handleDailyCheckInSubmit = async () => {
     const dailyCheckInUrl = "https://localhost:44373/api/AddDailyCheckIn";
@@ -83,9 +85,10 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     }
 
     try {
+
       const dailyCheckin = {
-        "EmployeeId": dailyCheckinData.EmployeeId,
-        "CompanyId": dailyCheckinData.CompanyId,
+        "EmployeeId": localStorage.getItem("userId"),
+        "CompanyId": userContext.companyId,
         "EnergyAtWork_int": dailyCheckinData.EnergyAtWork.int,
         "EnergyAtWork_value": dailyCheckinData.EnergyAtWork.value,
         "FocusAtWork_int": dailyCheckinData.FocusAtWork.int,
@@ -102,18 +105,19 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
         .post(dailyCheckInUrl, dailyCheckin, config)
         .then((response) => {
           console.log(response);
-          return response.data[0]
+          return response.data
         }).catch((error) => {console.log(error)});
   
-        if (addDailyCheckin) {
+        if (addDailyCheckin != null) {
           const getDailyCheckinUrl = "https://localhost:44373/api/GetDailyCheckIn";
           axios
           .get(getDailyCheckinUrl, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             params: {
-              "DateFrom": new Date(),
-              "EmployeeId": dailyCheckinData.EmployeeId
+              "DateFrom": addDailyCheckin.Encoded_Date,
+              "DateTo": Date.now(),
+              "EmployeeId": localStorage.getItem("userId"),
             },
           }).then((response) => {
             const result = response.data;

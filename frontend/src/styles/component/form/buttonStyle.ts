@@ -24,9 +24,12 @@ export const buttonStyle = defineStyleConfig({
     },
     masterCrud: {
       _hover: { transform: "scale(1.1)" },
-      backgroundColor: "#ff0000",
-      border: "none",
-      color: "#6c6c6c",
+      backgroundColor: "#ffffff",
+      borderColor: "#ebebeb",
+      borderStyle: "solid",
+      borderWidth: "2px",
+      color: "000000",
+      width: "25%",
     },
     sidebar: {
       _hover: {

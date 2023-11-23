@@ -37,7 +37,8 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: "bottom" as const,
+      align: "start",
+      position: "right",
       labels: {
         usePointStyle: true, // Use point style (square) for legend items
         fillStyle: "Color",

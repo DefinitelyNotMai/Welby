@@ -49,28 +49,31 @@ export const Auth = ({ children }: AuthProps) => {
     };
 
     const fetchRole = async () => {
-      const roleUrl = "http://localhost:58258/api/GetSystemUsersToSecurityGroupMapping";
+      const roleUrl =
+        "http://localhost:58258/api/GetSystemUsersToSecurityGroupMapping";
 
       try {
         const token = fetchAccessToken(); // token
-        const userRole = axios.get(roleUrl, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          params: {
-            "GroupToUserMappingId": null,
-	          "SecurityGroupId": null,
-	          "UserId": userId
-          }
-        }).then((response) => {
-          const result = response.data
-          if (result && result.length > 0) {
-            console.log(result)
-            userContext.setRole(result[0].SecurityGroupId)
-          }
-        })
+        const userRole = axios
+          .get(roleUrl, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            params: {
+              GroupToUserMappingId: null,
+              SecurityGroupId: null,
+              UserId: userId,
+            },
+          })
+          .then((response) => {
+            const result = response.data;
+            if (result && result.length > 0) {
+              console.log(result);
+              userContext.setRole(result[0].SecurityGroupId);
+            }
+          });
         /*
         const response = axios call
              
@@ -84,8 +87,5 @@ export const Auth = ({ children }: AuthProps) => {
     fetchContext();
   }, [navigate, toast, userContext]);
 
-  console.log(userContext.role);
-  return userContext.companyId && userContext.email && userContext.phone ? (
-    <>{children}</>
-  ) : null;
+  return userContext.companyId && userContext.email ? <>{children}</> : null;
 };

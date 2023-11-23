@@ -11,7 +11,7 @@ import {
   ModalOverlay,
   useToast,
 } from "@chakra-ui/react";
-import { FormEvent, useState,useContext } from "react";
+import { FormEvent, useState, useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 
 // local
@@ -74,94 +74,53 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     />,
   ]);
 
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
   // NOTE: this is where api call for submitting daily check in should be done
-  const handleDailyCheckInSubmit = async () => {
+  const handleDailyCheckInSubmit = () => {
     const dailyCheckInUrl = "https://localhost:44373/api/AddDailyCheckIn";
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
-    }
-<<<<<<< HEAD
+    };
+
+    var dateNow = new Date().getDate();
     const dailyCheckin = {
-      "EmployeeId": dailyCheckinData.EmployeeId,
-      "CompanyId": dailyCheckinData.CompanyId,
-      "EnergyAtWork_int": dailyCheckinData.EnergyAtWork.int,
-      "EnergyAtWork_value": dailyCheckinData.EnergyAtWork.value,
-      "FocusAtWork_int": dailyCheckinData.FocusAtWork.int,
-      "FocusAtWork_value": dailyCheckinData.FocusAtWork.value,
-      "PositiveEmotions_int": dailyCheckinData.PositiveEmotions.int,
-      "PositiveEmotions_value": dailyCheckinData.PositiveEmotions.value,
-      "NegativeEmotions_int": dailyCheckinData.NegativeEmotions.int, 
-      "NegativeEmotions_value": dailyCheckinData.PositiveEmotions.value,
-      "Completion": "Partial",
-      "Productivity": 0,
-      "Active": true
-    }
+      EmployeeId: localStorage.getItem("userId"),
+      CompanyId: userContext.companyId,
+      EnergyAtWork_int: dailyCheckinData.EnergyAtWork.int,
+      EnergyAtWork_value: dailyCheckinData.EnergyAtWork.value,
+      FocusAtWork_int: dailyCheckinData.FocusAtWork.int,
+      FocusAtWork_value: dailyCheckinData.FocusAtWork.value,
+      PositiveEmotions_int: dailyCheckinData.PositiveEmotions.int,
+      PositiveEmotions_value: dailyCheckinData.PositiveEmotions.value,
+      NegativeEmotions_int: dailyCheckinData.NegativeEmotions.int,
+      NegativeEmotions_value: dailyCheckinData.PositiveEmotions.value,
+      Productivity: 0,
+      Encoded_Date: dateNow,
+      Active: true,
+    };
     axios
-      .post(dailyCheckInUrl,dailyCheckin,config)
+      .post(dailyCheckInUrl, dailyCheckin, config)
       .then((response) => {
         console.log(response);
-=======
-
-    try {
-      const dailyCheckin = {
-        "EmployeeId": localStorage.getItem("userId"),
-        "CompanyId": userContext.companyId,
-        "EnergyAtWork_int": dailyCheckinData.EnergyAtWork.int,
-        "EnergyAtWork_value": dailyCheckinData.EnergyAtWork.value,
-        "FocusAtWork_int": dailyCheckinData.FocusAtWork.int,
-        "FocusAtWork_value": dailyCheckinData.FocusAtWork.value,
-        "PositiveEmotions_int": dailyCheckinData.PositiveEmotions.int,
-        "PositiveEmotions_value": dailyCheckinData.PositiveEmotions.value,
-        "NegativeEmotions_int": dailyCheckinData.NegativeEmotions.int, 
-        "NegativeEmotions_value": dailyCheckinData.PositiveEmotions.value,
-        "Completion": "Partial",
-        "Productivity": 0,
-        "Active": true
-      }
-
-      const addDailyCheckin = await axios
-        .post(dailyCheckInUrl, dailyCheckin, config)
-        .then((response) => {
-          console.log(response.data);
-          console.log("haaaa")
-          return response.data
-        }).catch((error) => {console.log(error)});
-  
-        if (addDailyCheckin != null) {
-          const getDailyCheckinUrl =
-          "https://localhost:44373/api/GetDailyCheckIn";
-        const response = await axios.get(getDailyCheckinUrl, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          params: {
-            DateFrom: addDailyCheckin.Encoded_Date,
-            DateTo: Date.now(),
-            EmployeeId: localStorage.getItem("userId"),
-          },
-        });
-
->>>>>>> quarterlyassessment-chua
         const result = response.data;
         if (result && result.length > 0) {
-          localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId);
+          localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId); // this is for setting the id
         }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-      }
-
-    } catch (error) {
-      console.log(error)
-    }
-    
-    var trybool = true;
     // if successful statement here:
-    //console.log(dailyCheckinData);
-   
+    console.log(dailyCheckinData);
+    const trybool = true;
 
     // NOTE: use this to store dailyCheckinId so it will persist through refreshes
     // This will be cleared on logout
+
+    //localStorage.setItem("dailyCheckinId", result[0].dailyCheckinId); // this is for setting the id
 
     if (trybool) {
       toast({

@@ -60,6 +60,16 @@ const options = {
         max: 7,
         stepSize: 1,
       },
+      title: {
+        color: "#000000",
+        display: true,
+        padding: 20,
+        text: "Day",
+        font: {
+          size: 16,
+          weight: "bold",
+        },
+      },
     },
     y: {
       beginAtZero: true,
@@ -68,10 +78,15 @@ const options = {
         max: 100,
         stepSize: 5,
       },
-      scaleLabel: {
+      title: {
+        color: "#000000",
         display: true,
-        labelString: "Day",
-        fontColor: "#000000",
+        padding: 20,
+        text: "Scores",
+        font: {
+          size: 16,
+          weight: "bold",
+        },
       },
     },
   },

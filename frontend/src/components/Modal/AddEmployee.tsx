@@ -58,17 +58,17 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
 
   const userId = localStorage.getItem("userId");
   const userContext = useContext(UserContext);
+
   const handleAddEmployee = async () => {
     const temporaryData = {
       Nickname: addEmployeeData.Email,
       Email: addEmployeeData.Email,
       CompanyId: userContext.companyId,
-      CountryId: 1000,
-      GenderId: 1,
       CompanyPosition: addEmployeeData.Role,
-      Active: true,
       FirstLogIn: 0,
       Encoded_By: userId,
+      CountryId: 1000,
+      GenderId: 1,
     };
 
     try {
@@ -83,10 +83,11 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
           console.log(error);
         });
       if (addEmployee != null) {
-        const getEmployeeUrl = "https://localhost:44373/api/GetAllEmployeesByCompanyAndEmail";
+        const getEmployeeUrl =
+          "https://localhost:44373/api/GetAllEmployeesByCompanyAndEmail";
         const param = {
           CompanyId: userContext.companyId,
-          Email: addEmployee.Email,
+          Email: addEmployeeData.Email,
         };
         const employee = await axios
           .get(getEmployeeUrl, {

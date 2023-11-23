@@ -85,7 +85,6 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     }
 
     try {
-
       const dailyCheckin = {
         "EmployeeId": localStorage.getItem("userId"),
         "CompanyId": userContext.companyId,
@@ -101,40 +100,43 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
         "Productivity": 0,
         "Active": true
       }
+
       const addDailyCheckin = await axios
         .post(dailyCheckInUrl, dailyCheckin, config)
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
+          console.log("haaaa")
           return response.data
         }).catch((error) => {console.log(error)});
   
         if (addDailyCheckin != null) {
-          const getDailyCheckinUrl = "https://localhost:44373/api/GetDailyCheckIn";
-          axios
-          .get(getDailyCheckinUrl, {
-            method: "GET",
-            headers: {"Content-Type": "application/json"},
-            params: {
-              "DateFrom": addDailyCheckin.Encoded_Date,
-              "DateTo": Date.now(),
-              "EmployeeId": localStorage.getItem("userId"),
-            },
-          }).then((response) => {
-            const result = response.data;
-            if (result && result.length > 0) {
-              localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId); // this is for setting the id
-            }
-          }).catch((error) => {console.log(error)});
-        } 
+          const getDailyCheckinUrl =
+          "https://localhost:44373/api/GetDailyCheckIn";
+        const response = await axios.get(getDailyCheckinUrl, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          params: {
+            DateFrom: addDailyCheckin.Encoded_Date,
+            DateTo: Date.now(),
+            EmployeeId: localStorage.getItem("userId"),
+          },
+        });
+
+        const result = response.data;
+        if (result && result.length > 0) {
+          localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId);
+        }
+
+      }
 
     } catch (error) {
       console.log(error)
     }
     
-      
+    var trybool = true;
     // if successful statement here:
-    console.log(dailyCheckinData);
-    const trybool = true;
+    //console.log(dailyCheckinData);
+   
 
     // NOTE: use this to store dailyCheckinId so it will persist through refreshes
     // This will be cleared on logout

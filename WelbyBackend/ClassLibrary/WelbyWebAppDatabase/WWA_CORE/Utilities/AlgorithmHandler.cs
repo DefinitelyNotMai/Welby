@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Accord.MachineLearning;
+using Accord.Math;
 using Accord.Statistics.Models.Regression.Linear;
 using WWA_CORE.Constants;
 using WWA_CORE.Persistent.Context;
@@ -103,8 +104,25 @@ namespace WWA_CORE.Utilities
     
     public class AlgorithmHandler : IDisposable
     {
+
         public float UseAlgo(int e_id, int eaw, int faw, int pe, int ne)
         {
+                double[][] inputsBase = {
+                    new double[] { 5, 4, 4, 2 },
+                    new double[] { 4, 4, 4, 2 },
+                    new double[] { 3, 3, 3, 3 },
+                    new double[] { 3, 4, 3, 2 },
+                    new double[] { 3, 4, 3, 4 },
+                    new double[] { 3, 4, 3, 3 },
+                    new double[] { 4, 4, 4, 4 },
+                    new double[] { 5, 4, 5, 1 },
+                    new double[] { 3, 3, 3, 3 },
+                    new double[] { 1, 3, 2, 4 },
+                };
+                double[] outputsBase = {
+                        40,100,80,100,80,60,40,80,40,0
+                };
+
             EmployeeTrainingData employee = new EmployeeTrainingData(
                 e_id,
                 Convert.ToDouble(eaw),
@@ -132,23 +150,28 @@ namespace WWA_CORE.Utilities
             }
             else
             {
-                double[][] trainingInputs = new double[trainingData.Count][];
-                double[] trainingOutputs = new double[trainingData.Count];
+                double[][] inputsFromDB = new double[trainingData.Count][];
+                double[] outputsFromDB = new double[trainingData.Count];
 
                 for (int i = 0; i < trainingData.Count; i++)
                 {
-                    trainingInputs[i] = new double[] {
-                trainingData[i].EnergyAtWork,
-                trainingData[i].FocusAtWork,
-                trainingData[i].NegativeEmotions,
-                trainingData[i].PositiveEmotions
-            };
+                    inputsFromDB[i] = new double[] {
+                        trainingData[i].EnergyAtWork,
+                        trainingData[i].FocusAtWork,
+                        trainingData[i].NegativeEmotions,
+                        trainingData[i].PositiveEmotions
+                     };
 
-                    trainingOutputs[i] = (double)trainingData[i].Productivity;
+                    outputsFromDB[i] = (double)trainingData[i].Productivity;
                 }
+
+                double[][] trainingSetInput = inputsFromDB.Concat(inputsBase).ToArray();
+                double[] trainingSetOutput = outputsFromDB.Concat(outputsBase).ToArray();
+
+
                 MultipleLinearRegression regression = new MultipleLinearRegression();
                 var teacher = new OrdinaryLeastSquares();
-                regression = teacher.Learn(trainingInputs, trainingOutputs);
+                regression = teacher.Learn(trainingSetInput, trainingSetOutput);
                 double[] input = {Convert.ToDouble(eaw),
             Convert.ToDouble(faw),
             Convert.ToDouble(pe),

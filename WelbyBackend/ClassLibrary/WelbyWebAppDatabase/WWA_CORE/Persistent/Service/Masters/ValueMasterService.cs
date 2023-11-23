@@ -58,7 +58,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEID, valueMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_COMPANYID, valueMasterViewModel.CompanyId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, valueMasterViewModel.Active),
 
                 }

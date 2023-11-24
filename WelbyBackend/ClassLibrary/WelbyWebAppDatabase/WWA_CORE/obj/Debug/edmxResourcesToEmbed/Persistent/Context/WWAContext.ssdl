@@ -653,6 +653,7 @@
   </Function>
   <Function Name="procWWA_REG_Employee_Registration_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmployeeId" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
     <Parameter Name="Email" Type="nvarchar" Mode="In" />
     <Parameter Name="PageNo" Type="int" Mode="In" />

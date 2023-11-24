@@ -25,7 +25,7 @@ namespace WWA_CORE.Persistent.ViewModel.Registration
         public string ProfilePhoto { get; set; }
 
         public bool FirstLogIn { get;set; }
-
+        public string CompanyPosition { get; set; }
 
         public int GenderId { get; set; }
         public int CompanyId { get; set; }

@@ -392,11 +392,32 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_GetBy_Company", companyIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_REG_Employee_Registration_Pagewise_Get(Nullable<int> employeeId, string phone_Number, string email, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
+        public virtual int procWWA_REG_Employee_GetBy_Company_and_Email(Nullable<int> companyId, string email, Nullable<bool> active)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_GetBy_Company_and_Email", companyIdParameter, emailParameter, activeParameter);
+        }
+    
+        public virtual int procWWA_REG_Employee_Registration_Pagewise_Get(Nullable<int> employeeId, Nullable<int> companyId, string phone_Number, string email, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
         {
             var employeeIdParameter = employeeId.HasValue ?
                 new ObjectParameter("EmployeeId", employeeId) :
                 new ObjectParameter("EmployeeId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
     
             var phone_NumberParameter = phone_Number != null ?
                 new ObjectParameter("Phone_Number", phone_Number) :
@@ -422,7 +443,7 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("DateTo", dateTo) :
                 new ObjectParameter("DateTo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, phone_NumberParameter, emailParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, companyIdParameter, phone_NumberParameter, emailParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
         }
     
         public virtual int procWWA_TrainingSet_Get(Nullable<bool> employeeId, Nullable<bool> active)
@@ -436,23 +457,6 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_TrainingSet_Get", employeeIdParameter, activeParameter);
-        }
-    
-        public virtual int procWWA_REG_Employee_GetBy_Company_and_Email(Nullable<int> companyId, string email, Nullable<bool> active)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var activeParameter = active.HasValue ?
-                new ObjectParameter("Active", active) :
-                new ObjectParameter("Active", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_GetBy_Company_and_Email", companyIdParameter, emailParameter, activeParameter);
         }
     }
 }

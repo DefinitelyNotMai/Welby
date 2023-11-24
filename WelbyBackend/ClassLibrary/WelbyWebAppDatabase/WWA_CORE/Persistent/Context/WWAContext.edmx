@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_EMP_DailyCheckIn">
           <Key>
             <PropertyRef Name="DailyCheckInId" />
@@ -658,6 +658,7 @@
         </Function>
         <Function Name="procWWA_REG_Employee_Registration_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
           <Parameter Name="PageNo" Type="int" Mode="In" />
@@ -772,7 +773,8 @@
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -799,9 +801,9 @@
           <Property Name="LastChanged_By" Type="Int32" />
           <Property Name="LastChanged_Date" Type="DateTime" Precision="3" />
           <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Completion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_EMP_D__Compa__06ED0088" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_MST_Company" />
           <NavigationProperty Name="tbl_REG_Employee_Registration" Relationship="Self.FK__tbl_EMP_D__Emplo__05F8DC4F" FromRole="tbl_EMP_DailyCheckIn" ToRole="tbl_REG_Employee_Registration" />
-          <Property Name="Completion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_EMP_Interest">
           <Key>
@@ -1566,8 +1568,14 @@
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="procWWA_REG_Employee_GetBy_Company_and_Email">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="procWWA_REG_Employee_Registration_Pagewise_Get">
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Phone_Number" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="PageNo" Mode="In" Type="Int32" />
@@ -1577,11 +1585,6 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_TrainingSet_Get">
             <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="procWWA_REG_Employee_GetBy_Company_and_Email">
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
@@ -1594,7 +1597,6 @@
           <EntitySetMapping Name="tbl_EMP_DailyCheckIn">
             <EntityTypeMapping TypeName="WWAModel.tbl_EMP_DailyCheckIn">
               <MappingFragment StoreEntitySet="tbl_EMP_DailyCheckIn">
-                <ScalarProperty Name="Completion" ColumnName="Completion" />
                 <ScalarProperty Name="DailyCheckInId" ColumnName="DailyCheckInId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -1614,6 +1616,7 @@
                 <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
                 <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
                 <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+                <ScalarProperty Name="Completion" ColumnName="Completion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1921,9 +1924,9 @@
           <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Pagewise_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company" />
+          <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company_and_Email" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company_and_Email" />
           <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
           <FunctionImportMapping FunctionImportName="procWWA_TrainingSet_Get" FunctionName="WWAModel.Store.procWWA_TrainingSet_Get" />
-          <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company_and_Email" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company_and_Email" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1938,7 +1941,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

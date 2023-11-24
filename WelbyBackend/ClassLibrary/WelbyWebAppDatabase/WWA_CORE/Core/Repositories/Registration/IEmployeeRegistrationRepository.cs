@@ -14,10 +14,7 @@ namespace WWA_CORE.Core.Repositories.Registration
         Task<EmployeeRegistrationViewModel> RemoveEmployee(EmployeeRegistrationViewModel employeeRegistrationModelView);
         Task<EmployeeRegistrationViewModel> ReturnEmployee(EmployeeRegistrationViewModel employeeRegistrationModelView);
         Task<EmployeeRegistrationViewModel> UpdateEmployee(EmployeeRegistrationViewModel employeeRegistrationViewModel);    
-        Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployees(EmployeeRegistrationViewModel employeeRegistrationViewModel);
-        Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee(EmployeeRegistrationViewModel employeeRegistrationViewModel);
-        Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployeesByCompany(EmployeeRegistrationViewModel employeeRegistrationViewModel);
-        Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployeesByCompanyAndEmail(EmployeeRegistrationViewModel employeeRegistrationViewModel);
+        Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployees(EmployeeRegistrationViewModel employeeRegistrationViewModel);
 
 
     }

@@ -4,7 +4,6 @@
     <EntitySetMapping Name="tbl_EMP_DailyCheckIn">
       <EntityTypeMapping TypeName="WWAModel.tbl_EMP_DailyCheckIn">
         <MappingFragment StoreEntitySet="tbl_EMP_DailyCheckIn">
-          <ScalarProperty Name="Completion" ColumnName="Completion" />
           <ScalarProperty Name="DailyCheckInId" ColumnName="DailyCheckInId" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -24,6 +23,7 @@
           <ScalarProperty Name="LastChanged_By" ColumnName="LastChanged_By" />
           <ScalarProperty Name="LastChanged_Date" ColumnName="LastChanged_Date" />
           <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
+          <ScalarProperty Name="Completion" ColumnName="Completion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -331,8 +331,8 @@
     <FunctionImportMapping FunctionImportName="procWWA_MST_Value_Master_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_MST_Value_Master_Pagewise_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company" />
+    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company_and_Email" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company_and_Email" />
     <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_Registration_Pagewise_Get" FunctionName="WWAModel.Store.procWWA_REG_Employee_Registration_Pagewise_Get" />
     <FunctionImportMapping FunctionImportName="procWWA_TrainingSet_Get" FunctionName="WWAModel.Store.procWWA_TrainingSet_Get" />
-    <FunctionImportMapping FunctionImportName="procWWA_REG_Employee_GetBy_Company_and_Email" FunctionName="WWAModel.Store.procWWA_REG_Employee_GetBy_Company_and_Email" />
   </EntityContainerMapping>
 </Mapping>

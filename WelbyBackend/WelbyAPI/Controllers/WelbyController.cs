@@ -29,6 +29,65 @@ namespace WelbyAPI.Controllers
             this._wwauow = this._wwauow ?? new WWAUnitOfWork();
         }
 
+        #region EMPLOYEES
+        [Route("~/api/GetEmployees")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
+        {
+            var model = await _wwauow.Employee.GetEmployees(param);
+            return model;
+        }
+
+        [Route("~/api/AddEmployee")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddEmployee([FromBody] EmployeeRegistrationViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Employee.AddEmployee(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateEmployee")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateEmployee([FromBody] EmployeeRegistrationViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Employee.UpdateEmployee(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveEmployee")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveEmployee([FromBody] EmployeeRegistrationViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Employee.RemoveEmployee(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnEmployee")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnEmployee([FromBody] EmployeeRegistrationViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Employee.RemoveEmployee(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        #endregion
+
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
@@ -142,90 +201,6 @@ namespace WelbyAPI.Controllers
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
             return response;
         }
-        #endregion
-
-        #region EMPLOYEES
-        [Route("~/api/GetEmployees")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
-        {
-            var model = await _wwauow.Employee.GetAllEmployees(param);
-            return model;
-        }
-
-        //GetSingle Employee
-        [Route("~/api/GetEmployee")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee([FromUri] EmployeeRegistrationViewModel param)
-        {
-            var model = await _wwauow.Employee.GetEmployee(param);
-            return model;
-        }
-
-        [Route("~/api/GetEmployeesByCompany")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployee([FromUri] EmployeeRegistrationViewModel param)
-        {
-            var model = await _wwauow.Employee.GetAllEmployeesByCompany(param);
-            return model;
-        }
-
-        [Route("~/api/GetAllEmployeesByCompanyAndEmail")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetCompanyEmployeeByEmail([FromUri] EmployeeRegistrationViewModel param)
-        {
-            var model = await _wwauow.Employee.GetAllEmployeesByCompanyAndEmail(param);
-            return model;
-        }
-
-        [Route("~/api/AddEmployee")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddEmployee([FromBody] EmployeeRegistrationViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Employee.AddEmployee(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateEmployee")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateEmployee([FromBody] EmployeeRegistrationViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Employee.UpdateEmployee(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveEmployee")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveEmployee([FromBody] EmployeeRegistrationViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Employee.RemoveEmployee(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnEmployee")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnEmployee([FromBody] EmployeeRegistrationViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Employee.RemoveEmployee(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
         #endregion
 
         #region VALUE

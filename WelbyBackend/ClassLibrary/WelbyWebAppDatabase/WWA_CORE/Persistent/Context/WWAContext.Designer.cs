@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Micah\source\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\Persistent\Context\WWAContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\Persistent\Context\WWAContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

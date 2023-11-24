@@ -54,6 +54,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     Other_Notes = employeeRegistrationViewModel.Other_Notes,
 
                     FirstLogIn = employeeRegistrationViewModel.FirstLogIn,
+                    CompanyPosition = employeeRegistrationViewModel.CompanyPosition,
                     
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
@@ -80,7 +81,7 @@ namespace WWA_CORE.Persistent.Service.Registration
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployees(EmployeeRegistrationViewModel employeeRegistrationViewModel)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployees(EmployeeRegistrationViewModel employeeRegistrationViewModel)
         {
             var query = new SqlQueryObject
             {
@@ -93,9 +94,11 @@ namespace WWA_CORE.Persistent.Service.Registration
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_NO , employeeRegistrationViewModel.PageNo),
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_SIZE , employeeRegistrationViewModel.PageSize),
 
+
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMPLOYEEID , employeeRegistrationViewModel.EmployeeId),
+                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_COMPANYID , employeeRegistrationViewModel.CompanyId),
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_PHONE_NUMBER , employeeRegistrationViewModel.Phone_Number),
-                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS , employeeRegistrationViewModel.Email),
+                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS , employeeRegistrationViewModel.Email)
                }
             };
 
@@ -123,214 +126,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 Address = Convert.ToString(row["Address"]),
 
                 FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
-
-                GenderId = Convert.ToInt32(row["GenderId"]),
-                CompanyId = Convert.ToInt32(row["CompanyId"]),
-                CountryId = Convert.ToInt32(row["CountryId"]),
-
-
-                Work = Convert.ToString(row["Work"]),
-                Connect = Convert.ToString(row["Connect"]),
-                Support = Convert.ToString(row["Support"]),
-                Other_Notes = Convert.ToString(row["Other_Notes"]),
-
-
-                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
-                GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
-                CountryDisplay = Convert.ToString(row["CountryDisplay"]),
-                EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
-
-                Active = Convert.ToBoolean(row["Active"]),
-                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
-                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
-                Computer_Name = Convert.ToString(row["Computer_Name"]),
-                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
-                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
-                EncodedByName = "",
-                LastChangedByName = "",
-            }).ToList();
-
-            query.Dispose();
-            employeeRegistrationViewModel.Dispose();
-            return ReturnedList;
-        }
-
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployeesByCompany(EmployeeRegistrationViewModel employeeRegistrationViewModel)
-        {
-            var query = new SqlQueryObject
-            {
-                ProcedureName = PROCEDURE_NAME.PROC_REG_EMPLOYEE_GETBY_COMPANY,
-                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
-                Parameters = new SqlParameter[]
-               {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_GET_COMPANYID , employeeRegistrationViewModel.CompanyId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeRegistrationViewModel.Active)
-               }
-            };
-
-            await query.ExecuteAsync();
-
-            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
-            {
-                EmployeeId = Convert.ToInt32(row["EmployeeId"]),
-
-                First_Name = Convert.ToString(row["First_Name"]),
-                Middle_Name = Convert.ToString(row["Middle_Name"]),
-                Last_Name = Convert.ToString(row["Last_Name"]),
-                Nickname = Convert.ToString(row["Nickname"]),
-                
-                Phone_Number = Convert.ToString(row["Phone_Number"]),
-                Email = Convert.ToString(row["Email"]),
-                Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
-
-                TikTok = Convert.ToString(row["TikTok"]),
-                Linkedin = Convert.ToString(row["Linkedin"]),
-                Instagram = Convert.ToString(row["Instagram"]),
-                Facebook = Convert.ToString(row["Facebook"]),
-
-                ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
-                Address = Convert.ToString(row["Address"]),
-
-                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
-
-                GenderId = Convert.ToInt32(row["GenderId"]),
-                CompanyId = Convert.ToInt32(row["CompanyId"]),
-                CountryId = Convert.ToInt32(row["CountryId"]),
-
-
-                Work = Convert.ToString(row["Work"]),
-                Connect = Convert.ToString(row["Connect"]),
-                Support = Convert.ToString(row["Support"]),
-                Other_Notes = Convert.ToString(row["Other_Notes"]),
-
-
-                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
-                GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
-                CountryDisplay = Convert.ToString(row["CountryDisplay"]),
-                EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
-
-                Active = Convert.ToBoolean(row["Active"]),
-                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
-                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
-                Computer_Name = Convert.ToString(row["Computer_Name"]),
-                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
-                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
-                EncodedByName = "",
-                LastChangedByName = "",
-            }).ToList();
-
-            query.Dispose();
-            employeeRegistrationViewModel.Dispose();
-            return ReturnedList;
-        }
-
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetAllEmployeesByCompanyAndEmail(EmployeeRegistrationViewModel employeeRegistrationViewModel)
-        {
-            var query = new SqlQueryObject
-            {
-                ProcedureName = PROCEDURE_NAME.PROC_GET_EMLOYEE_GETBY_COMPANY_AND_EMAIL,
-                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
-                Parameters = new SqlParameter[]
-               {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYID , employeeRegistrationViewModel.CompanyId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYEMAIL, employeeRegistrationViewModel.Email),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeRegistrationViewModel.Active)
-               }
-            };
-
-            await query.ExecuteAsync();
-
-            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
-            {
-                EmployeeId = Convert.ToInt32(row["EmployeeId"]),
-
-                First_Name = Convert.ToString(row["First_Name"]),
-                Middle_Name = Convert.ToString(row["Middle_Name"]),
-                Last_Name = Convert.ToString(row["Last_Name"]),
-                Nickname = Convert.ToString(row["Nickname"]),
-
-                Phone_Number = Convert.ToString(row["Phone_Number"]),
-                Email = Convert.ToString(row["Email"]),
-                Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
-
-                TikTok = Convert.ToString(row["TikTok"]),
-                Linkedin = Convert.ToString(row["Linkedin"]),
-                Instagram = Convert.ToString(row["Instagram"]),
-                Facebook = Convert.ToString(row["Facebook"]),
-
-                ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
-                Address = Convert.ToString(row["Address"]),
-
-                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
-
-                GenderId = Convert.ToInt32(row["GenderId"]),
-                CompanyId = Convert.ToInt32(row["CompanyId"]),
-                CountryId = Convert.ToInt32(row["CountryId"]),
-
-
-                Work = Convert.ToString(row["Work"]),
-                Connect = Convert.ToString(row["Connect"]),
-                Support = Convert.ToString(row["Support"]),
-                Other_Notes = Convert.ToString(row["Other_Notes"]),
-
-
-                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
-                GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
-                CountryDisplay = Convert.ToString(row["CountryDisplay"]),
-                EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
-
-                Active = Convert.ToBoolean(row["Active"]),
-                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
-                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
-                Computer_Name = Convert.ToString(row["Computer_Name"]),
-                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
-                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
-                EncodedByName = "",
-                LastChangedByName = "",
-            }).ToList();
-
-            query.Dispose();
-            employeeRegistrationViewModel.Dispose();
-            return ReturnedList;
-        }
-
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployee(EmployeeRegistrationViewModel employeeRegistrationViewModel)
-        {
-            var query = new SqlQueryObject
-            {
-                ProcedureName = PROCEDURE_NAME.PROC_REG_EMPLOYEE_REGISTRATION_GET,
-                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
-                Parameters = new SqlParameter[]
-               {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID , employeeRegistrationViewModel.EmployeeId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeRegistrationViewModel.Active)
-               }
-            };
-
-            await query.ExecuteAsync();
-
-            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
-            {
-                EmployeeId = Convert.ToInt32(row["EmployeeId"]),
-
-                First_Name = Convert.ToString(row["First_Name"]),
-                Middle_Name = Convert.ToString(row["Middle_Name"]),
-                Last_Name = Convert.ToString(row["Last_Name"]),
-                Nickname = Convert.ToString(row["Nickname"]),
-
-                Phone_Number = Convert.ToString(row["Phone_Number"]),
-                Email = Convert.ToString(row["Email"]),
-                Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
-
-                TikTok = Convert.ToString(row["TikTok"]),
-                Linkedin = Convert.ToString(row["Linkedin"]),
-                Instagram = Convert.ToString(row["Instagram"]),
-                Facebook = Convert.ToString(row["Facebook"]),
-
-                ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
-                Address = Convert.ToString(row["Address"]),
-
-                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
+                CompanyPosition = Convert.ToString(row["CompanyPosition"]),
 
                 GenderId = Convert.ToInt32(row["GenderId"]),
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
@@ -423,22 +219,21 @@ namespace WWA_CORE.Persistent.Service.Registration
             {
                 var RowToUpdate = await context.tbl_REG_Employee_Registration.FirstOrDefaultAsync(c => c.EmployeeId == employeeRegistrationViewModel.EmployeeId);
 
-                RowToUpdate.CompanyId = employeeRegistrationViewModel.CompanyId;
-
                 RowToUpdate.First_Name = employeeRegistrationViewModel.First_Name;
                 RowToUpdate.Middle_Name = employeeRegistrationViewModel.Middle_Name;
                 RowToUpdate.Last_Name = employeeRegistrationViewModel.Last_Name;
                 RowToUpdate.Nickname = employeeRegistrationViewModel.Nickname;
-
-                RowToUpdate.TikTok = employeeRegistrationViewModel.TikTok;
-                RowToUpdate.GenderId = employeeRegistrationViewModel.GenderId;
                 RowToUpdate.Email = employeeRegistrationViewModel.Email;
-
                 RowToUpdate.Phone_Number = employeeRegistrationViewModel.Phone_Number;
+
                 RowToUpdate.Birthday = employeeRegistrationViewModel.Birthday;
                 RowToUpdate.Address = employeeRegistrationViewModel.Address;
-                RowToUpdate.CountryId = employeeRegistrationViewModel.CountryId;
 
+                RowToUpdate.CompanyId = employeeRegistrationViewModel.CompanyId;
+                RowToUpdate.CountryId = employeeRegistrationViewModel.CountryId;
+                RowToUpdate.GenderId = employeeRegistrationViewModel.GenderId;
+
+                RowToUpdate.TikTok = employeeRegistrationViewModel.TikTok;
                 RowToUpdate.Linkedin = employeeRegistrationViewModel.Linkedin;
                 RowToUpdate.Facebook = employeeRegistrationViewModel.Facebook;
                 RowToUpdate.Instagram = employeeRegistrationViewModel.Instagram;
@@ -446,15 +241,11 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.Work = employeeRegistrationViewModel.Work;
                 RowToUpdate.Connect = employeeRegistrationViewModel.Connect;
                 RowToUpdate.Support = employeeRegistrationViewModel.Support;
-
-                RowToUpdate.ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto;
                 RowToUpdate.Other_Notes = employeeRegistrationViewModel.Other_Notes;
-
-                RowToUpdate.FirstLogIn = employeeRegistrationViewModel.FirstLogIn;
 
                 RowToUpdate.Active = employeeRegistrationViewModel.Active;
                 RowToUpdate.Computer_Name = employeeRegistrationViewModel.Computer_Name;
-                RowToUpdate.LastChanged_By = employeeRegistrationViewModel.Encoded_By;
+                RowToUpdate.LastChanged_By = employeeRegistrationViewModel.LastChanged_By;
                 RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();
 
                 await context.SaveChangesAsync();
@@ -464,6 +255,7 @@ namespace WWA_CORE.Persistent.Service.Registration
             {
                 employeeRegistrationViewModel.Message_Code = $"{ex.Message} \n {ex.InnerException.ToString() ?? ""}";
             }
+
 
             context.Dispose();
             globalFunctions.Dispose();

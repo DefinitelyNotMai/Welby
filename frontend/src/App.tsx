@@ -5,12 +5,10 @@ import { RouterProvider } from "react-router-dom";
 import { UserContextProvider } from "./context/UserContext";
 import { routes } from "./configuration/routes";
 
-const App = () => {
+export const App = () => {
   return (
     <UserContextProvider>
       <RouterProvider router={routes} />
     </UserContextProvider>
   );
 };
-
-export default App;

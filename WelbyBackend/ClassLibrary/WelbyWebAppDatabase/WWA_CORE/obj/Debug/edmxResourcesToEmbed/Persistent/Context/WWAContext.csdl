@@ -722,7 +722,9 @@
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_TISE_Get">
+      <Parameter Name="TiseId" Mode="In" Type="Int32" />
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">

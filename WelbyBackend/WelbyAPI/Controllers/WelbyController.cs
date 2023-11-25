@@ -614,7 +614,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEE LEARNED BEHAVIORS
         [Route("~/api/GetEmployeeLearnedBehaviors")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromUris] EmployeeLearnedBehaviorsViewModel param)
+        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromUri] EmployeeLearnedBehaviorsViewModel param)
         {
             var model = await _wwauow.EmployeeLearnedBehaviors.GetEmployeeLearnedBehaviors(param);
             return model;

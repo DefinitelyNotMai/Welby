@@ -598,6 +598,8 @@
         </Function>
         <Function Name="procWWA_MST_Company_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_Company_Master_Login_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -617,6 +619,9 @@
         </Function>
         <Function Name="procWWA_MST_Goal_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GoalId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_Goal_Master_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1518,6 +1523,8 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Company_Master_Get">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Phone_Number" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Company_Master_Login_Get">
@@ -1537,6 +1544,9 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Goal_Master_Get">
             <Parameter Name="GoalId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Goal_Master_Pagewise_Get">

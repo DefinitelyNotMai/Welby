@@ -737,6 +737,8 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Company_Master_Get">
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Phone_Number" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Company_Master_Login_Get">
@@ -756,6 +758,9 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Goal_Master_Get">
       <Parameter Name="GoalId" Mode="In" Type="Int32" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Goal_Master_Pagewise_Get">

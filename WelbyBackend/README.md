@@ -79,6 +79,68 @@ were tested only in Postman.
   }
 
 ---
+## Company Routes
+
+> ##### GET :
+**~/api/GetCompanies**
+- params : {
+  - **CompanyId:** number
+  - **Email:** string
+  - **Phone_Number:** string
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddCompany**
+- params : {
+  - **IndustryTypeId:** number
+  - **CountryId:** number
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveCompany**
+- params : {
+  - **CompanyId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnCompany**
+- params : {
+  - **CompanyId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateCompany**
+- params : {
+  - **CompanyId:** number
+  - **Logo:** text
+  - **Name:** string
+  - **Email:** string
+  - **Phone_Number:** string
+  - **Website:** string
+  - **FoundingDate:** string
+  - **Vision:** string
+  - **Mission:** string
+  - **Address:** string
+  - **CountryId** number
+  - **IndustryTypeId:** number
+  - **CountryId:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
 ## Values Routes
 
 > ##### GET :
@@ -128,6 +190,63 @@ were tested only in Postman.
   - **CompanyId:** number
   - **Title:** string
   - **Description:** string
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+
+---
+## Goals Routes
+
+> ##### GET :
+**~/api/GetGoals**
+- params : {
+  - **Goal~~~~Id:** number
+  - **CompanyId:** number
+  - **Title:** string
+  - **Description:** string
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddGoal**
+- params : {
+  - **CompanyId:** number
+  - **Title:** string // maximum characters 250
+  - **Description:** string // maximum characters 1000
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveGoal**
+- params : {
+  - **ValueId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnGoal**
+- params : {
+  - **ValueId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateGoal**
+- params : {
+  - **GoalId:** number
+  - **CompanyId:** number
+  - **Title:** string
+  - **Description:** string
+  - **DurationTo:** string
   - **Active:** boolean
   - **LastChanged_By:** number
 

@@ -59,8 +59,11 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_GENDER_MASTER_GET_GENDERID = "@GenderId";
         public const string PARA_MST_GENDER_MASTER_GET_BIOLOGICAL = "@Biological";
 
+        //Goal Master
         public const string PARA_MST_GOAL_MASTER_GET_GOALID = "@GoalId";
-        public const string PARA_MST_GOAL_MASTER_GET_GOAL_COMPANYID = "@CompanyId"; //PAGEWISE PARAM
+        public const string PARA_MST_GOAL_MASTER_GET_COMPANYID = "@CompanyId";
+        public const string PARA_MST_GOAL_MASTER_GET_TITLE = "@Title";
+        public const string PARA_MST_GOAL_MASTER_GET_DESCRIPTION = "@Description";
 
         //Value Master
         public const string PARA_MST_VALUE_MASTER_GET_VALUEID = "@ValueId";

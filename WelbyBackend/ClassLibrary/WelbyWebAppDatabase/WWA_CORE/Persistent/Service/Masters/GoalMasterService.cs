@@ -50,8 +50,8 @@ namespace WWA_CORE.Persistent.Service.Masters
             globalFunctions.Dispose();
             return goalMasterViewModel;
         }
-
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals(GoalMasterViewModel goalMasterViewModel)
+       
+        public async Task<IEnumerable<GoalMasterViewModel>> GetAllGoals(GoalMasterViewModel goalMasterViewModel)
         {
             var query = new SqlQueryObject
             {
@@ -60,46 +60,9 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOALID, goalMasterViewModel.GoalId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, goalMasterViewModel.Active),
-                }
-            };
-
-            await query.ExecuteAsync();
-
-            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new GoalMasterViewModel()
-            {
-                GoalId = Convert.ToInt32(row["GoalId"]),
-                CompanyId = Convert.ToInt32(row["CompanyId"]),
-                Title = Convert.ToString(row["Title"]),
-                Description = Convert.ToString(row["Description"]),
-                DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
-                DurationTo = DBNull.Value != row["DurationTo"] ? (DateTime?)row["DurationTo"] : null,
-
-
-                Active = Convert.ToBoolean(row["Active"]),
-                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
-                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
-                Computer_Name = Convert.ToString(row["Computer_Name"]),
-                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
-                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
-                EncodedByName = "",
-                LastChangedByName = "",
-
-            }).ToList();
-            query.Dispose();
-            goalMasterViewModel.Dispose();
-            return ReturnedList;
-        }
-
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoalByCompany(GoalMasterViewModel goalMasterViewModel)
-        {
-            var query = new SqlQueryObject
-            {
-                ProcedureName = PROCEDURE_NAME.PROC_MST_GOAL_MASTER_PAGEWISE_GET,
-                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
-                Parameters = new SqlParameter[]
-                {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_GOAL_COMPANYID, goalMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_COMPANYID, goalMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_TITLE, goalMasterViewModel.Title),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GOAL_MASTER_GET_DESCRIPTION, goalMasterViewModel.Description),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, goalMasterViewModel.Active),
                 }
             };
@@ -195,7 +158,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 RowToUpdate.Title = goalMasterViewModel.Title;
                 RowToUpdate.CompanyId = goalMasterViewModel.CompanyId;
                 RowToUpdate.Description = goalMasterViewModel.Description;
-                RowToUpdate.DurationFrom = goalMasterViewModel.DurationFrom;
                 RowToUpdate.DurationTo = goalMasterViewModel.DurationTo;
 
                 RowToUpdate.Active = goalMasterViewModel.Active;

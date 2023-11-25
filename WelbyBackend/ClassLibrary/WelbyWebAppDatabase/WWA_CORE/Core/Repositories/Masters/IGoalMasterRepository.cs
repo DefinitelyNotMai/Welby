@@ -13,7 +13,6 @@ namespace WWA_CORE.Core.Repositories.Masters
         Task<GoalMasterViewModel> UpdateGoal(GoalMasterViewModel goalMasterViewModel);
         Task<GoalMasterViewModel> RemoveGoal(GoalMasterViewModel goalMasterViewModel);
         Task<GoalMasterViewModel> ReturnGoal(GoalMasterViewModel goalMasterViewModel);
-        Task<IEnumerable<GoalMasterViewModel>> GetGoalByCompany(GoalMasterViewModel goalMasterViewModel);
-        Task<IEnumerable<GoalMasterViewModel>> GetGoals(GoalMasterViewModel goalMasterViewModel);
+        Task<IEnumerable<GoalMasterViewModel>> GetAllGoals(GoalMasterViewModel goalMasterViewModel);
     }
 }

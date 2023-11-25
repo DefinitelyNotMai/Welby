@@ -277,6 +277,7 @@
     <Compile Include="Persistent\Resource\Employee\EmployeeWeaknessResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CompanyMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CountryMasterResource.cs" />
+    <Compile Include="Persistent\Resource\Masters\GoalMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
     <Compile Include="Persistent\Service\Algo\DailyCheckInService.cs" />

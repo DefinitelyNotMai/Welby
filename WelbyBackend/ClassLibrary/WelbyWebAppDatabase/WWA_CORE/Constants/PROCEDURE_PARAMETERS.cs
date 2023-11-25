@@ -52,7 +52,9 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_INDUSTRY_TYPE_MASTER_GET_INDUSTRYTYPEID = "@IndustryTypeId";
         public const string PARA_MST_INDUSTRY_TYPE_MASTER_GET_INDUSTRYNAME = "@Industry_Name";
 
+        //Country Master
         public const string PARA_MST_COUNTRY_MASTER_GET_COUNTRYID = "@CountryId";
+        public const string PARA_MST_COUNTRY_MASTER_GET_NAME = "@Name";
 
         //Gender MAster
         public const string PARA_MST_GENDER_MASTER_GET_GENDERID = "@GenderId";

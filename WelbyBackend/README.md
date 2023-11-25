@@ -297,6 +297,7 @@ were tested only in Postman.
 
 **~/api/UpdateStrength**
 - params : {
+  - **StrengthId:** string
   - **Strength:** string
   - **Category:** string
   - **Description:** string
@@ -347,6 +348,7 @@ were tested only in Postman.
 
 **~/api/UpdateInterest**
 - params : {
+  - **InterestId:** string
   - **Name:** string
   - **Active:** boolean
   - **LastChanged_By:** number
@@ -397,6 +399,7 @@ were tested only in Postman.
 
 **~/api/UpdateGender**
 - params : {
+  - **GenderId:** string
   - **Gender:** string
   - **Biological:** boolean
   - **Active:** boolean
@@ -447,8 +450,63 @@ were tested only in Postman.
 
 **~/api/UpdateIndustryType**
 - params : {
+  - **IndustryTypeId:** number
   - **Industry_Name:** string
   - **Active:** boolean
   - **LastChanged_By:** number
 
   }
+
+---
+## Country Master Routes
+
+> ##### GET :
+**~/api/GetCountries**
+- params : {
+  - **CountryId:** number
+  - **Name:** string
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddCountry**
+- params : {
+  - **Name:** string
+  - **Nationality:** string
+  - **Flag_Image:** string
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveCountry**
+- params : {
+  - **CountryId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnCountry**
+- params : {
+  - **CountryId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateCountry**
+- params : {
+  - **CountryId:** number
+  - **Name:** string
+  - **Nationality:** string
+  - **Flag_Image:** text
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+

@@ -495,6 +495,64 @@ namespace WelbyAPI.Controllers
         }
         #endregion
 
+        #region COUNTRY
+        [Route("~/api/GetCountries")]
+        [HttpGet]
+        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromBody] CountryMasterViewModel param)
+        {
+            var model = await _wwauow.Country.GetCountryList(param);
+            return model;
+        }
+
+        [Route("~/api/AddCountry")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddCountry([FromBody] CountryMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Country.AddCountry(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateCountry")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateCountry([FromBody] CountryMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Country.UpdateCountry(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveCountry")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveCountry([FromBody] CountryMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Country.RemoveCountry(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnCountry")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnCountry([FromBody] CountryMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Country.ReturnCountry(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
         // ---------------------------------------------------------------------
 
         #region DAILYCHECKIN
@@ -612,63 +670,7 @@ namespace WelbyAPI.Controllers
         }
         #endregion
 
-        #region COUNTRY
-        [Route("~/api/GetAllCountry")]
-        [HttpGet]
-        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromUri] CountryMasterViewModel param)
-        {
-            var model = await _wwauow.Country.GetCountryList(param);
-            return model;
-        }
-
-        [Route("~/api/AddCountry")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddCountry([FromBody] CountryMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Country.AddCountry(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateCountry")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateCountry([FromBody] CountryMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Country.UpdateCountry(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveCountry")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveCountry([FromBody] CountryMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Country.RemoveCountry(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnCountry")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnCountry([FromBody] CountryMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Country.ReturnCountry(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
+        
 
         #region EMPLOYEE INTEREST
         [Route("~/api/GetEmployeeInterests")]

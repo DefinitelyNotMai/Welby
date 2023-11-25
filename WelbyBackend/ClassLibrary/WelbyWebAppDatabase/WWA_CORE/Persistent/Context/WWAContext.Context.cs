@@ -253,17 +253,21 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Company_Master_Login_Get", companyIdParameter, phone_NumberParameter, emailParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_Country_Master_Get(Nullable<int> countryId, Nullable<bool> active)
+        public virtual int procWWA_MST_Country_Master_Get(Nullable<int> countryId, string name, Nullable<bool> active)
         {
             var countryIdParameter = countryId.HasValue ?
                 new ObjectParameter("CountryId", countryId) :
                 new ObjectParameter("CountryId", typeof(int));
     
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Country_Master_Get", countryIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Country_Master_Get", countryIdParameter, nameParameter, activeParameter);
         }
     
         public virtual int procWWA_MST_Gender_Master_Get(Nullable<int> genderId, string gender, Nullable<bool> active)

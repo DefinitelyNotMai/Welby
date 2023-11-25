@@ -610,6 +610,7 @@
         </Function>
         <Function Name="procWWA_MST_Country_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_Gender_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1540,6 +1541,7 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Country_Master_Get">
             <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Gender_Master_Get">

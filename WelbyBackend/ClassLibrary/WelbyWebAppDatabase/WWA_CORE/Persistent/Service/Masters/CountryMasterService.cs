@@ -57,6 +57,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COUNTRY_MASTER_GET_COUNTRYID, countryMasterViewModel.CountryId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_COUNTRY_MASTER_GET_NAME, countryMasterViewModel.Name),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, countryMasterViewModel.Active),
                 }
             };

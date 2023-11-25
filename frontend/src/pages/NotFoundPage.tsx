@@ -11,15 +11,8 @@ export const NotFoundPage = () => {
     <WelcomeLayout noBackground>
       <Flex alignItems="center" justifyContent="center" minHeight="100vh">
         <Flex>
-          <Heading
-            borderRight="1px solid #000000"
-            color="#000000"
-            fontFamily="Roboto"
-            fontWeight="medium"
-          >
-            404&nbsp;
-          </Heading>
-          <Heading color="#000000" fontFamily="Roboto" fontWeight="normal">
+          <Heading variant="404-title">404&nbsp;</Heading>
+          <Heading variant="404-description">
             &nbsp;This page could not be found
           </Heading>
         </Flex>

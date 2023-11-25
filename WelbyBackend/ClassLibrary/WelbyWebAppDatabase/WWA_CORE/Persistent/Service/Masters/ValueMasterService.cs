@@ -50,15 +50,18 @@ namespace WWA_CORE.Persistent.Service.Masters
             return valueMasterViewModel;
         }
 
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueByCompany(ValueMasterViewModel valueMasterViewModel)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetValues(ValueMasterViewModel valueMasterViewModel)
         {
             var query = new SqlQueryObject
             {
-                ProcedureName = PROCEDURE_NAME.PROC_MST_VALUE_MASTER_PAGEWISE_GET,
+                ProcedureName = PROCEDURE_NAME.PROC_MST_VALUE_MASTER_GET,
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEID, valueMasterViewModel.ValueId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_COMPANYID, valueMasterViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_TITLE, valueMasterViewModel.Title),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_DESCRIPTION, valueMasterViewModel.Description),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, valueMasterViewModel.Active),
 
                 }
@@ -74,6 +77,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Title = Convert.ToString(row["Title"]),
                 Description = Convert.ToString(row["Description"]),
 
+                CompanyName = Convert.ToString(row["CompanyName"]),
+
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
                 Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
@@ -83,46 +88,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 EncodedByName = "",
                 LastChangedByName = "",
 
-                TotalRows = Convert.ToInt32(row["TotalRows"]),
-                TotalPage = Convert.ToInt32(row["TotalPage"]),
-
-            }).ToList();
-            query.Dispose();
-            valueMasterViewModel.Dispose();
-            return ReturnedList;
-        }
-
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValues(ValueMasterViewModel valueMasterViewModel)
-        {
-            var query = new SqlQueryObject
-            {
-                ProcedureName = PROCEDURE_NAME.PROC_MST_VALUE_MASTER_GET,
-                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
-                Parameters = new SqlParameter[]
-                {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_VALUE_MASTER_GET_VALUEID, valueMasterViewModel.ValueId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, valueMasterViewModel.Active)
-
-                }
-            };
-
-            await query.ExecuteAsync();
-
-            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new ValueMasterViewModel()
-            {
-
-                ValueId = Convert.ToInt32(row["ValueId"]),
-                CompanyId = Convert.ToInt32(row["CompanyId"]),
-                Title = Convert.ToString(row["Title"]),
-                Description = Convert.ToString(row["Description"]),
-
-                Active = Convert.ToBoolean(row["Active"]),
-                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
-                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
-                Computer_Name = Convert.ToString(row["Computer_Name"]),
-                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
-                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
-                EncodedByName = ""
 
             }).ToList();
             query.Dispose();

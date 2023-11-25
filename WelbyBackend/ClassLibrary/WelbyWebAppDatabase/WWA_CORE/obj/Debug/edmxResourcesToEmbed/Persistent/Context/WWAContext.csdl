@@ -776,6 +776,9 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Value_Master_Get">
       <Parameter Name="ValueId" Mode="In" Type="Int32" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Value_Master_Pagewise_Get">
@@ -800,6 +803,7 @@
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
       <Parameter Name="Phone_Number" Mode="In" Type="String" />
       <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
       <Parameter Name="PageNo" Mode="In" Type="Int32" />
       <Parameter Name="PageSize" Mode="In" Type="Int32" />
       <Parameter Name="DateFrom" Mode="In" Type="String" />

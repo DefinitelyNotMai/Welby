@@ -226,6 +226,7 @@ namespace WWA_CORE.Persistent.Service.Registration
 
                 RowToUpdate.Birthday = employeeRegistrationViewModel.Birthday;
                 RowToUpdate.Address = employeeRegistrationViewModel.Address;
+                RowToUpdate.CompanyPosition = employeeRegistrationViewModel.CompanyPosition;
 
                 RowToUpdate.CompanyId = employeeRegistrationViewModel.CompanyId;
                 RowToUpdate.CountryId = employeeRegistrationViewModel.CountryId;
@@ -240,6 +241,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.Connect = employeeRegistrationViewModel.Connect;
                 RowToUpdate.Support = employeeRegistrationViewModel.Support;
                 RowToUpdate.Other_Notes = employeeRegistrationViewModel.Other_Notes;
+                RowToUpdate.ProfilePhoto = employeeRegistrationViewModel.ProfilePhoto;
 
                 RowToUpdate.Active = employeeRegistrationViewModel.Active;
                 RowToUpdate.Computer_Name = employeeRegistrationViewModel.Computer_Name;

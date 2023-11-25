@@ -632,6 +632,9 @@
   </Function>
   <Function Name="procWWA_MST_Value_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ValueId" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
   </Function>
   <Function Name="procWWA_MST_Value_Master_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -656,6 +659,7 @@
     <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
     <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
     <Parameter Name="PageNo" Type="int" Mode="In" />
     <Parameter Name="PageSize" Type="int" Mode="In" />
     <Parameter Name="DateFrom" Type="varchar" Mode="In" />

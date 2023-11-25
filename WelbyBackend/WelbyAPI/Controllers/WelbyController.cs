@@ -32,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEES
         [Route("~/api/GetEmployees")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromBody] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetEmployees(param);
             return model;
@@ -87,6 +87,67 @@ namespace WelbyAPI.Controllers
         }
 
         #endregion
+        
+        #region VALUE
+        [Route("~/api/GetValues")]
+        [HttpGet]
+        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromBody] ValueMasterViewModel param)
+        {
+            var model = await _wwauow.Value.GetValues(param);
+            return model;
+        }
+
+        [Route("~/api/AddValue")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddValue([FromBody] ValueMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Value.AddValue(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateValue")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateValue([FromBody] ValueMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Value.UpdateValue(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveValue")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveValue([FromBody] ValueMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Value.RemoveValue(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnValue")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnValue([FromBody] ValueMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Value.ReturnValue(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+
+        // ---------------------------------------------------------------------
 
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
@@ -196,72 +257,6 @@ namespace WelbyAPI.Controllers
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.Tise.ReturnTise(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region VALUE
-        [Route("~/api/GetValueByCompany")]
-        [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetValueList([FromUri] ValueMasterViewModel param)
-        {
-            var model = await _wwauow.Value.GetValueByCompany(param);
-            return model;
-        }
-
-        [Route("~/api/GetValues")]
-        [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromUri] ValueMasterViewModel param)
-        {
-            var model = await _wwauow.Value.GetValues(param);
-            return model;
-        }
-
-        [Route("~/api/AddValue")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddValue([FromBody] ValueMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Value.AddValue(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateValue")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateValue([FromBody] ValueMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Value.UpdateValue(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveValue")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveValue([FromBody] ValueMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Value.RemoveValue(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnValue")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnValue([FromBody] ValueMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Value.ReturnValue(param);
             var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
             var sample = js.Serialize(model);
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");

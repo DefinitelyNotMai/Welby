@@ -184,7 +184,6 @@
   <ItemGroup>
     <Compile Include="Constants\PROCEDURE_NAME.cs" />
     <Compile Include="Constants\PROCEDURE_PARAMETERS.cs" />
-    <Compile Include="Constants\REPORT_PARAMETER.cs" />
     <Compile Include="Core\Repositories\Algo\IDailyCheckInRepository.cs" />
     <Compile Include="Core\Repositories\Algo\IResultsRepository.cs" />
     <Compile Include="Core\Repositories\Algo\ITiseRepository.cs" />
@@ -278,6 +277,7 @@
     <Compile Include="Persistent\Resource\Employee\EmployeeWeaknessResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CompanyMasterResource.cs" />
     <Compile Include="Persistent\Resource\Masters\CountryMasterResource.cs" />
+    <Compile Include="Persistent\Resource\Masters\ValueMasterResource.cs" />
     <Compile Include="Persistent\Resource\Registration\EmployeeRegistrationResource.cs" />
     <Compile Include="Persistent\Service\Algo\DailyCheckInService.cs" />
     <Compile Include="Persistent\Service\Algo\ResultsService.cs" />

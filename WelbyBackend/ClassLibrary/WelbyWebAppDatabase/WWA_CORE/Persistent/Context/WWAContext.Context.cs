@@ -340,17 +340,29 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Strength_Master_Get", strengthIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_Value_Master_Get(Nullable<int> valueId, Nullable<bool> active)
+        public virtual int procWWA_MST_Value_Master_Get(Nullable<int> valueId, Nullable<int> companyId, string title, string description, Nullable<bool> active)
         {
             var valueIdParameter = valueId.HasValue ?
                 new ObjectParameter("ValueId", valueId) :
                 new ObjectParameter("ValueId", typeof(int));
     
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Value_Master_Get", valueIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Value_Master_Get", valueIdParameter, companyIdParameter, titleParameter, descriptionParameter, activeParameter);
         }
     
         public virtual int procWWA_MST_Value_Master_Pagewise_Get(Nullable<int> companyId, Nullable<bool> active)
@@ -409,7 +421,7 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_GetBy_Company_and_Email", companyIdParameter, emailParameter, activeParameter);
         }
     
-        public virtual int procWWA_REG_Employee_Registration_Pagewise_Get(Nullable<int> employeeId, Nullable<int> companyId, string phone_Number, string email, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
+        public virtual int procWWA_REG_Employee_Registration_Pagewise_Get(Nullable<int> employeeId, Nullable<int> companyId, string phone_Number, string email, Nullable<bool> active, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
         {
             var employeeIdParameter = employeeId.HasValue ?
                 new ObjectParameter("EmployeeId", employeeId) :
@@ -427,6 +439,10 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Email", email) :
                 new ObjectParameter("Email", typeof(string));
     
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
             var pageNoParameter = pageNo.HasValue ?
                 new ObjectParameter("PageNo", pageNo) :
                 new ObjectParameter("PageNo", typeof(int));
@@ -443,7 +459,7 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("DateTo", dateTo) :
                 new ObjectParameter("DateTo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, companyIdParameter, phone_NumberParameter, emailParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, companyIdParameter, phone_NumberParameter, emailParameter, activeParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
         }
     
         public virtual int procWWA_TrainingSet_Get(Nullable<bool> employeeId, Nullable<bool> active)

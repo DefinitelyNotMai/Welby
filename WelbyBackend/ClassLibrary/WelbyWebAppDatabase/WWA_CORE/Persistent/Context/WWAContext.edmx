@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_EMP_DailyCheckIn">
           <Key>
             <PropertyRef Name="DailyCheckInId" />
@@ -637,6 +637,9 @@
         </Function>
         <Function Name="procWWA_MST_Value_Master_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ValueId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_MST_Value_Master_Pagewise_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -661,6 +664,7 @@
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="PageNo" Type="int" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
           <Parameter Name="DateFrom" Type="varchar" Mode="In" />
@@ -773,8 +777,7 @@
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1554,6 +1557,9 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Value_Master_Get">
             <Parameter Name="ValueId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_MST_Value_Master_Pagewise_Get">
@@ -1578,6 +1584,7 @@
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Phone_Number" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="PageNo" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
             <Parameter Name="DateFrom" Mode="In" Type="String" />

@@ -40,8 +40,6 @@ namespace WWA_CORE.Constants
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS = "@Email";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_COMPANYID = "@CompanyId";
 
-        public const string PARA_REG_EMPLOYEE_REGISTRATION_GET_EMPLOYEEID = "@EmployeeId";
-
         //Company
         public const string PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYID = "@CompanyId";
         public const string PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYEMAIL = "@Email";
@@ -64,8 +62,11 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_GOAL_MASTER_GET_GOALID = "@GoalId";
         public const string PARA_MST_GOAL_MASTER_GET_GOAL_COMPANYID = "@CompanyId"; //PAGEWISE PARAM
 
+        //Value Master
         public const string PARA_MST_VALUE_MASTER_GET_VALUEID = "@ValueId";
-        public const string PARA_MST_VALUE_MASTER_GET_COMPANYID = "@CompanyId"; //PAGEWISE PARAM
+        public const string PARA_MST_VALUE_MASTER_GET_COMPANYID = "@CompanyId";
+        public const string PARA_MST_VALUE_MASTER_GET_TITLE = "@Title";
+        public const string PARA_MST_VALUE_MASTER_GET_DESCRIPTION = "@Description";
 
         public const string PARA_MST_INTEREST_MASTER_GET_INTERESTID = "@InterestId";
 
@@ -104,29 +105,6 @@ namespace WWA_CORE.Constants
         public const string PARA_EMP_WEAKNESS_GET_STRENGTHID = "@StrengthId";
         #endregion
 
-        #region SECURITY
-        public const string PARA_SSA_SYSTEM_CONTROLS_CONTROLID = "@ControlId";
-        public const string PARA_SSA_SYSTEM_CONTROLS_CONTROLNAME = "@ControlName";
-        public const string PARA_SSA_SYSTEM_GROUP_GROUPID = "@GroupId";
-
-        public const string PARA_SSA_SYSTEM_GROUP_CONTROL_MAPPING_GROUPID = "@GroupId";
-        public const string PARA_SSA_SYSTEM_GROUP_CONTROL_MAPPING_MAPPINGID = "@MappingId";
-        public const string PARA_SSA_SYSTEM_GROUP_CONTROL_MAPPING_CONTROLID = "@ControlId";
-
-        public const string PARA_SSA_SYSTEM_USERS_USER_NAME = "@User_Name";
-        public const string PARA_SSA_SYSTEM_USERS_PASSWORD = "@Password";
-
-        /**
-        public const string PARA_SSA_SYSTEM_USERS_GROUPID = "@GroupId";
-        public const string PARA_SSA_SYSTEM_USERS_USERID = "@UserId";
-        public const string PARA_SSA_SYSTEM_USERS_BRANCHID = "@BranchId";
-        public const string PARA_SSA_SYSTEM_USERS_EMP_NO = "@Emp_No";
-        
-        public const string PARA_SSA_SYSTEM_USERS_ACCOUNT_LOGS_USERID = "@UserId";
-        public const string PARA_SSA_SYSTEM_USERS_ACCOUNT_LOGS_RECORDID = "@RecordId";
-        public const string PARA_SSA_SYSTEM_USERS_SYSTEM_LOGS_EMP_NO = "@Emp_No";
-        public const string PARA_SSA_SYSTEM_USERS_SYSTEM_LOGS_RECORDID = "@RecordId ";
-        **/
-        #endregion
+      
     }
 }

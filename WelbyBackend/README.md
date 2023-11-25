@@ -1,18 +1,21 @@
 # WelbyAPI Routes  and Parameters
 Note: The parameters might change because these 
 were tested only in Postman.
+- ##### *If value of a string parameter is not known, use* **" "** *to indicate it is null.*
+- ##### *if value of a number parameter is not known, use* **0** *to indicate null.*
+- ##### *If `Active` is not `true` it will show both active and inactive datas* 
 
 ---
 ## Employee Routes
 
 > ##### GET :
-
 **~/api/GetEmployees**
 - params : {
    - **EmployeeId:** number 
    - **CompanyId:** number
    - **Email:** string
    - **Phone_Number:** string
+   - **Active:** boolean
 
   }
 
@@ -49,14 +52,19 @@ were tested only in Postman.
 **~/api/UpdateEmployee**
 - params : {
   - **EmployeeId:** number
+  - **ProfilePhoto:** text
   - **First_Name:** string
   - **Middle_Name:** string
   - **Last_Name:** string
   - **Nickname:** string
   - **Email:** string
   - **Phone_Number:** string
+  - **Address:** string
+  - **Birthday:** string
   - **CompanyId** number
-  - **CountryId:** number
+  - **CompanyPosition:** string
+  - **CountryId:** number 
+  - **GenderId:** number
   - **TikTok:** string
   - **LinkedIn:** string
   - **Facebook:** string
@@ -71,26 +79,26 @@ were tested only in Postman.
   }
 
 ---
-## Employee Routes
+## Values Routes
 
 > ##### GET :
-
-**~/api/GetEmployees**
+**~/api/GetValues**
 - params : {
-  - **EmployeeId:** number
+  - **ValueId:** number
   - **CompanyId:** number
-  - **Email:** string
-  - **Phone_Number:** string
+  - **Title:** string
+  - **Description:** string
+  - **Active:** boolean
 
   }
 
 > ##### Add :
 
-**~/api/AddEmployee**
+**~/api/AddValue**
 - params : {
   - **CompanyId:** number
-  - **GenderId:** number
-  - **CountryId:** number
+  - **Title:** string // maximum characters 250
+  - **Description:** string // maximum characters 1000
   - **Encoded_By:** number
   - **Encoded_Date:** string
 
@@ -98,41 +106,28 @@ were tested only in Postman.
 
 > ##### Remove :
 
-**~/api/RemoveEmployee**
+**~/api/RemoveValue**
 - params : {
-  - **EmpoyeeId:** number
+  - **ValueId:** number
 
   }
 
 > ##### Return :
 
-**~/api/ReturnEmployee**
+**~/api/ReturnValue**
 - params : {
-  - **EmpoyeeId:** number
+  - **ValueId:** number
 
   }
 
 > ##### Update :
 
-**~/api/UpdateEmployee**
+**~/api/UpdateValue**
 - params : {
-  - **EmployeeId:** number
-  - **First_Name:** string
-  - **Middle_Name:** string
-  - **Last_Name:** string
-  - **Nickname:** string
-  - **Email:** string
-  - **Phone_Number:** string
-  - **CompanyId** number
-  - **CountryId:** number
-  - **TikTok:** string
-  - **LinkedIn:** string
-  - **Facebook:** string
-  - **Instagram:** string
-  - **Work:** string
-  - **Connect:** string
-  - **Support:** string
-  - **Other_Notes:** string
+  - **ValueId:** number
+  - **CompanyId:** number
+  - **Title:** string
+  - **Description:** string
   - **Active:** boolean
   - **LastChanged_By:** number
 

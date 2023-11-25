@@ -11,19 +11,19 @@ import { DashboardHeader } from "../../components/Dashboard/DashboardHeader";
 import { Sidebar } from "../../components/DataDisplay/Sidebar";
 
 export const DashboardPage = () => {
-  const [selectedItem, setSelectedItem] = useState<string>("");
-
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    setSelectedItem(location.pathname.replace("/dashboard/", "").split("/")[0]);
-  }, [location.pathname]);
+  const [selectedItem, setSelectedItem] = useState<string>("");
 
   const handleItemClick = (item: string, route: string) => {
     setSelectedItem(item);
     navigate(route);
   };
+
+  useEffect(() => {
+    setSelectedItem(location.pathname.replace("/dashboard/", "").split("/")[0]);
+  }, [location.pathname]);
 
   return (
     <>
@@ -77,13 +77,7 @@ export const DashboardPage = () => {
             Our Company
           </Button>
         </Sidebar>
-        <Flex
-          flexDirection="column"
-          flex={1}
-          gap={4}
-          marginLeft={4}
-          marginTop={4}
-        >
+        <Flex flex={1} flexDirection="column" marginLeft={4} marginTop={4}>
           <Outlet />
         </Flex>
       </Flex>

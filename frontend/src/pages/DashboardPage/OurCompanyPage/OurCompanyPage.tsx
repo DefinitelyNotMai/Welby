@@ -1,15 +1,15 @@
 // lib
 import { Button, Flex } from "@chakra-ui/react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 // local
 import { Tab } from "../../../components/DataDisplay/Tab";
 
 export const OurCompanyPage = () => {
-  const [selectedItem, setSelectedItem] =
-    useState<string>("mission-and-vision");
+  const [selectedItem, setSelectedItem] = useState<string>("");
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleItemClick = (item: string, route: string) => {
@@ -17,6 +17,11 @@ export const OurCompanyPage = () => {
     navigate(route);
   };
 
+  useEffect(() => {
+    setSelectedItem(
+      location.pathname.replace("/dashboard/our-company/", "").split("/")[0],
+    );
+  }, [location.pathname]);
   return (
     <>
       <Tab>
@@ -64,7 +69,7 @@ export const OurCompanyPage = () => {
           Core Values
         </Button>
       </Tab>
-      <Flex flex={1}>
+      <Flex flex={1} marginTop={4}>
         <Outlet />
       </Flex>
     </>

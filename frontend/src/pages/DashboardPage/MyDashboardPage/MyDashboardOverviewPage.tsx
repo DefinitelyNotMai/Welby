@@ -1,6 +1,6 @@
 // lib
 import { BsPerson } from "react-icons/bs";
-import { Button, Flex, Grid, Modal } from "@chakra-ui/react";
+import { Button, Flex, Grid } from "@chakra-ui/react";
 import {
   FaDumbbell,
   FaEye,
@@ -12,38 +12,32 @@ import {
 } from "react-icons/fa";
 import { GiHummingbird } from "react-icons/gi";
 import { IoMdGitNetwork } from "react-icons/io";
+import { MdPeople } from "react-icons/md";
 import { TbTargetArrow } from "react-icons/tb";
 import { useEffect, useState } from "react";
 
 // local
 import { ChartDoughnut } from "../../../components/Charts/ChartDoughnut";
-import {
-  DAILY_CHECKIN_INITIAL_DATA,
-  TISE_INITIAL_DATA,
-} from "../../../data/initForm";
-import { DailyCheckInFormData, TISE } from "../../../data/typesForm";
+import { DAILYCHECKIN_DATA, DailyCheckIn } from "../../../data/dailyCheckIn";
 import { DailyCheckin } from "../../../components/Modal/DailyCheckin";
 import { QuarterlyAssessment } from "../../../components/Modal/QuarterlyAssessment";
 import { Section } from "../../../components/DataDisplay/Section";
+import { TISE, TISE_DATA } from "../../../data/tise";
 import { WellBeingCard } from "../../../components/DataDisplay/WellBeingCard";
-import { MdPeople } from "react-icons/md";
 
-/*
- * NOTE: add a conditional to set Buttons for assessments to be disabled or not.
- */
 export const MyDashboardOverviewPage = () => {
-  document.title = "Overview | Welby";
+  document.title = "Dashboard Overview | Welby";
 
-  const [dailyCheckinData, setDailyCheckinData] =
-    useState<DailyCheckInFormData>(DAILY_CHECKIN_INITIAL_DATA);
-  const [tiseData, setTiseData] = useState<TISE>(TISE_INITIAL_DATA);
+  const [tiseData, setTiseData] = useState<TISE>(TISE_DATA);
+  const [dailyCheckInData, setDailyCheckInData] =
+    useState<DailyCheckIn>(DAILYCHECKIN_DATA);
+  const [modal, setModal] = useState<string>("");
 
-  const [modalOpen, setModalOpen] = useState<string>("");
-
-  // NOTE: add calls for fetching dailycheckindata and tise values here
+  // NOTE: calls for fetching daily checkin and tise data goes here
   useEffect(() => {
-    // setDailyCheckinData(result)
+    // setDailyCheckInData(result)
     // setTiseData(result)
+    //}, [dailyCheckInData, tiseData]);
   });
 
   return (
@@ -54,7 +48,7 @@ export const MyDashboardOverviewPage = () => {
           <Button
             key={1}
             marginRight={16}
-            onClick={() => setModalOpen("daily-checkin")}
+            onClick={() => setModal("daily-checkin")}
           >
             Do Daily Check-In
           </Button>,
@@ -63,27 +57,47 @@ export const MyDashboardOverviewPage = () => {
         <Flex flexDirection="row" justifyContent="space-between" height="full">
           <WellBeingCard
             icon={BsPerson}
-            valueInt={dailyCheckinData.EnergyAtWork.int}
-            valueString={dailyCheckinData.EnergyAtWork.value}
+            onClick={() =>
+              alert(
+                "TEST: onClick this will display result of this well-being factor of the day.",
+              )
+            }
             title="Energy At Work"
+            valueInt={dailyCheckInData.EnergyAtWork_int}
+            valueString={dailyCheckInData.EnergyAtWork_value}
           />
           <WellBeingCard
             icon={TbTargetArrow}
-            valueInt={dailyCheckinData.FocusAtWork.int}
-            valueString={dailyCheckinData.FocusAtWork.value}
+            onClick={() =>
+              alert(
+                "TEST: onClick this will display result of this well-being factor of the day.",
+              )
+            }
             title="Focus At Work"
+            valueInt={dailyCheckInData.FocusAtWork_int}
+            valueString={dailyCheckInData.FocusAtWork_value}
           />
           <WellBeingCard
             icon={FaRegThumbsUp}
-            valueInt={dailyCheckinData.PositiveEmotions.int}
-            valueString={dailyCheckinData.PositiveEmotions.value}
-            title="Positive Emotion"
+            onClick={() =>
+              alert(
+                "TEST: onClick this will display result of this well-being factor of the day.",
+              )
+            }
+            title="Positive Emotions"
+            valueInt={dailyCheckInData.PositiveEmotions_int}
+            valueString={dailyCheckInData.PositiveEmotions_value}
           />
           <WellBeingCard
             icon={FaRegThumbsDown}
-            valueInt={dailyCheckinData.NegativeEmotions.int}
-            valueString={dailyCheckinData.NegativeEmotions.value}
-            title="Negative Emotion"
+            onClick={() =>
+              alert(
+                "TEST: onClick this will display result of this well-being factor of the day.",
+              )
+            }
+            title="Negative Emotions"
+            valueInt={dailyCheckInData.NegativeEmotions_int}
+            valueString={dailyCheckInData.NegativeEmotions_value}
           />
         </Flex>
       </Section>
@@ -93,7 +107,7 @@ export const MyDashboardOverviewPage = () => {
           <Button
             key={1}
             marginRight={16}
-            onClick={() => setModalOpen("quarterly-assessment")}
+            onClick={() => setModal("quarterly-assessment")}
           >
             Take Quarterly Assessment
           </Button>,
@@ -163,16 +177,16 @@ export const MyDashboardOverviewPage = () => {
           </Flex>
         </Grid>
       </Section>
-      {modalOpen === "daily-checkin" && (
+      {modal === "daily-checkin" && (
         <DailyCheckin
-          isOpen={modalOpen === "daily-checkin"}
-          onClose={() => setModalOpen("")}
+          isOpen={modal === "daily-checkin"}
+          onClose={() => setModal("")}
         />
       )}
-      {modalOpen === "quarterly-assessment" && (
+      {modal === "quarterly-assessment" && (
         <QuarterlyAssessment
-          isOpen={modalOpen === "quarterly-assessment"}
-          onClose={() => setModalOpen("")}
+          isOpen={modal === "quarterly-assessment"}
+          onClose={() => setModal("")}
         />
       )}
     </Flex>

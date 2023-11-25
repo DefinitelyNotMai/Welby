@@ -2,22 +2,33 @@ import { Card, CardBody, Flex, Grid, Icon, Text } from "@chakra-ui/react";
 
 type WellBeingCardProps = {
   icon?: React.ElementType;
-  mb?: string;
+  marginBottom?: string;
+  onClick?: () => void;
+  title?: string;
   valueInt?: number;
   valueString?: string;
-  title?: string;
 };
 
 export const WellBeingCard = ({
   icon: IconComponent,
-  mb,
+  marginBottom,
+  onClick,
+  title,
   valueInt,
   valueString,
-  title,
 }: WellBeingCardProps) => {
   return (
     <>
-      <Card boxShadow="md" bg="#ffffff" padding={0} borderRadius="1rem" mb={mb}>
+      <Card
+        _hover={{ transform: "scale(1.1)" }}
+        bg="#ffffff"
+        borderRadius="1rem"
+        boxShadow="md"
+        cursor="pointer"
+        marginBottom={marginBottom}
+        onClick={onClick}
+        padding={0}
+      >
         <CardBody>
           <Grid templateColumns="1fr 2fr 1fr" gap={4}>
             <Flex alignItems="center">

@@ -13,11 +13,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Employee } from "../../data/typesMaster";
-import { EMPLOYEE_DATA } from "../../data/initMaster";
 import Pagination from "../../components/Disclosure/Pagination";
 import { fetchData } from "../../api/fetchData";
 import axios from "axios";
+import { EMPLOYEE_DATA, Employee } from "../../data/employee";
 
 export const EmployeesPage = () => {
   document.title = "Employees | Welby";

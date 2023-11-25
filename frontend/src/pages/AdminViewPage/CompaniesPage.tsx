@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Company } from "../../data/typesMaster";
-import { COMPANY_DATA } from "../../data/initMaster";
 import {
   Button,
   Flex,
@@ -23,6 +21,7 @@ import {
   CompanyUpdate,
 } from "../../components/Modal/AdminView/CompanyModal";
 import axios from "axios";
+import { COMPANY_DATA, Company } from "../../data/company";
 
 export const CompaniesPage = () => {
   document.title = "Companies | Welby";

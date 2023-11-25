@@ -1,6 +1,4 @@
 import { FormEvent, useState, useEffect, useContext } from "react";
-import { EmployeeFormData } from "../../data/typesForm";
-import { EMPLOYEE_INITIAL_DATA } from "../../data/initForm";
 import { useMultiStepForm } from "../../hooks/useMultiStepForm";
 import { Step1 } from "./Step1";
 import { WelcomeLayout } from "../../layout/WelcomeLayout";
@@ -14,26 +12,27 @@ import { Step6 } from "./Step6";
 import { fetchData } from "../../api/fetchData";
 import { signUpEmployee } from "../../api/signUpEmployee";
 import { UserContext } from "../../context/UserContext";
+import { EMPLOYEESIGNUP_DATA, EmployeeSignup } from "../../data/employeeSignup";
 
 export const EmployeeSignUpPage = () => {
   document.title = "Employee Sign Up | Welby";
 
   const userContext = useContext(UserContext);
 
-  const [employeeData, setEmployeeData] = useState<EmployeeFormData>({
-    ...EMPLOYEE_INITIAL_DATA,
+  const [employeeData, setEmployeeData] = useState<EmployeeSignup>({
+    ...EMPLOYEESIGNUP_DATA,
     Email: userContext.email,
   });
 
   const navigate = useNavigate();
 
-  const updateEmployeeFields = (fields: Partial<EmployeeFormData>) => {
+  const updateEmployeeFields = (fields: Partial<EmployeeSignup>) => {
     setEmployeeData((prev) => {
       return { ...prev, ...fields };
     });
   };
 
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId") || 0;
 
   useEffect(() => {
     const employeeUrl = "https://localhost:44373/api/GetEmployee";

@@ -15,7 +15,7 @@ type Step6Data = {
   Middle_Name: string;
   Last_Name: string;
   Birthday: string;
-  GenderId: string;
+  GenderId: number;
   Phone_Number: string;
   companyEmail: string;
   Name: string;
@@ -185,7 +185,9 @@ export const Step6 = ({
                 <SelectGender
                   id="company-admin-gender"
                   name="company-admin-gender"
-                  onChange={(e) => updateFields({ GenderId: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ GenderId: parseInt(e.target.value, 10) })
+                  }
                   value={GenderId}
                 />
               </FormItem>

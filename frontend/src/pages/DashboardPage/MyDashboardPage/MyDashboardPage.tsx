@@ -1,20 +1,29 @@
 // lib
-import { Button, Flex } from "@chakra-ui/react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 // local
 import { Tab } from "../../../components/DataDisplay/Tab";
+import { Button, Flex } from "@chakra-ui/react";
 
 export const MyDashboardPage = () => {
   document.title = "My Dashboard | Welby";
-  const [selectedItem, setSelectedItem] = useState<string>("overview");
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [selectedItem, setSelectedItem] = useState<string>("");
+
   const handleItemClick = (item: string, route: string) => {
     setSelectedItem(item);
     navigate(route);
   };
+
+  useEffect(() => {
+    setSelectedItem(
+      location.pathname.replace("/dashboard/my-dashboard/", "").split("/")[0],
+    );
+  }, [location.pathname]);
 
   return (
     <>
@@ -46,7 +55,7 @@ export const MyDashboardPage = () => {
           Well-Being
         </Button>
       </Tab>
-      <Flex flex={1}>
+      <Flex flex={1} marginTop={4}>
         <Outlet />
       </Flex>
     </>

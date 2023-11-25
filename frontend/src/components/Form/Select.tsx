@@ -3,21 +3,19 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Select } from "@chakra-ui/react";
 
 // local
-import {
-  Country,
-  Gender,
-  IndustryType,
-  Strength,
-} from "../../data/typesMaster";
 import { SystemSecurityGroup } from "../../data/typesOWS";
 import { fetchAccessToken } from "../../api/tokenService";
 import { fetchData } from "../../api/fetchData";
+import { Country } from "../../data/country";
+import { Gender } from "../../data/gender";
+import { IndustryType } from "../../data/industryType";
+import { Strength } from "../../data/strength";
 
 type CustomSelectProps = {
   id: string;
   name: string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
+  value: number | string;
 };
 
 export const SelectCompanySize = ({
@@ -67,7 +65,7 @@ export const SelectCountry = ({
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const data = await fetchData(countriesUrl, { Active: "1" });
+        const data = await fetchData(countriesUrl, { Active: true });
         setCountries(data);
       } catch (error) {
         console.error("Error fetching data: ", error);

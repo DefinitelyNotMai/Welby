@@ -19,8 +19,8 @@ type Step1Data = {
   CompanySize: string;
   Phone_Number: string;
   FoundingDate: string;
-  CountryId: string;
-  IndustryTypeId: string;
+  CountryId: number;
+  IndustryTypeId: number;
 };
 
 type Step1Props = Step1Data & {
@@ -145,7 +145,7 @@ export const Step1 = ({
                   id="company-location"
                   name="company-location"
                   onChange={(e) => {
-                    updateFields({ CountryId: e.target.value });
+                    updateFields({ CountryId: parseInt(e.target.value, 10) });
                   }}
                   value={CountryId}
                 />
@@ -187,7 +187,9 @@ export const Step1 = ({
                   id="company-industry-type"
                   name="company-industry-type"
                   onChange={(e) => {
-                    updateFields({ IndustryTypeId: e.target.value });
+                    updateFields({
+                      IndustryTypeId: parseInt(e.target.value, 10),
+                    });
                   }}
                   value={IndustryTypeId}
                 />

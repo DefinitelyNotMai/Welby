@@ -3,11 +3,11 @@ import axios from "axios";
 import bcrypt from "bcryptjs";
 
 // local
-import { EmployeeFormData } from "../data/typesForm";
 import { fetchAccessToken } from "./tokenService";
+import { EmployeeSignup } from "../data/employeeSignup";
 
 export const signUpEmployee = async (
-  EmployeeData: EmployeeFormData,
+  EmployeeData: EmployeeSignup,
   //password: string,
   UserId: string | null,
 ) => {
@@ -161,48 +161,44 @@ export const signUpEmployee = async (
         console.log(error);
       });
 
-      const tokenResponse = await fetchAccessToken();
-      if (tokenResponse) {
-        const token = tokenResponse;
-        const UpdateSystemUserUrl = "https://localhost:58258/api/UpdateSystemUser";
-        
-        const hashedPassword = await bcrypt.hash(
-          EmployeeData.Password,
-          10
-        );
+    const tokenResponse = await fetchAccessToken();
+    if (tokenResponse) {
+      const token = tokenResponse;
+      const UpdateSystemUserUrl =
+        "https://localhost:58258/api/UpdateSystemUser";
 
-        const systemUser = {
-          UserCode: UserId,
-          UserName: EmployeeData.Email,
-          Password: hashedPassword,
-          AccountLocked: 0,
-          LoggedIn: 0,
-          PasswordNoExpiry: null,
-          ExpiryDays: null,
-          AccountVerified: null,
-          VerifiedDate: null,
-          Encoded_By: UserId,
-          Active: true,
-        }
-        axios
-          .patch(UpdateSystemUserUrl, systemUser, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          })
-          .then((response) => {
-            console.log(response.data);
-            console.log("Successfully added to OWS");
-            return response.data;
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      } 
+      const hashedPassword = await bcrypt.hash(EmployeeData.Password, 10);
 
+      const systemUser = {
+        UserCode: UserId,
+        UserName: EmployeeData.Email,
+        Password: hashedPassword,
+        AccountLocked: 0,
+        LoggedIn: 0,
+        PasswordNoExpiry: null,
+        ExpiryDays: null,
+        AccountVerified: null,
+        VerifiedDate: null,
+        Encoded_By: UserId,
+        Active: true,
+      };
+      axios
+        .patch(UpdateSystemUserUrl, systemUser, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          console.log("Successfully added to OWS");
+          return response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   } catch (error) {
     console.error("An error has occured: ", error);
   }
 };
-

@@ -1,18 +1,15 @@
-// lib
 import { Button, Flex, Grid } from "@chakra-ui/react";
 import { useState } from "react";
-
-// local
 import { Section } from "../../../components/DataDisplay/Section";
-import { DailyCheckin } from "../../../components/Modal/DailyCheckin";
-import { QuarterlyAssessment } from "../../../components/Modal/QuarterlyAssessment";
 import { ChartBar } from "../../../components/Charts/ChartBar";
 import { PredictionChart } from "../../../components/Charts/PredictionChart";
+import { DailyCheckin } from "../../../components/Modal/DailyCheckin";
+import { QuarterlyAssessment } from "../../../components/Modal/QuarterlyAssessment";
 
 export const MyDashboardWellbeingPage = () => {
   document.title = "Well-Being | Welby";
 
-  const [modalOpen, setModalOpen] = useState<string>("");
+  const [modal, setModal] = useState<string>("");
 
   return (
     <Grid templateRows="1fr 1fr" gap={4} width="full" marginBottom={4}>
@@ -22,7 +19,7 @@ export const MyDashboardWellbeingPage = () => {
           <Button
             key={1}
             marginRight={16}
-            onClick={() => setModalOpen("daily-checkin")}
+            onClick={() => setModal("daily-checkin")}
           >
             Do Daily Check-In
           </Button>,
@@ -38,7 +35,7 @@ export const MyDashboardWellbeingPage = () => {
           <Button
             key={1}
             marginRight={16}
-            onClick={() => setModalOpen("quarterly-assessment")}
+            onClick={() => setModal("quarterly-assessment")}
           >
             Take Quarterly Assessment
           </Button>,
@@ -46,16 +43,16 @@ export const MyDashboardWellbeingPage = () => {
       >
         <PredictionChart />
       </Section>
-      {modalOpen === "daily-checkin" && (
+      {modal === "daily-checkin" && (
         <DailyCheckin
-          isOpen={modalOpen === "daily-checkin"}
-          onClose={() => setModalOpen("")}
+          isOpen={modal === "daily-checkin"}
+          onClose={() => setModal("")}
         />
       )}
-      {modalOpen === "quarterly-assessment" && (
+      {modal === "quarterly-assessment" && (
         <QuarterlyAssessment
-          isOpen={modalOpen === "quarterly-assessment"}
-          onClose={() => setModalOpen("")}
+          isOpen={modal === "quarterly-assessment"}
+          onClose={() => setModal("")}
         />
       )}
     </Grid>

@@ -7,7 +7,7 @@ import { SelectCountry } from "../../components/Form/Select";
 
 type Step7Data = {
   Address: string;
-  CountryId: string;
+  CountryId: number;
   Facebook: string;
   Instagram: string;
   Linkedin: string;
@@ -85,7 +85,9 @@ export const Step7 = ({
                 <SelectCountry
                   id="company-admin-country"
                   name="company-admin-country"
-                  onChange={(e) => updateFields({ CountryId: e.target.value })}
+                  onChange={(e) =>
+                    updateFields({ CountryId: parseInt(e.target.value, 10) })
+                  }
                   value={CountryId}
                 />
               </FormItem>

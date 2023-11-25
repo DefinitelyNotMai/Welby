@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 // local
 import { AdminViewPage } from "../pages/AdminViewPage";
-import { Auth } from "../layout/Auth";
+//import { Auth } from "../layout/Auth";
 import { CompanySignUpPage } from "../pages/CompanySignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { EmployeeSignUpPage } from "../pages/EmployeeSignUpPage";
@@ -47,17 +47,15 @@ export const routes = createBrowserRouter([
         path: "/",
         element: <WelcomePage />,
       },
+      /*
       {
         path: "/login",
         element: <LoginPage />,
       },
+      */
       {
         path: "/admin-view",
-        element: (
-          <Auth>
-            <AdminViewPage />
-          </Auth>
-        ),
+        element: <AdminViewPage />,
         children: [
           {
             path: "companies",
@@ -119,11 +117,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: (
-          <Auth>
-            <DashboardPage />
-          </Auth>
-        ),
+        element: <DashboardPage />,
         children: [
           {
             path: "my-dashboard",
@@ -173,20 +167,18 @@ export const routes = createBrowserRouter([
           },
         ],
       },
+      /*
+       * NOTE: Not too sure yet but maybe put a code sent in by the company as like a parameter
+       * that'll be added in the url to determine for which company the employee is signing up for?
+       * "/employee-signup?code=<random_chars>&?id=1001". Not yet final, just a thought
+       */
+      /*
       {
-        /*
-         * NOTE: Not too sure yet but maybe put a code sent in by the company as like a parameter
-         * that'll be added in the url to determine for which company the employee is signing up for?
-         * "/employee-signup?code=<random_chars>&?id=1001". Not yet final, just a thought
-         */
         path: "/employee-signup",
         //
-        element: (
-          
-            <EmployeeSignUpPage />
-          
-        ),
+        element: <EmployeeSignUpPage />,
       },
+      */
     ],
   },
 ]);

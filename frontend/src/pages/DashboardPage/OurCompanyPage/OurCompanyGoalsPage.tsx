@@ -3,11 +3,10 @@ import { Button, Grid } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
 // local
-import { GOAL_DATA } from "../../../data/initMaster";
-import { Goal } from "../../../data/typesMaster";
 import { Section } from "../../../components/DataDisplay/Section";
 import { UserContext } from "../../../context/UserContext";
 import { fetchData } from "../../../api/fetchData";
+import { GOAL_DATA, Goal } from "../../../data/goal";
 
 export const OurCompanyGoalsPage = () => {
   document.title = "Company Goals | Welby";
@@ -55,7 +54,10 @@ export const OurCompanyGoalsPage = () => {
           </Button>
         ))}
       </Section>
-      <Section borderRadius="1rem 0 0 0" title="Goal Description">
+      <Section
+        borderRadius="1rem 0 0 0"
+        title={selectedGoal.Title || "Goal Title"}
+      >
         {selectedGoal.Description}
       </Section>
     </Grid>

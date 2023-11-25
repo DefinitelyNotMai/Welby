@@ -3,11 +3,10 @@ import { Button, Grid } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
 // local
-import { VALUE_DATA } from "../../../data/initMaster";
-import { Value } from "../../../data/typesMaster";
 import { Section } from "../../../components/DataDisplay/Section";
 import { UserContext } from "../../../context/UserContext";
 import { fetchData } from "../../../api/fetchData";
+import { VALUE_DATA, Value } from "../../../data/value";
 
 export const OurCompanyCoreValuesPage = () => {
   document.title = "Company Core Values | Welby";
@@ -35,7 +34,7 @@ export const OurCompanyCoreValuesPage = () => {
 
   return (
     <Grid gap={4} templateColumns="1.25fr 2fr" width="full">
-      <Section borderRadius="1rem 1rem 0 0" title="Company Goals">
+      <Section borderRadius="1rem 1rem 0 0" title="Core Values">
         {values.map((value) => (
           <Button
             backgroundColor={

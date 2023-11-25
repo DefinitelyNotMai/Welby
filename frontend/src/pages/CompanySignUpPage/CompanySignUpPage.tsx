@@ -1,14 +1,14 @@
 // lib
+import { Button, Card, Flex, Grid } from "@chakra-ui/react";
 import { Form, useNavigate } from "react-router-dom";
 import { FormEvent, useContext, useState } from "react";
 
 // local
 import {
-  COMPANY_ADMIN_INITIAL_DATA,
-  COMPANY_INITIAL_DATA,
-} from "../../data/initForm";
-import { Button, Card, Flex, Grid } from "@chakra-ui/react";
-import { CompanyAdminFormData, CompanyFormData } from "../../data/typesForm";
+  COMPANYADMINSIGNUP_DATA,
+  CompanyAdminSignup,
+} from "../../data/companyAdminSignup";
+import { COMPANYSIGNUP_DATA, CompanySignup } from "../../data/companySignup";
 import { Step1 } from "./Step1";
 import { Step2 } from "./Step2";
 import { Step3 } from "./Step3";
@@ -27,21 +27,22 @@ export const CompanySignUpPage = () => {
   document.title = "Sign Up | Welby";
 
   const [companyData, setCompanyData] =
-    useState<CompanyFormData>(COMPANY_INITIAL_DATA);
-  const [companyAdminData, setCompanyAdminData] =
-    useState<CompanyAdminFormData>(COMPANY_ADMIN_INITIAL_DATA);
+    useState<CompanySignup>(COMPANYSIGNUP_DATA);
+  const [companyAdminData, setCompanyAdminData] = useState<CompanyAdminSignup>(
+    COMPANYADMINSIGNUP_DATA,
+  );
 
   const { companyId, setCompanyId } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const updateCompanyFields = (fields: Partial<CompanyFormData>) => {
+  const updateCompanyFields = (fields: Partial<CompanySignup>) => {
     setCompanyData((prev) => {
       return { ...prev, ...fields };
     });
   };
 
-  const updateCompanyAdminFields = (fields: Partial<CompanyAdminFormData>) => {
+  const updateCompanyAdminFields = (fields: Partial<CompanyAdminSignup>) => {
     setCompanyAdminData((prev) => {
       return { ...prev, ...fields };
     });

@@ -12,11 +12,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Gender } from "../../data/typesMaster";
-import { GENDER_DATA } from "../../data/initMaster";
 import { fetchData } from "../../api/fetchData";
 import axios from "axios";
 import Pagination from "../../components/Disclosure/Pagination";
+import { GENDER_DATA, Gender } from "../../data/gender";
 
 export const GendersPage = () => {
   document.title = "Genders | Welby";

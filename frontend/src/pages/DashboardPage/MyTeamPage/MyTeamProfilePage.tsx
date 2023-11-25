@@ -3,8 +3,7 @@ import { Section } from "../../../components/DataDisplay/Section";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../api/fetchData";
 import { Avatar, Button, Divider, Flex, Grid, Text } from "@chakra-ui/react";
-import { Employee } from "../../../data/typesMaster";
-import { EMPLOYEE_DATA } from "../../../data/initMaster";
+import { EMPLOYEE_DATA, Employee } from "../../../data/employee";
 
 type TeamMember = {
   CompanyId: string;

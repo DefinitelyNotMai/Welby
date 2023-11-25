@@ -3,14 +3,11 @@ import { Avatar, Divider, Flex, Grid, Text } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
 // local
-import {
-  COMPANY_DATA,
-  COUNTRY_DATA,
-  INDUSTRY_TYPE_DATA,
-} from "../../data/initMaster";
-import { Company, Country, IndustryType } from "../../data/typesMaster";
 import { UserContext } from "../../context/UserContext";
 import { fetchData } from "../../api/fetchData";
+import { COMPANY_DATA, Company } from "../../data/company";
+import { COUNTRY_DATA, Country } from "../../data/country";
+import { INDUSTRY_TYPE_DATA, IndustryType } from "../../data/industryType";
 
 export const CompanyProfile = () => {
   const [companyData, setCompanyData] = useState<Company>(COMPANY_DATA);

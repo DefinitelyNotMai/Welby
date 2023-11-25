@@ -202,7 +202,7 @@ were tested only in Postman.
 > ##### GET :
 **~/api/GetGoals**
 - params : {
-  - **Goal~~~~Id:** number
+  - **GoalId:** number
   - **CompanyId:** number
   - **Title:** string
   - **Description:** string
@@ -226,7 +226,7 @@ were tested only in Postman.
 
 **~/api/RemoveGoal**
 - params : {
-  - **ValueId:** number
+  - **GoalId:** number
 
   }
 
@@ -234,7 +234,7 @@ were tested only in Postman.
 
 **~/api/ReturnGoal**
 - params : {
-  - **ValueId:** number
+  - **GoalId:** number
 
   }
 

@@ -167,17 +167,25 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_Realized_Strengths_Get", realizedStrengthsIdParameter, employeeIdParameter, strengthIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_EMP_TISE_Get(Nullable<int> companyId, Nullable<bool> active)
+        public virtual int procWWA_EMP_TISE_Get(Nullable<int> tiseId, Nullable<int> companyId, Nullable<int> employeeId, Nullable<bool> active)
         {
+            var tiseIdParameter = tiseId.HasValue ?
+                new ObjectParameter("TiseId", tiseId) :
+                new ObjectParameter("TiseId", typeof(int));
+    
             var companyIdParameter = companyId.HasValue ?
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_TISE_Get", companyIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_TISE_Get", tiseIdParameter, companyIdParameter, employeeIdParameter, activeParameter);
         }
     
         public virtual int procWWA_EMP_Unrealized_Strengths_Get(Nullable<int> unrealizedStrengthsId, Nullable<int> employeeId, Nullable<int> strengthId, Nullable<bool> active)

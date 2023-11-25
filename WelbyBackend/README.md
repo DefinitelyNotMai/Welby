@@ -510,3 +510,448 @@ were tested only in Postman.
 
   }
 
+---
+## Employee Interest Routes
+
+> ##### GET :
+**~/api/GetEmployeeInterest**
+- params : {
+  - **EmployeeInterestId:** number
+  - **EmployeeId:** number
+  - **InterestId:** number
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddEmployeeInterest**
+- params : {
+  - **EmployeeId:** number
+  - **InterestId:** number
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveEmployeeInterest**
+- params : {
+  - **EmployeeInterestId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnEmployeeInterest**
+- params : {
+  - **EmployeeInterestId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateEmployeeInterest**
+- params : {
+  - **EmployeeInterestId:** number
+  - **EmployeeId:** number
+  - **InterestId:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
+## Employee Learned Behaviors Routes
+
+> ##### GET :
+**~/api/GetEmployeeLearnedBehaviors**
+- params : {
+  - **LearnedBehaviorsId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddEmployeeLearnedBehavior**
+- params : {
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveEmployeeLearnedBehavior**
+- params : {
+  - **LearnedBehaviorsId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnEmployeeLearnedBehavior**
+- params : {
+  - **LearnedBehaviorsId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateEmployeeLearnedBehavior**
+- params : {
+  - **LearnedBehaviorsId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
+## Employee Realized Strength Routes
+
+> ##### GET :
+**~/api/GetEmployeeRealizedStrengths**
+- params : {
+  - **RealizedStrengthsId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddEmployeeRealizedStrength**
+- params : {
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveEmployeeRealizedStrength**
+- params : {
+  - **RealizedStrengthsId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnEmployeeRealizedStrength**
+- params : {
+  - **RealizedStrengthsId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateEmployeeRealizedStrengths**
+- params : {
+  - **RealizedStrengthsId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
+## Employee Realized Strength Routes
+
+> ##### GET :
+**~/api/GetEmployeeUnrealizedStrengths**
+- params : {
+  - **UnrealizedStrengthsId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddEmployeeUnrealizedStrength**
+- params : {
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveEmployeeUnrealizedStrength**
+- params : {
+  - **UnrealizedStrengthsId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnEmployeeUnrealizedStrength**
+- params : {
+  - **UnrealizedStrengthsId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateEmployeeUnrealizedStrengths**
+- params : {
+  - **UnrealizedStrengthsId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
+## Employee Weakness Routes
+
+> ##### GET :
+**~/api/GetEmployeeWeaknesses**
+- params : {
+  - **EmployeeWeaknessId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddEmployeeWeakness**
+- params : {
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveEmployeeWeakness**
+- params : {
+  - **EmployeeWeaknessId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnEmployeeWeakness**
+- params : {
+  - **EmployeeWeaknessId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateEmployeeWeakness**
+- params : {
+  - **EmployeeWeaknessId:** number
+  - **EmployeeId:** number
+  - **StrengthId:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+
+
+---
+## Daily Check In Routes
+
+> ##### GET :
+**~/api/GetDailyCheckIn**
+- params : {
+  - **DailyCheckInId:** number
+  - **EmployeeId:** number
+  - **CompanyId:** number
+  - **Active:** boolean
+  - **DateFrom:** string
+  - **DateTo:** string
+
+  }
+
+> ##### Add :
+
+**~/api/AddDailyCheckIn**
+- params : {
+  - **EmployeeId:** number
+  - **CompanyId:** number
+  - **EnergyAtWork_int:** number
+  - **FocusAtWork_int:** number
+  - **PositiveEmotions_int:** number
+  - **NegativeEmotions_int:** number
+  - **EnergyAtWork_value:** string
+  - **FocusAtWork_value:** string
+  - **PositiveEmotions_value:** string
+  - **NegativeEmotions_value:** string
+  - **Productivity:** number
+  - **Prediction:** float
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveDailyCheckIn**
+- params : {
+  - **DailyCheckInId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnDailyCheckIn**
+- params : {
+  - **DailyCheckInId:** number
+
+  }
+
+> ##### Update Productivity:
+> Note: There is no update of the whole daily check in as it should not be changed
+
+**~/api/UpdateProductivity**
+- params : {
+  - **DailyCheckInId:** number
+  - **Productivity:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+
+---
+## TISE Routes
+
+> ##### GET :
+**~/api/GetAllTise**
+- params : {
+  - **DailyCheckInId:** number
+  - **EmployeeId:** number
+  - **CompanyId:** number
+  - **Active:** boolean
+  - **DateFrom:** string
+  - **DateTo:** string
+
+  }
+
+> ##### Add :
+
+**~/api/AddTise**
+- params : {
+  - **EmployeeId:** number
+  - **CompanyId:** number
+  - **EnergyAtWork_int:** number
+  - **FocusAtWork_int:** number
+  - **PositiveEmotions_int:** number
+  - **NegativeEmotions_int:** number
+  - **EnergyAtWork_value:** string
+  - **FocusAtWork_value:** string
+  - **PositiveEmotions_value:** string
+  - **NegativeEmotions_value:** string
+  - **Productivity:** number
+  - **Prediction:** float
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveTise**
+- params : {
+  - **DailyCheckInId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnTise**
+- params : {
+  - **DailyCheckInId:** number
+
+  }
+
+> ##### Update Productivity:
+> Note: There is no update of the whole daily check in as it should not be changed
+
+**~/api/UpdateProductivity**
+- params : {
+  - **DailyCheckInId:** number
+  - **Productivity:** number
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
+## Results Routes
+
+> ##### GET :
+**~/api/GetAllResults**
+- params : {
+  - **ResultsId:** number
+  - **Active:** boolean
+  
+  }
+
+> ##### Add :
+> Note: Completion column of Daily Check In is being set in the DailyCheckInService.cs file
+
+**~/api/AddResults**
+- params : {
+  - **EmployeeId:** number
+  - **CompanyId:** number
+  - **EnergyAtWork_int:** number
+  - **FocusAtWork_int:** number
+  - **PositiveEmotions_int:** number
+  - **NegativeEmotions_int:** number
+  - **EnergyAtWork_value:** string
+  - **FocusAtWork_value:** string
+  - **PositiveEmotions_value:** string
+  - **NegativeEmotions_value:** string
+  - **Productivity:** number
+  - **Prediction:** float
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveTise**
+- params : {
+  - **TiseId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnTise**
+- params : {
+  - **TiseId:** number
+
+  }
+
+> ##### ~~Update :~~
+> Note:  No Update in TISE
+
+**~~~/api/UpdateProductivity~~**
+- ~~params : {  }~~

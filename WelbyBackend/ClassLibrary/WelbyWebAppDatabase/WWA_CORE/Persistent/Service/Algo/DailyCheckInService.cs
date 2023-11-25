@@ -43,7 +43,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                     EnergyAtWork_value = dailyCheckInViewModel.EnergyAtWork_value,
                     PositiveEmotions_value = dailyCheckInViewModel.PositiveEmotions_value,
                     NegativeEmotions_value = dailyCheckInViewModel.NegativeEmotions_value,
-                    Completion = dailyCheckInViewModel.Completion,
+                    Completion = "Partial",
                     Productivity = dailyCheckInViewModel.Productivity == null ? 0 : dailyCheckInViewModel.Productivity,
                     Prediction = predicted,
                     
@@ -226,7 +226,7 @@ namespace WWA_CORE.Persistent.Service.Algo
                 var RowToUpdate = await context.tbl_EMP_DailyCheckIn.FirstOrDefaultAsync(c => c.DailyCheckInId == dailyCheckInViewModel.DailyCheckInId);
 
                 RowToUpdate.Productivity = dailyCheckInViewModel.Productivity;
-                RowToUpdate.Completion = dailyCheckInViewModel.Completion;
+                RowToUpdate.Completion = "Completed";
 
                 RowToUpdate.Active = true;
                 RowToUpdate.Computer_Name = dailyCheckInViewModel.Computer_Name;

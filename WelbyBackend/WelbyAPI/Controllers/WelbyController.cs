@@ -32,7 +32,7 @@ namespace WelbyAPI.Controllers
         #region EMPLOYEES
         [Route("~/api/GetEmployees")]
         [HttpGet]
-        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<IEnumerable<EmployeeRegistrationViewModel>> GetEmployeesList([FromUri] EmployeeRegistrationViewModel param)
         {
             var model = await _wwauow.Employee.GetEmployees(param);
             return model;
@@ -91,7 +91,7 @@ namespace WelbyAPI.Controllers
         #region VALUE
         [Route("~/api/GetValues")]
         [HttpGet]
-        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromBody] ValueMasterViewModel param)
+        public async Task<IEnumerable<ValueMasterViewModel>> GetAllValues([FromUri] ValueMasterViewModel param)
         {
             var model = await _wwauow.Value.GetValues(param);
             return model;
@@ -149,7 +149,7 @@ namespace WelbyAPI.Controllers
         #region COMPANY
         [Route("~/api/GetCompanies")]
         [HttpGet]
-        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromBody] CompanyMasterViewModel param)
+        public async Task<IEnumerable<CompanyMasterViewModel>> GetCompanyList([FromUri] CompanyMasterViewModel param)
         {
             var model = await _wwauow.Company.GetCompany(param);
             return model;
@@ -208,7 +208,7 @@ namespace WelbyAPI.Controllers
         #region GOAL
         [Route("~/api/GetGoals")]
         [HttpGet]
-        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals([FromBody] GoalMasterViewModel param)
+        public async Task<IEnumerable<GoalMasterViewModel>> GetGoals([FromUri] GoalMasterViewModel param)
         {
             var model = await _wwauow.Goal.GetAllGoals(param);
             return model;
@@ -266,7 +266,7 @@ namespace WelbyAPI.Controllers
         #region STRENGTH
         [Route("~/api/GetStrengths")]
         [HttpGet]
-        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromBody] StrengthMasterViewModel param)
+        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromUri] StrengthMasterViewModel param)
         {
             var model = await _wwauow.Strength.GetStrengthList(param);
             return model;
@@ -324,7 +324,7 @@ namespace WelbyAPI.Controllers
         #region INTEREST
         [Route("~/api/GetInterests")]
         [HttpGet]
-        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromBody] InterestMasterViewModel param)
+        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromUri] InterestMasterViewModel param)
         {
             var model = await _wwauow.Interest.GetInterestsList(param);
             return model;
@@ -382,7 +382,7 @@ namespace WelbyAPI.Controllers
         #region GENDER
         [Route("~/api/GetGender")]
         [HttpGet]
-        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromBody] GenderMasterViewModel param)
+        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromUri] GenderMasterViewModel param)
         {
             var model = await _wwauow.Gender.GetGenderList(param);
             return model;
@@ -440,7 +440,7 @@ namespace WelbyAPI.Controllers
         #region INDUSTRY TYPE
         [Route("~/api/GetIndustryTypes")]
         [HttpGet]
-        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromBody] IndustryTypeMasterViewModel param)
+        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromUri] IndustryTypeMasterViewModel param)
         {
             var model = await _wwauow.IndustryType.GetIndustryTypeList(param);
             return model;
@@ -498,7 +498,7 @@ namespace WelbyAPI.Controllers
         #region COUNTRY
         [Route("~/api/GetCountries")]
         [HttpGet]
-        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromBody] CountryMasterViewModel param)
+        public async Task<IEnumerable<CountryMasterViewModel>> GetCountryList([FromUri] CountryMasterViewModel param)
         {
             var model = await _wwauow.Country.GetCountryList(param);
             return model;
@@ -553,22 +553,304 @@ namespace WelbyAPI.Controllers
         }
         #endregion
 
+        #region EMPLOYEE INTEREST
+        [Route("~/api/GetEmployeeInterest")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromUri] EmployeeInterestViewModel param)
+        {
+            var model = await _wwauow.EmployeeInterest.GetEmployeeInterests(param);
+            return model;
+        }
+
+        [Route("~/api/AddEmployeeInterest")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddEmployeeInterest([FromBody] EmployeeInterestViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeInterest.AddEmployeeInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateEmployeeInterest")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateEmployeeInterest([FromBody] EmployeeInterestViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeInterest.UpdateEmployeeInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveEmployeeInterest")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveEmployeeInterest([FromBody] EmployeeInterestViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeInterest.RemoveEmployeeInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnEmployeeInterest")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnEmployeeInterest([FromBody] EmployeeInterestViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeInterest.ReturnEmployeeInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region EMPLOYEE LEARNED BEHAVIORS
+        [Route("~/api/GetEmployeeLearnedBehaviors")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromUris] EmployeeLearnedBehaviorsViewModel param)
+        {
+            var model = await _wwauow.EmployeeLearnedBehaviors.GetEmployeeLearnedBehaviors(param);
+            return model;
+        }
+
+        [Route("~/api/AddEmployeeLearnedBehavior")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddEmployeeLearnedBehavior([FromBody] EmployeeLearnedBehaviorsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeLearnedBehaviors.AddEmployeeLearnedBehavior(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateEmployeeLearnedBehavior")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateEmployeeLearnedBehavior([FromBody] EmployeeLearnedBehaviorsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeLearnedBehaviors.UpdateEmployeeLearnedBehavior(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveEmployeeLearnedBehavior")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveEmployeeLearnedBehaviors([FromBody] EmployeeLearnedBehaviorsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeLearnedBehaviors.RemoveEmployeeLearnedBehavior(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnEmployeeLearnedBehavior")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnEmployeeLearnedBehaviors([FromBody] EmployeeLearnedBehaviorsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeLearnedBehaviors.ReturnEmployeeLearnedBehavior(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region EMPLOYEE REALIZED STRENGTH
+        [Route("~/api/GetEmployeeRealizedStrengths")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromUri] EmployeeRealizedStrengthsViewModel param)
+        {
+            var model = await _wwauow.EmployeeRealizedStrengths.GetEmployeeRealizedStrength(param);
+            return model;
+        }
+
+        [Route("~/api/AddEmployeeRealizedStrength")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddEmployeeRealizedStrength([FromBody] EmployeeRealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeRealizedStrengths.AddEmployeeRealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateEmployeeRealizedStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateEmployeeRealizedStrength([FromBody] EmployeeRealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeRealizedStrengths.UpdateEmployeeRealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveEmployeeRealizedStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveEmployeeRealizedStrengths([FromBody] EmployeeRealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeRealizedStrengths.RemoveEmployeeRealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnEmployeeRealizedStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnEmployeeRealizedStrengths([FromBody] EmployeeRealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeRealizedStrengths.ReturnEmployeeRealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region EMPLOYEE UNREALIZED STRENGTH
+        [Route("~/api/GetEmployeeUnrealizedStrengths")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromUri] EmployeeUnrealizedStrengthsViewModel param)
+        {
+            var model = await _wwauow.EmployeeUnrealizedStrengths.GetEmployeeUnrealizedStrength(param);
+            return model;
+        }
+
+        [Route("~/api/AddEmployeeUnrealizedStrength")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddEmployeeUnrealizedStrength([FromBody] EmployeeUnrealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeUnrealizedStrengths.AddEmployeeUnrealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateEmployeeUnrealizedStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateEmployeeUnrealizedStrength([FromBody] EmployeeUnrealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeUnrealizedStrengths.UpdateEmployeeUnrealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveEmployeeUnrealizedStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveEmployeeUnrealizedStrengths([FromBody] EmployeeUnrealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeUnrealizedStrengths.RemoveEmployeeUnrealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnEmployeeUnrealizedStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnEmployeeUnrealizedStrengths([FromBody] EmployeeUnrealizedStrengthsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeUnrealizedStrengths.ReturnEmployeeUnrealizedStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region EMPLOYEE WEAKNESS
+        [Route("~/api/GetEmployeeWeaknesses")]
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromUri] EmployeeWeaknessViewModel param)
+        {
+            var model = await _wwauow.EmployeeWeakness.GetEmployeeWeakness(param);
+            return model;
+        }
+
+        [Route("~/api/AddEmployeeWeakness")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeWeakness.AddEmployeeWeakness(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateEmployeeWeakness")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeWeakness.UpdateEmployeeWeakness(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveEmployeeWeakness")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeWeakness.RemoveEmployeeWeakness(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnEmployeeWeakness")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.EmployeeWeakness.ReturnEmployeeWeakness(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
         // ---------------------------------------------------------------------
 
         #region DAILYCHECKIN
         [Route("~/api/GetAllDailyCheckIn")]
         [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromBody] DailyCheckInViewModel param)
+        public async Task<IEnumerable<DailyCheckInViewModel>> GetDailyCheckIn([FromUri] DailyCheckInViewModel param)
         {
             var model = await _wwauow.DailyCheckIn.GetAllDailyCheckIn(param);
-
-            return model;
-        }
-        [Route("~/api/GetAllEmployeeDailyCheckIn")]
-        [HttpGet]
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetEmployeeDailyCheckIn([FromBody] DailyCheckInViewModel param)
-        {
-            var model = await _wwauow.DailyCheckIn.GetAllEmployeeDailyCheckIn(param);
 
             return model;
         }
@@ -663,298 +945,6 @@ namespace WelbyAPI.Controllers
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.Tise.ReturnTise(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        
-
-        #region EMPLOYEE INTEREST
-        [Route("~/api/GetEmployeeInterests")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeInterestViewModel>> GetEmployeeInterestsList([FromUri] EmployeeInterestViewModel param)
-        {
-            var model = await _wwauow.EmployeeInterest.GetEmployeeInterests(param);
-            return model;
-        }
-
-        [Route("~/api/AddEmployeeInterests")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddEmployeeInterest([FromBody] EmployeeInterestViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeInterest.AddEmployeeInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateEmployeeInterests")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateEmployeeInterest([FromBody] EmployeeInterestViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeInterest.UpdateEmployeeInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveEmployeeInterests")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveEmployeeInterest([FromBody] EmployeeInterestViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeInterest.RemoveEmployeeInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnEmployeeInterests")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnEmployeeInterest([FromBody] EmployeeInterestViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeInterest.ReturnEmployeeInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region EMPLOYEE LEARNED BEHAVIORS
-        [Route("~/api/GetEmployeeLearnedBehaviors")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeLearnedBehaviorsViewModel>> GetEmployeeLearnedBehaviorsList([FromUri] EmployeeLearnedBehaviorsViewModel param)
-        {
-            var model = await _wwauow.EmployeeLearnedBehaviors.GetEmployeeLearnedBehaviors(param);
-            return model;
-        }
-
-        [Route("~/api/AddEmployeeLearnedBehavior")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddEmployeeLearnedBehavior([FromBody] EmployeeLearnedBehaviorsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeLearnedBehaviors.AddEmployeeLearnedBehavior(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateEmployeeLearnedBehavior")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateEmployeeLearnedBehavior([FromBody] EmployeeLearnedBehaviorsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeLearnedBehaviors.UpdateEmployeeLearnedBehavior(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveEmployeeLearnedBehavior")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveEmployeeLearnedBehaviors([FromBody] EmployeeLearnedBehaviorsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeLearnedBehaviors.RemoveEmployeeLearnedBehavior(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnEmployeeLearnedBehavior")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnEmployeeLearnedBehaviors([FromBody] EmployeeLearnedBehaviorsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeLearnedBehaviors.ReturnEmployeeLearnedBehavior(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region EMPLOYEE REALIZED STRENGTH
-        [Route("~/api/GetEmployeeRealizedStrengths")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeRealizedStrengthsViewModel>> GetEmployeeRealizedStrengthList([FromUri] EmployeeRealizedStrengthsViewModel param)
-        {
-            var model = await _wwauow.EmployeeRealizedStrengths.GetEmployeeRealizedStrength(param);
-            return model;
-        }
-
-        [Route("~/api/AddEmployeeRealizedStrength")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddEmployeeRealizedStrength([FromBody] EmployeeRealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeRealizedStrengths.AddEmployeeRealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateEmployeeRealizedStrength")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateEmployeeRealizedStrength([FromBody] EmployeeRealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeRealizedStrengths.UpdateEmployeeRealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveEmployeeRealizedStrengths")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveEmployeeRealizedStrengths([FromBody] EmployeeRealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeRealizedStrengths.RemoveEmployeeRealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnEmployeeRealizedStrengths")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnEmployeeRealizedStrengths([FromBody] EmployeeRealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeRealizedStrengths.ReturnEmployeeRealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region EMPLOYEE UNREALIZED STRENGTH
-        [Route("~/api/GetEmployeeUnrealizedStrengths")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeUnrealizedStrengthsViewModel>> GetEmployeeUnrealizedStrengthList([FromUri] EmployeeUnrealizedStrengthsViewModel param)
-        {
-            var model = await _wwauow.EmployeeUnrealizedStrengths.GetEmployeeUnrealizedStrength(param);
-            return model;
-        }
-
-        [Route("~/api/AddEmployeeUnrealizedStrength")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddEmployeeUnrealizedStrength([FromBody] EmployeeUnrealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeUnrealizedStrengths.AddEmployeeUnrealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateEmployeeUnrealizedStrength")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateEmployeeUnrealizedStrength([FromBody] EmployeeUnrealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeUnrealizedStrengths.UpdateEmployeeUnrealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveEmployeeUnrealizedStrengths")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveEmployeeUnrealizedStrengths([FromBody] EmployeeUnrealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeUnrealizedStrengths.RemoveEmployeeUnrealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnEmployeeUnrealizedStrengths")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnEmployeeUnrealizedStrengths([FromBody] EmployeeUnrealizedStrengthsViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeUnrealizedStrengths.ReturnEmployeeUnrealizedStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region EMPLOYEE WEAKNESS
-        [Route("~/api/GetEmployeeWeaknesses")]
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeWeaknessViewModel>> GetEmployeeWeaknessList([FromUri] EmployeeWeaknessViewModel param)
-        {
-            var model = await _wwauow.EmployeeWeakness.GetEmployeeWeakness(param);
-            return model;
-        }
-
-        [Route("~/api/AddEmployeeWeakness")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeWeakness.AddEmployeeWeakness(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateEmployeeWeakness")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeWeakness.UpdateEmployeeWeakness(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveEmployeeWeakness")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeWeakness.RemoveEmployeeWeakness(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnEmployeeWeakness")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnEmployeeWeakness([FromBody] EmployeeWeaknessViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.EmployeeWeakness.ReturnEmployeeWeakness(param);
             var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
             var sample = js.Serialize(model);
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");

@@ -14,7 +14,5 @@ namespace WWA_CORE.Core.Repositories.Masters
         Task<StrengthMasterViewModel> RemoveStrength(StrengthMasterViewModel strengthMasterViewModel);
         Task<StrengthMasterViewModel> ReturnStrength(StrengthMasterViewModel strengthMasterViewModel);
         Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList(StrengthMasterViewModel strengthMasterViewModel);
-
-        Task<IEnumerable<WWA_CORE.Utilities.KeyValuePair>> GetStrengthCategory();
     }
 }

@@ -11,6 +11,7 @@ using WWA_CORE.Persistent.Context;
 using WWA_CORE.Persistent.ViewModel.Masters;
 using WWA_CORE.Utilities;
 using System.Data.Entity;
+using Accord.Collections;
 
 namespace WWA_CORE.Persistent.Service.Masters
 {
@@ -27,6 +28,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 {
                     Strength = strengthMasterViewModel.Strength,
                     Category = strengthMasterViewModel.Category,
+                    Description = strengthMasterViewModel.Description,
 
                     Active = true,
                     Encoded_By = strengthMasterViewModel.Encoded_By,
@@ -48,21 +50,6 @@ namespace WWA_CORE.Persistent.Service.Masters
             return strengthMasterViewModel;
         }
 
-        public async Task<IEnumerable<KeyValuePair>> GetStrengthCategory()
-        {
-            var FilterTypeList = new List<KeyValuePair>();
-            await Task.Run(() =>
-            {
-                FilterTypeList.Insert(0, new KeyValuePair { Key = 0, Value = WWA_COREDefaults.DEFAULT_KEYVALUEPAIR_VALUE});
-                foreach (var item in Enum.GetValues(typeof(EnumClass.StrengthCategory))) 
-                {
-                    FilterTypeList.Add(new KeyValuePair { Key = (int)item, Value = item.ToString().Replace("_", " ") });
-                }
-            });
-
-            return FilterTypeList;
-        }
-
         public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList(StrengthMasterViewModel strengthMasterViewModel)
         {
             var query = new SqlQueryObject
@@ -72,6 +59,9 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_STRENGTH_MASTER_GET_STRENGTHID, strengthMasterViewModel.StrengthId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_STRENGTH_MASTER_GET_STRENGTH, strengthMasterViewModel.Strength),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_STRENGTH_MASTER_GET_CATEGORY, strengthMasterViewModel.Category),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_STRENGTH_MASTER_GET_DESCRIPTION, strengthMasterViewModel.Description),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, strengthMasterViewModel.Active),
                 }
             };
@@ -83,6 +73,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Strength = Convert.ToString(row["Strength"]),
                 StrengthId = Convert.ToInt32(row["StrengthId"]),
                 Category = Convert.ToString(row["Category"]),
+                Description = Convert.ToString(row["Description"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
@@ -161,6 +152,8 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var RowToUpdate = await context.tbl_MST_Strength_Master.FirstOrDefaultAsync(c => c.StrengthId == strengthMasterViewModel.StrengthId);
 
                 RowToUpdate.Strength = strengthMasterViewModel.Strength;
+                RowToUpdate.Category = strengthMasterViewModel.Category;
+                RowToUpdate.Description = strengthMasterViewModel.Description;
 
                 RowToUpdate.Active = strengthMasterViewModel.Active;
                 RowToUpdate.LastChanged_By = strengthMasterViewModel.Encoded_By;

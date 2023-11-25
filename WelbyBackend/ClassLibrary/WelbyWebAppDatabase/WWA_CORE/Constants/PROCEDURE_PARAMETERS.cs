@@ -48,16 +48,15 @@ namespace WWA_CORE.Constants
         #endregion
 
         #region MASTERS
-        public const string PARA_MST_CITY_MASTER_GET_COUNTRYID = "@CountryId";
-
+        //Industry Master
         public const string PARA_MST_INDUSTRY_TYPE_MASTER_GET_INDUSTRYTYPEID = "@IndustryTypeId";
+        public const string PARA_MST_INDUSTRY_TYPE_MASTER_GET_INDUSTRYNAME = "@Industry_Name";
 
         public const string PARA_MST_COUNTRY_MASTER_GET_COUNTRYID = "@CountryId";
 
-        public const string PARA_MST_COMPANY_MASTER_GET_COMPANYID = "@CompanyId";
-
+        //Gender MAster
         public const string PARA_MST_GENDER_MASTER_GET_GENDERID = "@GenderId";
-        public const string PARA_MST_GENDER_MASTER_GET_BIOLOGICAL = "@Biological";
+        public const string PARA_MST_GENDER_MASTER_GET_GENDER = "@Gender";
 
         //Goal Master
         public const string PARA_MST_GOAL_MASTER_GET_GOALID = "@GoalId";
@@ -71,9 +70,15 @@ namespace WWA_CORE.Constants
         public const string PARA_MST_VALUE_MASTER_GET_TITLE = "@Title";
         public const string PARA_MST_VALUE_MASTER_GET_DESCRIPTION = "@Description";
 
+        //Interest Master
         public const string PARA_MST_INTEREST_MASTER_GET_INTERESTID = "@InterestId";
+        public const string PARA_MST_INTEREST_MASTER_GET_NAME = "@Name";
 
+        //Strength Master
         public const string PARA_MST_STRENGTH_MASTER_GET_STRENGTHID = "@StrengthId";
+        public const string PARA_MST_STRENGTH_MASTER_GET_STRENGTH = "@Strength";
+        public const string PARA_MST_STRENGTH_MASTER_GET_CATEGORY = "@Category";
+        public const string PARA_MST_STRENGTH_MASTER_GET_DESCRIPTION = "@Description";
         #endregion
 
         #region COMPANY

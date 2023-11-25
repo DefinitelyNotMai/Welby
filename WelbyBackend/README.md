@@ -3,7 +3,7 @@ Note: The parameters might change because these
 were tested only in Postman.
 - ##### *If value of a string parameter is not known, use* **" "** *to indicate it is null.*
 - ##### *if value of a number parameter is not known, use* **0** *to indicate null.*
-- ##### *If `Active` is not `true` it will show both active and inactive datas* 
+- ##### *If `Active` is not `true` it will show both active and inactive data* 
 
 ---
 ## Employee Routes
@@ -35,7 +35,7 @@ were tested only in Postman.
 
 **~/api/RemoveEmployee**
 - params : {
-  - **EmpoyeeId:** number
+  - **EmployeeId:** number
 
   }
 
@@ -43,7 +43,7 @@ were tested only in Postman.
 
 **~/api/ReturnEmployee**
 - params : {
-  - **EmpoyeeId:** number
+  - **EmployeeId:** number
 
   }
 
@@ -141,7 +141,7 @@ were tested only in Postman.
   }
 
 ---
-## Values Routes
+## Company Values Routes
 
 > ##### GET :
 **~/api/GetValues**
@@ -195,9 +195,8 @@ were tested only in Postman.
 
   }
 
-
 ---
-## Goals Routes
+## Company Goals Routes
 
 > ##### GET :
 **~/api/GetGoals**
@@ -247,6 +246,208 @@ were tested only in Postman.
   - **Title:** string
   - **Description:** string
   - **DurationTo:** string
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
+## Strengths Master Routes
+
+> ##### GET :
+**~/api/GetStrengths**
+- params : {
+  - **StrengthId:** number
+  - **Strength:** string
+  - **Category:** string
+  - **Description:** string
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddStrength**
+- params : {
+  - **Strength:** string
+  - **Category:** string 
+  - **Description:** string 
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveStrength**
+- params : {
+  - **StrengthId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnStrength**
+- params : {
+  - **StrengthId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateStrength**
+- params : {
+  - **Strength:** string
+  - **Category:** string
+  - **Description:** string
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+---
+## Interest Master Routes
+
+> ##### GET :
+**~/api/GetInterests**
+- params : {
+  - **InterestId:** number
+  - **Name:** string
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddInterest**
+- params : {
+  - **Name:** string
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveInterest**
+- params : {
+  - **InterestId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnInterest**
+- params : {
+  - **InterestId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateInterest**
+- params : {
+  - **Name:** string
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+
+---
+## Gender Master Routes
+
+> ##### GET :
+**~/api/GetGender**
+- params : {
+  - **GenderId:** number
+  - **Gender:** string
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddGender**
+- params : {
+  - **Gender:** string
+  - **Biological:** boolean
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveGender**
+- params : {
+  - **GenderId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnGender**
+- params : {
+  - **GenderId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateGender**
+- params : {
+  - **Gender:** string
+  - **Biological:** boolean
+  - **Active:** boolean
+  - **LastChanged_By:** number
+
+  }
+
+
+---
+## Industry Type Routes
+
+> ##### GET :
+**~/api/GetIndustryTypes**
+- params : {
+  - **IndustryTypeId:** number
+  - **Industry_Name** string
+  - **Active:** boolean
+
+  }
+
+> ##### Add :
+
+**~/api/AddIndustryType**
+- params : {
+  - **Industry_Name:** string
+  - **Encoded_By:** number
+  - **Encoded_Date:** string
+
+  }
+
+> ##### Remove :
+
+**~/api/RemoveIndustryTYpe**
+- params : {
+  - **IndustryTypeId:** number
+
+  }
+
+> ##### Return :
+
+**~/api/ReturnIndustryType**
+- params : {
+  - **IndustryTypeId:** number
+
+  }
+
+> ##### Update :
+
+**~/api/UpdateIndustryType**
+- params : {
+  - **Industry_Name:** string
   - **Active:** boolean
   - **LastChanged_By:** number
 

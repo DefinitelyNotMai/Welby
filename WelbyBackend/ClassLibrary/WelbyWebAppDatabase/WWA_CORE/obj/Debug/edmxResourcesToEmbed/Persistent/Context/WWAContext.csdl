@@ -753,7 +753,7 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Gender_Master_Get">
       <Parameter Name="GenderId" Mode="In" Type="Int32" />
-      <Parameter Name="Biological" Mode="In" Type="Boolean" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Goal_Master_Get">
@@ -769,14 +769,19 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_IndustryType_Master_Get">
       <Parameter Name="IndustryTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="Industry_Name" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Interest_Master_Get">
       <Parameter Name="InterestId" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Strength_Master_Get">
       <Parameter Name="StrengthId" Mode="In" Type="Int32" />
+      <Parameter Name="Strength" Mode="In" Type="String" />
+      <Parameter Name="Category" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Value_Master_Get">

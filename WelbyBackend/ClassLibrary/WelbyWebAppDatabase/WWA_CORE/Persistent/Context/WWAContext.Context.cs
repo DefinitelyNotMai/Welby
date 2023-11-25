@@ -266,21 +266,21 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Country_Master_Get", countryIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_Gender_Master_Get(Nullable<int> genderId, Nullable<bool> biological, Nullable<bool> active)
+        public virtual int procWWA_MST_Gender_Master_Get(Nullable<int> genderId, string gender, Nullable<bool> active)
         {
             var genderIdParameter = genderId.HasValue ?
                 new ObjectParameter("GenderId", genderId) :
                 new ObjectParameter("GenderId", typeof(int));
     
-            var biologicalParameter = biological.HasValue ?
-                new ObjectParameter("Biological", biological) :
-                new ObjectParameter("Biological", typeof(bool));
+            var genderParameter = gender != null ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(string));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Gender_Master_Get", genderIdParameter, biologicalParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Gender_Master_Get", genderIdParameter, genderParameter, activeParameter);
         }
     
         public virtual int procWWA_MST_Goal_Master_Get(Nullable<int> goalId, Nullable<int> companyId, string title, string description, Nullable<bool> active)
@@ -321,43 +321,63 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Goal_Master_Pagewise_Get", companyIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_IndustryType_Master_Get(Nullable<int> industryTypeId, Nullable<bool> active)
+        public virtual int procWWA_MST_IndustryType_Master_Get(Nullable<int> industryTypeId, string industry_Name, Nullable<bool> active)
         {
             var industryTypeIdParameter = industryTypeId.HasValue ?
                 new ObjectParameter("IndustryTypeId", industryTypeId) :
                 new ObjectParameter("IndustryTypeId", typeof(int));
     
+            var industry_NameParameter = industry_Name != null ?
+                new ObjectParameter("Industry_Name", industry_Name) :
+                new ObjectParameter("Industry_Name", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_IndustryType_Master_Get", industryTypeIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_IndustryType_Master_Get", industryTypeIdParameter, industry_NameParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_Interest_Master_Get(Nullable<int> interestId, Nullable<bool> active)
+        public virtual int procWWA_MST_Interest_Master_Get(Nullable<int> interestId, string name, Nullable<bool> active)
         {
             var interestIdParameter = interestId.HasValue ?
                 new ObjectParameter("InterestId", interestId) :
                 new ObjectParameter("InterestId", typeof(int));
     
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Interest_Master_Get", interestIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Interest_Master_Get", interestIdParameter, nameParameter, activeParameter);
         }
     
-        public virtual int procWWA_MST_Strength_Master_Get(Nullable<int> strengthId, Nullable<bool> active)
+        public virtual int procWWA_MST_Strength_Master_Get(Nullable<int> strengthId, string strength, string category, string description, Nullable<bool> active)
         {
             var strengthIdParameter = strengthId.HasValue ?
                 new ObjectParameter("StrengthId", strengthId) :
                 new ObjectParameter("StrengthId", typeof(int));
     
+            var strengthParameter = strength != null ?
+                new ObjectParameter("Strength", strength) :
+                new ObjectParameter("Strength", typeof(string));
+    
+            var categoryParameter = category != null ?
+                new ObjectParameter("Category", category) :
+                new ObjectParameter("Category", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Strength_Master_Get", strengthIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_MST_Strength_Master_Get", strengthIdParameter, strengthParameter, categoryParameter, descriptionParameter, activeParameter);
         }
     
         public virtual int procWWA_MST_Value_Master_Get(Nullable<int> valueId, Nullable<int> companyId, string title, string description, Nullable<bool> active)

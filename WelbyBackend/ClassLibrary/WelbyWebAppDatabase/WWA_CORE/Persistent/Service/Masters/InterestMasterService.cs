@@ -56,6 +56,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_INTEREST_MASTER_GET_INTERESTID, interestMasterViewModel.InterestId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_INTEREST_MASTER_GET_NAME, interestMasterViewModel.Name),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, interestMasterViewModel.Active),
                 }
             };

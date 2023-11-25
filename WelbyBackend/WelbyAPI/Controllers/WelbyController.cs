@@ -263,6 +263,238 @@ namespace WelbyAPI.Controllers
         }
         #endregion
 
+        #region STRENGTH
+        [Route("~/api/GetStrengths")]
+        [HttpGet]
+        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromBody] StrengthMasterViewModel param)
+        {
+            var model = await _wwauow.Strength.GetStrengthList(param);
+            return model;
+        }
+
+        [Route("~/api/AddStrength")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddStrength([FromBody] StrengthMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Strength.AddStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateStrength([FromBody] StrengthMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Strength.UpdateStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveStrength([FromBody] StrengthMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Strength.RemoveStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnStrength")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnStrength([FromBody] StrengthMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Strength.ReturnStrength(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region INTEREST
+        [Route("~/api/GetInterests")]
+        [HttpGet]
+        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromBody] InterestMasterViewModel param)
+        {
+            var model = await _wwauow.Interest.GetInterestsList(param);
+            return model;
+        }
+
+        [Route("~/api/AddInterest")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddInterest([FromBody] InterestMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Interest.AddInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateInterest")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateInterest([FromBody] InterestMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Interest.UpdateInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveInterest")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveInterest([FromBody] InterestMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Interest.RemoveInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnInterest")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnInterest([FromBody] InterestMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Interest.AddInterest(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region GENDER
+        [Route("~/api/GetGender")]
+        [HttpGet]
+        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromBody] GenderMasterViewModel param)
+        {
+            var model = await _wwauow.Gender.GetGenderList(param);
+            return model;
+        }
+
+        [Route("~/api/AddGender")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddGender([FromBody] GenderMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Gender.AddGender(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateGender")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateGender([FromBody] GenderMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Gender.UpdateGender(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveGender")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveGender([FromBody] GenderMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Gender.RemoveGender(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnGender")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnGender([FromBody] GenderMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Gender.ReturnGender(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
+        #region INDUSTRY TYPE
+        [Route("~/api/GetIndustryTypes")]
+        [HttpGet]
+        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromBody] IndustryTypeMasterViewModel param)
+        {
+            var model = await _wwauow.IndustryType.GetIndustryTypeList(param);
+            return model;
+        }
+
+        [Route("~/api/AddIndustryType")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> AddIndustryType([FromBody] IndustryTypeMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.IndustryType.AddIndustryType(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/RemoveIndustryType")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> RemoveIndustryType([FromBody] IndustryTypeMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.IndustryType.RemoveIndustryType(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/ReturnIndustryType")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> ReturnIndustryType([FromBody] IndustryTypeMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.IndustryType.ReturnIndustryType(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateIndustryType")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateIndustryType([FromBody] IndustryTypeMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.IndustryType.UpdateIndustryType(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+        #endregion
+
         // ---------------------------------------------------------------------
 
         #region DAILYCHECKIN
@@ -380,240 +612,6 @@ namespace WelbyAPI.Controllers
         }
         #endregion
 
-        #region STRENGTH
-        [Route("~/api/GetStrength")]
-        [HttpGet]
-        public async Task<IEnumerable<StrengthMasterViewModel>> GetStrengthList([FromUri] StrengthMasterViewModel param)
-        {
-            var model = await _wwauow.Strength.GetStrengthList(param);
-            return model;
-        }
-
-        [Route("~/api/AddStrength")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddStrength([FromBody] StrengthMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Strength.AddStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateStrength")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateStrength([FromBody] StrengthMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Strength.UpdateStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveStrength")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveStrength([FromBody] StrengthMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Strength.RemoveStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnStrength")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnStrength([FromBody] StrengthMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Strength.ReturnStrength(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region INTEREST
-        [Route("~/api/GetAllInterest")]
-        [HttpGet]
-        public async Task<IEnumerable<InterestMasterViewModel>> GetInterestList([FromUri] InterestMasterViewModel param)
-        {
-            var model = await _wwauow.Interest.GetInterestsList(param);
-            return model;
-        }
-
-        [Route("~/api/AddInterest")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddInterest([FromBody] InterestMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Interest.AddInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateInterest")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateInterest([FromBody] InterestMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Interest.UpdateInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveInterest")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveInterest([FromBody] InterestMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Interest.RemoveInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnInterest")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnInterest([FromBody] InterestMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Interest.AddInterest(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        #region INDUSTRY TYPE
-        [Route("~/api/GetIndustryTypes")]
-        [HttpGet]
-        public async Task<IEnumerable<IndustryTypeMasterViewModel>> GetIndustryTypes([FromUri] IndustryTypeMasterViewModel param)
-        {
-            var model = await _wwauow.IndustryType.GetIndustryTypeList(param);
-            return model;
-        }
-
-        [Route("~/api/AddIndustryType")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddIndustryType([FromBody] IndustryTypeMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.IndustryType.AddIndustryType(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveIndustryType")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveIndustryType([FromBody] IndustryTypeMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.IndustryType.RemoveIndustryType(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnIndustryType")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnIndustryType([FromBody] IndustryTypeMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.IndustryType.ReturnIndustryType(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateIndustryType")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateIndustryType([FromBody] IndustryTypeMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.IndustryType.UpdateIndustryType(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
-        
-
-        #region GENDER
-        [Route("~/api/GetGender")]
-        [HttpGet]
-        public async Task<IEnumerable<GenderMasterViewModel>> GetGenderList([FromUri] GenderMasterViewModel param)
-        {
-            var model = await _wwauow.Gender.GetGenderList(param);
-            return model;
-        }
-
-        [Route("~/api/AddGender")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> AddGender([FromBody] GenderMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Gender.AddGender(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("SAVE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/UpdateGender")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateGender([FromBody] GenderMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Gender.UpdateGender(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/RemoveGender")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> RemoveGender([FromBody] GenderMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Gender.RemoveGender(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("REMOVE") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        [Route("~/api/ReturnGender")]
-        [HttpPatch]
-        public async Task<HttpResponseMessage> ReturnGender([FromBody] GenderMasterViewModel param)
-        {
-            var js = new JavaScriptSerializer();
-            var model = await _wwauow.Gender.ReturnGender(param);
-            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
-            var sample = js.Serialize(model);
-            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
-            return response;
-        }
-        #endregion
-
         #region COUNTRY
         [Route("~/api/GetAllCountry")]
         [HttpGet]
@@ -671,8 +669,6 @@ namespace WelbyAPI.Controllers
             return response;
         }
         #endregion
-
-        
 
         #region EMPLOYEE INTEREST
         [Route("~/api/GetEmployeeInterests")]

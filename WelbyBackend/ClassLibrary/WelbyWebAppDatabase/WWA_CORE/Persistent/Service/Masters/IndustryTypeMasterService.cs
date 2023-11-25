@@ -26,6 +26,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 var rowtoInsert = new tbl_MST_IndustryType_Master
                 {
                     Industry_Name = industryTypeMasterViewModel.Industry_Name,
+
                     Active = true,
                     Encoded_By = industryTypeMasterViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),
@@ -57,6 +58,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_INDUSTRY_TYPE_MASTER_GET_INDUSTRYTYPEID, industryTypeMasterViewModel.IndustryTypeId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_INDUSTRY_TYPE_MASTER_GET_INDUSTRYNAME, industryTypeMasterViewModel.Industry_Name),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, industryTypeMasterViewModel.Active),
                 }
             };

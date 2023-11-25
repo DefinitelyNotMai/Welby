@@ -317,7 +317,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AlgorithmHandler.cs" />
     <Compile Include="Utilities\CommonSchema.cs" />
-    <Compile Include="Utilities\EnumClass.cs" />
     <Compile Include="Utilities\GlobalFunctions.cs" />
     <Compile Include="Utilities\IQueryableExtensions.cs" />
     <Compile Include="Utilities\IQueryObject.cs" />

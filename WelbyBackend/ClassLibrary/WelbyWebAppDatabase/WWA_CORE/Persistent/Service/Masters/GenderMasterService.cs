@@ -56,6 +56,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Parameters = new SqlParameter[]
                 {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GENDER_MASTER_GET_GENDERID, genderMasterViewModel.GenderId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_MST_GENDER_MASTER_GET_GENDER, genderMasterViewModel.Gender),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, genderMasterViewModel.Active),
                 }
             };

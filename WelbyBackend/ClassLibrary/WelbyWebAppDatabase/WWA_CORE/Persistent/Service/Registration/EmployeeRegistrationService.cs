@@ -107,42 +107,40 @@ namespace WWA_CORE.Persistent.Service.Registration
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new EmployeeRegistrationViewModel()
             {
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
-
                 First_Name = Convert.ToString(row["First_Name"]),
                 Middle_Name = Convert.ToString(row["Middle_Name"]),
                 Last_Name = Convert.ToString(row["Last_Name"]),
                 Nickname = Convert.ToString(row["Nickname"]),
+                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
+
+                CompanyId = Convert.ToInt32(row["CompanyId"]),
+                EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
+                CompanyPosition = Convert.ToString(row["CompanyPosition"]),
 
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
                 Birthday = DBNull.Value != row["Birthday"] ? (DateTime?)row["Birthday"] : null,
 
+                GenderId = Convert.ToInt32(row["GenderId"]),
+                GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
+
+                CountryId = Convert.ToInt32(row["CountryId"]),
+                Address = Convert.ToString(row["Address"]),
+                CountryDisplay = Convert.ToString(row["CountryDisplay"]),
+               
                 TikTok = Convert.ToString(row["TikTok"]),
                 Linkedin = Convert.ToString(row["Linkedin"]),
                 Instagram = Convert.ToString(row["Instagram"]),
                 Facebook = Convert.ToString(row["Facebook"]),
-
-                ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
-                Address = Convert.ToString(row["Address"]),
-
-                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
-                CompanyPosition = Convert.ToString(row["CompanyPosition"]),
-
-                GenderId = Convert.ToInt32(row["GenderId"]),
-                CompanyId = Convert.ToInt32(row["CompanyId"]),
-                CountryId = Convert.ToInt32(row["CountryId"]),
-
 
                 Work = Convert.ToString(row["Work"]),
                 Connect = Convert.ToString(row["Connect"]),
                 Support = Convert.ToString(row["Support"]),
                 Other_Notes = Convert.ToString(row["Other_Notes"]),
 
+                FirstLogIn = Convert.ToBoolean(row["FirstLogIn"]),
 
-                EmployeeFullName = Convert.ToString(row["EmployeeFullName"]),
-                GenderDisplayName = Convert.ToString(row["GenderDisplayName"]),
-                CountryDisplay = Convert.ToString(row["CountryDisplay"]),
-                EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
+                ProfilePhoto = Convert.ToString(row["ProfilePhoto"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

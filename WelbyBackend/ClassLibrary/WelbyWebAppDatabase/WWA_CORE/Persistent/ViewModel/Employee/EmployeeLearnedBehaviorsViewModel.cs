@@ -9,8 +9,8 @@ namespace WWA_CORE.Persistent.ViewModel.Employee
 {
     public class EmployeeLearnedBehaviorsViewModel : EmployeeLearnedBehaviorsResource
     {
+        public int LearnedBehaviorsId { get; set; }
         public int StrengthId { get; set; }
         public int EmployeeId { get; set; }
-        public int LearnedBehaviorsId { get; set; }
     }
 }

@@ -60,6 +60,7 @@ namespace WWA_CORE.Persistent.Service.Employee
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_LEARNED_BEHAVIORS_GET_LEARNEDBEHAVIORSID , employeeLearnedBehaviorsViewModel.LearnedBehaviorsId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_LEARNED_BEHAVIORS_GET_EMPLOYEEID , employeeLearnedBehaviorsViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_LEARNED_BEHAVIORS_GET_STRENGTHID , employeeLearnedBehaviorsViewModel.StrengthId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeLearnedBehaviorsViewModel.Active),
 
               }
             };
@@ -71,6 +72,9 @@ namespace WWA_CORE.Persistent.Service.Employee
                 LearnedBehaviorsId = Convert.ToInt32(row["LearnedBehaviorsId"]),
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
                 StrengthId = Convert.ToInt32(row["StrengthId"]),
+
+                EmployeeFirstNameDisplay = Convert.ToString(row["EmployeeFirstNameDisplay"]),
+                LearnedBehaviorDisplay = Convert.ToString(row["LearnedBehaviorDisplay"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

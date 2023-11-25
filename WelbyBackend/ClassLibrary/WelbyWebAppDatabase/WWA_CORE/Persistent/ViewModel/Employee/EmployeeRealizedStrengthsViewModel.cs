@@ -9,8 +9,8 @@ namespace WWA_CORE.Persistent.ViewModel.Employee
 {
     public class EmployeeRealizedStrengthsViewModel : EmployeeRealizedStrengthsResource
     {
-        public int StrengthId { get; set; }
         public int RealizedStrengthsId { get; set; }
+        public int StrengthId { get; set; }
         public int EmployeeId { get; set; }
     }
 }

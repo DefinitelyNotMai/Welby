@@ -705,16 +705,20 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Interest_Get">
       <Parameter Name="EmployeeInterestId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="InterestId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Learned_Behaviors_Get">
       <Parameter Name="LearnedBehaviorsId" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Realized_Strengths_Get">
       <Parameter Name="RealizedStrengthsId" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_TISE_Get">
@@ -724,11 +728,13 @@
     <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">
       <Parameter Name="UnrealizedStrengthsId" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Weakness_Get">
       <Parameter Name="EmployeeWeaknessId" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+      <Parameter Name="StrengthId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_Get_Results">
@@ -749,6 +755,7 @@
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Country_Master_Get">
       <Parameter Name="CountryId" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="procWWA_MST_Gender_Master_Get">

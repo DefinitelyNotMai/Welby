@@ -566,16 +566,20 @@
         </Function>
         <Function Name="procWWA_EMP_Interest_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmployeeInterestId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="InterestId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Learned_Behaviors_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LearnedBehaviorsId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Realized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RealizedStrengthsId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_TISE_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -585,11 +589,13 @@
         <Function Name="procWWA_EMP_Unrealized_Strengths_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UnrealizedStrengthsId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_EMP_Weakness_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmployeeWeaknessId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="StrengthId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="procWWA_Get_Results" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1497,16 +1503,20 @@
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Interest_Get">
             <Parameter Name="EmployeeInterestId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="InterestId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Learned_Behaviors_Get">
             <Parameter Name="LearnedBehaviorsId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Realized_Strengths_Get">
             <Parameter Name="RealizedStrengthsId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_TISE_Get">
@@ -1516,11 +1526,13 @@
           <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">
             <Parameter Name="UnrealizedStrengthsId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_EMP_Weakness_Get">
             <Parameter Name="EmployeeWeaknessId" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="StrengthId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="procWWA_Get_Results">

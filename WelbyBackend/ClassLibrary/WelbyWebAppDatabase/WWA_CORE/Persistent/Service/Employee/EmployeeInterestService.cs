@@ -58,10 +58,11 @@ namespace WWA_CORE.Persistent.Service.Employee
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_EMPLOYEEINTERESTLID , employeeInterestViewModel.EmployeeInterestId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_EMPLOYEEINTERESTID , employeeInterestViewModel.EmployeeInterestId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_EMPLOYEEID , employeeInterestViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_INTEREST_GET_INTERESTID , employeeInterestViewModel.InterestId),
-                    
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeInterestViewModel.Active),
+
               }
             };
 
@@ -72,6 +73,10 @@ namespace WWA_CORE.Persistent.Service.Employee
                 EmployeeInterestId = Convert.ToInt32(row["EmployeeInterestId"]),
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
                 InterestId = Convert.ToInt32(row["InterestId"]),
+
+                EmployeeFirstNameDisplay = Convert.ToString(row["EmployeeFirstNameDisplay"]),
+                InterestNameDisplay = Convert.ToString(row["InterestNameDisplay"]),
+
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

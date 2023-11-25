@@ -9,7 +9,6 @@ namespace WWA_CORE.Persistent.Resource.Employee
 {
     public class EmployeeLearnedBehaviorsResource : CommonSchema
     {
-        public string EmployeeLearnedBehaviorsDisplay { get; set; }
         public string LearnedBehaviorDisplay { get; set; }
         public string EmployeeFirstNameDisplay { get; set; }
     }

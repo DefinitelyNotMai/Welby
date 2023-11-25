@@ -60,6 +60,7 @@ namespace WWA_CORE.Persistent.Service.Employee
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_UNREALIZED_STRENGTH_GET_UNREALIZEDSTRENGTHSID , employeeUnrealizedStrengthsViewModel.UnrealizedStrengthsId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_UNREALIZED_STRENGTH_GET_EMPLOYEEID , employeeUnrealizedStrengthsViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_EMP_UNREALIZED_STRENGTH_GET_STRENGTHID , employeeUnrealizedStrengthsViewModel.StrengthId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeUnrealizedStrengthsViewModel.Active),
 
              }
             };
@@ -71,6 +72,9 @@ namespace WWA_CORE.Persistent.Service.Employee
                 UnrealizedStrengthsId = Convert.ToInt32(row["UnrealizedStrengthsId"]),
                 EmployeeId = Convert.ToInt32(row["EmployeeId"]),
                 StrengthId = Convert.ToInt32(row["StrengthId"]),
+
+                EmployeeFirstNameDisplay = Convert.ToString(row["EmployeeFirstNameDisplay"]),
+                UnrealizedStrengthDisplay = Convert.ToString(row["UnrealizedStrengthDisplay"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),

@@ -9,8 +9,8 @@ namespace WWA_CORE.Persistent.ViewModel.Employee
 {
     public class EmployeeInterestViewModel : EmployeeInterestsResource
     {
+        public int EmployeeInterestId { get; set; }
         public int InterestId { get; set; }
         public int EmployeeId { get; set; }
-        public int EmployeeInterestId { get; set; }
     }
 }

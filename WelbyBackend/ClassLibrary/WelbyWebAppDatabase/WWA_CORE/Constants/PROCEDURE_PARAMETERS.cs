@@ -94,7 +94,7 @@ namespace WWA_CORE.Constants
         #endregion
 
         #region EMPLOYEE
-        public const string PARA_EMP_INTEREST_GET_EMPLOYEEINTERESTLID = "@EmployeeInterestId";
+        public const string PARA_EMP_INTEREST_GET_EMPLOYEEINTERESTID = "@EmployeeInterestId";
         public const string PARA_EMP_INTEREST_GET_EMPLOYEEID = "@EmployeeId";
         public const string PARA_EMP_INTEREST_GET_INTERESTID = "@InterestId";
 

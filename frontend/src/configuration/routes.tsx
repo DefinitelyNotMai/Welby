@@ -34,6 +34,7 @@ import { StrengthsPage } from "../pages/AdminViewPage/StrengthsPage";
 import { GroupsPage } from "../pages/AdminViewPage/GroupsPage";
 import { UsersPage } from "../pages/AdminViewPage/UsersPage";
 import { UserToGroupPage } from "../pages/AdminViewPage/UserToGroupPage";
+import { Auth } from "../layout/Auth";
 
 export const routes = createBrowserRouter([
   {
@@ -47,12 +48,10 @@ export const routes = createBrowserRouter([
         path: "/",
         element: <WelcomePage />,
       },
-      /*
       {
         path: "/login",
         element: <LoginPage />,
       },
-      */
       {
         path: "/admin-view",
         element: <AdminViewPage />,
@@ -117,7 +116,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashboardPage />,
+        element: (
+          <Auth>
+            <DashboardPage />
+          </Auth>
+        ),
         children: [
           {
             path: "my-dashboard",

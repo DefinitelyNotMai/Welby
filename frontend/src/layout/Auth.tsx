@@ -19,10 +19,10 @@ export const Auth = ({ children }: AuthProps) => {
   const userContext = useContext(UserContext);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId") || 0;
 
     const fetchContext = async () => {
-      const employeeUrl = "https://localhost:44373/api/GetEmployee";
+      const employeeUrl = "https://localhost:44373/api/GetEmployees";
 
       try {
         const result = await fetchData(employeeUrl, {
@@ -53,7 +53,7 @@ export const Auth = ({ children }: AuthProps) => {
         "http://localhost:58258/api/GetSystemUsersToSecurityGroupMapping";
 
       try {
-        const token = fetchAccessToken(); // token
+        const token = fetchAccessToken();
         const userRole = axios
           .get(roleUrl, {
             method: "GET",
@@ -74,17 +74,14 @@ export const Auth = ({ children }: AuthProps) => {
               userContext.setRole(result[0].SecurityGroupId);
             }
           });
-        /*
-        const response = axios call
-             
-        */
-        userContext.setRole;
       } catch (error) {
         console.error("Error fetching role: ", error);
       }
     };
 
     fetchContext();
+    fetchRole();
+    console.log(userContext.companyId, userContext.email, userContext.phone);
   }, [navigate, toast, userContext]);
 
   return userContext.companyId && userContext.email ? <>{children}</> : null;

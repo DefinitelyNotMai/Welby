@@ -8,13 +8,10 @@ export const fetchData = async (
       .join("&");
 
     const urlWithQuery = `${fetchUrl}?${queryString}`;
-    const mergedHeaders = {
-      "Content-Type": "application/json",
-    };
 
     const response = await fetch(urlWithQuery, {
       method: "GET",
-      headers: mergedHeaders,
+      headers: { "Content-Type": "application/json" },
       //body: JSON.stringify(params),
       // NOTE: body not allowed for native fetch API, since this is a purely URL based
       // operation, place the data as a query string.

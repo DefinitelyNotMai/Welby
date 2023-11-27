@@ -14,18 +14,17 @@ import { Form, useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
 
 // local
-import { ForgotPassword } from "../components/Modal/ForgotPassword/ForgotPassword";
+import { ForgotPasswordModal } from "../components/Modal/ForgotPassword/ForgotPassword";
 import { FormItem } from "../components/Form/FormItem";
-import { INITIAL_LOGIN_DATA } from "../data/initForm";
-import { LoginData } from "../data/typesForm";
 import { SystemUsers } from "../data/typesOWS";
 import { WelcomeLayout } from "../layout/WelcomeLayout";
-import { processLogin } from "../api/loginService";
+import { LOGIN_DATA, Login } from "../data/login";
+import { login } from "../api/loginService";
 
 export const LoginPage = () => {
   document.title = "Login | Welby";
 
-  const [userData, setUserData] = useState<LoginData>(INITIAL_LOGIN_DATA);
+  const [userData, setUserData] = useState<Login>(LOGIN_DATA);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -52,7 +51,7 @@ export const LoginPage = () => {
       Password: userData.Password,
     };
 
-    const loginSuccess = await processLogin(data);
+    const loginSuccess = await login(data);
     console.log(loginSuccess.loginSuccess);
 
     if (loginSuccess.loginSuccess == true) {
@@ -126,7 +125,7 @@ export const LoginPage = () => {
         closeOnOverlayClick={false}
         closeOnEsc={false}
       >
-        <ForgotPassword onClose={toggleModal} />
+        <ForgotPasswordModal onClose={toggleModal} />
       </Modal>
     </WelcomeLayout>
   );

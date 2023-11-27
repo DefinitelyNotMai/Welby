@@ -1,18 +1,14 @@
+// lib
 import bcrypt from "bcryptjs";
-import { LoginData } from "../data/typesForm";
+
+// local
+import { Login } from "../data/login";
 import { fetchAccessToken } from "./tokenService";
 
 const loginUrl = "http://localhost:58258/api/GetSystemUsers";
 
-export const processLogin = async (
-  loginData: LoginData,
-): Promise<{
-  loginSuccess: boolean;
-  path: string;
-  id: string;
-}> => {
+export const login = async (loginData: Login) => {
   let path = "";
-  let id = "";
 
   try {
     const token = await fetchAccessToken();
@@ -45,7 +41,6 @@ export const processLogin = async (
 
       if (passwordMatch) {
         localStorage.setItem("userId", result[0].UserCode);
-        id = result[0].UserCode;
 
         if (result[0].FirstLogIn === 0) {
           path = "/employee-signup";
@@ -53,17 +48,15 @@ export const processLogin = async (
           path = "/dashboard/my-dashboard/overview";
         }
 
-        return { loginSuccess: true, path, id };
+        return { loginSuccess: true, path };
       } else {
-        return { loginSuccess: false, path, id };
+        return { loginSuccess: false, path };
       }
     } else {
-      return { loginSuccess: false, path, id };
+      return { loginSuccess: false, path };
     }
   } catch (error) {
     console.error(error);
-    return { loginSuccess: false, path, id };
+    return { loginSuccess: false, path };
   }
 };
-
-export default processLogin;

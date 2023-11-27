@@ -2,13 +2,9 @@
 import axios from "axios";
 
 // local
-import { CompanyFormData } from "../data/typesForm";
+import { CompanySignup } from "../data/companySignup";
 
-export const signUpCompany = async (
-  CompanyData: CompanyFormData,
-  companyId: string,
-  setCompanyId: (id: string) => void,
-) => {
+export const signUpCompany = async (CompanyData: CompanySignup) => {
   const company_info = {
     Name: CompanyData.Name,
     Email: CompanyData.companyEmail,
@@ -31,91 +27,48 @@ export const signUpCompany = async (
 
   try {
     const addCompanyUrl = "https://localhost:44373/api/AddCompany";
-    const addCompany = await axios
-      .post(addCompanyUrl, company_info, config)
-      .then((response) => {
-        // console.log(response.data)
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error);
+    const addCompany = await axios.post(addCompanyUrl, company_info, config);
+
+    if (addCompany) {
+      const getCompanyUrl = "https://localhost:44373/api/GetCompanies";
+      const company = await axios.get(getCompanyUrl, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        params: {
+          Email: CompanyData.companyEmail,
+          Phone_Number: CompanyData.Phone_Number,
+        },
       });
 
-      if (addCompany) {
-        const getCompanyUrl = "https://localhost:44373/api/GetCompany";
-        const company = await axios
-        .get(getCompanyUrl, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          params: {
-            Email: CompanyData.companyEmail,
-            Phone_Number: CompanyData.Phone_Number,
-          },
-        })
-        .then((response) => {
-          const result = response.data;
-          if (result && result.length > 0) {
-            const id = result[0].CompanyId;
-            setCompanyId(id);
-            return result[0];
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (company && company.data && company.data.length > 0) {
+        const id = company.data[0].CompanyId;
 
-        if (company) {
-          const Values: {
-            title: string;
-            description: string;
-          }[] = CompanyData.Values;
-          
-          const Goals: {
-            title: string;
-            description: string;
-            durationTo: string;
-          }[] = CompanyData.Goals;
+        const Values = CompanyData.Values;
+        const Goals = CompanyData.Goals;
 
-          for(let i = 0; i < Values.length; i++) {
-            const addValuesUrl = "https://localhost:44373/api/AddValue";
-            const value = {
-              CompanyId: company.CompanyId,
-              Title: Values[i].title,
-              Description: Values[i].description,
-            };
-            axios
-              .post(addValuesUrl, value, config)
-              .then((response) => {
-                // handle the response from the server
-                // console.log(response.data)
-                return response.data;
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
-
-          for (let i = 0; i < Goals.length; i++) {
-            const addGoalsUrl = "https://localhost:44373/api/AddGoal";
-            const goal = {
-              CompanyId: company.CompanyId,
-              Title: Goals[i].title,
-              Description: Goals[i].description,
-              DurationTo: Goals[i].durationTo,
-            };
-            axios
-              .post(addGoalsUrl, goal, config)
-              .then((response) => {
-                // handle the response from the server
-                // console.log(response.data)
-                return response.data;
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
+        for (let i = 0; i < Values.length; i++) {
+          const addValuesUrl = "https://localhost:44373/api/AddValue";
+          const value = {
+            CompanyId: id,
+            Title: Values[i].title,
+            Description: Values[i].description,
+          };
+          axios.post(addValuesUrl, value, config);
         }
+
+        for (let i = 0; i < Goals.length; i++) {
+          const addGoalsUrl = "https://localhost:44373/api/AddGoal";
+          const goal = {
+            CompanyId: id,
+            Title: Goals[i].title,
+            Description: Goals[i].description,
+            DurationTo: Goals[i].durationTo,
+          };
+          axios.post(addGoalsUrl, goal, config);
+        }
+        return id;
       }
+    }
   } catch (error) {
     // handle network or other error
     console.error("An error occured: ", error);

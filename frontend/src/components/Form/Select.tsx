@@ -3,13 +3,13 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Select } from "@chakra-ui/react";
 
 // local
-import { SystemSecurityGroup } from "../../data/typesOWS";
-import { fetchAccessToken } from "../../api/tokenService";
-import { fetchData } from "../../api/fetchData";
 import { Country } from "../../data/country";
 import { Gender } from "../../data/gender";
 import { IndustryType } from "../../data/industryType";
 import { Strength } from "../../data/strength";
+import { SystemSecurityGroup } from "../../data/typesOWS";
+import { fetchAccessToken } from "../../api/tokenService";
+import { fetchData } from "../../api/fetchData";
 
 type CustomSelectProps = {
   id: string;
@@ -61,11 +61,15 @@ export const SelectCountry = ({
 }: CustomSelectProps) => {
   const [countries, setCountries] = useState<Country[]>([]);
 
-  const countriesUrl = "https://localhost:44373/api/GetAllCountry";
+  const countriesUrl = "https://localhost:44373/api/GetCountries";
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const data = await fetchData(countriesUrl, { Active: true });
+        const data = await fetchData(countriesUrl, {
+          CountryId: 0,
+          Name: "",
+          Active: true,
+        });
         setCountries(data);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -141,7 +145,11 @@ export const SelectIndustryType = ({
   useEffect(() => {
     const fetchIndustryTypes = async () => {
       try {
-        const data = await fetchData(industryTypesUrl, { Active: "1" });
+        const data = await fetchData(industryTypesUrl, {
+          IndustryTypeId: 0,
+          Industry_Name: "",
+          Active: true,
+        });
         setIndustryTypes(data);
       } catch (error) {
         console.error("Error fetching data: ", error);

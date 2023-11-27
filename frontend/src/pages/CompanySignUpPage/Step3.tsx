@@ -27,8 +27,11 @@ export const Step3 = ({ Values, updateFields }: Step3Props) => {
   };
 
   const handleAddValue = () => {
-    const updatedValues = [...Values, { title: "", description: "" }];
-    updateFields({ Values: updatedValues });
+    if (Values.length < 5) {
+      // Check if the current number of values is less than 5
+      const updatedValues = [...Values, { title: "", description: "" }];
+      updateFields({ Values: updatedValues });
+    }
   };
 
   const handleRemoveValue = () => {
@@ -94,8 +97,7 @@ export const Step3 = ({ Values, updateFields }: Step3Props) => {
         {Values.length > 1 && (
           <Link onClick={handleRemoveValue}>- Remove Value</Link>
         )}
-
-        <Link onClick={handleAddValue}>+ Add Value</Link>
+        {Values.length < 5 && <Link onClick={handleAddValue}>+ Add Value</Link>}
       </Flex>
     </Flex>
   );

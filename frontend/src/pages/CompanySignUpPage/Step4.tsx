@@ -33,11 +33,13 @@ export const Step4 = ({ Goals, updateFields }: Step4Props) => {
   };
 
   const handleAddGoal = () => {
-    const updatedGoals = [
-      ...Goals,
-      { title: "", description: "", durationTo: "" },
-    ];
-    updateFields({ Goals: updatedGoals });
+    if (Goals.length < 5) {
+      const updatedGoals = [
+        ...Goals,
+        { title: "", description: "", durationTo: "" },
+      ];
+      updateFields({ Goals: updatedGoals });
+    }
   };
 
   const handleRemoveGoal = () => {
@@ -119,8 +121,7 @@ export const Step4 = ({ Goals, updateFields }: Step4Props) => {
         {Goals.length > 1 && (
           <Link onClick={handleRemoveGoal}>- Remove Goal</Link>
         )}
-
-        <Link onClick={handleAddGoal}>+ Add Goal</Link>
+        {Goals.length < 5 && <Link onClick={handleAddGoal}>+ Add Goal</Link>}
       </Flex>
     </Flex>
   );

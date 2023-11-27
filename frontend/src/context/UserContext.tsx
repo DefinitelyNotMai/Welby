@@ -2,11 +2,11 @@
 import { ReactNode, createContext, useState } from "react";
 
 type UserContextType = {
-  companyId: string;
+  companyId: number;
   email: string;
   phone: string;
   role: number;
-  setCompanyId: (id: string) => void;
+  setCompanyId: (id: number) => void;
   setEmail: (email: string) => void;
   setPhone: (phone: string) => void;
   setRole: (role: number) => void;
@@ -19,7 +19,7 @@ type UserContextProviderProps = {
 export const UserContext = createContext({} as UserContextType);
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [companyId, setCompanyId] = useState<string>("");
+  const [companyId, setCompanyId] = useState<number>(0);
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [role, setRole] = useState<number>(0);

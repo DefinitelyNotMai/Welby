@@ -1,7 +1,7 @@
 // lib
 import { Button, Card, Flex, Grid } from "@chakra-ui/react";
 import { Form, useNavigate } from "react-router-dom";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 
 // local
 import {
@@ -17,22 +17,20 @@ import { Step5 } from "./Step5";
 import { Step6 } from "./Step6";
 import { Step7 } from "./Step7";
 import { Step8 } from "./Step8";
-import { UserContext } from "../../context/UserContext";
 import { WelcomeLayout } from "../../layout/WelcomeLayout";
 import { signUpCompany } from "../../api/signUpCompany";
-import { signUpCompanyAdmin } from "../../api/signUpCompanyAdmin";
 import { useMultiStepForm } from "../../hooks/useMultiStepForm";
+import { signUpCompanyAdmin } from "../../api/signUpCompanyAdmin";
 
 export const CompanySignUpPage = () => {
   document.title = "Sign Up | Welby";
 
+  const [companyId, setCompanyId] = useState<number>(0);
   const [companyData, setCompanyData] =
     useState<CompanySignup>(COMPANYSIGNUP_DATA);
   const [companyAdminData, setCompanyAdminData] = useState<CompanyAdminSignup>(
     COMPANYADMINSIGNUP_DATA,
   );
-
-  const { companyId, setCompanyId } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -49,7 +47,8 @@ export const CompanySignUpPage = () => {
   };
 
   const handleCompanySignUp = async () => {
-    await signUpCompany(companyData, companyId, setCompanyId);
+    const id = await signUpCompany(companyData);
+    setCompanyId(id);
     nextStep();
   };
 

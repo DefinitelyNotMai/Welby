@@ -12,25 +12,27 @@ import { Form } from "react-router-dom";
 import { useState, FormEvent } from "react";
 
 // local
-import { FORGOT_PASSWORD_INITIAL_DATA } from "../../../data/initForm";
-import { ForgotPasswordData } from "../../../data/typesForm";
 import { Step1 } from "./Step1";
 import { Step2 } from "./Step2";
 import { Step3 } from "./Step3";
 import { useMultiStepForm } from "../../../hooks/useMultiStepForm";
+import {
+  FORGOTPASSWORD_DATA,
+  ForgotPassword,
+} from "../../../data/forgotPassword";
 
 type ForgotPasswordProps = {
   onClose: () => void;
 };
 
-export const ForgotPassword = ({ onClose }: ForgotPasswordProps) => {
+export const ForgotPasswordModal = ({ onClose }: ForgotPasswordProps) => {
   document.title = "Password Recovery | Welby";
 
   const toast = useToast();
   const [forgotPasswordData, setForgotPasswordData] =
-    useState<ForgotPasswordData>(FORGOT_PASSWORD_INITIAL_DATA);
+    useState<ForgotPassword>(FORGOTPASSWORD_DATA);
 
-  const updateForgotPaswordFields = (fields: Partial<ForgotPasswordData>) => {
+  const updateForgotPaswordFields = (fields: Partial<ForgotPassword>) => {
     setForgotPasswordData((prev) => {
       return { ...prev, ...fields };
     });
@@ -130,8 +132,8 @@ export const ForgotPassword = ({ onClose }: ForgotPasswordProps) => {
               {isFirstStep
                 ? "NEXT"
                 : currentStepIndex === 1
-                ? "VERIFY"
-                : "SUBMIT"}
+                  ? "VERIFY"
+                  : "SUBMIT"}
             </Button>
           </Flex>
         </Form>

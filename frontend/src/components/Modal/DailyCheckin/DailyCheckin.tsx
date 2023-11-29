@@ -74,9 +74,22 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     />,
   ]);
 
+  function getDateToday(): string {
+    const today: Date = new Date();
+    const year: number = today.getFullYear();
+    const month: number = today.getMonth() + 1; // Months are zero-based, so we add 1
+    const day: number = today.getDate();
+
+    // Pad single-digit month/day with leading zero
+    const formattedMonth: string = month < 10 ? `0${month}` : `${month}`;
+    const formattedDay: string = day < 10 ? `0${day}` : `${day}`;
+
+    return `${year}-${formattedMonth}-${formattedDay}`;
+}
+
   const userContext = useContext(UserContext);
   // NOTE: this is where api call for submitting daily check in should be done
-  const handleDailyCheckInSubmit = () => {
+  const handleDailyCheckInSubmit = async () => {
     const dailyCheckInUrl = "https://localhost:44373/api/AddDailyCheckIn";
     const config = {
       headers: {
@@ -84,7 +97,6 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
       },
     };
 
-    var dateNow = new Date().getDate();
     const dailyCheckin = {
       EmployeeId: localStorage.getItem("userId"),
       CompanyId: userContext.companyId,
@@ -97,21 +109,41 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
       NegativeEmotions_int: dailyCheckinData.NegativeEmotions.int,
       NegativeEmotions_value: dailyCheckinData.PositiveEmotions.value,
       Productivity: 0,
-      Encoded_Date: dateNow,
       Active: true,
     };
-    axios
+    const getDailyCheckin = await axios
       .post(dailyCheckInUrl, dailyCheckin, config)
       .then((response) => {
         console.log(response);
         const result = response.data;
-        if (result && result.length > 0) {
-          localStorage.setItem("dailyCheckinId", result[0].DailyCheckInId); // this is for setting the id
-        }
+        return result;
       })
       .catch((error) => {
         console.log(error);
       });
+
+      if (getDailyCheckin != null) {
+        const getDailyCheckinIdUrl = "https://localhost:44373/api/GetDailyCheckIn";
+        axios.get(getDailyCheckinIdUrl, {
+          method: "GET",
+          headers: {"Content-Type": "application/json",
+          params: {
+            DailyCheckInId: 0,
+            EmployeeId: localStorage.getItem("userId"),
+            CompanyId: userContext.companyId,
+            Completion: "Partial",
+            DateTo: getDateToday(),
+            DateFrom: getDateToday(),
+            Active: true,
+          }
+        }}).then((response) =>{
+          if (response.data != null && response.data.length > 0) {
+            localStorage.setItem("dailyCheckinId", response.data[0].DailyCheckInId); // this is for setting the id
+          }
+        }).catch((error) =>{
+          console.error(error);
+        })
+      }
 
     // if successful statement here:
     console.log(dailyCheckinData);
@@ -120,7 +152,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     // NOTE: use this to store dailyCheckinId so it will persist through refreshes
     // This will be cleared on logout
 
-    //localStorage.setItem("dailyCheckinId", result[0].dailyCheckinId); // this is for setting the id
+    //localStorage.setItem("dailyCheckinId", response.data[0].DailyCheckInId); // this is for setting the id
 
     if (trybool) {
       toast({

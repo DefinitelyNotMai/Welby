@@ -41,10 +41,14 @@ export const MyTeamPage = () => {
     const fetchMembers = async () => {
       try {
         const employeesUrl =
-          "https://localhost:44373/api/GetEmployeesByCompany";
+          "https://localhost:44373/api/GetEmployees";
 
         const data = await fetchData(employeesUrl, {
           CompanyId: companyId,
+          Email: "",
+          EmployeeId: 0,
+          Phone_Number: "",
+          Active: true
         });
         setEmployees(data);
       } catch (error) {

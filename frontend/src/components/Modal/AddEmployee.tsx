@@ -84,10 +84,13 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
         });
       if (addEmployee != null) {
         const getEmployeeUrl =
-          "https://localhost:44373/api/GetAllEmployeesByCompanyAndEmail";
+          "https://localhost:44373/api/GetEmployees";
         const param = {
           CompanyId: userContext.companyId,
           Email: addEmployeeData.Email,
+          EmployeeId: 0,
+          Phone_Number: "",
+          Active: true
         };
         const employee = await axios
           .get(getEmployeeUrl, {

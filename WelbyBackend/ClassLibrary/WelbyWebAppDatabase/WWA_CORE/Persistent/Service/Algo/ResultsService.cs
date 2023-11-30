@@ -63,7 +63,7 @@ namespace WWA_CORE.Persistent.Service.Algo
 
             var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new ResultsViewModel()
             {
-                ResultsId = Convert.ToInt32(row["ResultId"]),
+                ResultsId = Convert.ToInt32(row["ResultsId"]),
                 ResultDescription = Convert.ToString(row["ResultDescription"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
@@ -129,9 +129,30 @@ namespace WWA_CORE.Persistent.Service.Algo
             return resultsViewModel;
         }
 
-        public Task<ResultsViewModel> UpdateResult(ResultsViewModel resultsViewModel)
+        public async Task<ResultsViewModel> UpdateResult(ResultsViewModel resultsViewModel)
         {
-            throw new NotImplementedException();
+            var context = new WWAEntities();
+            var globalFunctions = new GlobalFunctions();
+
+            try
+            {
+                var RowToUpdate = await context.tbl_Results.FirstOrDefaultAsync(c => c.ResultsId == resultsViewModel.ResultsId);
+                RowToUpdate.ResultDescription = resultsViewModel.ResultDescription;
+                RowToUpdate.Active = true;
+                RowToUpdate.LastChanged_By = resultsViewModel.Encoded_By;
+                RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();
+                await context.SaveChangesAsync();
+                resultsViewModel.Message_Code = WWA_COREDefaults.DEFAULT_SUCCESS_RETURN_MESSAGE_CODE;
+            }
+            catch (Exception ex)
+            {
+                resultsViewModel.Message_Code = $"{ex.Message} \n {ex.InnerException.ToString() ?? ""}";
+            }
+
+            context.Dispose();
+            globalFunctions.Dispose();
+
+            return resultsViewModel;
         }
     }
 }

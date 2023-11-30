@@ -776,7 +776,9 @@ were tested only in Postman.
 ## Daily Check In Routes
 
 > ##### GET :
-**~/api/GetDailyCheckIn**
+> Note:  Date format in get daily check in is: "November 30, 2023"
+
+**~/api/GetAllDailyCheckIn**
 - params : {
   - **DailyCheckInId:** number
   - **EmployeeId:** number
@@ -858,18 +860,15 @@ were tested only in Postman.
 - params : {
   - **EmployeeId:** number
   - **CompanyId:** number
-  - **EnergyAtWork_int:** number
-  - **FocusAtWork_int:** number
-  - **PositiveEmotions_int:** number
-  - **NegativeEmotions_int:** number
-  - **EnergyAtWork_value:** string
-  - **FocusAtWork_value:** string
-  - **PositiveEmotions_value:** string
-  - **NegativeEmotions_value:** string
-  - **Productivity:** number
-  - **Prediction:** float
+  - **Factor_1:** float //SocialMutualism - mean
+  - **Factor_2:** float //SenseOfBeingValued - mean
+  - **Factor_3:** float //NurturedPsychologicalNeeds - mean
+  - **Factor_4:** float //PositiveWorkRelationships - mean
+  - **Factor_5:** number //SubjectiveWellBeing - sum
+  - **Factor_6:** string //OrganizationalCommitment - sum
+  - **Factor_7:** string //IntentToQuit - sum
+  - **Factor_8:** string //Presenteeism - subtraction
   - **Encoded_By:** number
-  - **Encoded_Date:** string
 
   }
 
@@ -877,7 +876,7 @@ were tested only in Postman.
 
 **~/api/RemoveTise**
 - params : {
-  - **DailyCheckInId:** number
+  - **TiseId:** number
 
   }
 
@@ -885,7 +884,7 @@ were tested only in Postman.
 
 **~/api/ReturnTise**
 - params : {
-  - **DailyCheckInId:** number
+  - **TiseId:** number
 
   }
 
@@ -915,43 +914,34 @@ were tested only in Postman.
 > ##### Add :
 > Note: Completion column of Daily Check In is being set in the DailyCheckInService.cs file
 
-**~/api/AddResults**
+**~/api/AddResult**
 - params : {
-  - **EmployeeId:** number
-  - **CompanyId:** number
-  - **EnergyAtWork_int:** number
-  - **FocusAtWork_int:** number
-  - **PositiveEmotions_int:** number
-  - **NegativeEmotions_int:** number
-  - **EnergyAtWork_value:** string
-  - **FocusAtWork_value:** string
-  - **PositiveEmotions_value:** string
-  - **NegativeEmotions_value:** string
-  - **Productivity:** number
-  - **Prediction:** float
+  - **ResultDescription:** string
   - **Encoded_By:** number
-  - **Encoded_Date:** string
 
   }
 
 > ##### Remove :
 
-**~/api/RemoveTise**
+**~/api/RemoveResult**
 - params : {
-  - **TiseId:** number
+  - **ResultsId:** number
 
   }
 
 > ##### Return :
 
-**~/api/ReturnTise**
+**~/api/ReturnResult**
 - params : {
-  - **TiseId:** number
+  - **ResultsId:** number
 
   }
 
-> ##### ~~Update :~~
-> Note:  No Update in TISE
+> ##### Update :
 
-**~~~/api/UpdateProductivity~~**
-- ~~params : {  }~~
+**~/api/UpdateResult**
+- params : {
+  - **ResultsId:** number
+  - **ResultDescription:** string
+  - **Encoded_By:** number
+ }

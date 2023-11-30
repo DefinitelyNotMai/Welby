@@ -26,7 +26,7 @@ namespace WWA_CORE.Constants
         public const string PARA_CMP_TISE_GET_COMPANYID = "@CompanyId";
         
         //Result
-        public const string PARA_GET_RESULTID = "@ResultId";
+        public const string PARA_GET_RESULTID = "@ResultsId";
 
         //TrainingSet
         public const string PARA_GET_TRAININGSET_EMPLOYEEID = "@EmployeeId";

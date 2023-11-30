@@ -997,6 +997,18 @@ namespace WelbyAPI.Controllers
             response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
             return response;
         }
+
+        [Route("~/api/UpdateResult")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateResults([FromBody] ResultsViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Results.UpdateResult(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("RETURN") ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest));
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
         #endregion
     }
 }

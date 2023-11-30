@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FormEvent, useState, useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
+import { fetchData } from "../../../api/fetchData";
 
 // local
 import { DAILY_CHECKIN_INITIAL_DATA } from "../../../data/initForm";
@@ -74,7 +75,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     />,
   ]);
 
-  function getDateToday(): string {
+  function getSimpleDate(): string {
     const today: Date = new Date();
     const year: number = today.getFullYear();
     const month: number = today.getMonth() + 1; // Months are zero-based, so we add 1
@@ -86,6 +87,19 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
 
     return `${year}-${formattedMonth}-${formattedDay}`;
 }
+
+const simpleDate: string = getSimpleDate();
+
+function getDateToday(): Date {
+  const today: Date = new Date();
+  const year: number = today.getFullYear();
+  const month: number = today.getMonth(); // Months are zero-based, so no need to add 1
+  const day: number = today.getDate();
+
+  return new Date(year, month, day);
+}
+
+const dateToday: Date = getDateToday();
 
   const userContext = useContext(UserContext);
   // NOTE: this is where api call for submitting daily check in should be done
@@ -114,7 +128,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     const getDailyCheckin = await axios
       .post(dailyCheckInUrl, dailyCheckin, config)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         const result = response.data;
         return result;
       })
@@ -123,30 +137,26 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
       });
 
       if (getDailyCheckin != null) {
-        const getDailyCheckinIdUrl = "https://localhost:44373/api/GetDailyCheckIn";
-        axios.get(getDailyCheckinIdUrl, {
-          method: "GET",
-          headers: {"Content-Type": "application/json",
-          params: {
-            DailyCheckInId: 0,
+        const getDailyCheckinIdUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
+        try {
+          const getDailyCheckin = await fetchData(getDailyCheckinIdUrl, {
             EmployeeId: localStorage.getItem("userId"),
             CompanyId: userContext.companyId,
-            Completion: "Partial",
-            DateTo: getDateToday(),
-            DateFrom: getDateToday(),
+            DateTo:  simpleDate,
+            DateFrom:  simpleDate,
             Active: true,
+          });
+          if (getDailyCheckin) {
+            console.log(getDailyCheckin)
+            localStorage.setItem("dailyCheckinId", getDailyCheckin[0].DailyCheckInId);
           }
-        }}).then((response) =>{
-          if (response.data != null && response.data.length > 0) {
-            localStorage.setItem("dailyCheckinId", response.data[0].DailyCheckInId); // this is for setting the id
-          }
-        }).catch((error) =>{
-          console.error(error);
-        })
+        } catch(error) {
+          console.log(error);
+        }
       }
 
     // if successful statement here:
-    console.log(dailyCheckinData);
+    //console.log(dailyCheckinData);
     const trybool = true;
 
     // NOTE: use this to store dailyCheckinId so it will persist through refreshes

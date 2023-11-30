@@ -33,9 +33,14 @@ export const DashboardHeader = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const userUrl = "https://localhost:44373/api/GetEmployee";
+      const userUrl = "https://localhost:44373/api/GetEmployees";
       try {
-        const result = await fetchData(userUrl, { EmployeeId: userId });
+        const result = await fetchData(userUrl, { 
+          CompanyId: 0,
+          Email: "", 
+          EmployeeId: userId, 
+          Phone_Number: "",
+          Active: true});
         if (result) {
           setNickname(result[0].Nickname);
           setProfilePhoto(result[0].ProfilePhoto);

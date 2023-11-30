@@ -688,7 +688,7 @@
     </AssociationSet>
     <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get">
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-      <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+      <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
       <Parameter Name="DateFrom" Mode="In" Type="String" />
       <Parameter Name="DateTo" Mode="In" Type="String" />

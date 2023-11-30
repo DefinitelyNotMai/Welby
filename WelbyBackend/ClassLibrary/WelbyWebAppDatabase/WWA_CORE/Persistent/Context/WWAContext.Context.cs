@@ -45,7 +45,7 @@ namespace WWA_CORE.Persistent.Context
         public virtual DbSet<tbl_REG_Employee_Registration> tbl_REG_Employee_Registration { get; set; }
         public virtual DbSet<tbl_Results> tbl_Results { get; set; }
     
-        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> companyId, Nullable<bool> employeeId, Nullable<bool> active, string dateFrom, string dateTo)
+        public virtual int procWWA_EMP_DailyCheckIn_Get(Nullable<int> companyId, Nullable<int> employeeId, Nullable<bool> active, string dateFrom, string dateTo)
         {
             var companyIdParameter = companyId.HasValue ?
                 new ObjectParameter("CompanyId", companyId) :
@@ -53,7 +53,7 @@ namespace WWA_CORE.Persistent.Context
     
             var employeeIdParameter = employeeId.HasValue ?
                 new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(bool));
+                new ObjectParameter("EmployeeId", typeof(int));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :

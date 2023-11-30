@@ -75,56 +75,9 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_COMPANYID, dailyCheckInViewModel.CompanyId),
-                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, dailyCheckInViewModel.Active)
-                }
-            };
-            await query.ExecuteAsync();
-
-            var ReturnedList = query.Result.Tables[0].AsEnumerable().Select(row => new DailyCheckInViewModel()
-            {
-                DailyCheckInId = Convert.ToInt32(row["DailyCheckInId"]),
-                EmployeeId = Convert.ToInt32(row["EmployeeId"]),
-                CompanyId = Convert.ToInt32(row["CompanyId"]),
-                EnergyAtWork_int = Convert.ToInt32(row["EnergyAtWork_int"]),
-                FocusAtWork_int = Convert.ToInt32(row["FocusAtWork_int"]),
-                PositiveEmotions_int = Convert.ToInt32(row["PositiveEmotions_int"]),
-                NegativeEmotions_int = Convert.ToInt32(row["NegativeEmotions_int"]),
-
-                EnergyAtWork_value = Convert.ToString(row["EnergyAtWork_value"]),
-                FocusAtWork_value = Convert.ToString(row["FocusAtWork_value"]),
-                PositiveEmotions_value = Convert.ToString(row["PositiveEmotions_value"]),
-                NegativeEmotions_value = Convert.ToString(row["NegativeEmotions_value"]),
-
-                Productivity = Convert.ToInt32(row["Productivity"]),
-                Prediction = Convert.ToSingle(row["Prediction"]),
-                Completion = Convert.ToString(row["Completion"]),
-
-                CompanyName = Convert.ToString(row["CompanyName"]),
-                EmployeeName = Convert.ToString(row["EmployeeName"]),
-
-                Active = Convert.ToBoolean(row["Active"]),
-                Encoded_By = Convert.ToInt32(row["Encoded_By"]),
-                Encoded_Date = Convert.ToDateTime(row["Encoded_Date"]),
-                Computer_Name = Convert.ToString(row["Computer_Name"]),
-                LastChanged_By = DBNull.Value != row["LastChanged_By"] ? Convert.ToInt32(row["LastChanged_By"]) : 0,
-                LastChanged_Date = DBNull.Value != row["LastChanged_Date"] ? (DateTime?)row["LastChanged_Date"] : null,
-            }).ToList();
-            query.Dispose();
-            dailyCheckInViewModel.Dispose();
-            return ReturnedList;
-        }
-
-        public async Task<IEnumerable<DailyCheckInViewModel>> GetAllEmployeeDailyCheckIn(DailyCheckInViewModel dailyCheckInViewModel)
-        {
-            var query = new SqlQueryObject
-            {
-                ProcedureName = PROCEDURE_NAME.PROC_EMP_DAILYCHECKIN_GET_EMPLOYEE,
-                ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
-                Parameters = new SqlParameter[]
-                {
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM, dailyCheckInViewModel.DateFrom),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO, dailyCheckInViewModel.DateTo),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_COMPANYID, dailyCheckInViewModel.CompanyId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_EMPLOYEEID, dailyCheckInViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, dailyCheckInViewModel.Active)
                 }

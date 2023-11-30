@@ -549,7 +549,7 @@
         </Association>
         <Function Name="procWWA_EMP_DailyCheckIn_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="EmployeeId" Type="bit" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="DateFrom" Type="varchar" Mode="In" />
           <Parameter Name="DateTo" Type="varchar" Mode="In" />
@@ -1488,7 +1488,7 @@
           </AssociationSet>
           <FunctionImport Name="procWWA_EMP_DailyCheckIn_Get">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="EmployeeId" Mode="In" Type="Boolean" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="DateFrom" Mode="In" Type="String" />
             <Parameter Name="DateTo" Mode="In" Type="String" />

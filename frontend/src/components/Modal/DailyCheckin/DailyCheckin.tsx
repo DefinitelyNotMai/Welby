@@ -75,30 +75,6 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     />,
   ]);
 
-  function getSimpleDate(): string {
-    const today: Date = new Date();
-    const year: number = today.getFullYear();
-    const month: number = today.getMonth() + 1; // Months are zero-based, so we add 1
-    const day: number = today.getDate();
-
-    // Pad single-digit month/day with leading zero
-    const formattedMonth: string = month < 10 ? `0${month}` : `${month}`;
-    const formattedDay: string = day < 10 ? `0${day}` : `${day}`;
-
-    return `${year}-${formattedMonth}-${formattedDay}`;
-}
-
-const simpleDate: string = getSimpleDate();
-
-function getDateToday(): Date {
-  const today: Date = new Date();
-  const year: number = today.getFullYear();
-  const month: number = today.getMonth(); // Months are zero-based, so no need to add 1
-  const day: number = today.getDate();
-
-  return new Date(year, month, day);
-}
-
 function getSimpleDateToday(): string {
     const today: Date = new Date();
     
@@ -107,8 +83,6 @@ function getSimpleDateToday(): string {
 }
 
 const simpleDateToday: string = getSimpleDateToday();
-
-const dateToday: Date = getDateToday();
 
   const userContext = useContext(UserContext);
   // NOTE: this is where api call for submitting daily check in should be done

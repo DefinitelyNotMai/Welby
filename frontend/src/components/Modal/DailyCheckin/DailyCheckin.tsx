@@ -99,6 +99,15 @@ function getDateToday(): Date {
   return new Date(year, month, day);
 }
 
+function getSimpleDateToday(): string {
+    const today: Date = new Date();
+    
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return today.toLocaleDateString('en-US', options);
+}
+
+const simpleDateToday: string = getSimpleDateToday();
+
 const dateToday: Date = getDateToday();
 
   const userContext = useContext(UserContext);
@@ -142,8 +151,8 @@ const dateToday: Date = getDateToday();
           const getDailyCheckin = await fetchData(getDailyCheckinIdUrl, {
             EmployeeId: localStorage.getItem("userId"),
             CompanyId: userContext.companyId,
-            DateTo:  simpleDate,
-            DateFrom:  simpleDate,
+            DateTo:  simpleDateToday,
+            DateFrom:  simpleDateToday,
             Active: true,
           });
           if (getDailyCheckin) {

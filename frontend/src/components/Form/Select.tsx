@@ -186,11 +186,17 @@ export const SelectStrength = ({
 }: CustomSelectProps) => {
   const [strengths, setStrengths] = useState<Strength[]>([]);
 
-  const strengthsUrl = "https://localhost:44373/api/GetStrength";
+  const strengthsUrl = "https://localhost:44373/api/GetStrengths";
   useEffect(() => {
     const fetchStrengths = async () => {
       try {
-        const data = await fetchData(strengthsUrl, { Active: "1" });
+        const data = await fetchData(strengthsUrl, {
+          StrengthId: 0,
+          Strength: "",
+          Category: "",
+          Description: "",
+          Active: true,
+        });
         setStrengths(data);
       } catch (error) {
         console.error("Error fetching data: ", error);

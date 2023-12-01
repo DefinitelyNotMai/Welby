@@ -15,9 +15,9 @@ type Step1Data = {
   Birthday: string;
   Nickname: string;
   Last_Name: string;
-  GenderId: string;
+  GenderId: number;
   Phone_Number: string;
-  CountryId: string;
+  CountryId: number;
   Instagram: string;
   TikTok: string;
   Linkedin: string;
@@ -94,7 +94,7 @@ export const Step1 = ({
               onChange={(e) => updateFields({ Email: e.target.value })}
               placeholder="Email"
               type="email"
-              value={Email}
+              value={Email !== undefined ? Email : ""}
             />
           </FormItem>
           <FormItem htmlFor="first-name" label="First Name" isRequired>
@@ -161,7 +161,9 @@ export const Step1 = ({
             <SelectGender
               id="gender"
               name="gender"
-              onChange={(e) => updateFields({ GenderId: e.target.value })}
+              onChange={(e) =>
+                updateFields({ GenderId: parseInt(e.target.value) })
+              }
               value={GenderId}
             />
           </FormItem>
@@ -182,7 +184,9 @@ export const Step1 = ({
             <SelectCountry
               id="location"
               name="location"
-              onChange={(e) => updateFields({ CountryId: e.target.value })}
+              onChange={(e) =>
+                updateFields({ CountryId: parseInt(e.target.value) })
+              }
               value={CountryId}
             />
           </FormItem>

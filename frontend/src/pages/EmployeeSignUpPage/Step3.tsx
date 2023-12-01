@@ -6,10 +6,10 @@ import { FormItem } from "../../components/Form/FormItem";
 import { SelectStrength } from "../../components/Form/Select";
 
 type Step3Data = {
-  RealizedStrengths: string[];
-  UnrealizedStrengths: string[];
-  LearnedBehaviors: string[];
-  Weakness: string;
+  RealizedStrengths: [number, number, number];
+  UnrealizedStrengths: [number, number, number];
+  LearnedBehaviors: [number, number];
+  Weakness: number;
 };
 
 type Step3Props = Step3Data & {
@@ -52,7 +52,7 @@ export const Step3 = ({
                     const updatedRealizedStrengths = [
                       ...(RealizedStrengths || []),
                     ];
-                    updatedRealizedStrengths[index] = e.target.value;
+                    updatedRealizedStrengths[index] = parseInt(e.target.value);
                     updateFields({
                       RealizedStrengths: updatedRealizedStrengths,
                     });
@@ -80,7 +80,9 @@ export const Step3 = ({
                     const updatedUnrealizedStrengths = [
                       ...(UnrealizedStrengths || []),
                     ];
-                    updatedUnrealizedStrengths[index] = e.target.value;
+                    updatedUnrealizedStrengths[index] = parseInt(
+                      e.target.value,
+                    );
                     updateFields({
                       UnrealizedStrengths: updatedUnrealizedStrengths,
                     });
@@ -108,7 +110,7 @@ export const Step3 = ({
                     const updatedLearnedBehaviors = [
                       ...(LearnedBehaviors || []),
                     ];
-                    updatedLearnedBehaviors[index] = e.target.value;
+                    updatedLearnedBehaviors[index] = parseInt(e.target.value);
                     updateFields({
                       LearnedBehaviors: updatedLearnedBehaviors,
                     });
@@ -127,7 +129,7 @@ export const Step3 = ({
                 id="weakness"
                 name="weakness"
                 onChange={(e) => {
-                  updateFields({ Weakness: e.target.value });
+                  updateFields({ Weakness: parseInt(e.target.value) });
                 }}
                 value={Weakness}
               />

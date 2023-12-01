@@ -3,7 +3,7 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { InterestCheckbox } from "../../components/Form/InterestCheckbox";
 
 type Step4Data = {
-  Interests: string[];
+  Interests: number[];
 };
 
 type Step4Props = Step4Data & {

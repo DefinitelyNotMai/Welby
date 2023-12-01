@@ -1,28 +1,27 @@
-import { FormEvent, useState, useEffect, useContext } from "react";
-import { useMultiStepForm } from "../../hooks/useMultiStepForm";
-import { Step1 } from "./Step1";
-import { WelcomeLayout } from "../../layout/WelcomeLayout";
+// lib
 import { Button, Card, Flex } from "@chakra-ui/react";
 import { Form, useNavigate } from "react-router-dom";
+import { FormEvent, useState, useEffect, useContext } from "react";
+
+// local
+import Step4 from "./Step4";
+import { EMPLOYEESIGNUP_DATA, EmployeeSignup } from "../../data/employeeSignup";
+import { Step1 } from "./Step1";
 import { Step2 } from "./Step2";
 import { Step3 } from "./Step3";
-import Step4 from "./Step4";
 import { Step5 } from "./Step5";
 import { Step6 } from "./Step6";
+import { UserContext } from "../../context/UserContext";
+import { WelcomeLayout } from "../../layout/WelcomeLayout";
 import { fetchData } from "../../api/fetchData";
 import { signUpEmployee } from "../../api/signUpEmployee";
-import { UserContext } from "../../context/UserContext";
-import { EMPLOYEESIGNUP_DATA, EmployeeSignup } from "../../data/employeeSignup";
+import { useMultiStepForm } from "../../hooks/useMultiStepForm";
 
 export const EmployeeSignUpPage = () => {
   document.title = "Employee Sign Up | Welby";
 
-  const userContext = useContext(UserContext);
-
-  const [employeeData, setEmployeeData] = useState<EmployeeSignup>({
-    ...EMPLOYEESIGNUP_DATA,
-    Email: userContext.email,
-  });
+  const [employeeData, setEmployeeData] =
+    useState<EmployeeSignup>(EMPLOYEESIGNUP_DATA);
 
   const navigate = useNavigate();
 
@@ -35,25 +34,18 @@ export const EmployeeSignUpPage = () => {
   const userId = localStorage.getItem("userId") || 0;
 
   useEffect(() => {
-    const employeeUrl = "https://localhost:44373/api/GetEmployee";
+    const employeeUrl = "https://localhost:44373/api/GetEmployees";
 
     const fetchAndSetEmployee = async () => {
       try {
-        //console.log(userId); // NOTE: this works
         const data = await fetchData(employeeUrl, { EmployeeId: userId });
-        //console.log(data); // NOTE: this works
-        setEmployeeData(data);
-        //console.log(dumdum);
-        //setEmployeeData(data);
-        //console.log(employeeData);
+        setEmployeeData({ ...data[0], FirstLogIn: true });
       } catch (error) {
         console.log(error);
       }
     };
     fetchAndSetEmployee();
-    //console.log(employeeData);
   }, [userId]);
-  //console.log(dumdum);
 
   const {
     currentStepIndex,

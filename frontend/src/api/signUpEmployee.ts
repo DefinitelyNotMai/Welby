@@ -8,8 +8,7 @@ import { EmployeeSignup } from "../data/employeeSignup";
 
 export const signUpEmployee = async (
   EmployeeData: EmployeeSignup,
-  //password: string,
-  UserId: string | null,
+  UserId: string | number,
 ) => {
   const employee = {
     EmployeeId: UserId,
@@ -45,7 +44,7 @@ export const signUpEmployee = async (
     Support: EmployeeData.Support,
 
     Other_Notes: EmployeeData.Other_Notes,
-    FirstLogIn: 1,
+    FirstLogIn: EmployeeData.FirstLogIn,
   };
 
   const config = {
@@ -116,7 +115,7 @@ export const signUpEmployee = async (
         });
     }
 
-    const InterestsUrl = "https://localhost:44373/api/AddEmployeeInterests";
+    const InterestsUrl = "https://localhost:44373/api/AddEmployeeInterest";
     for (let i = 0; i < EmployeeData.Interests.length; i++) {
       const EMP_Interest = {
         EmployeeId: UserId,
@@ -155,7 +154,7 @@ export const signUpEmployee = async (
     axios
       .patch(UpdateEmployeeUrl, employee, config)
       .then(() => {
-        console.log("Update");
+        console.log("Update: ", employee);
       })
       .catch((error) => {
         console.log(error);
@@ -164,8 +163,7 @@ export const signUpEmployee = async (
     const tokenResponse = await fetchAccessToken();
     if (tokenResponse) {
       const token = tokenResponse;
-      const UpdateSystemUserUrl =
-        "https://localhost:58258/api/UpdateSystemUser";
+      const UpdateSystemUserUrl = "http://localhost:58258/api/UpdateSystemUser";
 
       const hashedPassword = await bcrypt.hash(EmployeeData.Password, 10);
 

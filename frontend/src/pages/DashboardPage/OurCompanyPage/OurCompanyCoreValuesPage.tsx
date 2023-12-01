@@ -1,5 +1,5 @@
 // lib
-import { Button, Grid } from "@chakra-ui/react";
+import { Button, Flex, Grid } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
 // local
@@ -19,10 +19,14 @@ export const OurCompanyCoreValuesPage = () => {
   useEffect(() => {
     const fetchValues = async () => {
       try {
-        const valuesUrl = "https://localhost:44373/api/GetValueByCompany";
+        const valuesUrl = "https://localhost:44373/api/GetValues";
 
         const data = await fetchData(valuesUrl, {
+          ValueId: 0,
           CompanyId: userContext.companyId,
+          Title: "",
+          Description: "",
+          Active: true,
         });
         setValues(data);
       } catch (error) {
@@ -35,24 +39,26 @@ export const OurCompanyCoreValuesPage = () => {
   return (
     <Grid gap={4} templateColumns="1.25fr 2fr" width="full">
       <Section borderRadius="1rem 1rem 0 0" title="Core Values">
-        {values.map((value) => (
-          <Button
-            backgroundColor={
-              selectedValue.ValueId === value.ValueId ? "#24a2f0" : "#cccccc"
-            }
-            key={value.ValueId}
-            onClick={() => {
-              if (selectedValue.ValueId === value.ValueId) {
-                setSelectedValue(VALUE_DATA);
-              } else {
-                setSelectedValue(value);
+        <Flex flexDirection="column" gap={4}>
+          {values.map((value) => (
+            <Button
+              backgroundColor={
+                selectedValue.ValueId === value.ValueId ? "#24a2f0" : "#cccccc"
               }
-            }}
-            variant="list"
-          >
-            {value.Title}
-          </Button>
-        ))}
+              key={value.ValueId}
+              onClick={() => {
+                if (selectedValue.ValueId === value.ValueId) {
+                  setSelectedValue(VALUE_DATA);
+                } else {
+                  setSelectedValue(value);
+                }
+              }}
+              variant="list"
+            >
+              {value.Title}
+            </Button>
+          ))}
+        </Flex>
       </Section>
       <Section
         borderRadius="1rem 0 0 0"

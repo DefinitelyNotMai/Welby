@@ -231,6 +231,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.CompanyId = employeeRegistrationViewModel.CompanyId;
                 RowToUpdate.CountryId = employeeRegistrationViewModel.CountryId;
                 RowToUpdate.GenderId = employeeRegistrationViewModel.GenderId;
+                RowToUpdate.FirstLogIn = employeeRegistrationViewModel.FirstLogIn;
 
                 RowToUpdate.TikTok = employeeRegistrationViewModel.TikTok;
                 RowToUpdate.Linkedin = employeeRegistrationViewModel.Linkedin;

@@ -6,14 +6,11 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { fetchData } from "../../api/fetchData";
 import { COMPANY_DATA, Company } from "../../data/company";
-import { COUNTRY_DATA, Country } from "../../data/country";
 import { INDUSTRY_TYPE_DATA, IndustryType } from "../../data/industryType";
 
 export const CompanyProfile = () => {
   const [companyData, setCompanyData] = useState<Company>(COMPANY_DATA);
-  const [country, setCountry] = useState<Country>(COUNTRY_DATA);
-  const [industryType, setIndustryType] =
-    useState<IndustryType>(INDUSTRY_TYPE_DATA);
+  useState<IndustryType>(INDUSTRY_TYPE_DATA);
 
   const userContext = useContext(UserContext);
 
@@ -35,42 +32,6 @@ export const CompanyProfile = () => {
     fetchCompanyData();
   }, [userContext.companyId]);
 
-  useEffect(() => {
-    const countryUrl = "https://localhost:44373/api/GetAllCountry";
-
-    const fetchCountryData = async () => {
-      try {
-        const result = await fetchData(countryUrl, {
-          CountryId: companyData.CountryId,
-        });
-        if (result) {
-          setCountry(result[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching country data: ", error);
-      }
-    };
-    fetchCountryData();
-  }, [companyData.CountryId]);
-
-  useEffect(() => {
-    const industryTypeUrl = "https://localhost:44373/api/GetIndustryTypes";
-
-    const fetchIndustryTypeData = async () => {
-      try {
-        const result = await fetchData(industryTypeUrl, {
-          IndustryTypeId: companyData.IndustryTypeId,
-        });
-        if (result) {
-          setIndustryType(result[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching industry type data: ", error);
-      }
-    };
-    fetchIndustryTypeData();
-  }, [companyData.IndustryTypeId]);
-
   return (
     <Flex flexDirection="column" gap={4} height="full">
       <Avatar alignSelf="center" boxSize={48} src={companyData.Logo} />
@@ -90,7 +51,7 @@ export const CompanyProfile = () => {
             <Text color="#bcbcbc">Company Size:</Text>
           </Flex>
           <Flex alignItems="flex-start" flexDirection="column" gap={2}>
-            <Text color="#34313a">{country.Name}</Text>
+            <Text color="#34313a">{companyData.CompanyLocation}</Text>
             <Text color="#34313a">{companyData.CompanySize}</Text>
           </Flex>
         </Grid>
@@ -133,7 +94,7 @@ export const CompanyProfile = () => {
             <Text color="#bcbcbc">Founded:</Text>
           </Flex>
           <Flex alignItems="flex-start" flexDirection="column" gap={2}>
-            <Text color="#34313a">{industryType.Industry_Name}</Text>
+            <Text color="#34313a">{companyData.IndustryTypeDisplay}</Text>
             <Text color="#34313a">Private Company</Text>
             <Text color="#34313a">{companyData.FoundingDate}</Text>
           </Flex>

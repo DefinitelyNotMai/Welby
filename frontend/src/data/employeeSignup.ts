@@ -25,7 +25,8 @@ export type EmployeeSignup = {
   LearnedBehaviors: [number, number];
   Weakness: number;
   Interests: number[];
-  Other_Notes: "";
+  Other_Notes: string;
+  FirstLogIn: boolean;
 };
 
 export const EMPLOYEESIGNUP_DATA: EmployeeSignup = {
@@ -56,4 +57,5 @@ export const EMPLOYEESIGNUP_DATA: EmployeeSignup = {
   Weakness: 0,
   Interests: [0],
   Other_Notes: "",
+  FirstLogIn: true,
 };

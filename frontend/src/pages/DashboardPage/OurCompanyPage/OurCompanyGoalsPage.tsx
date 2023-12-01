@@ -1,5 +1,5 @@
 // lib
-import { Button, Grid } from "@chakra-ui/react";
+import { Button, Flex, Grid } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 
 // local
@@ -19,10 +19,14 @@ export const OurCompanyGoalsPage = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const goalsUrl = "https://localhost:44373/api/GetGoalByCompany";
+        const goalsUrl = "https://localhost:44373/api/GetGoals";
 
         const data = await fetchData(goalsUrl, {
+          GoalId: 0,
           CompanyId: userContext.companyId,
+          Title: "",
+          Description: "",
+          Active: true,
         });
         setGoals(data);
       } catch (error) {
@@ -35,24 +39,26 @@ export const OurCompanyGoalsPage = () => {
   return (
     <Grid gap={4} templateColumns="1.25fr 2fr" width="full">
       <Section borderRadius="1rem 1rem 0 0" title="Company Goals">
-        {goals.map((goal) => (
-          <Button
-            backgroundColor={
-              selectedGoal.GoalId === goal.GoalId ? "#24a2f0" : "#cccccc"
-            }
-            key={goal.GoalId}
-            onClick={() => {
-              if (selectedGoal.GoalId === goal.GoalId) {
-                setSelectedGoal(GOAL_DATA);
-              } else {
-                setSelectedGoal(goal);
+        <Flex flexDirection="column" gap={4}>
+          {goals.map((goal) => (
+            <Button
+              backgroundColor={
+                selectedGoal.GoalId === goal.GoalId ? "#24a2f0" : "#cccccc"
               }
-            }}
-            variant="list"
-          >
-            {goal.Title}
-          </Button>
-        ))}
+              key={goal.GoalId}
+              onClick={() => {
+                if (selectedGoal.GoalId === goal.GoalId) {
+                  setSelectedGoal(GOAL_DATA);
+                } else {
+                  setSelectedGoal(goal);
+                }
+              }}
+              variant="list"
+            >
+              {goal.Title}
+            </Button>
+          ))}
+        </Flex>
       </Section>
       <Section
         borderRadius="1rem 0 0 0"

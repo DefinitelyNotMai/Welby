@@ -14,8 +14,8 @@ type Interests = {
 };
 
 type InterestCheckboxProps = {
-  value: string[];
-  onChange?: (event: string[]) => void;
+  value: number[];
+  onChange?: (event: number[]) => void;
 };
 
 export const InterestCheckbox = ({
@@ -27,8 +27,12 @@ export const InterestCheckbox = ({
   useEffect(() => {
     const fetchInterests = async () => {
       try {
-        const interestsUrl = "https://localhost:44373/api/GetAllInterest";
-        const data = await fetchData(interestsUrl, { Active: "1" });
+        const interestsUrl = "https://localhost:44373/api/GetInterests";
+        const data = await fetchData(interestsUrl, {
+          InterestId: 0,
+          Name: "",
+          Active: true,
+        });
         setInterests(data);
       } catch (error) {
         console.error("Error fetching interests:", error);
@@ -38,7 +42,11 @@ export const InterestCheckbox = ({
   }, []);
 
   return (
-    <CheckboxGroup colorScheme="blue" value={value} onChange={onChange}>
+    <CheckboxGroup
+      colorScheme="blue"
+      value={value}
+      onChange={(values) => onChange?.(values.map(Number))}
+    >
       <Grid
         backgroundColor="white"
         borderRadius="xl"
@@ -50,7 +58,7 @@ export const InterestCheckbox = ({
       >
         {interests.map((interest) => (
           <GridItem key={interest.InterestId}>
-            <Checkbox size="lg" value={String(interest.InterestId)}>
+            <Checkbox size="lg" value={interest.InterestId}>
               <Text color="#000000" fontWeight="normal">
                 {interest.Name}
               </Text>

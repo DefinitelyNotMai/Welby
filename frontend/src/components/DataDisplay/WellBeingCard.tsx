@@ -14,17 +14,15 @@ export const WellBeingCard = ({
   marginBottom,
   onClick,
   title,
-  valueInt,
+  valueInt = 5,
   valueString,
 }: WellBeingCardProps) => {
   return (
     <>
       <Card
-        _hover={{ transform: "scale(1.1)" }}
         bg="#ffffff"
         borderRadius="1rem"
         boxShadow="md"
-        cursor="pointer"
         marginBottom={marginBottom}
         onClick={onClick}
         padding={0}

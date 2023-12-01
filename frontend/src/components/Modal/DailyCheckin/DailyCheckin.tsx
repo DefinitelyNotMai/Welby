@@ -75,14 +75,18 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
     />,
   ]);
 
-function getSimpleDateToday(): string {
+  function getSimpleDateToday(): string {
     const today: Date = new Date();
-    
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return today.toLocaleDateString('en-US', options);
-}
 
-const simpleDateToday: string = getSimpleDateToday();
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return today.toLocaleDateString("en-US", options);
+  }
+
+  const simpleDateToday: string = getSimpleDateToday();
 
   const userContext = useContext(UserContext);
   // NOTE: this is where api call for submitting daily check in should be done
@@ -119,24 +123,28 @@ const simpleDateToday: string = getSimpleDateToday();
         console.log(error);
       });
 
-      if (getDailyCheckin != null) {
-        const getDailyCheckinIdUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
-        try {
-          const getDailyCheckin = await fetchData(getDailyCheckinIdUrl, {
-            EmployeeId: localStorage.getItem("userId"),
-            CompanyId: userContext.companyId,
-            DateTo:  simpleDateToday,
-            DateFrom:  simpleDateToday,
-            Active: true,
-          });
-          if (getDailyCheckin) {
-            console.log(getDailyCheckin)
-            localStorage.setItem("dailyCheckinId", getDailyCheckin[0].DailyCheckInId);
-          }
-        } catch(error) {
-          console.log(error);
+    if (getDailyCheckin != null) {
+      const getDailyCheckinIdUrl =
+        "https://localhost:44373/api/GetAllDailyCheckIn";
+      try {
+        const getDailyCheckin = await fetchData(getDailyCheckinIdUrl, {
+          EmployeeId: localStorage.getItem("userId") || 0,
+          CompanyId: userContext.companyId,
+          DateTo: simpleDateToday,
+          DateFrom: simpleDateToday,
+          Active: true,
+        });
+        if (getDailyCheckin) {
+          console.log(getDailyCheckin);
+          localStorage.setItem(
+            "dailyCheckinId",
+            getDailyCheckin[0].DailyCheckInId,
+          );
         }
+      } catch (error) {
+        console.log(error);
       }
+    }
 
     // if successful statement here:
     //console.log(dailyCheckinData);

@@ -48,6 +48,7 @@ export const Auth = ({ children }: AuthProps) => {
       }
     };
 
+    /*
     const fetchRole = async () => {
       const roleUrl =
         "http://localhost:58258/api/GetSystemUsersToSecurityGroupMapping";
@@ -78,11 +79,12 @@ export const Auth = ({ children }: AuthProps) => {
         console.error("Error fetching role: ", error);
       }
     };
+    fetchRole();
+    */
 
     fetchContext();
-    fetchRole();
-    console.log(userContext.companyId, userContext.email, userContext.phone);
   }, [navigate, toast, userContext]);
+  console.log(userContext.companyId, userContext.email, userContext.phone);
 
   return userContext.companyId && userContext.email ? <>{children}</> : null;
 };

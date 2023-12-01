@@ -28,7 +28,7 @@ export const DashboardHeader = () => {
   const [profilePhoto, setProfilePhoto] = useState<string>("");
   const [nickname, setNickname] = useState<string>("");
 
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId") || 0;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const DashboardHeader = () => {
   const realLogout = () => {
     localStorage.clear();
     navigate("/");
-  }
+  };
 
   return (
     <Box

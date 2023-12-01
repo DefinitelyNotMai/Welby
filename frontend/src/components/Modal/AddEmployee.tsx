@@ -65,7 +65,7 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
       Email: addEmployeeData.Email,
       CompanyId: userContext.companyId,
       CompanyPosition: addEmployeeData.Role,
-      FirstLogIn: 0,
+      FirstLogIn: false,
       Encoded_By: userId,
       CountryId: 1000,
       GenderId: 1,

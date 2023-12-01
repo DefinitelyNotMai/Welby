@@ -3,7 +3,7 @@ import { Box, Button, Flex, Grid } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
-import axios from "axios"
+import axios from "axios";
 
 // local
 import { Tab } from "../../../components/DataDisplay/Tab";
@@ -40,15 +40,14 @@ export const MyTeamPage = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const employeesUrl =
-          "https://localhost:44373/api/GetEmployees";
+        const employeesUrl = "https://localhost:44373/api/GetEmployees";
 
         const data = await fetchData(employeesUrl, {
           CompanyId: companyId,
           Email: "",
           EmployeeId: 0,
           Phone_Number: "",
-          Active: true
+          Active: true,
         });
         setEmployees(data);
       } catch (error) {
@@ -81,7 +80,7 @@ export const MyTeamPage = () => {
             </Button>,
           ]}
         >
-          <Flex flexDirection="column">
+          <Flex flex={1} flexDirection="column" gap={4}>
             {employees.map((member) => (
               <Button
                 bg={

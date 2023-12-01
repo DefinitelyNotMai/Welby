@@ -4,8 +4,10 @@ import bcrypt from "bcryptjs";
 // local
 import { Login } from "../data/login";
 import { fetchAccessToken } from "./tokenService";
+import { fetchData } from "./fetchData";
 
 const loginUrl = "http://localhost:58258/api/GetSystemUsers";
+const employeeUrl = "https://localhost:44373/api/GetEmployees";
 
 export const login = async (loginData: Login) => {
   let path = "";
@@ -31,6 +33,14 @@ export const login = async (loginData: Login) => {
     }
 
     const result = await response.json();
+    const data = await fetchData(employeeUrl, {
+      CompanyId: 0,
+      Email: loginData.UserName,
+      EmployeeId: 0,
+      Phone_Number: "",
+      Active: true,
+    });
+    console.log(data);
 
     if (result && result.length > 0) {
       const storedPassword = result[0].Password;
@@ -42,7 +52,7 @@ export const login = async (loginData: Login) => {
       if (passwordMatch) {
         localStorage.setItem("userId", result[0].UserCode);
 
-        if (result[0].FirstLogIn === 0) {
+        if (data[0].FirstLogIn === false) {
           path = "/employee-signup";
         } else {
           path = "/dashboard/my-dashboard/overview";

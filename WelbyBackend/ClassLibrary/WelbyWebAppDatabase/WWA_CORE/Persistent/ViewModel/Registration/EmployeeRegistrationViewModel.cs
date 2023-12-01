@@ -15,7 +15,9 @@ namespace WWA_CORE.Persistent.ViewModel.Registration
         public string Middle_Name { get; set; }
         public string Last_Name { get; set;}
         public string Nickname { get; set; }
+
         public bool FirstLogIn { get; set; }
+
         public string Email { get; set; }
         public string Phone_Number { get; set; }
         public string Address { get; set; }

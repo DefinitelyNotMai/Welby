@@ -52,7 +52,7 @@ namespace WelbyAPI.Controllers
 
         [Route("~/api/UpdateEmployee")]
         [HttpPatch]
-        public async Task<HttpResponseMessage> UpdateEmployee([FromBody] EmployeeRegistrationViewModel param)
+        public async Task<HttpResponseMessage> UpdateEmployees([FromBody] EmployeeRegistrationViewModel param)
         {
             var js = new JavaScriptSerializer();
             var model = await _wwauow.Employee.UpdateEmployee(param);

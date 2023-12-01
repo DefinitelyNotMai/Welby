@@ -1,6 +1,6 @@
 // lib
 import { BsPerson } from "react-icons/bs";
-import { Button, Flex, Grid } from "@chakra-ui/react";
+import { Button, Flex, Grid, Icon, Text } from "@chakra-ui/react";
 import {
   FaDumbbell,
   FaEye,
@@ -14,7 +14,7 @@ import { GiHummingbird } from "react-icons/gi";
 import { IoMdGitNetwork } from "react-icons/io";
 import { MdPeople } from "react-icons/md";
 import { TbTargetArrow } from "react-icons/tb";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // local
 import { ChartDoughnut } from "../../../components/Charts/ChartDoughnut";
@@ -24,6 +24,10 @@ import { QuarterlyAssessment } from "../../../components/Modal/QuarterlyAssessme
 import { Section } from "../../../components/DataDisplay/Section";
 import { TISE, TISE_DATA } from "../../../data/tise";
 import { WellBeingCard } from "../../../components/DataDisplay/WellBeingCard";
+import { fetchData } from "../../../api/fetchData";
+import { UserContext } from "../../../context/UserContext";
+import { DailyCheckInResult } from "../../../components/Modal/DailyCheckin/DailyCheckInResult";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 export const MyDashboardOverviewPage = () => {
   document.title = "Dashboard Overview | Welby";
@@ -32,13 +36,50 @@ export const MyDashboardOverviewPage = () => {
   const [dailyCheckInData, setDailyCheckInData] =
     useState<DailyCheckIn>(DAILYCHECKIN_DATA);
   const [modal, setModal] = useState<string>("");
+  const [checkInTaken, setCheckInTaken] = useState<boolean>(true);
 
   // NOTE: calls for fetching daily checkin and tise data goes here
+  const userId = localStorage.getItem("userId") || 0;
+  const url = "https://localhost:44373/api/GetAllDailyCheckIn";
+  const userContext = useContext(UserContext);
+
+  const getSimpleDateToday = (): string => {
+    const today: Date = new Date();
+
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return today.toLocaleDateString("en-US", options);
+  };
+
+  const simpleDateToday: string = getSimpleDateToday();
+
   useEffect(() => {
-    // setDailyCheckInData(result)
-    // setTiseData(result)
-    //}, [dailyCheckInData, tiseData]);
-  });
+    const checkIfCheckInTaken = async () => {
+      const data = await fetchData(url, {
+        DailyCheckInId: 0,
+        EmployeeId: userId,
+        CompanyId: userContext.companyId,
+        Active: true,
+        DateFrom: simpleDateToday,
+        DateTo: simpleDateToday,
+      });
+      if (data.length > 0) {
+        setCheckInTaken(true);
+        setDailyCheckInData(data[0]);
+        console.log(data[0]);
+      } else {
+        setCheckInTaken(false);
+      }
+      //console.log(data);
+      //console.log(checkInTaken);
+    };
+    checkIfCheckInTaken();
+  }, [simpleDateToday, userContext.companyId, userId]);
+
+  //console.log(getSimpleDate());
 
   return (
     <Flex flexDirection="column" gap={4} width="full" marginBottom={4}>
@@ -48,58 +89,60 @@ export const MyDashboardOverviewPage = () => {
           <Button
             key={1}
             marginRight={16}
-            onClick={() => setModal("daily-checkin")}
+            onClick={() =>
+              checkInTaken === true
+                ? setModal("checkin-results")
+                : setModal("daily-checkin")
+            }
           >
-            Do Daily Check-In
+            {checkInTaken === false ? "Do Daily Check In" : "Show Results"}
           </Button>,
         ]}
       >
-        <Flex flexDirection="row" justifyContent="space-between" height="full">
-          <WellBeingCard
-            icon={BsPerson}
-            onClick={() =>
-              alert(
-                "TEST: onClick this will display result of this well-being factor of the day.",
-              )
-            }
-            title="Energy At Work"
-            valueInt={dailyCheckInData.EnergyAtWork_int}
-            valueString={dailyCheckInData.EnergyAtWork_value}
-          />
-          <WellBeingCard
-            icon={TbTargetArrow}
-            onClick={() =>
-              alert(
-                "TEST: onClick this will display result of this well-being factor of the day.",
-              )
-            }
-            title="Focus At Work"
-            valueInt={dailyCheckInData.FocusAtWork_int}
-            valueString={dailyCheckInData.FocusAtWork_value}
-          />
-          <WellBeingCard
-            icon={FaRegThumbsUp}
-            onClick={() =>
-              alert(
-                "TEST: onClick this will display result of this well-being factor of the day.",
-              )
-            }
-            title="Positive Emotions"
-            valueInt={dailyCheckInData.PositiveEmotions_int}
-            valueString={dailyCheckInData.PositiveEmotions_value}
-          />
-          <WellBeingCard
-            icon={FaRegThumbsDown}
-            onClick={() =>
-              alert(
-                "TEST: onClick this will display result of this well-being factor of the day.",
-              )
-            }
-            title="Negative Emotions"
-            valueInt={dailyCheckInData.NegativeEmotions_int}
-            valueString={dailyCheckInData.NegativeEmotions_value}
-          />
-        </Flex>
+        {checkInTaken === true ? (
+          <Flex
+            flexDirection="row"
+            justifyContent="space-between"
+            height="full"
+          >
+            <WellBeingCard
+              icon={BsPerson}
+              title="Energy At Work"
+              valueInt={dailyCheckInData.EnergyAtWork_int}
+              valueString={dailyCheckInData.EnergyAtWork_value}
+            />
+            <WellBeingCard
+              icon={TbTargetArrow}
+              title="Focus At Work"
+              valueInt={dailyCheckInData.FocusAtWork_int}
+              valueString={dailyCheckInData.FocusAtWork_value}
+            />
+            <WellBeingCard
+              icon={FaRegThumbsUp}
+              title="Positive Emotions"
+              valueInt={parseInt(dailyCheckInData.PositiveEmotions_int)}
+              valueString={dailyCheckInData.PositiveEmotions_value}
+            />
+            <WellBeingCard
+              icon={FaRegThumbsDown}
+              title="Negative Emotions"
+              valueInt={dailyCheckInData.NegativeEmotions_int}
+              valueString={dailyCheckInData.NegativeEmotions_value}
+            />
+          </Flex>
+        ) : (
+          <Flex
+            alignItems="center"
+            flexDirection="column"
+            justifyContent="center"
+            height="full"
+          >
+            <Icon as={RiErrorWarningLine} boxSize={32} color="#24a2f0" />
+            <Text color="#34313a" fontSize="1.25rem" fontWeight={700}>
+              You haven&apos;t taken your Daily Check In yet.
+            </Text>
+          </Flex>
+        )}
       </Section>
       <Section
         title="How are the pillars of your ability to thrive at work?"
@@ -180,12 +223,18 @@ export const MyDashboardOverviewPage = () => {
       {modal === "daily-checkin" && (
         <DailyCheckin
           isOpen={modal === "daily-checkin"}
-          onClose={() => setModal("")}
+          onClose={() => setModal("checkin-results")}
         />
       )}
       {modal === "quarterly-assessment" && (
         <QuarterlyAssessment
           isOpen={modal === "quarterly-assessment"}
+          onClose={() => setModal("")}
+        />
+      )}
+      {modal === "checkin-results" && (
+        <DailyCheckInResult
+          isOpen={modal === "checkin-results"}
           onClose={() => setModal("")}
         />
       )}

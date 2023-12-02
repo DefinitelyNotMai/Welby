@@ -12,6 +12,12 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
+import { useContext, useEffect } from "react";
+import { getDateDaysAgo, getDateToday } from "../../api/getDates";
+import { DailyCheckIn } from "../../data/dailyCheckIn";
+import { fetchData } from "../../api/fetchData";
+import { UserContext } from "../../context/UserContext";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -71,7 +77,15 @@ const options = {
   },
 };
 
-const labels = Array.from({ length: 30 }, (_, i) => i + 1);
+type EmployeeData = {
+  EAW: number[],
+  FAW: number[],
+  PE: number[],
+  NE: number[]
+}
+
+const labels = Array.from({ length: 10 }, (_, i) => i + 1);
+var empDataset: EmployeeData = {EAW: [], FAW: [], PE: [], NE:[]} //I know this wont work but eh
 
 const data = {
   labels: labels,
@@ -79,7 +93,7 @@ const data = {
   datasets: [
     {
       label: "Energy At Work",
-      data: generateRandomNumbers(30),
+      data: empDataset.EAW,
       backgroundColor: "rgba(36, 162, 240, 0.5)",
       borderColor: "#24a2f0",
       fill: true,
@@ -88,7 +102,7 @@ const data = {
     },
     {
       label: "Focus at Work",
-      data: generateRandomNumbers(30),
+      data: empDataset.FAW,
       backgroundColor: "#f0d124",
       borderColor: "#f0d124",
       pointRadius: 5,
@@ -96,7 +110,7 @@ const data = {
     },
     {
       label: "Positive Emotions",
-      data: generateRandomNumbers(30),
+      data: empDataset.PE,
       backgroundColor: "#78e1e8",
       borderColor: "#78e1e8",
       pointRadius: 5,
@@ -104,7 +118,7 @@ const data = {
     },
     {
       label: "Negative Emotions",
-      data: generateRandomNumbers(30),
+      data: empDataset.NE,
       backgroundColor: "#34313a",
       borderColor: "#34313a",
       pointRadius: 5,
@@ -114,6 +128,39 @@ const data = {
 };
 
 export const ChartBar = () => {
+  const userContext = useContext(UserContext);
+  useEffect(() => {
+    const getEmployeeDailyCheckin = async () => {
+      const getDailyCheckinUrl =
+        "https://localhost:44373/api/GetAllDailyCheckIn";
+      try {
+        const getEmployeeDailyCheckins = await fetchData(
+          getDailyCheckinUrl,
+          {
+            EmployeeId: localStorage.getItem("userId"), //from array
+            CompanyId: userContext.companyId,
+            DateTo: getDateToday(),
+            DateFrom: getDateDaysAgo(9),
+            Active: true,
+          },);
+          if (getEmployeeDailyCheckins) {
+            for(let i = 0; i < getEmployeeDailyCheckins.length; i++) {
+              empDataset.EAW.push(getEmployeeDailyCheckins[i].EnergyAtWork_int)
+              empDataset.FAW.push(getEmployeeDailyCheckins[i].FocusAtWork_int)
+              empDataset.PE.push(getEmployeeDailyCheckins[i].PositiveEmotions_int)
+              empDataset.NE.push(getEmployeeDailyCheckins[i].NegativeEmotions_int)
+            }
+            console.log(empDataset)
+          }
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getEmployeeDailyCheckin();
+  }, [userContext.companyId]);
+
+
   return (
     <Flex flexDirection="row" flex={1} padding={8}>
       <Line options={options} data={data} />

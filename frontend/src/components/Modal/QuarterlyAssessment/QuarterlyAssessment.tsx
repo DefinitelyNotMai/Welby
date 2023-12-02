@@ -69,7 +69,7 @@ export const QuarterlyAssessment = ({
     });
   };
 
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
 
   // NOTE: this is where api call for submitting daily check in should be done
   const handleQuarterlyAssessmentSubmit = () => {
@@ -84,32 +84,40 @@ export const QuarterlyAssessment = ({
       const mean = calculateSum(numbers) / numbers.length;
       return mean;
     };
-    
+
     const quarterlyAssesmentUrl = "https://localhost:44373/api/AddTise";
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    };
     const tise = {
-      "EmployeeId": localStorage.getItem("userId"),
-      "CompanyId": userContext.companyId,
-      "Factor_1": calculateMean(QuarterlyAssessmentData.SocialMutualism),
-      "Factor_2": calculateMean(QuarterlyAssessmentData.SenseOfBeingValued),
-      "Factor_3": calculateMean(QuarterlyAssessmentData.NurturedPsychologicalNeeds),
-      "Factor_4": calculateMean(QuarterlyAssessmentData.PositiveWorkRelationships),
-      "Factor_5": calculateSum(QuarterlyAssessmentData.SubjectiveWellBeing),
-      "Factor_6": calculateSum(QuarterlyAssessmentData.OrganizationalCommitment),
-      "Factor_7": calculateSum(QuarterlyAssessmentData.IntentToQuit),
-      "Factor_8": QuarterlyAssessmentData.Presenteeism[1] - QuarterlyAssessmentData.Presenteeism[0],
-      "Encoded_by": localStorage.getItem("userId"),
-    }
+      EmployeeId: localStorage.getItem("userId"),
+      CompanyId: userContext.companyId,
+      Factor_1: calculateMean(QuarterlyAssessmentData.SocialMutualism),
+      Factor_2: calculateMean(QuarterlyAssessmentData.SenseOfBeingValued),
+      Factor_3: calculateMean(
+        QuarterlyAssessmentData.NurturedPsychologicalNeeds,
+      ),
+      Factor_4: calculateMean(
+        QuarterlyAssessmentData.PositiveWorkRelationships,
+      ),
+      Factor_5: calculateSum(QuarterlyAssessmentData.SubjectiveWellBeing),
+      Factor_6: calculateSum(QuarterlyAssessmentData.OrganizationalCommitment),
+      Factor_7: calculateSum(QuarterlyAssessmentData.IntentToQuit),
+      Factor_8:
+        QuarterlyAssessmentData.Presenteeism[1] -
+        QuarterlyAssessmentData.Presenteeism[0],
+      Encoded_by: localStorage.getItem("userId"),
+    };
     axios
-    .post(quarterlyAssesmentUrl, tise, config)
-    .then((response) => {
-      console.log(response);
-    }).catch((error) => {console.log(error)});
-
+      .post(quarterlyAssesmentUrl, tise, config)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const {
@@ -118,7 +126,6 @@ export const QuarterlyAssessment = ({
     isLastStep,
     nextStep,
     prevStep,
-    setCurrentStepIndex,
     step,
     steps,
   } = useMultiStepForm([

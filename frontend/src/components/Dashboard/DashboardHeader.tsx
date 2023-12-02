@@ -35,12 +35,13 @@ export const DashboardHeader = () => {
     const fetchUserData = async () => {
       const userUrl = "https://localhost:44373/api/GetEmployees";
       try {
-        const result = await fetchData(userUrl, { 
+        const result = await fetchData(userUrl, {
           CompanyId: 0,
-          Email: "", 
-          EmployeeId: userId, 
+          Email: "",
+          EmployeeId: userId,
           Phone_Number: "",
-          Active: true});
+          Active: true,
+        });
         if (result) {
           setNickname(result[0].Nickname);
           setProfilePhoto(result[0].ProfilePhoto);
@@ -63,6 +64,7 @@ export const DashboardHeader = () => {
   const handleLogoutSelection = () => {
     setIsLoggingOut(!isLoggingOut);
   };
+
   const realLogout = () => {
     localStorage.clear();
     navigate("/");
@@ -115,7 +117,7 @@ export const DashboardHeader = () => {
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={handleProfileSelection}>My Profile</MenuItem>
-                <MenuItem onClick={realLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogoutSelection}>Logout</MenuItem>
               </MenuList>
             </Menu>
             <Heading as="h1" fontSize="md" marginLeft={2}>

@@ -31,6 +31,7 @@ ChartJS.register(
 
 type EmployeeDailyCheckin = {
   EmployeeId: number;
+  EmployeeName: string;
   DailyCheckins: DailyCheckIn[];
 };
 
@@ -43,8 +44,6 @@ const generateRandomNumbers = (count: number) => {
   }
   return randomNumbers;
 };
-
-// Company Admin will see the dailycheckins of the employees in the same company.
 
 const options = {
   responsive: true,
@@ -198,20 +197,21 @@ export const PredictionChart = () => {
   const userContext = useContext(UserContext);
 
   useEffect(() => {
-    const employeesDailyCheckin: EmployeeDailyCheckin[] = [];
     const getCompanyDailyCheckin = async () => {
+      const employeesDailyCheckin: EmployeeDailyCheckin[] = [];
       const employeesId: number[] = [];
+      const getEmployeesUrl = "https://localhost:44373/api/GetEmployees";
       const getDailyCheckinUrl =
         "https://localhost:44373/api/GetAllDailyCheckIn";
       // First get employees in the company that did their daily checkins.
       try {
         const getEmployeesWithDailyCheckin = await fetchData(
-          getDailyCheckinUrl,
+          getEmployeesUrl,
           {
-            EmployeeId: 0,
             CompanyId: userContext.companyId,
-            DateTo: "",
-            DateFrom: "",
+            Email: "",
+            EmployeeId: 0,
+            Phone_Number: "",
             Active: true,
           },
         );
@@ -244,7 +244,8 @@ export const PredictionChart = () => {
                 //create object to push to array employeesDailyCheckins
                 const employee: EmployeeDailyCheckin = {
                   EmployeeId: employeesId[i],
-                  DailyCheckins: getEmployeeDailyCheckins,
+                  EmployeeName: getEmployeeDailyCheckins[0].EmployeeName,
+                  DailyCheckins: getEmployeeDailyCheckins
                 };
                 employeesDailyCheckin.push(employee); // push in the array of employee with its daily checkins
               }

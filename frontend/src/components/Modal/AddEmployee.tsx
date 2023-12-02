@@ -10,6 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
 import { FormEvent, useState, useContext } from "react";
@@ -38,6 +39,8 @@ type AddEmployeeProps = {
 export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
   const [addEmployeeData, setAddEmployeeData] =
     useState<EmployeeFormData>(EMPLOYEE_DATA);
+
+  const toast = useToast();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -83,14 +86,13 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
           console.log(error);
         });
       if (addEmployee != null) {
-        const getEmployeeUrl =
-          "https://localhost:44373/api/GetEmployees";
+        const getEmployeeUrl = "https://localhost:44373/api/GetEmployees";
         const param = {
           CompanyId: userContext.companyId,
           Email: addEmployeeData.Email,
           EmployeeId: 0,
           Phone_Number: "",
-          Active: true
+          Active: true,
         };
         const employee = await axios
           .get(getEmployeeUrl, {
@@ -211,7 +213,6 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
                   })
                   .then((response) => {
                     console.log(response.data);
-                    alert("Success! Added member to your team!");
                     console.log("Mapped Admin");
                     return response.data;
                   })
@@ -223,6 +224,15 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
           }
         }
       }
+      toast({
+        title: "SUCCESS",
+        description: "Successfully added Employee",
+        status: "success",
+        position: "top",
+        duration: "5000",
+        isClosable: true,
+      });
+      onClose();
     } catch (error) {
       // Handle network or other error
       console.error("An error occurred:", error);

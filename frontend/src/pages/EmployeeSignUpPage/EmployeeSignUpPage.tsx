@@ -73,6 +73,7 @@ export const EmployeeSignUpPage = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (isLastStep) {
+      localStorage.clear();
       navigate("/login");
     } else if (currentStepIndex === steps.length - 2) {
       handleEmployeeSignUp();

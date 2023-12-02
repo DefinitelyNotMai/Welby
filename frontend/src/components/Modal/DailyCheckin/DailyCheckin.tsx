@@ -14,6 +14,7 @@ import {
 import { FormEvent, useState, useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 import { fetchData } from "../../../api/fetchData";
+import { getDateToday } from "../../../api/getDates";
 
 // local
 import { DAILY_CHECKIN_INITIAL_DATA } from "../../../data/initForm";
@@ -130,8 +131,8 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
         const getDailyCheckin = await fetchData(getDailyCheckinIdUrl, {
           EmployeeId: localStorage.getItem("userId") || 0,
           CompanyId: userContext.companyId,
-          DateTo: simpleDateToday,
-          DateFrom: simpleDateToday,
+          DateTo: getDateToday(),
+          DateFrom: getDateToday(),
           Active: true,
         });
         if (getDailyCheckin) {
@@ -140,6 +141,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
             "dailyCheckinId",
             getDailyCheckin[0].DailyCheckInId,
           );
+          console.log("dailycheckinId: " + getDailyCheckin[0].DailyCheckInId)
         }
       } catch (error) {
         console.log(error);

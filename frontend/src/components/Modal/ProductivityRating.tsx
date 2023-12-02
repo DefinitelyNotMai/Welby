@@ -50,43 +50,43 @@ export const ProductivityRating = ({
         "Content-Type": "application/json",
       },
     }
+    console.log("updateProductivity" + dailyCheckInId )
     const productivityUpdate = {
-      "DailyCheckInId": dailyCheckInId,
-      "Productivity": productivity,
-      "Completion": "Completed"
+      DailyCheckInId:  dailyCheckInId,
+      Productivity: productivity,
+      Completion: "Completed"
     }
 
     axios.patch(updateProductivityUrl, productivityUpdate, config)
       .then((response)=> {
         console.log(response)
+        const trybool = true;
+        if (trybool) {
+          toast({
+            title: "SUCCESS",
+            description: "Submitted productivity rating.",
+            status: "success",
+            position: "top",
+            isClosable: true,
+            duration: 5000,
+          });
+          userContext.setCompanyId("");
+          localStorage.clear();
+          navigate("/");
+        } else {
+          toast({
+            title: "ERROR",
+            description: "Productivity rating not submitted, try again.",
+            status: "error",
+            position: "top",
+            isClosable: true,
+            duration: 5000,
+          });
+        }
       }).catch((error)=> {console.log(error)});
 
 
-    const trybool = true;
     
-
-    if (trybool) {
-      toast({
-        title: "SUCCESS",
-        description: "Submitted productivity rating.",
-        status: "success",
-        position: "top",
-        isClosable: true,
-        duration: 5000,
-      });
-      userContext.setCompanyId("");
-      localStorage.clear();
-      navigate("/");
-    } else {
-      toast({
-        title: "ERROR",
-        description: "Productivity rating not submitted, try again.",
-        status: "error",
-        position: "top",
-        isClosable: true,
-        duration: 5000,
-      });
-    }
   };
 
   return (

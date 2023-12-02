@@ -11,6 +11,12 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useContext } from "react";
+
+import { get7DaysAgo, getDateToday } from "../../api/getDates";
+import { DailyCheckIn } from "../../data/dailyCheckIn";
+import { fetchData } from "../../api/fetchData";
+import { UserContext } from "../../context/UserContext";
 
 ChartJS.register(
   CategoryScale,
@@ -32,6 +38,71 @@ const generateRandomNumbers = (count: number) => {
   }
   return randomNumbers;
 };
+
+type EmployeeDailyCheckin = { 
+  EmployeeId: number,
+  DailyCheckins: DailyCheckIn[],
+}
+
+// Company Admin will see the dailycheckins of the employees in the same company.
+const employeesDailyCheckin: EmployeeDailyCheckin[] = [];
+
+const getCompanyDailyCheckin = async () => {
+  const userContext = useContext(UserContext); 
+  const employeesId: number[] = []
+  const getDailyCheckinUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
+  // First get employees in the company that did their daily checkins.
+  try {
+    const getEmployeesWithDailyCheckin = await fetchData(getDailyCheckinUrl, {
+      EmployeeId: 0,
+      CompanyId: userContext.companyId,
+      DateTo: "",
+      DateFrom: "",
+      Active: true,
+    });
+
+    if (getEmployeesWithDailyCheckin) {
+      // Get the employee's EmployeeId to get each employee's dailycheckin later.
+      getEmployeesWithDailyCheckin.forEach((employee: { EmployeeId: number; }) => {
+        employeesId.push(employee.EmployeeId); // pushed in the array.
+      });
+    }
+
+    if (employeesId.length != 0) {
+      for (let i = 0; i < employeesId.length; i++) {
+        // By using the EmployeeIds in the array, for each id get all of its dailycheckins from 7 days ago till today.
+        try {
+          const getEmployeeDailyCheckins = await fetchData(getDailyCheckinUrl, {
+            EmployeeId: employeesId[i], //from array
+            CompanyId: userContext.companyId,
+            DateTo: getDateToday(),
+            DateFrom: get7DaysAgo(),
+            Active: true,
+          });
+      
+          if (getEmployeeDailyCheckins) {
+            //create object to push to array employeesDailyCheckins
+            var employee: EmployeeDailyCheckin = {
+              EmployeeId: employeesId[i],
+              DailyCheckins: getEmployeeDailyCheckins
+            }
+            employeesDailyCheckin.push(employee) // push in the array of employee with its daily checkins
+          }
+
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+    
+  } catch (err) {
+    console.log(err);
+  }
+
+  console.log(employeesDailyCheckin)
+}
+
+getCompanyDailyCheckin();
 
 const options = {
   responsive: true,

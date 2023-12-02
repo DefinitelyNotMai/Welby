@@ -45,6 +45,7 @@ export const signUpEmployee = async (
 
     Other_Notes: EmployeeData.Other_Notes,
     FirstLogIn: EmployeeData.FirstLogIn,
+    Active: true,
   };
 
   const config = {
@@ -168,7 +169,7 @@ export const signUpEmployee = async (
       const hashedPassword = await bcrypt.hash(EmployeeData.Password, 10);
 
       const systemUser = {
-        UserCode: UserId,
+        UserCode: localStorage.getItem("id"),
         UserName: EmployeeData.Email,
         Password: hashedPassword,
         AccountLocked: 0,
@@ -180,6 +181,8 @@ export const signUpEmployee = async (
         Encoded_By: UserId,
         Active: true,
       };
+
+      console.log(systemUser);
       axios
         .patch(UpdateSystemUserUrl, systemUser, {
           headers: {

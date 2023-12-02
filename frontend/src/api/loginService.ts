@@ -51,6 +51,7 @@ export const login = async (loginData: Login) => {
 
       if (passwordMatch) {
         localStorage.setItem("userId", result[0].UserCode);
+        localStorage.setItem("id", result[0].UserId);
 
         if (data[0].FirstLogIn === false) {
           path = "/employee-signup";

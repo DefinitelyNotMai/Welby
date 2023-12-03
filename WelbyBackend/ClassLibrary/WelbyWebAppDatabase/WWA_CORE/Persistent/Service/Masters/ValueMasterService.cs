@@ -27,7 +27,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 {
                     Title = valueMasterViewModel.Title,
                     CompanyId = valueMasterViewModel.CompanyId,
-                    Description = valueMasterViewModel.Title,
+                    Description = valueMasterViewModel.Description,
                     
 
                     Active = true,

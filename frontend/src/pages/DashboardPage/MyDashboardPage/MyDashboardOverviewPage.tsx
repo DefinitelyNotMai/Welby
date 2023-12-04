@@ -37,6 +37,7 @@ export const MyDashboardOverviewPage = () => {
     useState<DailyCheckIn>(DAILYCHECKIN_DATA);
   const [modal, setModal] = useState<string>("");
   const [checkInTaken, setCheckInTaken] = useState<boolean>(true);
+  const [tiseTaken, setTiseTaken] = useState<boolean>(true);
 
   // NOTE: calls for fetching daily checkin and tise data goes here
   const userId = localStorage.getItem("userId") || 0;
@@ -79,6 +80,28 @@ export const MyDashboardOverviewPage = () => {
     checkIfCheckInTaken();
   }, [simpleDateToday, userContext.companyId, userId]);
 
+  useEffect(() => {
+    const checkIfTiseTaken = async () => {
+      const data = await fetchData(url, {
+        TiseId: 0,
+        EmployeeId: userId,
+        CompanyId: userContext.companyId,
+        Active: true,
+        DateFrom: simpleDateToday,
+        DateTo: simpleDateToday,
+      });
+      if (data.length > 0) {
+        setTiseTaken(true);
+        setTiseData(data[0]);
+        console.log(data[0]);
+      } else {
+        setTiseTaken(false);
+      }
+      //console.log(data);
+      //console.log(checkInTaken);
+    };
+    checkIfTiseTaken();
+  }, [simpleDateToday, userContext.companyId, userId]);
   //console.log(getSimpleDate());
 
   return (
@@ -156,68 +179,84 @@ export const MyDashboardOverviewPage = () => {
           </Button>,
         ]}
       >
-        <Grid gap={4} templateRows="1fr 1fr 1fr">
-          <Flex
-            flexDirection="row"
-            gap={4}
-            height="full"
-            justifyContent="center"
-          >
-            <ChartDoughnut
-              title="Social Mutualism"
-              icon={GiHummingbird}
-              dataValue={tiseData.Factor_1}
-            />
-            <ChartDoughnut
-              title="Sense of Being Valued"
-              icon={FaDumbbell}
-              dataValue={tiseData.Factor_2}
-            />
-            <ChartDoughnut
-              title="Nurtured Psychological Needs"
-              icon={IoMdGitNetwork}
-              dataValue={tiseData.Factor_3}
-            />
-          </Flex>
-          <Flex
-            flexDirection="row"
-            gap={4}
-            height="full"
-            justifyContent="center"
-          >
-            <ChartDoughnut
-              title="Positive Work Relationships"
-              icon={MdPeople}
-              dataValue={tiseData.Factor_4}
-            />
-            <ChartDoughnut
-              title="Subjective Well Being"
-              icon={FaHands}
-              dataValue={tiseData.Factor_5}
-            />
-            <ChartDoughnut
-              title="Organizational Commitment"
-              icon={FaHandshake}
-              dataValue={tiseData.Factor_6}
-            />
-          </Flex>
-          <Flex
-            flexDirection="row"
-            gap={4}
-            height="full"
-            justifyContent="center"
-          >
-            <ChartDoughnut
-              title="Intent To Quit"
-              icon={FaWalking}
-              dataValue={tiseData.Factor_7}
-            />
-            <ChartDoughnut
-              title="Presenteeism"
-              icon={FaEye}
-              dataValue={tiseData.Factor_8}
-            />
-          </Flex>
+        <Grid gap={4} templateRows={tiseTaken === true ? "1fr 1fr 1fr" : "1fr"}>
+          {tiseTaken === true ? (
+            <>
+              <Flex
+                flexDirection="row"
+                gap={4}
+                height="full"
+                justifyContent="center"
+              >
+                <ChartDoughnut
+                  title="Social Mutualism"
+                  icon={GiHummingbird}
+                  dataValue={tiseData.Factor_1}
+                />
+                <ChartDoughnut
+                  title="Sense of Being Valued"
+                  icon={FaDumbbell}
+                  dataValue={tiseData.Factor_2}
+                />
+                <ChartDoughnut
+                  title="Nurtured Psychological Needs"
+                  icon={IoMdGitNetwork}
+                  dataValue={tiseData.Factor_3}
+                />
+              </Flex>
+              <Flex
+                flexDirection="row"
+                gap={4}
+                height="full"
+                justifyContent="center"
+              >
+                <ChartDoughnut
+                  title="Positive Work Relationships"
+                  icon={MdPeople}
+                  dataValue={tiseData.Factor_4}
+                />
+                <ChartDoughnut
+                  title="Subjective Well Being"
+                  icon={FaHands}
+                  dataValue={tiseData.Factor_5}
+                />
+                <ChartDoughnut
+                  title="Organizational Commitment"
+                  icon={FaHandshake}
+                  dataValue={tiseData.Factor_6}
+                />
+              </Flex>
+              <Flex
+                flexDirection="row"
+                gap={4}
+                height="full"
+                justifyContent="center"
+              >
+                <ChartDoughnut
+                  title="Intent To Quit"
+                  icon={FaWalking}
+                  dataValue={tiseData.Factor_7}
+                />
+                <ChartDoughnut
+                  title="Presenteeism"
+                  icon={FaEye}
+                  dataValue={tiseData.Factor_8}
+                />
+              </Flex>
+            </>
+          ) : (
+            <Flex
+              alignItems="center"
+              flexDirection="column"
+              justifyContent="center"
+              height="full"
+            >
+              <Icon as={RiErrorWarningLine} boxSize={32} color="#24a2f0" />
+              <Text color="#34313a" fontSize="1.25rem" fontWeight={700}>
+                You haven&apos;t taken your Quarterly Assesment yet.
+              </Text>
+            </Flex>
+          )}
         </Grid>
       </Section>
       {modal === "daily-checkin" && (

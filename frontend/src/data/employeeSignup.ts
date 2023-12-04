@@ -27,6 +27,7 @@ export type EmployeeSignup = {
   Interests: number[];
   Other_Notes: string;
   FirstLogIn: boolean;
+  CompanyPosition: string;
 };
 
 export const EMPLOYEESIGNUP_DATA: EmployeeSignup = {
@@ -58,4 +59,5 @@ export const EMPLOYEESIGNUP_DATA: EmployeeSignup = {
   Interests: [0],
   Other_Notes: "",
   FirstLogIn: true,
+  CompanyPosition: "",
 };

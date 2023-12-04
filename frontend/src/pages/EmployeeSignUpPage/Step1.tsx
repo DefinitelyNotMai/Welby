@@ -25,6 +25,7 @@ type Step1Data = {
   ProfilePhoto: string;
   Email: string;
   Password: string;
+  CompanyPosition: string;
 };
 
 type Step1Props = Step1Data & {
@@ -47,6 +48,7 @@ export const Step1 = ({
   Linkedin,
   Facebook,
   ProfilePhoto,
+  CompanyPosition,
   updateFields,
 }: Step1Props) => {
   const [companyName, setCompanyName] = useState<string>("");
@@ -168,6 +170,19 @@ export const Step1 = ({
             />
           </FormItem>
         </Flex>
+        <GridItem colSpan={2}>
+          <FormItem htmlFor="position" label="Position" isRequired>
+            <Input
+              id="position"
+              name="position"
+              onChange={(e) =>
+                updateFields({ CompanyPosition: e.target.value })
+              }
+              placeholder=""
+              value={CompanyPosition}
+            />
+          </FormItem>
+        </GridItem>
         <GridItem colSpan={2}>
           <FormItem htmlFor="phone-number" label="Phone Number" isRequired>
             <Input

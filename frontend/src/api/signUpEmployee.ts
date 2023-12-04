@@ -45,6 +45,7 @@ export const signUpEmployee = async (
 
     Other_Notes: EmployeeData.Other_Notes,
     FirstLogIn: EmployeeData.FirstLogIn,
+    CompanyPosition: EmployeeData.CompanyPosition,
     Active: true,
   };
 

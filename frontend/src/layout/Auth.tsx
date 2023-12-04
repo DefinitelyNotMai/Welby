@@ -32,6 +32,7 @@ export const Auth = ({ children }: AuthProps) => {
           userContext.setCompanyId(result[0].CompanyId);
           userContext.setEmail(result[0].Email);
           userContext.setPhone(result[0].Phone_Number);
+          userContext.setRole(result[0].CompanyRole);
         } else {
           toast({
             title: "ERROR",
@@ -47,41 +48,7 @@ export const Auth = ({ children }: AuthProps) => {
         console.error("Error fetching data: ", error);
       }
     };
-
-    /*
-    const fetchRole = async () => {
-      const roleUrl =
-        "http://localhost:58258/api/GetSystemUsersToSecurityGroupMapping";
-
-      try {
-        const token = fetchAccessToken();
-        const userRole = axios
-          .get(roleUrl, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            params: {
-              GroupToUserMappingId: null,
-              SecurityGroupId: null,
-              UserId: userId,
-            },
-          })
-          .then((response) => {
-            const result = response.data;
-            if (result && result.length > 0) {
-              console.log(result);
-              userContext.setRole(result[0].SecurityGroupId);
-            }
-          });
-      } catch (error) {
-        console.error("Error fetching role: ", error);
-      }
-    };
-    fetchRole();
-    */
-
+    
     fetchContext();
   }, [navigate, toast, userContext]);
   console.log(userContext.companyId, userContext.email, userContext.phone);

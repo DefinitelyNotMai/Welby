@@ -212,6 +212,7 @@ export const PredictionChart = () => {
             Email: "",
             EmployeeId: 0,
             Phone_Number: "",
+            CompanyRole: "",
             Active: true,
           },
         );

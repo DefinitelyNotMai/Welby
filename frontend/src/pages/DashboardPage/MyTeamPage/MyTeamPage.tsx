@@ -47,6 +47,7 @@ export const MyTeamPage = () => {
           Email: "",
           EmployeeId: 0,
           Phone_Number: "",
+          CompanyRole: "",
           Active: true,
         });
         setEmployees(data);

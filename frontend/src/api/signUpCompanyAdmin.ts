@@ -34,7 +34,9 @@ export const signUpCompanyAdmin = async (
       Connect: CompanyAdminData.Connect,
       Support: CompanyAdminData.Support,
       Other_Notes: CompanyAdminData.Other_Notes,
-      FirstLogIn: 1,
+      FirstLogIn: true,
+      CompanyPosition: "Company Admin",
+      CompanyRole: "Company Admin"
     };
 
     const addCompanyAdmin = await axios.post(
@@ -78,7 +80,7 @@ export const signUpCompanyAdmin = async (
       ExpiryDays: null,
       AccountVerified: null,
       VerifiedDate: null,
-      Encoded_By: 24286,
+      Encoded_By: admin.EmployeeId,
       Active: true,
     };
 
@@ -95,26 +97,7 @@ export const signUpCompanyAdmin = async (
 
     console.log(addToOWS.data);
     console.log("Successfully added to OWS");
-
-    const mapAdminData = {
-      SecurityGroup: 5,
-      UserId: addToOWS.UserId,
-      Encoded_By: 24286,
-    };
-
-    const mapAdmin = await axios.post(
-      "http://localhost:58258/api/MapSystemUsersToSecurityGroupMapping",
-      mapAdminData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      },
-    );
-
-    console.log(mapAdmin.data);
-    console.log("Mapped Admin");
+    
   } catch (error) {
     console.error("An error has occurred:", error);
   }

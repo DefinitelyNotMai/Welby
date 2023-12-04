@@ -170,7 +170,8 @@ export const signUpEmployee = async (
       const hashedPassword = await bcrypt.hash(EmployeeData.Password, 10);
 
       const systemUser = {
-        UserCode: localStorage.getItem("id"),
+        UserCode: localStorage.getItem("userId"),
+        UserId: localStorage.getItem("id"),
         UserName: EmployeeData.Email,
         Password: hashedPassword,
         AccountLocked: 0,

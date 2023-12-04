@@ -21,6 +21,8 @@ export type CompanyAdminSignup = {
   Connect: string;
   Support: string;
   Other_Notes: string;
+  CompanyPosition: string;
+  CompanyRole: "";
 };
 
 export const COMPANYADMINSIGNUP_DATA: CompanyAdminSignup = {
@@ -48,4 +50,6 @@ export const COMPANYADMINSIGNUP_DATA: CompanyAdminSignup = {
   Connect: "",
   Support: "",
   Other_Notes: "",
+  CompanyPosition: "",
+  CompanyRole: "",
 };

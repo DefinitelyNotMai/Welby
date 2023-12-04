@@ -28,6 +28,7 @@ export type EmployeeSignup = {
   Other_Notes: string;
   FirstLogIn: boolean;
   CompanyPosition: string;
+  CompanyRole: string;
 };
 
 export const EMPLOYEESIGNUP_DATA: EmployeeSignup = {
@@ -60,4 +61,5 @@ export const EMPLOYEESIGNUP_DATA: EmployeeSignup = {
   Other_Notes: "",
   FirstLogIn: true,
   CompanyPosition: "",
+  CompanyRole: "",
 };

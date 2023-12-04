@@ -497,7 +497,7 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_GetBy_Company_and_Email", companyIdParameter, emailParameter, activeParameter);
         }
     
-        public virtual int procWWA_REG_Employee_Registration_Pagewise_Get(Nullable<int> employeeId, Nullable<int> companyId, string phone_Number, string email, Nullable<bool> active, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
+        public virtual int procWWA_REG_Employee_Registration_Pagewise_Get(Nullable<int> employeeId, Nullable<int> companyId, string phone_Number, string email, string companyRole, Nullable<bool> active, Nullable<int> pageNo, Nullable<int> pageSize, string dateFrom, string dateTo)
         {
             var employeeIdParameter = employeeId.HasValue ?
                 new ObjectParameter("EmployeeId", employeeId) :
@@ -514,6 +514,10 @@ namespace WWA_CORE.Persistent.Context
             var emailParameter = email != null ?
                 new ObjectParameter("Email", email) :
                 new ObjectParameter("Email", typeof(string));
+    
+            var companyRoleParameter = companyRole != null ?
+                new ObjectParameter("CompanyRole", companyRole) :
+                new ObjectParameter("CompanyRole", typeof(string));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
@@ -535,7 +539,7 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("DateTo", dateTo) :
                 new ObjectParameter("DateTo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, companyIdParameter, phone_NumberParameter, emailParameter, activeParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_REG_Employee_Registration_Pagewise_Get", employeeIdParameter, companyIdParameter, phone_NumberParameter, emailParameter, companyRoleParameter, activeParameter, pageNoParameter, pageSizeParameter, dateFromParameter, dateToParameter);
         }
     
         public virtual int procWWA_TrainingSet_Get(Nullable<bool> employeeId, Nullable<bool> active)

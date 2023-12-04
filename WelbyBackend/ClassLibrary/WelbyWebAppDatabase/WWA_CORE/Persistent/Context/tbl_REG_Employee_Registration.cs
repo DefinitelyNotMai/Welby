@@ -55,6 +55,7 @@ namespace WWA_CORE.Persistent.Context
         public string Computer_Name { get; set; }
         public Nullable<bool> FirstLogIn { get; set; }
         public string CompanyPosition { get; set; }
+        public string CompanyRole { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }

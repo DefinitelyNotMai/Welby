@@ -11,6 +11,7 @@ namespace WWA_CORE.Persistent.Resource.Algo
     {
         public string CompanyName { get; set; }
         public string EmployeeName { get; set; }
+        public string EmployeeFullName { get; set; }
 
     }
 }

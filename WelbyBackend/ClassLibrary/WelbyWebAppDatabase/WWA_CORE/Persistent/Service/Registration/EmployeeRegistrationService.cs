@@ -55,6 +55,7 @@ namespace WWA_CORE.Persistent.Service.Registration
 
                     FirstLogIn = employeeRegistrationViewModel.FirstLogIn,
                     CompanyPosition = employeeRegistrationViewModel.CompanyPosition,
+                    CompanyRole = employeeRegistrationViewModel.CompanyRole,
                     
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
@@ -93,12 +94,14 @@ namespace WWA_CORE.Persistent.Service.Registration
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO , employeeRegistrationViewModel.DateTo),
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_NO , employeeRegistrationViewModel.PageNo),
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_PAGE_SIZE , employeeRegistrationViewModel.PageSize),
+                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, employeeRegistrationViewModel.Active),
 
 
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMPLOYEEID , employeeRegistrationViewModel.EmployeeId),
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_COMPANYID , employeeRegistrationViewModel.CompanyId),
                   new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_PHONE_NUMBER , employeeRegistrationViewModel.Phone_Number),
-                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS , employeeRegistrationViewModel.Email)
+                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS , employeeRegistrationViewModel.Email),
+                  new SqlParameter(PROCEDURE_PARAMETERS.PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_ROLE , employeeRegistrationViewModel.CompanyRole)
                }
             };
 
@@ -116,6 +119,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
                 CompanyPosition = Convert.ToString(row["CompanyPosition"]),
+                CompanyRole = Convert.ToString(row["CompanyRole"]),
 
                 Phone_Number = Convert.ToString(row["Phone_Number"]),
                 Email = Convert.ToString(row["Email"]),
@@ -227,6 +231,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 RowToUpdate.Birthday = employeeRegistrationViewModel.Birthday;
                 RowToUpdate.Address = employeeRegistrationViewModel.Address;
                 RowToUpdate.CompanyPosition = employeeRegistrationViewModel.CompanyPosition;
+                RowToUpdate.CompanyRole = employeeRegistrationViewModel.CompanyRole;
 
                 RowToUpdate.CompanyId = employeeRegistrationViewModel.CompanyId;
                 RowToUpdate.CountryId = employeeRegistrationViewModel.CountryId;

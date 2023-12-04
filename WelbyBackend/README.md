@@ -15,6 +15,7 @@ were tested only in Postman.
    - **CompanyId:** number
    - **Email:** string
    - **Phone_Number:** string
+   - **CompanyRole:** string
    - **Active:** boolean
 
   }

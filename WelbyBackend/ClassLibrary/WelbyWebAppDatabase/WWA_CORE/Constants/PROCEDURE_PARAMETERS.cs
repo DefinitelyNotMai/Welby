@@ -39,7 +39,7 @@ namespace WWA_CORE.Constants
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_PHONE_NUMBER = "@Phone_Number";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_EMAIL_ADDRESS = "@Email";
         public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_COMPANYID = "@CompanyId";
-
+        public const string PARA_REG_EMPLOYEE_REGISTRATION_PAGEWISE_GET_ROLE = "@CompanyRole";
         //Company
         public const string PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYID = "@CompanyId";
         public const string PARA_MST_COMPANY_MASTER_LOGIN_GET_COMPANYEMAIL = "@Email";

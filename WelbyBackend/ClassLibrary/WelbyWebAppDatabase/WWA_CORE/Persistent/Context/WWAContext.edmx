@@ -281,6 +281,7 @@
           <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
           <Property Name="FirstLogIn" Type="bit" />
           <Property Name="CompanyPosition" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompanyRole" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_Results">
           <Key>
@@ -683,6 +684,7 @@
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompanyRole" Type="nvarchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="PageNo" Type="int" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
@@ -1118,6 +1120,7 @@
           <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_REG_E__Compa__0D0FEE32" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Company" />
           <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_REG_E__Count__0B27A5C0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Country_Master" />
           <NavigationProperty Name="tbl_MST_Gender_Master" Relationship="Self.FK__tbl_REG_E__Gende__0C1BC9F9" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Gender_Master" />
+          <Property Name="CompanyRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_Results">
           <Key>
@@ -1622,6 +1625,7 @@
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Phone_Number" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="CompanyRole" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="PageNo" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
@@ -1900,6 +1904,7 @@
           <EntitySetMapping Name="tbl_REG_Employee_Registration">
             <EntityTypeMapping TypeName="WWAModel.tbl_REG_Employee_Registration">
               <MappingFragment StoreEntitySet="tbl_REG_Employee_Registration">
+                <ScalarProperty Name="CompanyRole" ColumnName="CompanyRole" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />

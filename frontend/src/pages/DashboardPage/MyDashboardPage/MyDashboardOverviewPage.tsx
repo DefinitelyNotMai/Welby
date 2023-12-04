@@ -120,7 +120,7 @@ export const MyDashboardOverviewPage = () => {
             <WellBeingCard
               icon={FaRegThumbsUp}
               title="Positive Emotions"
-              valueInt={parseInt(dailyCheckInData.PositiveEmotions_int)}
+              valueInt={dailyCheckInData.PositiveEmotions_int}
               valueString={dailyCheckInData.PositiveEmotions_value}
             />
             <WellBeingCard
@@ -223,6 +223,7 @@ export const MyDashboardOverviewPage = () => {
       {modal === "daily-checkin" && (
         <DailyCheckin
           isOpen={modal === "daily-checkin"}
+          onCancel={() => setModal("")}
           onClose={() => setModal("checkin-results")}
         />
       )}

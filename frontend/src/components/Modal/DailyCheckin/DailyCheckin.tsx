@@ -29,10 +29,15 @@ import axios from "axios";
 
 type DailyCheckinProps = {
   isOpen: boolean;
+  onCancel: () => void;
   onClose: () => void;
 };
 
-export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
+export const DailyCheckin = ({
+  isOpen,
+  onCancel,
+  onClose,
+}: DailyCheckinProps) => {
   const [dailyCheckinData, setDailyCheckinData] =
     useState<DailyCheckInFormData>(DAILY_CHECKIN_INITIAL_DATA);
 
@@ -141,7 +146,27 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
             "dailyCheckinId",
             getDailyCheckin[0].DailyCheckInId,
           );
-          console.log("dailycheckinId: " + getDailyCheckin[0].DailyCheckInId)
+          console.log("dailycheckinId: " + getDailyCheckin[0].DailyCheckInId);
+          toast({
+            title: "SUCCESS",
+            description: "Your daily check-in is complete. Good Job!",
+            status: "success",
+            isClosable: true,
+            duration: 5000,
+            position: "top",
+          });
+          onClose();
+          window.location.reload();
+        } else {
+          toast({
+            title: "ERROR",
+            description:
+              "Your daily check-in is unsuccessful. Please try submitting again.",
+            status: "error",
+            isClosable: true,
+            duration: 5000,
+            position: "top",
+          });
         }
       } catch (error) {
         console.log(error);
@@ -150,34 +175,9 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
 
     // if successful statement here:
     //console.log(dailyCheckinData);
-    const trybool = true;
-
     // NOTE: use this to store dailyCheckinId so it will persist through refreshes
     // This will be cleared on logout
-
     //localStorage.setItem("dailyCheckinId", response.data[0].DailyCheckInId); // this is for setting the id
-
-    if (trybool) {
-      toast({
-        title: "SUCCESS",
-        description: "Your daily check-in is complete. Good Job!",
-        status: "success",
-        isClosable: true,
-        duration: 5000,
-        position: "top",
-      });
-      onClose();
-    } else {
-      toast({
-        title: "ERROR",
-        description:
-          "Your daily check-in is unsuccessful. Please try submitting again.",
-        status: "error",
-        isClosable: true,
-        duration: 5000,
-        position: "top",
-      });
-    }
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -222,7 +222,7 @@ export const DailyCheckin = ({ isOpen, onClose }: DailyCheckinProps) => {
               <Button
                 backgroundColor="#bcbcbc"
                 color="#ffffff"
-                onClick={isFirstStep ? onClose : prevStep}
+                onClick={isFirstStep ? onCancel : prevStep}
                 width="25%"
               >
                 {isFirstStep ? "Cancel" : "Previous"}

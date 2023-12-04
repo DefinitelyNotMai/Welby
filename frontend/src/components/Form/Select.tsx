@@ -228,36 +228,11 @@ export const SelectRole = ({
   onChange,
   value,
 }: CustomSelectProps) => {
-  const [roles, setRoles] = useState<SystemSecurityGroup[]>([]);
-
-  useEffect(() => {
-    const fetchRoles = async () => {
-      try {
-        const token = await fetchAccessToken();
-        const securityGroupUrl =
-          "http://localhost:58258/api/GetSystemSecurityGroup";
-
-        const response = await fetch(`${securityGroupUrl}?Active=true`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const result = data.slice(2); // slice first 2 options
-        setRoles(result);
-      } catch (error) {
-        console.log("Error fetching data: ", error);
-      }
-    };
-    fetchRoles();
-  }, []);
+  const companyRoleOptions = [
+    { id: "Company Admin", label: "Company Admin" },
+    { id: "Leader", label: "Leader" },
+    { id: "Member", label: "Member" },
+  ];
 
   return (
     <Select
@@ -267,9 +242,9 @@ export const SelectRole = ({
       placeholder="Select Role..."
       value={value}
     >
-      {roles.map((role) => (
-        <option key={role.SecurityGroupId} value={role.SecurityGroupId}>
-          {role.SecurityGroupName}
+      {companyRoleOptions.map((companyRole) => (
+        <option key={companyRole.id} value={companyRole.id}>
+          {companyRole.label}
         </option>
       ))}
     </Select>

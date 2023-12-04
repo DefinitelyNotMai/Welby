@@ -1,5 +1,4 @@
 // lib
-import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import { ReactNode, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 // local
 import { UserContext } from "../context/UserContext";
 import { fetchData } from "../api/fetchData";
-import { fetchAccessToken } from "../api/tokenService";
 
 type AuthProps = {
   children: ReactNode;
@@ -48,10 +46,15 @@ export const Auth = ({ children }: AuthProps) => {
         console.error("Error fetching data: ", error);
       }
     };
-    
+
     fetchContext();
   }, [navigate, toast, userContext]);
-  console.log(userContext.companyId, userContext.email, userContext.phone);
+  console.log(
+    userContext.companyId,
+    userContext.email,
+    userContext.phone,
+    userContext.role,
+  );
 
   return userContext.companyId && userContext.email ? <>{children}</> : null;
 };

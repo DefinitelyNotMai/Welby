@@ -67,7 +67,7 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
       Nickname: addEmployeeData.Email,
       Email: addEmployeeData.Email,
       CompanyId: userContext.companyId,
-      CompanyPosition: addEmployeeData.Role,
+      CompanyRole: addEmployeeData.Role,
       FirstLogIn: false,
       Encoded_By: userId,
       CountryId: 1000,
@@ -172,55 +172,6 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
               .catch(function (error) {
                 console.log(error);
               });
-            if (addToOWS != null) {
-              const tokenUrl = "http://localhost:58258/token";
-              const header = {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Access-Control-Allow-Origin": "*",
-              };
-              const adminUserName = "Venancio";
-              const adminUserPassword = "Jones";
-              const formData = new URLSearchParams();
-              formData.append("grant_type", "password");
-              formData.append("username", adminUserName);
-              formData.append("password", adminUserPassword);
-              const tokenResponse = await fetch(tokenUrl, {
-                method: "POST",
-                headers: header,
-                body: formData,
-              })
-                .then((res) => {
-                  return res.json();
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-              if (tokenResponse != null) {
-                const token = tokenResponse.access_token;
-                const mapCompanyAdminrUrl =
-                  "http://localhost:58258/api/MapSystemUsersToSecurityGroupMapping";
-                const mapAdmin = {
-                  SecurityGroupId: 6,
-                  UserId: addToOWS.UserId,
-                  Encoded_By: userId,
-                };
-                axios
-                  .post(mapCompanyAdminrUrl, mapAdmin, {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                    },
-                  })
-                  .then((response) => {
-                    console.log(response.data);
-                    console.log("Mapped Admin");
-                    return response.data;
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  });
-              }
-            }
           }
         }
       }
@@ -229,7 +180,7 @@ export const AddEmployee = ({ isOpen, onClose }: AddEmployeeProps) => {
         description: "Successfully added Employee",
         status: "success",
         position: "top",
-        duration: "5000",
+        duration: 5000,
         isClosable: true,
       });
       onClose();

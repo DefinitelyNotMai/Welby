@@ -203,6 +203,18 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
+        [Route("~/api/TakeAssessment")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> EnableDisableAssessment([FromBody] CompanyMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Company.TakeAssessment(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
         #endregion
 
         #region GOAL

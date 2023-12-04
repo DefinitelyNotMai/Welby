@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WWA_CORE.Utilities
 {
@@ -25,5 +26,7 @@ namespace WWA_CORE.Utilities
         public static int MIN_PASSWORD_SPECIAL_CHAR_COUNT = 1;
         public static int MIN_PASSWORD_UPPER_CASE_COUNT = 1;
         public static int MIN_PASSWORD_LOWER_CASE_COUNT = 1;
+
+        
     }
 }

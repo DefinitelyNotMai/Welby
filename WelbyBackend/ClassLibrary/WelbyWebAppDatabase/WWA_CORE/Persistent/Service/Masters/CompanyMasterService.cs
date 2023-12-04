@@ -35,12 +35,13 @@ namespace WWA_CORE.Persistent.Service.Masters
 
                     CountryId = companyMasterViewModel.CountryId,
                     IndustryTypeId = companyMasterViewModel.IndustryTypeId,
-                    
+
                     FoundingDate = companyMasterViewModel.FoundingDate,
                     Mission = companyMasterViewModel.Mission,
                     Vision = companyMasterViewModel.Vision,
                     Logo = companyMasterViewModel.Logo,
 
+                    TakeAssessment = false,
                     Active = true,
                     Encoded_By = companyMasterViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),
@@ -98,6 +99,7 @@ namespace WWA_CORE.Persistent.Service.Masters
 
                 CompanyLocation = Convert.ToString(row["CompanyLocation"]),
                 IndustryTypeDisplay = Convert.ToString(row["IndustryTypeDisplay"]),
+                TakeAssessment = Convert.ToBoolean(row["TakeAssessment"]),
 
                 Active = Convert.ToBoolean(row["Active"]),
                 Encoded_By = Convert.ToInt32(row["Encoded_By"]),
@@ -193,6 +195,32 @@ namespace WWA_CORE.Persistent.Service.Masters
 
                 await context.SaveChangesAsync();
 
+                companyMasterViewModel.Message_Code = $"{WWA_COREDefaults.DEFAULT_SUCCESS_UPDATE_MESSAGE_CODE}";
+            }
+            catch (Exception ex)
+            {
+                companyMasterViewModel.Message_Code = $"{ex.Message} \n {ex.InnerException.ToString() ?? ""}";
+
+            }
+
+            context.Dispose();
+            globalFunctions.Dispose();
+
+            return companyMasterViewModel;
+        }
+
+        public async Task<CompanyMasterViewModel> TakeAssessment(CompanyMasterViewModel companyMasterViewModel)
+        {
+            var context = new WWAEntities();
+            var globalFunctions = new GlobalFunctions();
+
+            try
+            {
+                var RowToUpdate = await context.tbl_MST_Company.FirstOrDefaultAsync(c => c.CompanyId == companyMasterViewModel.CompanyId);
+                RowToUpdate.TakeAssessment = companyMasterViewModel.TakeAssessment;
+                RowToUpdate.LastChanged_By = companyMasterViewModel.Encoded_By;
+                RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();
+                await context.SaveChangesAsync();
                 companyMasterViewModel.Message_Code = $"{WWA_COREDefaults.DEFAULT_SUCCESS_UPDATE_MESSAGE_CODE}";
             }
             catch (Exception ex)

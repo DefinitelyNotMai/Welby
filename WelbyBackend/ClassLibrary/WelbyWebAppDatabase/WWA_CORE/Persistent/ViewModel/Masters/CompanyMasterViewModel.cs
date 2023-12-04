@@ -22,6 +22,8 @@ namespace WWA_CORE.Persistent.ViewModel.Masters
         public string Mission { get; set; }
         public string Logo { get; set; }
 
+        public bool TakeAssessment { get; set; }
+
         public int? CountryId { get; set; }
         public int? IndustryTypeId { get; set; }
     }

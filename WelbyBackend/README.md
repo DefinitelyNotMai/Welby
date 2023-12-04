@@ -108,7 +108,7 @@ were tested only in Postman.
 **~/api/RemoveCompany**
 - params : {
   - **CompanyId:** number
-
+  - **Encoded_By:** number
   }
 
 > ##### Return :
@@ -116,7 +116,7 @@ were tested only in Postman.
 **~/api/ReturnCompany**
 - params : {
   - **CompanyId:** number
-
+  - **Encoded_By:** number
   }
 
 > ##### Update :
@@ -138,6 +138,16 @@ were tested only in Postman.
   - **CountryId:** number
   - **Active:** boolean
   - **LastChanged_By:** number
+
+  }
+
+> ##### Take Assessment :
+
+**~/api/TakeAssessment**
+- params : {
+  - **CompanyId:** number
+  - **TakeAssessment:** boolean
+  - **Encoded_By:** number
 
   }
 

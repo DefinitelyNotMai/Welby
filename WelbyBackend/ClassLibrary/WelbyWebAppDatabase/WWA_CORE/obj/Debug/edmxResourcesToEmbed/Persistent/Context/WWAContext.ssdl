@@ -140,6 +140,7 @@
     <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
     <Property Name="FoundingDate" Type="datetime" />
     <Property Name="CompanySize" Type="nvarchar" MaxLength="50" />
+    <Property Name="TakeAssessment" Type="bit" />
   </EntityType>
   <EntityType Name="tbl_MST_Country_Master">
     <Key>

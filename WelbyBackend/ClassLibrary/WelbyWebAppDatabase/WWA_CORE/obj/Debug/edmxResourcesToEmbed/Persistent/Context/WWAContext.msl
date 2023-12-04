@@ -147,6 +147,7 @@
           <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
           <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
           <ScalarProperty Name="CompanySize" ColumnName="CompanySize" />
+          <ScalarProperty Name="TakeAssessment" ColumnName="TakeAssessment" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -43,6 +43,7 @@ namespace WWA_CORE.Persistent.Context
         public string Computer_Name { get; set; }
         public Nullable<System.DateTime> FoundingDate { get; set; }
         public string CompanySize { get; set; }
+        public Nullable<bool> TakeAssessment { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_EMP_DailyCheckIn> tbl_EMP_DailyCheckIn { get; set; }

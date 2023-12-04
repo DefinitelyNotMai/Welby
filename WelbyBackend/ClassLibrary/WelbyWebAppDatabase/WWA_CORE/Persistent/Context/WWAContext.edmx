@@ -145,6 +145,7 @@
           <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
           <Property Name="FoundingDate" Type="datetime" />
           <Property Name="CompanySize" Type="nvarchar" MaxLength="50" />
+          <Property Name="TakeAssessment" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_MST_Country_Master">
           <Key>
@@ -957,6 +958,7 @@
           <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="FoundingDate" Type="DateTime" Precision="3" />
           <Property Name="CompanySize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TakeAssessment" Type="Boolean" />
           <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Compa__06ED0088" FromRole="tbl_MST_Company" ToRole="tbl_EMP_DailyCheckIn" />
           <NavigationProperty Name="tbl_EMP_TISE" Relationship="Self.FK__tbl_EMP_T__Compa__4BCC3ABA" FromRole="tbl_MST_Company" ToRole="tbl_EMP_TISE" />
           <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_MST_C__Compu__45F365D3" FromRole="tbl_MST_Company" ToRole="tbl_MST_Country_Master" />
@@ -1790,6 +1792,7 @@
                 <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
                 <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
                 <ScalarProperty Name="CompanySize" ColumnName="CompanySize" />
+                <ScalarProperty Name="TakeAssessment" ColumnName="TakeAssessment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

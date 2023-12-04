@@ -308,6 +308,7 @@
     <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="FirstLogIn" Type="Boolean" />
     <Property Name="CompanyPosition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Emplo__05F8DC4F" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
     <NavigationProperty Name="tbl_EMP_Interest" Relationship="Self.FK__tbl_EMP_I__Emplo__7D98A078" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Interest" />
     <NavigationProperty Name="tbl_EMP_Learned_Behaviors" Relationship="Self.FK__tbl_EMP_L__Emplo__75F77EB0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Learned_Behaviors" />
@@ -822,6 +823,7 @@
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
       <Parameter Name="Phone_Number" Mode="In" Type="String" />
       <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="CompanyRole" Mode="In" Type="String" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
       <Parameter Name="PageNo" Mode="In" Type="Int32" />
       <Parameter Name="PageSize" Mode="In" Type="Int32" />

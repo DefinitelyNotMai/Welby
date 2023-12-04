@@ -106,6 +106,7 @@ C:\Users\Micah\source\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CO
 C:\Users\Micah\source\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.pdb
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA.mdf
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_log.ldf
+C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\Accord.dll.config
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_CORE.dll.config
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_CORE.dll
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\WWA_CORE.pdb
@@ -175,4 +176,3 @@ C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppD
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.csproj.CopyComplete
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.dll
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.pdb
-C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\Accord.dll.config

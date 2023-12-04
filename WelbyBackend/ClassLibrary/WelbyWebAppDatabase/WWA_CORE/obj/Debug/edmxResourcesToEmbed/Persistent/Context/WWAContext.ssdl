@@ -276,6 +276,7 @@
     <Property Name="Computer_Name" Type="nvarchar" MaxLength="150" />
     <Property Name="FirstLogIn" Type="bit" />
     <Property Name="CompanyPosition" Type="nvarchar" MaxLength="100" />
+    <Property Name="CompanyRole" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tbl_Results">
     <Key>
@@ -678,6 +679,7 @@
     <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
     <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="CompanyRole" Type="nvarchar" Mode="In" />
     <Parameter Name="Active" Type="bit" Mode="In" />
     <Parameter Name="PageNo" Type="int" Mode="In" />
     <Parameter Name="PageSize" Type="int" Mode="In" />

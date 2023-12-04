@@ -119,6 +119,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                 CompanyId = Convert.ToInt32(row["CompanyId"]),
                 EmployeeCompanyDisplay = Convert.ToString(row["EmployeeCompanyDisplay"]),
                 CompanyPosition = Convert.ToString(row["CompanyPosition"]),
+
                 CompanyRole = Convert.ToString(row["CompanyRole"]),
 
                 Phone_Number = Convert.ToString(row["Phone_Number"]),

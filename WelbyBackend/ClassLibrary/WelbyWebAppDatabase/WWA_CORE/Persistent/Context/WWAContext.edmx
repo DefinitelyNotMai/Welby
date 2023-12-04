@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_EMP_DailyCheckIn">
           <Key>
             <PropertyRef Name="DailyCheckInId" />
@@ -798,7 +798,8 @@
             <End Role="tbl_REG_Employee_Registration" EntitySet="tbl_REG_Employee_Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1110,6 +1111,7 @@
           <Property Name="Computer_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="FirstLogIn" Type="Boolean" />
           <Property Name="CompanyPosition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_EMP_DailyCheckIn" Relationship="Self.FK__tbl_EMP_D__Emplo__05F8DC4F" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_DailyCheckIn" />
           <NavigationProperty Name="tbl_EMP_Interest" Relationship="Self.FK__tbl_EMP_I__Emplo__7D98A078" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Interest" />
           <NavigationProperty Name="tbl_EMP_Learned_Behaviors" Relationship="Self.FK__tbl_EMP_L__Emplo__75F77EB0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_EMP_Learned_Behaviors" />
@@ -1120,7 +1122,6 @@
           <NavigationProperty Name="tbl_MST_Company" Relationship="Self.FK__tbl_REG_E__Compa__0D0FEE32" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Company" />
           <NavigationProperty Name="tbl_MST_Country_Master" Relationship="Self.FK__tbl_REG_E__Count__0B27A5C0" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Country_Master" />
           <NavigationProperty Name="tbl_MST_Gender_Master" Relationship="Self.FK__tbl_REG_E__Gende__0C1BC9F9" FromRole="tbl_REG_Employee_Registration" ToRole="tbl_MST_Gender_Master" />
-          <Property Name="CompanyRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_Results">
           <Key>
@@ -1904,7 +1905,6 @@
           <EntitySetMapping Name="tbl_REG_Employee_Registration">
             <EntityTypeMapping TypeName="WWAModel.tbl_REG_Employee_Registration">
               <MappingFragment StoreEntitySet="tbl_REG_Employee_Registration">
-                <ScalarProperty Name="CompanyRole" ColumnName="CompanyRole" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
@@ -1934,6 +1934,7 @@
                 <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
                 <ScalarProperty Name="FirstLogIn" ColumnName="FirstLogIn" />
                 <ScalarProperty Name="CompanyPosition" ColumnName="CompanyPosition" />
+                <ScalarProperty Name="CompanyRole" ColumnName="CompanyRole" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -291,6 +291,7 @@
           <ScalarProperty Name="Computer_Name" ColumnName="Computer_Name" />
           <ScalarProperty Name="FirstLogIn" ColumnName="FirstLogIn" />
           <ScalarProperty Name="CompanyPosition" ColumnName="CompanyPosition" />
+          <ScalarProperty Name="CompanyRole" ColumnName="CompanyRole" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

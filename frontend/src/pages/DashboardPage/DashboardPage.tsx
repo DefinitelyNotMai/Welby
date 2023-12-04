@@ -4,15 +4,17 @@ import { Button, Flex } from "@chakra-ui/react";
 import { LuLayout } from "react-icons/lu";
 import { MdBusinessCenter } from "react-icons/md";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // local
 import { DashboardHeader } from "../../components/Dashboard/DashboardHeader";
 import { Sidebar } from "../../components/DataDisplay/Sidebar";
+import { UserContext } from "../../context/UserContext";
 
 export const DashboardPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const userContext = useContext(UserContext);
 
   const [selectedItem, setSelectedItem] = useState<string>("");
 
@@ -46,20 +48,22 @@ export const DashboardPage = () => {
           >
             My Dashboard
           </Button>
-          <Button
-            borderLeft={
-              selectedItem === "my-team"
-                ? "5px solid #24a2f0"
-                : "5px solid #ffffff"
-            }
-            color={selectedItem === "my-team" ? "#24a2f0" : "#bcbcbc"}
-            fontWeight={selectedItem === "my-team" ? "medium" : "normal"}
-            leftIcon={<AiOutlineTeam />}
-            onClick={() => handleItemClick("my-team", "my-team")}
-            variant="sidebar"
-          >
-            My Team
-          </Button>
+          {userContext.role === "Leader" && (
+            <Button
+              borderLeft={
+                selectedItem === "my-team"
+                  ? "5px solid #24a2f0"
+                  : "5px solid #ffffff"
+              }
+              color={selectedItem === "my-team" ? "#24a2f0" : "#bcbcbc"}
+              fontWeight={selectedItem === "my-team" ? "medium" : "normal"}
+              leftIcon={<AiOutlineTeam />}
+              onClick={() => handleItemClick("my-team", "my-team")}
+              variant="sidebar"
+            >
+              My Team
+            </Button>
+          )}
           <Button
             borderLeft={
               selectedItem === "our-company"

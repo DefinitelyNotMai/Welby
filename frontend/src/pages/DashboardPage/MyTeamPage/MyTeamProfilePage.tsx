@@ -40,7 +40,7 @@ export const MyTeamProfilePage = () => {
       }
     };
     fetchUserData();
-  }, [selectedEmployee.EmployeeId, employeeData]);
+  }, [selectedEmployee.EmployeeId]);
 
   if (employeeData.FirstLogIn === true) {
     return (

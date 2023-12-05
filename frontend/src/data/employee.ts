@@ -26,7 +26,7 @@ export type Employee = {
   LastChanged_By: number;
   LastChanged_Date: string;
   Computer_Name: string;
-  FirstLogin: boolean;
+  FirstLogIn: boolean;
   CompanyPosition: string;
   CountryDisplay: string;
 };
@@ -59,7 +59,7 @@ export const EMPLOYEE_DATA: Employee = {
   LastChanged_By: 0,
   LastChanged_Date: "",
   Computer_Name: "",
-  FirstLogin: false,
+  FirstLogIn: false,
   CompanyPosition: "",
   CountryDisplay: "",
 };

@@ -175,6 +175,7 @@ export const QuarterlyAssessment = ({
     e.preventDefault();
     if (isLastStep) {
       handleQuarterlyAssessmentSubmit();
+      onClose();
     } else {
       nextStep();
     }

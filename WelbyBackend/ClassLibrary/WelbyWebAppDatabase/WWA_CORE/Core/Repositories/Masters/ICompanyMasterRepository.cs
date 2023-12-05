@@ -16,5 +16,8 @@ namespace WWA_CORE.Core.Repositories.Masters
         Task<IEnumerable<CompanyMasterViewModel>> GetCompany(CompanyMasterViewModel companyMasterViewModel);
         Task<CompanyMasterViewModel> TakeAssessment(CompanyMasterViewModel companyMasterViewModel);
 
+        Task<CompanyMasterViewModel> UpdateCompanyVision(CompanyMasterViewModel companyMasterViewModel);
+        Task<CompanyMasterViewModel> UpdateCompanyMission(CompanyMasterViewModel companyMasterViewModel);
+
     }
 }

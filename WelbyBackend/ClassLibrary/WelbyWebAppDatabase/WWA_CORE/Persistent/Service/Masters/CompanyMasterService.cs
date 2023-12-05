@@ -234,5 +234,67 @@ namespace WWA_CORE.Persistent.Service.Masters
 
             return companyMasterViewModel;
         }
+
+        public async Task<CompanyMasterViewModel> UpdateCompanyVision(CompanyMasterViewModel companyMasterViewModel)
+        {
+            var context = new WWAEntities();
+            var globalFunctions = new GlobalFunctions();
+
+            try
+            {
+                var RowToUpdate = await context.tbl_MST_Company.FirstOrDefaultAsync(c => c.CompanyId == companyMasterViewModel.CompanyId);
+
+               
+                RowToUpdate.Vision = companyMasterViewModel.Vision;
+                RowToUpdate.LastChanged_By = companyMasterViewModel.Encoded_By;
+                RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();
+                RowToUpdate.Computer_Name = companyMasterViewModel.Computer_Name;
+
+                await context.SaveChangesAsync();
+
+                companyMasterViewModel.Message_Code = $"{WWA_COREDefaults.DEFAULT_SUCCESS_UPDATE_MESSAGE_CODE}";
+            }
+            catch (Exception ex)
+            {
+                companyMasterViewModel.Message_Code = $"{ex.Message} \n {ex.InnerException.ToString() ?? ""}";
+
+            }
+
+            context.Dispose();
+            globalFunctions.Dispose();
+
+            return companyMasterViewModel;
+        }
+
+        public async Task<CompanyMasterViewModel> UpdateCompanyMission(CompanyMasterViewModel companyMasterViewModel)
+        {
+            var context = new WWAEntities();
+            var globalFunctions = new GlobalFunctions();
+
+            try
+            {
+                var RowToUpdate = await context.tbl_MST_Company.FirstOrDefaultAsync(c => c.CompanyId == companyMasterViewModel.CompanyId);
+
+
+                RowToUpdate.Mission = companyMasterViewModel.Mission;
+                RowToUpdate.LastChanged_By = companyMasterViewModel.Encoded_By;
+                RowToUpdate.LastChanged_Date = globalFunctions.GetServerDateTime();
+                RowToUpdate.Computer_Name = companyMasterViewModel.Computer_Name;
+
+                await context.SaveChangesAsync();
+
+                companyMasterViewModel.Message_Code = $"{WWA_COREDefaults.DEFAULT_SUCCESS_UPDATE_MESSAGE_CODE}";
+            }
+            catch (Exception ex)
+            {
+                companyMasterViewModel.Message_Code = $"{ex.Message} \n {ex.InnerException.ToString() ?? ""}";
+
+            }
+
+            context.Dispose();
+            globalFunctions.Dispose();
+
+            return companyMasterViewModel;
+        }
     }
 }

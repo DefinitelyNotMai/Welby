@@ -728,6 +728,8 @@
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
       <Parameter Name="Active" Mode="In" Type="Boolean" />
+      <Parameter Name="DateFrom" Mode="In" Type="String" />
+      <Parameter Name="DateTo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="procWWA_EMP_Unrealized_Strengths_Get">
       <Parameter Name="UnrealizedStrengthsId" Mode="In" Type="Int32" />

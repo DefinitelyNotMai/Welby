@@ -130,14 +130,28 @@ were tested only in Postman.
   - **Phone_Number:** string
   - **Website:** string
   - **FoundingDate:** string
-  - **Vision:** string
-  - **Mission:** string
   - **Address:** string
   - **CountryId** number
   - **IndustryTypeId:** number
   - **CountryId:** number
   - **Active:** boolean
-  - **LastChanged_By:** number
+  - **Encoded_By:** number
+
+  }
+- 
+  **~/api/UpdateCompanyVision**
+- params : {
+  - **CompanyId:** number
+  - **Vision:** string
+  - **Encoded_By:** number
+
+  }
+
+**~/api/UpdateCompanyMission**
+- params : {
+  - **CompanyId:** number
+  - **Mission:** string
+  - **Encoded_By:** number
 
   }
 

@@ -11,6 +11,7 @@ using WWA_CORE.Persistent.ViewModel.Algo;
 using WWA_CORE.Utilities;
 using System.Data;
 using System.Data.Entity;
+using WWA_CORE.Persistent.ViewModel.Registration;
 
 namespace WWA_CORE.Persistent.Service.Algo
 {
@@ -65,7 +66,11 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM , tiseViewModel.DateFrom),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO ,tiseViewModel.DateTo),
+
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_TISE_GET_COMPANYID, tiseViewModel.CompanyId),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_TISE_GET_EMPLOYEEID, tiseViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, tiseViewModel.Active)
                 }
             };

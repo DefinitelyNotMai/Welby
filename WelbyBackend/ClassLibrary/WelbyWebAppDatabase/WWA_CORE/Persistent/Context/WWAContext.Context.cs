@@ -167,7 +167,7 @@ namespace WWA_CORE.Persistent.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_Realized_Strengths_Get", realizedStrengthsIdParameter, employeeIdParameter, strengthIdParameter, activeParameter);
         }
     
-        public virtual int procWWA_EMP_TISE_Get(Nullable<int> tiseId, Nullable<int> companyId, Nullable<int> employeeId, Nullable<bool> active)
+        public virtual int procWWA_EMP_TISE_Get(Nullable<int> tiseId, Nullable<int> companyId, Nullable<int> employeeId, Nullable<bool> active, string dateFrom, string dateTo)
         {
             var tiseIdParameter = tiseId.HasValue ?
                 new ObjectParameter("TiseId", tiseId) :
@@ -185,7 +185,15 @@ namespace WWA_CORE.Persistent.Context
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_TISE_Get", tiseIdParameter, companyIdParameter, employeeIdParameter, activeParameter);
+            var dateFromParameter = dateFrom != null ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(string));
+    
+            var dateToParameter = dateTo != null ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("procWWA_EMP_TISE_Get", tiseIdParameter, companyIdParameter, employeeIdParameter, activeParameter, dateFromParameter, dateToParameter);
         }
     
         public virtual int procWWA_EMP_Unrealized_Strengths_Get(Nullable<int> unrealizedStrengthsId, Nullable<int> employeeId, Nullable<int> strengthId, Nullable<bool> active)

@@ -8,30 +8,42 @@ type ChartDoughnutProps = {
   icon?: React.ElementType;
   title: string;
   dataValue: number;
+  min: number;
+  avg: number;
+  max: number;
 };
 
 export const ChartDoughnut = ({
   icon: IconComponent,
   title,
   dataValue,
+  min,
+  avg,
+  max,
 }: ChartDoughnutProps) => {
-  const percentage = (dataValue / 100) * 100;
+  const adjustValueToRange = (value: number) => {
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
+  };
+  const adjustedDataValue = adjustValueToRange(dataValue);
+  const percentage = ((adjustedDataValue - min) / (max - min)) * 100;
 
   const getBackgroundColor = (value: number) => {
-    if (value >= 70) {
-      return "#24a2f0";
-    } else if (value >= 50 && value < 70) {
-      return "#f0d124";
+    if (value >= max) {
+      return "#24a2f0"; // High
+    } else if (value >= avg && value < max) {
+      return "#f0d124"; // Average
     } else {
-      return "#eb2a2a";
+      return "#eb2a2a"; // Low
     }
   };
 
   const getTextValue = (value: number) => {
-    if (value >= 70) {
+    if (value >= max) {
       return "High";
-    } else if (value >= 50 && value < 70) {
-      return "Avg.";
+    } else if (value >= avg && value < max) {
+      return "Avg";
     } else {
       return "Low";
     }
@@ -59,7 +71,6 @@ export const ChartDoughnut = ({
   };
 
   const textValue = getTextValue(dataValue);
-
   return (
     <Flex alignItems="center">
       <Card

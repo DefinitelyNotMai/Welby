@@ -41,7 +41,8 @@ export const MyDashboardOverviewPage = () => {
 
   // NOTE: calls for fetching daily checkin and tise data goes here
   const userId = localStorage.getItem("userId") || 0;
-  const url = "https://localhost:44373/api/GetAllDailyCheckIn";
+  const dailyCheckInUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
+  const tiseUrl = "https://localhost:44373/api/GetAllTise";
   const userContext = useContext(UserContext);
 
   const getSimpleDateToday = (): string => {
@@ -59,7 +60,7 @@ export const MyDashboardOverviewPage = () => {
 
   useEffect(() => {
     const checkIfCheckInTaken = async () => {
-      const data = await fetchData(url, {
+      const data = await fetchData(dailyCheckInUrl, {
         DailyCheckInId: 0,
         EmployeeId: userId,
         CompanyId: userContext.companyId,
@@ -82,7 +83,7 @@ export const MyDashboardOverviewPage = () => {
 
   useEffect(() => {
     const checkIfTiseTaken = async () => {
-      const data = await fetchData(url, {
+      const tdata = await fetchData(tiseUrl, {
         TiseId: 0,
         EmployeeId: userId,
         CompanyId: userContext.companyId,
@@ -90,20 +91,18 @@ export const MyDashboardOverviewPage = () => {
         DateFrom: simpleDateToday,
         DateTo: simpleDateToday,
       });
-      if (data.length > 0) {
+      if (tdata.length > 0) {
         setTiseTaken(true);
-        setTiseData(data[0]);
-        console.log(data[0]);
+        setTiseData(tdata[0]);
+        console.log(tdata[0]);
       } else {
         setTiseTaken(false);
       }
-      //console.log(data);
-      //console.log(checkInTaken);
     };
     checkIfTiseTaken();
   }, [simpleDateToday, userContext.companyId, userId]);
-  //console.log(getSimpleDate());
 
+  console.log(tiseData);
   return (
     <Flex flexDirection="column" gap={4} width="full" marginBottom={4}>
       <Section
@@ -192,16 +191,25 @@ export const MyDashboardOverviewPage = () => {
                   title="Social Mutualism"
                   icon={GiHummingbird}
                   dataValue={tiseData.Factor_1}
+                  min={1}
+                  avg={3}
+                  max={7}
                 />
                 <ChartDoughnut
                   title="Sense of Being Valued"
                   icon={FaDumbbell}
                   dataValue={tiseData.Factor_2}
+                  min={1}
+                  avg={3}
+                  max={7}
                 />
                 <ChartDoughnut
                   title="Nurtured Psychological Needs"
                   icon={IoMdGitNetwork}
                   dataValue={tiseData.Factor_3}
+                  min={1}
+                  avg={3}
+                  max={7}
                 />
               </Flex>
               <Flex
@@ -214,16 +222,25 @@ export const MyDashboardOverviewPage = () => {
                   title="Positive Work Relationships"
                   icon={MdPeople}
                   dataValue={tiseData.Factor_4}
+                  min={1}
+                  avg={3}
+                  max={7}
                 />
                 <ChartDoughnut
                   title="Subjective Well Being"
                   icon={FaHands}
                   dataValue={tiseData.Factor_5}
+                  min={1}
+                  avg={7}
+                  max={21}
                 />
                 <ChartDoughnut
                   title="Organizational Commitment"
                   icon={FaHandshake}
                   dataValue={tiseData.Factor_6}
+                  min={1}
+                  avg={9}
+                  max={28}
                 />
               </Flex>
               <Flex
@@ -236,11 +253,17 @@ export const MyDashboardOverviewPage = () => {
                   title="Intent To Quit"
                   icon={FaWalking}
                   dataValue={tiseData.Factor_7}
+                  min={1}
+                  avg={7}
+                  max={21}
                 />
                 <ChartDoughnut
                   title="Presenteeism"
                   icon={FaEye}
                   dataValue={tiseData.Factor_8}
+                  min={-3}
+                  avg={-2}
+                  max={0}
                 />
               </Flex>
             </>

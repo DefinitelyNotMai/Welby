@@ -45,6 +45,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                     Active = true,
                     Encoded_By = companyMasterViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),
+                    LastChanged_Date = globalFunctions.GetServerDateTime(),
                     Computer_Name = companyMasterViewModel.Computer_Name
                 };
 
@@ -185,8 +186,6 @@ namespace WWA_CORE.Persistent.Service.Masters
                 RowToUpdate.Address = companyMasterViewModel.Address;
                 RowToUpdate.IndustryTypeId = companyMasterViewModel.IndustryTypeId;
                 RowToUpdate.FoundingDate = companyMasterViewModel.FoundingDate;
-                RowToUpdate.Vision = companyMasterViewModel.Vision;
-                RowToUpdate.Mission = companyMasterViewModel.Mission;
                 RowToUpdate.Logo = companyMasterViewModel.Logo;
                 RowToUpdate.Active = companyMasterViewModel.Active;
                 RowToUpdate.LastChanged_By = companyMasterViewModel.Encoded_By;

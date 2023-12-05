@@ -48,23 +48,20 @@ export const DashboardPage = () => {
           >
             My Dashboard
           </Button>
-          {userContext.role === "Company Admin" ||
-            ("Leader" && (
-              <Button
-                borderLeft={
-                  selectedItem === "my-team"
-                    ? "5px solid #24a2f0"
-                    : "5px solid #ffffff"
-                }
-                color={selectedItem === "my-team" ? "#24a2f0" : "#bcbcbc"}
-                fontWeight={selectedItem === "my-team" ? "medium" : "normal"}
-                leftIcon={<AiOutlineTeam />}
-                onClick={() => handleItemClick("my-team", "my-team")}
-                variant="sidebar"
-              >
-                My Team
-              </Button>
-            ))}
+          <Button
+            borderLeft={
+              selectedItem === "my-team"
+                ? "5px solid #24a2f0"
+                : "5px solid #ffffff"
+            }
+            color={selectedItem === "my-team" ? "#24a2f0" : "#bcbcbc"}
+            fontWeight={selectedItem === "my-team" ? "medium" : "normal"}
+            leftIcon={<AiOutlineTeam />}
+            onClick={() => handleItemClick("my-team", "my-team")}
+            variant="sidebar"
+          >
+            My Team
+          </Button>
           <Button
             borderLeft={
               selectedItem === "our-company"

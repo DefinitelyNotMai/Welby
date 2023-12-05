@@ -106,7 +106,6 @@ export const DailyCheckInResult = ({
       <ModalContent
         backgroundColor="#ffffff"
         border="2px solid #000000"
-        boxShadow="5px 5px #000000"
         minWidth="35%"
       >
         <ModalHeader color="#000000">Daily Check-in Result</ModalHeader>

@@ -13,7 +13,7 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TbBell, TbCalendarEvent } from "react-icons/tb";
 
@@ -21,6 +21,7 @@ import { TbBell, TbCalendarEvent } from "react-icons/tb";
 import WelbyLogo from "../../assets/images/welby_logo_and_name_primary_1_flat.svg";
 import { fetchData } from "../../api/fetchData";
 import { ProductivityRating } from "../Modal/ProductivityRating";
+import { UserContext } from "../../context/UserContext";
 
 export const DashboardHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -69,6 +70,7 @@ export const DashboardHeader = () => {
     localStorage.clear();
     navigate("/");
   };
+  const userContext = useContext(UserContext);
 
   return (
     <Box
@@ -97,7 +99,15 @@ export const DashboardHeader = () => {
             transition="all"
             width={{ base: 16, sm: 20 }}
           >
-            <Link>
+            <Link
+              onClick={() => {
+                localStorage.clear();
+                userContext.setCompanyId(0);
+                userContext.setEmail("");
+                userContext.setPhone("");
+                userContext.setRole("");
+              }}
+            >
               <Image
                 alt="Welby Logo"
                 height="full"

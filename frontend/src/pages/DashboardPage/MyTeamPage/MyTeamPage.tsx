@@ -3,7 +3,6 @@ import { Box, Button, Flex, Grid } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
-import axios from "axios";
 
 // local
 import { Tab } from "../../../components/DataDisplay/Tab";
@@ -25,11 +24,9 @@ export const MyTeamPage = () => {
     TeamMember | undefined
   >(undefined);
   const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState<boolean>(false);
+  const [employeeAdded, setEmployeeAdded] = useState<boolean>(false);
 
   const userContext = useContext(UserContext);
-  const companyId = userContext.companyId;
-  const email = userContext.email;
-  const phone = userContext.phone;
   const navigate = useNavigate();
 
   const handleItemClick = (item: string, route: string) => {
@@ -43,7 +40,7 @@ export const MyTeamPage = () => {
         const employeesUrl = "https://localhost:44373/api/GetEmployees";
 
         const data = await fetchData(employeesUrl, {
-          CompanyId: companyId,
+          CompanyId: userContext.companyId,
           Email: "",
           EmployeeId: 0,
           Phone_Number: "",
@@ -56,7 +53,12 @@ export const MyTeamPage = () => {
       }
     };
     fetchMembers();
-  }, [companyId, email, employees, phone]);
+
+    if (employeeAdded) {
+      setEmployeeAdded(false);
+      fetchMembers();
+    }
+  }, [employeeAdded, userContext.companyId]);
 
   return (
     <Grid templateColumns="1fr 2fr" flex={1} gap={4}>
@@ -111,20 +113,25 @@ export const MyTeamPage = () => {
       </Flex>
       <Flex flexDirection="column">
         <Tab>
-          <Button
-            borderBottom={
-              selectedItem === "overview"
-                ? "5px solid #24a2f0"
-                : "5px solid #ffffff"
-            }
-            color={selectedItem === "overview" ? "#24a2f0" : "#bcbcbc"}
-            fontWeight={selectedItem === "overview" ? "medium" : "normal"}
-            isDisabled={selectedEmployee === undefined ? true : false}
-            onClick={() => handleItemClick("overview", "overview")}
-            variant="tab"
-          >
-            Overview
-          </Button>
+          {userContext.role === "Company Admin" ||
+          userContext.role === "Leader" ? (
+            <Button
+              borderBottom={
+                selectedItem === "overview"
+                  ? "5px solid #24a2f0"
+                  : "5px solid #ffffff"
+              }
+              color={selectedItem === "overview" ? "#24a2f0" : "#bcbcbc"}
+              fontWeight={selectedItem === "overview" ? "medium" : "normal"}
+              isDisabled={selectedEmployee === undefined ? true : false}
+              onClick={() => handleItemClick("overview", "overview")}
+              variant="tab"
+            >
+              Overview
+            </Button>
+          ) : (
+            <></>
+          )}
           <Button
             borderBottom={
               selectedItem === "member-profile"
@@ -140,14 +147,17 @@ export const MyTeamPage = () => {
             Member Profile
           </Button>
         </Tab>
-        <Flex flex={1}>
+        <Flex flex={1} marginTop={4}>
           <Outlet context={[selectedEmployee]} />
         </Flex>
       </Flex>
       {isAddEmployeeOpen && (
         <AddEmployee
           isOpen={isAddEmployeeOpen}
-          onClose={() => setIsAddEmployeeOpen(!isAddEmployeeOpen)}
+          onClose={() => {
+            setIsAddEmployeeOpen(!isAddEmployeeOpen);
+            setEmployeeAdded(true);
+          }}
         />
       )}
     </Grid>

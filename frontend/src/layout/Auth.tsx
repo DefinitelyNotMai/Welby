@@ -49,12 +49,6 @@ export const Auth = ({ children }: AuthProps) => {
 
     fetchContext();
   }, [navigate, toast, userContext]);
-  console.log(
-    userContext.companyId,
-    userContext.email,
-    userContext.phone,
-    userContext.role,
-  );
 
   return userContext.companyId && userContext.email ? <>{children}</> : null;
 };

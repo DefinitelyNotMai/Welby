@@ -60,6 +60,7 @@ namespace WWA_CORE.Persistent.Service.Registration
                     Active = true,
                     Encoded_By = employeeRegistrationViewModel.Encoded_By,
                     Encoded_Date = globalFunctions.GetServerDateTime(),
+                    LastChanged_Date = globalFunctions.GetServerDateTime(),
                     Computer_Name = employeeRegistrationViewModel.Computer_Name
                 };
 

@@ -146,25 +146,53 @@ export const CompaniesPage = () => {
       });
   };
 
+  const updateMission = () => {
+    const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission";
+    axios.patch(updateMissionUrl, {
+      CompanyId: companyData.CompanyId,
+      Mission: companyData.Mission,
+      Encoded_By: 24287,
+    }).then((response) => {
+      console.log(response);
+      console.log("Updated company mission")
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
+
+  const updateVision = () => {
+    const updateVisionUrl = "https://localhost:44373/api/UpdateCompanyVision";
+    axios.patch(updateVisionUrl, {
+      CompanyId: companyData.CompanyId,
+      Vision: companyData.Vision,
+      Encoded_By: 24287,
+    }).then((response) => {
+      console.log(response);
+      console.log("Updated company vision")
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
+
   const handleUpdateCompany = () => {
+    updateMission();
+    updateVision();
     const company = {
       CompanyId: companyData.CompanyId,
       Name: companyData.Name,
       Email: companyData.Email,
       Phone_Number: companyData.Phone_Number,
       Website: companyData.Website,
-      Vision: companyData.Vision,
-      Mission: companyData.Mission,
       Logo: companyData.Logo,
       CountryId: companyData.CountryId,
       IndustryTypeId: companyData.IndustryTypeId,
       FoundingDate: companyData.FoundingDate,
-      Active: 1,
+      Active: true,
       Encoded_By: 24287,
     };
 
     const updateCompanyUrl = "https://localhost:44373/api/UpdateCompany";
-
+    
     axios
       .patch(updateCompanyUrl, company, config)
       .then((response) => {

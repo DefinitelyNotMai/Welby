@@ -1,5 +1,5 @@
 // lib
-import { Button, Grid, Modal } from "@chakra-ui/react";
+import { Button, Grid } from "@chakra-ui/react";
 import { BsPencilSquare } from "react-icons/bs";
 
 // local
@@ -7,22 +7,19 @@ import { CompanyMission } from "../../../components/Dashboard/CompanyMission";
 import { CompanyProfile } from "../../../components/Dashboard/CompanyProfile";
 import { CompanyVision } from "../../../components/Dashboard/CompanyVision";
 import { Section } from "../../../components/DataDisplay/Section";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { EditMission } from "../../../components/Modal/EditMission";
+import { UserContext } from "../../../context/UserContext";
+import { EditVision } from "../../../components/Modal/EditVision";
 
 export const OurCompanyMissionAndVisionPage = () => {
   document.title = "Mission and Vision | Welby";
 
+  const userContext = useContext(UserContext);
+
   const [editModal, setEditModal] = useState<string>("");
-  const [receivedData, setReceivedData] = useState<string>("");
-
-  const handleData = (data: string) => {
-    setReceivedData(data);
-  };
-
-  const handleCloseModal = () => {
-    setEditModal("");
-  };
+  const [mission, setMission] = useState<string>("");
+  const [vision, setVision] = useState<string>("");
 
   return (
     <Grid gap={4} templateColumns="1fr 2fr" width="full">
@@ -32,54 +29,56 @@ export const OurCompanyMissionAndVisionPage = () => {
       <Grid gap={4} marginBottom={4} templateRows="1fr 1fr">
         <Section
           title="Mission"
-          headerComponents={[
-            <Button
-              key={1}
-              leftIcon={<BsPencilSquare style={{ color: "#24a2f0 " }} />}
-              onClick={() => setEditModal("Mission")}
-              variant="section-secondary"
-            >
-              Edit
-            </Button>,
-          ]}
+          headerComponents={
+            userContext.role === "Company Admin"
+              ? [
+                  <Button
+                    key={1}
+                    leftIcon={<BsPencilSquare style={{ color: "#24a2f0 " }} />}
+                    onClick={() => setEditModal("Mission")}
+                    variant="section-secondary"
+                  >
+                    Edit
+                  </Button>,
+                ]
+              : []
+          }
         >
-          <CompanyMission onDataReceived={handleData} />
+          <CompanyMission onDataReceived={(data: string) => setMission(data)} />
         </Section>
         <Section
           title="Vision"
-          headerComponents={[
-            <Button
-              key={1}
-              leftIcon={<BsPencilSquare style={{ color: "#24a2f0 " }} />}
-              onClick={() => setEditModal("Vision")}
-              variant="section-secondary"
-            >
-              Edit
-            </Button>,
-          ]}
+          headerComponents={
+            userContext.role === "Company Admin"
+              ? [
+                  <Button
+                    key={1}
+                    leftIcon={<BsPencilSquare style={{ color: "#24a2f0 " }} />}
+                    onClick={() => setEditModal("Vision")}
+                    variant="section-secondary"
+                  >
+                    Edit
+                  </Button>,
+                ]
+              : []
+          }
         >
-          <CompanyVision />
+          <CompanyVision onDataReceived={(data: string) => setVision(data)} />
         </Section>
       </Grid>
       {editModal === "Mission" && (
-        <Modal
+        <EditMission
           isOpen={editModal === "Mission"}
-          onClose={handleCloseModal}
-          isCentered
-          closeOnOverlayClick={false}
-          closeOnEsc={false}
-        >
-          <EditMission missionData={receivedData} />
-        </Modal>
+          missionData={mission}
+          onClose={() => setEditModal("")}
+        />
       )}
       {editModal === "Vision" && (
-        <Modal
+        <EditVision
           isOpen={editModal === "Vision"}
-          onClose={handleCloseModal}
-          isCentered
-          closeOnOverlayClick={false}
-          closeOnEsc={false}
-        ></Modal>
+          visionData={vision}
+          onClose={() => setEditModal("")}
+        />
       )}
     </Grid>
   );

@@ -1,6 +1,8 @@
+// lib
 import {
   Button,
   Flex,
+  Modal,
   ModalCloseButton,
   ModalContent,
   ModalHeader,
@@ -9,61 +11,69 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import { useContext, useState, FormEvent, useEffect } from "react";
-import { UserContext } from "../../context/UserContext";
-import axios from "axios";
+import { useState, FormEvent } from "react";
+
+// local
 
 type EditMissionProps = {
+  isOpen: boolean;
   missionData: string;
+  onClose: () => void;
 };
 
-export const EditMission = ({ missionData }: EditMissionProps) => {
+export const EditMission = ({
+  isOpen,
+  missionData,
+  onClose,
+}: EditMissionProps) => {
   const [editedMission, setEditedMission] = useState(missionData);
 
-  const userContext = useContext(UserContext);
   const toast = useToast();
 
-  useEffect(() => {});
-  const handleEditCompany = () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const company = {
-      CompanyId: userContext.companyId,
-      Mission: editedMission,
-      Encoded_By: 24287,
-    };
+  const handleEditMission = async () => {
+    try {
+      // NOTE: replace success with axios call
+      const success = true;
 
-    const updateCompanyUrl = "https://localhost:44373/api/UpdateCompany";
-
-    axios
-      .patch(updateCompanyUrl, company, config)
-      .then((response) => {
-        console.log(response.data);
+      if (success) {
         toast({
           title: "SUCCESS",
-          description: "Company Mission has been updated.",
+          description: "Successfully updated company's Mission",
+          position: "top",
           status: "success",
-          duration: 5000,
           isClosable: true,
+          duration: 5000,
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      } else {
+        toast({
+          title: "ERROR",
+          description: "Failed to update company's Mission",
+          position: "top",
+          status: "error",
+          isClosable: true,
+          duration: 5000,
+        });
+      }
+    } catch (error) {
+      console.error("Error updating mission: ", error);
+    }
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    //handleEditCompany();
+    handleEditMission();
   };
 
   return (
-    <>
+    <Modal
+      closeOnEsc={false}
+      closeOnOverlayClick={false}
+      isCentered
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent minWidth="50%">
         <ModalHeader>Edit Mission</ModalHeader>
         <ModalCloseButton />
         <Form onSubmit={handleSubmit}>
@@ -76,6 +86,6 @@ export const EditMission = ({ missionData }: EditMissionProps) => {
           </Flex>
         </Form>
       </ModalContent>
-    </>
+    </Modal>
   );
 };

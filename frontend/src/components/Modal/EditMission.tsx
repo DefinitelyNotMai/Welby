@@ -11,7 +11,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+
+import axios from "axios";
 
 // local
 
@@ -29,31 +32,52 @@ export const EditMission = ({
   const [editedMission, setEditedMission] = useState(missionData);
 
   const toast = useToast();
+  const userContext = useContext(UserContext);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
   const handleEditMission = async () => {
+    const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission"
     try {
       // NOTE: replace success with axios call
-      const success = true;
+      console.log(editedMission)
+      axios.patch(updateMissionUrl, {
+        CompanyId: userContext.companyId,
+        Mission: editedMission,
+        Encoded_By: localStorage.getItem("userId")
+      }, config).then((response) => {
+        console.log(response);
+        const success = true;
+        if (success) {
+          toast({
+            title: "SUCCESS",
+            description: "Successfully updated company's Mission",
+            position: "top",
+            status: "success",
+            isClosable: true,
+            duration: 5000,
+          });
+        } else {
+          toast({
+            title: "ERROR",
+            description: "Failed to update company's Mission",
+            position: "top",
+            status: "error",
+            isClosable: true,
+            duration: 5000,
+          });
+        }
+      }).catch((error) => {
+        console.log(error);
+      })
+      
 
-      if (success) {
-        toast({
-          title: "SUCCESS",
-          description: "Successfully updated company's Mission",
-          position: "top",
-          status: "success",
-          isClosable: true,
-          duration: 5000,
-        });
-      } else {
-        toast({
-          title: "ERROR",
-          description: "Failed to update company's Mission",
-          position: "top",
-          status: "error",
-          isClosable: true,
-          duration: 5000,
-        });
-      }
+      
+      
     } catch (error) {
       console.error("Error updating mission: ", error);
     }

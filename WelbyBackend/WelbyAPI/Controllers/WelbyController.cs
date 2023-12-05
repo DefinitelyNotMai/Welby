@@ -179,6 +179,30 @@ namespace WelbyAPI.Controllers
             return response;
         }
 
+        [Route("~/api/UpdateCompanyVision")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateVision([FromBody] CompanyMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Company.UpdateCompanyVision(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [Route("~/api/UpdateCompanyMission")]
+        [HttpPatch]
+        public async Task<HttpResponseMessage> UpdateMission([FromBody] CompanyMasterViewModel param)
+        {
+            var js = new JavaScriptSerializer();
+            var model = await _wwauow.Company.UpdateCompanyMission(param);
+            var response = (model.Message_Code.ToUpper().Trim().Contains("UPDATE") || model.Message_Code.ToUpper().Trim().Contains("DUPLICATE")) ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
+            var sample = js.Serialize(model);
+            response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+            return response;
+        }
+
         [Route("~/api/RemoveCompany")]
         [HttpPatch]
         public async Task<HttpResponseMessage> RemoveCompany([FromBody] CompanyMasterViewModel param)

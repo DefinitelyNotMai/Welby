@@ -259,6 +259,37 @@ export const SelectStrength = ({
   );
 };
 
+export const SelectStrengthCategory = ({
+  id,
+  name,
+  onChange,
+  value,
+}: CustomSelectProps) => {
+  const strengthCategoryOptions = [
+    { id: "Being", label: "Being" },
+    { id: "Communicating", label: "Communicating" },
+    { id: "Motivating", label: "Motivating" },
+    { id: "Relating", label: "Relating" },
+    { id: "Thinking", label: "Thinking" },
+  ];
+
+  return (
+    <Select
+      id={id}
+      name={name}
+      onChange={onChange}
+      placeholder="Select Category..."
+      value={value}
+    >
+      {strengthCategoryOptions.map((strengthCategory) => (
+        <option key={strengthCategory.id} value={strengthCategory.id}>
+          {strengthCategory.label}
+        </option>
+      ))}
+    </Select>
+  );
+};
+
 export const SelectRole = ({
   id,
   name,

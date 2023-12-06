@@ -7,9 +7,8 @@ import { Country } from "../../data/country";
 import { Gender } from "../../data/gender";
 import { IndustryType } from "../../data/industryType";
 import { Strength } from "../../data/strength";
-import { SystemSecurityGroup } from "../../data/typesOWS";
-import { fetchAccessToken } from "../../api/tokenService";
 import { fetchData } from "../../api/fetchData";
+import { Company } from "../../data/company";
 
 type CustomSelectProps = {
   id: string;
@@ -47,6 +46,44 @@ export const SelectCompanySize = ({
       {companySizeOptions.map((companySize) => (
         <option key={companySize.id} value={companySize.id}>
           {companySize.label}
+        </option>
+      ))}
+    </Select>
+  );
+};
+
+export const SelectCompany = ({
+  id,
+  name,
+  onChange,
+  value,
+}: CustomSelectProps) => {
+  const [companies, setCompanies] = useState<Company[]>([]);
+
+  const companiesUrl = "https://localhost:44373/api/GetCompanies";
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const data = await fetchData(companiesUrl, { Active: "1" });
+        setCompanies(data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchCompanies();
+  }, []);
+
+  return (
+    <Select
+      id={id}
+      name={name}
+      onChange={onChange}
+      placeholder="Select Company..."
+      value={value}
+    >
+      {companies.map((company) => (
+        <option key={company.CompanyId} value={company.CompanyId}>
+          {company.Name}
         </option>
       ))}
     </Select>

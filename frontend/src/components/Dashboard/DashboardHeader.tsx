@@ -66,10 +66,6 @@ export const DashboardHeader = () => {
     setIsLoggingOut(!isLoggingOut);
   };
 
-  const realLogout = () => {
-    localStorage.clear();
-    navigate("/");
-  };
   const userContext = useContext(UserContext);
 
   return (

@@ -28,6 +28,7 @@ export const buttonStyle = defineStyleConfig({
       borderColor: "#ebebeb",
       borderStyle: "solid",
       borderWidth: "2px",
+      boxShadow: "lg",
       color: "000000",
       width: "25%",
     },

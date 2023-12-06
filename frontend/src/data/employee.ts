@@ -28,6 +28,9 @@ export type Employee = {
   Computer_Name: string;
   FirstLogIn: boolean;
   CompanyPosition: string;
+  CompanyRole: string;
+  GenderDisplayName: string;
+  EmployeeCompanyDisplay: string;
   CountryDisplay: string;
 };
 
@@ -61,5 +64,8 @@ export const EMPLOYEE_DATA: Employee = {
   Computer_Name: "",
   FirstLogIn: false,
   CompanyPosition: "",
+  CompanyRole: "",
+  GenderDisplayName: "",
+  EmployeeCompanyDisplay: "",
   CountryDisplay: "",
 };

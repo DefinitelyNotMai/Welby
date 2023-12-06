@@ -50,7 +50,7 @@ export const EmployeesPage = () => {
             Phone_Number: "",
             CompanyRole: "",
             Active: false,
-            FirstLogIn: false,
+            //FirstLogIn: false, <-- not part of parameter. only needed when posting
           },
         });
         const data = employee.data;
@@ -158,6 +158,7 @@ export const EmployeesPage = () => {
       Support: employeeData.Support,
       Other_Notes: employeeData.Other_Notes,
       Active: true,
+      FirstLogIn: employeeData.FirstLogIn,
       Encoded_By: 24287,
     };
 

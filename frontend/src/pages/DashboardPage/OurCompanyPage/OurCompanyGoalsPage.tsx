@@ -1,6 +1,7 @@
 // lib
 import { Button, Flex, Grid } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 // local
 import { Section } from "../../../components/DataDisplay/Section";
@@ -16,7 +17,37 @@ export const OurCompanyGoalsPage = () => {
 
   const userContext = useContext(UserContext);
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
   useEffect(() => {
+    const handleEditGoals = () => {
+      const goal = {
+        GoalId: selectedGoal.GoalId,
+        CompanyId: userContext.companyId,
+        Title: selectedGoal.Title,
+        Description: selectedGoal.Description,
+        DurationTo: selectedGoal.DurationTo,
+        Active: true,
+        Encoded_By: localStorage.getItem("userId"),
+      };
+  
+      const updateGoalUrl = "https://localhost:44373/api/UpdateGoal";
+  
+      axios
+        .patch(updateGoalUrl, goal, config)
+        .then((response) => {
+          console.log(response.data);
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
     const fetchGoals = async () => {
       try {
         const goalsUrl = "https://localhost:44373/api/GetGoals";

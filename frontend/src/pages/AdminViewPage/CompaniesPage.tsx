@@ -52,7 +52,7 @@ export const CompaniesPage = () => {
             Email: "",
             Phone_Number: "",
             Active: false,
-            TakeAssessment: false,
+            //TakeAssessment: false, <-- not part of parameter. only needed when posting
           },
         });
         const data = company.data;

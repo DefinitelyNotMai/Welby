@@ -122,7 +122,7 @@ export const GendersPage = () => {
       GenderId: genderData.GenderId,
       Gender: genderData.Gender,
       Biological: genderData.Biological,
-      Active: 1,
+      Active: true,
       Encoded_By: 24287,
     };
 

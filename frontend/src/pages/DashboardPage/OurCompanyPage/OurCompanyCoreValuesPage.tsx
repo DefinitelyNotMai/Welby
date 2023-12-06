@@ -1,6 +1,7 @@
 // lib
 import { Button, Flex, Grid } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 // local
 import { Section } from "../../../components/DataDisplay/Section";
@@ -15,8 +16,37 @@ export const OurCompanyCoreValuesPage = () => {
   const [selectedValue, setSelectedValue] = useState<Value>(VALUE_DATA);
 
   const userContext = useContext(UserContext);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
   useEffect(() => {
+    const handleEditValue = () => {
+      const value = {
+        ValueId: selectedValue.ValueId,
+        CompanyId: userContext.companyId,
+        Title: selectedValue.Title,
+        Description: selectedValue.Description,
+        Active: true,
+        Encoded_By: localStorage.getItem('userId'),
+      };
+  
+      const updateValueUrl = "https://localhost:44373/api/UpdateValue";
+
+  
+      axios
+        .patch(updateValueUrl, value, config)
+        .then((response) => {
+          console.log(response.data);
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+    }
     const fetchValues = async () => {
       try {
         const valuesUrl = "https://localhost:44373/api/GetValues";

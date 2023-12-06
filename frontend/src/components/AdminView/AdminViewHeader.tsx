@@ -9,25 +9,21 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Spacer,
   Text,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
 // local
 import WelbyLogo from "../../assets/images/welby_logo_and_name_primary_1_flat.svg";
-import { useNavigate } from "react-router-dom";
+import WelbyProfile from "../../assets/images/welby_profile.png";
 import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export const AdminViewHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
-
-  const handleProfileClick = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const handleLogoutSelection = () => {
     userContext.setCompanyId(0);
@@ -44,56 +40,54 @@ export const AdminViewHeader = () => {
       backgroundColor="#ffffff"
       borderBottom="2px solid #ebebeb"
       position="sticky"
-      top="0"
+      top={0}
       transition="ease-in-out"
-      zIndex="40"
+      width="full"
+      zIndex={40}
     >
       <Box
-        marginLeft="auto"
-        marginRight="auto"
-        maxWidth="9xl"
-        paddingX={5}
-        marginX="auto"
+        height={{ base: 10, sm: 14 }}
+        marginLeft={16}
+        marginRight={32}
         overflow="hidden"
         paddingRight={{ base: 5, md: 10 }}
-        height={{ base: 10, sm: 14 }}
+        paddingX={2}
         transition="all"
       >
-        <Flex h="full" alignItems="center">
+        <Flex alignItems="center" height="full" justifyContent="space-between">
           <Box
-            width={{ base: 16, sm: 20 }}
             height={{ base: 16, sm: 20 }}
-            transition="all"
             position="relative"
-            marginLeft={10}
+            transition="all"
+            width={{ base: 16, sm: 20 }}
           >
-            <Link onClick={() => localStorage.clear()}>
+            <Link
+              onClick={() => {
+                navigate("/admin-view");
+              }}
+            >
               <Image
-                src={WelbyLogo}
                 alt="Welby Logo"
-                objectFit="contain"
-                width="full"
                 height="full"
+                objectFit="contain"
+                src={WelbyLogo}
+                width="full"
               />
             </Link>
           </Box>
-          <Text
-            fontFamily="Montserrat"
-            fontWeight="bold"
-            color="#6c6c6c"
-            ml="3"
-          >
-            Super Admin
-          </Text>
-          <Spacer />
-          <Menu isOpen={isMenuOpen}>
-            <MenuButton as={Link} onClick={handleProfileClick}>
-              <Avatar boxSize={6} />
-            </MenuButton>
-            <MenuList>
-              <MenuItem onClick={handleLogoutSelection}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
+          <Flex alignItems="center">
+            <Menu isOpen={isMenuOpen}>
+              <MenuButton as={Link} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <Avatar boxSize={8} src={WelbyProfile} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={handleLogoutSelection}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+            <Text color="#6c6c6c" marginLeft={4} fontWeight="bold">
+              Super Admin
+            </Text>
+          </Flex>
         </Flex>
       </Box>
     </Box>

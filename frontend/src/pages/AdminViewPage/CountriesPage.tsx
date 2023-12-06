@@ -241,12 +241,14 @@ export const CountriesPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(country)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{country.Active === false ? "0" : "1"}</Td>
-                <Td>{country.CountryId}</Td>
-                <Td>{country.Name}</Td>
-                <Td>{country.Nationality}</Td>
-                <Td>{country.Flag_Image}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {country.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{country.CountryId}</Td>
+                <Td whiteSpace="normal">{country.Name}</Td>
+                <Td whiteSpace="normal">{country.Nationality}</Td>
+                <Td whiteSpace="normal">{country.Flag_Image}</Td>
               </Tr>
             ))}
           </Tbody>

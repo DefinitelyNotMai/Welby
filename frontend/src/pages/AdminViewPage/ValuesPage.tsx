@@ -243,12 +243,14 @@ export const ValuesPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(value)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{value.Active === false ? "0" : "1"}</Td>
-                <Td>{value.ValueId}</Td>
-                <Td>{value.CompanyId}</Td>
-                <Td>{value.Title}</Td>
-                <Td>{value.Description}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {value.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{value.ValueId}</Td>
+                <Td whiteSpace="normal">{value.CompanyId}</Td>
+                <Td whiteSpace="normal">{value.Title}</Td>
+                <Td whiteSpace="normal">{value.Description}</Td>
               </Tr>
             ))}
           </Tbody>

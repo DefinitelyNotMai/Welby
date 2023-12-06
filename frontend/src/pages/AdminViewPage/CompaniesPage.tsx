@@ -52,6 +52,7 @@ export const CompaniesPage = () => {
             Email: "",
             Phone_Number: "",
             Active: false,
+            TakeAssessment: false,
           },
         });
         const data = company.data;
@@ -148,31 +149,37 @@ export const CompaniesPage = () => {
 
   const updateMission = () => {
     const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission";
-    axios.patch(updateMissionUrl, {
-      CompanyId: companyData.CompanyId,
-      Mission: companyData.Mission,
-      Encoded_By: 24287,
-    }).then((response) => {
-      console.log(response);
-      console.log("Updated company mission")
-    }).catch((error) => {
-      console.log(error)
-    });
-  }
+    axios
+      .patch(updateMissionUrl, {
+        CompanyId: companyData.CompanyId,
+        Mission: companyData.Mission,
+        Encoded_By: 24287,
+      })
+      .then((response) => {
+        console.log(response);
+        console.log("Updated company mission");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const updateVision = () => {
     const updateVisionUrl = "https://localhost:44373/api/UpdateCompanyVision";
-    axios.patch(updateVisionUrl, {
-      CompanyId: companyData.CompanyId,
-      Vision: companyData.Vision,
-      Encoded_By: 24287,
-    }).then((response) => {
-      console.log(response);
-      console.log("Updated company vision")
-    }).catch((error) => {
-      console.log(error)
-    });
-  }
+    axios
+      .patch(updateVisionUrl, {
+        CompanyId: companyData.CompanyId,
+        Vision: companyData.Vision,
+        Encoded_By: 24287,
+      })
+      .then((response) => {
+        console.log(response);
+        console.log("Updated company vision");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleUpdateCompany = () => {
     updateMission();
@@ -192,7 +199,7 @@ export const CompaniesPage = () => {
     };
 
     const updateCompanyUrl = "https://localhost:44373/api/UpdateCompany";
-    
+
     axios
       .patch(updateCompanyUrl, company, config)
       .then((response) => {
@@ -301,21 +308,23 @@ export const CompaniesPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(company)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{company.Active === false ? "0" : "1"}</Td>
-                <Td>{company.CompanyId}</Td>
-                <Td>{company.Name}</Td>
-                <Td>{company.Email}</Td>
-                <Td>{company.Phone_Number}</Td>
-                <Td>{company.Website}</Td>
-                <Td>{company.Vision}</Td>
-                <Td>{company.Mission}</Td>
-                <Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {company.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{company.CompanyId}</Td>
+                <Td whiteSpace="normal">{company.Name}</Td>
+                <Td whiteSpace="normal">{company.Email}</Td>
+                <Td whiteSpace="normal">{company.Phone_Number}</Td>
+                <Td whiteSpace="normal">{company.Website}</Td>
+                <Td whiteSpace="normal">{company.Vision}</Td>
+                <Td whiteSpace="normal">{company.Mission}</Td>
+                <Td whiteSpace="normal">
                   <Image src={company.Logo} />
                 </Td>
-                <Td>{company.CountryId}</Td>
-                <Td>{company.IndustryTypeId}</Td>
-                <Td>{company.FoundingDate}</Td>
+                <Td whiteSpace="normal">{company.CountryId}</Td>
+                <Td whiteSpace="normal">{company.IndustryTypeId}</Td>
+                <Td whiteSpace="normal">{company.FoundingDate}</Td>
               </Tr>
             ))}
           </Tbody>

@@ -18,6 +18,7 @@ import axios from "axios";
 // local
 import Pagination from "../../components/Disclosure/Pagination";
 import { GOAL_DATA, Goal } from "../../data/goal";
+import { GoalDelete } from "../../components/Modal/AdminView/GoalModal";
 
 export const GoalsPage = () => {
   document.title = "Goals | Welby";
@@ -51,17 +52,28 @@ export const GoalsPage = () => {
             Active: false,
           },
         });
-        const data = goal.data;
-        const goals = data.map((c: Goal) => {
+
+        // Custom sorting function based on LastChanged_Date and original order
+        const sortedGoals = goal.data.sort((a, b) => {
+          const dateComparison =
+            new Date(b.LastChanged_Date) - new Date(a.LastChanged_Date);
+          return dateComparison !== 0
+            ? dateComparison
+            : goals.indexOf(a) - goals.indexOf(b);
+        });
+
+        const goals = sortedGoals.map((c: Goal) => {
           return {
             ...c,
           };
         });
+
         setGoals(goals);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
+
     fetchAndSetGoals();
   }, [goalData]);
 
@@ -231,12 +243,13 @@ export const GoalsPage = () => {
             <Tr borderBottom="1px solid #ebebeb">
               <Th>No.</Th>
               <Th>Active</Th>
-              <Th>GoalId</Th>
-              <Th>CompanyId</Th>
+              <Th>Goal Id</Th>
+              <Th>Company Id</Th>
               <Th>Title</Th>
               <Th>Description</Th>
-              <Th>DurationFrom</Th>
-              <Th>DurationTo</Th>
+              <Th>Duration From</Th>
+              <Th>Duration To</Th>
+              <Th>Last Changed</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -246,14 +259,15 @@ export const GoalsPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(goal)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{goal.Active === false ? "0" : "1"}</Td>
-                <Td>{goal.GoalId}</Td>
-                <Td>{goal.CompanyId}</Td>
-                <Td>{goal.Title}</Td>
-                <Td>{goal.Description}</Td>
-                <Td>{goal.DurationFrom}</Td>
-                <Td>{goal.DurationTo}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">{goal.Active === false ? "0" : "1"}</Td>
+                <Td whiteSpace="normal">{goal.GoalId}</Td>
+                <Td whiteSpace="normal">{goal.CompanyId}</Td>
+                <Td whiteSpace="normal">{goal.Title}</Td>
+                <Td whiteSpace="normal">{goal.Description}</Td>
+                <Td whiteSpace="normal">{goal.DurationFrom}</Td>
+                <Td whiteSpace="normal">{goal.DurationTo}</Td>
+                <Td whiteSpace="normal">{goal.LastChanged_Date}</Td>
               </Tr>
             ))}
           </Tbody>

@@ -50,6 +50,7 @@ export const EmployeesPage = () => {
             Phone_Number: "",
             CompanyRole: "",
             Active: false,
+            FirstLogIn: false,
           },
         });
         const data = employee.data;
@@ -279,29 +280,31 @@ export const EmployeesPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(employee)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{employee.Active === false ? "0" : "1"}</Td>
-                <Td>{employee.EmployeeId}</Td>
-                <Td>{employee.First_Name}</Td>
-                <Td>{employee.Middle_Name}</Td>
-                <Td>{employee.Last_Name}</Td>
-                <Td>{employee.Nickname}</Td>
-                <Td>{employee.Email}</Td>
-                <Td>{employee.Phone_Number}</Td>
-                <Td>{employee.Address}</Td>
-                <Td>{employee.Birthday}</Td>
-                <Td>{employee.Linkedin}</Td>
-                <Td>{employee.Facebook}</Td>
-                <Td>{employee.Instagram}</Td>
-                <Td>{employee.TikTok}</Td>
-                <Td>{employee.Work}</Td>
-                <Td>{employee.Connect}</Td>
-                <Td>{employee.Support}</Td>
-                <Td>{employee.Other_Notes}</Td>
-                <Td>{employee.ProfilePhoto}</Td>
-                <Td>{employee.GenderId}</Td>
-                <Td>{employee.CompanyId}</Td>
-                <Td>{employee.CountryId}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {employee.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{employee.EmployeeId}</Td>
+                <Td whiteSpace="normal">{employee.First_Name}</Td>
+                <Td whiteSpace="normal">{employee.Middle_Name}</Td>
+                <Td whiteSpace="normal">{employee.Last_Name}</Td>
+                <Td whiteSpace="normal">{employee.Nickname}</Td>
+                <Td whiteSpace="normal">{employee.Email}</Td>
+                <Td whiteSpace="normal">{employee.Phone_Number}</Td>
+                <Td whiteSpace="normal">{employee.Address}</Td>
+                <Td whiteSpace="normal">{employee.Birthday}</Td>
+                <Td whiteSpace="normal">{employee.Linkedin}</Td>
+                <Td whiteSpace="normal">{employee.Facebook}</Td>
+                <Td whiteSpace="normal">{employee.Instagram}</Td>
+                <Td whiteSpace="normal">{employee.TikTok}</Td>
+                <Td whiteSpace="normal">{employee.Work}</Td>
+                <Td whiteSpace="normal">{employee.Connect}</Td>
+                <Td whiteSpace="normal">{employee.Support}</Td>
+                <Td whiteSpace="normal">{employee.Other_Notes}</Td>
+                <Td whiteSpace="normal">{employee.ProfilePhoto}</Td>
+                <Td whiteSpace="normal">{employee.GenderId}</Td>
+                <Td whiteSpace="normal">{employee.CompanyId}</Td>
+                <Td whiteSpace="normal">{employee.CountryId}</Td>
               </Tr>
             ))}
           </Tbody>

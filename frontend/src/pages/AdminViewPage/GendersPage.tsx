@@ -227,10 +227,12 @@ export const GendersPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(gender)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{gender.Active === false ? "0" : "1"}</Td>
-                <Td>{gender.GenderId}</Td>
-                <Td>{gender.Gender}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {gender.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{gender.GenderId}</Td>
+                <Td whiteSpace="normal">{gender.Gender}</Td>
               </Tr>
             ))}
           </Tbody>

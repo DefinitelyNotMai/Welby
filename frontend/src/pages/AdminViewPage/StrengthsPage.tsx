@@ -243,12 +243,14 @@ export const StrengthsPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(strength)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{strength.Active === false ? "0" : "1"}</Td>
-                <Td>{strength.StrengthId}</Td>
-                <Td>{strength.Strength}</Td>
-                <Td>{strength.Category}</Td>
-                <Td>{strength.Description}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {strength.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{strength.StrengthId}</Td>
+                <Td whiteSpace="normal">{strength.Strength}</Td>
+                <Td whiteSpace="normal">{strength.Category}</Td>
+                <Td whiteSpace="normal">{strength.Description}</Td>
               </Tr>
             ))}
           </Tbody>

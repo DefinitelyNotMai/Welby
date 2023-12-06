@@ -240,10 +240,12 @@ export const IndustryTypesPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(industryType)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{industryType.Active === false ? "0" : "1"}</Td>
-                <Td>{industryType.IndustryTypeId}</Td>
-                <Td>{industryType.Industry_Name}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {industryType.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{industryType.IndustryTypeId}</Td>
+                <Td whiteSpace="normal">{industryType.Industry_Name}</Td>
               </Tr>
             ))}
           </Tbody>

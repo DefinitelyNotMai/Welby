@@ -237,10 +237,12 @@ export const InterestsPage = () => {
                 borderBottom="1px solid #ebebeb"
                 onClick={() => handleRowClick(interest)}
               >
-                <Td>{startNumber + index}</Td>
-                <Td>{interest.Active === false ? "0" : "1"}</Td>
-                <Td>{interest.InterestId}</Td>
-                <Td>{interest.Name}</Td>
+                <Td whiteSpace="normal">{startNumber + index}</Td>
+                <Td whiteSpace="normal">
+                  {interest.Active === false ? "0" : "1"}
+                </Td>
+                <Td whiteSpace="normal">{interest.InterestId}</Td>
+                <Td whiteSpace="normal">{interest.Name}</Td>
               </Tr>
             ))}
           </Tbody>

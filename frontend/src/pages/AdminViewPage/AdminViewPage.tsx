@@ -5,7 +5,6 @@ import { FaRegBuilding } from "react-icons/fa";
 import {
   FaBook,
   FaBriefcase,
-  FaCity,
   FaEarthAsia,
   FaFlagCheckered,
   FaGenderless,
@@ -48,7 +47,7 @@ export const AdminViewPage = () => {
       <AdminViewHeader />
       <Flex flexDirection="row" flex={1}>
         <Sidebar paddingTop={0}>
-          <Accordion allowMultiple defaultIndex={[0]}>
+          <Accordion allowMultiple defaultIndex={[0, 1, 2, 3, 4]}>
             <AccordionItem>
               <AccordionButton
                 buttonName="Business and Organization"
@@ -145,6 +144,7 @@ export const AdminViewPage = () => {
                   leftIcon={<FaMap />}
                   onClick={() => handleItemClick("countries", "countries")}
                   variant="sidebar"
+                  width="100%"
                 >
                   Countries
                 </Button>
@@ -161,6 +161,7 @@ export const AdminViewPage = () => {
                   leftIcon={<FaGenderless />}
                   onClick={() => handleItemClick("genders", "genders")}
                   variant="sidebar"
+                  width="100%"
                 >
                   Genders
                 </Button>
@@ -173,6 +174,7 @@ export const AdminViewPage = () => {
                   leftIcon={<FaBook />}
                   onClick={() => handleItemClick("interests", "interests")}
                   variant="sidebar"
+                  width="100%"
                 >
                   Interests
                 </Button>
@@ -185,6 +187,7 @@ export const AdminViewPage = () => {
                   leftIcon={<GiMuscleUp />}
                   onClick={() => handleItemClick("strengths", "strengths")}
                   variant="sidebar"
+                  width="100%"
                 >
                   Strengths
                 </Button>
@@ -201,6 +204,7 @@ export const AdminViewPage = () => {
                   leftIcon={<AiOutlineFolder />}
                   onClick={() => handleItemClick("groups", "groups")}
                   variant="sidebar"
+                  width="100%"
                 >
                   Groups
                 </Button>
@@ -213,6 +217,7 @@ export const AdminViewPage = () => {
                   leftIcon={<AiOutlineFolder />}
                   onClick={() => handleItemClick("users", "users")}
                   variant="sidebar"
+                  width="100%"
                 >
                   Users
                 </Button>
@@ -231,6 +236,7 @@ export const AdminViewPage = () => {
                     handleItemClick("user-to-group", "user-to-group")
                   }
                   variant="sidebar"
+                  width="100%"
                 >
                   User To Group
                 </Button>

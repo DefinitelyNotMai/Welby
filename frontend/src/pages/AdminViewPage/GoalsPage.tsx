@@ -1,7 +1,9 @@
 // lib
+import axios from "axios";
 import {
   Button,
   Flex,
+  Icon,
   Spacer,
   Table,
   TableContainer,
@@ -10,15 +12,18 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 // local
 import Pagination from "../../components/Disclosure/Pagination";
 import { GOAL_DATA, Goal } from "../../data/goal";
-import { GoalDelete } from "../../components/Modal/AdminView/GoalModal";
+import {
+  GoalAdd,
+  GoalDelete,
+  GoalUpdate,
+} from "../../components/Modal/AdminView/GoalModal";
+import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const GoalsPage = () => {
   document.title = "Goals | Welby";
@@ -28,14 +33,9 @@ export const GoalsPage = () => {
   const [currentMode, setCurrentMode] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchData, setFetchData] = useState<boolean>(true);
 
   const itemsPerPage = 10;
-  const toast = useToast();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   useEffect(() => {
     const goalUrl = "https://localhost:44373/api/GetGoals";
@@ -52,30 +52,20 @@ export const GoalsPage = () => {
             Active: false,
           },
         });
-
-        // Custom sorting function based on LastChanged_Date and original order
-        const sortedGoals = goal.data.sort((a, b) => {
-          const dateComparison =
-            new Date(b.LastChanged_Date) - new Date(a.LastChanged_Date);
-          return dateComparison !== 0
-            ? dateComparison
-            : goals.indexOf(a) - goals.indexOf(b);
+        const data = goal.data;
+        const goals = data.map((g: Goal) => {
+          return g;
         });
-
-        const goals = sortedGoals.map((c: Goal) => {
-          return {
-            ...c,
-          };
-        });
-
         setGoals(goals);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
-
-    fetchAndSetGoals();
-  }, [goalData]);
+    if (fetchData) {
+      fetchAndSetGoals();
+      setFetchData(false);
+    }
+  }, [fetchData]);
 
   const updateGoalFields = (fields: Partial<Goal>) => {
     setGoalData((prev) => {
@@ -111,76 +101,18 @@ export const GoalsPage = () => {
   };
 
   const handleClose = () => {
+    setFetchData(true);
     setIsFormOpen(false);
     setCurrentMode("");
+    setGoalData(GOAL_DATA);
   };
 
-  const handleDeleteGoal = () => {
-    const goal = {
-      GoalId: goalData.GoalId,
-      Encoded_By: 24287,
-    };
-
-    const deleteGoalUrl = "https://localhost:44373/api/RemoveGoal";
-
-    axios
-      .patch(deleteGoalUrl, goal, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Goal with GoalId: ${goalData.GoalId} has been deleted.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setGoalData(GOAL_DATA);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleUpdateGoal = () => {
-    const goal = {
-      GoalId: goalData.GoalId,
-      CompanyId: goalData.CompanyId,
-      Title: goalData.Title,
-      Description: goalData.Description,
-      DurationTo: goalData.DurationTo,
-      Active: true,
-      Encoded_By: 24287,
-    };
-
-    const updateGoalUrl = "https://localhost:44373/api/UpdateGoal";
-
-    axios
-      .patch(updateGoalUrl, goal, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "Goal updated.",
-          description: `Goal with GoalId: ${goalData.GoalId} has been updated.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setGoalData(GOAL_DATA);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <Flex flexDirection="column" marginLeft={4} marginTop={4}>
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
         <Button
           borderColor={currentMode === "Add" ? "#44a348" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePlus} boxSize={6} color="#44a348" />}
           onClick={() => {
             if (currentMode === "Add") {
               setCurrentMode("");
@@ -189,13 +121,14 @@ export const GoalsPage = () => {
               setIsFormOpen(true);
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Add
         </Button>
         <Button
           borderColor={currentMode === "Update" ? "#24a2f0" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePencil} boxSize={6} color="#24a2f0" />}
           onClick={() => {
             if (currentMode === "Update") {
               setCurrentMode("");
@@ -203,6 +136,7 @@ export const GoalsPage = () => {
               setCurrentMode("Update");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Update
@@ -210,7 +144,7 @@ export const GoalsPage = () => {
         <Spacer />
         <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
             if (currentMode === "Delete") {
               setCurrentMode("");
@@ -218,6 +152,7 @@ export const GoalsPage = () => {
               setCurrentMode("Delete");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Delete
@@ -256,15 +191,22 @@ export const GoalsPage = () => {
             {displayedGoals.map((goal, index) => (
               <Tr
                 key={index}
-                borderBottom="1px solid #ebebeb"
+                _hover={{ backgroundColor: currentMode !== "" && "#ebebeb" }}
+                backgroundColor={index % 2 === 0 ? "#f5f5f5" : "#ffffff"}
+                borderBottom={index % 2 === 0 ? "#ffffff" : "#f5f5f5"}
+                cursor={currentMode !== "" ? "pointer" : "default"}
                 onClick={() => handleRowClick(goal)}
               >
                 <Td whiteSpace="normal">{startNumber + index}</Td>
                 <Td whiteSpace="normal">{goal.Active === false ? "0" : "1"}</Td>
                 <Td whiteSpace="normal">{goal.GoalId}</Td>
                 <Td whiteSpace="normal">{goal.CompanyId}</Td>
-                <Td whiteSpace="normal">{goal.Title}</Td>
-                <Td whiteSpace="normal">{goal.Description}</Td>
+                <Td whiteSpace="normal" minWidth="250px">
+                  {goal.Title}
+                </Td>
+                <Td whiteSpace="normal" minWidth="500px">
+                  {goal.Description}
+                </Td>
                 <Td whiteSpace="normal">{goal.DurationFrom}</Td>
                 <Td whiteSpace="normal">{goal.DurationTo}</Td>
                 <Td whiteSpace="normal">{goal.LastChanged_Date}</Td>
@@ -274,7 +216,7 @@ export const GoalsPage = () => {
         </Table>
       </TableContainer>
 
-      <Flex justifyContent="center" marginTop={4} marginX={4}>
+      <Flex justifyContent="center" margin={4}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -283,38 +225,29 @@ export const GoalsPage = () => {
         />
       </Flex>
 
-      {isFormOpen && (
-        <>
-          {currentMode === "Add" && (
-            <GoalAdd
-              handleCancel={handleClose}
-              handleAddUpdate={handleDeleteGoal}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateGoalFields}
-              {...goalData}
-            />
-          )}
-          {currentMode === "Update" && (
-            <GoalUpdate
-              handleCancel={handleClose}
-              handleAddUpdate={handleUpdateGoal}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateGoalFields}
-              {...goalData}
-            />
-          )}
-          {currentMode === "Delete" && (
-            <GoalDelete
-              handleCancel={handleClose}
-              handleDelete={handleDeleteGoal}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              {...goalData}
-            />
-          )}
-        </>
+      {currentMode === "Add" && (
+        <GoalAdd
+          onClose={handleClose}
+          isOpen={isFormOpen}
+          updateFields={updateGoalFields}
+          {...goalData}
+        />
+      )}
+      {currentMode === "Update" && (
+        <GoalUpdate
+          onClose={handleClose}
+          isOpen={isFormOpen}
+          updateFields={updateGoalFields}
+          {...goalData}
+        />
+      )}
+      {currentMode === "Delete" && (
+        <GoalDelete
+          onClose={handleClose}
+          isOpen={isFormOpen}
+          updateFields={updateGoalFields}
+          {...goalData}
+        />
       )}
     </Flex>
   );

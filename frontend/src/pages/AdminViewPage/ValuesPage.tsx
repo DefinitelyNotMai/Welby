@@ -2,6 +2,7 @@
 import {
   Button,
   Flex,
+  Icon,
   Spacer,
   Table,
   TableContainer,
@@ -10,7 +11,6 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -18,6 +18,12 @@ import axios from "axios";
 // local
 import Pagination from "../../components/Disclosure/Pagination";
 import { VALUE_DATA, Value } from "../../data/value";
+import {
+  ValueAdd,
+  ValueDelete,
+  ValueUpdate,
+} from "../../components/Modal/AdminView/ValueModal";
+import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const ValuesPage = () => {
   document.title = "Values | Welby";
@@ -27,14 +33,9 @@ export const ValuesPage = () => {
   const [currentMode, setCurrentMode] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchData, setFetchData] = useState<boolean>(true);
 
   const itemsPerPage = 10;
-  const toast = useToast();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   useEffect(() => {
     const valueUrl = "https://localhost:44373/api/GetValues";
@@ -62,8 +63,11 @@ export const ValuesPage = () => {
         console.error("Error fetching data: ", error);
       }
     };
-    fetchAndSetValues();
-  }, [valueData]);
+    if (fetchData) {
+      fetchAndSetValues();
+      setFetchData(false);
+    }
+  }, [fetchData]);
 
   const updateValueFields = (fields: Partial<Value>) => {
     setValueData((prev) => {
@@ -99,75 +103,18 @@ export const ValuesPage = () => {
   };
 
   const handleClose = () => {
+    setFetchData(true);
     setIsFormOpen(false);
     setCurrentMode("");
+    setValueData(VALUE_DATA);
   };
 
-  const handleDeleteValue = () => {
-    const value = {
-      ValueId: valueData.ValueId,
-      Encoded_By: 24287,
-    };
-
-    const deleteValueUrl = "https://localhost:44373/api/RemoveValue";
-
-    axios
-      .patch(deleteValueUrl, value, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Value with Value Id: ${valueData.ValueId} has been deleted.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setValueData(VALUE_DATA);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleUpdateValue = () => {
-    const value = {
-      ValueId: valueData.ValueId,
-      CompanyId: valueData.CompanyId,
-      Title: valueData.Title,
-      Description: valueData.Description,
-      Active: true,
-      Encoded_By: 24287,
-    };
-
-    const updateValueUrl = "https://localhost:44373/api/UpdateValue";
-
-    axios
-      .patch(updateValueUrl, value, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "Value updated.",
-          description: `Value with ValueId: ${valueData.ValueId} has been updated.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setValueData(VALUE_DATA);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <Flex flexDirection="column" marginLeft={4} marginTop={4}>
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
         <Button
           borderColor={currentMode === "Add" ? "#44a348" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePlus} boxSize={6} color="#44a348" />}
           onClick={() => {
             if (currentMode === "Add") {
               setCurrentMode("");
@@ -176,13 +123,14 @@ export const ValuesPage = () => {
               setIsFormOpen(true);
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Add
         </Button>
         <Button
           borderColor={currentMode === "Update" ? "#24a2f0" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePencil} boxSize={6} color="#24a2f0" />}
           onClick={() => {
             if (currentMode === "Update") {
               setCurrentMode("");
@@ -190,6 +138,7 @@ export const ValuesPage = () => {
               setCurrentMode("Update");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Update
@@ -197,7 +146,7 @@ export const ValuesPage = () => {
         <Spacer />
         <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
             if (currentMode === "Delete") {
               setCurrentMode("");
@@ -205,6 +154,7 @@ export const ValuesPage = () => {
               setCurrentMode("Delete");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Delete
@@ -240,7 +190,10 @@ export const ValuesPage = () => {
             {displayedValues.map((value, index) => (
               <Tr
                 key={index}
-                borderBottom="1px solid #ebebeb"
+                _hover={{ backgroundColor: currentMode !== "" && "#ebebeb" }}
+                backgroundColor={index % 2 === 0 ? "#f5f5f5" : "#ffffff"}
+                borderBottom={index % 2 === 0 ? "#ffffff" : "#f5f5f5"}
+                cursor={currentMode !== "" ? "pointer" : "default"}
                 onClick={() => handleRowClick(value)}
               >
                 <Td whiteSpace="normal">{startNumber + index}</Td>
@@ -257,7 +210,7 @@ export const ValuesPage = () => {
         </Table>
       </TableContainer>
 
-      <Flex justifyContent="center" marginTop={4} marginX={4}>
+      <Flex justifyContent="center" margin={4}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -266,38 +219,24 @@ export const ValuesPage = () => {
         />
       </Flex>
 
-      {isFormOpen && (
-        <>
-          {currentMode === "Add" && (
-            <ValueAdd
-              handleCancel={handleClose}
-              handleAddUpdate={handleDeleteValue}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateValueFields}
-              {...valueData}
-            />
-          )}
-          {currentMode === "Update" && (
-            <ValueUpdate
-              handleCancel={handleClose}
-              handleAddUpdate={handleUpdateValue}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateValueFields}
-              {...valueData}
-            />
-          )}
-          {currentMode === "Delete" && (
-            <ValueDelete
-              handleCancel={handleClose}
-              handleDelete={handleDeleteValue}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              {...valueData}
-            />
-          )}
-        </>
+      {currentMode === "Add" && (
+        <ValueAdd
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateValueFields}
+          {...valueData}
+        />
+      )}
+      {currentMode === "Update" && (
+        <ValueUpdate
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateValueFields}
+          {...valueData}
+        />
+      )}
+      {currentMode === "Delete" && (
+        <ValueDelete isOpen={isFormOpen} onClose={handleClose} {...valueData} />
       )}
     </Flex>
   );

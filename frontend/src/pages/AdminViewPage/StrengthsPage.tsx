@@ -2,6 +2,7 @@
 import {
   Button,
   Flex,
+  Icon,
   Spacer,
   Table,
   TableContainer,
@@ -10,7 +11,6 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -18,6 +18,12 @@ import axios from "axios";
 // local
 import Pagination from "../../components/Disclosure/Pagination";
 import { STRENGTH_DATA, Strength } from "../../data/strength";
+import {
+  StrengthAdd,
+  StrengthDelete,
+  StrengthUpdate,
+} from "../../components/Modal/AdminView/StrengthModal";
+import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const StrengthsPage = () => {
   document.title = "Strengths | Welby";
@@ -27,14 +33,9 @@ export const StrengthsPage = () => {
   const [currentMode, setCurrentMode] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchData, setFetchData] = useState<boolean>(true);
 
   const itemsPerPage = 10;
-  const toast = useToast();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   useEffect(() => {
     const strengthUrl = "https://localhost:44373/api/GetStrengths";
@@ -62,8 +63,11 @@ export const StrengthsPage = () => {
         console.error("Error fetching data: ", error);
       }
     };
-    fetchAndSetStrengths();
-  }, [strengthData]);
+    if (fetchData) {
+      fetchAndSetStrengths();
+      setFetchData(false);
+    }
+  }, [fetchData]);
 
   const updateStrengthFields = (fields: Partial<Strength>) => {
     setStrengthData((prev) => {
@@ -99,75 +103,18 @@ export const StrengthsPage = () => {
   };
 
   const handleClose = () => {
+    setFetchData(true);
     setIsFormOpen(false);
     setCurrentMode("");
+    setStrengthData(STRENGTH_DATA);
   };
 
-  const handleDeleteStrength = () => {
-    const strength = {
-      StrengthId: strengthData.StrengthId,
-      Encoded_By: 24287,
-    };
-
-    const deleteStrengthUrl = "https://localhost:44373/api/RemoveStrength";
-
-    axios
-      .patch(deleteStrengthUrl, strength, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Strength with Strength Id: ${strengthData.StrengthId} has been deleted.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setStrengthData(STRENGTH_DATA);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleUpdateStrength = () => {
-    const strength = {
-      StrengthId: strengthData.StrengthId,
-      Strength: strengthData.Strength,
-      Category: strengthData.Category,
-      Description: strengthData.Description,
-      Active: true,
-      Encoded_By: 24287,
-    };
-
-    const updateStrengthUrl = "https://localhost:44373/api/UpdateStrength";
-
-    axios
-      .patch(updateStrengthUrl, strength, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "Strength updated.",
-          description: `Strength with StrengthId: ${strengthData.StrengthId} has been updated.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setStrengthData(STRENGTH_DATA);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <Flex flexDirection="column" marginLeft={4} marginTop={4}>
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
         <Button
           borderColor={currentMode === "Add" ? "#44a348" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePlus} boxSize={6} color="#44a348" />}
           onClick={() => {
             if (currentMode === "Add") {
               setCurrentMode("");
@@ -176,13 +123,14 @@ export const StrengthsPage = () => {
               setIsFormOpen(true);
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Add
         </Button>
         <Button
           borderColor={currentMode === "Update" ? "#24a2f0" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePencil} boxSize={6} color="#24a2f0" />}
           onClick={() => {
             if (currentMode === "Update") {
               setCurrentMode("");
@@ -190,6 +138,7 @@ export const StrengthsPage = () => {
               setCurrentMode("Update");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Update
@@ -197,7 +146,7 @@ export const StrengthsPage = () => {
         <Spacer />
         <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
             if (currentMode === "Delete") {
               setCurrentMode("");
@@ -205,6 +154,7 @@ export const StrengthsPage = () => {
               setCurrentMode("Delete");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Delete
@@ -240,7 +190,10 @@ export const StrengthsPage = () => {
             {displayedStrengths.map((strength, index) => (
               <Tr
                 key={index}
-                borderBottom="1px solid #ebebeb"
+                _hover={{ backgroundColor: currentMode !== "" && "#ebebeb" }}
+                backgroundColor={index % 2 === 0 ? "#f5f5f5" : "#ffffff"}
+                borderBottom={index % 2 === 0 ? "#ffffff" : "#f5f5f5"}
+                cursor={currentMode !== "" ? "pointer" : "default"}
                 onClick={() => handleRowClick(strength)}
               >
                 <Td whiteSpace="normal">{startNumber + index}</Td>
@@ -257,7 +210,7 @@ export const StrengthsPage = () => {
         </Table>
       </TableContainer>
 
-      <Flex justifyContent="center" marginTop={4} marginX={4}>
+      <Flex justifyContent="center" margin={4}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -266,38 +219,28 @@ export const StrengthsPage = () => {
         />
       </Flex>
 
-      {isFormOpen && (
-        <>
-          {currentMode === "Add" && (
-            <StrengthAdd
-              handleCancel={handleClose}
-              handleAddUpdate={handleDeleteStrength}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateStrengthFields}
-              {...strengthData}
-            />
-          )}
-          {currentMode === "Update" && (
-            <StrengthUpdate
-              handleCancel={handleClose}
-              handleAddUpdate={handleUpdateStrength}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateStrengthFields}
-              {...strengthData}
-            />
-          )}
-          {currentMode === "Delete" && (
-            <StrengthDelete
-              handleCancel={handleClose}
-              handleDelete={handleDeleteStrength}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              {...strengthData}
-            />
-          )}
-        </>
+      {currentMode === "Add" && (
+        <StrengthAdd
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateStrengthFields}
+          {...strengthData}
+        />
+      )}
+      {currentMode === "Update" && (
+        <StrengthUpdate
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateStrengthFields}
+          {...strengthData}
+        />
+      )}
+      {currentMode === "Delete" && (
+        <StrengthDelete
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          {...strengthData}
+        />
       )}
     </Flex>
   );

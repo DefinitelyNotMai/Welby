@@ -2,6 +2,7 @@
 import {
   Button,
   Flex,
+  Icon,
   Spacer,
   Table,
   TableContainer,
@@ -10,7 +11,6 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -18,6 +18,12 @@ import axios from "axios";
 // local
 import Pagination from "../../components/Disclosure/Pagination";
 import { INTEREST_DATA, Interest } from "../../data/interest";
+import {
+  InterestAdd,
+  InterestDelete,
+  InterestUpdate,
+} from "../../components/Modal/AdminView/InterestModal";
+import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const InterestsPage = () => {
   document.title = "Interests | Welby";
@@ -27,15 +33,9 @@ export const InterestsPage = () => {
   const [currentMode, setCurrentMode] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchData, setFetchData] = useState<boolean>(true);
 
   const itemsPerPage = 10;
-  const toast = useToast();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
   useEffect(() => {
     const interestUrl = "https://localhost:44373/api/GetInterests";
     const fetchAndSetInterests = async () => {
@@ -60,8 +60,11 @@ export const InterestsPage = () => {
         console.error("Error fetching data: ", error);
       }
     };
-    fetchAndSetInterests();
-  }, [interestData]);
+    if (fetchData) {
+      fetchAndSetInterests();
+      setFetchData(false);
+    }
+  }, [fetchData]);
 
   const updateInterestFields = (fields: Partial<Interest>) => {
     setInterestData((prev) => {
@@ -97,73 +100,18 @@ export const InterestsPage = () => {
   };
 
   const handleClose = () => {
+    setFetchData(true);
     setIsFormOpen(false);
     setCurrentMode("");
+    setInterestData(INTEREST_DATA);
   };
 
-  const handleDeleteInterest = () => {
-    const interest = {
-      InterestId: interestData.InterestId,
-      Encoded_By: 24287,
-    };
-
-    const deleteInterestUrl = "https://localhost:44373/api/RemoveInterest";
-
-    axios
-      .patch(deleteInterestUrl, interest, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Interest with Interest Id: ${interestData.InterestId} has been deleted.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setInterestData(INTEREST_DATA);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleUpdateInterest = () => {
-    const interest = {
-      InterestId: interestData.InterestId,
-      Name: interestData.Name,
-      Active: true,
-      Encoded_By: 24287,
-    };
-
-    const updateInterestUrl = "https://localhost:44373/api/UpdateInterest";
-
-    axios
-      .patch(updateInterestUrl, interest, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "Interest updated.",
-          description: `Interest with InterestId: ${interestData.InterestId} has been updated.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setInterestData(INTEREST_DATA);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <Flex flexDirection="column" marginLeft={4} marginTop={4}>
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
         <Button
           borderColor={currentMode === "Add" ? "#44a348" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePlus} boxSize={6} color="#44a348" />}
           onClick={() => {
             if (currentMode === "Add") {
               setCurrentMode("");
@@ -172,13 +120,14 @@ export const InterestsPage = () => {
               setIsFormOpen(true);
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Add
         </Button>
         <Button
           borderColor={currentMode === "Update" ? "#24a2f0" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePencil} boxSize={6} color="#24a2f0" />}
           onClick={() => {
             if (currentMode === "Update") {
               setCurrentMode("");
@@ -186,6 +135,7 @@ export const InterestsPage = () => {
               setCurrentMode("Update");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Update
@@ -193,7 +143,7 @@ export const InterestsPage = () => {
         <Spacer />
         <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
             if (currentMode === "Delete") {
               setCurrentMode("");
@@ -201,6 +151,7 @@ export const InterestsPage = () => {
               setCurrentMode("Delete");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Delete
@@ -234,7 +185,10 @@ export const InterestsPage = () => {
             {displayedInterests.map((interest, index) => (
               <Tr
                 key={index}
-                borderBottom="1px solid #ebebeb"
+                _hover={{ backgroundColor: currentMode !== "" && "#ebebeb" }}
+                backgroundColor={index % 2 === 0 ? "#f5f5f5" : "#ffffff"}
+                borderBottom={index % 2 === 0 ? "#ffffff" : "#f5f5f5"}
+                cursor={currentMode !== "" ? "pointer" : "default"}
                 onClick={() => handleRowClick(interest)}
               >
                 <Td whiteSpace="normal">{startNumber + index}</Td>
@@ -249,7 +203,7 @@ export const InterestsPage = () => {
         </Table>
       </TableContainer>
 
-      <Flex justifyContent="center" marginTop={4} marginX={4}>
+      <Flex justifyContent="center" margin={4}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -258,38 +212,28 @@ export const InterestsPage = () => {
         />
       </Flex>
 
-      {isFormOpen && (
-        <>
-          {currentMode === "Add" && (
-            <InterestAdd
-              handleCancel={handleClose}
-              handleAddUpdate={handleDeleteInterest}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateInterestFields}
-              {...interestData}
-            />
-          )}
-          {currentMode === "Update" && (
-            <InterestUpdate
-              handleCancel={handleClose}
-              handleAddUpdate={handleUpdateInterest}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateInterestFields}
-              {...interestData}
-            />
-          )}
-          {currentMode === "Delete" && (
-            <InterestDelete
-              handleCancel={handleClose}
-              handleDelete={handleDeleteInterest}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              {...interestData}
-            />
-          )}
-        </>
+      {currentMode === "Add" && (
+        <InterestAdd
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateInterestFields}
+          {...interestData}
+        />
+      )}
+      {currentMode === "Update" && (
+        <InterestUpdate
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateInterestFields}
+          {...interestData}
+        />
+      )}
+      {currentMode === "Delete" && (
+        <InterestDelete
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          {...interestData}
+        />
       )}
     </Flex>
   );

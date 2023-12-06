@@ -2,6 +2,8 @@
 import {
   Button,
   Flex,
+  Icon,
+  Image,
   Spacer,
   Table,
   TableContainer,
@@ -10,7 +12,6 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -18,6 +19,12 @@ import axios from "axios";
 // local
 import Pagination from "../../components/Disclosure/Pagination";
 import { COUNTRY_DATA, Country } from "../../data/country";
+import {
+  CountryAdd,
+  CountryDelete,
+  CountryUpdate,
+} from "../../components/Modal/AdminView/CountryModal";
+import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const CountriesPage = () => {
   document.title = "Countries | Welby";
@@ -27,14 +34,9 @@ export const CountriesPage = () => {
   const [currentMode, setCurrentMode] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchData, setFetchData] = useState<boolean>(true);
 
   const itemsPerPage = 10;
-  const toast = useToast();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   useEffect(() => {
     const countryUrl = "https://localhost:44373/api/GetCountries";
@@ -60,8 +62,11 @@ export const CountriesPage = () => {
         console.error("Error fetching data: ", error);
       }
     };
-    fetchAndSetCountries();
-  }, [countryData]);
+    if (fetchData) {
+      fetchAndSetCountries();
+      setFetchData(false);
+    }
+  }, [fetchData]);
 
   const updateCountryFields = (fields: Partial<Country>) => {
     setCountryData((prev) => {
@@ -91,81 +96,23 @@ export const CountriesPage = () => {
   const handleRowClick = (country: Country) => {
     if (currentMode) {
       setCountryData(country);
-      console.log(country);
       setIsFormOpen(true);
     }
   };
 
   const handleClose = () => {
+    setFetchData(true);
     setIsFormOpen(false);
     setCurrentMode("");
+    setCountryData(COUNTRY_DATA);
   };
 
-  const handleDeleteCountry = () => {
-    const country = {
-      CountryId: countryData.CountryId,
-      Encoded_By: 24287,
-    };
-
-    const deleteCountryUrl = "https://localhost:44373/api/RemoveCountry";
-
-    axios
-      .patch(deleteCountryUrl, country, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Country with Country Id: ${countryData.CountryId} has been deleted.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setCountryData(COUNTRY_DATA);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleUpdateCountry = () => {
-    const country = {
-      CountryId: countryData.CountryId,
-      Name: countryData.Name,
-      Nationality: countryData.Nationality,
-      Flag_Image: countryData.Flag_Image,
-      Active: true,
-      Encoded_By: 24287,
-    };
-
-    const updateCountryUrl = "https://localhost:44373/api/UpdateCountry";
-
-    axios
-      .patch(updateCountryUrl, country, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "Country updated.",
-          description: `Country with CountryId: ${countryData.CountryId} has been updated.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setCountryData(COUNTRY_DATA);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <Flex flexDirection="column" marginLeft={4} marginTop={4}>
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
         <Button
           borderColor={currentMode === "Add" ? "#44a348" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePlus} boxSize={6} color="#44a348" />}
           onClick={() => {
             if (currentMode === "Add") {
               setCurrentMode("");
@@ -174,13 +121,14 @@ export const CountriesPage = () => {
               setIsFormOpen(true);
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Add
         </Button>
         <Button
           borderColor={currentMode === "Update" ? "#24a2f0" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePencil} boxSize={6} color="#24a2f0" />}
           onClick={() => {
             if (currentMode === "Update") {
               setCurrentMode("");
@@ -188,6 +136,7 @@ export const CountriesPage = () => {
               setCurrentMode("Update");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Update
@@ -195,7 +144,7 @@ export const CountriesPage = () => {
         <Spacer />
         <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
             if (currentMode === "Delete") {
               setCurrentMode("");
@@ -203,6 +152,7 @@ export const CountriesPage = () => {
               setCurrentMode("Delete");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Delete
@@ -238,7 +188,10 @@ export const CountriesPage = () => {
             {displayedCountries.map((country, index) => (
               <Tr
                 key={index}
-                borderBottom="1px solid #ebebeb"
+                _hover={{ backgroundColor: currentMode !== "" && "#ebebeb" }}
+                backgroundColor={index % 2 === 0 ? "#f5f5f5" : "#ffffff"}
+                borderBottom={index % 2 === 0 ? "#ffffff" : "#f5f5f5"}
+                cursor={currentMode !== "" ? "pointer" : "default"}
                 onClick={() => handleRowClick(country)}
               >
                 <Td whiteSpace="normal">{startNumber + index}</Td>
@@ -248,14 +201,16 @@ export const CountriesPage = () => {
                 <Td whiteSpace="normal">{country.CountryId}</Td>
                 <Td whiteSpace="normal">{country.Name}</Td>
                 <Td whiteSpace="normal">{country.Nationality}</Td>
-                <Td whiteSpace="normal">{country.Flag_Image}</Td>
+                <Td whiteSpace="normal">
+                  <Image src={country.Flag_Image} />
+                </Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
 
-      <Flex justifyContent="center" marginTop={4} marginX={4}>
+      <Flex justifyContent="center" margin={4}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -264,38 +219,28 @@ export const CountriesPage = () => {
         />
       </Flex>
 
-      {isFormOpen && (
-        <>
-          {currentMode === "Add" && (
-            <CountryAdd
-              handleCancel={handleClose}
-              handleAddUpdate={handleDeleteCountry}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateCountryFields}
-              {...countryData}
-            />
-          )}
-          {currentMode === "Update" && (
-            <CountryUpdate
-              handleCancel={handleClose}
-              handleAddUpdate={handleUpdateCountry}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateCountryFields}
-              {...countryData}
-            />
-          )}
-          {currentMode === "Delete" && (
-            <CountryDelete
-              handleCancel={handleClose}
-              handleDelete={handleDeleteCountry}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              {...countryData}
-            />
-          )}
-        </>
+      {currentMode === "Add" && (
+        <CountryAdd
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateCountryFields}
+          {...countryData}
+        />
+      )}
+      {currentMode === "Update" && (
+        <CountryUpdate
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateCountryFields}
+          {...countryData}
+        />
+      )}
+      {currentMode === "Delete" && (
+        <CountryDelete
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          {...countryData}
+        />
       )}
     </Flex>
   );

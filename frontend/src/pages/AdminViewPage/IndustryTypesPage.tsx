@@ -2,6 +2,7 @@
 import {
   Button,
   Flex,
+  Icon,
   Spacer,
   Table,
   TableContainer,
@@ -10,7 +11,6 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -18,6 +18,12 @@ import axios from "axios";
 // local
 import Pagination from "../../components/Disclosure/Pagination";
 import { INDUSTRY_TYPE_DATA, IndustryType } from "../../data/industryType";
+import {
+  IndustryTypeAdd,
+  IndustryTypeDelete,
+  IndustryTypeUpdate,
+} from "../../components/Modal/AdminView/IndustryTypeModal";
+import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const IndustryTypesPage = () => {
   document.title = "IndustryTypes | Welby";
@@ -28,14 +34,9 @@ export const IndustryTypesPage = () => {
   const [currentMode, setCurrentMode] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchData, setFetchData] = useState<boolean>(true);
 
   const itemsPerPage = 10;
-  const toast = useToast();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   useEffect(() => {
     const industryTypeUrl = "https://localhost:44373/api/GetIndustryTypes";
@@ -61,8 +62,11 @@ export const IndustryTypesPage = () => {
         console.error("Error fetching data: ", error);
       }
     };
-    fetchAndSetIndustryTypes();
-  }, [industryTypeData]);
+    if (fetchData) {
+      fetchAndSetIndustryTypes();
+      setFetchData(false);
+    }
+  }, [fetchData]);
 
   const updateIndustryTypeFields = (fields: Partial<IndustryType>) => {
     setIndustryTypeData((prev) => {
@@ -98,75 +102,18 @@ export const IndustryTypesPage = () => {
   };
 
   const handleClose = () => {
+    setFetchData(true);
     setIsFormOpen(false);
     setCurrentMode("");
+    setIndustryTypeData(INDUSTRY_TYPE_DATA);
   };
 
-  const handleDeleteIndustryType = () => {
-    const industryType = {
-      IndustryTypeId: industryTypeData.IndustryTypeId,
-      Encoded_By: 24287,
-    };
-
-    const deleteIndustryTypeUrl =
-      "https://localhost:44373/api/RemoveIndustryType";
-
-    axios
-      .patch(deleteIndustryTypeUrl, industryType, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Industry Type with IndustryTypeId: ${industryTypeData.IndustryTypeId} has been deleted.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setIndustryTypeData(INDUSTRY_TYPE_DATA);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleUpdateIndustryType = () => {
-    const industryType = {
-      IndustryTypeId: industryTypeData.IndustryTypeId,
-      Industry_Name: industryTypeData.Industry_Name,
-      Active: true,
-      Encoded_By: 24287,
-    };
-
-    const updateIndustryTypeUrl =
-      "https://localhost:44373/api/UpdateIndustryType";
-
-    axios
-      .patch(updateIndustryTypeUrl, industryType, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "IndustryType updated.",
-          description: `IndustryType with IndustryTypeId: ${industryTypeData.IndustryTypeId} has been updated.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setIndustryTypeData(INDUSTRY_TYPE_DATA);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <Flex flexDirection="column" marginLeft={4} marginTop={4}>
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
         <Button
           borderColor={currentMode === "Add" ? "#44a348" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePlus} boxSize={6} color="#44a348" />}
           onClick={() => {
             if (currentMode === "Add") {
               setCurrentMode("");
@@ -175,13 +122,14 @@ export const IndustryTypesPage = () => {
               setIsFormOpen(true);
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Add
         </Button>
         <Button
           borderColor={currentMode === "Update" ? "#24a2f0" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePencil} boxSize={6} color="#24a2f0" />}
           onClick={() => {
             if (currentMode === "Update") {
               setCurrentMode("");
@@ -189,6 +137,7 @@ export const IndustryTypesPage = () => {
               setCurrentMode("Update");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Update
@@ -196,7 +145,7 @@ export const IndustryTypesPage = () => {
         <Spacer />
         <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
             if (currentMode === "Delete") {
               setCurrentMode("");
@@ -204,6 +153,7 @@ export const IndustryTypesPage = () => {
               setCurrentMode("Delete");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Delete
@@ -237,7 +187,10 @@ export const IndustryTypesPage = () => {
             {displayedIndustryTypes.map((industryType, index) => (
               <Tr
                 key={index}
-                borderBottom="1px solid #ebebeb"
+                _hover={{ backgroundColor: currentMode !== "" && "#ebebeb" }}
+                backgroundColor={index % 2 === 0 ? "#f5f5f5" : "#ffffff"}
+                borderBottom={index % 2 === 0 ? "#ffffff" : "#f5f5f5"}
+                cursor={currentMode !== "" ? "pointer" : "default"}
                 onClick={() => handleRowClick(industryType)}
               >
                 <Td whiteSpace="normal">{startNumber + index}</Td>
@@ -252,7 +205,7 @@ export const IndustryTypesPage = () => {
         </Table>
       </TableContainer>
 
-      <Flex justifyContent="center" marginTop={4} marginX={4}>
+      <Flex justifyContent="center" margin={4}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -261,38 +214,29 @@ export const IndustryTypesPage = () => {
         />
       </Flex>
 
-      {isFormOpen && (
-        <>
-          {currentMode === "Add" && (
-            <IndustryTypeAdd
-              handleCancel={handleClose}
-              handleAddUpdate={handleDeleteIndustryType}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateIndustryTypeFields}
-              {...industryTypeData}
-            />
-          )}
-          {currentMode === "Update" && (
-            <IndustryTypeUpdate
-              handleCancel={handleClose}
-              handleAddUpdate={handleUpdateIndustryType}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateIndustryTypeFields}
-              {...industryTypeData}
-            />
-          )}
-          {currentMode === "Delete" && (
-            <IndustryTypeDelete
-              handleCancel={handleClose}
-              handleDelete={handleDeleteIndustryType}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              {...industryTypeData}
-            />
-          )}
-        </>
+      {currentMode === "Add" && (
+        <IndustryTypeAdd
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateIndustryTypeFields}
+          {...industryTypeData}
+        />
+      )}
+      {currentMode === "Update" && (
+        <IndustryTypeUpdate
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateIndustryTypeFields}
+          {...industryTypeData}
+        />
+      )}
+      {currentMode === "Delete" && (
+        <IndustryTypeDelete
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateIndustryTypeFields}
+          {...industryTypeData}
+        />
       )}
     </Flex>
   );

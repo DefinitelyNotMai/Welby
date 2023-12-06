@@ -1,6 +1,7 @@
 import {
   Button,
   Flex,
+  Icon,
   Spacer,
   Table,
   TableContainer,
@@ -9,13 +10,17 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { fetchData } from "../../api/fetchData";
-import axios from "axios";
 import Pagination from "../../components/Disclosure/Pagination";
 import { GENDER_DATA, Gender } from "../../data/gender";
+import axios from "axios";
+import {
+  GenderAdd,
+  GenderDelete,
+  GenderUpdate,
+} from "../../components/Modal/AdminView/GenderModal";
+import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const GendersPage = () => {
   document.title = "Genders | Welby";
@@ -25,31 +30,37 @@ export const GendersPage = () => {
   const [currentMode, setCurrentMode] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [fetchData, setFetchData] = useState<boolean>(true);
 
   const itemsPerPage = 10;
-  const toast = useToast();
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   useEffect(() => {
     const genderUrl = "https://localhost:44373/api/GetGender";
     const fetchAndSetGenders = async () => {
       try {
-        const data = await fetchData(genderUrl, {
-          GenderId: 0,
-          Gender: "",
-          Active: false,
+        const gender = await axios.get(genderUrl, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          params: {
+            GenderId: 0,
+            Gender: "",
+            Active: false,
+          },
         });
-        setGenders(data);
+        const data = gender.data;
+        const genders = data.map((g: Gender) => {
+          return g;
+        });
+        setGenders(genders);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
-    fetchAndSetGenders();
-  }, [genderData]);
+    if (fetchData) {
+      fetchAndSetGenders();
+      setFetchData(false);
+    }
+  }, [fetchData]);
 
   const updateGenderFields = (fields: Partial<Gender>) => {
     setGenderData((prev) => {
@@ -85,67 +96,10 @@ export const GendersPage = () => {
   };
 
   const handleClose = () => {
+    setFetchData(true);
     setIsFormOpen(false);
     setCurrentMode("");
-  };
-
-  const handleDeleteGender = () => {
-    const gender = {
-      GenderId: genderData.GenderId,
-      Encoded_By: 24287,
-    };
-
-    const deleteGenderUrl = "https://localhost:44373/api/RemoveGender";
-
-    axios
-      .patch(deleteGenderUrl, gender, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Gender with Gender Id: ${genderData.GenderId} has been deleted.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setGenderData(GENDER_DATA);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleUpdateGender = () => {
-    const gender = {
-      GenderId: genderData.GenderId,
-      Gender: genderData.Gender,
-      Biological: genderData.Biological,
-      Active: true,
-      Encoded_By: 24287,
-    };
-
-    const updateGenderUrl = "https://localhost:44373/api/UpdateGender";
-
-    axios
-      .patch(updateGenderUrl, gender, config)
-      .then((response) => {
-        console.log(response.data);
-        toast({
-          title: "SUCCESS",
-          description: `Gender with Gender Id: ${genderData.GenderId} has been updated.`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        setIsFormOpen(false);
-        setCurrentMode("");
-        setGenderData(GENDER_DATA);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setGenderData(GENDER_DATA);
   };
 
   return (
@@ -153,7 +107,7 @@ export const GendersPage = () => {
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
         <Button
           borderColor={currentMode === "Add" ? "#44a348" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePlus} boxSize={6} color="#44a348" />}
           onClick={() => {
             if (currentMode === "Add") {
               setCurrentMode("");
@@ -162,13 +116,14 @@ export const GendersPage = () => {
               setIsFormOpen(true);
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Add
         </Button>
         <Button
           borderColor={currentMode === "Update" ? "#24a2f0" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbFilePencil} boxSize={6} color="#24a2f0" />}
           onClick={() => {
             if (currentMode === "Update") {
               setCurrentMode("");
@@ -176,6 +131,7 @@ export const GendersPage = () => {
               setCurrentMode("Update");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Update
@@ -183,7 +139,7 @@ export const GendersPage = () => {
         <Spacer />
         <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
-          variant="masterCrud"
+          leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
             if (currentMode === "Delete") {
               setCurrentMode("");
@@ -191,6 +147,7 @@ export const GendersPage = () => {
               setCurrentMode("Delete");
             }
           }}
+          variant="masterCrud"
           width="15%"
         >
           Delete
@@ -224,7 +181,10 @@ export const GendersPage = () => {
             {displayedGenders.map((gender, index) => (
               <Tr
                 key={index}
-                borderBottom="1px solid #ebebeb"
+                _hover={{ backgroundColor: currentMode !== "" && "#ebebeb" }}
+                backgroundColor={index % 2 === 0 ? "#f5f5f5" : "#ffffff"}
+                borderBottom={index % 2 === 0 ? "#ffffff" : "#f5f5f5"}
+                cursor={currentMode !== "" ? "pointer" : "default"}
                 onClick={() => handleRowClick(gender)}
               >
                 <Td whiteSpace="normal">{startNumber + index}</Td>
@@ -239,7 +199,7 @@ export const GendersPage = () => {
         </Table>
       </TableContainer>
 
-      <Flex justifyContent="center" marginTop={4} marginX={4}>
+      <Flex justifyContent="center" margin={4}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -248,39 +208,29 @@ export const GendersPage = () => {
         />
       </Flex>
 
-      {/*isFormOpen && (
-        <>
-          {currentMode === "Add" && (
-            <GenderAdd
-              handleCancel={handleClose}
-              handleAddUpdate={handleDeleteGender}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateGenderFields}
-              {...genderData}
-            />
-          )}
-          {currentMode === "Update" && (
-            <GenderUpdate
-              handleCancel={handleClose}
-              handleAddUpdate={handleUpdateGender}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              updateFields={updateGenderFields}
-              {...genderData}
-            />
-          )}
-          {currentMode === "Delete" && (
-            <GenderDelete
-              handleCancel={handleClose}
-              handleDelete={handleDeleteGender}
-              isOpen={isFormOpen}
-              onClose={handleClose}
-              {...genderData}
-            />
-          )}
-        </>
-      )*/}
+      {currentMode === "Add" && (
+        <GenderAdd
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateGenderFields}
+          {...genderData}
+        />
+      )}
+      {currentMode === "Update" && (
+        <GenderUpdate
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          updateFields={updateGenderFields}
+          {...genderData}
+        />
+      )}
+      {currentMode === "Delete" && (
+        <GenderDelete
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          {...genderData}
+        />
+      )}
     </Flex>
   );
 };

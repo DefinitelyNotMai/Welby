@@ -160,7 +160,7 @@ export const MyTeamPage = () => {
             Member Profile
           </Button>
         </Tab>
-        <Flex flex={1}>
+        <Flex flex={1} marginTop={4}>
           <Outlet context={[selectedEmployee]} />
         </Flex>
       </Flex>

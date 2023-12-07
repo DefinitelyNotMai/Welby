@@ -46,7 +46,6 @@ export const MyTeamProfilePage = () => {
     return (
       <Section
         borderRadius="1rem 0 0 0"
-        marginTop={4}
         title={`${employeeData.First_Name} ${employeeData.Middle_Name} ${employeeData.Last_Name}`}
         width="full"
       >

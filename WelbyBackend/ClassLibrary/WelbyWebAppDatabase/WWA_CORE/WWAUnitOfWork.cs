@@ -41,6 +41,7 @@ namespace WWA_CORE
         public IDailyCheckInRepository DailyCheckIn { get; private set; }
         public ITiseRepository Tise { get; private set; }
         public IResultsRepository Results { get; private set; }
+        public IDailyCheckinReport DailyCheckInReports { get; private set; }
         public GlobalFunctions GlobalFunctions { get; set; }
         public DbContextTransaction Transaction
         {
@@ -71,6 +72,7 @@ namespace WWA_CORE
             this.DailyCheckIn = new DailyCheckInService();
             this.Tise = new TiseService();
             this.Results = new ResultsService();
+            this.DailyCheckInReports = new DailyCheckinReport();
         }
 
         public void BeginTransaction()

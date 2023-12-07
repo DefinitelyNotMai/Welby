@@ -176,3 +176,7 @@ C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppD
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.csproj.CopyComplete
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.dll
 C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\obj\Debug\WWA_CORE.pdb
+C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\AuldinBackOfficeTools.Core.dll
+C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\AuldinBackOfficeTools.Excel.dll
+C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\EPPlus.dll
+C:\Users\Micah\Desktop\ThesisSystem\Welby\WelbyBackend\ClassLibrary\WelbyWebAppDatabase\WWA_CORE\bin\Debug\EPPlus.xml

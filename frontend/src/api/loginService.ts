@@ -55,6 +55,8 @@ export const login = async (loginData: Login) => {
 
         if (data[0].FirstLogIn === false) {
           path = "/employee-signup";
+        } else if (data[0].CompanyRole === "Welby") {
+          path = "/admin-view";
         } else {
           path = "/dashboard/my-dashboard/overview";
         }

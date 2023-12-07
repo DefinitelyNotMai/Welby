@@ -77,6 +77,7 @@ namespace WWA_CORE.Persistent.Service.Masters
                 Description = Convert.ToString(row["Description"]),
                 DurationFrom = DBNull.Value != row["DurationFrom"] ? (DateTime?)row["DurationFrom"] : null,
                 DurationTo = DBNull.Value != row["DurationTo"] ? (DateTime?)row["DurationTo"] : null,
+                CompanyName = Convert.ToString(row["CompanyName"]),
 
 
                 Active = Convert.ToBoolean(row["Active"]),

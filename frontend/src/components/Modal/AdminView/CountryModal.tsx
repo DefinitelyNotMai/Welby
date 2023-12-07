@@ -47,7 +47,7 @@ export const CountryAdd = ({
       Name: countryData.Name,
       Nationality: countryData.Nationality,
       Flag_Image: countryData.Flag_Image,
-      Encoded_By: 24287,
+      Encoded_By: localStorage.getItem("userId"),
     };
 
     axios

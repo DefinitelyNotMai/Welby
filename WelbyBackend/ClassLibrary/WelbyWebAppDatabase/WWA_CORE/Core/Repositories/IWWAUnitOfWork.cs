@@ -32,6 +32,7 @@ namespace WWA_CORE.Core.Repositories
         ITiseRepository Tise { get; }
         IResultsRepository Results { get; }
         IDailyCheckinReport DailyCheckInReports { get; }
+        ITiseReport TiseReport { get; }
 
         GlobalFunctions GlobalFunctions { get; set; }
         DbContextTransaction Transaction { get; }

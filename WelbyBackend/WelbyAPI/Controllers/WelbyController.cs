@@ -1046,5 +1046,47 @@ namespace WelbyAPI.Controllers
             return response;
         }
         #endregion
+
+        [Route("~/api/DownloadExcel")]
+        [HttpGet]
+        public async Task<HttpResponseMessage> GetExcel([FromUri] DailyCheckinReportViewModel param)
+        {
+            try
+            {
+                var model = await _wwauow.DailyCheckInReports.CreateReport(param);
+
+                // Check if the model contains the Excel file bytes
+                if (model != null && model.Length > 0)
+                {
+                    var result = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ByteArrayContent(model)
+                    };
+                    result.Content.Headers.ContentDisposition =
+                        new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                        {
+                            FileName = "EmployeesDailyCheckIns.xlsx"
+                        };
+                    result.Content.Headers.ContentType =
+                        new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+                    return result;
+                }
+                else
+                {
+                    // Handle the case where the model doesn't contain the Excel file bytes
+                    var js = new JavaScriptSerializer();
+                    var sample = js.Serialize(model); // Serialize the metadata
+                    var response = Request.CreateResponse(HttpStatusCode.BadRequest);
+                    response.Content = new StringContent(sample, Encoding.UTF8, "application/json");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions here
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }

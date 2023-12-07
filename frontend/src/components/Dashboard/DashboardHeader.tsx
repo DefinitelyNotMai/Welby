@@ -12,6 +12,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,7 @@ export const DashboardHeader = () => {
   const [nickname, setNickname] = useState<string>("");
 
   const userId = localStorage.getItem("userId") || 0;
+  const toast = useToast();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,7 +65,19 @@ export const DashboardHeader = () => {
   };
 
   const handleLogoutSelection = () => {
-    setIsLoggingOut(!isLoggingOut);
+    const dailyCheckInId = localStorage.getItem("dailyCheckInId") || 0;
+    if (dailyCheckInId != 0) {
+      setIsLoggingOut(!isLoggingOut);
+    } else {
+      toast({
+        title: "ERROR",
+        description: "Please take your daily check in before logging out.",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        status: "error",
+      });
+    }
   };
 
   const userContext = useContext(UserContext);

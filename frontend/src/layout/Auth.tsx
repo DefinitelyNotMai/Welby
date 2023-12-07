@@ -1,6 +1,6 @@
 // lib
 import { useToast } from "@chakra-ui/react";
-import { ReactNode, useContext, useEffect } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // local
@@ -12,6 +12,7 @@ type AuthProps = {
 };
 
 export const Auth = ({ children }: AuthProps) => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const toast = useToast();
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
@@ -26,12 +27,18 @@ export const Auth = ({ children }: AuthProps) => {
         const result = await fetchData(employeeUrl, {
           EmployeeId: userId,
         });
-        if (userId && userId.length > 0) {
+        if (userId !== 0) {
+          setIsLoggedIn(true);
           userContext.setCompanyId(result[0].CompanyId);
           userContext.setEmail(result[0].Email);
           userContext.setPhone(result[0].Phone_Number);
           userContext.setRole(result[0].CompanyRole);
         } else {
+          setIsLoggedIn(false);
+          userContext.setCompanyId(0);
+          userContext.setEmail("");
+          userContext.setPhone("");
+          userContext.setRole("");
           toast({
             title: "ERROR",
             description: "Access Denied. Please log in to proceed.",
@@ -50,5 +57,5 @@ export const Auth = ({ children }: AuthProps) => {
     fetchContext();
   }, [navigate, toast, userContext]);
 
-  return userContext.companyId && userContext.email ? <>{children}</> : null;
+  return isLoggedIn === true ? <>{children}</> : null;
 };

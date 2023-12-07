@@ -181,7 +181,7 @@ export const ValuesPage = () => {
               <Th>No.</Th>
               <Th>Active</Th>
               <Th>Value Id</Th>
-              <Th>Company Id</Th>
+              <Th>Company</Th>
               <Th>Title</Th>
               <Th>Description</Th>
             </Tr>
@@ -201,7 +201,7 @@ export const ValuesPage = () => {
                   {value.Active === false ? "0" : "1"}
                 </Td>
                 <Td whiteSpace="normal">{value.ValueId}</Td>
-                <Td whiteSpace="normal">{value.CompanyId}</Td>
+                <Td whiteSpace="normal">{value.CompanyName}</Td>
                 <Td whiteSpace="normal">{value.Title}</Td>
                 <Td whiteSpace="normal">{value.Description}</Td>
               </Tr>

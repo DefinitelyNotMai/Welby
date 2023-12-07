@@ -11,6 +11,7 @@ export type Goal = {
   LastChanged_By: number;
   LastChanged_Date: string;
   Computer_Name: string;
+  CompanyName: string;
 };
 
 export const GOAL_DATA: Goal = {
@@ -26,4 +27,5 @@ export const GOAL_DATA: Goal = {
   LastChanged_By: 0,
   LastChanged_Date: "",
   Computer_Name: "",
+  CompanyName: "",
 };

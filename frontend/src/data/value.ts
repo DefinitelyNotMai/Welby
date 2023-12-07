@@ -9,6 +9,7 @@ export type Value = {
   LastChanged_By: number;
   LastChanged_Date: string;
   Computer_Name: string;
+  CompanyName: string;
 };
 
 export const VALUE_DATA: Value = {
@@ -22,4 +23,5 @@ export const VALUE_DATA: Value = {
   LastChanged_By: 0,
   LastChanged_Date: "",
   Computer_Name: "",
+  CompanyName: "",
 };

@@ -67,6 +67,7 @@ export const GoalsPage = () => {
     }
   }, [fetchData]);
 
+  console.log(goals);
   const updateGoalFields = (fields: Partial<Goal>) => {
     setGoalData((prev) => {
       return { ...prev, ...fields };
@@ -179,7 +180,7 @@ export const GoalsPage = () => {
               <Th>No.</Th>
               <Th>Active</Th>
               <Th>Goal Id</Th>
-              <Th>Company Id</Th>
+              <Th>Company</Th>
               <Th>Title</Th>
               <Th>Description</Th>
               <Th>Duration From</Th>
@@ -200,7 +201,7 @@ export const GoalsPage = () => {
                 <Td whiteSpace="normal">{startNumber + index}</Td>
                 <Td whiteSpace="normal">{goal.Active === false ? "0" : "1"}</Td>
                 <Td whiteSpace="normal">{goal.GoalId}</Td>
-                <Td whiteSpace="normal">{goal.CompanyId}</Td>
+                <Td whiteSpace="normal">{goal.CompanyName}</Td>
                 <Td whiteSpace="normal" minWidth="250px">
                   {goal.Title}
                 </Td>

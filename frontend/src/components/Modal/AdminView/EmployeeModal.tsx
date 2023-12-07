@@ -29,7 +29,7 @@ import {
   SelectRole,
 } from "../../Form/Select";
 import { UploadPhoto } from "../../Form/UploadPhoto";
-import { fetchAccessToken } from "./tokenService";
+import { fetchAccessToken } from "../../../api/tokenService";
 
 type EmployeeModalProps = Employee & {
   isOpen: boolean;

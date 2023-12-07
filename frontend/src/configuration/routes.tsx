@@ -3,9 +3,19 @@ import { createBrowserRouter } from "react-router-dom";
 
 // local
 import { AdminViewPage } from "../pages/AdminViewPage";
+import { Auth } from "../layout/Auth";
+import { CitiesPage } from "../pages/AdminViewPage/CitiesPage";
+import { CompaniesPage } from "../pages/AdminViewPage/CompaniesPage";
 import { CompanySignUpPage } from "../pages/CompanySignUpPage";
+import { CountriesPage } from "../pages/AdminViewPage/CountriesPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { EmployeeSignUpPage } from "../pages/EmployeeSignUpPage";
+import { EmployeesPage } from "../pages/AdminViewPage/EmployeesPage";
+import { GendersPage } from "../pages/AdminViewPage/GendersPage";
+import { GoalsPage } from "../pages/AdminViewPage/GoalsPage";
+import { GroupsPage } from "../pages/AdminViewPage/GroupsPage";
+import { IndustryTypesPage } from "../pages/AdminViewPage/IndustryTypesPage";
+import { InterestsPage } from "../pages/AdminViewPage/InterestsPage";
 import { LoginPage } from "../pages/LoginPage";
 import { MyDashboardOverviewPage } from "../pages/DashboardPage/MyDashboardPage/MyDashboardOverviewPage";
 import { MyDashboardPage } from "../pages/DashboardPage/MyDashboardPage";
@@ -18,22 +28,13 @@ import { OurCompanyCoreValuesPage } from "../pages/DashboardPage/OurCompanyPage/
 import { OurCompanyGoalsPage } from "../pages/DashboardPage/OurCompanyPage/OurCompanyGoalsPage";
 import { OurCompanyMissionAndVisionPage } from "../pages/DashboardPage/OurCompanyPage/OurCompanyMissionAndVisionPage";
 import { OurCompanyPage } from "../pages/DashboardPage/OurCompanyPage";
+import { ProfilePage } from "../pages/ProfilePage";
 import { Root } from "../layout/Root";
-import { WelcomePage } from "../pages/WelcomePage";
-import { CompaniesPage } from "../pages/AdminViewPage/CompaniesPage";
-import { EmployeesPage } from "../pages/AdminViewPage/EmployeesPage";
-import { GoalsPage } from "../pages/AdminViewPage/GoalsPage";
-import { IndustryTypesPage } from "../pages/AdminViewPage/IndustryTypesPage";
-import { ValuesPage } from "../pages/AdminViewPage/ValuesPage";
-import { CitiesPage } from "../pages/AdminViewPage/CitiesPage";
-import { CountriesPage } from "../pages/AdminViewPage/CountriesPage";
-import { GendersPage } from "../pages/AdminViewPage/GendersPage";
-import { InterestsPage } from "../pages/AdminViewPage/InterestsPage";
 import { StrengthsPage } from "../pages/AdminViewPage/StrengthsPage";
-import { GroupsPage } from "../pages/AdminViewPage/GroupsPage";
-import { UsersPage } from "../pages/AdminViewPage/UsersPage";
 import { UserToGroupPage } from "../pages/AdminViewPage/UserToGroupPage";
-import { Auth } from "../layout/Auth";
+import { UsersPage } from "../pages/AdminViewPage/UsersPage";
+import { ValuesPage } from "../pages/AdminViewPage/ValuesPage";
+import { WelcomePage } from "../pages/WelcomePage";
 
 export const routes = createBrowserRouter([
   {
@@ -53,7 +54,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/admin-view",
-        element: <AdminViewPage />,
+        element: (
+          <Auth>
+            <AdminViewPage />
+          </Auth>
+        ),
         children: [
           {
             path: "companies",
@@ -168,6 +173,14 @@ export const routes = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: "/profile",
+        element: (
+          <Auth>
+            <ProfilePage />
+          </Auth>
+        ),
       },
       {
         path: "/employee-signup",

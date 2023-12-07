@@ -150,23 +150,54 @@ export const MyDashboardOverviewPage = () => {
     checkIfTiseTaken();
   }, [userContext.companyId, userId]);
 
+  const handleCheckInDownload = () => {
+    alert("dl checkin");
+  };
+
+  const handleTISEDownload = () => {
+    alert("dl tise");
+  };
+
   return (
     <Flex flexDirection="column" gap={4} width="full" marginBottom={4}>
       <Section
         title="How is your well-being at work?"
-        headerComponents={[
-          <Button
-            key={1}
-            marginRight={16}
-            onClick={() =>
-              checkInTaken === true
-                ? setModal("checkin-results")
-                : setModal("daily-checkin")
-            }
-          >
-            {checkInTaken === false ? "Do Daily Check In" : "Show Results"}
-          </Button>,
-        ]}
+        headerComponents={
+          userContext.role === "Company Admin" || userContext.role === "Leader"
+            ? [
+                <Button key={1} onClick={handleCheckInDownload}>
+                  Download Daily Check-In Scores as Excel Spreadsheet
+                </Button>,
+                <Button
+                  key={2}
+                  marginRight={16}
+                  onClick={() =>
+                    checkInTaken === true
+                      ? setModal("checkin-results")
+                      : setModal("daily-checkin")
+                  }
+                >
+                  {checkInTaken === false
+                    ? "Do Daily Check In"
+                    : "Show Results"}
+                </Button>,
+              ]
+            : [
+                <Button
+                  key={3}
+                  marginRight={16}
+                  onClick={() =>
+                    checkInTaken === true
+                      ? setModal("checkin-results")
+                      : setModal("daily-checkin")
+                  }
+                >
+                  {checkInTaken === false
+                    ? "Do Daily Check In"
+                    : "Show Results"}
+                </Button>,
+              ]
+        }
       >
         {checkInTaken === true ? (
           <Flex
@@ -215,22 +246,42 @@ export const MyDashboardOverviewPage = () => {
       </Section>
       <Section
         title="How are the pillars of your ability to thrive at work?"
-        headerComponents={[
-          <Switch
-            key={1}
-            isChecked={takeAssessment}
-            onChange={handleTakeAssessment}
-            size="lg"
-          />,
-          <Button
-            key={2}
-            isDisabled={!takeAssessment || tiseTaken}
-            marginRight={16}
-            onClick={() => setModal("quarterly-assessment")}
-          >
-            {tiseTaken ? "Quarterly Exam taken" : "Take Quarterly Assessment"}
-          </Button>,
-        ]}
+        headerComponents={
+          userContext.role === "Company Admin" || userContext.role === "Leader"
+            ? [
+                <Switch
+                  key={1}
+                  isChecked={takeAssessment}
+                  onChange={handleTakeAssessment}
+                  size="lg"
+                />,
+                <Button key={2} onClick={handleTISEDownload}>
+                  Download TISE Scores as Excel Spreadsheet
+                </Button>,
+                <Button
+                  key={3}
+                  isDisabled={!takeAssessment || tiseTaken}
+                  marginRight={16}
+                  onClick={() => setModal("quarterly-assessment")}
+                >
+                  {tiseTaken
+                    ? "Quarterly Exam taken"
+                    : "Take Quarterly Assessment"}
+                </Button>,
+              ]
+            : [
+                <Button
+                  key={4}
+                  isDisabled={!takeAssessment || tiseTaken}
+                  marginRight={16}
+                  onClick={() => setModal("quarterly-assessment")}
+                >
+                  {tiseTaken
+                    ? "Quarterly Exam taken"
+                    : "Take Quarterly Assessment"}
+                </Button>,
+              ]
+        }
       >
         <Grid gap={4} templateRows={tiseTaken === true ? "1fr 1fr 1fr" : "1fr"}>
           {tiseTaken === true ? (

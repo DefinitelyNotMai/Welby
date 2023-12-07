@@ -7,6 +7,7 @@ export type Interest = {
   LastChanged_By: number;
   LastChanged_Date: string;
   Computer_Name: string;
+  InterestNameDisplay: string;
 };
 
 export const INTEREST_DATA: Interest = {
@@ -18,4 +19,5 @@ export const INTEREST_DATA: Interest = {
   LastChanged_By: 0,
   LastChanged_Date: "",
   Computer_Name: "",
+  InterestNameDisplay: "",
 };

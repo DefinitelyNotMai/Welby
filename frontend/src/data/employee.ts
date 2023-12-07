@@ -32,6 +32,7 @@ export type Employee = {
   GenderDisplayName: string;
   EmployeeCompanyDisplay: string;
   CountryDisplay: string;
+  EmployeeFullName: string;
 };
 
 export const EMPLOYEE_DATA: Employee = {
@@ -68,4 +69,5 @@ export const EMPLOYEE_DATA: Employee = {
   GenderDisplayName: "",
   EmployeeCompanyDisplay: "",
   CountryDisplay: "",
+  EmployeeFullName: "",
 };

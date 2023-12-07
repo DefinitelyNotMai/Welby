@@ -9,6 +9,9 @@ export type Strength = {
   LastChanged_By: number;
   LastChanged_Date: string;
   Computer_Name: string;
+  RealizedStrengthDisplay: string;
+  UnrealizedStrengthDisplay: string;
+  LearnedBehaviorDisplay: string;
 };
 
 export const STRENGTH_DATA: Strength = {
@@ -22,4 +25,7 @@ export const STRENGTH_DATA: Strength = {
   LastChanged_By: 0,
   LastChanged_Date: "",
   Computer_Name: "",
+  RealizedStrengthDisplay: "",
+  UnrealizedStrengthDisplay: "",
+  LearnedBehaviorDisplay: "",
 };

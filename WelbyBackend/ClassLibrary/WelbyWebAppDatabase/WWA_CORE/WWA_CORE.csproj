@@ -197,6 +197,7 @@
     <Compile Include="Core\Repositories\Algo\IDailyCheckinReport.cs" />
     <Compile Include="Core\Repositories\Algo\IDailyCheckInRepository.cs" />
     <Compile Include="Core\Repositories\Algo\IResultsRepository.cs" />
+    <Compile Include="Core\Repositories\Algo\ITiseReport.cs" />
     <Compile Include="Core\Repositories\Algo\ITiseRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeInterestRepository.cs" />
     <Compile Include="Core\Repositories\Employee\IEmployeeLearnedBehaviorsRepository.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="Persistent\Service\Algo\DailyCheckinReport.cs" />
     <Compile Include="Persistent\Service\Algo\DailyCheckInService.cs" />
     <Compile Include="Persistent\Service\Algo\ResultsService.cs" />
+    <Compile Include="Persistent\Service\Algo\TiseReport.cs" />
     <Compile Include="Persistent\Service\Algo\TiseService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeInterestService.cs" />
     <Compile Include="Persistent\Service\Employee\EmployeeLearnedBehaviorsService.cs" />
@@ -312,6 +314,7 @@
     <Compile Include="Persistent\ViewModel\Algo\DailyCheckinReportViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Algo\DailyCheckInViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Algo\ResultsViewModel.cs" />
+    <Compile Include="Persistent\ViewModel\Algo\TiseReportViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Algo\TiseViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeInterestViewModel.cs" />
     <Compile Include="Persistent\ViewModel\Employee\EmployeeLearnedBehaviorsViewModel.cs" />

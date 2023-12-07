@@ -24,6 +24,9 @@ namespace WWA_CORE.Persistent.Service.Algo
                 ConnectionString = WWA_COREDefaults.DEFAULT_WWA_CORE_CONNECTION_STRING,
                 Parameters = new SqlParameter[]
                 {
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_FROM , dailyCheckinReportViewModel.DateFrom),
+                    new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_DATE_TO , dailyCheckinReportViewModel.DateTo),
+
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_GET_TRAININGSET_EMPLOYEEID, dailyCheckinReportViewModel.EmployeeId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_CMP_DAILYCHECKIN_GET_COMPANYID, dailyCheckinReportViewModel.CompanyId),
                     new SqlParameter(PROCEDURE_PARAMETERS.PARA_COMMON_ACTIVE, dailyCheckinReportViewModel.Active)

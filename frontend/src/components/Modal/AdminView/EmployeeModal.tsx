@@ -1,5 +1,6 @@
 // lib
 import axios from "axios";
+import bcrypt from "bcryptjs";
 import {
   Button,
   Flex,
@@ -28,6 +29,7 @@ import {
   SelectRole,
 } from "../../Form/Select";
 import { UploadPhoto } from "../../Form/UploadPhoto";
+import { fetchAccessToken } from "./tokenService";
 
 type EmployeeModalProps = Employee & {
   isOpen: boolean;
@@ -54,7 +56,6 @@ export const EmployeeAdd = ({
     e.preventDefault();
     const addEmployeeUrl = "https://localhost:44373/api/AddEmployee";
     const employee = {
-      EmployeeId: employeeData.EmployeeId,
       ProfilePhoto: employeeData.ProfilePhoto,
       First_Name: employeeData.First_Name,
       Middle_Name: employeeData.Middle_Name,
@@ -82,37 +83,73 @@ export const EmployeeAdd = ({
       Encoded_By: 24287,
     };
 
-    axios
-      .patch(addEmployeeUrl, employee, config)
-      .then(() => {
-        // TODO: add ows call for updating password
-        /*
-        const token = fetchAccessToken();
-        if (token != null) {
-          const UpdateSystemUserUrl = "http://lcoalhost:58258/api/UpdateSystemUser";
-        }
-        */
-        toast({
-          description: `Employee "${employeeData.Nickname}" has been added.`,
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-          status: "success",
-          title: "SUCCESS",
-        });
-        onClose();
-      })
-      .catch((error) => {
-        console.error("An error occurred: ", error);
-        toast({
-          description: `Failed to add Employee "${employeeData.Nickname}". Please try again.`,
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-          status: "error",
-          title: "Error",
-        });
+    const addEmployee = axios
+    .post(addEmployeeUrl, employee, config)
+    .then((response) => {
+      return response.data
+    });
+    
+    const getEmployeeParams = {
+      Email: employeeData.Email,
+      Phone_Number: employeeData.Phone_Number,
+    };
+
+    const getEmployee = axios.get(
+      "https://localhost:44373/api/GetEmployees",
+      {
+        params: getEmployeeParams,
+      },
+    ).then((response) => {
+      let results = response.data;
+      return results[0]
+    })
+    const token = fetchAccessToken();
+    const hashedPassword =  bcrypt.hash(password, 10);
+
+    const userData = {
+      UserCode: getEmployee.EmployeeId,
+      UserName: getEmployee.Email,
+      Password: hashedPassword,
+      AccountLocked: 0,
+      LoggedIn: 0,
+      PasswordNoExpiry: null,
+      ExpiryDays: null,
+      AccountVerified: null,
+      VerifiedDate: null,
+      Encoded_By: localStorage.getItem("userId"),
+      Active: true,
+    };
+    
+    axios.post(
+      "http://localhost:58258/api/AddSystemUsers",
+      userData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    ).then((response) => {
+      toast({
+        description: `Employee "${employeeData.Nickname}" has been added.`,
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        status: "success",
+        title: "SUCCESS",
       });
+      onClose();
+    }).catch((error) => {
+      console.error("An error occurred: ", error);
+      toast({
+        description: `Failed to add Employee "${employeeData.Nickname}". Please try again.`,
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+        status: "error",
+        title: "Error",
+      });
+    });
   };
 
   return (
@@ -485,7 +522,7 @@ export const EmployeeUpdate = ({
     return `${year}-${month}-${day}`;
   };
 
-  const handleUpdate = (e: FormEvent) => {
+  const handleUpdate = async (e: FormEvent) => {
     e.preventDefault();
     const updateEmployeeUrl = "https://localhost:44373/api/UpdateEmployee";
     const employee = {
@@ -519,14 +556,68 @@ export const EmployeeUpdate = ({
 
     axios
       .patch(updateEmployeeUrl, employee, config)
-      .then(() => {
-        // TODO: add ows call for updating password
-        /*
-        const token = fetchAccessToken();
-        if (token != null) {
-          const UpdateSystemUserUrl = "http://lcoalhost:58258/api/UpdateSystemUser";
+      .then((response) => {
+       console.log(response)
+      })
+      .catch((error) => {
+        console.error("An error occurred: ", error);
+      });
+
+      const getEmpOwsUrl = "http://localhost:58258/api/GetSystemUsers";
+      const token = await fetchAccessToken();
+      const getEmpOws = axios.get(getEmpOwsUrl,{
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        params: {
+          UserId : 0,
+          UserCode : employeeData.EmployeeId,
+          UserName : '',
+          Password : '',
+          AccountLocked: 0,
+          LoggedIn: 0,
+          PasswordNoExpiry: null,
+          ExpiryDays: null,
+          AccountVerified: null,
+          VerifiedDate: null,
+          Encoded_By: localStorage.getItem("userId"),
+          Active: true,
         }
-        */
+      }).then((response) => {
+        console.log(response.data);
+        return response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+
+      const UpdateSystemUserUrl = "http://lcoalhost:58258/api/UpdateSystemUser";
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const UpdateEmpOws = {
+        UserId : getEmpOws.UserId,
+        UserCode : employeeData.EmployeeId,
+        UserName : employeeData.Email,
+        Password : hashedPassword,
+        AccountLocked: 0,
+        LoggedIn: 0,
+        PasswordNoExpiry: null,
+        ExpiryDays: null,
+        AccountVerified: null,
+        VerifiedDate: null,
+        Encoded_By: localStorage.getItem("userId"),
+        Active: true,
+      }
+
+      axios.patch(UpdateSystemUserUrl, UpdateEmpOws, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      }).then((response) =>{
+        console.log(response)
         toast({
           description: `Employee "${employeeData.Nickname}" has been updated.`,
           duration: 5000,
@@ -536,8 +627,7 @@ export const EmployeeUpdate = ({
           title: "SUCCESS",
         });
         onClose();
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.error("An error occurred: ", error);
         toast({
           description: `Failed to update employee "${employeeData.Nickname}". Please try again.`,
@@ -548,6 +638,7 @@ export const EmployeeUpdate = ({
           title: "Error",
         });
       });
+
   };
 
   return (

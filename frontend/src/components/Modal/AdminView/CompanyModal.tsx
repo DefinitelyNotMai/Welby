@@ -183,9 +183,18 @@ export const CompanyAdd = ({
     e.preventDefault();
     const addCompanyUrl = "https://localhost:44373/api/AddCompany";
     const company = {
-      Company: companyData.Company,
-      Biological: true,
-      Encoded_By: 24287,
+      Name: companyData.Name,
+      Email: companyData.Email,
+      Logo: companyData.Logo,
+      Phone_Number: companyData.Phone_Number,
+      Website: companyData.Website,
+      FoundingDate: companyData.FoundingDate,
+      Vision: companyData.Vision,
+      CountryId: companyData.CountryId,
+      Mission: companyData.Mission,
+      IndustryTypeId: companyData.IndustryTypeId,
+      CompanySize: companyData.CompanySize,
+      Encoded_By: localStorage.getItem("userId"),
     };
 
     axios
@@ -267,8 +276,53 @@ export const CompanyUpdate = ({
 }: CompanyModalProps) => {
   const toast = useToast();
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const handleUpdateVision = () => {
+    const updateVisionUrl = "https://localhost:44373/api/UpdateCompanyVision"
+    try {
+      axios.patch(updateVisionUrl, {
+        CompanyId: companyData.CompanyId,
+        Vision: companyData.Vision,
+        Encoded_By: localStorage.getItem("userId")
+      }, config).then((response) => {
+        console.log(response.data);
+      }).catch((error) => {
+        console.log(error);
+      })
+    } catch (error) {
+      console.error("Error updating vision: ", error);
+    }
+  };
+
+  const handleUpdateMission = () => {
+    const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission"
+    try {
+      axios.patch(updateMissionUrl, {
+        CompanyId: companyData.CompanyId,
+        Mission: companyData.Mission,
+        Encoded_By: localStorage.getItem("userId")
+      }, config).then((response) => {
+        console.log(response.data);
+      
+      }).catch((error) => {
+        console.log(error);
+      })
+    } catch (error) {
+      console.error("Error updating mission: ", error);
+    }
+  };
+
   const handleUpdate = (e: FormEvent) => {
     e.preventDefault();
+
+    handleUpdateVision();
+    handleUpdateMission();
+
     const updateCompanyUrl = "https://localhost:44373/api/UpdateCompany";
     const company = {
       CompanyId: companyData.CompanyId,
@@ -281,8 +335,9 @@ export const CompanyUpdate = ({
       Address: companyData.Address,
       CountryId: companyData.CountryId,
       IndustryTypeId: companyData.IndustryTypeId,
+      TakeAssessment: false,
       Active: true,
-      Encoded_By: 24287,
+      Encoded_By: localStorage.getItem("userId"),
     };
 
     axios

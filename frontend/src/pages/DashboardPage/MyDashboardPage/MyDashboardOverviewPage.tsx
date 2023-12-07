@@ -1,6 +1,6 @@
 // lib
 import { BsPerson } from "react-icons/bs";
-import { Button, Flex, Grid, Icon, Text } from "@chakra-ui/react";
+import { Button, Flex, Grid, Icon, Switch, Text } from "@chakra-ui/react";
 import {
   FaDumbbell,
   FaEye,
@@ -29,9 +29,12 @@ import { UserContext } from "../../../context/UserContext";
 import { DailyCheckInResult } from "../../../components/Modal/DailyCheckin/DailyCheckInResult";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { getDateToday } from "../../../api/getDates";
+import axios from "axios";
 
 export const MyDashboardOverviewPage = () => {
   document.title = "Dashboard Overview | Welby";
+
+  const userContext = useContext(UserContext);
 
   const [tiseData, setTiseData] = useState<TISE>(TISE_DATA);
   const [dailyCheckInData, setDailyCheckInData] =
@@ -39,13 +42,14 @@ export const MyDashboardOverviewPage = () => {
   const [modal, setModal] = useState<string>("");
   const [checkInTaken, setCheckInTaken] = useState<boolean>(true);
   const [tiseTaken, setTiseTaken] = useState<boolean>(true);
-  const [stat, setStat] = useState<boolean>(true);
+  const [takeAssessment, setTakeAssessment] = useState<boolean>(false);
+  const [fetched, setFetched] = useState<boolean>(true);
 
   // NOTE: calls for fetching daily checkin and tise data goes here
   const userId = localStorage.getItem("userId") || 0;
   const dailyCheckInUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
   const tiseUrl = "https://localhost:44373/api/GetAllTise";
-  const userContext = useContext(UserContext);
+  const companyUrl = "https://localhost:44373/api/GetCompanies";
 
   useEffect(() => {
     const checkIfCheckInTaken = async () => {
@@ -60,20 +64,62 @@ export const MyDashboardOverviewPage = () => {
       if (data.length > 0) {
         setCheckInTaken(true);
         setDailyCheckInData(data[0]);
-        console.log(data[0]);
       } else {
         setCheckInTaken(false);
       }
-      //console.log(data);
-      //console.log(checkInTaken);
     };
 
-    checkIfCheckInTaken();
-    if (stat) {
-      setStat(false);
+    if (fetched) {
+      setFetched(false);
       checkIfCheckInTaken();
     }
-  }, [stat, userContext.companyId, userId]);
+  }, [fetched, userContext.companyId, userId]);
+
+  useEffect(() => {
+    const fetchTakeAssessment = async () => {
+      const data = await fetchData(companyUrl, {
+        CompanyId: userContext.companyId,
+      });
+      if (data.length > 0) {
+        setTakeAssessment(data[0].TakeAssessment);
+      }
+    };
+
+    if (fetched) {
+      setFetched(false);
+      fetchTakeAssessment();
+    }
+  }, [fetched, userContext.companyId]);
+
+  const handleTakeAssessment = () => {
+    setTakeAssessment(!takeAssessment);
+    console.log(takeAssessment);
+    const takeAssessmentUrl = "https://localhost:44373/api/TakeAssessment";
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const company = {
+      CompanyId: userContext.companyId,
+      TakeAssessment: !takeAssessment,
+      Encoded_By: localStorage.getItem("userId"),
+    };
+
+    axios
+      .patch(takeAssessmentUrl, company, config)
+      .then(() => {
+        setFetched(true);
+      })
+      .catch((error) => {
+        console.error("An error occurred: ", error);
+      });
+  };
+
+  const handleClose = (mode: string) => {
+    setFetched(true);
+    setModal(mode);
+  };
 
   useEffect(() => {
     const checkIfTiseTaken = async () => {
@@ -96,7 +142,6 @@ export const MyDashboardOverviewPage = () => {
     checkIfTiseTaken();
   }, [userContext.companyId, userId]);
 
-  console.log(tiseData);
   return (
     <Flex flexDirection="column" gap={4} width="full" marginBottom={4}>
       <Section
@@ -163,8 +208,15 @@ export const MyDashboardOverviewPage = () => {
       <Section
         title="How are the pillars of your ability to thrive at work?"
         headerComponents={[
-          <Button
+          <Switch
             key={1}
+            isChecked={takeAssessment}
+            onChange={handleTakeAssessment}
+            size="lg"
+          />,
+          <Button
+            key={2}
+            isDisabled={!takeAssessment}
             marginRight={16}
             onClick={() => setModal("quarterly-assessment")}
           >
@@ -280,22 +332,19 @@ export const MyDashboardOverviewPage = () => {
         <DailyCheckin
           isOpen={modal === "daily-checkin"}
           onCancel={() => setModal("")}
-          onClose={() => {
-            setModal("checkin-results");
-            setStat(true);
-          }}
+          onClose={() => handleClose("checkin-results")}
         />
       )}
       {modal === "quarterly-assessment" && (
         <QuarterlyAssessment
           isOpen={modal === "quarterly-assessment"}
-          onClose={() => setModal("")}
+          onClose={() => handleClose("")}
         />
       )}
       {modal === "checkin-results" && (
         <DailyCheckInResult
           isOpen={modal === "checkin-results"}
-          onClose={() => setModal("")}
+          onClose={() => handleClose("")}
         />
       )}
     </Flex>

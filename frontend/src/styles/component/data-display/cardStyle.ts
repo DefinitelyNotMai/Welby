@@ -32,6 +32,20 @@ const variants = {
       margin: 0,
     },
   }),
+  profile: definePartsStyle({
+    container: {
+      backgroundColor: "#ffffff",
+      border: "1px solid #ebebeb",
+      boxShadow: "2xl",
+    },
+    header: {
+      borderBottom: "2px solid #ebebeb",
+      color: "#2e2e2e",
+      fontSize: "1.25rem",
+      fontWeight: "bold",
+      margin: 0,
+    },
+  }),
 };
 
 export const cardStyle = defineMultiStyleConfig({ variants });

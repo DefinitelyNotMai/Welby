@@ -12,6 +12,9 @@ export const textStyle = defineStyleConfig({
       fontSize: "1.25rem",
       fontWeight: "bold",
     },
+    profile: {
+      color: "#000000",
+    },
   },
   defaultProps: {
     variant: "form",

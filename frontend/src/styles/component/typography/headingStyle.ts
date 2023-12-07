@@ -19,6 +19,11 @@ export const headingStyle = defineStyleConfig({
       fontFamily: "Roboto",
       fontWeight: "normal",
     },
+    profile: {
+      color: "#000000",
+      fontSize: "1.5rem",
+      fontWeight: "semibold",
+    },
   },
   defaultProps: {
     variant: "welcome",

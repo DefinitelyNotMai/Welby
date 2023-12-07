@@ -8,6 +8,7 @@ type ChartDoughnutProps = {
   icon?: React.ElementType;
   title: string;
   dataValue: number;
+  onClick: () => void;
   min: number;
   avg: number;
   max: number;
@@ -17,6 +18,7 @@ export const ChartDoughnut = ({
   icon: IconComponent,
   title,
   dataValue,
+  onClick,
   min,
   avg,
   max,
@@ -88,7 +90,14 @@ export const ChartDoughnut = ({
           flexDir="column"
           alignItems="center"
         >
-          <Icon as={IconComponent} color="#24a2f0" boxSize={12} />
+          <Icon
+            as={IconComponent}
+            _hover={{ transform: "scale(1.1)" }}
+            cursor="pointer"
+            color="#24a2f0"
+            boxSize={12}
+            onClick={onClick}
+          />
           <Text
             color="#7c7c7c"
             fontFamily="Montserrat"

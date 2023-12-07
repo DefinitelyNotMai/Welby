@@ -30,6 +30,14 @@ import { DailyCheckInResult } from "../../../components/Modal/DailyCheckin/Daily
 import { RiErrorWarningLine } from "react-icons/ri";
 import { getDateToday } from "../../../api/getDates";
 import axios from "axios";
+import { Factor1Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor1Result";
+import { Factor2Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor2Result";
+import { Factor3Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor3Result";
+import { Factor4Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor4Result";
+import { Factor5Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor5Result";
+import { Factor6Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor6Result";
+import { Factor7Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor7Result";
+import { Factor8Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor8Result";
 
 export const MyDashboardOverviewPage = () => {
   document.title = "Dashboard Overview | Welby";
@@ -216,11 +224,11 @@ export const MyDashboardOverviewPage = () => {
           />,
           <Button
             key={2}
-            isDisabled={!takeAssessment}
+            isDisabled={!takeAssessment || tiseTaken}
             marginRight={16}
             onClick={() => setModal("quarterly-assessment")}
           >
-            Take Quarterly Assessment
+            {tiseTaken ? "Quarterly Exam taken" : "Take Quarterly Assessment"}
           </Button>,
         ]}
       >
@@ -237,6 +245,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Social Mutualism"
                   icon={GiHummingbird}
                   dataValue={tiseData.Factor_1}
+                  onClick={() => setModal("factor-1")}
                   min={1}
                   avg={3}
                   max={7}
@@ -245,6 +254,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Sense of Being Valued"
                   icon={FaDumbbell}
                   dataValue={tiseData.Factor_2}
+                  onClick={() => setModal("factor-2")}
                   min={1}
                   avg={3}
                   max={7}
@@ -253,6 +263,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Nurtured Psychological Needs"
                   icon={IoMdGitNetwork}
                   dataValue={tiseData.Factor_3}
+                  onClick={() => setModal("factor-3")}
                   min={1}
                   avg={3}
                   max={7}
@@ -268,6 +279,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Positive Work Relationships"
                   icon={MdPeople}
                   dataValue={tiseData.Factor_4}
+                  onClick={() => setModal("factor-4")}
                   min={1}
                   avg={3}
                   max={7}
@@ -276,6 +288,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Subjective Well Being"
                   icon={FaHands}
                   dataValue={tiseData.Factor_5}
+                  onClick={() => setModal("factor-5")}
                   min={1}
                   avg={7}
                   max={21}
@@ -284,6 +297,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Organizational Commitment"
                   icon={FaHandshake}
                   dataValue={tiseData.Factor_6}
+                  onClick={() => setModal("factor-6")}
                   min={1}
                   avg={9}
                   max={28}
@@ -299,6 +313,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Intent To Quit"
                   icon={FaWalking}
                   dataValue={tiseData.Factor_7}
+                  onClick={() => setModal("factor-7")}
                   min={1}
                   avg={7}
                   max={21}
@@ -307,6 +322,7 @@ export const MyDashboardOverviewPage = () => {
                   title="Presenteeism"
                   icon={FaEye}
                   dataValue={tiseData.Factor_8}
+                  onClick={() => setModal("factor-8")}
                   min={-3}
                   avg={-2}
                   max={0}
@@ -344,6 +360,54 @@ export const MyDashboardOverviewPage = () => {
       {modal === "checkin-results" && (
         <DailyCheckInResult
           isOpen={modal === "checkin-results"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-1" && (
+        <Factor1Result
+          isOpen={modal === "factor-1"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-2" && (
+        <Factor2Result
+          isOpen={modal === "factor-2"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-3" && (
+        <Factor3Result
+          isOpen={modal === "factor-3"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-4" && (
+        <Factor4Result
+          isOpen={modal === "factor-4"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-5" && (
+        <Factor5Result
+          isOpen={modal === "factor-5"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-6" && (
+        <Factor6Result
+          isOpen={modal === "factor-6"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-7" && (
+        <Factor7Result
+          isOpen={modal === "factor-7"}
+          onClose={() => handleClose("")}
+        />
+      )}
+      {modal === "factor-8" && (
+        <Factor8Result
+          isOpen={modal === "factor-8"}
           onClose={() => handleClose("")}
         />
       )}

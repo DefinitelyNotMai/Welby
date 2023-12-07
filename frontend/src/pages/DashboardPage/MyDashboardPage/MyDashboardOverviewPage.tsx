@@ -28,7 +28,7 @@ import { fetchData } from "../../../api/fetchData";
 import { UserContext } from "../../../context/UserContext";
 import { DailyCheckInResult } from "../../../components/Modal/DailyCheckin/DailyCheckInResult";
 import { RiErrorWarningLine } from "react-icons/ri";
-import { getDateToday } from "../../../api/getDates";
+import { getDateToday, getDateDaysAgo} from "../../../api/getDates";
 import axios from "axios";
 import { Factor1Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor1Result";
 import { Factor2Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor2Result";
@@ -155,7 +155,36 @@ export const MyDashboardOverviewPage = () => {
   };
 
   const handleTISEDownload = () => {
-    alert("dl tise");
+    const excelDownloadUrl = "https://localhost:44373/api/DownloadExcelTise";
+    axios({
+      method: "GET",
+      url: excelDownloadUrl, // Replace with your API endpoint
+      params: {
+        EmployeeId: 0,
+        CompanyId: userContext.companyId,
+        DateTo: getDateToday(),
+        DateFrom: getDateDaysAgo(91),
+        Active: true,
+      },
+      responseType: 'blob', // Set the response type to 'blob' to handle binary data (e.g., files)
+      headers: {
+        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify the expected file format
+      },
+    })
+      .then(response => {
+        // Handle the file response here
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'EmployeesTise.xlsx'); // Set the file name
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        alert("Error downloading file");
+        // Handle errors
+        console.error('Error downloading file:', error);
+      });
   };
 
   return (

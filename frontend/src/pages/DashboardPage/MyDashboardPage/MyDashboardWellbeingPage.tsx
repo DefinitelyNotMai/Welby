@@ -19,7 +19,7 @@ export const MyDashboardWellbeingPage = () => {
   };
 
   const handleDownload = () => {
-    const excelDownloadUrl = "https://localhost:44373/api/DownloadExcel";
+    const excelDownloadUrl = "https://localhost:44373/api/DownloadExcelDailyCheckin";
     axios({
       method: "GET",
       url: excelDownloadUrl, // Replace with your API endpoint

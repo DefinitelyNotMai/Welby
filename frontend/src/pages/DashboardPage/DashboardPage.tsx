@@ -27,7 +27,6 @@ export const DashboardPage = () => {
     setSelectedItem(location.pathname.replace("/dashboard/", "").split("/")[0]);
   }, [location.pathname]);
 
-  console.log("DailyCheckInId: ", localStorage.getItem("dailyCheckInId"));
   return (
     <>
       <DashboardHeader />

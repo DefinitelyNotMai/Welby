@@ -1,25 +1,52 @@
 import { Button, Flex, Grid } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Section } from "../../../components/DataDisplay/Section";
 import { ChartBar } from "../../../components/Charts/ChartBar";
 import { PredictionChart } from "../../../components/Charts/PredictionChart";
 import { UserContext } from "../../../context/UserContext";
 import axios from "axios";
 import { getDateDaysAgo, getDateToday } from "../../../api/getDates";
+import { fetchData } from "../../../api/fetchData";
+import { DailyCheckin } from "../../../components/Modal/DailyCheckin";
+import { DailyCheckInResult } from "../../../components/Modal/DailyCheckin/DailyCheckInResult";
 
 export const MyDashboardWellbeingPage = () => {
   document.title = "Well-Being | Welby";
 
   const userContext = useContext(UserContext);
   const [modal, setModal] = useState<string>("");
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  const [checkInTaken, setCheckInTaken] = useState<boolean>(true);
+  const [fetched, setFetched] = useState<boolean>(true);
+
+  const userId = localStorage.getItem("userId") || 0;
+  const dailyCheckInUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
+
+  useEffect(() => {
+    const checkIfCheckInTaken = async () => {
+      const data = await fetchData(dailyCheckInUrl, {
+        DailyCheckInId: 0,
+        EmployeeId: userId,
+        CompanyId: userContext.companyId,
+        Active: true,
+        DateFrom: getDateToday(),
+        DateTo: getDateToday(),
+      });
+      if (data.length > 0) {
+        setCheckInTaken(true);
+      } else {
+        setCheckInTaken(false);
+      }
+    };
+
+    if (fetched) {
+      setFetched(false);
+      checkIfCheckInTaken();
+    }
+  }, [fetched, userContext.companyId, userId]);
 
   const handleDownload = () => {
-    const excelDownloadUrl = "https://localhost:44373/api/DownloadExcelDailyCheckin";
+    const excelDownloadUrl =
+      "https://localhost:44373/api/DownloadExcelDailyCheckin";
     axios({
       method: "GET",
       url: excelDownloadUrl, // Replace with your API endpoint
@@ -30,28 +57,31 @@ export const MyDashboardWellbeingPage = () => {
         DateFrom: getDateDaysAgo(29),
         Active: true,
       },
-      responseType: 'blob', // Set the response type to 'blob' to handle binary data (e.g., files)
+      responseType: "blob", // Set the response type to 'blob' to handle binary data (e.g., files)
       headers: {
-        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify the expected file format
+        Accept:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // Specify the expected file format
       },
     })
-      .then(response => {
+      .then((response) => {
         // Handle the file response here
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', 'EmployeesDailyCheckIns.xlsx'); // Set the file name
+        link.setAttribute("download", "EmployeesDailyCheckIns.xlsx"); // Set the file name
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => {
+      .catch((error) => {
         alert("Error downloading file");
         // Handle errors
-        console.error('Error downloading file:', error);
+        console.error("Error downloading file:", error);
       });
-    
+  };
 
-    
+  const handleClose = (mode: string) => {
+    setFetched(true);
+    setModal(mode);
   };
 
   return (
@@ -60,11 +90,15 @@ export const MyDashboardWellbeingPage = () => {
         title="Well-Being Journey Details"
         headerComponents={[
           <Button
-            key={1}
+            key={3}
             marginRight={16}
-            onClick={() => setModal("daily-checkin")}
+            onClick={() =>
+              checkInTaken === true
+                ? setModal("checkin-results")
+                : setModal("daily-checkin")
+            }
           >
-            Do Daily Check-In
+            {checkInTaken === false ? "Do Daily Check In" : "Show Results"}
           </Button>,
         ]}
       >
@@ -86,12 +120,19 @@ export const MyDashboardWellbeingPage = () => {
       ) : (
         <></>
       )}
-      {/*modal === "daily-checkin" && (
+      {modal === "daily-checkin" && (
         <DailyCheckin
           isOpen={modal === "daily-checkin"}
-          onClose={() => setModal("")}
+          onCancel={() => setModal("")}
+          onClose={() => handleClose("checkin-results")}
         />
-      )*/}
+      )}
+      {modal === "checkin-results" && (
+        <DailyCheckInResult
+          isOpen={modal === "checkin-results"}
+          onClose={() => handleClose("")}
+        />
+      )}
     </Grid>
   );
 };

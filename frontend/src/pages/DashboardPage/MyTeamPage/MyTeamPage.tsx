@@ -67,21 +67,26 @@ export const MyTeamPage = () => {
           borderRadius="1rem 1rem 0 0"
           title="My Team"
           height="full"
-          headerComponents={[
-            <Button
-              key={1}
-              onClick={() => setIsAddEmployeeOpen(!isAddEmployeeOpen)}
-              variant="section-secondary"
-            >
-              Add Employee
-              <Box
-                as={FiPlusCircle}
-                boxSize={6}
-                color="#24a2f0"
-                marginLeft={2}
-              />
-            </Button>,
-          ]}
+          headerComponents={
+            userContext.role === "Company Admin" ||
+            userContext.role === "Leader"
+              ? [
+                  <Button
+                    key={1}
+                    onClick={() => setIsAddEmployeeOpen(!isAddEmployeeOpen)}
+                    variant="section-secondary"
+                  >
+                    Add Employee
+                    <Box
+                      as={FiPlusCircle}
+                      boxSize={6}
+                      color="#24a2f0"
+                      marginLeft={2}
+                    />
+                  </Button>,
+                ]
+              : []
+          }
         >
           <Flex flex={1} flexDirection="column" gap={4}>
             {employees.map((member) => (
@@ -98,8 +103,16 @@ export const MyTeamPage = () => {
                     navigate("/dashboard/my-team");
                     setSelectedEmployee(undefined);
                   } else {
-                    setSelectedItem("overview");
-                    navigate("overview");
+                    if (
+                      userContext.role === "Company Admin" ||
+                      userContext.role === "Leader"
+                    ) {
+                      setSelectedItem("overview");
+                      navigate("overview");
+                    } else {
+                      setSelectedItem("member-profile");
+                      navigate("member-profile");
+                    }
                     setSelectedEmployee(member);
                   }
                 }}
@@ -147,7 +160,7 @@ export const MyTeamPage = () => {
             Member Profile
           </Button>
         </Tab>
-        <Flex flex={1} marginTop={4}>
+        <Flex flex={1}>
           <Outlet context={[selectedEmployee]} />
         </Flex>
       </Flex>

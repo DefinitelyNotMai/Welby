@@ -157,7 +157,7 @@ export const ProfilePage = () => {
           <Button
             leftIcon={<Icon as={FaChevronLeft} color="#24a2f0" />}
             margin={4}
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/dashboard/my-dashboard/overview")}
             variant="masterCrud"
             width="10%"
           >

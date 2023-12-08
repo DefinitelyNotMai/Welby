@@ -155,9 +155,10 @@ import {
 import { Form } from "react-router-dom";
 
 // local
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import { FormItem } from "../../Form/FormItem";
 import { Company } from "../../../data/company";
+import { ChartPreview } from "../../Charts/ChartPreview";
 
 type CompanyModalProps = Company & {
   isOpen: boolean;
@@ -283,35 +284,48 @@ export const CompanyUpdate = ({
   };
 
   const handleUpdateVision = () => {
-    const updateVisionUrl = "https://localhost:44373/api/UpdateCompanyVision"
+    const updateVisionUrl = "https://localhost:44373/api/UpdateCompanyVision";
     try {
-      axios.patch(updateVisionUrl, {
-        CompanyId: companyData.CompanyId,
-        Vision: companyData.Vision,
-        Encoded_By: localStorage.getItem("userId")
-      }, config).then((response) => {
-        console.log(response.data);
-      }).catch((error) => {
-        console.log(error);
-      })
+      axios
+        .patch(
+          updateVisionUrl,
+          {
+            CompanyId: companyData.CompanyId,
+            Vision: companyData.Vision,
+            Encoded_By: localStorage.getItem("userId"),
+          },
+          config,
+        )
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.error("Error updating vision: ", error);
     }
   };
 
   const handleUpdateMission = () => {
-    const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission"
+    const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission";
     try {
-      axios.patch(updateMissionUrl, {
-        CompanyId: companyData.CompanyId,
-        Mission: companyData.Mission,
-        Encoded_By: localStorage.getItem("userId")
-      }, config).then((response) => {
-        console.log(response.data);
-      
-      }).catch((error) => {
-        console.log(error);
-      })
+      axios
+        .patch(
+          updateMissionUrl,
+          {
+            CompanyId: companyData.CompanyId,
+            Mission: companyData.Mission,
+            Encoded_By: localStorage.getItem("userId"),
+          },
+          config,
+        )
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.error("Error updating mission: ", error);
     }
@@ -486,6 +500,103 @@ export const CompanyDelete = ({
             </Flex>
           </Flex>
         </Form>
+      </ModalContent>
+    </Modal>
+  );
+};
+
+export const CompanyPreview = ({
+  isOpen,
+  onClose,
+  ...companyData
+}: CompanyModalProps) => {
+  const toast = useToast();
+
+  useEffect(() => {}, []);
+  const handleDelete = (e: FormEvent) => {
+    e.preventDefault();
+    const deleteCompanyUrl = "https://localhost:44373/api/RemoveCompany";
+    const company = {
+      CompanyId: companyData.CompanyId,
+      Encoded_By: 24287,
+    };
+
+    axios
+      .patch(deleteCompanyUrl, company, config)
+      .then(() => {
+        toast({
+          description: `Company "${companyData.Name}" has been deleted.`,
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+          status: "success",
+          title: "SUCCESS",
+        });
+        onClose();
+      })
+      .catch((error) => {
+        console.error("An error occurred: ", error);
+        toast({
+          description: `Failed to delete Company "${companyData.Name}". Please try again.`,
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+          status: "error",
+          title: "Error",
+        });
+      });
+  };
+
+  const handleCheckInDownload = () => {
+    alert("checkin download");
+  };
+
+  const handleTISEDownload = () => {
+    alert("download tise results");
+  };
+
+  return (
+    <Modal
+      closeOnEsc={false}
+      closeOnOverlayClick={false}
+      isCentered
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <ModalOverlay />
+      <ModalContent
+        backgroundColor="#ffffff"
+        border="3px solid #000000"
+        boxShadow="5px 5px #000000"
+        minWidth="60%"
+        padding={8}
+      >
+        <ModalHeader color="#000000">{companyData.Name} Data</ModalHeader>
+        <ModalCloseButton color="#000000" />
+        <Flex
+          alignItems="center"
+          flexDirection="column"
+          gap={8}
+          justifyContent="center"
+        >
+          <ChartPreview {...companyData} />
+          <Flex flexDirection="row" gap={4} marginBottom={4}>
+            <Button
+              onClick={handleCheckInDownload}
+              variant="masterCrud"
+              width="50%"
+            >
+              Download Check-In Results
+            </Button>
+            <Button
+              onClick={handleTISEDownload}
+              variant="masterCrud"
+              width="50%"
+            >
+              Download TISE Results
+            </Button>
+          </Flex>
+        </Flex>
       </ModalContent>
     </Modal>
   );

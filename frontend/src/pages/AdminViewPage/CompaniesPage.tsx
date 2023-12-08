@@ -22,9 +22,10 @@ import { COMPANY_DATA, Company } from "../../data/company";
 import {
   CompanyAdd,
   CompanyDelete,
+  CompanyPreview,
   CompanyUpdate,
 } from "../../components/Modal/AdminView/CompanyModal";
-import { TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
+import { TbEye, TbFilePencil, TbFilePlus, TbTrash } from "react-icons/tb";
 
 export const CompaniesPage = () => {
   document.title = "Companies | Welby";
@@ -147,6 +148,21 @@ export const CompaniesPage = () => {
         </Button>
         <Spacer />
         <Button
+          borderColor={currentMode === "Preview" ? "#46bdc6" : "#ebebeb"}
+          leftIcon={<Icon as={TbEye} boxSize={6} color="#46bdc6" />}
+          onClick={() => {
+            if (currentMode === "Preview") {
+              setCurrentMode("");
+            } else {
+              setCurrentMode("Preview");
+            }
+          }}
+          variant="masterCrud"
+          width="15%"
+        >
+          Preview Well-Being
+        </Button>
+        <Button
           borderColor={currentMode === "Delete" ? "#d95555" : "#ebebeb"}
           leftIcon={<Icon as={TbTrash} boxSize={6} color="#d95555" />}
           onClick={() => {
@@ -172,7 +188,9 @@ export const CompaniesPage = () => {
               ? "#24a2f0"
               : currentMode === "Delete"
                 ? "#d95555"
-                : "#ebebeb"
+                : currentMode === "Preview"
+                  ? "#cfe2f3"
+                  : "#ebebeb"
         }
         borderRadius="1rem 0 0 1rem"
         borderWidth="2px"
@@ -263,6 +281,13 @@ export const CompaniesPage = () => {
       )}
       {currentMode === "Delete" && (
         <CompanyDelete
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          {...companyData}
+        />
+      )}
+      {currentMode === "Preview" && (
+        <CompanyPreview
           isOpen={isFormOpen}
           onClose={handleClose}
           {...companyData}

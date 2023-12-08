@@ -175,7 +175,7 @@ export const routes = createBrowserRouter([
         ],
       },
       {
-        path: "/profile",
+        path: "/profile/:userId",
         element: (
           <Auth>
             <ProfilePage />

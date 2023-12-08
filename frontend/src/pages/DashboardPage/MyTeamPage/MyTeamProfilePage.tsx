@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { Section } from "../../../components/DataDisplay/Section";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../api/fetchData";
@@ -24,6 +24,8 @@ export const MyTeamProfilePage = () => {
   const [employeeData, setEmployeeData] = useState<Employee>(EMPLOYEE_DATA);
   const [selectedEmployee] = useOutletContext<TeamMember | undefined>();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUserData = async () => {
       const employeeUrl = "https://localhost:44373/api/GetEmployees";
@@ -41,6 +43,10 @@ export const MyTeamProfilePage = () => {
     };
     fetchUserData();
   }, [selectedEmployee.EmployeeId]);
+
+  const handleSeeFullProfile = () => {
+    navigate(`/profile/${selectedEmployee.EmployeeId}`);
+  };
 
   if (employeeData.FirstLogIn === true) {
     return (
@@ -136,7 +142,12 @@ export const MyTeamProfilePage = () => {
               </Flex>
             </Grid>
           </Flex>
-          <Button alignSelf="center" marginTop={8} width="25%">
+          <Button
+            alignSelf="center"
+            marginTop={8}
+            onClick={handleSeeFullProfile}
+            width="25%"
+          >
             See Full Profile
           </Button>
         </Flex>

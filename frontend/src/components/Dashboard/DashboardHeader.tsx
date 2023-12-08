@@ -23,20 +23,26 @@ import WelbyLogo from "../../assets/images/welby_logo_and_name_primary_1_flat.sv
 import { fetchData } from "../../api/fetchData";
 import { ProductivityRating } from "../Modal/ProductivityRating";
 import { UserContext } from "../../context/UserContext";
+import { getDateToday } from "../../api/getDates";
 
 export const DashboardHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
   const [profilePhoto, setProfilePhoto] = useState<string>("");
   const [nickname, setNickname] = useState<string>("");
+  const [fetched, setFetched] = useState<boolean>(true);
+  const [productivityDone, setProductivityDone] = useState<boolean>(false);
 
   const userId = localStorage.getItem("userId") || 0;
   const toast = useToast();
   const navigate = useNavigate();
+  const userContext = useContext(UserContext);
+
+  const userUrl = "https://localhost:44373/api/GetEmployees";
+  const dailyCheckInUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const userUrl = "https://localhost:44373/api/GetEmployees";
       try {
         const result = await fetchData(userUrl, {
           CompanyId: 0,
@@ -53,20 +59,45 @@ export const DashboardHeader = () => {
         console.error("Error fetching user data:", error);
       }
     };
-    fetchUserData();
-  }, [userId]);
 
-  const handleProfileClick = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+    const fetchCheckInData = async () => {
+      const data = await fetchData(dailyCheckInUrl, {
+        DailyCheckInId: 0,
+        EmployeeId: userId,
+        CompanyId: userContext.companyId,
+        Active: true,
+        DateFrom: getDateToday(),
+        DateTo: getDateToday(),
+      });
+      if (data.length > 0) {
+        localStorage.setItem("dailyCheckInId", data[0].DailyCheckInId);
+        if (data[0].Completion === "Completed") {
+          setProductivityDone(true);
+        }
+      }
+    };
 
-  const handleProfileSelection = () => {
-    navigate("/profile");
+    if (fetched) {
+      setFetched(false);
+      fetchUserData();
+      fetchCheckInData();
+    }
+  }, [fetched, userContext.companyId, userId]);
+
+  const skipProductivity = () => {
+    userContext.setCompanyId(0);
+    userContext.setEmail("");
+    userContext.setPhone("");
+    userContext.setRole("");
+    localStorage.clear();
+    navigate("/");
   };
 
   const handleLogoutSelection = () => {
     const dailyCheckInId = localStorage.getItem("dailyCheckInId") || 0;
-    if (dailyCheckInId != 0) {
+    if (dailyCheckInId && productivityDone) {
+      skipProductivity();
+    } else if (dailyCheckInId && !productivityDone) {
       setIsLoggingOut(!isLoggingOut);
     } else {
       toast({
@@ -79,8 +110,6 @@ export const DashboardHeader = () => {
       });
     }
   };
-
-  const userContext = useContext(UserContext);
 
   return (
     <Box
@@ -132,11 +161,13 @@ export const DashboardHeader = () => {
             <Icon as={TbCalendarEvent} boxSize={6} color="#24a2f0" />
             <Icon as={TbBell} boxSize={6} color="#24a2f0" />
             <Menu isOpen={isMenuOpen}>
-              <MenuButton as={Link} onClick={handleProfileClick}>
+              <MenuButton as={Link} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 <Avatar boxSize={6} src={profilePhoto} />
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={handleProfileSelection}>My Profile</MenuItem>
+                <MenuItem onClick={() => navigate("/profile")}>
+                  My Profile
+                </MenuItem>
                 <MenuItem onClick={handleLogoutSelection}>Logout</MenuItem>
               </MenuList>
             </Menu>

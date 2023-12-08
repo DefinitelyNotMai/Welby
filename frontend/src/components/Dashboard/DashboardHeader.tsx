@@ -140,11 +140,7 @@ export const DashboardHeader = () => {
           >
             <Link
               onClick={() => {
-                localStorage.clear();
-                userContext.setCompanyId(0);
-                userContext.setEmail("");
-                userContext.setPhone("");
-                userContext.setRole("");
+                navigate("/dashboard/my-dashboard/overview");
               }}
             >
               <Image
@@ -165,7 +161,7 @@ export const DashboardHeader = () => {
                 <Avatar boxSize={6} src={profilePhoto} />
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={() => navigate("/profile")}>
+                <MenuItem onClick={() => navigate(`/profile/${userId}`)}>
                   My Profile
                 </MenuItem>
                 <MenuItem onClick={handleLogoutSelection}>Logout</MenuItem>

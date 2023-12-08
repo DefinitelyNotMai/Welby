@@ -83,19 +83,37 @@ export const UploadPhoto = ({
         />
       </Flex>
 
-      <Button
-        onClick={() => {
-          const fileInput = document.getElementById(id);
+      <Flex justifyContent="center" flexDirection="row" gap={4} flex={1}>
+        <Button
+          onClick={() => {
+            const fileInput = document.getElementById(id);
 
-          if (fileInput) {
-            fileInput.click();
-          }
-        }}
-        type="button"
-        width={buttonWidth}
-      >
-        {value ? "Change Photo" : "Upload Photo"}
-      </Button>
+            if (fileInput) {
+              fileInput.click();
+            }
+          }}
+          type="button"
+          width={buttonWidth}
+        >
+          {value ? "Change Photo" : "Upload Photo"}
+        </Button>
+        {value && (
+          <Button
+            onClick={() => {
+              onChange("");
+              const fileInput = document.getElementById(id) as HTMLInputElement;
+
+              if (fileInput) {
+                fileInput.value = "";
+              }
+            }}
+            type="button"
+            width={buttonWidth}
+          >
+            Remove Photo
+          </Button>
+        )}
+      </Flex>
     </Flex>
   );
 };

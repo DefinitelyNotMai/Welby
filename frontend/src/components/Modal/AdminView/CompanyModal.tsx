@@ -159,6 +159,7 @@ import { FormEvent, useEffect } from "react";
 import { FormItem } from "../../Form/FormItem";
 import { Company } from "../../../data/company";
 import { ChartPreview } from "../../Charts/ChartPreview";
+import { getDateToday, getDateDaysAgo } from "../../../api/getDates";
 
 type CompanyModalProps = Company & {
   isOpen: boolean;
@@ -548,11 +549,69 @@ export const CompanyPreview = ({
   };
 
   const handleCheckInDownload = () => {
-    alert("checkin download");
+    const excelDownloadUrl = "https://localhost:44373/api/DownloadExcelDailyCheckin";
+    axios({
+      method: "GET",
+      url: excelDownloadUrl, // Replace with your API endpoint
+      params: {
+        EmployeeId: 0,
+        CompanyId: companyData.CompanyId,
+        DateTo: getDateToday(),
+        DateFrom: getDateDaysAgo(29),
+        Active: true,
+      },
+      responseType: 'blob', // Set the response type to 'blob' to handle binary data (e.g., files)
+      headers: {
+        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify the expected file format
+      },
+    })
+      .then(response => {
+        // Handle the file response here
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${companyData.Name}DailyCheckins.xlsx`); // Set the file name
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        alert("Error downloading file");
+        // Handle errors
+        console.error('Error downloading file:', error);
+      });
   };
 
   const handleTISEDownload = () => {
-    alert("download tise results");
+    const excelDownloadUrl = "https://localhost:44373/api/DownloadExcelTise";
+    axios({
+      method: "GET",
+      url: excelDownloadUrl, // Replace with your API endpoint
+      params: {
+        EmployeeId: 0,
+        CompanyId: companyData.CompanyId,
+        DateTo: getDateToday(),
+        DateFrom: getDateDaysAgo(91),
+        Active: true,
+      },
+      responseType: 'blob', // Set the response type to 'blob' to handle binary data (e.g., files)
+      headers: {
+        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify the expected file format
+      },
+    })
+      .then(response => {
+        // Handle the file response here
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${companyData.Name}Tise.xlsx`); // Set the file name
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        alert("Error downloading file");
+        // Handle errors
+        console.error('Error downloading file:', error);
+      });
   };
 
   return (

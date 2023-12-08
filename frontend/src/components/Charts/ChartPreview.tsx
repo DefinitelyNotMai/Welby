@@ -12,6 +12,11 @@ import {
 import { Line } from "react-chartjs-2";
 import { useEffect } from "react";
 
+
+import { getDateToday, getDateDaysAgo } from "../../api/getDates";
+import { fetchData } from "../../api/fetchData";
+import { DailyCheckIn } from "../../data/dailyCheckIn";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -23,11 +28,78 @@ ChartJS.register(
   Legend,
 );
 
+type EmployeeDailyCheckin = {
+  EmployeeId: number;
+  EmployeeName: string;
+  DailyCheckins: DailyCheckIn[];
+};
+
+
 export const ChartPreview = ({ ...companyData }) => {
   useEffect(() => {
     // NOTE: add fetch calls here
     // if you need values from the selected company, use companyData
     // (ex.: companyData.CompanyId)
+    const getCompanyDailyCheckin = async () => {
+      const employeesDailyCheckin: EmployeeDailyCheckin[] = [];
+      const employeesId: number[] = [];
+      const getEmployeesUrl = "https://localhost:44373/api/GetEmployees";
+      const getDailyCheckinUrl =
+        "https://localhost:44373/api/GetAllDailyCheckIn";
+
+      try {
+        const getEmployeesWithDailyCheckin = await fetchData(getEmployeesUrl, {
+          CompanyId: companyData.companyId,
+          Email: "",
+          EmployeeId: 0,
+          Phone_Number: "",
+          CompanyRole: "",
+          Active: true,
+        });
+
+        if (getEmployeesWithDailyCheckin) {
+          getEmployeesWithDailyCheckin.forEach(
+            (employee: { EmployeeId: number }) => {
+              employeesId.push(employee.EmployeeId);
+            },
+          );
+        }
+
+        if (employeesId.length != 0) {
+          for (let i = 0; i < employeesId.length; i++) {
+            try {
+              const getEmployeeDailyCheckins = await fetchData(
+                getDailyCheckinUrl,
+                {
+                  EmployeeId: employeesId[i],
+                  CompanyId: companyData.companyId,
+                  DateTo: getDateToday(),
+                  DateFrom: getDateDaysAgo(29),
+                  Active: true,
+                },
+              );
+
+              if (getEmployeeDailyCheckins) {
+                const employee: EmployeeDailyCheckin = {
+                  EmployeeId: employeesId[i],
+                  EmployeeName: getEmployeeDailyCheckins[0].EmployeeName,
+                  DailyCheckins: getEmployeeDailyCheckins,
+                };
+                employeesDailyCheckin.push(employee);
+              }
+            } catch (error) {
+              console.error("Error fetching data", error);
+            }
+          }
+        }
+
+      } catch (e) {
+        console.log(e)
+      }
+
+    }
+
+
   }, []);
   const options = {
     responsive: true,

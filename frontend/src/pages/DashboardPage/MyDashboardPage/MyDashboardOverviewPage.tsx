@@ -38,6 +38,7 @@ export const MyDashboardOverviewPage = () => {
   const [modal, setModal] = useState<string>("");
   const [checkInTaken, setCheckInTaken] = useState<boolean>(true);
   const [tiseTaken, setTiseTaken] = useState<boolean>(true);
+  const [stat, setStat] = useState<boolean>(true);
 
   // NOTE: calls for fetching daily checkin and tise data goes here
   const userId = localStorage.getItem("userId") || 0;
@@ -78,8 +79,13 @@ export const MyDashboardOverviewPage = () => {
       //console.log(data);
       //console.log(checkInTaken);
     };
+
     checkIfCheckInTaken();
-  }, [simpleDateToday, userContext.companyId, userId]);
+    if (stat) {
+      setStat(false);
+      checkIfCheckInTaken();
+    }
+  }, [simpleDateToday, stat, userContext.companyId, userId]);
 
   useEffect(() => {
     const checkIfTiseTaken = async () => {
@@ -286,7 +292,10 @@ export const MyDashboardOverviewPage = () => {
         <DailyCheckin
           isOpen={modal === "daily-checkin"}
           onCancel={() => setModal("")}
-          onClose={() => setModal("checkin-results")}
+          onClose={() => {
+            setModal("checkin-results");
+            setStat(true);
+          }}
         />
       )}
       {modal === "quarterly-assessment" && (

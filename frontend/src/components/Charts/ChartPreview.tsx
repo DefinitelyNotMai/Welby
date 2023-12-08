@@ -10,8 +10,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 
 import { getDateToday, getDateDaysAgo } from "../../api/getDates";
 import { fetchData } from "../../api/fetchData";
@@ -34,8 +33,20 @@ type EmployeeDailyCheckin = {
   DailyCheckins: DailyCheckIn[];
 };
 
+type CompanyData = {
+  EAW: number[];
+  FAW: number[];
+  PE: number[];
+  NE: number[];
+};
 
 export const ChartPreview = ({ ...companyData }) => {
+  const [compDataset, setCompDataset] = useState<CompanyData>({
+    EAW: [],
+    FAW: [],
+    PE: [],
+    NE: [],
+  });
   useEffect(() => {
     // NOTE: add fetch calls here
     // if you need values from the selected company, use companyData
@@ -49,7 +60,7 @@ export const ChartPreview = ({ ...companyData }) => {
 
       try {
         const getEmployeesWithDailyCheckin = await fetchData(getEmployeesUrl, {
-          CompanyId: companyData.companyId,
+          CompanyId: companyData.CompanyId,
           Email: "",
           EmployeeId: 0,
           Phone_Number: "",
@@ -72,7 +83,7 @@ export const ChartPreview = ({ ...companyData }) => {
                 getDailyCheckinUrl,
                 {
                   EmployeeId: employeesId[i],
-                  CompanyId: companyData.companyId,
+                  CompanyId: companyData.CompanyId,
                   DateTo: getDateToday(),
                   DateFrom: getDateDaysAgo(29),
                   Active: true,
@@ -91,16 +102,47 @@ export const ChartPreview = ({ ...companyData }) => {
               console.error("Error fetching data", error);
             }
           }
+          //console.log(employeesDailyCheckin);
         }
+        //
+        if (employeesDailyCheckin.length !== 0) {
+          const maxDaysWithData = Math.max(
+            ...employeesDailyCheckin.map(
+              (employee) => employee.DailyCheckins.length,
+            ),
+          );
+          const averages: CompanyData = {
+            EAW: Array(maxDaysWithData).fill(0), // Initialize array with zeros
+            FAW: Array(maxDaysWithData).fill(0),
+            PE: Array(maxDaysWithData).fill(0),
+            NE: Array(maxDaysWithData).fill(0),
+          };
 
+          employeesDailyCheckin.forEach((employee) => {
+            employee.DailyCheckins.forEach((dailyCheckin, index) => {
+              averages.EAW[index] += dailyCheckin.EnergyAtWork_int;
+              averages.FAW[index] += dailyCheckin.FocusAtWork_int;
+              averages.PE[index] += dailyCheckin.PositiveEmotions_int;
+              averages.NE[index] += dailyCheckin.NegativeEmotions_int;
+            });
+          });
+
+          // Calculate the average by dividing the sum by the number of employees
+          const numEmployees = employeesDailyCheckin.length;
+          averages.EAW = averages.EAW.map((sum) => sum / numEmployees);
+          averages.FAW = averages.FAW.map((sum) => sum / numEmployees);
+          averages.PE = averages.PE.map((sum) => sum / numEmployees);
+          averages.NE = averages.NE.map((sum) => sum / numEmployees);
+
+          setCompDataset(averages);
+        }
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
+    };
+    getCompanyDailyCheckin();
+  }, [companyData.CompanyId]);
 
-    }
-
-
-  }, []);
   const options = {
     responsive: true,
     plugins: {
@@ -124,7 +166,7 @@ export const ChartPreview = ({ ...companyData }) => {
         beginAtZero: false,
         ticks: {
           min: 1,
-          max: 30,
+          max: 10,
           stepSize: 1,
         },
       },
@@ -145,9 +187,7 @@ export const ChartPreview = ({ ...companyData }) => {
     datasets: [
       {
         label: "Energy At Work",
-        // NOTE: put here the array of values (average of Energy at Work) in each day
-        // data: <arrayName>
-        data: [0, 0, 0, 0],
+        data: compDataset.EAW,
         backgroundColor: "rgba(36, 162, 240, 0.5)",
         borderColor: "#24a2f0",
         fill: true,
@@ -156,7 +196,7 @@ export const ChartPreview = ({ ...companyData }) => {
       },
       {
         label: "Focus at Work",
-        data: [0, 0, 0, 0],
+        data: compDataset.FAW,
         backgroundColor: "#f0d124",
         borderColor: "#f0d124",
         pointRadius: 5,
@@ -164,7 +204,7 @@ export const ChartPreview = ({ ...companyData }) => {
       },
       {
         label: "Positive Emotions",
-        data: [0, 0, 0, 0],
+        data: compDataset.PE,
         backgroundColor: "#78e1e8",
         borderColor: "#78e1e8",
         pointRadius: 5,
@@ -172,7 +212,7 @@ export const ChartPreview = ({ ...companyData }) => {
       },
       {
         label: "Negative Emotions",
-        data: [0, 0, 0, 0],
+        data: compDataset.NE,
         backgroundColor: "#34313a",
         borderColor: "#34313a",
         pointRadius: 5,

@@ -161,12 +161,6 @@ export const DailyCheckin = ({
         console.log(error);
       }
     }
-
-    // if successful statement here:
-    //console.log(dailyCheckinData);
-    // NOTE: use this to store dailyCheckinId so it will persist through refreshes
-    // This will be cleared on logout
-    //localStorage.setItem("dailyCheckinId", response.data[0].DailyCheckInId); // this is for setting the id
   };
 
   const handleSubmit = (e: FormEvent) => {

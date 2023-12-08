@@ -511,45 +511,9 @@ export const CompanyPreview = ({
   onClose,
   ...companyData
 }: CompanyModalProps) => {
-  const toast = useToast();
-
-  useEffect(() => {}, []);
-  const handleDelete = (e: FormEvent) => {
-    e.preventDefault();
-    const deleteCompanyUrl = "https://localhost:44373/api/RemoveCompany";
-    const company = {
-      CompanyId: companyData.CompanyId,
-      Encoded_By: 24287,
-    };
-
-    axios
-      .patch(deleteCompanyUrl, company, config)
-      .then(() => {
-        toast({
-          description: `Company "${companyData.Name}" has been deleted.`,
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-          status: "success",
-          title: "SUCCESS",
-        });
-        onClose();
-      })
-      .catch((error) => {
-        console.error("An error occurred: ", error);
-        toast({
-          description: `Failed to delete Company "${companyData.Name}". Please try again.`,
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-          status: "error",
-          title: "Error",
-        });
-      });
-  };
-
   const handleCheckInDownload = () => {
-    const excelDownloadUrl = "https://localhost:44373/api/DownloadExcelDailyCheckin";
+    const excelDownloadUrl =
+      "https://localhost:44373/api/DownloadExcelDailyCheckin";
     axios({
       method: "GET",
       url: excelDownloadUrl, // Replace with your API endpoint
@@ -560,24 +524,25 @@ export const CompanyPreview = ({
         DateFrom: getDateDaysAgo(29),
         Active: true,
       },
-      responseType: 'blob', // Set the response type to 'blob' to handle binary data (e.g., files)
+      responseType: "blob", // Set the response type to 'blob' to handle binary data (e.g., files)
       headers: {
-        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify the expected file format
+        Accept:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // Specify the expected file format
       },
     })
-      .then(response => {
+      .then((response) => {
         // Handle the file response here
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', `${companyData.Name}DailyCheckins.xlsx`); // Set the file name
+        link.setAttribute("download", `${companyData.Name}DailyCheckins.xlsx`); // Set the file name
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => {
+      .catch((error) => {
         alert("Error downloading file");
         // Handle errors
-        console.error('Error downloading file:', error);
+        console.error("Error downloading file:", error);
       });
   };
 
@@ -593,24 +558,25 @@ export const CompanyPreview = ({
         DateFrom: getDateDaysAgo(91),
         Active: true,
       },
-      responseType: 'blob', // Set the response type to 'blob' to handle binary data (e.g., files)
+      responseType: "blob", // Set the response type to 'blob' to handle binary data (e.g., files)
       headers: {
-        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify the expected file format
+        Accept:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // Specify the expected file format
       },
     })
-      .then(response => {
+      .then((response) => {
         // Handle the file response here
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', `${companyData.Name}Tise.xlsx`); // Set the file name
+        link.setAttribute("download", `${companyData.Name}Tise.xlsx`); // Set the file name
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => {
+      .catch((error) => {
         alert("Error downloading file");
         // Handle errors
-        console.error('Error downloading file:', error);
+        console.error("Error downloading file:", error);
       });
   };
 

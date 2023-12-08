@@ -12,6 +12,7 @@ import {
   Progress,
   Spacer,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { FormEvent, useState, useContext } from "react";
 import { useMultiStepForm } from "../../../hooks/useMultiStepForm";
@@ -60,6 +61,8 @@ export const QuarterlyAssessment = ({
   const [QuarterlyAssessmentData, setQuarterlyAssessmentData] = useState(
     QUARTERLY_ASSESSMENT_INITIAL_DATA,
   );
+
+  const toast = useToast();
 
   const updateQuarterlyAssessmentFields = (
     fields: Partial<QuarterlyAssessmentFormData>,
@@ -114,9 +117,26 @@ export const QuarterlyAssessment = ({
       .post(quarterlyAssesmentUrl, tise, config)
       .then((response) => {
         console.log(response);
+        toast({
+          title: "SUCCESS",
+          description: "Your quarterly assessment is complete. Good Job!",
+          status: "success",
+          isClosable: true,
+          duration: 5000,
+          position: "top",
+        });
       })
       .catch((error) => {
         console.log(error);
+        toast({
+          title: "ERROR",
+          description:
+            "Your quarterly assessment is unsuccessful. Please try submitting again.",
+          status: "error",
+          isClosable: true,
+          duration: 5000,
+          position: "top",
+        });
       });
   };
 

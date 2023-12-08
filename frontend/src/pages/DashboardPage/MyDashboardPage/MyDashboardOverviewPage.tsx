@@ -28,7 +28,7 @@ import { fetchData } from "../../../api/fetchData";
 import { UserContext } from "../../../context/UserContext";
 import { DailyCheckInResult } from "../../../components/Modal/DailyCheckin/DailyCheckInResult";
 import { RiErrorWarningLine } from "react-icons/ri";
-import { getDateToday, getDateDaysAgo} from "../../../api/getDates";
+import { getDateToday, getDateDaysAgo } from "../../../api/getDates";
 import axios from "axios";
 import { Factor1Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor1Result";
 import { Factor2Result } from "../../../components/Modal/QuarterlyAssessment/QuarterlyAssessmentResult/Factor2Result";
@@ -150,9 +150,11 @@ export const MyDashboardOverviewPage = () => {
     checkIfTiseTaken();
   }, [userContext.companyId, userId]);
 
+  /*
   const handleCheckInDownload = () => {
     alert("dl checkin");
   };
+  */
 
   const handleTISEDownload = () => {
     const excelDownloadUrl = "https://localhost:44373/api/DownloadExcelTise";
@@ -166,67 +168,50 @@ export const MyDashboardOverviewPage = () => {
         DateFrom: getDateDaysAgo(91),
         Active: true,
       },
-      responseType: 'blob', // Set the response type to 'blob' to handle binary data (e.g., files)
+      responseType: "blob", // Set the response type to 'blob' to handle binary data (e.g., files)
       headers: {
-        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify the expected file format
+        Accept:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // Specify the expected file format
       },
     })
-      .then(response => {
+      .then((response) => {
         // Handle the file response here
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', 'EmployeesTise.xlsx'); // Set the file name
+        link.setAttribute("download", "EmployeesTise.xlsx"); // Set the file name
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => {
+      .catch((error) => {
         alert("Error downloading file");
         // Handle errors
-        console.error('Error downloading file:', error);
+        console.error("Error downloading file:", error);
       });
   };
 
   return (
     <Flex flexDirection="column" gap={4} width="full" marginBottom={4}>
+      {/*
+        <Button key={1} onClick={handleCheckInDownload}>
+          Download Daily Check-In Scores as Excel Spreadsheet
+        </Button>,
+      */}
       <Section
         title="How is your well-being at work?"
-        headerComponents={
-          userContext.role === "Company Admin" || userContext.role === "Leader"
-            ? [
-                <Button key={1} onClick={handleCheckInDownload}>
-                  Download Daily Check-In Scores as Excel Spreadsheet
-                </Button>,
-                <Button
-                  key={2}
-                  marginRight={16}
-                  onClick={() =>
-                    checkInTaken === true
-                      ? setModal("checkin-results")
-                      : setModal("daily-checkin")
-                  }
-                >
-                  {checkInTaken === false
-                    ? "Do Daily Check In"
-                    : "Show Results"}
-                </Button>,
-              ]
-            : [
-                <Button
-                  key={3}
-                  marginRight={16}
-                  onClick={() =>
-                    checkInTaken === true
-                      ? setModal("checkin-results")
-                      : setModal("daily-checkin")
-                  }
-                >
-                  {checkInTaken === false
-                    ? "Do Daily Check In"
-                    : "Show Results"}
-                </Button>,
-              ]
-        }
+        headerComponents={[
+          <Button
+            key={1}
+            marginRight={16}
+            onClick={() =>
+              checkInTaken === true
+                ? setModal("checkin-results")
+                : setModal("daily-checkin")
+            }
+          >
+            {checkInTaken === false ? "Do Daily Check In" : "Show Results"}
+          </Button>,
+        ]}
       >
         {checkInTaken === true ? (
           <Flex
@@ -326,8 +311,8 @@ export const MyDashboardOverviewPage = () => {
                   icon={GiHummingbird}
                   dataValue={tiseData.Factor_1}
                   onClick={() => setModal("factor-1")}
-                  min={1}
-                  avg={3}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
                 <ChartDoughnut
@@ -335,8 +320,8 @@ export const MyDashboardOverviewPage = () => {
                   icon={FaDumbbell}
                   dataValue={tiseData.Factor_2}
                   onClick={() => setModal("factor-2")}
-                  min={1}
-                  avg={3}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
                 <ChartDoughnut
@@ -344,8 +329,8 @@ export const MyDashboardOverviewPage = () => {
                   icon={IoMdGitNetwork}
                   dataValue={tiseData.Factor_3}
                   onClick={() => setModal("factor-3")}
-                  min={1}
-                  avg={3}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
               </Flex>
@@ -360,8 +345,8 @@ export const MyDashboardOverviewPage = () => {
                   icon={MdPeople}
                   dataValue={tiseData.Factor_4}
                   onClick={() => setModal("factor-4")}
-                  min={1}
-                  avg={3}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
                 <ChartDoughnut
@@ -369,8 +354,8 @@ export const MyDashboardOverviewPage = () => {
                   icon={FaHands}
                   dataValue={tiseData.Factor_5}
                   onClick={() => setModal("factor-5")}
-                  min={1}
-                  avg={7}
+                  min={6}
+                  avg={15}
                   max={21}
                 />
                 <ChartDoughnut
@@ -378,8 +363,8 @@ export const MyDashboardOverviewPage = () => {
                   icon={FaHandshake}
                   dataValue={tiseData.Factor_6}
                   onClick={() => setModal("factor-6")}
-                  min={1}
-                  avg={9}
+                  min={8}
+                  avg={20}
                   max={28}
                 />
               </Flex>
@@ -394,18 +379,18 @@ export const MyDashboardOverviewPage = () => {
                   icon={FaWalking}
                   dataValue={tiseData.Factor_7}
                   onClick={() => setModal("factor-7")}
-                  min={1}
-                  avg={7}
+                  min={6}
+                  avg={15}
                   max={21}
                 />
                 <ChartDoughnut
                   title="Presenteeism"
                   icon={FaEye}
-                  dataValue={tiseData.Factor_8}
+                  dataValue={tiseData.Factor_8 + 3}
                   onClick={() => setModal("factor-8")}
-                  min={-3}
-                  avg={-2}
-                  max={0}
+                  min={0}
+                  avg={1.5}
+                  max={3}
                 />
               </Flex>
             </>

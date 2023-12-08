@@ -152,16 +152,18 @@ export const MyTeamOverviewPage = () => {
                   title="Social Mutualism"
                   icon={GiHummingbird}
                   dataValue={tiseData.Factor_1}
-                  min={1}
-                  avg={3}
+                  onClick={() => {}}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
                 <ChartDoughnut
                   title="Sense of Being Valued"
                   icon={FaDumbbell}
                   dataValue={tiseData.Factor_2}
-                  min={1}
-                  avg={3}
+                  onClick={() => {}}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
               </Flex>
@@ -175,16 +177,18 @@ export const MyTeamOverviewPage = () => {
                   title="Nurtured Psychological Needs"
                   icon={IoMdGitNetwork}
                   dataValue={tiseData.Factor_3}
-                  min={1}
-                  avg={3}
+                  onClick={() => {}}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
                 <ChartDoughnut
                   title="Positive Work Relationships"
                   icon={MdPeople}
                   dataValue={tiseData.Factor_4}
-                  min={1}
-                  avg={3}
+                  onClick={() => {}}
+                  min={2}
+                  avg={4}
                   max={7}
                 />
               </Flex>
@@ -198,16 +202,18 @@ export const MyTeamOverviewPage = () => {
                   title="Subjective Well Being"
                   icon={FaHands}
                   dataValue={tiseData.Factor_5}
-                  min={1}
-                  avg={7}
+                  onClick={() => {}}
+                  min={6}
+                  avg={15}
                   max={21}
                 />
                 <ChartDoughnut
                   title="Organizational Commitment"
                   icon={FaHandshake}
                   dataValue={tiseData.Factor_6}
-                  min={1}
-                  avg={9}
+                  onClick={() => {}}
+                  min={8}
+                  avg={20}
                   max={28}
                 />
               </Flex>
@@ -221,17 +227,19 @@ export const MyTeamOverviewPage = () => {
                   title="Intent To Quit"
                   icon={FaWalking}
                   dataValue={tiseData.Factor_7}
-                  min={1}
-                  avg={7}
+                  onClick={() => {}}
+                  min={6}
+                  avg={15}
                   max={21}
                 />
                 <ChartDoughnut
                   title="Presenteeism"
                   icon={FaEye}
-                  dataValue={tiseData.Factor_8}
-                  min={-3}
-                  avg={-2}
-                  max={0}
+                  dataValue={tiseData.Factor_8 + 3}
+                  onClick={() => {}}
+                  min={0}
+                  avg={1.5}
+                  max={3}
                 />
               </Flex>
             </>
@@ -244,7 +252,7 @@ export const MyTeamOverviewPage = () => {
             >
               <Icon as={RiErrorWarningLine} boxSize={32} color="#24a2f0" />
               <Text color="#34313a" fontSize="1.25rem" fontWeight={700}>
-                You haven&apos;t taken your Quarterly Assesment yet.
+                Employee hasn&apos;t taken their Quarterly Assesment yet.
               </Text>
             </Flex>
           )}

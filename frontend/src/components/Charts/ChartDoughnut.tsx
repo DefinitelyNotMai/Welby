@@ -5,58 +5,44 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement);
 
 type ChartDoughnutProps = {
-  icon?: React.ElementType;
-  title: string;
-  dataValue: number;
-  onClick: () => void;
-  min: number;
   avg: number;
+  dataValue: number;
+  icon: React.ElementType;
+  min: number;
   max: number;
+  onClick: () => void;
+  title: string;
 };
 
 export const ChartDoughnut = ({
-  icon: IconComponent,
-  title,
-  dataValue,
-  onClick,
-  min,
   avg,
+  dataValue,
+  icon: IconComponent,
+  min,
   max,
+  onClick,
+  title,
 }: ChartDoughnutProps) => {
-  const adjustValueToRange = (value: number) => {
-    if (value < min) return min;
-    if (value > max) return max;
-    return value;
-  };
-  const adjustedDataValue = adjustValueToRange(dataValue);
-  const percentage = ((adjustedDataValue - min) / (max - min)) * 100;
-
-  const getBackgroundColor = (value: number) => {
-    if (value >= max) {
-      return "#24a2f0"; // High
-    } else if (value >= avg && value < max) {
-      return "#f0d124"; // Average
+  const determineRange = (value: number) => {
+    if (value <= max && value > avg) {
+      return { color: "#24a2f0", label: "High" };
+    } else if (value <= avg && value > min) {
+      return { color: "#f0d124", label: "Avg" };
+    } else if (value <= min) {
+      return { color: "#eb2a2a", label: "Low" };
     } else {
-      return "#eb2a2a"; // Low
+      return {};
     }
   };
 
-  const getTextValue = (value: number) => {
-    if (value >= max) {
-      return "High";
-    } else if (value >= avg && value < max) {
-      return "Avg";
-    } else {
-      return "Low";
-    }
-  };
+  const { color, label } = determineRange(dataValue);
 
   const data = {
     labels: [],
     datasets: [
       {
-        data: [percentage, 100 - percentage],
-        backgroundColor: [getBackgroundColor(dataValue), "#bcbcbc"],
+        data: [dataValue, max - dataValue],
+        backgroundColor: [color, "#bcbcbc"],
         borderWidth: 0,
         rotation: 180,
       },
@@ -72,7 +58,6 @@ export const ChartDoughnut = ({
     },
   };
 
-  const textValue = getTextValue(dataValue);
   return (
     <Flex alignItems="center">
       <Card
@@ -126,7 +111,7 @@ export const ChartDoughnut = ({
           fontWeight="700"
           fontSize="48"
         >
-          {textValue}
+          {label}
         </Text>
         <Text
           color="#727272"

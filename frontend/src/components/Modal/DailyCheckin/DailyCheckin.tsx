@@ -141,12 +141,13 @@ export const DailyCheckin = ({
           Active: true,
         });
         if (getDailyCheckin) {
-          console.log(getDailyCheckin);
+          console.log("checkin: ", getDailyCheckin);
           localStorage.setItem(
-            "dailyCheckinId",
+            "dailyCheckInId",
             getDailyCheckin[0].DailyCheckInId,
           );
           console.log("dailycheckinId: " + getDailyCheckin[0].DailyCheckInId);
+          console.log("checkinLS: ", localStorage.getItem("dailyCheckInId"));
           toast({
             title: "SUCCESS",
             description: "Your daily check-in is complete. Good Job!",
@@ -156,7 +157,7 @@ export const DailyCheckin = ({
             position: "top",
           });
           onClose();
-          window.location.reload();
+          //window.location.reload();
         } else {
           toast({
             title: "ERROR",

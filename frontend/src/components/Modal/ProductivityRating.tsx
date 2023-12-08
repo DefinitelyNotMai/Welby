@@ -44,22 +44,24 @@ export const ProductivityRating = ({
   // NOTE: add the api calls for adding productivity to db here.
   const handleLogout = () => {
     const dailyCheckInId = localStorage.getItem("dailyCheckInId");
-    const updateProductivityUrl = "https://localhost:44373/api/UpdateProductivity";
+    const updateProductivityUrl =
+      "https://localhost:44373/api/UpdateProductivity";
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
-    }
-    console.log("updateProductivity" + dailyCheckInId )
+    };
+    console.log("updateProductivity" + dailyCheckInId);
     const productivityUpdate = {
-      DailyCheckInId:  dailyCheckInId,
+      DailyCheckInId: dailyCheckInId,
       Productivity: productivity,
-      Completion: "Completed"
-    }
+      Completion: "Completed",
+    };
 
-    axios.patch(updateProductivityUrl, productivityUpdate, config)
-      .then((response)=> {
-        console.log(response)
+    axios
+      .patch(updateProductivityUrl, productivityUpdate, config)
+      .then((response) => {
+        console.log(response);
         const trybool = true;
         if (trybool) {
           toast({
@@ -70,7 +72,10 @@ export const ProductivityRating = ({
             isClosable: true,
             duration: 5000,
           });
-          userContext.setCompanyId("");
+          userContext.setCompanyId(0);
+          userContext.setEmail("");
+          userContext.setPhone("");
+          userContext.setRole("");
           localStorage.clear();
           navigate("/");
         } else {
@@ -83,10 +88,10 @@ export const ProductivityRating = ({
             duration: 5000,
           });
         }
-      }).catch((error)=> {console.log(error)});
-
-
-    
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

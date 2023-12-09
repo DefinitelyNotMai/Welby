@@ -31,6 +31,7 @@ export const CompanyMission = ({ onDataReceived }: CompanyMissionProps) => {
         console.error("Error fetching company data: ", error);
       }
     };
+
     fetchMission();
   }, [userContext.companyId, onDataReceived]);
 

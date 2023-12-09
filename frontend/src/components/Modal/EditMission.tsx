@@ -1,4 +1,5 @@
 // lib
+import axios from "axios";
 import {
   Button,
   Flex,
@@ -11,12 +12,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import { useState, FormEvent, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-
-import axios from "axios";
+import { FormEvent, useContext, useState } from "react";
 
 // local
+import { UserContext } from "../../context/UserContext";
 
 type EditMissionProps = {
   isOpen: boolean;
@@ -41,18 +40,19 @@ export const EditMission = ({
   };
 
   const handleEditMission = async () => {
-    const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission"
+    const updateMissionUrl = "https://localhost:44373/api/UpdateCompanyMission";
     try {
-      // NOTE: replace success with axios call
-      console.log(editedMission)
-      axios.patch(updateMissionUrl, {
-        CompanyId: userContext.companyId,
-        Mission: editedMission,
-        Encoded_By: localStorage.getItem("userId")
-      }, config).then((response) => {
-        console.log(response);
-        const success = true;
-        if (success) {
+      axios
+        .patch(
+          updateMissionUrl,
+          {
+            CompanyId: userContext.companyId,
+            Mission: editedMission,
+            Encoded_By: localStorage.getItem("userId"),
+          },
+          config,
+        )
+        .then(() => {
           toast({
             title: "SUCCESS",
             description: "Successfully updated company's Mission",
@@ -61,7 +61,9 @@ export const EditMission = ({
             isClosable: true,
             duration: 5000,
           });
-        } else {
+        })
+        .catch((error) => {
+          console.log(error);
           toast({
             title: "ERROR",
             description: "Failed to update company's Mission",
@@ -70,14 +72,7 @@ export const EditMission = ({
             isClosable: true,
             duration: 5000,
           });
-        }
-      }).catch((error) => {
-        console.log(error);
-      })
-      
-
-      
-      
+        });
     } catch (error) {
       console.error("Error updating mission: ", error);
     }

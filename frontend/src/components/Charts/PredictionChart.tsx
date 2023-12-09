@@ -11,7 +11,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { get7DaysAgo, getDateToday } from "../../api/getDates";
 import { DailyCheckIn } from "../../data/dailyCheckIn";
@@ -35,14 +35,19 @@ type EmployeeDailyCheckin = {
   DailyCheckins: DailyCheckIn[];
 };
 
-const generateRandomNumbers = (count: number) => {
-  const randomNumbers = [];
-  for (let i = 0; i < count; i++) {
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
+type ChartData = {
+  labels: number[];
+  datasets: ChartDataset[];
+};
 
-    randomNumbers.push(randomNumber);
-  }
-  return randomNumbers;
+type ChartDataset = {
+  label: string;
+  data: number[];
+  backgroundColor: string;
+  borderColor?: string;
+  pointRadius: number;
+  tension: number;
+  borderDash?: number[];
 };
 
 const options = {
@@ -104,97 +109,21 @@ const options = {
   },
 };
 
-const labels = Array.from({ length: 7 }, (_, i) => i + 1);
-
-const data = {
-  labels: labels,
-
-  datasets: [
-    {
-      label: "Employee A - Actual",
-      data: generateRandomNumbers(7),
-      backgroundColor: "rgba(36, 162, 240, 0.5)",
-      borderColor: "#1f77b4",
-      pointRadius: 5,
-      tension: 0,
-    },
-    {
-      label: "Employee A - Predicted",
-      data: generateRandomNumbers(7),
-      backgroundColor: "#ff7f0e",
-      pointRadius: 5,
-      tension: 0,
-      borderDash: [5, 5],
-    },
-    {
-      label: "Employee B - Actual",
-      data: generateRandomNumbers(7),
-      backgroundColor: "rgba(36, 162, 240, 0.5)",
-      borderColor: "#2ca02c",
-      pointRadius: 5,
-      tension: 0,
-    },
-    {
-      label: "Employee B - Predicted",
-      data: generateRandomNumbers(7),
-      backgroundColor: "#d62728",
-      pointRadius: 5,
-      tension: 0,
-      borderDash: [5, 5],
-    },
-    {
-      label: "Employee C - Actual",
-      data: generateRandomNumbers(7),
-      backgroundColor: "rgba(36, 162, 240, 0.5)",
-      borderColor: "#94678d",
-      pointRadius: 5,
-      tension: 0,
-    },
-    {
-      label: "Employee C - Predicted",
-      data: generateRandomNumbers(7),
-      backgroundColor: "#8c564b",
-      pointRadius: 5,
-      tension: 0,
-      borderDash: [5, 5],
-    },
-    {
-      label: "Employee D - Actual",
-      data: generateRandomNumbers(7),
-      backgroundColor: "rgba(36, 162, 240, 0.5)",
-      borderColor: "#e377c2",
-      pointRadius: 5,
-      tension: 0,
-    },
-    {
-      label: "Employee D - Predicted",
-      data: generateRandomNumbers(7),
-      backgroundColor: "#7f7f7f",
-      pointRadius: 5,
-      tension: 0,
-      borderDash: [5, 5],
-    },
-    {
-      label: "Employee E - Actual",
-      data: generateRandomNumbers(7),
-      backgroundColor: "rgba(36, 162, 240, 0.5)",
-      borderColor: "#bcbc22",
-      pointRadius: 5,
-      tension: 0,
-    },
-    {
-      label: "Employee E - Predicted",
-      data: generateRandomNumbers(7),
-      backgroundColor: "#17becf",
-      pointRadius: 5,
-      tension: 0,
-      borderDash: [5, 5],
-    },
-  ],
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let background = "#";
+  let border = "#";
+  for (let i = 0; i < 6; i++) {
+    background += letters[Math.floor(Math.random() * 16)];
+    border += letters[Math.floor(Math.random() * 16)];
+  }
+  return { background, border };
 };
 
+const labels = Array.from({ length: 7 }, (_, i) => i + 1);
 export const PredictionChart = () => {
   const userContext = useContext(UserContext);
+  const [chartData, setChartData] = useState<ChartData | null>(null);
 
   useEffect(() => {
     const getCompanyDailyCheckin = async () => {
@@ -203,37 +132,32 @@ export const PredictionChart = () => {
       const getEmployeesUrl = "https://localhost:44373/api/GetEmployees";
       const getDailyCheckinUrl =
         "https://localhost:44373/api/GetAllDailyCheckIn";
-      // First get employees in the company that did their daily checkins.
+
       try {
-        const getEmployeesWithDailyCheckin = await fetchData(
-          getEmployeesUrl,
-          {
-            CompanyId: userContext.companyId,
-            Email: "",
-            EmployeeId: 0,
-            Phone_Number: "",
-            CompanyRole: "",
-            Active: true,
-          },
-        );
+        const getEmployeesWithDailyCheckin = await fetchData(getEmployeesUrl, {
+          CompanyId: userContext.companyId,
+          Email: "",
+          EmployeeId: 0,
+          Phone_Number: "",
+          CompanyRole: "",
+          Active: true,
+        });
 
         if (getEmployeesWithDailyCheckin) {
-          // Get the employee's EmployeeId to get each employee's dailycheckin later.
           getEmployeesWithDailyCheckin.forEach(
             (employee: { EmployeeId: number }) => {
-              employeesId.push(employee.EmployeeId); // pushed in the array.
+              employeesId.push(employee.EmployeeId);
             },
           );
         }
 
-        if (employeesId.length != 0) {
+        if (employeesId.length !== 0) {
           for (let i = 0; i < employeesId.length; i++) {
-            // By using the EmployeeIds in the array, for each id get all of its dailycheckins from 7 days ago till today.
             try {
               const getEmployeeDailyCheckins = await fetchData(
                 getDailyCheckinUrl,
                 {
-                  EmployeeId: employeesId[i], //from array
+                  EmployeeId: employeesId[i],
                   CompanyId: userContext.companyId,
                   DateTo: getDateToday(),
                   DateFrom: get7DaysAgo(),
@@ -242,24 +166,61 @@ export const PredictionChart = () => {
               );
 
               if (getEmployeeDailyCheckins) {
-                //create object to push to array employeesDailyCheckins
                 const employee: EmployeeDailyCheckin = {
                   EmployeeId: employeesId[i],
                   EmployeeName: getEmployeeDailyCheckins[0].EmployeeName,
-                  DailyCheckins: getEmployeeDailyCheckins
+                  DailyCheckins: getEmployeeDailyCheckins,
                 };
-                employeesDailyCheckin.push(employee); // push in the array of employee with its daily checkins
+                employeesDailyCheckin.push(employee);
               }
             } catch (error) {
-              console.log(error);
+              console.error("Error fetching data", error);
             }
           }
+
+          const datasets: ChartDataset[] = employeesDailyCheckin.flatMap(
+            (employee) => {
+              const { background: actualBackground, border: actualBorder } =
+                getRandomColor();
+              const {
+                background: predictedBackground,
+                border: predictedBorder,
+              } = getRandomColor();
+
+              return [
+                {
+                  label: `${employee.EmployeeName} - Actual`,
+                  data: employee.DailyCheckins.map(
+                    (checkin) => checkin.Productivity,
+                  ),
+                  backgroundColor: actualBackground,
+                  borderColor: actualBorder,
+                  pointRadius: 5,
+                  tension: 0,
+                },
+                {
+                  label: `${employee.EmployeeName} - Predicted`,
+                  data: employee.DailyCheckins.map(
+                    (checkin) => checkin.Prediction,
+                  ),
+                  backgroundColor: predictedBackground,
+                  borderColor: predictedBorder,
+                  pointRadius: 5,
+                  tension: 0,
+                  borderDash: [5, 5],
+                },
+              ];
+            },
+          );
+
+          setChartData({
+            labels: labels,
+            datasets: datasets,
+          });
         }
       } catch (err) {
         console.log(err);
       }
-
-      console.log(employeesDailyCheckin);
     };
 
     getCompanyDailyCheckin();
@@ -276,7 +237,7 @@ export const PredictionChart = () => {
       <Heading color="#000000" fontSize="1.5rem">
         Actual vs Predicted Scores for Employees Over a Month
       </Heading>
-      <Line options={options} data={data} />
+      {chartData && <Line options={options} data={chartData} />}
     </Flex>
   );
 };

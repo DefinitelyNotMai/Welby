@@ -28,6 +28,7 @@ import { fetchData } from "../../../api/fetchData";
 import { UserContext } from "../../../context/UserContext";
 import { DailyCheckInResult } from "../../../components/Modal/DailyCheckin/DailyCheckInResult";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { getDateToday } from "../../../api/getDates";
 
 export const MyDashboardOverviewPage = () => {
   document.title = "Dashboard Overview | Welby";
@@ -46,19 +47,6 @@ export const MyDashboardOverviewPage = () => {
   const tiseUrl = "https://localhost:44373/api/GetAllTise";
   const userContext = useContext(UserContext);
 
-  const getSimpleDateToday = (): string => {
-    const today: Date = new Date();
-
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return today.toLocaleDateString("en-US", options);
-  };
-
-  const simpleDateToday: string = getSimpleDateToday();
-
   useEffect(() => {
     const checkIfCheckInTaken = async () => {
       const data = await fetchData(dailyCheckInUrl, {
@@ -66,8 +54,8 @@ export const MyDashboardOverviewPage = () => {
         EmployeeId: userId,
         CompanyId: userContext.companyId,
         Active: true,
-        DateFrom: simpleDateToday,
-        DateTo: simpleDateToday,
+        DateFrom: getDateToday(),
+        DateTo: getDateToday(),
       });
       if (data.length > 0) {
         setCheckInTaken(true);
@@ -85,7 +73,7 @@ export const MyDashboardOverviewPage = () => {
       setStat(false);
       checkIfCheckInTaken();
     }
-  }, [simpleDateToday, stat, userContext.companyId, userId]);
+  }, [stat, userContext.companyId, userId]);
 
   useEffect(() => {
     const checkIfTiseTaken = async () => {
@@ -94,8 +82,8 @@ export const MyDashboardOverviewPage = () => {
         EmployeeId: userId,
         CompanyId: userContext.companyId,
         Active: true,
-        DateFrom: simpleDateToday,
-        DateTo: simpleDateToday,
+        DateFrom: getDateToday(),
+        DateTo: getDateToday(),
       });
       if (tdata.length > 0) {
         setTiseTaken(true);
@@ -106,7 +94,7 @@ export const MyDashboardOverviewPage = () => {
       }
     };
     checkIfTiseTaken();
-  }, [simpleDateToday, userContext.companyId, userId]);
+  }, [userContext.companyId, userId]);
 
   console.log(tiseData);
   return (

@@ -1,14 +1,16 @@
 import { Button, Flex, Grid } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Section } from "../../../components/DataDisplay/Section";
 import { ChartBar } from "../../../components/Charts/ChartBar";
 import { PredictionChart } from "../../../components/Charts/PredictionChart";
 import { DailyCheckin } from "../../../components/Modal/DailyCheckin";
 import { QuarterlyAssessment } from "../../../components/Modal/QuarterlyAssessment";
+import { UserContext } from "../../../context/UserContext";
 
 export const MyDashboardWellbeingPage = () => {
   document.title = "Well-Being | Welby";
 
+  const userContext = useContext(UserContext);
   const [modal, setModal] = useState<string>("");
 
   return (
@@ -41,7 +43,12 @@ export const MyDashboardWellbeingPage = () => {
           </Button>,
         ]}
       >
-        <PredictionChart />
+        {userContext.role === "Company Admin" ||
+        userContext.role === "Leader" ? (
+          <></>
+        ) : (
+          <PredictionChart />
+        )}
       </Section>
       {modal === "daily-checkin" && (
         <DailyCheckin

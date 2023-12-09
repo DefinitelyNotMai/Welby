@@ -113,7 +113,6 @@ export const ChartBar = () => {
               getEmployeeDailyCheckins[i].NegativeEmotions_int,
             );
           }
-          console.log(newEmpDataset);
           setEmpDataset(newEmpDataset);
         }
       } catch (err) {

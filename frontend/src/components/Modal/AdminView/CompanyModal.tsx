@@ -5,7 +5,7 @@ import { FormItem } from "../../Form/FormItem";
 import { UploadPhoto } from "../../Form/UploadPhoto";
 
 type CompanyData = {
-  CompanyId: string;
+  CompanyId: number;
   Logo: string;
   Name: string;
   Email: string;
@@ -13,8 +13,8 @@ type CompanyData = {
   Website: string;
   Vision: string;
   Mission: string;
-  CountryId: string;
-  IndustryTypeId: string;
+  CountryId: number;
+  IndustryTypeId: number;
   FoundingDate: string;
 };
 
@@ -102,7 +102,9 @@ const CompanyUpdate = ({
               <SelectCountry
                 id="company-country"
                 name="company-country"
-                onChange={(e) => updateFields({ CountryId: e.target.value })}
+                onChange={(e) =>
+                  updateFields({ CountryId: parseInt(e.target.value) })
+                }
                 value={CountryId}
               />
             </FormItem>
@@ -143,7 +145,7 @@ const CompanyUpdate = ({
                 id="company-industry"
                 name="company-industry"
                 onChange={(e) =>
-                  updateFields({ IndustryTypeId: e.target.value })
+                  updateFields({ IndustryTypeId: parseInt(e.target.value) })
                 }
                 value={IndustryTypeId}
               />

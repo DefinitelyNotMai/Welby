@@ -138,18 +138,6 @@ export const AdminViewPage = () => {
               <AccordionButton buttonName="Geographical" icon={FaEarthAsia}>
                 <Button
                   borderLeftColor={
-                    selectedItem === "cities" ? "#24a2f0" : "#ffffff"
-                  }
-                  color={selectedItem === "cities" ? "#24a2f0" : "#bcbcbc"}
-                  fontWeight={selectedItem === "cities" ? "bold" : "normal"}
-                  leftIcon={<FaCity />}
-                  onClick={() => handleItemClick("cities", "cities")}
-                  variant="sidebar"
-                >
-                  Cities
-                </Button>
-                <Button
-                  borderLeftColor={
                     selectedItem === "countries" ? "#24a2f0" : "#ffffff"
                   }
                   color={selectedItem === "countries" ? "#24a2f0" : "#bcbcbc"}

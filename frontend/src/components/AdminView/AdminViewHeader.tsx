@@ -12,22 +12,28 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // local
 import WelbyLogo from "../../assets/images/welby_logo_and_name_primary_1_flat.svg";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 export const AdminViewHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const userContext = useContext(UserContext);
 
   const handleProfileClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const handleLogoutSelection = () => {
+    userContext.setCompanyId(0);
+    userContext.setEmail("");
+    userContext.setPhone("");
+    userContext.setRole("");
     localStorage.clear();
     navigate("/");
   };

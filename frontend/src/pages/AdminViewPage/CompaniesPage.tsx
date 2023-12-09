@@ -14,7 +14,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import Pagination from "../../components/Disclosure/Pagination";
-import { fetchData } from "../../api/fetchData";
 import {
   CompanyAdd,
   CompanyDelete,
@@ -40,19 +39,37 @@ export const CompaniesPage = () => {
     },
   };
 
+  // TODO: needs to be fixed. On my end I get server error 500
   useEffect(() => {
     const companyUrl = "https://localhost:44373/api/GetCompanies";
     const fetchAndSetCompanies = async () => {
       try {
-        const data = await fetchData(companyUrl, { Active: 0 });
+        const company = await axios.get(companyUrl, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          params: {
+            CompanyId: 0,
+            Email: "",
+            Phone_Number: "",
+            Active: false,
+          },
+        });
+        const data = company.data;
+        /*
+        const data = await fetchData(companyUrl, {
+          Active: false,
+        });
+        */
         const companies = data.map((c: Company) => {
+          /*
           const date = new Date(c.FoundingDate);
           const year = date.getFullYear();
           const month = (date.getMonth() + 1).toString().padStart(2, "0");
           const day = date.getDate().toString().padStart(2, "0");
+          */
           return {
             ...c,
-            FoundingDate: `${year}-${month}-${day}`,
+            //FoundingDate: `${year}-${month}-${day}`,
           };
         });
         setCompanies(companies);

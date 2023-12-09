@@ -1,7 +1,7 @@
+// lib
 import {
   Button,
   Flex,
-  Image,
   Spacer,
   Table,
   TableContainer,
@@ -13,9 +13,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import Pagination from "../../components/Disclosure/Pagination";
-import { fetchData } from "../../api/fetchData";
 import axios from "axios";
+
+// local
+import Pagination from "../../components/Disclosure/Pagination";
 import { EMPLOYEE_DATA, Employee } from "../../data/employee";
 
 export const EmployeesPage = () => {
@@ -36,21 +37,28 @@ export const EmployeesPage = () => {
   };
 
   useEffect(() => {
-    const employeeUrl = "https://localhost:44373/api/GetEmployee";
+    const employeeUrl = "https://localhost:44373/api/GetEmployees";
     const fetchAndSetEmployees = async () => {
       try {
-        const data = await fetchData(employeeUrl, { Active: 1 });
-        const companies = data.map((c: Employee) => {
-          const date = new Date(c.Birthday);
-          const year = date.getFullYear();
-          const month = (date.getMonth() + 1).toString().padStart(2, "0");
-          const day = date.getDate().toString().padStart(2, "0");
+        const employee = await axios.get(employeeUrl, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          params: {
+            EmployeeId: 0,
+            CompanyId: 0,
+            Email: "",
+            Phone_Number: "",
+            CompanyRole: "",
+            Active: false,
+          },
+        });
+        const data = employee.data;
+        const employees = data.map((c: Employee) => {
           return {
             ...c,
-            Birthday: `${year}-${month}-${day}`,
           };
         });
-        setEmployees(companies);
+        setEmployees(employees);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -58,7 +66,7 @@ export const EmployeesPage = () => {
     fetchAndSetEmployees();
   }, [employeeData]);
 
-  const updateCompanyFields = (fields: Partial<Employee>) => {
+  const updateEmployeeFields = (fields: Partial<Employee>) => {
     setEmployeeData((prev) => {
       return { ...prev, ...fields };
     });
@@ -68,7 +76,7 @@ export const EmployeesPage = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const startNumber = startIndex + 1;
-  const displayedCompanies = employees.slice(startIndex, endIndex);
+  const displayedEmployees = employees.slice(startIndex, endIndex);
   const totalPages = Math.ceil(employees.length / itemsPerPage);
 
   const handleNextPage = () => {
@@ -97,7 +105,7 @@ export const EmployeesPage = () => {
   };
 
   const handleDeleteEmployee = () => {
-    const company = {
+    const employee = {
       EmployeeId: employeeData.EmployeeId,
       Encoded_By: 24287,
     };
@@ -105,12 +113,12 @@ export const EmployeesPage = () => {
     const deleteEmployeeUrl = "https://localhost:44373/api/RemoveEmployee";
 
     axios
-      .patch(deleteEmployeeUrl, company, config)
+      .patch(deleteEmployeeUrl, employee, config)
       .then((response) => {
         console.log(response.data);
         toast({
           title: "SUCCESS",
-          description: `Company with Company Id: ${employeeData.EmployeeId} has been deleted.`,
+          description: `Employee with Employee Id: ${employeeData.EmployeeId} has been deleted.`,
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -127,6 +135,7 @@ export const EmployeesPage = () => {
   const handleUpdateEmployee = () => {
     const employee = {
       EmployeeId: employeeData.EmployeeId,
+      ProfilePhoto: employeeData.ProfilePhoto,
       First_Name: employeeData.First_Name,
       Middle_Name: employeeData.Middle_Name,
       Last_Name: employeeData.Last_Name,
@@ -135,30 +144,31 @@ export const EmployeesPage = () => {
       Phone_Number: employeeData.Phone_Number,
       Address: employeeData.Address,
       Birthday: employeeData.Birthday,
-      Linkedin: employeeData.Linkedin,
+      CompanyId: employeeData.CompanyId,
+      CompanyPosition: employeeData.CompanyPosition,
+      CountryId: employeeData.CountryId,
+      GenderId: employeeData.GenderId,
+      TikTok: employeeData.TikTok,
+      LinkedIn: employeeData.Linkedin,
       Facebook: employeeData.Facebook,
       Instagram: employeeData.Instagram,
-      TikTok: employeeData.TikTok,
       Work: employeeData.Work,
       Connect: employeeData.Connect,
       Support: employeeData.Support,
       Other_Notes: employeeData.Other_Notes,
-      GenderId: employeeData.GenderId,
-      CompanyId: employeeData.CompanyId,
-      CountryId: employeeData.CountryId,
-      Active: 1,
+      Active: true,
       Encoded_By: 24287,
     };
 
-    const updateCompanyUrl = "https://localhost:44373/api/UpdateCompany";
+    const updateEmployeeUrl = "https://localhost:44373/api/UpdateEmployee";
 
     axios
-      .patch(updateCompanyUrl, employee, config)
+      .patch(updateEmployeeUrl, employee, config)
       .then((response) => {
         console.log(response.data);
         toast({
-          title: "Company updated.",
-          description: `Company with CompanyId: ${employeeData.CompanyId} has been updated.`,
+          title: "Employee updated.",
+          description: `Employee with EmployeeId: ${employeeData.EmployeeId} has been updated.`,
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -171,7 +181,6 @@ export const EmployeesPage = () => {
         console.log(error);
       });
   };
-
   return (
     <Flex flexDirection="column" marginLeft={4} marginTop={4}>
       <Flex flexDirection="row" gap={4} marginBottom={4} marginRight={4}>
@@ -264,7 +273,7 @@ export const EmployeesPage = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {displayedCompanies.map((employee, index) => (
+            {displayedEmployees.map((employee, index) => (
               <Tr
                 key={index}
                 borderBottom="1px solid #ebebeb"
@@ -289,9 +298,7 @@ export const EmployeesPage = () => {
                 <Td>{employee.Connect}</Td>
                 <Td>{employee.Support}</Td>
                 <Td>{employee.Other_Notes}</Td>
-                <Td>
-                  <Image src={employee.ProfilePhoto} />
-                </Td>
+                <Td>{employee.ProfilePhoto}</Td>
                 <Td>{employee.GenderId}</Td>
                 <Td>{employee.CompanyId}</Td>
                 <Td>{employee.CountryId}</Td>
@@ -310,30 +317,30 @@ export const EmployeesPage = () => {
         />
       </Flex>
 
-      {/*isFormOpen && (
+      {isFormOpen && (
         <>
           {currentMode === "Add" && (
-            <CompanyAdd
+            <EmployeeAdd
               handleCancel={handleClose}
               handleAddUpdate={handleDeleteEmployee}
               isOpen={isFormOpen}
               onClose={handleClose}
-              updateFields={updateCompanyFields}
+              updateFields={updateEmployeeFields}
               {...employeeData}
             />
           )}
           {currentMode === "Update" && (
-            <CompanyUpdate
+            <EmployeeUpdate
               handleCancel={handleClose}
               handleAddUpdate={handleUpdateEmployee}
               isOpen={isFormOpen}
               onClose={handleClose}
-              updateFields={updateCompanyFields}
+              updateFields={updateEmployeeFields}
               {...employeeData}
             />
           )}
           {currentMode === "Delete" && (
-            <CompanyDelete
+            <EmployeeDelete
               handleCancel={handleClose}
               handleDelete={handleDeleteEmployee}
               isOpen={isFormOpen}
@@ -342,7 +349,7 @@ export const EmployeesPage = () => {
             />
           )}
         </>
-      )*/}
+      )}
     </Flex>
   );
 };

@@ -38,7 +38,11 @@ export const GendersPage = () => {
     const genderUrl = "https://localhost:44373/api/GetGender";
     const fetchAndSetGenders = async () => {
       try {
-        const data = await fetchData(genderUrl, { Active: 0 });
+        const data = await fetchData(genderUrl, {
+          GenderId: 0,
+          Gender: "",
+          Active: false,
+        });
         setGenders(data);
       } catch (error) {
         console.error("Error fetching data: ", error);

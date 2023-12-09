@@ -81,19 +81,6 @@ export const DailyCheckin = ({
     />,
   ]);
 
-  function getSimpleDateToday(): string {
-    const today: Date = new Date();
-
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return today.toLocaleDateString("en-US", options);
-  }
-
-  const simpleDateToday: string = getSimpleDateToday();
-
   const userContext = useContext(UserContext);
   // NOTE: this is where api call for submitting daily check in should be done
   const handleDailyCheckInSubmit = async () => {
@@ -141,13 +128,14 @@ export const DailyCheckin = ({
           Active: true,
         });
         if (getDailyCheckin) {
-          console.log("checkin: ", getDailyCheckin);
+          //console.log("checkin: ", getDailyCheckin);
+          console.log("BEFORE: ", localStorage.getItem("dailyCheckInId"));
           localStorage.setItem(
             "dailyCheckInId",
             getDailyCheckin[0].DailyCheckInId,
           );
-          console.log("dailycheckinId: " + getDailyCheckin[0].DailyCheckInId);
-          console.log("checkinLS: ", localStorage.getItem("dailyCheckInId"));
+          console.log("AFTER: ", localStorage.getItem("dailyCheckInId"));
+          //console.log("dailycheckinId: " + getDailyCheckin[0].DailyCheckInId);
           toast({
             title: "SUCCESS",
             description: "Your daily check-in is complete. Good Job!",

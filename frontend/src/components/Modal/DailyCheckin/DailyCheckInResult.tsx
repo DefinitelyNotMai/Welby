@@ -9,6 +9,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { fetchData } from "../../../api/fetchData";
 import { UserContext } from "../../../context/UserContext";
+import { getDateToday } from "../../../api/getDates";
 
 type DailyCheckInResultProps = {
   isOpen: boolean;
@@ -21,18 +22,6 @@ export const DailyCheckInResult = ({
 }: DailyCheckInResultProps) => {
   const [result, setResult] = useState();
 
-  const getSimpleDateToday = (): string => {
-    const today: Date = new Date();
-
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return today.toLocaleDateString("en-US", options);
-  };
-
-  const simpleDateToday: string = getSimpleDateToday();
   const userContext = useContext(UserContext);
   const userId = localStorage.getItem("userId") || 0;
   const checkInUrl = "https://localhost:44373/api/GetAllDailyCheckIn";
@@ -45,8 +34,8 @@ export const DailyCheckInResult = ({
         EmployeeId: userId,
         CompanyId: userContext.companyId,
         Active: true,
-        DateFrom: simpleDateToday,
-        DateTo: simpleDateToday,
+        DateFrom: getDateToday(),
+        DateTo: getDateToday(),
       });
 
       if (data.length > 0) {
@@ -92,7 +81,7 @@ export const DailyCheckInResult = ({
     };
 
     fetchCheckInData();
-  }, [simpleDateToday, userContext.companyId, userId]);
+  }, [userContext.companyId, userId]);
 
   return (
     <Modal

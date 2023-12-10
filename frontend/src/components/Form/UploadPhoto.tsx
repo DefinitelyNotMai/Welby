@@ -2,7 +2,7 @@
 import { Button, Flex, Image, Input, Text } from "@chakra-ui/react";
 
 type UploadPhotoProps = {
-  buttonWidth: string[];
+  buttonWidth?: string[];
   id: string;
   label: string;
   name: string;
@@ -93,7 +93,7 @@ export const UploadPhoto = ({
             }
           }}
           type="button"
-          width={buttonWidth}
+          width={buttonWidth || "100%"}
         >
           {value ? "Change Photo" : "Upload Photo"}
         </Button>
@@ -108,7 +108,7 @@ export const UploadPhoto = ({
               }
             }}
             type="button"
-            width={buttonWidth}
+            width={buttonWidth || "100%"}
           >
             Remove Photo
           </Button>

@@ -21,7 +21,12 @@ export const Section = ({
   ...props
 }: SectionProps) => {
   return (
-    <Card borderRadius={borderRadius} variant="section" {...props}>
+    <Card
+      borderRadius={borderRadius}
+      boxShadow="lg"
+      variant="section"
+      {...props}
+    >
       <CardHeader
         display="flex"
         alignItems="center"

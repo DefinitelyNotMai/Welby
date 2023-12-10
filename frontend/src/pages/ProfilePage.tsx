@@ -30,6 +30,12 @@ import { FaPencil } from "react-icons/fa6";
 import { EmployeeUpdate } from "../components/Modal/AdminView/EmployeeModal";
 import { UserContext } from "../context/UserContext";
 
+type FormatOptions = {
+  month: "long";
+  day: "numeric";
+  year: "numeric";
+};
+
 export const ProfilePage = () => {
   const [employeeData, setEmployeeData] = useState<Employee>(EMPLOYEE_DATA);
   const [interests, setInterests] = useState<Interest[]>([]);
@@ -40,6 +46,7 @@ export const ProfilePage = () => {
   const [learnedBehaviors, setLearnedBehaviors] = useState<Strength[]>([]);
   const [modal, setModal] = useState<string>("");
   const [fetched, setFetched] = useState<boolean>(true);
+  const [age, setAge] = useState<number>(0);
 
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -153,12 +160,49 @@ export const ProfilePage = () => {
       fetchLearnedBehaviors();
       setFetched(false);
     }
-  }, [employeeData.CompanyId, userContext.companyId, userId, fetched]);
+  }, [
+    employeeData.CompanyId,
+    fetched,
+    navigate,
+    toast,
+    userContext.companyId,
+    userId,
+  ]);
 
+  useEffect(() => {
+    setAge(calculateAge(employeeData.Birthday) || 0);
+  }, [employeeData.Birthday]);
   const updateEmployeeFields = (fields: Partial<Employee>) => {
     setEmployeeData((prev) => {
       return { ...prev, ...fields };
     });
+  };
+
+  const formatBirthday = (birthdayString: string): string => {
+    const options: FormatOptions = {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    };
+    const birthdayDate = new Date(birthdayString);
+    return birthdayDate.toLocaleDateString("en-US", options);
+  };
+
+  const calculateAge = (birthdayString: string): number | null => {
+    const birthdayDate = new Date(birthdayString);
+    const currentDate = new Date();
+    const ageDiff = currentDate.getFullYear() - birthdayDate.getFullYear();
+
+    // Adjust age if birthday hasn't occurred yet this year
+    if (
+      currentDate.getMonth() < birthdayDate.getMonth() ||
+      (currentDate.getMonth() === birthdayDate.getMonth() &&
+        currentDate.getDate() < birthdayDate.getDate())
+    ) {
+      return ageDiff - 1;
+    }
+
+    return ageDiff;
   };
 
   const handleClose = () => {
@@ -220,7 +264,8 @@ export const ProfilePage = () => {
                     {employeeData.EmployeeFullName}
                   </Text>
                   <Text color="#000000" fontSize="0.875rem">
-                    {employeeData.Birthday} (Age years old)
+                    {formatBirthday(employeeData.Birthday)} (Age{" "}
+                    {age !== 0 ? `${age} years old` : "unknown"})
                   </Text>
                 </Flex>
                 <Flex flexDirection="column">

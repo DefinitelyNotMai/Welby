@@ -52,7 +52,7 @@ export const EmployeeAdd = ({
   const [password, setPassword] = useState<string>("");
   const toast = useToast();
 
-  const handleAdd = (e: FormEvent) => {
+  const handleAdd = async (e: FormEvent) => {
     e.preventDefault();
     const addEmployeeUrl = "https://localhost:44373/api/AddEmployee";
     const employee = {
@@ -94,7 +94,7 @@ export const EmployeeAdd = ({
       Phone_Number: employeeData.Phone_Number,
     };
 
-    const getEmployee = axios
+    const getEmployee = await axios
       .get("https://localhost:44373/api/GetEmployees", {
         params: getEmployeeParams,
       })
@@ -563,7 +563,7 @@ export const EmployeeUpdate = ({
 
     const getEmpOwsUrl = "http://localhost:58258/api/GetSystemUsers";
     const token = await fetchAccessToken();
-    const getEmpOws = axios
+    const getEmpOws = await axios
       .get(getEmpOwsUrl, {
         method: "GET",
         headers: {
@@ -581,19 +581,18 @@ export const EmployeeUpdate = ({
           ExpiryDays: null,
           AccountVerified: null,
           VerifiedDate: null,
-          Encoded_By: localStorage.getItem("userId"),
+          Encoded_By: 0,
           Active: true,
         },
       })
       .then((response) => {
-        console.log(response.data);
-        return response.data;
+        return response.data[0];
       })
       .catch((error) => {
         console.log(error);
       });
 
-    const UpdateSystemUserUrl = "http://lcoalhost:58258/api/UpdateSystemUser";
+    const UpdateSystemUserUrl = "http://localhost:58258/api/UpdateSystemUser";
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -666,7 +665,6 @@ export const EmployeeUpdate = ({
           >
             <FormItem htmlFor="employee-profile-photo">
               <UploadPhoto
-                buttonWidth={["50%", "25%"]}
                 id="employee-profile-photo"
                 name="employee-profile-photo"
                 label="Profile Photo"

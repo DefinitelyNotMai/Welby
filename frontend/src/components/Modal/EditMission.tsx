@@ -61,6 +61,7 @@ export const EditMission = ({
             isClosable: true,
             duration: 5000,
           });
+          onClose();
         })
         .catch((error) => {
           console.log(error);

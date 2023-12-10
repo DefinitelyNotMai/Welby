@@ -41,18 +41,19 @@ export const EditVision = ({
   };
 
   const handleEditVision = async () => {
-    const updateVisionUrl = "https://localhost:44373/api/UpdateCompanyVision"
+    const updateVisionUrl = "https://localhost:44373/api/UpdateCompanyVision";
     try {
-      // NOTE: replace success with axios call
-      
-      axios.patch(updateVisionUrl, {
-        CompanyId: userContext.companyId,
-        Vision: editedVision,
-        Encoded_By: localStorage.getItem("userId")
-      }, config).then((response) => {
-        console.log(response);
-        const success = true;
-        if (success) {
+      axios
+        .patch(
+          updateVisionUrl,
+          {
+            CompanyId: userContext.companyId,
+            Vision: editedVision,
+            Encoded_By: localStorage.getItem("userId"),
+          },
+          config,
+        )
+        .then(() => {
           toast({
             title: "SUCCESS",
             description: "Successfully updated company's Vision",
@@ -61,7 +62,10 @@ export const EditVision = ({
             isClosable: true,
             duration: 5000,
           });
-        } else {
+          onClose();
+        })
+        .catch((error) => {
+          console.log(error);
           toast({
             title: "ERROR",
             description: "Failed to update company's Vision",
@@ -70,13 +74,7 @@ export const EditVision = ({
             isClosable: true,
             duration: 5000,
           });
-        }
-      }).catch((error) => {
-        console.log(error);
-      })
-
-      
-     
+        });
     } catch (error) {
       console.error("Error updating vision: ", error);
     }

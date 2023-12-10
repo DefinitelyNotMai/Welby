@@ -52,7 +52,7 @@ export const Step6 = ({
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
         <FormItem htmlFor="company-admin-profile-photo">
           <UploadPhoto
-            buttonWidth={["50%", "25%"]}
+            buttonWidth={["100%", "100%"]}
             id="company-admin-profile-photo"
             name="company-admin-profile-photo"
             label="Profile Photo"

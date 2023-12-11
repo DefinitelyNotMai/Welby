@@ -101,7 +101,7 @@ export const DailyCheckin = ({
       PositiveEmotions_int: dailyCheckinData.PositiveEmotions.int,
       PositiveEmotions_value: dailyCheckinData.PositiveEmotions.value,
       NegativeEmotions_int: dailyCheckinData.NegativeEmotions.int,
-      NegativeEmotions_value: dailyCheckinData.PositiveEmotions.value,
+      NegativeEmotions_value: dailyCheckinData.NegativeEmotions.value,
       Productivity: 0,
       Active: true,
     };

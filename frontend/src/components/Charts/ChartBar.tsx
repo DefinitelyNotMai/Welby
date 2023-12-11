@@ -132,7 +132,6 @@ export const ChartBar = () => {
         data: empDataset.EAW,
         backgroundColor: "rgba(36, 162, 240, 0.5)",
         borderColor: "#24a2f0",
-        fill: true,
         pointRadius: 5,
         tension: 0.2,
       },

@@ -249,7 +249,7 @@ export const Step1 = ({
       </Grid>
       <FormItem htmlFor="profile-photo">
         <UploadPhoto
-          buttonWidth={["50%", "50%"]}
+          buttonWidth={["100%", "100%"]}
           id="profile-photo"
           label="Profile Photo"
           name="profile-photo"

@@ -78,6 +78,14 @@ export const ProductivityRating = ({
           userContext.setRole("");
           localStorage.clear();
           navigate("/");
+          toast({
+            title: "SUCCESS",
+            description: "Successfully logged out.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
         } else {
           toast({
             title: "ERROR",

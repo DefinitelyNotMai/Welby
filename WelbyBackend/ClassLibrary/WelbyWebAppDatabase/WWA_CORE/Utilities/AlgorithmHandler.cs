@@ -43,20 +43,32 @@ namespace WWA_CORE.Utilities
     class EmployeePredictor
     {
         // Training data: EnergyAtWork, FocusAtWork, NegativeEmotions, PositiveEmotions, Productivity
-        private double[][] inputs = {
-            new double[] { 5, 4, 4, 2 },
+        public double[][] inputs = {
+            new double[] { 5, 5, 5, 3 },
+            new double[] { 5, 4, 5, 3 },
+            new double[] { 5, 4, 5, 4 },
+            new double[] { 5, 5, 5, 3 },
             new double[] { 4, 4, 4, 2 },
+            new double[] { 3, 3, 3, 2 },
+            new double[] { 5, 5, 5, 1 },
+            new double[] { 5, 3, 5, 2 },
+            new double[] { 5, 3, 5, 2 },
+            new double[] { 5, 4, 4, 2 },
             new double[] { 3, 3, 3, 3 },
-            new double[] { 3, 4, 3, 2 },
-            new double[] { 3, 4, 3, 4 },
-            new double[] { 3, 4, 3, 3 },
-            new double[] { 4, 4, 4, 4 },
-            new double[] { 5, 4, 5, 1 },
-            new double[] { 3, 3, 3, 3 },
-            new double[] { 1, 3, 2, 4 },
+            new double[] { 4, 3, 4, 1 },
+            new double[] { 4, 3, 4, 1 },
+            new double[] { 5, 3, 4, 1 },
+            new double[] { 1, 1, 1, 4 },
+            new double[] { 2, 2, 3, 4 },
+            new double[] { 2, 4, 3, 2 },
+            new double[] { 1, 1, 3, 4 },
+            new double[] { 2, 1, 3, 5 },
+            new double[] { 1, 1, 1, 5 },
+            new double[] { 3, 3, 2, 4 },
+            new double[] { 3, 1, 2, 3 },
         };
-        private double[] outputs = {
-                40,100,80,100,80,60,40,80,40,0
+        public double[] outputs = {
+                100,98,99,99,95,85,80,80,80,80,50,75,80,79,5,20,37,6,3,0,57,8
         };
 
         private MultipleLinearRegression regression;
@@ -107,21 +119,6 @@ namespace WWA_CORE.Utilities
 
         public float UseAlgo(int e_id, int eaw, int faw, int pe, int ne)
         {
-                double[][] inputsBase = {
-                    new double[] { 5, 4, 4, 2 },
-                    new double[] { 4, 4, 4, 2 },
-                    new double[] { 3, 3, 3, 3 },
-                    new double[] { 3, 4, 3, 2 },
-                    new double[] { 3, 4, 3, 4 },
-                    new double[] { 3, 4, 3, 3 },
-                    new double[] { 4, 4, 4, 4 },
-                    new double[] { 5, 4, 5, 1 },
-                    new double[] { 3, 3, 3, 3 },
-                    new double[] { 1, 3, 2, 4 },
-                };
-                double[] outputsBase = {
-                        40,100,80,100,80,60,40,80,40,0
-                };
 
             EmployeeTrainingData employee = new EmployeeTrainingData(
                 e_id,
@@ -135,9 +132,7 @@ namespace WWA_CORE.Utilities
             IEnumerable<EmployeeTrainingData> employeeTrainingData = predictor.GetTrainingSet(employee);
             var trainingData = employeeTrainingData.ToList();
 
-
-
-            if (employeeTrainingData == null || trainingData.Count < 4)
+            if (employeeTrainingData == null || trainingData.Count < 6)
             {
                 // Example prediction for an employee
                 double predictedProductivity = predictor.PredictProductivity(
@@ -165,34 +160,22 @@ namespace WWA_CORE.Utilities
                     outputsFromDB[i] = (double)trainingData[i].Productivity;
                 }
 
-                double[][] trainingSetInput = inputsFromDB.Concat(inputsBase).ToArray();
-                double[] trainingSetOutput = outputsFromDB.Concat(outputsBase).ToArray();
+                double[][] trainingSetInput = inputsFromDB.Concat(predictor.inputs).ToArray();
+                double[] trainingSetOutput = outputsFromDB.Concat(predictor.outputs).ToArray();
 
 
                 MultipleLinearRegression regression = new MultipleLinearRegression();
                 var teacher = new OrdinaryLeastSquares();
                 regression = teacher.Learn(trainingSetInput, trainingSetOutput);
-                double[] input = {Convert.ToDouble(eaw),
-            Convert.ToDouble(faw),
-            Convert.ToDouble(pe),
-            Convert.ToDouble(ne)};
+                double[] input = {
+                    Convert.ToDouble(eaw),
+                    Convert.ToDouble(faw),
+                    Convert.ToDouble(pe),
+                    Convert.ToDouble(ne)
+                };
 
                 return Convert.ToSingle(regression.Transform(input));
             }
-        }
-
-        public float ImplementAlgo(int eaw, int faw, int pe, int ne)
-        {
-            EmployeePredictor predictor = new EmployeePredictor();
-
-            // Example prediction for an employee
-            double predictedProductivity = predictor.PredictProductivity(
-                Convert.ToDouble(eaw),
-                Convert.ToDouble(faw),
-                Convert.ToDouble(pe),
-                Convert.ToDouble(ne));
-
-            return Convert.ToSingle(predictedProductivity);
         }
 
         #region Disposable Implementation

@@ -92,9 +92,7 @@ export const MyTeamProfilePage = () => {
                 <Text color="#34313a">{employeeData.Middle_Name}</Text>
                 <Text color="#34313a">{employeeData.Last_Name}</Text>
                 <Text color="#34313a">{employeeData.Birthday}</Text>
-                <Text color="#34313a">
-                  {employeeData.Address}, {employeeData.CountryDisplay}
-                </Text>
+                <Text color="#34313a">{employeeData.CountryDisplay}</Text>
               </Flex>
             </Grid>
           </Flex>

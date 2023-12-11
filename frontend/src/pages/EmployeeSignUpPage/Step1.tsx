@@ -26,6 +26,7 @@ type Step1Data = {
   Email: string;
   Password: string;
   CompanyPosition: string;
+  CompanyRole: string;
 };
 
 type Step1Props = Step1Data & {
@@ -49,6 +50,7 @@ export const Step1 = ({
   Facebook,
   ProfilePhoto,
   CompanyPosition,
+  CompanyRole,
   updateFields,
 }: Step1Props) => {
   const [companyName, setCompanyName] = useState<string>("");
@@ -128,6 +130,17 @@ export const Step1 = ({
               value={Birthday}
             />
           </FormItem>
+          <FormItem htmlFor="position" label="Position" isRequired>
+            <Input
+              id="position"
+              name="position"
+              onChange={(e) =>
+                updateFields({ CompanyPosition: e.target.value })
+              }
+              placeholder=""
+              value={CompanyPosition}
+            />
+          </FormItem>
         </Flex>
         <Flex flexDirection="column" gap={4}>
           <FormItem htmlFor="password" label="Password" isRequired>
@@ -169,20 +182,17 @@ export const Step1 = ({
               value={GenderId}
             />
           </FormItem>
-        </Flex>
-        <GridItem colSpan={2}>
-          <FormItem htmlFor="position" label="Position" isRequired>
+          <FormItem htmlFor="role" label="Role" isRequired>
             <Input
-              id="position"
-              name="position"
-              onChange={(e) =>
-                updateFields({ CompanyPosition: e.target.value })
-              }
+              isDisabled
+              id="role"
+              name="role"
+              onChange={(e) => updateFields({ CompanyRole: e.target.value })}
               placeholder=""
-              value={CompanyPosition}
+              value={CompanyRole}
             />
           </FormItem>
-        </GridItem>
+        </Flex>
         <GridItem colSpan={2}>
           <FormItem htmlFor="phone-number" label="Phone Number" isRequired>
             <Input

@@ -91,6 +91,14 @@ export const DashboardHeader = () => {
     userContext.setRole("");
     localStorage.clear();
     navigate("/");
+    toast({
+      title: "SUCCESS",
+      description: "Successfully logged out.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
   };
 
   const handleLogoutSelection = () => {

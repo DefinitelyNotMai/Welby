@@ -140,6 +140,7 @@ export const MyDashboardOverviewPage = () => {
         DateTo: getDateToday(),
       });
       if (tdata.length > 0) {
+        setFetched(true);
         setTiseTaken(true);
         setTiseData(tdata[0]);
         console.log(tdata[0]);
@@ -148,7 +149,7 @@ export const MyDashboardOverviewPage = () => {
       }
     };
     checkIfTiseTaken();
-  }, [userContext.companyId, userId]);
+  }, [fetched, userContext.companyId, userId]);
 
   /*
   const handleCheckInDownload = () => {

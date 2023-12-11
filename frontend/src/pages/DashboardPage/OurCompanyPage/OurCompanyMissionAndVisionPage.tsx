@@ -23,8 +23,35 @@ export const OurCompanyMissionAndVisionPage = () => {
 
   return (
     <Grid gap={4} templateColumns="1fr 2fr" width="full">
-      <Section borderRadius="1rem 1rem 0 0" title="Profile">
-        <CompanyProfile />
+      <Section
+        borderRadius="1rem 1rem 0 0"
+        border={editModal === "profile" ? "2px solid #24a2f0" : "none"}
+        title="Profile"
+        headerComponents={
+          userContext.role === "Company Admin" && editModal !== "profile"
+            ? [
+                <Button
+                  key={0}
+                  leftIcon={<BsPencilSquare style={{ color: "#24a2f0 " }} />}
+                  onClick={() => {
+                    if (editModal === "profile") {
+                      setEditModal("");
+                    } else {
+                      setEditModal("profile");
+                    }
+                  }}
+                  variant="section-secondary"
+                >
+                  Edit
+                </Button>,
+              ]
+            : []
+        }
+      >
+        <CompanyProfile
+          edit={editModal === "profile"}
+          onClose={() => setEditModal("")}
+        />
       </Section>
       <Grid gap={4} marginBottom={4} templateRows="1fr 1fr">
         <Section

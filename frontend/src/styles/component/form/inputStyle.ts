@@ -16,6 +16,19 @@ export const inputStyle = defineStyleConfig({
         fontSize: "0.875rem",
       },
     },
+    "edit-profile": {
+      backgroundColor: "#ffffff",
+      borderColor: "#000000",
+      borderStyle: "solid",
+      borderWidth: "2px",
+      field: {
+        _placeholder: { color: "#bcbcbc" },
+        backgroundColor: "#ffffff",
+        color: "#000000",
+        fontWeight: "regular",
+        fontSize: "0.875rem",
+      },
+    },
   },
   defaultProps: {
     variant: "form",

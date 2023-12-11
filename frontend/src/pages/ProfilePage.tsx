@@ -185,6 +185,7 @@ export const ProfilePage = () => {
   useEffect(() => {
     setAge(calculateAge(employeeData.Birthday) || 0);
   }, [employeeData.Birthday]);
+
   const updateEmployeeFields = (fields: Partial<Employee>) => {
     setEmployeeData((prev) => {
       return { ...prev, ...fields };

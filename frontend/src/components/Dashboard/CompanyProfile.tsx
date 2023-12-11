@@ -90,12 +90,10 @@ export const CompanyProfile = () => {
         <Grid gap={8} templateColumns="1fr 1fr" width="full">
           <Flex alignItems="flex-end" flexDirection="column" gap={2}>
             <Text color="#bcbcbc">Industry:</Text>
-            <Text color="#bcbcbc">Type:</Text>
             <Text color="#bcbcbc">Founded:</Text>
           </Flex>
           <Flex alignItems="flex-start" flexDirection="column" gap={2}>
             <Text color="#34313a">{companyData.IndustryTypeDisplay}</Text>
-            <Text color="#34313a">Private Company</Text>
             <Text color="#34313a">{companyData.FoundingDate}</Text>
           </Flex>
         </Grid>

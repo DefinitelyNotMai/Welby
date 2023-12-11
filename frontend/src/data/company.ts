@@ -18,6 +18,8 @@ export type Company = {
   Computer_Name: string;
   FoundingDate: string;
   CompanySize: string;
+  CompanyLocation: string;
+  IndustryTypeDisplay: string;
 };
 
 export const COMPANY_DATA: Company = {
@@ -40,4 +42,6 @@ export const COMPANY_DATA: Company = {
   Computer_Name: "",
   FoundingDate: "",
   CompanySize: "",
+  CompanyLocation: "",
+  IndustryTypeDisplay: "",
 };

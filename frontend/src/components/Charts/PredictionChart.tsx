@@ -74,7 +74,7 @@ const options = {
       beginAtZero: false,
       ticks: {
         min: 1,
-        max: 7,
+        max: 15,
         stepSize: 1,
       },
       title: {
@@ -120,7 +120,7 @@ const getRandomColor = () => {
   return { background, border };
 };
 
-const labels = Array.from({ length: 7 }, (_, i) => i + 1);
+const labels = Array.from({ length: 15 }, (_, i) => i + 1);
 export const PredictionChart = () => {
   const userContext = useContext(UserContext);
   const [chartData, setChartData] = useState<ChartData | null>(null);
